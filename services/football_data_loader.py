@@ -9,6 +9,10 @@ from models.football import (
     FootballTeam,
 )
 
+from models.football_odds import (
+    FootballMatchOdds,
+)
+
 from models.football_statistics import (
     FootballMatchStatistics,
 )
@@ -86,11 +90,24 @@ class FootballDataLoader:
                 away_half_time_goals=self._int_or_none(row["HTAG"]),
             )
 
+            odds = FootballMatchOdds(
+                home=self._float_or_none(row["B365H"]),
+                draw=self._float_or_none(row["B365D"]),
+                away=self._float_or_none(row["B365A"]),
+                over_2_5=self._float_or_none(
+                    row["B365>2.5"]
+                ),
+                under_2_5=self._float_or_none(
+                    row["B365<2.5"]
+                ),
+            )
+
             matches.append(
                 HistoricalFootballMatch(
                     match=match,
                     date=date,
                     statistics=statistics,
+                    odds=odds,
                     winner=match.result,
                 )
             )
@@ -122,6 +139,14 @@ class FootballDataLoader:
             return None
 
         return int(value)
+
+    @staticmethod
+    def _float_or_none(value):
+
+        if pd.isna(value):
+            return None
+
+        return float(value)
 
     @staticmethod
     def _competition(value) -> str:
