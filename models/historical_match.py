@@ -1,8 +1,9 @@
-from dataclasses import dataclass
+﻿from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 
 from models.football import FootballMatch
+from models.football_statistics import FootballMatchStatistics
 
 
 @dataclass(frozen=True)
@@ -10,6 +11,10 @@ class HistoricalFootballMatch:
 
     match: FootballMatch
     date: datetime
+
+    statistics: Optional[
+        FootballMatchStatistics
+    ] = None
 
     winner: Optional[str] = None
 
