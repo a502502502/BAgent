@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.pyc
+.vs/
+.idea/
+.DS_Store
+.env
+
+# Logs
+logs/
+
+# Generated data
+data/
+output/
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
