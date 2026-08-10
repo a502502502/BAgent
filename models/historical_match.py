@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 from models.football import FootballMatch
+from models.football_odds import FootballMatchOdds
 from models.football_statistics import FootballMatchStatistics
 
 
@@ -14,6 +15,10 @@ class HistoricalFootballMatch:
 
     statistics: Optional[
         FootballMatchStatistics
+    ] = None
+
+    odds: Optional[
+        FootballMatchOdds
     ] = None
 
     winner: Optional[str] = None
