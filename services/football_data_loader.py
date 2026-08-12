@@ -71,6 +71,12 @@ class FootballDataLoader:
                     row["FTAG"]
                 ),
                 status="Completed",
+                home_corners=self._int_or_none(row["HC"]),
+                away_corners=self._int_or_none(row["AC"]),
+                home_yellow_cards=self._int_or_none(row["HY"]),
+                away_yellow_cards=self._int_or_none(row["AY"]),
+                home_red_cards=self._int_or_none(row["HR"]),
+                away_red_cards=self._int_or_none(row["AR"]),
             )
 
             statistics = FootballMatchStatistics(

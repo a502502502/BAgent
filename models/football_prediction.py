@@ -16,8 +16,11 @@ class FootballPrediction:
 
     rating: float
     confidence: float
+    match_balance: float
 
     contributions: List[Contribution]
+
+    is_market_fallback: bool = False
 
     @property
     def predicted_result(self) -> str:

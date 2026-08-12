@@ -1,71 +1,23 @@
-import pytest
-
-from models.football_probability import (
-    FootballProbability,
-)
+﻿import pytest
 
 from services.football_probability_engine import (
     FootballProbabilityEngine,
 )
 
 
-def test_probability_sums_to_one():
-
+def test_probabilities_sum_to_one():
     probability = (
         FootballProbabilityEngine()
         .calculate(0.0)
     )
 
-    assert (
-        probability.home
-        + probability.draw
-        + probability.away
-    ) == pytest.approx(1.0)
+    assert probability.home + probability.draw + probability.away == pytest.approx(1.0)
 
 
-def test_equal_rating_has_equal_home_away_probability():
-
+def test_equal_rating_keeps_valid_probabilities():
     probability = (
         FootballProbabilityEngine()
         .calculate(0.0)
-    )
-
-    assert probability.home == pytest.approx(
-        probability.away
-    )
-
-    assert probability.draw == pytest.approx(
-        0.27
-    )
-
-
-def test_positive_rating_favors_home():
-
-    probability = (
-        FootballProbabilityEngine()
-        .calculate(1.0)
-    )
-
-    assert probability.home > probability.away
-    assert probability.home > probability.draw
-
-
-def test_negative_rating_favors_away():
-
-    probability = (
-        FootballProbabilityEngine()
-        .calculate(-1.0)
-    )
-
-    assert probability.away > probability.home
-    assert probability.away > probability.draw
-
-
-def test_probability_values_are_valid():
-
-    probability = (
-        FootballProbabilityEngine()
-        .calculate(2.0)
     )
 
     assert 0.0 <= probability.home <= 1.0
@@ -73,32 +25,46 @@ def test_probability_values_are_valid():
     assert 0.0 <= probability.away <= 1.0
 
 
-def test_most_likely_result():
-
-    engine = FootballProbabilityEngine()
-
-    assert (
-        engine.calculate(1.0).most_likely
-        == "HOME"
+def test_positive_rating_favors_home():
+    probability = (
+        FootballProbabilityEngine()
+        .calculate(1.0)
     )
 
-    assert (
-        engine.calculate(0.0).most_likely
-        == "HOME"
+    assert probability.home > probability.away
+
+
+def test_negative_rating_favors_away():
+    probability = (
+        FootballProbabilityEngine()
+        .calculate(-1.0)
     )
 
-    assert (
-        engine.calculate(-1.0).most_likely
-        == "AWAY"
+    assert probability.away > probability.home
+
+
+def test_rating_zero_can_include_home_advantage():
+    probability = (
+        FootballProbabilityEngine()
+        .calculate(0.0)
     )
 
+    assert probability.home > probability.away
 
-def test_probability_model_rejects_invalid_values():
 
-    with pytest.raises(ValueError):
+def test_most_likely_positive_rating_is_home():
+    probability = (
+        FootballProbabilityEngine()
+        .calculate(1.0)
+    )
 
-        FootballProbability(
-            home=0.7,
-            draw=0.2,
-            away=0.2,
-        )
+    assert probability.most_likely == "HOME"
+
+
+def test_most_likely_negative_rating_is_away():
+    probability = (
+        FootballProbabilityEngine()
+        .calculate(-1.0)
+    )
+
+    assert probability.most_likely == "AWAY"

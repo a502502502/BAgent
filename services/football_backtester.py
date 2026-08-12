@@ -101,6 +101,7 @@ class FootballBacktester:
             match=historical_match.match,
             historical_profile=profile,
             date=historical_match.date,
+            odds=historical_match.odds,
         )
 
     @staticmethod
@@ -117,7 +118,7 @@ class FootballBacktester:
         }:
             raise ValueError(
                 "Unexpected football result: "
-                f"{result}"
+                f"{historical_match.result}"
             )
 
         return result

@@ -1,4 +1,4 @@
-import httpx
+﻿import httpx
 
 from config.settings import TIMEOUT
 from config.settings import USER_AGENT
@@ -23,6 +23,14 @@ class HttpClient:
         response.raise_for_status()
 
         return response.text
+
+    def get_json(self, url: str):
+
+        response = self.client.get(url)
+
+        response.raise_for_status()
+
+        return response.json()
 
     def close(self):
         self.client.close()
