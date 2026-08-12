@@ -1,0 +1,451 @@
+============================================================
+  FC COPENHAGEN vs DEBRECENI VSC
+  2026-08-12
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 68.0%
+  Draw     : 28.0%
+  Away Win : 5.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Confidenza: 82%
+  Sintesi: La dinamica di doppia sfida con Copenhagen già avanti 3-0 crea una situazione anomala: la squadra danese ha scarsi incentivi per vincere dominando (già qualificata), mentre Debreceni affronta una remuntada psicologicamente impossibile che potrebbe tradursi in passività offensiva. Questi fattori motivazionali potrebbero deprimere il risultato rispetto alle aspettative statistiche di vittoria netta di Copenhagen.
+
+  Eventi identificati:
+    [AWAY] motivation      impatto -2.0  conf 85%   — Debreceni è già sconfitto 3-0 all'andata e deve vincere per 3+ gol per una remuntada praticamente impossibile. Questo crea demotivazione psicologica e riduce incentivo a rischiare tatticamente, portando probabilmente a un atteggiamento passivo.
+    [HOME] motivation      impatto -1.0  conf 80%   — FC Copenhagen ha un vantaggio di 3-0 e si qualifica anche perdendo fino a 2 gol. Questo riduce la necessità di rischiare, potendo gestire la partita con prudenza e risparmiare energie. Potrebbe portare a minor pressione d'attacco.
+
+── PROBABILITÀ CORRETTE (base + sesto senso) ──────────
+  Home Win : 65.5%  (-1.8%)
+  Draw     : 31.4%  (+3.7%)
+  Away Win : 3.1%  (-1.9%)
+  Segnale  : HOME
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  FC Copenhagen         : 98.9%
+  Debreceni VSC         : 1.1%
+  Supplementari             : 1.5%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.71 (casa 1.748 + ospite 0.957)
+  Over 1.5 : 75.2%  |  Under 1.5 : 24.8%
+  Over 2.5 : 50.7%  |  Under 2.5 : 49.2%
+  Over 3.5 : 28.7%  |  Under 3.5 : 71.3%
+  BTTS Sì  : 50.9%  |  BTTS No   : 49.1%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 10.08 (casa 5.91 + ospite 4.17)
+  Over  8.5 : 67.6%  |  Under  8.5 : 32.4%
+  Over  9.5 : 55.2%  |  Under  9.5 : 44.8%
+  Over 10.5 : 42.7%  |  Under 10.5 : 57.3%
+  Over 11.5 : 31.3%  |  Under 11.5 : 68.7%
+  Casa >4.5 : 70.3%  |  Casa >5.5  : 54.0%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 1.1
+  Draw     : 7.5
+  Away Win : 15.0
+
+── VALUE BETS ──────────────────────────────────────────
+  ⭐ VALUE BET  draw        nostra 31.4% vs mercato 13.3%  edge +18.1%  quota mercato: 7.5
+
+============================================================
+[BAgent] Salvata — ID: 92be60e4
+============================================================
+  GKS KATOWICE vs HAPOEL TEL AVIV
+  2026-08-12
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 28.0%
+  Draw     : 28.0%
+  Away Win : 44.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Confidenza: 55%
+  Sintesi: L'elemento dominante è il contesto della doppia sfida: GKS Katowice sotto pressione estrema con necessità di vittoria decisiva crea volatilità mentale e rischio errori, mentre Hapoel Tel Aviv gode di posizione di controllo psicologico. Non emergono infortuni specifici o scandali dalle notizie disponibili, limitando la capacità di identificare fattori nascosti al modello
+
+  Eventi identificati:
+    [HOME] motivation      impatto +0.5  conf 70%   — GKS Katowice in posizione disperata: deve vincere 3-0 o 2-0 per continuare. Questa pressione mentale estrema è una lama a doppio taglio: stimola la squadra ma crea anche tensione e rischio di errori
+    [AWAY] morale          impatto +1.0  conf 75%   — Hapoel Tel Aviv ha vantaggio di 2 gol e gioca in trasferta con margine di sicurezza. Può gestire la partita senza rischi eccessivi. Psicologicamente favorevole
+    [BOTH] fatigue         impatto -0.3  conf 40%   — Mancano dettagli specifici sulla preparazione atletica delle squadre negli ultimi 3 giorni. GKS Katowice ha giocato contro Wieczysta Kraków il 09/08 (3 giorni prima). Possibile stanchezza accumulata
+
+── PROBABILITÀ CORRETTE (base + sesto senso) ──────────
+  Home Win : 28.4%  (+0.4%)
+  Draw     : 26.1%  (-1.9%)
+  Away Win : 45.5%  (+1.5%)
+  Segnale  : NEUTRAL
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  GKS Katowice          : 13.5%
+  Hapoel Tel Aviv       : 86.5%
+  Supplementari             : 12.3%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.63 (casa 1.413 + ospite 1.217)
+  Over 1.5 : 73.9%  |  Under 1.5 : 26.2%
+  Over 2.5 : 48.9%  |  Under 2.5 : 51.1%
+  Over 3.5 : 27.1%  |  Under 3.5 : 72.9%
+  BTTS Sì  : 53.3%  |  BTTS No   : 46.7%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 9.97 (casa 5.36 + ospite 4.62)
+  Over  8.5 : 66.4%  |  Under  8.5 : 33.6%
+  Over  9.5 : 53.8%  |  Under  9.5 : 46.2%
+  Over 10.5 : 41.3%  |  Under 10.5 : 58.7%
+  Over 11.5 : 30.0%  |  Under 11.5 : 70.0%
+  Casa >4.5 : 62.0%  |  Casa >5.5  : 44.6%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 1.98
+  Draw     : 3.3
+  Away Win : 3.5
+
+── VALUE BETS ──────────────────────────────────────────
+  ⭐ VALUE BET  away_win    nostra 45.5% vs mercato 28.6%  edge +16.9%  quota mercato: 3.5
+
+============================================================
+[BAgent] Salvata — ID: 526b4cc3
+============================================================
+  RAPID VIENNA vs PAIDE LINNAMEESKOND
+  2026-08-12
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 68.0%
+  Draw     : 28.0%
+  Away Win : 5.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Confidenza: 72%
+  Sintesi: La dinamica della doppia sfida altera significativamente le motivazioni: Rapid Vienna, già qualificata, potrebbe gestire la partita senza spingere al massimo, mentre Paide Linnameeskond è già eliminata e perde il principale incentivo. Rapid ha giocato 3 giorni prima in campionato. Questi fattori contestuali (motivazione ridotta su entrambi i fronti) potrebbero comprimere il vantaggio atteso del modello.
+
+  Eventi identificati:
+    [AWAY] motivation      impatto -1.5  conf 85%   — Paide Linnameeskond è già eliminata matematicamente (svantaggio 4-1 in andata, si qualifica solo con vittoria superiore a 2 gol). Questa situazione elimina la pressione ma anche la motivazione principale della partita.
+    [HOME] motivation      impatto -1.0  conf 80%   — Rapid Vienna si qualifica anche con sconfitta fino a 2 gol di scaro. Ciò riduce la spinta offensiva e aumenta il rischio di gestione passiva della partita. La squadra potrebbe non spingere al massimo.
+    [BOTH] fatigue         impatto -0.5  conf 65%   — Rapid ha giocato in campionato austriaco il 09/08 (SV Oberbank Ried vs Rapid). La partita di Conference League è il 12/08, solo 3 giorni dopo. Paide ha una pausa maggiore ma è anche meno competitiva.
+
+── PROBABILITÀ CORRETTE (base + sesto senso) ──────────
+  Home Win : 65.4%  (-1.9%)
+  Draw     : 31.5%  (+3.8%)
+  Away Win : 3.1%  (-1.9%)
+  Segnale  : HOME
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  Rapid Vienna          : 98.9%
+  Paide Linnameeskond   : 1.1%
+  Supplementari             : 1.5%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.7 (casa 1.746 + ospite 0.958)
+  Over 1.5 : 75.2%  |  Under 1.5 : 24.8%
+  Over 2.5 : 50.7%  |  Under 2.5 : 49.2%
+  Over 3.5 : 28.7%  |  Under 3.5 : 71.3%
+  BTTS Sì  : 50.9%  |  BTTS No   : 49.1%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 10.08 (casa 5.91 + ospite 4.17)
+  Over  8.5 : 67.6%  |  Under  8.5 : 32.4%
+  Over  9.5 : 55.2%  |  Under  9.5 : 44.8%
+  Over 10.5 : 42.7%  |  Under 10.5 : 57.3%
+  Over 11.5 : 31.3%  |  Under 11.5 : 68.7%
+  Casa >4.5 : 70.3%  |  Casa >5.5  : 54.0%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 1.09
+  Draw     : 8.8
+  Away Win : 17.5
+
+── VALUE BETS ──────────────────────────────────────────
+  ⭐ VALUE BET  draw        nostra 31.5% vs mercato 11.4%  edge +20.2%  quota mercato: 8.8
+  ⭐ VALUE BET  btts_yes    nostra 50.9% vs mercato 41.7%  edge +9.2%  quota mercato: 2.4
+
+============================================================
+[BAgent] Salvata — ID: 65b7945d
+============================================================
+  RANGERS vs JAGIELLONIA
+  2026-08-13
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 36.0%
+  Draw     : 28.0%
+  Away Win : 36.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Confidenza: 55%
+  Sintesi: La dinamica di una partita di ritorno crea una forte asimmetria motivazionale: Rangers è forzato all'attacco per ribaltare lo svantaggio aggregato, mentre Jagiellonia può giocare in controllo dall'alto della sua posizione. Questo vantaggio psicologico/tattico per la Jagiellonia non è completamente riflesso nelle quote base (entrambe al 36%). Non emergono infortuni specifici o tensioni significative dalle notizie disponibili.
+
+  Eventi identificati:
+    [HOME] motivation      impatto +0.5  conf 70%   — Rangers deve vincere per avanzare (down 1-2 in aggregate). Questa necessità tattica crea pressione e rende la squadra forzatamente aggressiva, il che può essere un'arma a doppio taglio: maggiore spinta offensiva ma anche maggiore rischio difensivo.
+    [AWAY] motivation      impatto +0.8  conf 80%   — Jagiellonia avanti in aggregate (2-1) e in posizione di controllo. Può giocare in modo più conservativo e sfruttare le ripartenze. Posizione psicologica favorevole riduce pressione.
+    [HOME] coach_change    impatto +0.3  conf 40%   — Menzione di McInnes supportato dal dirigente in stile Klopp per avere successo a Ibrox. Questa retorica positiva del management suggests fiducia nel progetto, ma non fornisce dettagli specifici su miglioramenti tangibili. Segnale misto.
+
+── PROBABILITÀ CORRETTE (base + sesto senso) ──────────
+  Home Win : 36.7%  (+0.7%)
+  Draw     : 25.9%  (-2.1%)
+  Away Win : 37.4%  (+1.4%)
+  Segnale  : NEUTRAL
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  Rangers               : 33.5%
+  Jagiellonia           : 66.5%
+  Supplementari             : 22.7%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.65 (casa 1.489 + ospite 1.159)
+  Over 1.5 : 74.2%  |  Under 1.5 : 25.8%
+  Over 2.5 : 49.3%  |  Under 2.5 : 50.7%
+  Over 3.5 : 27.4%  |  Under 3.5 : 72.6%
+  BTTS Sì  : 53.1%  |  BTTS No   : 46.9%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 10.0 (casa 5.48 + ospite 4.52)
+  Over  8.5 : 66.7%  |  Under  8.5 : 33.3%
+  Over  9.5 : 54.2%  |  Under  9.5 : 45.8%
+  Over 10.5 : 41.6%  |  Under 10.5 : 58.4%
+  Over 11.5 : 30.3%  |  Under 11.5 : 69.7%
+  Casa >4.5 : 63.9%  |  Casa >5.5  : 46.8%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 1.85
+  Draw     : 3.5
+  Away Win : 4.2
+
+── VALUE BETS ──────────────────────────────────────────
+  ⭐ VALUE BET  away_win    nostra 37.4% vs mercato 23.8%  edge +13.6%  quota mercato: 4.2
+
+============================================================
+[BAgent] Salvata — ID: 2034b1dd
+============================================================
+  BESIKTAS vs HRADEC KRALOVE
+  2026-08-13
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 52.0%
+  Draw     : 28.0%
+  Away Win : 20.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Confidenza: 78%
+  Sintesi: Il fattore più rilevante è il vantaggio motivazionale e psicologico del Besiktas: già in vantaggio 1-0, si qualifica con pareggio, mentre l'Hradec deve vincere a tutti i costi sotto pressione. Il nuovo allenatore Italiano ha portato stabilità tattica al Besiktas. L'Hradec, nonostante la disperazione possa generare determinazione, soffre del peso psicologico di un'eliminazione obbligatoria dopo la sconfitta casalinga.
+
+  Eventi identificati:
+    [HOME] coach_change    impatto +1.5  conf 75%   — Vincenzo Italiano nominato nuovo allenatore del Besiktas con contratto fino al 2028. Cambio recente (giugno 2026) che ha portato nuova struttura tattica e metodologia. Italiano ha esperienza europea significativa.
+    [HOME] motivation      impatto +1.0  conf 85%   — Besiktas già avanti 1-0 dopo la gara d'andata. Con il sistema dei playoff Europa League, il Besiktas si qualifica anche con pareggio. Questo riduce drasticamente la pressione e l'urgenza tattica rispetto all'Hradec che DEVE vincere per forza.
+    [AWAY] motivation      impatto -1.5  conf 80%   — Hradec Kralove in situazione disperata dopo sconfitta 0-1 in casa. DEVE vincere obbligatoriamente per continuare. Questa pressione psicologica estremamente elevata può essere un'arma a doppio taglio: maggiore determinazione ma anche errori dovuti a tensione eccessiva.
+    [AWAY] other           impatto +0.3  conf 60%   — Hradec Kralove ha recentemente ingaggiato De Sciglio (difensore svincolato ex-Juve). Rinforzo positivo ma introdotto a febbraio 2026, ormai stabilizzato. Contribuisce solo marginalmente alla preparazione specifica per questo doppio confronto con turno europeo impegnativo.
+
+── PROBABILITÀ CORRETTE (base + sesto senso) ──────────
+  Home Win : 55.8%  (+3.8%)
+  Draw     : 29.4%  (+1.4%)
+  Away Win : 14.8%  (-5.2%)
+  Segnale  : HOME
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  Besiktas              : 84.0%
+  Hradec Kralove        : 15.9%
+  Supplementari             : 14.9%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.69 (casa 1.66 + ospite 1.026)
+  Over 1.5 : 74.9%  |  Under 1.5 : 25.1%
+  Over 2.5 : 50.3%  |  Under 2.5 : 49.7%
+  Over 3.5 : 28.3%  |  Under 3.5 : 71.7%
+  BTTS Sì  : 51.9%  |  BTTS No   : 48.1%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 10.05 (casa 5.77 + ospite 4.29)
+  Over  8.5 : 67.3%  |  Under  8.5 : 32.7%
+  Over  9.5 : 54.9%  |  Under  9.5 : 45.1%
+  Over 10.5 : 42.4%  |  Under 10.5 : 57.6%
+  Over 11.5 : 30.9%  |  Under 11.5 : 69.1%
+  Casa >4.5 : 68.2%  |  Casa >5.5  : 51.6%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 1.55
+  Draw     : 3.8
+  Away Win : 5.5
+
+── VALUE BETS: nessun valore trovato ───────────────────
+
+============================================================
+[BAgent] Salvata — ID: 2d23f749
+============================================================
+  ANDERLECHT vs PAOK
+  2026-08-13
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 52.0%
+  Draw     : 28.0%
+  Away Win : 20.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Confidenza: 65%
+  Sintesi: Il contesto della doppia sfida favorisce Anderlecht dal punto di vista psicologico: la qualificazione con pareggio riduce la pressione, mentre il PAOK è obbligato a vincere con conseguente maggior tensione. Il cambio recente di allenatore al PAOK (Lisci a giugno) potrebbe ancora generare assestamenti tattici. Mancano notizie concrete su infortuni chiave, squalifiche o problematiche specifiche che potrebbero ulteriormente modificare le dinamiche rispetto alle quote base.
+
+  Eventi identificati:
+    [AWAY] coach_change    impatto +0.5  conf 60%   — PAOK ha cambiato allenatore: Alessio Lisci ufficialmente nominato a giugno 2026. Nuovo progetto in corso, squadra potenzialmente in fase di assestamento tattico.
+    [AWAY] motivation      impatto +1.0  conf 70%   — PAOK deve vincere obbligatoriamente per qualificarsi (è sotto 1-0 all'andata). Questa pressione può essere positiva (motivazione altissima) o negativa (tensione eccessiva). In trasferta, un'obbligazione di vittoria può forzare scelte rischiose.
+    [HOME] motivation      impatto +1.5  conf 80%   — Anderlecht si qualifica anche con il pareggio. Psicologicamente avvantaggiato: può giocare con maggior libertà e meno pressione rispetto al PAOK. Tattica più conservativa è possibile.
+    [BOTH] other           impatto +0.0  conf 90%   — Le notizie fornite contengono molti articoli datati o irrilevanti (Lukaku-Napoli, sparatorie a Bruxelles, Kompany 2022, basket PAOK). Mancano aggiornamenti specifici recenti su infortuni, squalifiche o condizioni immediate delle squadre per questa partita (2026-08-13).
+
+── PROBABILITÀ CORRETTE (base + sesto senso) ──────────
+  Home Win : 53.5%  (+1.5%)
+  Draw     : 23.9%  (-4.1%)
+  Away Win : 22.6%  (+2.6%)
+  Segnale  : HOME
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  Anderlecht            : 83.5%
+  PAOK                  : 16.5%
+  Supplementari             : 15.2%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.68 (casa 1.64 + ospite 1.041)
+  Over 1.5 : 74.8%  |  Under 1.5 : 25.2%
+  Over 2.5 : 50.2%  |  Under 2.5 : 49.8%
+  Over 3.5 : 28.2%  |  Under 3.5 : 71.8%
+  BTTS Sì  : 52.1%  |  BTTS No   : 47.9%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 10.05 (casa 5.73 + ospite 4.31)
+  Over  8.5 : 67.2%  |  Under  8.5 : 32.8%
+  Over  9.5 : 54.8%  |  Under  9.5 : 45.2%
+  Over 10.5 : 42.3%  |  Under 10.5 : 57.7%
+  Over 11.5 : 30.9%  |  Under 11.5 : 69.2%
+  Casa >4.5 : 67.8%  |  Casa >5.5  : 51.0%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 1.75
+  Draw     : 3.5
+  Away Win : 4.5
+
+── VALUE BETS: nessun valore trovato ───────────────────
+
+============================================================
+[BAgent] Salvata — ID: 804bfb68
+============================================================
+  SHELBOURNE vs AJAX
+  2026-08-13
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 28.0%
+  Draw     : 28.0%
+  Away Win : 44.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Confidenza: 58%
+  Sintesi: Il contesto della doppia sfida favore l'Ajax che, già avanti 3-1, può gestire la gara con mentalità conservativa mentre Shelbourne deve attaccare disperatamente in una sfida matematicamente quasi impossibile. L'Ajax ha recentemente cambiato allenatore (Farioli) il cui assestamento tattico potrebbe non essere ancora perfetto in una sfida delicata.
+
+  Eventi identificati:
+    [AWAY] coach_change    impatto +0.5  conf 45%   — Ajax ha recentemente cambiato allenatore, passando a Farioli (citato in maggio 2026). Nuovo tecnico che porta 'ordine nel caos' secondo le dichiarazioni, ma l'assestamento tattico potrebbe non essere completo in una doppia sfida cruciale.
+    [HOME] motivation      impatto -0.8  conf 75%   — Shelbourne deve vincere con almeno 2-3 gol di scarto per avanzare. Sfida impossibile matematicamente ma psicologicamente può generare gioco spericolato e aggressivo, anche se contro una squadra superiore (perso 1-3 all'andata). Può favorire rischi eccessivi.
+    [AWAY] motivation      impatto +1.2  conf 70%   — Ajax è già avanti 3-1 nell'aggregato e ha il controllo della qualificazione. Può gestire la partita con meno urgenza, rischio di rilassamento e gestione conservativa. Shelbourne dovrà attaccare, creando spazi potenziali per il contropiede olandese.
+
+── PROBABILITÀ CORRETTE (base + sesto senso) ──────────
+  Home Win : 24.6%  (-3.4%)
+  Draw     : 28.9%  (+0.9%)
+  Away Win : 46.5%  (+2.5%)
+  Segnale  : AWAY
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  Shelbourne            : 12.7%
+  Ajax                  : 87.3%
+  Supplementari             : 11.8%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.62 (casa 1.38 + ospite 1.243)
+  Over 1.5 : 73.7%  |  Under 1.5 : 26.3%
+  Over 2.5 : 48.7%  |  Under 2.5 : 51.3%
+  Over 3.5 : 26.9%  |  Under 3.5 : 73.1%
+  BTTS Sì  : 53.2%  |  BTTS No   : 46.8%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 9.96 (casa 5.3 + ospite 4.66)
+  Over  8.5 : 66.3%  |  Under  8.5 : 33.7%
+  Over  9.5 : 53.7%  |  Under  9.5 : 46.3%
+  Over 10.5 : 41.2%  |  Under 10.5 : 58.8%
+  Over 11.5 : 29.9%  |  Under 11.5 : 70.1%
+  Casa >4.5 : 61.0%  |  Casa >5.5  : 43.6%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 7.5
+  Draw     : 4.2
+  Away Win : 1.38
+
+── VALUE BETS ──────────────────────────────────────────
+  ⭐ VALUE BET  home_win    nostra 24.6% vs mercato 13.3%  edge +11.3%  quota mercato: 7.5
+  👀 WATCH  draw        nostra 28.9% vs mercato 23.8%  edge +5.1%  quota mercato: 4.2
+
+============================================================
+[BAgent] Salvata — ID: cbdb5e42
+============================================================
+  HAMMARBY FF vs RAKOW CZESTOCHOWA
+  2026-08-13
+============================================================
+
+── PROBABILITÀ BASE (modello statistico) ──────────────
+  Home Win : 44.0%
+  Draw     : 28.0%
+  Away Win : 28.0%
+
+── SESTO SENSO ─────────────────────────────────────────
+  Notizie analizzate, nessun evento rilevante trovato.
+
+── PROBABILITÀ QUALIFICAZIONE (aggregato) ──────────────
+  Hammarby FF           : 60.2%
+  Rakow Czestochowa     : 39.7%
+  Supplementari             : 25.3%
+
+── MERCATI GOL (Poisson) ───────────────────────────────
+  Gol attesi: 2.66 (casa 1.554 + ospite 1.108)
+  Over 1.5 : 74.4%  |  Under 1.5 : 25.6%
+  Over 2.5 : 49.7%  |  Under 2.5 : 50.3%
+  Over 3.5 : 27.8%  |  Under 3.5 : 72.2%
+  BTTS Sì  : 52.8%  |  BTTS No   : 47.2%
+
+── MERCATI CORNER (Poisson) ────────────────────────────
+  Corner attesi: 10.02 (casa 5.59 + ospite 4.43)
+  Over  8.5 : 66.9%  |  Under  8.5 : 33.1%
+  Over  9.5 : 54.4%  |  Under  9.5 : 45.6%
+  Over 10.5 : 41.9%  |  Under 10.5 : 58.1%
+  Over 11.5 : 30.5%  |  Under 11.5 : 69.5%
+  Casa >4.5 : 65.6%  |  Casa >5.5  : 48.6%
+
+── QUOTE DI MERCATO ────────────────────────────────────
+  Home Win : 2.4
+  Draw     : 3.2
+  Away Win : 2.9
+
+── VALUE BETS: nessun valore trovato ───────────────────
+
+============================================================
+[BAgent] Salvata — ID: 6d41c548
+
+============================================================
+  RIEPILOGO — SEGNALI PER MULTIPLA
+============================================================
+  FC Copenhagen vs Debreceni VSC
+    Selezione: draw        quota 7.5  nostro 31.4%  edge +18.1%
+  GKS Katowice vs Hapoel Tel Aviv
+    Selezione: away_win    quota 3.5  nostro 45.5%  edge +16.9%
+  Rapid Vienna vs Paide Linnameeskond
+    Selezione: draw        quota 8.8  nostro 31.5%  edge +20.2%
+  Rangers vs Jagiellonia
+    Selezione: away_win    quota 4.2  nostro 37.4%  edge +13.6%
+  Besiktas vs Hradec Kralove
+    Selezione: draw        quota 3.8  nostro 29.4%  edge +3.1%
+  Anderlecht vs PAOK
+    Selezione: away_win    quota 4.5  nostro 22.6%  edge +0.4%
+  Shelbourne vs Ajax
+    Selezione: home_win    quota 7.5  nostro 24.6%  edge +11.3%
+  Hammarby FF vs Rakow Czestochowa
+    Selezione: home_win    quota 2.4  nostro 44.0%  edge +2.3%
+
+  Quota multipla: 298627.56
+  (soglia minima consigliata: 5.00)

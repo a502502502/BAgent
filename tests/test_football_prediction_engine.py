@@ -1,6 +1,5 @@
-﻿from datetime import datetime
-
-import pytest
+﻿import pytest
+from datetime import datetime
 
 from models.football import (
     FootballMatch,
@@ -25,27 +24,26 @@ from services.football_prediction_engine import (
 
 
 def make_match(
-    match_id: str,
-    date: str,
-    home_id: str,
-    away_id: str,
-    home_goals: int,
-    away_goals: int,
-) -> HistoricalFootballMatch:
-
+    match_id,
+    start_time,
+    home_team,
+    away_team,
+    home_goals,
+    away_goals,
+):
     match = FootballMatch(
         id=match_id,
         competition="Test League",
         season="2025/26",
         home=FootballTeam(
-            id=home_id,
-            name=home_id,
+            id=home_team,
+            name=home_team,
         ),
         away=FootballTeam(
-            id=away_id,
-            name=away_id,
+            id=away_team,
+            name=away_team,
         ),
-        start_time=date,
+        start_time=start_time,
         home_goals=home_goals,
         away_goals=away_goals,
         status="Completed",
@@ -53,8 +51,7 @@ def make_match(
 
     return HistoricalFootballMatch(
         match=match,
-        date=datetime.fromisoformat(date),
-        winner=match.result,
+        date=datetime.fromisoformat(start_time),
     )
 
 
@@ -95,12 +92,10 @@ def test_prediction_engine_produces_1x2_prediction():
         ),
     ]
 
-    dataset = FootballHistoricalDataset(
-        historical
-    )
+    dataset = FootballHistoricalDataset(historical)
 
-    historical_profile = (
-        FootballHistoricalProfile(dataset)
+    historical_profile = FootballHistoricalProfile(
+        dataset
     )
 
     prediction_match = FootballMatch(
@@ -119,17 +114,14 @@ def test_prediction_engine_produces_1x2_prediction():
         status="Scheduled",
     )
 
-    prediction = (
-        FootballPredictionEngine().predict(
-            match=prediction_match,
-            historical_profile=historical_profile,
-        )
+    prediction = FootballPredictionEngine().predict(
+        match=prediction_match,
+        historical_profile=historical_profile,
     )
 
     assert prediction is not None
 
     assert prediction.match_id == "PRED-001"
-
     assert prediction.home_team == "Strong Team"
     assert prediction.away_team == "Weak Team"
 
@@ -144,48 +136,45 @@ def test_prediction_engine_produces_1x2_prediction():
     )
 
     assert prediction.rating > 0
-
     assert prediction.confidence > 0
 
-    assert len(
-        prediction.contributions
-    ) == 1
+    assert len(prediction.contributions) == 1
 
-    assert (
-        prediction.contributions[0].factor
-        == "TeamStrength"
-    )
+    factors = {
+        contribution.factor
+        for contribution in prediction.contributions
+    }
+
+    assert factors == {"TeamStrength"}
 
 
 def test_prediction_returns_none_without_history():
 
     dataset = FootballHistoricalDataset([])
 
-    historical_profile = (
-        FootballHistoricalProfile(dataset)
+    historical_profile = FootballHistoricalProfile(
+        dataset
     )
 
-    match = FootballMatch(
+    prediction_match = FootballMatch(
         id="PRED-002",
         competition="Test League",
         season="2025/26",
         home=FootballTeam(
-            id="NewTeamA",
-            name="New Team A",
+            id="UnknownA",
+            name="Unknown A",
         ),
         away=FootballTeam(
-            id="NewTeamB",
-            name="New Team B",
+            id="UnknownB",
+            name="Unknown B",
         ),
         start_time="2026-08-01T20:00:00",
         status="Scheduled",
     )
 
-    prediction = (
-        FootballPredictionEngine().predict(
-            match=match,
-            historical_profile=historical_profile,
-        )
+    prediction = FootballPredictionEngine().predict(
+        match=prediction_match,
+        historical_profile=historical_profile,
     )
 
     assert prediction is None
@@ -193,17 +182,68 @@ def test_prediction_returns_none_without_history():
 
 def test_prediction_does_not_use_current_match():
 
-    previous_match = make_match(
-        "H-010",
-        "2026-08-01T18:00:00",
-        "TeamA",
-        "TeamB",
-        5,
-        0,
+    historical = [
+        make_match(
+            "H-001",
+            "2026-07-01T20:00:00",
+            "TeamA",
+            "TeamB",
+            3,
+            0,
+        ),
+    ]
+
+    dataset = FootballHistoricalDataset(historical)
+
+    historical_profile = FootballHistoricalProfile(
+        dataset
     )
 
-    current_match = FootballMatch(
-        id="PRED-010",
+    prediction_match = FootballMatch(
+        id="PRED-003",
+        competition="Test League",
+        season="2025/26",
+        home=FootballTeam(
+            id="TeamA",
+            name="Team A",
+        ),
+        away=FootballTeam(
+            id="TeamB",
+            name="Team B",
+        ),
+        start_time="2026-06-01T20:00:00",
+        status="Scheduled",
+    )
+
+    prediction = FootballPredictionEngine().predict(
+        match=prediction_match,
+        historical_profile=historical_profile,
+    )
+
+    assert prediction is None
+
+
+def test_prediction_uses_explicit_reference_date():
+
+    historical = [
+        make_match(
+            "H-001",
+            "2026-07-01T20:00:00",
+            "TeamA",
+            "TeamB",
+            3,
+            0,
+        ),
+    ]
+
+    dataset = FootballHistoricalDataset(historical)
+
+    historical_profile = FootballHistoricalProfile(
+        dataset
+    )
+
+    prediction_match = FootballMatch(
+        id="PRED-004",
         competition="Test League",
         season="2025/26",
         home=FootballTeam(
@@ -218,94 +258,13 @@ def test_prediction_does_not_use_current_match():
         status="Scheduled",
     )
 
-    dataset = FootballHistoricalDataset(
-        [
-            previous_match,
-        ]
-    )
-
-    historical_profile = (
-        FootballHistoricalProfile(dataset)
-    )
-
-    prediction = (
-        FootballPredictionEngine().predict(
-            match=current_match,
-            historical_profile=historical_profile,
-        )
-    )
-
-    assert prediction is not None
-
-    assert (
-        prediction.match_id
-        == "PRED-010"
-    )
-
-    assert (
-        prediction.probability.home
-        > prediction.probability.away
-    )
-
-
-def test_prediction_uses_explicit_reference_date():
-
-    historical = [
-        make_match(
-            "H-020",
-            "2026-07-01T20:00:00",
-            "TeamA",
-            "TeamB",
-            2,
-            0,
+    prediction = FootballPredictionEngine().predict(
+        match=prediction_match,
+        historical_profile=historical_profile,
+        date=datetime.fromisoformat(
+            "2026-06-15T20:00:00"
         ),
-        make_match(
-            "H-021",
-            "2026-08-20T20:00:00",
-            "TeamA",
-            "TeamB",
-            0,
-            5,
-        ),
-    ]
-
-    dataset = FootballHistoricalDataset(
-        historical
     )
 
-    historical_profile = (
-        FootballHistoricalProfile(dataset)
-    )
+    assert prediction is None
 
-    match = FootballMatch(
-        id="PRED-020",
-        competition="Test League",
-        season="2025/26",
-        home=FootballTeam(
-            id="TeamA",
-            name="Team A",
-        ),
-        away=FootballTeam(
-            id="TeamB",
-            name="Team B",
-        ),
-        start_time="2026-08-25T20:00:00",
-        status="Scheduled",
-    )
-
-    prediction = (
-        FootballPredictionEngine().predict(
-            match=match,
-            historical_profile=historical_profile,
-            date=datetime.fromisoformat(
-                "2026-08-10T20:00:00"
-            ),
-        )
-    )
-
-    assert prediction is not None
-
-    assert (
-        prediction.probability.home
-        > prediction.probability.away
-    )

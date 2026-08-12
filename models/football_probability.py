@@ -1,6 +1,5 @@
 ﻿from dataclasses import dataclass
 
-
 @dataclass(frozen=True)
 class FootballProbability:
 
@@ -34,13 +33,16 @@ class FootballProbability:
     @property
     def most_likely(self) -> str:
 
-        values = {
-            "HOME": self.home,
-            "DRAW": self.draw,
-            "AWAY": self.away,
-        }
-
-        return max(
-            values,
-            key=values.get,
+        non_draw_max = max(
+            self.home,
+            self.away,
         )
+
+        if self.draw >= non_draw_max - 0.03:
+            return "DRAW"
+
+        if self.home >= self.away:
+            return "HOME"
+
+        return "AWAY"
+
