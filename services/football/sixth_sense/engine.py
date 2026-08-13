@@ -38,6 +38,7 @@ from services.football.sixth_sense.adjuster import (
 from services.football.base_model.goal_model import GoalModel
 from services.football.base_model.corner_model import CornerModel
 from services.football.base_model.aggregate_model import AggregateModel
+from services.football.sixth_sense.repository import SixthSenseRepository
 
 
 # ------------------------------------------------------------------
@@ -260,6 +261,7 @@ class SixthSenseEngine:
 
         self.adjuster = ProbabilityAdjuster()
         self.min_edge = min_edge
+        self.repo = SixthSenseRepository()
 
     def analyze(
         self,
@@ -348,6 +350,21 @@ class SixthSenseEngine:
 
         if verbose:
             print(f"[BAgent] Sesto Senso: {len(sixth_sense.events)} eventi trovati")
+
+        # 4b. Persistenza Sesto Senso nel DB
+        match_date_str = match_date.isoformat() if isinstance(match_date, date) else str(match_date)
+        try:
+            news_bundle = bundle.get("news") or {}
+            if news_bundle:
+                n_art = self.repo.save_news(news_bundle, home, away, match_date_str)
+                if verbose:
+                    print(f"[BAgent] Salvati {n_art} articoli nel DB")
+            n_ev = self.repo.save_events(sixth_sense, home, away, match_date_str)
+            if verbose:
+                print(f"[BAgent] Salvati {n_ev} eventi nel DB")
+        except Exception as e:
+            if verbose:
+                print(f"[BAgent] ⚠️  Errore salvataggio DB Sesto Senso: {e}")
 
         # 5. Aggiustamento probabilità
         adjusted = self.adjuster.adjust(base_probs, sixth_sense)

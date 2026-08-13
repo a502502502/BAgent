@@ -168,6 +168,42 @@ def _create_tables(conn: sqlite3.Connection) -> None:
     );
 
     -- ----------------------------------------------------------------
+    -- Sesto Senso: articoli grezzi
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS sixth_sense_news (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        home_team       TEXT NOT NULL,
+        away_team       TEXT NOT NULL,
+        match_date      TEXT,
+        collected_at    TEXT NOT NULL,
+        team_tag        TEXT,          -- 'home' | 'away' | 'match'
+        title           TEXT NOT NULL,
+        url             TEXT,
+        source          TEXT,
+        snippet         TEXT,
+        language        TEXT
+    );
+
+    -- ----------------------------------------------------------------
+    -- Sesto Senso: eventi strutturati (output LLM)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS sixth_sense_events (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        home_team       TEXT NOT NULL,
+        away_team       TEXT NOT NULL,
+        match_date      TEXT,
+        created_at      TEXT NOT NULL,
+        team            TEXT,          -- nome squadra a cui si riferisce
+        player          TEXT,          -- nome giocatore (se applicabile)
+        event_type      TEXT,          -- injury | suspension | lineup | morale | fatigue | other
+        impact          REAL,          -- -3..+3
+        confidence      REAL,          -- 0.0..1.0
+        notes           TEXT,
+        summary         TEXT,          -- sintesi generale dell'analisi
+        overall_confidence REAL
+    );
+
+    -- ----------------------------------------------------------------
     -- Indici per query veloci
     -- ----------------------------------------------------------------
     CREATE INDEX IF NOT EXISTS idx_matches_teams
@@ -178,6 +214,12 @@ def _create_tables(conn: sqlite3.Connection) -> None:
         ON teams(team_name, league, season);
     CREATE INDEX IF NOT EXISTS idx_players_club
         ON players(current_club, league, season);
+    CREATE INDEX IF NOT EXISTS idx_ss_news_teams
+        ON sixth_sense_news(home_team, away_team, match_date);
+    CREATE INDEX IF NOT EXISTS idx_ss_events_teams
+        ON sixth_sense_events(home_team, away_team, match_date);
+    CREATE INDEX IF NOT EXISTS idx_ss_events_type
+        ON sixth_sense_events(event_type, team);
     """)
     conn.commit()
 
