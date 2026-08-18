@@ -168,6 +168,85 @@ def _create_tables(conn: sqlite3.Connection) -> None:
     );
 
     -- ----------------------------------------------------------------
+    -- Tennis: partite (singolare e doppio)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS tennis_matches (
+        id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+        tourney_id          TEXT,
+        tourney_name        TEXT NOT NULL,
+        surface             TEXT,          -- clay | grass | hard | carpet
+        tourney_level       TEXT,          -- G=GrandSlam A=Masters250 M=Masters1000 F=Finals D=Davis
+        tourney_date        TEXT,          -- YYYY-MM-DD
+        match_type          TEXT DEFAULT 'singles',  -- singles | doubles
+        round               TEXT,          -- R128 R64 R32 R16 QF SF F
+        best_of             INTEGER,
+        winner_name         TEXT NOT NULL,
+        winner_rank         INTEGER,
+        winner_rank_pts     INTEGER,
+        loser_name          TEXT NOT NULL,
+        loser_rank          INTEGER,
+        loser_rank_pts      INTEGER,
+        score               TEXT,          -- es. "6-3 7-5"
+        minutes             INTEGER,
+        -- Statistiche servizio vincitore
+        w_ace               INTEGER,
+        w_df                INTEGER,
+        w_1stIn             INTEGER,
+        w_1stWon            INTEGER,
+        w_2ndWon            INTEGER,
+        w_svpt              INTEGER,
+        w_bpSaved           INTEGER,
+        w_bpFaced           INTEGER,
+        -- Statistiche servizio perdente
+        l_ace               INTEGER,
+        l_df                INTEGER,
+        l_1stIn             INTEGER,
+        l_1stWon            INTEGER,
+        l_2ndWon            INTEGER,
+        l_svpt              INTEGER,
+        l_bpSaved           INTEGER,
+        l_bpFaced           INTEGER,
+        UNIQUE(tourney_id, match_type, round, winner_name, loser_name)
+    );
+
+    -- ----------------------------------------------------------------
+    -- Tennis: giocatori (stats aggregate per anno/superficie)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS tennis_players (
+        id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+        player_name         TEXT NOT NULL,
+        year                INTEGER NOT NULL,
+        surface             TEXT NOT NULL,  -- clay | grass | hard | all
+        matches_played      INTEGER DEFAULT 0,
+        matches_won         INTEGER DEFAULT 0,
+        win_pct             REAL,
+        avg_rank            REAL,
+        -- Statistiche servizio (medie per partita)
+        avg_ace             REAL,
+        avg_df              REAL,
+        avg_1st_in_pct      REAL,
+        avg_1st_won_pct     REAL,
+        avg_2nd_won_pct     REAL,
+        avg_bp_saved_pct    REAL,
+        -- Statistiche return (medie come avversario)
+        avg_bp_converted_pct REAL,
+        UNIQUE(player_name, year, surface)
+    );
+
+    -- ----------------------------------------------------------------
+    -- Tennis: tornei
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS tennis_tournaments (
+        id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+        tourney_id          TEXT UNIQUE,
+        tourney_name        TEXT NOT NULL,
+        surface             TEXT,
+        tourney_level       TEXT,
+        country             TEXT,
+        city                TEXT
+    );
+
+    -- ----------------------------------------------------------------
     -- Sesto Senso: articoli grezzi
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS sixth_sense_news (
@@ -220,6 +299,12 @@ def _create_tables(conn: sqlite3.Connection) -> None:
         ON sixth_sense_events(home_team, away_team, match_date);
     CREATE INDEX IF NOT EXISTS idx_ss_events_type
         ON sixth_sense_events(event_type, team);
+    CREATE INDEX IF NOT EXISTS idx_tennis_matches_players
+        ON tennis_matches(winner_name, loser_name);
+    CREATE INDEX IF NOT EXISTS idx_tennis_matches_tourney
+        ON tennis_matches(tourney_name, tourney_date);
+    CREATE INDEX IF NOT EXISTS idx_tennis_players_name
+        ON tennis_players(player_name, year, surface);
     """)
     conn.commit()
 

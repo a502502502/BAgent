@@ -4,6 +4,7 @@ News collector per il Sesto Senso.
 Fonti:
   - Google News RSS (gratuito, nessuna auth)
   - NewsAPI.org (gratuito fino a 100 req/giorno con API key)
+  - Fonti specifiche per lega (eredivisie.com, ecc.)
 
 Produce una lista di articoli strutturati pronti per l'analisi LLM.
 """
@@ -19,6 +20,54 @@ from typing import Optional
 from urllib.parse import quote_plus
 
 import requests
+
+
+# ------------------------------------------------------------------
+# Configurazione fonti specifiche per lega
+# ------------------------------------------------------------------
+
+# Mappa: keyword lega → lista di siti da includere nelle ricerche Sesto Senso
+# Usati come `site:url` nelle query Google News oppure come URL diretti da fetchare.
+LEAGUE_SOURCES: dict[str, dict] = {
+    "eredivisie": {
+        "sites": ["eredivisie.com"],
+        "language": "nl",
+        "country": "NL",
+        "search_suffix": "blessure OR opstelling OR nieuws OR schorsing",
+        "base_url": "https://eredivisie.com",
+        # Slug normalizzazione: team_name → slug per URL club page
+        # es. "Sparta Rotterdam" → "sparta-rotterdam"
+        "club_url_template": "https://eredivisie.com/clubs/{slug}/",
+        "note": (
+            "Fonte ufficiale Eredivisie. Contiene notizie su blessures (infortuni), "
+            "opstellingen (formazioni), scouting e trasferimenti. "
+            "Il sito è JavaScript-rendered: usare ricerca Google con site:eredivisie.com."
+        ),
+    },
+    "brazil serie a": {
+        "sites": ["ge.globo.com", "transfermarkt.com.br"],
+        "language": "pt",
+        "country": "BR",
+        "search_suffix": "lesão OR escalação OR notícias",
+        "note": "Fonti principali per il Brasileirão.",
+    },
+}
+
+# Normalizza il nome di una squadra in slug URL (es. "Sparta Rotterdam" → "sparta-rotterdam")
+def _team_to_slug(team_name: str) -> str:
+    import re
+    slug = team_name.lower().strip()
+    slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+    slug = re.sub(r'\s+', '-', slug)
+    return slug
+
+def get_league_config(league: str) -> dict | None:
+    """Restituisce la config della lega corrispondente (case-insensitive)."""
+    league_lower = league.lower()
+    for key, cfg in LEAGUE_SOURCES.items():
+        if key in league_lower:
+            return cfg
+    return None
 
 
 # ------------------------------------------------------------------
@@ -215,6 +264,8 @@ class NewsAPISource:
 class SixthSenseNewsCollector:
     """
     Raccoglie notizie per una partita combinando Google News + NewsAPI.
+    Se viene fornita una lega, usa anche le fonti specifiche configurate
+    in LEAGUE_SOURCES (es. eredivisie.com per partite olandesi).
     Produce un bundle pronto per l'analisi LLM.
     """
 
@@ -235,15 +286,19 @@ class SixthSenseNewsCollector:
         away: str,
         match_date: Optional[str] = None,
         max_per_team: int = 8,
+        league: Optional[str] = None,
     ) -> dict:
         """
         Raccoglie tutte le notizie disponibili per una partita.
+        Se `league` è specificata, usa anche le fonti configurate in LEAGUE_SOURCES.
 
         Ritorna:
         {
             "home": str,
             "away": str,
             "collected_at": str,
+            "league": str | None,
+            "league_source": str | None,   # es. "eredivisie.com"
             "articles": {
                 "match": [...],
                 "home_team": [...],
@@ -254,40 +309,64 @@ class SixthSenseNewsCollector:
         """
         collected_at = datetime.utcnow().isoformat()
 
-        # Notizie sulla partita
+        # Determina lingua/paese: usa config lega se disponibile
+        league_cfg = get_league_config(league) if league else None
+        lang = league_cfg["language"] if league_cfg else self.language
+        country = league_cfg["country"] if league_cfg else self.country
+        suffix = league_cfg.get("search_suffix", "infortunio OR formazione OR notizie") if league_cfg else "infortunio OR formazione OR notizie"
+        league_sites = league_cfg.get("sites", []) if league_cfg else []
+
+        # Notizie sulla partita (lingua locale)
         match_articles = self.google.search_match(
             home=home,
             away=away,
-            language=self.language,
-            country=self.country,
+            language=lang,
+            country=country,
             max_results=max_per_team,
         )
 
-        # Notizie singole squadre
+        # Notizie singole squadre (lingua locale)
         home_articles = self.google.search_team(
             team=home,
-            language=self.language,
-            country=self.country,
+            language=lang,
+            country=country,
             max_results=max_per_team,
         )
 
         away_articles = self.google.search_team(
             team=away,
-            language=self.language,
-            country=self.country,
+            language=lang,
+            country=country,
             max_results=max_per_team,
         )
+
+        # Ricerche aggiuntive sui siti specifici della lega
+        # (es. site:eredivisie.com "Telstar" blessure OR opstelling)
+        for site in league_sites:
+            for team in [home, away]:
+                slug = _team_to_slug(team)
+                site_query = f'site:{site} "{team}" {suffix}'
+                extra = self.google.search(
+                    query=site_query,
+                    language=lang,
+                    country=country,
+                    max_results=5,
+                )
+                if team == home:
+                    home_articles += extra
+                else:
+                    away_articles += extra
 
         # Integra con NewsAPI se disponibile
         if self.newsapi._available():
             home_articles += self.newsapi.search(
                 query=home,
-                language=self.language,
+                language=lang,
                 max_results=5,
             )
             away_articles += self.newsapi.search(
                 query=away,
-                language=self.language,
+                language=lang,
                 max_results=5,
             )
 
@@ -304,6 +383,8 @@ class SixthSenseNewsCollector:
             "away": away,
             "match_date": match_date,
             "collected_at": collected_at,
+            "league": league,
+            "league_source": league_sites[0] if league_sites else None,
             "articles": {
                 "match": all_articles[0],
                 "home_team": all_articles[1],
@@ -321,8 +402,16 @@ class SixthSenseNewsCollector:
         away = bundle["away"]
         date = bundle.get("match_date", "N/A")
 
+        league_label = bundle.get("league", "")
+        league_src = bundle.get("league_source", "")
+        header_extra = ""
+        if league_label:
+            header_extra = f" | Lega: {league_label}"
+        if league_src:
+            header_extra += f" | Fonte extra: {league_src}"
+
         lines = [
-            f"=== ANALISI SESTO SENSO: {home} vs {away} ({date}) ===",
+            f"=== ANALISI SESTO SENSO: {home} vs {away} ({date}){header_extra} ===",
             "",
         ]
 

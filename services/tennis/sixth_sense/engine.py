@@ -1,244 +1,287 @@
 """
-TennisEngine — pipeline BAgent per il tennis.
+TennisSixthSense — Sesto Senso per il tennis.
 
-Flusso:
-  1. Calcola P(vittoria) con Bradley-Terry + superficie + H2H
-  2. Calcola mercati set (2.5 / 3.5 / 4.5)
-  3. Raccoglie notizie opzionalmente (stesso SixthSenseAnalyzer del calcio)
-  4. Identifica value bets rispetto alle quote di mercato
+Cerca notizie su infortuni, ritiri, forma recente, problemi fisici
+dei giocatori prima di una partita.
 
 Utilizzo:
-    engine = TennisEngine()
-    result = engine.analyze(
-        player1="Carlos Alcaraz",    player1_rank=2,
-        player2="Jannik Sinner",     player2_rank=1,
-        surface="clay",
-        best_of=3,
-        market_odds={"player1": 1.90, "player2": 1.90}
-    )
-    print(result.report())
+    from services.tennis.sixth_sense.engine import TennisSixthSense
+    ss = TennisSixthSense()
+    events = ss.analyze("Carlos Alcaraz", "Jannik Sinner", surface="clay")
+    print(events.summary)
+    print(events.p1_factor)   # moltiplicatore forza P1 (es. 0.88 se infortunato)
+    print(events.p2_factor)   # moltiplicatore forza P2
 """
 
 from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
-from datetime import date, datetime, timezone
-from typing import Optional, Tuple
+from typing import Optional
+from datetime import datetime, timezone
 
-from services.tennis.base_model.win_model import TennisWinModel
-from services.tennis.base_model.set_model import TennisSetModel
+from services.football.external.sources.news import SixthSenseNewsCollector
 
-
-# ------------------------------------------------------------------
-# Result container
-# ------------------------------------------------------------------
 
 @dataclass
-class TennisAnalysisResult:
+class TennisEvent:
+    player: str
+    event_type: str       # injury | fatigue | withdrawal_risk | morale | form
+    impact: float         # -3..+3 (negativo = svantaggia il giocatore)
+    confidence: float     # 0.0..1.0
+    description: str
+
+
+@dataclass
+class TennisSixthSenseResult:
     player1: str
     player2: str
-    surface: str
-    best_of: int
-    analyzed_at: str
+    status: str           # OK | NO_NEWS | ERROR
+    events: list[TennisEvent] = field(default_factory=list)
+    summary: str = ""
+    overall_confidence: float = 0.0
 
-    # Probabilità
-    win_probs: dict           # {"player1": float, "player2": float}
-    set_markets: dict         # da TennisSetModel.markets()
-
-    # Value bets
-    value_signals: list[dict] = field(default_factory=list)
-    market_odds: dict         = field(default_factory=dict)
-
-    # Metadati modello
-    player1_rank: int = 0
-    player2_rank: int = 0
-    h2h: Optional[Tuple[int, int]] = None
-
-    def report(self) -> str:
-        lines = [
-            "=" * 60,
-            f"  {self.player1.upper()} vs {self.player2.upper()}",
-            f"  Superficie: {self.surface.upper()}  |  Best of {self.best_of}",
-            f"  Ranking: #{self.player1_rank} vs #{self.player2_rank}",
-            "=" * 60,
-            "",
-            "── PROBABILITÀ VITTORIA (Bradley-Terry) ───────────────",
-            f"  {self.player1:<25}: {self.win_probs['player1']:.1%}",
-            f"  {self.player2:<25}: {self.win_probs['player2']:.1%}",
-        ]
-
-        if self.h2h:
-            p1w, p2w = self.h2h
-            lines.append(f"  H2H: {self.player1} {p1w} - {p2w} {self.player2}")
-
-        lines.append("")
-
-        # Mercati set
-        sm = self.set_markets
-        if self.best_of == 3:
-            lines += [
-                "── MERCATI SET (Best of 3) ─────────────────────────────",
-                f"  {self.player1} 2-0 : {sm.get('p1_2_0', 0):.1%}  |  {self.player2} 2-0 : {sm.get('p2_2_0', 0):.1%}",
-                f"  {self.player1} 2-1 : {sm.get('p1_2_1', 0):.1%}  |  {self.player2} 2-1 : {sm.get('p2_2_1', 0):.1%}",
-                f"  Over 2.5 set  : {sm.get('over_2_5_sets', 0):.1%}  (3 set)  |  Under 2.5 : {sm.get('under_2_5_sets', 0):.1%}  (2 set)",
-                f"  Set attesi    : {sm.get('expected_sets', 0):.2f}",
-            ]
-        else:
-            lines += [
-                "── MERCATI SET (Best of 5) ─────────────────────────────",
-                f"  {self.player1} 3-0 : {sm.get('p1_3_0', 0):.1%}  |  {self.player2} 3-0 : {sm.get('p2_3_0', 0):.1%}",
-                f"  {self.player1} 3-1 : {sm.get('p1_3_1', 0):.1%}  |  {self.player2} 3-1 : {sm.get('p2_3_1', 0):.1%}",
-                f"  {self.player1} 3-2 : {sm.get('p1_3_2', 0):.1%}  |  {self.player2} 3-2 : {sm.get('p2_3_2', 0):.1%}",
-                f"  Over 3.5 set  : {sm.get('over_3_5_sets', 0):.1%}  |  Under 3.5 : {sm.get('under_3_5_sets', 0):.1%}",
-                f"  Over 4.5 set  : {sm.get('over_4_5_sets', 0):.1%}  |  Under 4.5 : {sm.get('under_4_5_sets', 0):.1%}",
-                f"  Set attesi    : {sm.get('expected_sets', 0):.2f}",
-            ]
-
-        # Quote di mercato
-        if self.market_odds:
-            lines += [
-                "",
-                "── QUOTE DI MERCATO ────────────────────────────────────",
-                f"  {self.player1:<25}: {self.market_odds.get('player1', 'N/A')}",
-                f"  {self.player2:<25}: {self.market_odds.get('player2', 'N/A')}",
-            ]
-            for key in ["over_2_5_sets", "under_2_5_sets",
-                        "over_3_5_sets", "under_3_5_sets",
-                        "over_4_5_sets", "under_4_5_sets"]:
-                if key in self.market_odds:
-                    lines.append(f"  {key:<25}: {self.market_odds[key]}")
-
-        # Value bets
-        if self.value_signals:
-            lines += ["", "── VALUE BETS ──────────────────────────────────────────"]
-            for vs in self.value_signals:
-                rec = "⭐ VALUE BET" if vs["recommendation"] == "VALUE BET" else "👀 WATCH"
-                lines.append(
-                    f"  {rec}  {vs['market']:<20}  "
-                    f"nostra {vs['our_probability']:.1%} vs "
-                    f"mercato {vs['market_probability']:.1%}  "
-                    f"edge {vs['edge']:+.1%}  "
-                    f"quota: {vs['market_odd']}"
-                )
-        elif self.market_odds:
-            lines += ["", "── VALUE BETS: nessun valore trovato ───────────────────"]
-
-        lines += ["", "=" * 60]
-        return "\n".join(lines)
+    # Fattori moltiplicativi per il modello (1.0 = neutro)
+    p1_factor: float = 1.0
+    p2_factor: float = 1.0
 
     def to_dict(self) -> dict:
         return {
-            "player1":        self.player1,
-            "player2":        self.player2,
-            "surface":        self.surface,
-            "best_of":        self.best_of,
-            "player1_rank":   self.player1_rank,
-            "player2_rank":   self.player2_rank,
-            "analyzed_at":    self.analyzed_at,
-            "win_probs":      self.win_probs,
-            "set_markets":    self.set_markets,
-            "value_signals":  self.value_signals,
-            "market_odds":    self.market_odds,
+            "player1":            self.player1,
+            "player2":            self.player2,
+            "status":             self.status,
+            "summary":            self.summary,
+            "overall_confidence": self.overall_confidence,
+            "p1_factor":          self.p1_factor,
+            "p2_factor":          self.p2_factor,
+            "events":             [vars(e) for e in self.events],
         }
 
 
-# ------------------------------------------------------------------
-# Engine
-# ------------------------------------------------------------------
+# ── Parsing risposta LLM ──────────────────────────────────────────────────────
 
-class TennisEngine:
+def _parse_llm_events(text: str, player1: str, player2: str) -> list[TennisEvent]:
     """
-    Pipeline BAgent per il tennis.
+    Estrae eventi strutturati dal testo LLM in formato JSON-like.
+    Cerca pattern: player, event_type, impact, confidence, description.
+    """
+    import json, re
 
-    Parametri:
-        min_edge: edge minimo per segnalare value bet (default 5%)
+    events: list[TennisEvent] = []
+
+    # Prova parsing JSON se il modello ha risposto in JSON
+    json_match = re.search(r"\[.*?\]", text, re.DOTALL)
+    if json_match:
+        try:
+            raw = json.loads(json_match.group())
+            for item in raw:
+                if isinstance(item, dict):
+                    events.append(TennisEvent(
+                        player=item.get("player", ""),
+                        event_type=item.get("event_type", "other"),
+                        impact=float(item.get("impact", 0)),
+                        confidence=float(item.get("confidence", 0.5)),
+                        description=item.get("description", ""),
+                    ))
+            return events
+        except Exception:
+            pass
+
+    # Fallback: parsing riga per riga
+    lines = text.splitlines()
+    for line in lines:
+        line = line.strip()
+        if not line or line.startswith("#") or line.startswith("="):
+            continue
+        # Cerca menzione di giocatori + keyword
+        p = None
+        if player1.split()[-1].lower() in line.lower():
+            p = player1
+        elif player2.split()[-1].lower() in line.lower():
+            p = player2
+        if not p:
+            continue
+
+        etype = "other"
+        impact = 0.0
+        if any(w in line.lower() for w in ["infort", "injur", "hurt", "retire", "forfait", "bless"]):
+            etype = "injury"
+            impact = -2.0
+        elif any(w in line.lower() for w in ["fatig", "stanc", "tante partite", "days rest"]):
+            etype = "fatigue"
+            impact = -1.0
+        elif any(w in line.lower() for w in ["form", "winning", "confidence", "vittori"]):
+            etype = "form"
+            impact = 1.0
+
+        if impact != 0.0:
+            events.append(TennisEvent(
+                player=p,
+                event_type=etype,
+                impact=impact,
+                confidence=0.5,
+                description=line[:200],
+            ))
+
+    return events
+
+
+def _impact_to_factor(events: list[TennisEvent], player: str) -> float:
+    """
+    Converte gli eventi in un fattore moltiplicativo [0.7, 1.3].
+    -3 → 0.70 (fortemente svantaggiato)
+     0 → 1.00 (neutro)
+    +3 → 1.30 (fortemente avvantaggiato)
+    """
+    total_impact = sum(
+        e.impact * e.confidence
+        for e in events
+        if player.split()[-1].lower() in e.player.lower() or e.player == player
+    )
+    # Scala: ±3 impact → ±30% factor
+    factor = 1.0 + (total_impact / 10.0)
+    return round(max(0.70, min(1.30, factor)), 3)
+
+
+# ── Engine principale ─────────────────────────────────────────────────────────
+
+class TennisSixthSense:
+    """
+    Sesto Senso per il tennis.
+    Usa lo stesso news collector del calcio, ma con query ottimizzate per tennis.
     """
 
-    def __init__(self, min_edge: float = 0.05):
-        self.min_edge = min_edge
+    TENNIS_QUERIES = [
+        "{player} infortunio OR ritiro OR forfait OR injury OR withdrawal",
+        "{player} tennis news form",
+    ]
+
+    def __init__(
+        self,
+        anthropic_key: Optional[str] = None,
+        newsapi_key: Optional[str] = None,
+        llm_model: str = "claude-haiku-4-5-20251001",
+    ):
+        self._anthropic_key = anthropic_key or os.getenv("ANTHROPIC_API_KEY")
+        self._newsapi_key = newsapi_key or os.getenv("NEWSAPI_KEY")
+        self._model = llm_model
+        self._collector = SixthSenseNewsCollector(newsapi_key=self._newsapi_key)
 
     def analyze(
         self,
         player1: str,
-        player1_rank: int,
         player2: str,
-        player2_rank: int,
         surface: str = "hard",
-        best_of: int = 3,
-        h2h: Optional[Tuple[int, int]] = None,
-        p1_surface_factor: float = 1.0,
-        p2_surface_factor: float = 1.0,
-        market_odds: Optional[dict] = None,
+        tournament: str = "",
+        match_date: Optional[str] = None,
         verbose: bool = False,
-    ) -> TennisAnalysisResult:
+    ) -> TennisSixthSenseResult:
         """
-        Analisi completa di un match tennis.
+        Analizza notizie su entrambi i giocatori.
 
-        player1/player2:        nomi dei giocatori
-        player1_rank/player2_rank: ranking ATP/WTA
-        surface:                'clay' | 'grass' | 'hard' | 'indoor'
-        best_of:                3 o 5
-        h2h:                    (vittorie p1, vittorie p2) — opzionale
-        p1_surface_factor:      moltiplicatore forza P1 su questa superficie (1.0 = neutro)
-        p2_surface_factor:      idem per P2
-        market_odds:            quote bookmaker {player1, player2, over_2_5_sets, ...}
-        verbose:                stampa progress
+        Ritorna TennisSixthSenseResult con:
+        - events: lista eventi trovati
+        - p1_factor / p2_factor: moltiplicatori per il modello (usati in TennisEngine)
+        - summary: sintesi testuale
         """
-        analyzed_at = datetime.now(timezone.utc).isoformat()
 
         if verbose:
-            print(f"[TennisEngine] Analisi: {player1} (#{player1_rank}) vs {player2} (#{player2_rank})")
-            print(f"[TennisEngine] Superficie: {surface}  |  Best of {best_of}")
+            print(f"[TennisSS] Ricerca notizie: {player1} vs {player2}")
 
-        # 1. Modello vittoria
-        win_model = TennisWinModel(
-            player1_rank=player1_rank,
-            player2_rank=player2_rank,
-            surface=surface,
-            h2h=h2h,
-            p1_surface_factor=p1_surface_factor,
-            p2_surface_factor=p2_surface_factor,
-        )
-        win_probs = win_model.win_probs()
-
-        if verbose:
-            print(f"[TennisEngine] P(vittoria): {player1} {win_probs['player1']:.1%}  |  {player2} {win_probs['player2']:.1%}")
-
-        # 2. Modello set
-        set_model = TennisSetModel(p1_win_prob=win_probs["player1"], best_of=best_of)
-        set_markets = set_model.markets()
-
-        if verbose:
-            print(f"[TennisEngine] Set attesi: {set_markets.get('expected_sets')}")
-
-        # 3. Value bets
-        value_signals: list[dict] = []
-        if market_odds:
-            # Value bets sul vincitore
-            win_signals = win_model.value_signals(market_odds, min_edge=self.min_edge)
-            # Value bets sui set
-            set_signals = set_model.value_signals(market_odds, min_edge=self.min_edge)
-            value_signals = sorted(
-                win_signals + set_signals,
-                key=lambda x: x["edge"],
-                reverse=True,
+        # Raccolta notizie (sfruttiamo il collector del calcio con home/away = p1/p2)
+        try:
+            bundle = self._collector.collect(
+                home=player1,
+                away=player2,
+                match_date=match_date,
+                max_per_team=6,
+            )
+        except Exception as e:
+            return TennisSixthSenseResult(
+                player1=player1, player2=player2,
+                status="ERROR", summary=str(e),
             )
 
-        if verbose and value_signals:
-            print(f"[TennisEngine] {len(value_signals)} value bet trovate")
+        total = bundle.get("total_articles", 0)
+        if verbose:
+            print(f"[TennisSS] {total} articoli raccolti")
 
-        return TennisAnalysisResult(
+        if total == 0:
+            return TennisSixthSenseResult(
+                player1=player1, player2=player2,
+                status="NO_NEWS", summary="Nessuna notizia trovata.",
+            )
+
+        # Prepara prompt
+        news_text = self._collector.format_for_llm(bundle)
+        prompt = self._build_prompt(player1, player2, surface, tournament, news_text)
+
+        # Analisi LLM
+        try:
+            import anthropic
+            client = anthropic.Anthropic(api_key=self._anthropic_key)
+            msg = client.messages.create(
+                model=self._model,
+                max_tokens=1024,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            llm_text = msg.content[0].text if msg.content else ""
+        except Exception as e:
+            # Se LLM non disponibile, usa parsing euristico diretto
+            llm_text = news_text
+            if verbose:
+                print(f"[TennisSS] LLM non disponibile ({e}), parsing euristico")
+
+        events = _parse_llm_events(llm_text, player1, player2)
+
+        p1_factor = _impact_to_factor(events, player1)
+        p2_factor = _impact_to_factor(events, player2)
+
+        # Summary
+        if events:
+            summary_parts = []
+            for ev in events:
+                sign = "+" if ev.impact > 0 else ""
+                summary_parts.append(f"{ev.player} [{ev.event_type}: {sign}{ev.impact:.0f}]")
+            summary = " | ".join(summary_parts)
+        else:
+            summary = "Nessun evento rilevante trovato."
+
+        overall_conf = (
+            sum(e.confidence for e in events) / len(events)
+            if events else 0.0
+        )
+
+        return TennisSixthSenseResult(
             player1=player1,
             player2=player2,
-            surface=surface,
-            best_of=best_of,
-            analyzed_at=analyzed_at,
-            win_probs=win_probs,
-            set_markets=set_markets,
-            value_signals=value_signals,
-            market_odds=market_odds or {},
-            player1_rank=player1_rank,
-            player2_rank=player2_rank,
-            h2h=h2h,
+            status="OK",
+            events=events,
+            summary=summary,
+            overall_confidence=round(overall_conf, 2),
+            p1_factor=p1_factor,
+            p2_factor=p2_factor,
         )
+
+    def _build_prompt(
+        self, p1: str, p2: str, surface: str, tournament: str, news_text: str
+    ) -> str:
+        ctx = f"Torneo: {tournament} | Superficie: {surface}" if tournament else f"Superficie: {surface}"
+        return f"""Sei un analista tennis. Analizza le notizie e identifica fattori rilevanti per la partita {p1} vs {p2}.
+{ctx}
+
+{news_text}
+
+Identifica eventi che influenzano la partita. Rispondi SOLO con un array JSON:
+[
+  {{
+    "player": "nome giocatore",
+    "event_type": "injury|fatigue|withdrawal_risk|morale|form",
+    "impact": numero da -3 a +3,
+    "confidence": numero da 0.0 a 1.0,
+    "description": "breve spiegazione in italiano"
+  }}
+]
+
+Se non trovi nulla di rilevante, rispondi con [].
+Non aggiungere testo fuori dal JSON."""
