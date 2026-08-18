@@ -81,7 +81,8 @@ DATABASE = DATA / "bagent.db"
 | Codice | GitHub: `https://github.com/a502502502/BAgent.git` (privato) |
 | Dati (`data/`) | Google Drive (sincronizzato) |
 | `.env` | Solo locale + Google Drive, **mai su git** |
-| Pi SSH | `pi@bagent.local` o `pi@192.168.1.69` |
+| Pi SSH (locale) | `pi@bagent.local` o `pi@192.168.1.70` |
+| Pi SSH (remoto/Tailscale) | `pi@100.120.216.25` (da qualsiasi rete) |
 
 ### .env (mai condividere in chat)
 Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`
@@ -109,11 +110,11 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
 ### Pending ⏳
 - **Task #22**: Modulo tennis completo (ATP/WTA/Doppio) — struttura già in `services/tennis/`
 - Integrazione MultiMarketAnalyzer nel pipeline principale BAgent
-- **Task #29**: Setup Pi come server autonomo (da fare quando a casa sulla stessa rete)
-  - Deploy `live_monitor.py` come servizio systemd sul Pi
-  - Cron job `db_updater.py` sul Pi ogni mattina
-  - `rclone` per sync DB → Google Drive automatico
-  - Tailscale per accesso SSH remoto da qualsiasi rete
+- **Task #29**: ✅ Setup Pi come server autonomo — COMPLETATO 18/08/2026
+  - ✅ `bagent-live.service` systemd attivo (`sudo systemctl status bagent-live`)
+  - ✅ Cron 07:00 — `db_updater.py` aggiorna DB ogni mattina
+  - ✅ Cron 07:30 — `rclone sync` DB → Google Drive (`gdrive:B-Agent/BAgent/data/`)
+  - ✅ Tailscale attivo — SSH remoto: `ssh pi@100.120.216.25`
 
 ---
 
@@ -284,4 +285,4 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 18 agosto 2026 — ore 18:00 IT*
+*Ultimo aggiornamento: 18 agosto 2026 — Task #29 completato (Pi autonomo + Tailscale)*
