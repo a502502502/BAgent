@@ -84,7 +84,7 @@ DATABASE = DATA / "bagent.db"
 | Pi SSH | `pi@bagent.local` o `pi@192.168.1.69` |
 
 ### .env (mai condividere in chat)
-Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`
+Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`
 
 ---
 
@@ -101,6 +101,7 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`
 - **Task #26**: 3 HTML schedine prenotate Netwin → `reports/schedina_*.html`
 - **Task #27**: Multipla 17-20 Agosto (nuova, UCL/EL style) → `reports/multipla_1720ago.html`
 - **Task #28**: Multipla MLS Americas (20 agosto) → `reports/multipla_mls_americas.html`
+- **Task #30**: Live Monitor (`scripts/live_monitor.py`) — polling Sofascore/API-Football ogni 30s, alert Telegram con pick Poisson live
 
 ### In corso 🔄
 - **Task #17**: Widget schedina Norway U19
@@ -108,8 +109,11 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`
 ### Pending ⏳
 - **Task #22**: Modulo tennis completo (ATP/WTA/Doppio) — struttura già in `services/tennis/`
 - Integrazione MultiMarketAnalyzer nel pipeline principale BAgent
-- Recovery `bagent.db` (journal file presente, stato dirty)
-- Multipla stanotte 18 agosto (01:00-04:00) — solo 3 partite disponibili, troppo poche
+- **Task #29**: Setup Pi come server autonomo (da fare quando a casa sulla stessa rete)
+  - Deploy `live_monitor.py` come servizio systemd sul Pi
+  - Cron job `db_updater.py` sul Pi ogni mattina
+  - `rclone` per sync DB → Google Drive automatico
+  - Tailscale per accesso SSH remoto da qualsiasi rete
 
 ---
 
@@ -210,4 +214,74 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 17 agosto 2026 — ore 23:00 IT*
+## Sessione 18 Agosto 2026 — Riepilogo Lavoro Svolto
+
+### Schedine HTML create
+| File | Contenuto |
+|------|-----------|
+| `reports/schedina_mattina_18ago.html` | Over 3.5 Slovan @1.88 + Sydney @1.27 + Guoan @2.95 → tripla @7.04×, €20 → **PERSA** (Thailand 2-1) |
+| `reports/schedina_ucl_18ago.html` | 1 Dinamo @1.75 + Under Fener @2.07 + 1 Levski @3.10 → tripla @11.22 |
+
+### Ticket Netwin Aperti (al 18/08 sera)
+| Ticket | Selezioni | Stake | Pot. Vincita | Cashout |
+|--------|-----------|-------|-------------|---------|
+| **1303** | Kingsley BTTS + Guoan 2 + Thailand 1 + Dinamo 1 | €10 | €113.87 | ~€9 |
+| **F009** | 10 sel. UCL/UEL (18-20 ago) — 9/10 aperte | €5 | €212.47 | ~€5 |
+| **B402** | 9 sel. UCL/UEL (18-20 ago) — 8/9 aperte | €2 | €118.58 | ~€2 |
+| **D80A** | 9 sel. UCL/UEL (18-20 ago) — 8/9 aperte | €3 | €439.39 | ~€3 |
+
+**Saldo Netwin**: €59.72
+
+### Picks stasera (18/08 21:00) per ticket aperti
+- **Dinamo 1** @1.76 → serve a F009 e D80A ⭐⭐
+- **Levski DC X2** @1.37 → serve a F009 (pareggio o AEK)
+- **Levski DC 12** @1.34 → serve a B402 (Levski o AEK)
+- **Levski AEK 2** @2.48 → serve a D80A (AEK outright)
+- ~~**Fener 2 (Lyon)** @2.03~~ → ❌ ABBANDONATO (non giochiamo più)
+- ~~**Under 2.5 Fener** @2.07~~ → ❌ ABBANDONATO
+
+### Live Monitor — `scripts/live_monitor.py`
+- Usa **API-Football** (non Sofascore, bloccata con 403)
+- Polling ogni 30 secondi
+- Notifiche **Telegram** su gol con pick Poisson aggiornati al minuto
+- Telegram chat_id: 466378357
+- Avvio: `python3 scripts/live_monitor.py`
+- **TODO**: deployare sul Pi come servizio systemd (Task #29)
+
+### Sofascore Match IDs utili
+| Partita | ID |
+|---------|-----|
+| Kingsley vs Gwelup | 16816280 |
+| Shanghai Shenhua vs Guoan | 16851672 |
+| Dinamo Zagabria vs Viking | 16707702 |
+| Levski vs AEK | 16707695 |
+| Fenerbahce vs Lyon | 16707704 |
+
+### Lesson Learned — Gare di Ritorno
+⚠️ Prima di analizzare una gara di ritorno, obbligatorio verificare:
+1. **xG e possesso della gara di andata** — se le stats contraddicono il risultato, la squadra "perdente" è più pericolosa di quanto dica il punteggio
+2. **Motivazione reale** — la squadra avanti nell'aggregato può giocare in controllo/risparmio
+3. **Rotazioni** — verifica se la squadra forte cambia formazione essendo già qualificata
+4. **Esempio**: Thailand 1 @1.43 analizzata male — Singapore aveva 75% possesso nella gara di andata ma aveva perso 1-3. Nel ritorno Singapore ha vinto 2-1 e si è qualificata.
+
+### Analisi UCL 18/08 — Sesto Senso
+**Fenerbahce vs Lyon**: Fener senza Lukaku, Amrabat, Soyuncu, Ederson, Gunok, Oosterwolde (6 assenti). Ha perso 2-1 in campionato sabato. Under 2.5 ⭐, Fener 1 ❌ rischio alto.
+**Levski vs AEK**: Levski 8V/9 ma manca Sangare/Kamdem/Bouras. AEK 13 senza sconfitta ma solo amichevoli estate. DC 12 B402 ⭐⭐.
+**Dinamo vs Viking**: Dinamo 11 gol in 2 qualificazioni, Viking debutto assoluto ai playoff UCL. Pick più solido della serata ⭐⭐.
+
+---
+
+### Schedina Svezia 18/08 (sera) — 5 selezioni
+| Partita | Pick | Quota |
+|---------|------|-------|
+| Skovde vs Falkenbergs | 2 @1.24 | ⭐ |
+| Karlstad vs Sandviken | DC X2 @1.24 | ⭐ |
+| Karlbergs vs Brage | DC X2 @1.33 | ⭐ |
+| Eskilstuna vs Oddevold | 2 @1.51 | 👀 |
+| Nosaby vs Trelleborg | DC 1X @1.80 | 👀 |
+
+**Quota: 5.55×** · Tutte le partite ore 18:30 · Quote verificate e inserite su Netwin
+
+---
+
+*Ultimo aggiornamento: 18 agosto 2026 — ore 18:00 IT*

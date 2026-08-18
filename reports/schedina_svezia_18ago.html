@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedina Svezia — 18 Agosto 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; padding: 24px 16px; }
+  .container { max-width: 780px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 28px; }
+  header .badge { display: inline-block; background: #1a2332; border: 1px solid #30363d; border-radius: 20px; padding: 6px 16px; font-size: 12px; color: #8b949e; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  header h1 { font-size: 22px; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+  header .subtitle { font-size: 13px; color: #8b949e; }
+
+  .stats-bar { display: flex; gap: 12px; margin-bottom: 24px; }
+  .stat { flex: 1; background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 14px; text-align: center; }
+  .stat .val { font-size: 22px; font-weight: 700; color: #f78166; margin-bottom: 2px; }
+  .stat .lbl { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat.green .val { color: #3fb950; }
+  .stat.blue .val { color: #58a6ff; }
+
+  .match-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+  .match-header { background: #1a2332; padding: 9px 16px; display: flex; align-items: center; gap: 10px; }
+  .competition { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+  .match-time { margin-left: auto; font-size: 13px; color: #58a6ff; font-weight: 600; }
+
+  .match-body { padding: 14px 16px; }
+  .teams { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .team { font-size: 15px; font-weight: 600; }
+  .team.away { text-align: right; }
+  .vs { font-size: 12px; color: #8b949e; }
+
+  .pick-row { display: flex; align-items: center; gap: 10px; background: #0d1117; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+  .pick-label { font-size: 12px; color: #8b949e; text-transform: uppercase; width: 60px; flex-shrink: 0; }
+  .pick-value { font-size: 14px; font-weight: 600; color: #f0f6fc; flex: 1; }
+  .pick-quota { font-size: 16px; font-weight: 700; color: #58a6ff; margin-left: auto; }
+  .pick-prob { font-size: 12px; color: #8b949e; margin-left: 8px; }
+
+  .verdict { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+  .verdict-star { font-size: 18px; }
+  .verdict-text { font-size: 12px; color: #8b949e; flex: 1; }
+  .edge-badge { padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; }
+  .edge-green { background: rgba(63,185,80,0.15); color: #3fb950; }
+  .edge-yellow { background: rgba(227,179,65,0.15); color: #e3b341; }
+
+  .sesto-box { margin-top: 10px; padding: 10px 14px; background: #0d1117; border-left: 3px solid #30363d; border-radius: 0 6px 6px 0; font-size: 12px; color: #8b949e; line-height: 1.6; }
+  .sesto-box strong { color: #c9d1d9; }
+
+  .skip-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; margin-bottom: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; opacity: 0.6; }
+  .skip-icon { font-size: 16px; }
+  .skip-text { font-size: 13px; color: #8b949e; }
+  .skip-reason { font-size: 12px; color: #f85149; margin-top: 2px; }
+
+  .section-title { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 10px; }
+
+  .totale { background: linear-gradient(135deg, #1a2332, #1c2b3a); border: 1px solid #388bfd; border-radius: 12px; padding: 18px 20px; margin-top: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .totale-label { font-size: 13px; color: #8b949e; }
+  .totale-value { font-size: 26px; font-weight: 700; color: #58a6ff; }
+  .totale-sels { font-size: 12px; color: #8b949e; margin-top: 4px; }
+
+  .warning { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.3); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #f85149; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">🇸🇪 Svezia — Sesto Senso</div>
+    <h1>Schedina Svezia</h1>
+    <div class="subtitle">Division 2 + Svenska Cup · 18 Agosto 2026</div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat green">
+      <div class="val">5</div>
+      <div class="lbl">Selezioni</div>
+    </div>
+    <div class="stat blue">
+      <div class="val">6.18×</div>
+      <div class="lbl">Quota Totale</div>
+    </div>
+    <div class="stat">
+      <div class="val">3</div>
+      <div class="lbl">Mercati</div>
+    </div>
+  </div>
+
+  <!-- SELEZIONE 1 -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🏆 Svenska Cup</span>
+      <span class="match-time">18:30</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">IFK Skovde FK</div>
+        <div class="vs">vs</div>
+        <div class="team away">Falkenbergs FF</div>
+      </div>
+      <div class="pick-row">
+        <span class="pick-label">1X2</span>
+        <span class="pick-value">2 Falkenbergs</span>
+        <span class="pick-quota">@1.27</span>
+        <span class="pick-prob">86%</span>
+      </div>
+      <div class="verdict">
+        <span class="verdict-star">⭐</span>
+        <span class="verdict-text">Superettan team vs Div 4 — gap di categoria netto</span>
+        <span class="edge-badge edge-green">+9%</span>
+      </div>
+      <div class="sesto-box">
+        <strong>Sesto Senso:</strong> Falkenbergs è in Superettan, Skovde molti livelli sotto. Partita di coppa senza pressione per Falkenbergs — gestione tranquilla. Skovde @7.00 conferma il divario. Quota minima (1.27) ma affidabilità alta.
+      </div>
+    </div>
+  </div>
+
+  <!-- SELEZIONE 2 -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🏆 Svenska Cup</span>
+      <span class="match-time">18:30</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">IF Boljan Falkenberg</div>
+        <div class="vs">vs</div>
+        <div class="team away">Varbergs BoIS</div>
+      </div>
+      <div class="pick-row">
+        <span class="pick-label">Over/Under</span>
+        <span class="pick-value">Under 2.5</span>
+        <span class="pick-quota">@1.32</span>
+        <span class="pick-prob">82%</span>
+      </div>
+      <div class="verdict">
+        <span class="verdict-star">⭐</span>
+        <span class="verdict-text">Varbergs 2° Superettan — gestirà in controllo senza rischi</span>
+        <span class="edge-badge edge-green">+8%</span>
+      </div>
+      <div class="sesto-box">
+        <strong>Sesto Senso:</strong> Varbergs BoIS è 2° in Superettan (9V-3P-3S), eccellente in trasferta. Boljan è nettamente inferiore. Le grandi squadre in coppa contro avversari deboli spesso vincono 1-0 o 2-0 gestendo le energie. Varbergs ha perso le ultime 3 (stanchezza / rotazioni) ma rimane favorita netta.
+      </div>
+    </div>
+  </div>
+
+  <!-- SELEZIONE 3 -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🏆 Svenska Cup</span>
+      <span class="match-time">18:30</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">Karlbergs BK</div>
+        <div class="vs">vs</div>
+        <div class="team away">IK Brage</div>
+      </div>
+      <div class="pick-row">
+        <span class="pick-label">DC</span>
+        <span class="pick-value">DC X2 (X o Brage)</span>
+        <span class="pick-quota">@1.33</span>
+        <span class="pick-prob">80%</span>
+      </div>
+      <div class="verdict">
+        <span class="verdict-star">⭐</span>
+        <span class="verdict-text">Brage 8° Superettan, miglior forma in trasferta (3V-0P-1S)</span>
+        <span class="edge-badge edge-green">+6%</span>
+      </div>
+      <div class="sesto-box">
+        <strong>Sesto Senso:</strong> IK Brage gioca in Superettan ed ha la miglior forma in trasferta della categoria. Karlbergs è divisione inferiore con pessimo record casalingo (0V-2P-2S in casa). DC X2 copre sia il pareggio che la vittoria Brage — ampio margine di sicurezza.
+      </div>
+    </div>
+  </div>
+
+  <!-- SELEZIONE 4 -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🏆 Svenska Cup</span>
+      <span class="match-time">16:30</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">AFC Eskilstuna</div>
+        <div class="vs">vs</div>
+        <div class="team away">IK Oddevold</div>
+      </div>
+      <div class="pick-row">
+        <span class="pick-label">1X2</span>
+        <span class="pick-value">2 Oddevold</span>
+        <span class="pick-quota">@1.54</span>
+        <span class="pick-prob">73%</span>
+      </div>
+      <div class="verdict">
+        <span class="verdict-star">👀</span>
+        <span class="verdict-text">Oddevold Superettan entra direttamente al 2° turno</span>
+        <span class="edge-badge edge-green">+13%</span>
+      </div>
+      <div class="sesto-box">
+        <strong>Sesto Senso:</strong> Oddevold (Superettan) entra direttamente al secondo turno della coppa. Eskilstuna ha battuto prima Konyaspor KIF per qualificarsi — è una squadra di divisione inferiore. Gap di categoria significativo, @1.54 offre buon valore rispetto al rischio.
+      </div>
+    </div>
+  </div>
+
+  <!-- SELEZIONE 5 -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🏟️ Division 2 — Södra Götaland</span>
+      <span class="match-time">17:00</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">Nosaby IF</div>
+        <div class="vs">vs</div>
+        <div class="team away">IFK Trelleborg</div>
+      </div>
+      <div class="pick-row">
+        <span class="pick-label">DC</span>
+        <span class="pick-value">DC 1X (Nosaby o X)</span>
+        <span class="pick-quota">@1.80</span>
+        <span class="pick-prob">68%</span>
+      </div>
+      <div class="verdict">
+        <span class="verdict-star">👀</span>
+        <span class="verdict-text">Nosaby 8 partite consecutive senza sconfitta in casa</span>
+        <span class="edge-badge edge-yellow">+22%</span>
+      </div>
+      <div class="sesto-box">
+        <strong>Sesto Senso:</strong> Nosaby ha una striscia di 8 partite casalinghe senza sconfitta in Division 2 e ha visto Over 2.5 nelle ultime 5 in casa. Il bookmaker però mette Trelleborg come favorita @1.80 — il DC 1X @1.80 offre valore eccezionale dato il rendimento casalingo di Nosaby. Alta incertezza su questa (73% → 68% per prudenza).
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCLUSE -->
+  <div class="section-title">❌ Escluse dal Sesto Senso</div>
+
+  <div class="skip-card">
+    <span class="skip-icon">❌</span>
+    <div>
+      <div class="skip-text">Vastra Frolunda vs Elfsborg — 2 Elfsborg @1.05</div>
+      <div class="skip-reason">Quota sotto minimo (1.20) · Elfsborg solo 36% Over 2.5 in Allsvenskan (3 assenti: Wikström, Frick, Richtnér)</div>
+    </div>
+  </div>
+
+  <div class="skip-card">
+    <span class="skip-icon">❌</span>
+    <div>
+      <div class="skip-text">Sollentuna vs Örebro — 2 Örebro @1.57</div>
+      <div class="skip-reason">Örebro forma disastrosa: 0V nelle ultime 5, 14° Superettan · Edge negativo (-6%)</div>
+    </div>
+  </div>
+
+  <div class="skip-card">
+    <span class="skip-icon">❌</span>
+    <div>
+      <div class="skip-text">Boljan vs Varbergs / Eskilstuna vs Oddevold — DC X2</div>
+      <div class="skip-reason">Quote sotto minimo (1.04 e 1.15) · Escluse da regola quota ≥ 1.20</div>
+    </div>
+  </div>
+
+  <div class="skip-card">
+    <span class="skip-icon">❌</span>
+    <div>
+      <div class="skip-text">Karlstad vs Sandviken — DC X2 @1.24</div>
+      <div class="skip-reason">Dati insufficienti su Sandviken · Livello simile tra le due squadre · Rischio non giustificato</div>
+    </div>
+  </div>
+
+  <!-- TOTALE -->
+  <div class="totale">
+    <div>
+      <div class="totale-label">Quota Combinata (5 sel.)</div>
+      <div class="totale-value">6.18×</div>
+      <div class="totale-sels">Falkenbergs 2 · Under 2.5 Varbergs · DC X2 Brage · Oddevold 2 · DC 1X Nosaby</div>
+    </div>
+  </div>
+
+  <div class="totale" style="margin-top: 10px; border-color: #3fb950;">
+    <div>
+      <div class="totale-label">Quota Ridotta — Solo ⭐ (prime 3 sel.)</div>
+      <div class="totale-value" style="color: #3fb950;">2.24×</div>
+      <div class="totale-sels">Falkenbergs 2 · Under 2.5 Varbergs · DC X2 Brage</div>
+    </div>
+  </div>
+
+  <div class="warning">
+    ⚠️ Quote Netwin non verificate tramite Chrome — verificare prima di giocare. Le partite Svenska Cup/Division 2 svedese possono avere orari non confermati.
+  </div>
+
+  <div style="text-align:center; margin-top: 20px; font-size: 11px; color: #444d56;">
+    BAgent · Sesto Senso · 18 Agosto 2026 · Quote da Netwin
+  </div>
+
+</div>
+</body>
+</html>
