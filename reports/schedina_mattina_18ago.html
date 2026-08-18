@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedina Mattina — 18 Agosto 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; padding: 24px 16px; }
+  .container { max-width: 720px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 24px; }
+  header .badge { display: inline-block; background: #1a2332; border: 1px solid #30363d; border-radius: 20px; padding: 6px 16px; font-size: 12px; color: #8b949e; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  header h1 { font-size: 21px; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+  header .subtitle { font-size: 13px; color: #8b949e; }
+
+  .stats-bar { display: flex; gap: 12px; margin-bottom: 22px; }
+  .stat { flex: 1; background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 14px; text-align: center; }
+  .stat .val { font-size: 22px; font-weight: 700; color: #f78166; margin-bottom: 2px; }
+  .stat .lbl { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat.green .val { color: #3fb950; }
+  .stat.blue .val { color: #58a6ff; }
+
+  .match-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+  .match-header { background: #1a2332; padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+  .competition { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+  .match-time { margin-left: auto; font-size: 13px; color: #58a6ff; font-weight: 600; }
+
+  .match-body { padding: 16px; }
+  .teams { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .team { text-align: center; flex: 1; }
+  .team-name { font-size: 15px; font-weight: 600; color: #f0f6fc; }
+  .team-sub { font-size: 11px; color: #8b949e; margin-top: 2px; }
+  .vs { font-size: 14px; color: #30363d; font-weight: 700; padding: 0 12px; }
+
+  .pick-row { display: flex; align-items: center; gap: 10px; background: #0d1117; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+  .pick-label { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; min-width: 40px; }
+  .pick-value { font-size: 16px; font-weight: 700; color: #f0f6fc; }
+  .pick-odds { margin-left: auto; font-size: 18px; font-weight: 700; color: #3fb950; }
+
+  .metrics { display: flex; gap: 8px; }
+  .metric { flex: 1; background: #0d1117; border-radius: 6px; padding: 8px; text-align: center; }
+  .metric .m-val { font-size: 14px; font-weight: 600; }
+  .metric .m-lbl { font-size: 10px; color: #8b949e; margin-top: 1px; }
+  .metric.prob .m-val { color: #58a6ff; }
+  .metric.edge .m-val { color: #3fb950; }
+  .metric.verdict .m-val { font-size: 16px; }
+
+  .sesto-senso { margin-top: 12px; background: #1a2332; border-left: 3px solid #58a6ff; border-radius: 0 6px 6px 0; padding: 10px 12px; }
+  .sesto-senso .ss-title { font-size: 10px; color: #58a6ff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .sesto-senso .ss-text { font-size: 12px; color: #8b949e; line-height: 1.5; }
+
+  .multipla-box { background: #161b22; border: 2px solid #3fb950; border-radius: 12px; padding: 20px; margin-top: 8px; }
+  .multipla-title { font-size: 13px; color: #3fb950; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; font-weight: 600; }
+  .multipla-row { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid #21262d; }
+  .multipla-row:last-of-type { border-bottom: none; }
+  .multipla-pick { font-size: 13px; color: #e6edf3; flex: 1; }
+  .multipla-pick span { color: #8b949e; font-size: 11px; display: block; margin-top: 1px; }
+  .multipla-q { font-size: 14px; font-weight: 700; color: #3fb950; }
+  .multipla-total { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 14px; border-top: 1px solid #30363d; }
+  .multipla-total .label { font-size: 14px; color: #8b949e; }
+  .multipla-total .quota-final { font-size: 28px; font-weight: 800; color: #3fb950; }
+  .multipla-total .vincita { font-size: 13px; color: #8b949e; margin-top: 2px; }
+
+  footer { text-align: center; margin-top: 28px; font-size: 11px; color: #484f58; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">☀️ Schedina Mattina</div>
+    <h1>18 Agosto 2026 — Mattina</h1>
+    <p class="subtitle">3 selezioni · Quote verificate su Netwin</p>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="val">3</div>
+      <div class="lbl">Selezioni</div>
+    </div>
+    <div class="stat green">
+      <div class="val">7.04×</div>
+      <div class="lbl">Quota Tripla</div>
+    </div>
+    <div class="stat blue">
+      <div class="val">+18%</div>
+      <div class="lbl">Edge Medio</div>
+    </div>
+  </div>
+
+  <!-- Match 1: SD Raiders vs Sydney FC -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🇦🇺 Australia Cup — Quarti di Finale</span>
+      <span class="match-time">~11:30 IT</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">
+          <div class="team-name">SD Raiders FC</div>
+          <div class="team-sub">Semiprofessionisti</div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="team">
+          <div class="team-name">Sydney FC</div>
+          <div class="team-sub">A-League (1ª divisione)</div>
+        </div>
+      </div>
+      <div class="pick-row">
+        <div class="pick-label">PICK</div>
+        <div class="pick-value">2 Sydney FC</div>
+        <div class="pick-odds">@1.27</div>
+      </div>
+      <div class="metrics">
+        <div class="metric prob">
+          <div class="m-val">88%</div>
+          <div class="m-lbl">Prob</div>
+        </div>
+        <div class="metric edge">
+          <div class="m-val">+14.4%</div>
+          <div class="m-lbl">Edge</div>
+        </div>
+        <div class="metric verdict">
+          <div class="m-val">⭐</div>
+          <div class="m-lbl">Verdetto</div>
+        </div>
+      </div>
+      <div class="sesto-senso">
+        <div class="ss-title">🧠 Sesto Senso</div>
+        <div class="ss-text">Sydney FC è un club di A-League (massima serie australiana), SD Raiders è semiprofessionista. Sydney ha vinto 5-1 al turno precedente e ha segnato 9 gol nelle ultime 2 gare di coppa. I Raiders hanno passato il turno ai rigori grazie al portiere Figueira — pura fortuna. Differenza di categoria netta. Quota bassa ma probabilità reale ~88% giustifica l'entry.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Match 2: Shanghai Shenhua vs Beijing Guoan -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🇨🇳 Chinese Super League — Giornata 17</span>
+      <span class="match-time">13:35 IT</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">
+          <div class="team-name">Shanghai Shenhua</div>
+          <div class="team-sub">6° posto CSL</div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="team">
+          <div class="team-name">Beijing Guoan</div>
+          <div class="team-sub">3° posto CSL</div>
+        </div>
+      </div>
+      <div class="pick-row">
+        <div class="pick-label">PICK</div>
+        <div class="pick-value">2 Beijing Guoan</div>
+        <div class="pick-odds">@2.95</div>
+      </div>
+      <div class="metrics">
+        <div class="metric prob">
+          <div class="m-val">38%</div>
+          <div class="m-lbl">Prob</div>
+        </div>
+        <div class="metric edge">
+          <div class="m-val">+12.1%</div>
+          <div class="m-lbl">Edge</div>
+        </div>
+        <div class="metric verdict">
+          <div class="m-val">⭐</div>
+          <div class="m-lbl">Verdetto</div>
+        </div>
+      </div>
+      <div class="sesto-senso">
+        <div class="ss-title">🧠 Sesto Senso</div>
+        <div class="ss-text">Guoan in forma straordinaria: 10 partite senza sconfitta (8V 2P), ha segnato 2+ gol in 8 di queste 10. H2H: Guoan vince 17-9-6 nelle ultime 32. Shenhua ha cambiato allenatore (Mao Yijun) e ha 4 infortuni chiave: Jin Shunkai (costola rotta), Li Ke, Liu Chengyu, Jiang Shenglong. Guoan vince W3/D3/L2 in 8 trasferte CSL 2026 — concede solo 1.25 gol/gara away. La quota @2.95 è gonfiata dal fattore casa di Shenhua ma non dalla forma reale.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Match 3: Slovan U19 vs Kosice U19 -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="competition">🇸🇰 Slovakia U19 Liga — Giornata 1</span>
+      <span class="match-time">~11:00 IT</span>
+    </div>
+    <div class="match-body">
+      <div class="teams">
+        <div class="team">
+          <div class="team-name">Slovan Bratislava U19</div>
+          <div class="team-sub">4° stagione scorsa</div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="team">
+          <div class="team-name">FC Košice U19</div>
+          <div class="team-sub">12° stagione scorsa</div>
+        </div>
+      </div>
+      <div class="pick-row">
+        <div class="pick-label">PICK</div>
+        <div class="pick-value">Over 3.5</div>
+        <div class="pick-odds">@1.88</div>
+      </div>
+      <div class="metrics">
+        <div class="metric prob">
+          <div class="m-val">64%</div>
+          <div class="m-lbl">Prob</div>
+        </div>
+        <div class="metric edge">
+          <div class="m-val">+20.3%</div>
+          <div class="m-lbl">Edge</div>
+        </div>
+        <div class="metric verdict">
+          <div class="m-val">⭐⭐</div>
+          <div class="m-lbl">Verdetto</div>
+        </div>
+      </div>
+      <div class="sesto-senso">
+        <div class="ss-title">🧠 Sesto Senso + FootyStats H2H</div>
+        <div class="ss-text">H2H (10 partite): Slovan 7V/2P/1L — netta superiorità. Media gol: <strong style="color:#f0f6fc">4.4 per partita</strong>. BTTS storico: <strong style="color:#f0f6fc">80%</strong>. Over 3.5 storico: ~64%. Prima giornata stagione 2026/27 — analisi su dati H2H storici. Slovan campione a casa (3 PPG), Košice 0 PPG in trasferta. Con media 4.4 gol e 80% BTTS, Over 3.5 @1.88 offre edge superiore a Over 2.5 @1.38 e ottimo valore rispetto alla quota.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tripla -->
+  <div class="multipla-box">
+    <div class="multipla-title">⚡ Tripla Consigliata</div>
+    <div class="multipla-row">
+      <div class="multipla-pick">2 Sydney FC <span>SD Raiders vs Sydney — Australia Cup QF</span></div>
+      <div class="multipla-q">@1.27</div>
+    </div>
+    <div class="multipla-row">
+      <div class="multipla-pick">Over 3.5 <span>Slovan Bratislava U19 vs Košice U19 — Slovakia U19</span></div>
+      <div class="multipla-q">@1.88</div>
+    </div>
+    <div class="multipla-row">
+      <div class="multipla-pick">2 Beijing Guoan <span>Shanghai Shenhua vs Guoan — CSL</span></div>
+      <div class="multipla-q">@2.95</div>
+    </div>
+    <div class="multipla-total">
+      <div>
+        <div class="label">Quota combinata</div>
+        <div class="vincita">€20 → vincita €140.86</div>
+      </div>
+      <div class="quota-final">7.04×</div>
+    </div>
+  </div>
+
+  <!-- Doppia alternativa -->
+  <div class="multipla-box" style="border-color:#388bfd; margin-top:12px;">
+    <div class="multipla-title" style="color:#388bfd">🔒 Doppia Alternativa (senza Guoan)</div>
+    <div class="multipla-row">
+      <div class="multipla-pick">2 Sydney FC <span>SD Raiders vs Sydney — Australia Cup QF</span></div>
+      <div class="multipla-q">@1.27</div>
+    </div>
+    <div class="multipla-row">
+      <div class="multipla-pick">Over 3.5 <span>Slovan U19 vs Košice U19</span></div>
+      <div class="multipla-q">@1.88</div>
+    </div>
+    <div class="multipla-total">
+      <div>
+        <div class="label">Quota combinata</div>
+        <div class="vincita">€20 → vincita €48.13</div>
+      </div>
+      <div class="quota-final" style="color:#388bfd">2.41×</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>BAgent · Sesto Senso · Modello Poisson · Quote Netwin · 18 Agosto 2026</p>
+    <p style="margin-top:4px">Il gioco è vietato ai minori di 18 anni e può causare dipendenza. Gioca responsabilmente.</p>
+  </footer>
+
+</div>
+</body>
+</html>
