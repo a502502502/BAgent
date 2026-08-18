@@ -25,6 +25,7 @@ from services.football.external.sources.sofascore import SofaScoreSource
 from services.football.external.sources.club_elo import ClubEloSource
 from services.football.external.sources.football_data_uk import FootballDataUKSource
 from services.football.external.sources.news import SixthSenseNewsCollector
+from services.football.external.sources.totalcorner import TotalCornerSource
 from services.football.external.collector import FootballExternalCollector
 from services.football.external.sources.odds_api import OddsAPICollector, SPORT_KEYS
 
@@ -100,6 +101,7 @@ class MultiSourceCollector:
 
         # Fonti secondarie
         self.sofascore = SofaScoreSource(delay=sofascore_delay)
+        self.totalcorner = TotalCornerSource(delay=1.0)
         self.club_elo = ClubEloSource()
         self.football_data = FootballDataUKSource(
             cache_dir=cache_dir or Path("data/football/cache")
@@ -206,11 +208,23 @@ class MultiSourceCollector:
                 news_bundle = {}
                 news_prompt = ""
 
+        # TotalCorner — statistiche storiche Over/Under, gol, corner, forma
+        totalcorner_data: dict = {}
+        totalcorner_prompt = ""
+        try:
+            totalcorner_data = self.totalcorner.collect(home, away, match_date)
+            if totalcorner_data.get("found"):
+                totalcorner_prompt = self.totalcorner.format_for_prompt(totalcorner_data)
+        except Exception as e:
+            print(f"[TotalCorner] Dati non disponibili ({type(e).__name__}) — procedo senza")
+
         # Aggiunge infortuni e formazioni da API-Football al prompt LLM
         api_data = base.get("api_football") or {}
         structured_context = self._build_structured_context(api_data, home, away)
         if structured_context:
             news_prompt = structured_context + "\n\n" + news_prompt
+        if totalcorner_prompt:
+            news_prompt = totalcorner_prompt + "\n\n" + news_prompt
 
         # Quote reali: prima API-Football, poi SofaScore come fallback
         market_odds_from_api = api_data.get("market_odds", {})
@@ -261,6 +275,7 @@ class MultiSourceCollector:
             "news_prompt": news_prompt,
             "market_odds_from_api": market_odds_from_api,
             "odds_api": odds_api_data,
+            "totalcorner": totalcorner_data,
             "sixth_sense": {
                 "events": [],
                 "home_impact": 0.0,
