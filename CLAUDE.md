@@ -285,4 +285,21 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 18 agosto 2026 — Task #29 completato (Pi autonomo + Tailscale)*
+## Sessione 19 Agosto 2026 — Riepilogo Lavoro Svolto
+
+### Schedine HTML create
+| File | Contenuto | Quota |
+|------|-----------|-------|
+| `reports/schedina_asia_19ago.html` | 5 selezioni Asia & Coppe: Shanghai Port 1 @1.43 + Pohang 1 @1.33 + Jeonbuk 1 @1.25 + Nagano 1 @1.50 + Reilac Shiga 1 @1.48 | **4.05×** (Tripla di ferro: **2.38×**) |
+
+### Analisi Partite 19/08 (Korea Cup, Emperor Cup, China Super League)
+- **Shanghai Port vs Dalian Yingbo** (1 @1.43): Capolista dominante, miglior attacco casalingo (Edge +17.2% ⭐⭐).
+- **Pohang Steelers vs Jinju Citizen** (1 @1.33): K-League 1 vs K4 semi-pro (Edge +11.6% ⭐⭐).
+- **Jeonbuk vs Dangjin Citizen** (1 @1.25): K-League 1 vs K4 (Edge +6.2% ⭐).
+- **Nagano Parceiro vs Fukui United** (1 @1.50): J3 pro vs lega regionale (Edge +10.9% ⭐⭐).
+- **Reilac Shiga vs Japan Soccer College** (1 @1.48): JFL vs Accademia/College (Edge +9.5% ⭐).
+
+---
+
+*Ultimo aggiornamento: 19 agosto 2026 — BAgent su Antigravity*
+
