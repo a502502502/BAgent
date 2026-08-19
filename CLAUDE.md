@@ -293,13 +293,34 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | `reports/schedina_asia_19ago.html` | 5 selezioni Asia & Coppe: Shanghai Port 1 + Pohang 1 + Jeonbuk 1 + Nagano 1 + Reilac Shiga 1 | **4.05×** | Conclusa |
 | `reports/schedina_doppia_pomeriggio_19ago.html` | 2 Multiple Pomeriggio: Super Sicura (5 eventi 3.84x) + Maxi Quota (11 eventi 119x) | **3.84×** / **119.37×** | Conclusa |
 | `reports/schedina_merge_sicura_19ago.html` | **Merge Super Sicura (6 eventi)**: Simba Over 1.5 + Ordabasy Over 1.5 + Kifisia Over 1.5 + Slobozia DC X2 + Sepsi DC X2 + Celtic 1 Corner | **4.36×** (~4.80×) | **CASSA PIENA 100% VINCENTE! 🏆** |
-| `reports/schedina_serale_19ago.html` | 2 Multiple Serata: Super Sicura Serale (6 eventi 3.85x) + Alta Quota (8 eventi 22.62x) | **3.85×** / **22.62×** | Registrata |
+| `reports/schedina_serale_19ago.html` | 2 Multiple Serata: Super Sicura Serale (6 eventi 3.88x) + Alta Quota (8 eventi 22.62x) | **3.88×** | **CASSA PIENA 100% VINCENTE! 🏆 (€30 ➔ €116.60)** |
 
 ### Lezioni Apprese & Validazioni (19 Agosto 2026)
 1. **Trappola 1X2 in Trasferta nelle Coppe Secche**: East Bengal finita 0-0 nei 90 min (2 pali). Il segno 2 secco nelle coppe a eliminazione diretta è rischioso; le **Doppie Chance X2** (es. Slobozia e Sepsi) e gli **Over 1.5** (Simba, Ordabasy, Kifisia) garantiscono la sicurezza matematica.
-2. **Successo della Strategia Merge**: La schedina *Merge Super Sicura* ha chiuso con 6 su 6 vinte combinando mercati protetti (Over 1.5 + DC X2 + 1 Corner Celtic a Parkhead).
+2. **Successo della Strategia Merge & Super Sicura**: Entrambe le multiple blindate (Pomeriggio @4.80x e Serata @3.88x) hanno chiuso con 6 su 6 vinte al 100%.
+3. **Regola Over 2.5 Sotto Quota (@1.12-@1.18)**: L'Under inaspettato nel match KV Vesturbaer (0-1) ha mostrato che chiedere 3 gol a quota @1.12 in leghe minori ha un'asimmetria di rischio sfavorevole. Se un match ha aspettativa over ma quota schiacciata, o si scende a **Over 1.5** o si esclude la selezione.
 
 ---
 
-*Ultimo aggiornamento: 19 agosto 2026 ore 23:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+## Sessione Notte 20 Agosto 2026 — Ticket Aperti su Netwin
+
+### Ticket #1: Multipla (6) Booster Notturna (10€ ➔ 77.01€)
+- [00:00] Cerro Porteno vs Palmeiras (Copa Libertadores) ➔ **DC X2** @1.16
+- [00:30] Fortaleza vs Sao Bernardo (Brasile Serie B) ➔ **1** @1.70
+- [00:30] Pelotas vs Gloria RS (Brasile Gaucho A2) ➔ **DC 1X** @1.15
+- [01:00] Houston Dynamo 2 vs San Jose II (MLS Next Pro) ➔ **Gol (GG)** @1.41
+- [01:00] Inter Miami II vs New England II (MLS Next Pro) ➔ **2** @1.48
+- [01:00] Forge FC vs FC Supra (Canada Premier) ➔ **1** @1.58
+* **Quota Totale: 7.48×** · **Importo: €10.00** · **Bonus: +€2.24** · **Vincita Potenziale: €77.01**
+
+### Ticket #2: Multipla (4) "Maxi Value Sesto Senso" (10€ ➔ 100.57€)
+- [00:30] Fortaleza vs Sao Bernardo (Brasile Serie B) ➔ **1** @1.72
+- [01:30] Columbus Crew vs CF Montreal (MLS) ➔ **1** @1.71
+- [02:30] Flamengo vs Cruzeiro (Copa Libertadores) ➔ **1** @1.66
+- [03:30] Seattle Sounders vs Austin FC (MLS) ➔ **DC X2** @2.00 (⭐ *Value Bet Contro-Mercato: Seattle 6 sconfitte di fila e 7 assenti*)
+* **Quota Totale: 9.76×** · **Importo: €10.00** · **Bonus: +€2.92** · **Vincita Potenziale: €100.57**
+
+---
+
+*Ultimo aggiornamento: 20 agosto 2026 ore 00:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
