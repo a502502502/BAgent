@@ -287,19 +287,19 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ## Sessione 19 Agosto 2026 — Riepilogo Lavoro Svolto
 
-### Schedine HTML create
-| File | Contenuto | Quota |
-|------|-----------|-------|
-| `reports/schedina_asia_19ago.html` | 5 selezioni Asia & Coppe: Shanghai Port 1 @1.43 + Pohang 1 @1.33 + Jeonbuk 1 @1.25 + Nagano 1 @1.50 + Reilac Shiga 1 @1.48 | **4.05×** (Tripla di ferro: **2.38×**) |
+### Schedine HTML create (19 Agosto 2026)
+| File | Contenuto | Quota | Esito |
+|------|-----------|-------|:---:|
+| `reports/schedina_asia_19ago.html` | 5 selezioni Asia & Coppe: Shanghai Port 1 + Pohang 1 + Jeonbuk 1 + Nagano 1 + Reilac Shiga 1 | **4.05×** | Conclusa |
+| `reports/schedina_doppia_pomeriggio_19ago.html` | 2 Multiple Pomeriggio: Super Sicura (5 eventi 3.84x) + Maxi Quota (11 eventi 119x) | **3.84×** / **119.37×** | Conclusa |
+| `reports/schedina_merge_sicura_19ago.html` | **Merge Super Sicura (6 eventi)**: Simba Over 1.5 + Ordabasy Over 1.5 + Kifisia Over 1.5 + Slobozia DC X2 + Sepsi DC X2 + Celtic 1 Corner | **4.36×** (~4.80×) | **CASSA PIENA 100% VINCENTE! 🏆** |
+| `reports/schedina_serale_19ago.html` | 2 Multiple Serata: Super Sicura Serale (6 eventi 3.85x) + Alta Quota (8 eventi 22.62x) | **3.85×** / **22.62×** | Registrata |
 
-### Analisi Partite 19/08 (Korea Cup, Emperor Cup, China Super League)
-- **Shanghai Port vs Dalian Yingbo** (1 @1.43): Capolista dominante, miglior attacco casalingo (Edge +17.2% ⭐⭐).
-- **Pohang Steelers vs Jinju Citizen** (1 @1.33): K-League 1 vs K4 semi-pro (Edge +11.6% ⭐⭐).
-- **Jeonbuk vs Dangjin Citizen** (1 @1.25): K-League 1 vs K4 (Edge +6.2% ⭐).
-- **Nagano Parceiro vs Fukui United** (1 @1.50): J3 pro vs lega regionale (Edge +10.9% ⭐⭐).
-- **Reilac Shiga vs Japan Soccer College** (1 @1.48): JFL vs Accademia/College (Edge +9.5% ⭐).
+### Lezioni Apprese & Validazioni (19 Agosto 2026)
+1. **Trappola 1X2 in Trasferta nelle Coppe Secche**: East Bengal finita 0-0 nei 90 min (2 pali). Il segno 2 secco nelle coppe a eliminazione diretta è rischioso; le **Doppie Chance X2** (es. Slobozia e Sepsi) e gli **Over 1.5** (Simba, Ordabasy, Kifisia) garantiscono la sicurezza matematica.
+2. **Successo della Strategia Merge**: La schedina *Merge Super Sicura* ha chiuso con 6 su 6 vinte combinando mercati protetti (Over 1.5 + DC X2 + 1 Corner Celtic a Parkhead).
 
 ---
 
-*Ultimo aggiornamento: 19 agosto 2026 — BAgent su Antigravity*
+*Ultimo aggiornamento: 19 agosto 2026 ore 23:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
