@@ -1,0 +1,63 @@
+================================================================================
+CRONOLOGIA E TRASCRIZIONE COMPLETA SESSIONE BAGENT — NOTTE 20 AGOSTO 2026
+================================================================================
+Data: Notte tra Mercoledì 19 e Giovedì 20 Agosto 2026
+Piattaforma: BAgent Engine su Antigravity (Google DeepMind - macOS)
+Repository: https://github.com/a502502502/BAgent.git
+Utente: Arjan Demiraj (Netwin Bookmaker)
+
+--------------------------------------------------------------------------------
+1. RIEPILOGO GENERALE DELLA SESSIONE
+--------------------------------------------------------------------------------
+In questa sessione su Mac:
+1. Abbiamo sincronizzato il workspace locale con la repository GitHub (ramo main).
+2. Abbiamo registrato il trionfo della "Super Sicura Serale":
+   - Puntata: 30.00 € | Quota: 3.88x
+   - Vincita incassata: 116.60 € (6 su 6 VINTE al 100%)!
+3. Abbiamo analizzato l'esito della tripla "Solo Gol Over" persa per il match islandese:
+   - ASA Aarhus vs Randers: 0-4 (Over 2.5 @1.47) -> VINTO
+   - UMF Selfoss vs Kari: 2-2 (Over 2.5 @1.22) -> VINTO
+   - KV Vesturbaer vs Augnablik: 0-1 (Over 2.5 @1.12) -> PERSO
+   - LEZIONE APPRESA & REGOLA: Mai giocare Over 2.5 sotto quota @1.25. Chiedere 3 gol minimi per quote @1.12-1.18 è asimmetricamente rischioso. In caso di quote schiacciate, scendere a Over 1.5 o escludere.
+4. Abbiamo analizzato l'Edge sui mercati speciali (Corner, Cartellini, Arbitri).
+5. Abbiamo elaborato e piazzato 2 Multiple Ufficiali per il palinsesto notturno delle Americhe.
+
+--------------------------------------------------------------------------------
+2. I 2 TICKET UFFICIALI GIOCATI PER LA NOTTE (20 AGOSTO 2026)
+--------------------------------------------------------------------------------
+
+A) TICKET #1: "MULTIPLA BOOSTER NOTTURNA" (6 Selezioni)
+- Quota Totale: 7.48x (Bonus: +2.24 €)
+- Importo: 10.00 € | Vincita Potenziale: 77.01 €
+1. [00:00] Cerro Porteno vs Palmeiras (Copa Libertadores) -> DC X2 @1.16
+2. [00:30] Fortaleza vs Sao Bernardo (Brasile Serie B) -> 1 @1.70
+3. [00:30] Pelotas vs Gloria RS (Brasile Gaucho A2) -> DC 1X @1.15
+4. [01:00] Houston Dynamo 2 vs San Jose Earthquakes II (MLS Next Pro) -> Gol (GG) @1.41
+5. [01:00] Inter Miami II vs New England Revolution II (MLS Next Pro) -> 2 @1.48
+6. [01:00] Forge FC Hamilton vs FC Supra Du Quebec (Canada Premier) -> 1 @1.58
+
+B) TICKET #2: "MAXI VALUE SESTO SENSO" (4 Selezioni)
+- Quota Totale: 9.76x (Bonus: +2.92 €)
+- Importo: 10.00 € | Vincita Potenziale: 100.57 €
+1. [00:30] Fortaleza vs Sao Bernardo (Brasile Serie B) -> 1 @1.72
+2. [01:30] Columbus Crew vs CF Montreal (MLS) -> 1 @1.71
+3. [02:30] Flamengo vs Cruzeiro (Copa Libertadores) -> 1 @1.66
+4. [03:30] Seattle Sounders vs Austin FC (MLS) -> DC X2 @2.00 (⭐ VALUE BET: Seattle 6 sconfitte di fila e 7 assenti titolari)
+
+TOTALE INVESTITO: 20.00 € | VINCITA POTENZIALE TOTALE: 177.58 €
+
+--------------------------------------------------------------------------------
+3. FILE E REPORT GENERATI NELLA CARTELLA
+--------------------------------------------------------------------------------
+- CLAUDE.md: Memoria centrale aggiornata con esiti 19 agosto e ticket notte 20 agosto.
+- reports/schedina_notturna_20ago.html: Dashboard visuale delle due schedine notturne.
+- reports/schedina_serale_19ago.html: Report schedina serale vincente (116.60 €).
+- reports/schedina_merge_sicura_19ago.html: Report pomeridiano vincente.
+
+--------------------------------------------------------------------------------
+4. PROMPT PER LA RIPRESA DELLA SESSIONE DOMANI
+--------------------------------------------------------------------------------
+Quando riapri Antigravity domani, incolla semplicemente:
+
+"Ciao! Ho aperto il progetto BAgent su Mac. Leggi attentamente i file CLAUDE.md e CONVERSAZIONE_20_AGOSTO_2026.txt per verificare gli esiti dei match notturni (Ticket #1 e Ticket #2), aggiornare la cassa e riprendere con il palinsesto del 20 agosto!"
+================================================================================
