@@ -423,43 +423,22 @@ def format_pick_table(picks: list[dict]) -> str:
 # ─── Monitor Loop ────────────────────────────────────────────────────────────
 
 def run():
-    print(f"\n{BOLD}{BLUE}╔══════════════════════════════════════════════════════╗")
-    print(f"║         BAgent Live Monitor — {datetime.now().strftime('%d/%m/%Y %H:%M')}          ║")
-    print(f"╚══════════════════════════════════════════════════════╝{RESET}\n")
+    print(f"\n=== BAgent Live Monitor -- {datetime.now().strftime('%d/%m/%Y %H:%M')} ===\n")
 
     # Verifica configurazione Telegram
     if TELEGRAM_TOKEN:
-        print(f"{GREEN}✓ Telegram configurato (chat_id: {TELEGRAM_CHAT_ID}){RESET}")
+        print(f"[Telegram] Configurato (chat_id: {TELEGRAM_CHAT_ID})")
     else:
-        print(f"{RED}✗ TELEGRAM_TOKEN mancante nel .env — notifiche Telegram disabilitate{RESET}")
-        print(f"  .env cercato in: {env_path}")
-    print()
+        print(f"[Telegram] Token mancante nel .env")
 
-    # Stato precedente punteggi
-    prev_scores: dict[int, tuple] = {}
-
-    if not API_FOOTBALL_KEY:
-        print(f"{RED}✗ API_FOOTBALL_KEY mancante nel .env{RESET}")
-        sys.exit(1)
-    print(f"{GREEN}✓ API-Football configurata{RESET}\n")
-
-    print(f"{BOLD}{'Partita':<22} {'Orario':<8} {'Pick'}{RESET}")
-    print("─" * 60)
-    for m in MATCHES:
-        home = m['home'].split()[0][:3].upper()
-        away = m['away'].split()[0][:3].upper()
-        partita = f"{home} vs {away}"
-        print(f"  {partita:<20} {m['kickoff']:<8} {m['our_pick']}")
-
-    print(f"\n{YELLOW}Polling ogni 30 secondi... (Ctrl+C per uscire){RESET}\n")
-    print("─" * 60)
-
-    # Test Telegram all'avvio
+    # Partite monitorate
     partite_str = "\n".join([
-        f"• {m['home'].split()[0][:3].upper()} vs {m['away'].split()[0][:3].upper()} ({m['kickoff']}) — {m['our_pick']}"
+        f"• {m['kickoff']} {m['home']} vs {m['away']} -- {m['our_pick']}"
         for m in MATCHES
     ])
-    notify_telegram(f"🤖 <b>BAgent Live Monitor attivo!</b>\n\nPartite monitorate:\n{partite_str}\n\n⏱ Polling ogni 30 secondi.")
+    notify_telegram(f"🤖 <b>BAgent Live Monitor ATTIVO!</b>\n\nPartite monitorate:\n{partite_str}\n\n⏱ Polling live attivo su Telegram.")
+    print("Notifica di avvio inviata su Telegram!")
+
 
     while True:
         now = datetime.now().strftime("%H:%M:%S")
