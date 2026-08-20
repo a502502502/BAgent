@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schedina Notturna — 21 Agosto 2026</title>
+<title>Schedine Notturne — 21 Agosto 2026</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; padding: 24px 16px; }
@@ -18,6 +18,7 @@
   .schedina-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #30363d; padding-bottom: 14px; margin-bottom: 16px; }
   .schedina-title { font-size: 18px; font-weight: 700; color: #f0f6fc; }
   .schedina-tag { padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; }
+  .tag-gold { background: rgba(227,179,65,0.15); color: #e3b341; border: 1px solid rgba(227,179,65,0.3); }
   .tag-blue { background: rgba(56,139,253,0.15); color: #58a6ff; border: 1px solid rgba(56,139,253,0.3); }
 
   .match-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #0d1117; border-radius: 8px; margin-bottom: 8px; }
@@ -28,9 +29,13 @@
   .match-pick { font-size: 13px; font-weight: 700; color: #3fb950; margin-right: 12px; }
   .match-quota { font-size: 14px; font-weight: 700; color: #f0f6fc; }
 
-  .totale-box { margin-top: 16px; padding: 14px 18px; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, rgba(56,139,253,0.1), rgba(56,139,253,0.2)); border: 1px solid #388bfd; }
+  .totale-box { margin-top: 16px; padding: 14px 18px; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; }
+  .tot-gold { background: linear-gradient(135deg, rgba(227,179,65,0.1), rgba(227,179,65,0.2)); border: 1px solid #e3b341; }
+  .tot-blue { background: linear-gradient(135deg, rgba(56,139,253,0.1), rgba(56,139,253,0.2)); border: 1px solid #388bfd; }
   .tot-label { font-size: 13px; color: #c9d1d9; }
-  .tot-val { font-size: 24px; font-weight: 700; color: #58a6ff; }
+  .tot-val { font-size: 24px; font-weight: 700; }
+  .tot-gold .tot-val { color: #e3b341; }
+  .tot-blue .tot-val { color: #58a6ff; }
 </style>
 </head>
 <body>
@@ -38,10 +43,57 @@
 
   <header>
     <div class="badge">BAgent Engine · Protocollo Cecchino</div>
-    <h1>Schedina Notturna d'Acciaio (21 Agosto 2026)</h1>
-    <div class="subtitle">4 Selezioni Blindate con Statistiche, Arbitri e Formazioni Verificate</div>
+    <h1>I 2 Ticket Notturni in Gioco (21 Agosto 2026)</h1>
+    <div class="subtitle">Capitale in Gioco: 57.00 € · Vincita Totale Attesa: 216.70 €</div>
   </header>
 
+  <!-- TICKET #9: TRIPLA PURA STATISTICA -->
+  <div class="schedina-block">
+    <div class="schedina-header">
+      <div class="schedina-title">💎 TICKET #9: Tripla Pura Statistica (100% Mercati Speciali & Gol)</div>
+      <span class="schedina-tag tag-gold">Puntata: 37.00 € · Potenziale: 114.70 €</span>
+    </div>
+
+    <div class="match-row">
+      <span class="match-time">02:30</span>
+      <div class="match-info">
+        <div class="match-name">Botafogo RJ vs Cienciano</div>
+        <div class="match-league">🏆 Copa Sudamericana (Assedio furioso per rimonta 1-6)</div>
+      </div>
+      <span class="match-pick">Over 2.5 Gol</span>
+      <span class="match-quota">@1.26</span>
+    </div>
+
+    <div class="match-row">
+      <span class="match-time">02:30</span>
+      <div class="match-info">
+        <div class="match-name">Corinthians vs Rosario Central</div>
+        <div class="match-league">🏆 Copa Libertadores (All'andata 8 cartellini e 27 falli, arbitro Herrera)</div>
+      </div>
+      <span class="match-pick">Over 5.5 Cartellini</span>
+      <span class="match-quota">@1.54</span>
+    </div>
+
+    <div class="match-row">
+      <span class="match-time">03:00</span>
+      <div class="match-info">
+        <div class="match-name">Atlético Morelia vs Correcaminos UAT</div>
+        <div class="match-league">🇲🇽 Liga de Expansión (Media gol 3.75, difese aperte)</div>
+      </div>
+      <span class="match-pick">Over 2.5 Gol</span>
+      <span class="match-quota">@1.48</span>
+    </div>
+
+    <div class="totale-box tot-gold">
+      <div>
+        <div class="tot-label">Quota Totale Netwin (~3.10×)</div>
+        <div style="font-size: 11px; color: #8b949e;">Importo: 37.00 € ➔ Vincita Potenziale</div>
+      </div>
+      <div class="tot-val">114.70 €</div>
+    </div>
+  </div>
+
+  <!-- TICKET #8: QUATERNA D'ACCIAIO -->
   <div class="schedina-block">
     <div class="schedina-header">
       <div class="schedina-title">🛡️ TICKET #8: Quaterna d'Acciaio Notturna</div>
@@ -62,7 +114,7 @@
       <span class="match-time">02:30</span>
       <div class="match-info">
         <div class="match-name">Corinthians vs Rosario Central</div>
-        <div class="match-league">🏆 Copa Libertadores (All'andata 8 cartellini, arbitro severo Herrera)</div>
+        <div class="match-league">🏆 Copa Libertadores</div>
       </div>
       <span class="match-pick">Over 5.5 Cartellini</span>
       <span class="match-quota">@1.54</span>
@@ -72,7 +124,7 @@
       <span class="match-time">03:00</span>
       <div class="match-info">
         <div class="match-name">Atlético Morelia vs Correcaminos UAT</div>
-        <div class="match-league">🇲🇽 Liga de Expansión (Media gol recenti 3.75, difese aperte)</div>
+        <div class="match-league">🇲🇽 Liga de Expansión</div>
       </div>
       <span class="match-pick">Over 2.5 Gol</span>
       <span class="match-quota">@1.48</span>
@@ -82,23 +134,23 @@
       <span class="match-time">04:00</span>
       <div class="match-info">
         <div class="match-name">Los Angeles FC 2 vs Sporting Kansas City II</div>
-        <div class="match-league">🇺🇸 MLS Next Pro (LAFC 2 imbattuto al Titan Stadium, reduce da 4-3)</div>
+        <div class="match-league">🇺🇸 MLS Next Pro (LAFC 2 imbattuto al Titan Stadium)</div>
       </div>
       <span class="match-pick">Over 2.5 Gol</span>
       <span class="match-quota">@1.33</span>
     </div>
 
-    <div class="totale-box">
+    <div class="totale-box tot-blue">
       <div>
-        <div class="tot-label">Quota Totale Netwin (con Bonus Multipla +10%)</div>
-        <div style="font-size: 11px; color: #8b949e;">Importo Giocato: 20.00 € ➔ Vincita a Cassa</div>
+        <div class="tot-label">Quota Totale Netwin (~5.10×)</div>
+        <div style="font-size: 11px; color: #8b949e;">Importo: 20.00 € ➔ Vincita Potenziale</div>
       </div>
-      <div class="tot-val">102.00 € (~5.10×)</div>
+      <div class="tot-val">102.00 €</div>
     </div>
   </div>
 
   <div style="text-align:center; margin-top: 24px; font-size: 11px; color: #444d56;">
-    BAgent · Sesto Senso & Decision Intelligence · 21 Agosto 2026
+    BAgent · Sesto Senso & Decision Intelligence · Notte 21 Agosto 2026
   </div>
 
 </div>
