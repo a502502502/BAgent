@@ -343,11 +343,11 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
 | **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 3.30× | ❌ Perso *(Elva 1-0)* | 0.00 € | -20.00 € | **87.32 €** |
 | **6** | **20/08 13:56** | **Multipla 6 Pomeriggio/Sera** | 6 eventi | **10.00 €** | 27.03× | ❌ Perso *(El Mansurah)* | 0.00 € | -10.00 € | **77.32 €** |
-| **7** | **20/08 17:51** | **⏱️ Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **15.00 €** | **9.90×** | **⏱️ IN CORSO** | *(Pot. +148.50 €)* | *(Pot. +133.50 €)* | **62.32 €** |
+| **7** | **20/08 17:51** | **⏱️ Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **20.00 €** | **9.90×** | **⏱️ IN CORSO** | *(Pot. +198.00 €)* | *(Pot. +178.00 €)* | **57.32 €** |
 
-* **Saldo Netwin Attuale Disponibile**: **`62.32 €`**
-* **Capitale Attivo in Gioco**: **`15.00 €`** (Ticket #7)
-* **Vincita Potenziale Attesa**: **`+148.50 €` (o fino a `297.00 €` con 30€)** 🚀
+* **Saldo Netwin Attuale Disponibile**: **`57.32 €`**
+* **Capitale Attivo in Gioco**: **`20.00 €`** (Ticket #7)
+* **Vincita Potenziale Attesa**: **`+198.00 €` ➔ Saldo Proiettato `255.32 €`!** 🚀
 
 ---
 
@@ -359,7 +359,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 - [18:00] Inter Turku vs FC Copenhagen ➔ **2 (Copenhagen)** @1.46 (Elyounoussi titolare, 6 vittorie su 7)
 - [19:00] Beşiktaş vs FK Kauno Žalgiris ➔ **Over 2.5 Gol** @1.40 (Tridente Trossard-Kökçü-Oh al Tüpraş)
 - [19:30] PAOK Salonicco vs SK Brann ➔ **Over 4.5 Cartellini** @1.55 (Toumba Stadium: 5.4 cartellini/m)
-* **Quota Base: 8.61×** · **Bonus Multipla: +15% (9.90×)** · **Stato: In Corso ⏱️**
+* **Quota Base: 8.61×** · **Bonus Multipla: +15% (9.90×)** · **Stake: €20.00** · **Vincita Potenziale: €198.00** · **Stato: In Corso ⏱️**
 
 ---
 
