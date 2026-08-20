@@ -342,26 +342,26 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **3** | **20/08 00:30** | **Ticket #1 Notte (Booster)** | 6 eventi | **10.00 €** | 7.48× | ❌ Perso (4/6) | 0.00 € | -10.00 € | ~117.32 € |
 | **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
 | **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 3.30× | ❌ Perso *(Elva 1-0)* | 0.00 € | -20.00 € | **87.32 €** |
-| **6** | **20/08 13:56** | **⏱️ Multipla 6 Pomeriggio/Sera** *(Welco, Mansurah, Selimbar, Rosenborg, Mjallby, Jagiellonia)* | **6 eventi** | **10.00 €** | **27.03×** | **⏱️ IN CORSO** | *(Pot. +270.32 €)* | *(Pot. +260.32 €)* | **77.32 €** |
+| **6** | **20/08 13:56** | **Multipla 6 Pomeriggio/Sera** | 6 eventi | **10.00 €** | 27.03× | ❌ Perso *(El Mansurah)* | 0.00 € | -10.00 € | **77.32 €** |
+| **7** | **20/08 17:51** | **⏱️ Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **15.00 €** | **9.90×** | **⏱️ IN CORSO** | *(Pot. +148.50 €)* | *(Pot. +133.50 €)* | **62.32 €** |
 
-* **Saldo Netwin Attuale Disponibile**: **`77.32 €`**
-* **Capitale Attivo in Gioco**: **`10.00 €`**
-* **Vincita Potenziale Attesa**: **`+270.32 €` ➔ Saldo Proiettato `347.64 €`!** 🚀
+* **Saldo Netwin Attuale Disponibile**: **`62.32 €`**
+* **Capitale Attivo in Gioco**: **`15.00 €`** (Ticket #7)
+* **Vincita Potenziale Attesa**: **`+148.50 €` (o fino a `297.00 €` con 30€)** 🚀
 
 ---
 
 ## Sessione 20 Agosto 2026 — Ticket Aperti su Netwin
 
-### Ticket #6: Multipla 6 Pomeriggio / Sera (Quota 24.57× base + Bonus ➔ 27.03×)
-- [14:00] Tartu JK Welco vs FC Levadia Tallinn U21 ➔ **Over 5.5 Gol** @3.30
-- [15:30] El Mansurah vs Baladiyyat AL Mehalla ➔ **Under 2.5 Gol** @1.34
-- [16:30] CSC 1599 Selimbar vs Botosani ➔ **2 (Botosani)** @1.46
-- [18:00] Rosenborg BK Kvinner vs Lyn ➔ **Over 2.5 Gol** @1.40
-- [18:00] Mjallby vs Red Bull Salisburgo ➔ **Over 3.5 Cartellini** @1.71 (TotalCorner: 6.5 cartellini/m)
-- [18:00] Jagiellonia Bialystok vs Iberia ➔ **Over 8.5 Corner** @1.59 (TotalCorner: 8.3 corner Jagiellonia/m)
-* **Quota Base: 24.57×** · **Bonus: +24.57 €** · **Stake: €10.00** · **Vincita Potenziale: €270.32** · **Cashout Abilitato: €8.00** · **Stato: In Corso ⏱️**
+### Ticket #7: Quinquina Europea Serale (Quota 8.61× base + Bonus 15% ➔ 9.90×)
+- [18:00] Mjällby vs Red Bull Salisburgo ➔ **Over 3.5 Cartellini** @1.71 (TotalCorner: 6.5 cartellini/m)
+- [18:00] Jagiellonia Białystok vs FC Iberia ➔ **Over 8.5 Corner** @1.59 (TotalCorner: 8.3 corner Jagiellonia/m)
+- [18:00] Inter Turku vs FC Copenhagen ➔ **2 (Copenhagen)** @1.46 (Elyounoussi titolare, 6 vittorie su 7)
+- [19:00] Beşiktaş vs FK Kauno Žalgiris ➔ **Over 2.5 Gol** @1.40 (Tridente Trossard-Kökçü-Oh al Tüpraş)
+- [19:30] PAOK Salonicco vs SK Brann ➔ **Over 4.5 Cartellini** @1.55 (Toumba Stadium: 5.4 cartellini/m)
+* **Quota Base: 8.61×** · **Bonus Multipla: +15% (9.90×)** · **Stato: In Corso ⏱️**
 
 ---
 
-*Ultimo aggiornamento: 20 agosto 2026 ore 13:56 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 20 agosto 2026 ore 17:51 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
