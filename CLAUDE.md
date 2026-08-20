@@ -302,25 +302,18 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-## Sessione Notte 20 Agosto 2026 — Ticket Aperti su Netwin
+### Esiti Ticket Notturni (20 Agosto 2026)
+- **Ticket #1 (Multipla Booster 6 selezioni)**: 4 su 6 prese (Cerro DC X2 ✅, Pelotas DC 1X ✅, Houston 2 GG ✅, Forge 1 ✅, Fortaleza 1-1 ❌, Inter Miami 2 4-2 ❌) ➔ Non vincente (-€10.00).
+- **Ticket #2 (Maxi Value Sesto Senso 4 selezioni)**: 2 su 4 prese (Flamengo 1 ✅, Austin FC DC X2 @2.00 ✅, Fortaleza 1-1 ❌, Columbus 1-2 ❌) ➔ Non vincente (-€10.00).
 
-### Ticket #1: Multipla (6) Booster Notturna (10€ ➔ 77.01€)
-- [00:00] Cerro Porteno vs Palmeiras (Copa Libertadores) ➔ **DC X2** @1.16
-- [00:30] Fortaleza vs Sao Bernardo (Brasile Serie B) ➔ **1** @1.70
-- [00:30] Pelotas vs Gloria RS (Brasile Gaucho A2) ➔ **DC 1X** @1.15
-- [01:00] Houston Dynamo 2 vs San Jose II (MLS Next Pro) ➔ **Gol (GG)** @1.41
-- [01:00] Inter Miami II vs New England II (MLS Next Pro) ➔ **2** @1.48
-- [01:00] Forge FC vs FC Supra (Canada Premier) ➔ **1** @1.58
-* **Quota Totale: 7.48×** · **Importo: €10.00** · **Bonus: +€2.24** · **Vincita Potenziale: €77.01**
-
-### Ticket #2: Multipla (4) "Maxi Value Sesto Senso" (10€ ➔ 100.57€)
-- [00:30] Fortaleza vs Sao Bernardo (Brasile Serie B) ➔ **1** @1.72
-- [01:30] Columbus Crew vs CF Montreal (MLS) ➔ **1** @1.71
-- [02:30] Flamengo vs Cruzeiro (Copa Libertadores) ➔ **1** @1.66
-- [03:30] Seattle Sounders vs Austin FC (MLS) ➔ **DC X2** @2.00 (⭐ *Value Bet Contro-Mercato: Seattle 6 sconfitte di fila e 7 assenti*)
-* **Quota Totale: 9.76×** · **Importo: €10.00** · **Bonus: +€2.92** · **Vincita Potenziale: €100.57**
+### Lesson Learned Notte 20 Agosto (Sesto Senso Rafforzato):
+1. **Trappola "Posizione in Classifica vs Punti Reali" (Caso Fortaleza vs Sao Bernardo)**:
+   - *Analisi*: Fortaleza sembrava favorita per la distanza in classifica (es. 5ª vs 12ª), ma il divario reale era di **soli 6 punti** in un campionato storicamente equilibrato e ad alto tasso di pareggio come la Serie B brasiliana.
+   - *Regola*: **Se il distacco in classifica è ampio solo sulla carta ma la differenza reale è $\le 6$ punti, MAI forzare il segno 1 secco: giocare sempre la Doppia Chance (DC 1X) o mercati protetti (Under/No Gol)!**
+2. **Conferma Value Bet Analitiche Contro-Mercato**: Centrata in pieno la quota **@2.00** su **Austin FC DC X2** (vittoria 1-2 a Seattle) grazie allo studio accurato sulle 6 sconfitte e 7 assenze di Seattle.
+3. **Volatilità Leghe Riserve / Sviluppo (MLS Next Pro)**: Evitare segni secchi in trasferta (New England II caduto 4-2) a causa dei continui cambi di roster.
 
 ---
 
-*Ultimo aggiornamento: 20 agosto 2026 ore 00:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 20 agosto 2026 ore 09:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
