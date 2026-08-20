@@ -332,7 +332,11 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **2** | **19/08 21:00** | **Super Sicura Serale** | 6 eventi | **20.00 €** | 3.88× | **✅ CASSA** | **+77.60 €** | **+57.60 €** | **~127.32 €** |
 | **3** | **20/08 00:30** | **Ticket #1 Notte (Booster)** | 6 eventi | **10.00 €** | 7.48× | ❌ Perso (4/6) | 0.00 € | -10.00 € | ~117.32 € |
 | **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
-| **5** | **20/08 10:31** | **⏱️ Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | **3.30×** | **⏱️ IN CORSO** | *(Pot. +66.00 €)* | *(Pot. +46.00 €)* | **87.32 €** *(Disp.)* |
+| **5** | **20/08 10:31** | **⏱️ Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | **3.30×** | **⏱️ IN CORSO** | *(Pot. +66.00 €)* | *(Pot. +46.00 €)* | **87.32 €** |
+
+* **Saldo Netwin Attuale Disponibile**: **`87.32 €`**
+* **Capitale in Gioco**: **`20.00 €`**
+* **Vincita Attesa a Cassa**: **`+66.00 €` ➔ Saldo Proiettato `153.32 €`**
 
 ---
 
@@ -347,5 +351,5 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 20 agosto 2026 ore 10:45 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 20 agosto 2026 ore 10:46 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
