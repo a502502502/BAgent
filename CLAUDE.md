@@ -149,6 +149,9 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
   - ⚖️ **Gare Bilanciate / Equilibrate (Squadre di pari livello / 50-50)**:
     - ⚠️ **I mercati alternativi basati su asimmetria (1X2 Corner/Cartellini) valgono MENO**: il gioco ristagna a centrocampo, si generano meno corner complessivi e l'esito è casuale.
     - ⚽ **Mercati da usare in gare bilanciate**: **Under 2.5 / Under 3.5**, **Multigol 1-3**, o **Doppie Chance di puro valore** (es. Austin DC X2 @2.00).
+- **Strategia In-Play & Assicurazione Live (Live Betting & Hedging)**:
+  - 👁️ **Validazione Visiva Live (Live Entry)**: Aspettare i primi 10-15 minuti di gioco o l'intervallo. Se una partita è bloccata e fallosa (come Elva-Maardu), non forzare l'Over o puntare su Under/Cartellini. Se una favorita assedia l'avversario ma è 0-0 al 20°, la quota 1X2 o Over 1.5 schizza verso l'alto con un Edge fantastico!
+  - 🛡️ **Assicurazione & Cashout Matematico**: Quando i primi eventi della schedina sono già vinti (es. Kaya Over 2.5 preso al 62' e Mariupol avanti 0-1), usare il tasto **Cashout su Netwin** o una singola di copertura sull'ultimo match per blindare il **100% di profitto netto garantito**, azzerando la varianza!
 - Quota combinata target: ≥ 3.50× (Super Sicure) fino a 20-30× (Alta Quota)
 - Probabilità minima per selezione in Super Sicure: > 80% (Media > 85%)
 - Verificare quote reali su **Netwin** (non stime)
