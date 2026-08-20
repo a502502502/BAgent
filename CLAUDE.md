@@ -324,6 +324,18 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
+## Registro Cassa Ufficiale BAgent (Dalla Cassa Piena del 19 Agosto)
+
+| # | Data & Ora | Ticket / Descrizione | Selezioni | Stake (€) | Quota Tot. | Esito | Incasso (€) | Netto (€) | Saldo Netwin |
+|---|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **1** | **19/08 16:30** | **🏆 MERGE SUPER SICURA** *(Simba, Ordabasy, Kifisia, Slobozia, Sepsi, Celtic)* | **6 eventi** | **20.00 €** | **4.80×** | **✅ VINTO (6/6)** | **+96.00 €** | **+76.00 €** | **~116.00 €** |
+| **2** | **19/08 21:00** | **Super Sicura Serale** | 6 eventi | **20.00 €** | 3.88× | **✅ CASSA** | **+77.60 €** | **+57.60 €** | **~127.32 €** |
+| **3** | **20/08 00:30** | **Ticket #1 Notte (Booster)** | 6 eventi | **10.00 €** | 7.48× | ❌ Perso (4/6) | 0.00 € | -10.00 € | ~117.32 € |
+| **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
+| **5** | **20/08 10:31** | **⏱️ Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | **3.30×** | **⏱️ IN CORSO** | *(Pot. +66.00 €)* | *(Pot. +46.00 €)* | **87.32 €** *(Disp.)* |
+
+---
+
 ## Sessione 20 Agosto 2026 — Ticket Aperti su Netwin
 
 ### Ticket #1: Quaterna Mattutina (Ucraina, Estonia, AFC, Norvegia)
@@ -335,5 +347,5 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 20 agosto 2026 ore 10:31 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 20 agosto 2026 ore 10:45 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
