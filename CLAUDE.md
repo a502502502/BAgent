@@ -324,5 +324,16 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 20 agosto 2026 ore 09:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+## Sessione 20 Agosto 2026 — Ticket Aperti su Netwin
+
+### Ticket #1: Quaterna Mattutina (Ucraina, Estonia, AFC, Norvegia)
+- [11:00] Dinaz Vyshgorod vs FSK Mariupol (Coppa Ucraina) ➔ **2 (Mariupol)** @1.31
+- [11:30] FC Elva vs Maardu Linnameeskond (Estonia Esiliiga) ➔ **Over 2.5 Gol** @1.38
+- [12:00] Phnom Penh Crown vs Kaya FC-Iloilo (AFC Champions) ➔ **Over 2.5 Gol** @1.30
+- [13:00] Tromsø IL U19 vs Lillestrøm SK U19 (Norvegia G19 - ID: 3648) ➔ **Over 3.5 Gol** @1.33
+* **Quota Base: 3.13×** · **Bonus: ~3.30×** · **Stake: €20.00** · **Vincita Potenziale: €66.00** · **Stato: In Corso ⏱️**
+
+---
+
+*Ultimo aggiornamento: 20 agosto 2026 ore 10:31 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
