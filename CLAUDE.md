@@ -22,7 +22,11 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
 - **Quota minima**: 1.20
 - **Verdetto**: ⭐ edge ≥5% · 👀 edge positivo <5% · ❌ edge negativo
 - **Terminologia**: usare "selezioni" o "partite" — MAI "gambe" (errore sessione precedente)
-- **Mercati**: usare mix 1X2, Doppia Chance (DC), Over/Under — non solo 1X2
+- **Protocollo Continuità (Max 3-4 Selezioni)**: MAI più di 3 o 4 eventi per ticket. Stop a schedine lunghe che saltano per 1 solo errore.
+- **Zero 2 Fissi in Trasferta nelle Coppe**: Usare sempre Doppia Chance (X2), Over 1.5 o Corner asimmetrici nelle gare di coppa.
+- **BAN Leghe Arabe / Minori Opache**: Stop a Egitto 2nd Div, Iraq, Golfo. Solo Coppe Europee UEFA, campionati europei regolamentati e leghe nordiche con TV/VAR.
+- **Cartellini solo in Ambienti Caldi**: Over Cartellini solo in Grecia, Turchia, Balcani, Sudamerica, derby e sfide ad altissima tensione. Evitare sfide nordiche/austriache pulite.
+- **Scontri Diretti Equilibrati (Δ punti ≤ 3)**: Non forzare Over 2.5 (rischio partita bloccata e fallosa), usare Over 1.5 o Doppia Chance.
 - **Quote Netwin**: verificare sempre direttamente su Netwin tramite Claude in Chrome
 
 ---
@@ -325,14 +329,20 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 2. **Conferma Value Bet Analitiche Contro-Mercato**: Centrata in pieno la quota **@2.00** su **Austin FC DC X2** (vittoria 1-2 a Seattle) grazie allo studio accurato sulle 6 sconfitte e 7 assenze di Seattle.
 3. **Volatilità Leghe Riserve / Sviluppo (MLS Next Pro)**: Evitare segni secchi in trasferta (New England II caduto 4-2) a causa dei continui cambi di roster.
 4. **Trappola Over 2.5 vs Falli Tattici e Gioco Spezzettato (Caso Elva vs Maardu 1-0)**:
-   - *Analisi*: Nonostante le statistiche storiche di 3.5 gol a match, lo scontro diretto tra 4ª e 6ª (34 vs 32 punti) si è trasformato in una battaglia a centrocampo con ben **8 cartellini gialli** e zero continuità di gioco.
-   - *Regola Fondamentale*: **Negli scontri diretti equilibrati di classifica (Δ punti ≤ 3), non forzare l'Over 2.5 sotto-quota (@1.38): giocare sempre l'Over 1.5 o la Doppia Chance (DC 1X è finita 1-0 ✅) per proteggersi dal gioco spezzettato!**
+   - *Analisi*: Nonostante le statistiche storiche di 3.5 gol a match, lo scontro diretto tra 4ª e 6ª (34 vs 32 punti) si è trasformato in una battaglia a centrocampo con ben **9 cartellini totali (5-4)** e zero continuità di gioco.
+   - *Regola Fondamentale*: **Negli scontri diretti equilibrati di classifica (Δ punti ≤ 3), non forzare l'Over 2.5 sotto-quota (@1.37): giocare sempre l'Over 1.5 o la Doppia Chance (DC 1X è finita 1-0 ✅) per proteggersi dal gioco spezzettato!**
 5. **BAN PERMANENTE CAMPIONATI ARABI & LEGHE MINORI OPACHE (Caso El Mansurah)**:
    - *Analisi*: Campionati arabi (Egitto 2nd Div, Iraq, Golfo) e leghe opache soffrono di tempi di recupero infiniti (+12 minuti), rigori casuali al 98°, feed dati lenti o inaffidabili su Sofascore/Flashscore e imprevedibilità tattica.
    - *Regola Fondamentale*: **BAN ASSOLUTO sui campionati arabi/minori opachi! Scommettere SOLO su competizioni con copertura TV/VAR ufficiale e feed live garantiti al secondo: Coppe Europee UEFA (UCL, UEL, UECL), Campionati Nazionali Europei regolamentati e Leghe Nordiche/Scandinave.**
 6. **STRATEGIA DI CONTINUITÀ & CONSISTENZA (Eliminazione della "Sconfitta per 1 Errore")**:
-   - *Analisi*: Le ultime schedine perse hanno fallito per **esattamente 1 evento su 4 o 1 su 6** (Elva 1-0, El Mansurah). Quando forziamo 6 eventi, la probabilità congiunta crolla dal 70% al 35%.
+   - *Analisi*: Le ultime schedine perse hanno fallito per **esattamente 1 evento su 4 o 1 su 6** (Elva 1-0, El Mansurah, Copenhagen 0-0). Quando forziamo 5-6 eventi, la probabilità congiunta crolla dal 70% al 35%.
    - *Protocollo Vincita Continua*: **Preferire sempre schedine da 3 o 4 EVENTI DI PURO ACCIAIO (Probabilità reale per evento > 85%, Quota 3.50x - 5.50x con Bonus) basati su Corner Asimmetrici, Cartellini TotalCorner e Doppie Chance Blindate. Zero eventi "borderline" riempitivi.**
+7. **TRAPPOLA DEL SEGNO 2 FISSO IN TRASFERTA NELLE COPPE (Caso Copenhagen 0-0 & East Bengal 0-0)**:
+   - *Analisi*: Nelle gare d'andata o coppe a eliminazione diretta, la favorita in trasferta (Copenhagen @1.66) gioca spesso in controllo accontentandosi del pareggio, mentre la sfavorita si barrica.
+   - *Regola Fondamentale*: **MAI giocare il segno 2 fisso in trasferta nelle coppe: usare SEMPRE la Doppia Chance (X2), l'Over 1.5 o mercati speciali (Corner Asimmetrici)!**
+8. **CARTELLINI & PROFILO AMBIENTALE/GEOGRAFICO (Caso PAOK 5 Cartellini ✅ vs Mjällby-Salisburgo Under ❌)**:
+   - *Analisi*: L'Over Cartellini richiede pressione ambientale e contrasti duri (es. Toumba Stadium PAOK 5 cartellini @1.70 ✅). Nelle sfide tra squadre nordiche/austriache con possesso palla pulito e basso agonismo (Mjällby-Salisburgo 0-1, 2-6 corner), i cartellini crollano.
+   - *Regola Fondamentale*: **Giocare l'Over Cartellini SOLO su derby, stadi caldi del Sud Europa (Grecia, Turchia, Balcani), Sudamerica o gare di ritorno ad altissima tensione! Evitare Over Cartellini su sfide nordiche/austriache pulite.**
 
 ---
 
@@ -344,27 +354,13 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **2** | **19/08 21:00** | **Super Sicura Serale** | 6 eventi | **20.00 €** | 3.88× | **✅ CASSA** | **+77.60 €** | **+57.60 €** | **~127.32 €** |
 | **3** | **20/08 00:30** | **Ticket #1 Notte (Booster)** | 6 eventi | **10.00 €** | 7.48× | ❌ Perso (4/6) | 0.00 € | -10.00 € | ~117.32 € |
 | **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
-| **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 3.30× | ❌ Perso *(Elva 1-0)* | 0.00 € | -20.00 € | **87.32 €** |
-| **6** | **20/08 13:56** | **Multipla 6 Pomeriggio/Sera** | 6 eventi | **10.00 €** | 27.03× | ❌ Perso *(El Mansurah)* | 0.00 € | -10.00 € | **77.32 €** |
-| **7** | **20/08 17:51** | **⏱️ Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **20.00 €** | **9.90×** | **⏱️ IN CORSO** | *(Pot. +198.00 €)* | *(Pot. +178.00 €)* | **57.32 €** |
+| **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 2.96× | ❌ Perso *(Elva 1-0, 9 gialli)* | 0.00 € | -20.00 € | **87.32 €** |
+| **6** | **20/08 13:56** | **Multipla 6 Pomeriggio/Sera** | 6 eventi | **10.00 €** | 24.57× | ❌ Perso *(El Mansurah 92°)* | 0.00 € | -10.00 € | **77.32 €** |
+| **7** | **20/08 17:51** | **Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **20.00 €** | **10.74×** | ❌ Perso *(4/5 prese, Copen. 0-0)* | 0.00 € | -20.00 € | **57.32 €** |
 
 * **Saldo Netwin Attuale Disponibile**: **`57.32 €`**
-* **Capitale Attivo in Gioco**: **`20.00 €`** (Ticket #7)
-* **Vincita Potenziale Attesa**: **`+198.00 €` ➔ Saldo Proiettato `255.32 €`!** 🚀
 
 ---
 
-## Sessione 20 Agosto 2026 — Ticket Aperti su Netwin
-
-### Ticket #7: Quinquina Europea Serale (Quota 8.61× base + Bonus 15% ➔ 9.90×)
-- [18:00] Mjällby vs Red Bull Salisburgo ➔ **Over 3.5 Cartellini** @1.71 (TotalCorner: 6.5 cartellini/m)
-- [18:00] Jagiellonia Białystok vs FC Iberia ➔ **Over 8.5 Corner** @1.59 (TotalCorner: 8.3 corner Jagiellonia/m)
-- [18:00] Inter Turku vs FC Copenhagen ➔ **2 (Copenhagen)** @1.46 (Elyounoussi titolare, 6 vittorie su 7)
-- [19:00] Beşiktaş vs FK Kauno Žalgiris ➔ **Over 2.5 Gol** @1.40 (Tridente Trossard-Kökçü-Oh al Tüpraş)
-- [19:30] PAOK Salonicco vs SK Brann ➔ **Over 4.5 Cartellini** @1.55 (Toumba Stadium: 5.4 cartellini/m)
-* **Quota Base: 8.61×** · **Bonus Multipla: +15% (9.90×)** · **Stake: €20.00** · **Vincita Potenziale: €198.00** · **Stato: In Corso ⏱️**
-
----
-
-*Ultimo aggiornamento: 20 agosto 2026 ore 17:51 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 00:45 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
