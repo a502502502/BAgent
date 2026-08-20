@@ -136,13 +136,18 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
 
 ---
 
-## Multipla — Regole
+## Multipla — Regole & Filosofia di Gioco
 
-- Quota combinata target: ≥ 30
-- Probabilità minima per selezione: > 79%
-- Mix mercati obbligatorio: 1X2, DC, Over/Under
-- Verificare quote su **Netwin** (non stime)
-- Aggiungere colonne: campionato, orario, tipo mercato
+- **Priorità Assoluta ai Mercati Alternativi Statistici (No 1X2 Forzato)**:
+  - Ridurre al minimo indispensabile i segni secchi 1 o 2 (massima vulnerabilità a pareggi ed episodi casuali).
+  - Privilegiare sempre:
+    1. **Calci d'Angolo (1X2 Corner, Over Corner)**: Altissima stabilità e prevedibilità tattica (es. Celtic 1 Corner @1.40 al 93%).
+    2. **Cartellini / Sanzioni (1X2 Cartellini ospiti/sfavoriti)**: Sfruttare falli tattici e frustrazione (es. 2 Cartellini LASK @2.00).
+    3. **Doppie Chance Blindate (DC 1X / X2)**: Protezione totale contro il pareggio al 90° (tasso di successo > 88-94%).
+    4. **Linee Gol Protette (Over 1.5, Under 2.5/3.5, No Gol)**: Bastano 2 gol qualsiasi senza dipendere da chi vince.
+- Quota combinata target: ≥ 3.50× (Super Sicure) fino a 20-30× (Alta Quota)
+- Probabilità minima per selezione in Super Sicure: > 80% (Media > 85%)
+- Verificare quote reali su **Netwin** (non stime)
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
 ---
