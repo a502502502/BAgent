@@ -321,6 +321,9 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
    - *Regola*: **Se il distacco in classifica è ampio solo sulla carta ma la differenza reale è $\le 6$ punti, MAI forzare il segno 1 secco: giocare sempre la Doppia Chance (DC 1X) o mercati protetti (Under/No Gol)!**
 2. **Conferma Value Bet Analitiche Contro-Mercato**: Centrata in pieno la quota **@2.00** su **Austin FC DC X2** (vittoria 1-2 a Seattle) grazie allo studio accurato sulle 6 sconfitte e 7 assenze di Seattle.
 3. **Volatilità Leghe Riserve / Sviluppo (MLS Next Pro)**: Evitare segni secchi in trasferta (New England II caduto 4-2) a causa dei continui cambi di roster.
+4. **Trappola Over 2.5 vs Falli Tattici e Gioco Spezzettato (Caso Elva vs Maardu 1-0)**:
+   - *Analisi*: Nonostante le statistiche storiche di 3.5 gol a match, lo scontro diretto tra 4ª e 6ª (34 vs 32 punti) si è trasformato in una battaglia a centrocampo con ben **8 cartellini gialli** e zero continuità di gioco.
+   - *Regola Fondamentale*: **Negli scontri diretti equilibrati di classifica (Δ punti ≤ 3), non forzare l'Over 2.5 sotto-quota (@1.38): giocare sempre l'Over 1.5 o la Doppia Chance (DC 1X è finita 1-0 ✅) per proteggersi dal gioco spezzettato!**
 
 ---
 
@@ -332,24 +335,12 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **2** | **19/08 21:00** | **Super Sicura Serale** | 6 eventi | **20.00 €** | 3.88× | **✅ CASSA** | **+77.60 €** | **+57.60 €** | **~127.32 €** |
 | **3** | **20/08 00:30** | **Ticket #1 Notte (Booster)** | 6 eventi | **10.00 €** | 7.48× | ❌ Perso (4/6) | 0.00 € | -10.00 € | ~117.32 € |
 | **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
-| **5** | **20/08 10:31** | **⏱️ Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | **3.30×** | **⏱️ IN CORSO** | *(Pot. +66.00 €)* | *(Pot. +46.00 €)* | **87.32 €** |
+| **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 3.30× | ❌ Perso *(Elva 1-0)* | 0.00 € | **-20.00 €** | **87.32 €** |
 
 * **Saldo Netwin Attuale Disponibile**: **`87.32 €`**
-* **Capitale in Gioco**: **`20.00 €`**
-* **Vincita Attesa a Cassa**: **`+66.00 €` ➔ Saldo Proiettato `153.32 €`**
+* **Profitto Netto Cumulativo**: **`+82.00 €`**
 
 ---
 
-## Sessione 20 Agosto 2026 — Ticket Aperti su Netwin
-
-### Ticket #1: Quaterna Mattutina (Ucraina, Estonia, AFC, Norvegia)
-- [11:00] Dinaz Vyshgorod vs FSK Mariupol (Coppa Ucraina) ➔ **2 (Mariupol)** @1.31
-- [11:30] FC Elva vs Maardu Linnameeskond (Estonia Esiliiga) ➔ **Over 2.5 Gol** @1.38
-- [12:00] Phnom Penh Crown vs Kaya FC-Iloilo (AFC Champions) ➔ **Over 2.5 Gol** @1.30
-- [13:00] Tromsø IL U19 vs Lillestrøm SK U19 (Norvegia G19 - ID: 3648) ➔ **Over 3.5 Gol** @1.33
-* **Quota Base: 3.13×** · **Bonus: ~3.30×** · **Stake: €20.00** · **Vincita Potenziale: €66.00** · **Stato: In Corso ⏱️**
-
----
-
-*Ultimo aggiornamento: 20 agosto 2026 ore 10:46 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 20 agosto 2026 ore 13:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
