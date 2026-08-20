@@ -330,6 +330,9 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 5. **BAN PERMANENTE CAMPIONATI ARABI & LEGHE MINORI OPACHE (Caso El Mansurah)**:
    - *Analisi*: Campionati arabi (Egitto 2nd Div, Iraq, Golfo) e leghe opache soffrono di tempi di recupero infiniti (+12 minuti), rigori casuali al 98°, feed dati lenti o inaffidabili su Sofascore/Flashscore e imprevedibilità tattica.
    - *Regola Fondamentale*: **BAN ASSOLUTO sui campionati arabi/minori opachi! Scommettere SOLO su competizioni con copertura TV/VAR ufficiale e feed live garantiti al secondo: Coppe Europee UEFA (UCL, UEL, UECL), Campionati Nazionali Europei regolamentati e Leghe Nordiche/Scandinave.**
+6. **STRATEGIA DI CONTINUITÀ & CONSISTENZA (Eliminazione della "Sconfitta per 1 Errore")**:
+   - *Analisi*: Le ultime schedine perse hanno fallito per **esattamente 1 evento su 4 o 1 su 6** (Elva 1-0, El Mansurah). Quando forziamo 6 eventi, la probabilità congiunta crolla dal 70% al 35%.
+   - *Protocollo Vincita Continua*: **Preferire sempre schedine da 3 o 4 EVENTI DI PURO ACCIAIO (Probabilità reale per evento > 85%, Quota 3.50x - 5.50x con Bonus) basati su Corner Asimmetrici, Cartellini TotalCorner e Doppie Chance Blindate. Zero eventi "borderline" riempitivi.**
 
 ---
 
