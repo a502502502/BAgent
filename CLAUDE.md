@@ -338,12 +338,27 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **2** | **19/08 21:00** | **Super Sicura Serale** | 6 eventi | **20.00 €** | 3.88× | **✅ CASSA** | **+77.60 €** | **+57.60 €** | **~127.32 €** |
 | **3** | **20/08 00:30** | **Ticket #1 Notte (Booster)** | 6 eventi | **10.00 €** | 7.48× | ❌ Perso (4/6) | 0.00 € | -10.00 € | ~117.32 € |
 | **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
-| **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 3.30× | ❌ Perso *(Elva 1-0)* | 0.00 € | **-20.00 €** | **87.32 €** |
+| **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 3.30× | ❌ Perso *(Elva 1-0)* | 0.00 € | -20.00 € | **87.32 €** |
+| **6** | **20/08 13:56** | **⏱️ Multipla 6 Pomeriggio/Sera** *(Welco, Mansurah, Selimbar, Rosenborg, Mjallby, Jagiellonia)* | **6 eventi** | **10.00 €** | **27.03×** | **⏱️ IN CORSO** | *(Pot. +270.32 €)* | *(Pot. +260.32 €)* | **77.32 €** |
 
-* **Saldo Netwin Attuale Disponibile**: **`87.32 €`**
-* **Profitto Netto Cumulativo**: **`+82.00 €`**
+* **Saldo Netwin Attuale Disponibile**: **`77.32 €`**
+* **Capitale Attivo in Gioco**: **`10.00 €`**
+* **Vincita Potenziale Attesa**: **`+270.32 €` ➔ Saldo Proiettato `347.64 €`!** 🚀
 
 ---
 
-*Ultimo aggiornamento: 20 agosto 2026 ore 13:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+## Sessione 20 Agosto 2026 — Ticket Aperti su Netwin
+
+### Ticket #6: Multipla 6 Pomeriggio / Sera (Quota 24.57× base + Bonus ➔ 27.03×)
+- [14:00] Tartu JK Welco vs FC Levadia Tallinn U21 ➔ **Over 5.5 Gol** @3.30
+- [15:30] El Mansurah vs Baladiyyat AL Mehalla ➔ **Under 2.5 Gol** @1.34
+- [16:30] CSC 1599 Selimbar vs Botosani ➔ **2 (Botosani)** @1.46
+- [18:00] Rosenborg BK Kvinner vs Lyn ➔ **Over 2.5 Gol** @1.40
+- [18:00] Mjallby vs Red Bull Salisburgo ➔ **Over 3.5 Cartellini** @1.71 (TotalCorner: 6.5 cartellini/m)
+- [18:00] Jagiellonia Bialystok vs Iberia ➔ **Over 8.5 Corner** @1.59 (TotalCorner: 8.3 corner Jagiellonia/m)
+* **Quota Base: 24.57×** · **Bonus: +24.57 €** · **Stake: €10.00** · **Vincita Potenziale: €270.32** · **Cashout Abilitato: €8.00** · **Stato: In Corso ⏱️**
+
+---
+
+*Ultimo aggiornamento: 20 agosto 2026 ore 13:56 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
