@@ -357,10 +357,24 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 2.96× | ❌ Perso *(Elva 1-0, 9 gialli)* | 0.00 € | -20.00 € | **87.32 €** |
 | **6** | **20/08 13:56** | **Multipla 6 Pomeriggio/Sera** | 6 eventi | **10.00 €** | 24.57× | ❌ Perso *(El Mansurah 92°)* | 0.00 € | -10.00 € | **77.32 €** |
 | **7** | **20/08 17:51** | **Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **20.00 €** | **10.74×** | ❌ Perso *(4/5 prese, Copen. 0-0)* | 0.00 € | -20.00 € | **57.32 €** |
+| **8** | **21/08 01:25** | **🛡️ Quaterna d'Acciaio Notturna** *(Novorizontino, Corinthians, Morelia, LAFC 2)* | **4 eventi** | **20.00 €** | **5.10×** | **⏱️ IN CORSO** | *(Pot. +102.00 €)* | *(Pot. +82.00 €)* | **37.32 €** |
 
-* **Saldo Netwin Attuale Disponibile**: **`57.32 €`**
+* **Saldo Netwin Attuale Disponibile**: **`37.32 €`**
+* **Capitale Attivo in Gioco**: **`20.00 €`** (Ticket #8)
+* **Vincita Potenziale Attesa**: **`+102.00 €` ➔ Saldo Proiettato: `139.32 €`!** 🚀
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 00:45 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+## Sessione 21 Agosto 2026 (Notte) — Ticket Attivo su Netwin
+
+### Ticket #8: Quaterna d'Acciaio Notturna (Quota 4.64× base + Bonus 10% ➔ ~5.10×)
+- [02:30] Grêmio Novorizontino vs América MG (Serie B) ➔ **1 Fisso** @1.53 (23 punti di distacco, precedente 3-0)
+- [02:30] Corinthians vs Rosario Central (Libertadores) ➔ **Over 5.5 Cartellini** @1.54 (All'andata 8 cartellini, arbitro Herrera)
+- [03:00] Atlético Morelia vs Correcaminos UAT (Liga Expansion) ➔ **Over 2.5 Gol** @1.48 (Media gol recenti 3.75, precedente 4-4)
+- [04:00] Los Angeles FC 2 vs Sporting Kansas City II (MLS Next Pro) ➔ **Over 2.5 Gol** @1.33 (LAFC 2 imbattuto, 4-3 recente)
+* **Stake Ufficiale: €20.00** · **Quota Totale con Bonus: ~5.10×** · **Vincita a Cassa: €102.00** · **Stato: In Corso ⏱️**
+
+---
+
+*Ultimo aggiornamento: 21 agosto 2026 ore 01:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
