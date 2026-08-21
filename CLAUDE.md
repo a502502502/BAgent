@@ -348,6 +348,201 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ## Registro Cassa Ufficiale BAgent (Dalla Cassa Piena del 19 Agosto)
 
+- **Strategia In-Play & Assicurazione Live (Live Betting & Hedging)**:
+  - 👁️ **Validazione Visiva Live (Live Entry)**: Aspettare i primi 10-15 minuti di gioco o l'intervallo. Se una partita è bloccata e fallosa (come Elva-Maardu), non forzare l'Over o puntare su Under/Cartellini. Se una favorita assedia l'avversario ma è 0-0 al 20°, la quota 1X2 o Over 1.5 schizza verso l'alto con un Edge fantastico!
+  - 🛡️ **Assicurazione & Cashout Matematico**: Quando i primi eventi della schedina sono già vinti (es. Kaya Over 2.5 preso al 62' e Mariupol avanti 0-1), usare il tasto **Cashout su Netwin** o una singola di copertura sull'ultimo match per blindare il **100% di profitto netto garantito**, azzerando la varianza!
+- Quota combinata target: ≥ 3.50× (Super Sicure) fino a 20-30× (Alta Quota)
+- Probabilità minima per selezione in Super Sicure: > 80% (Media > 85%)
+- Verificare quote reali su **Netwin** (non stime)
+- Escludere partite già iniziate (verificare orari live su Sofascore)
+
+---
+
+## Come Riprendere da Mac
+
+1. `git clone https://github.com/a502502502/BAgent.git`
+2. Collegare cartella `data/` da Google Drive (o symlink)
+3. Copiare `.env` da Google Drive nella root del progetto
+4. `pip install -r requirements.txt`
+5. Dire a Claude: **"leggi CLAUDE.md e riprendiamo"**
+
+---
+
+---
+
+## Sessione 17 Agosto 2026 — Riepilogo Lavoro Svolto
+
+### HTML Schedine create oggi (`reports/`)
+| File | Contenuto | Quota |
+|------|-----------|-------|
+| `multipla_mls_americas.html` | 10 selezioni MLS — giovedì 20 agosto @01:30 IT | 1,246× base → **1,558× con bonus +25%** |
+| (altri file da sessioni precedenti) | Vedere cartella reports/ | — |
+
+### Multipla MLS Americas — 10 Selezioni (gio 20/08 @01:30 IT)
+Quote verificate su Netwin tramite Claude in Chrome.
+
+| # | Partita | Pick | Quota | Edge |
+|---|---------|------|-------|------|
+| 1 | Columbus Crew vs CF Montréal | 1 Columbus | @1.61 | ⭐ +7.9% |
+| 2 | Minnesota United vs Atlanta United | 1 Minnesota | @1.80 | ⭐ +8.0% |
+| 3 | Real Salt Lake vs FC Dallas | 1 RSL | @1.88 | 👀 +3.4% |
+| 4 | FC Cincinnati vs New York City FC | 1 Cincinnati | @1.97 | 👀 +2.4% |
+| 5 | Sporting KC vs St. Louis City SC | 2 St. Louis | @1.98 | 👀 +3.0% |
+| 6 | Portland Timbers vs San Diego FC | 1 Portland | @2.10 | ⭐ +5.0% |
+| 7 | DC United vs New England Revolution | 1 DC United | @2.17 | 👀 +4.2% |
+| 8 | Toronto FC vs Charlotte FC | 1 Toronto | @2.20 | ⭐ +5.6% |
+| 9 | LA Galaxy vs San Jose Earthquakes | 1 LA Galaxy | @2.25 | 👀 +3.5% |
+| 10 | Philadelphia Union vs Inter Miami CF | 2 Inter Miami | @2.60 | 👀 +4.0% |
+
+**ESCLUSE da Sesto Senso:**
+- ❌ Seattle @1.61: 6 sconfitte consecutive, 7 infortuni (Morris, Roldan, Arriola, Dotson, De La Vega, Petkovic, Yeimar)
+- ❌ Vancouver @1.55: 0-3-4 nelle ultime 7, 5 infortuni (Brian White, Veselinovic, Caicedo...)
+
+### Partite 18 Agosto 01:00–04:00 IT (poche, no multipla)
+- 01:00 → Internacional vs Clube Do Remo (Brazil) — Inter @1.46, U/O 2.5 Over @1.73 / Under @1.96
+- 02:30 → Gimnasia vs Talleres (Argentina) — Talleres @2.50, DC X2 @1.35
+- 02:30 → Palestino vs Huachipato (Cile) — Palestino @1.71, U/O 2.5 Over @1.63 / Under @2.10
+- 00:15 → Velez vs Defensa Y Justicia (Argentina) — Velez @1.82
+- Uruguay/Peru/Colombia: niente fino a venerdì/mercoledì
+
+### Netwin — Quote MLS Verificate (gio 20/08)
+```
+Orlando City vs Chicago Fire:   Orlando @2.80, Chicago @2.22 (away fav)
+DC United vs New England:       DC @2.17, NE @3.10
+NY Red Bulls vs Nashville:      NYRB @2.82, Nashville @2.22 (away fav)
+Columbus Crew vs CF Montreal:   Columbus @1.61, Montreal @4.70
+Cincinnati vs NYC FC:           Cincinnati @1.97, NYC @3.25
+Philadelphia vs Inter Miami:    Philly @2.35, Miami @2.60
+Toronto vs Charlotte:           Toronto @2.20, Charlotte @2.95
+Sporting KC vs St. Louis:       KC @3.30, St. Louis @1.98 (away fav!)
+Minnesota vs Atlanta:           Minnesota @1.80, Atlanta @4.00
+Colorado vs LA:                 Colorado @2.67, LA @2.40
+Seattle vs Austin:              Seattle @1.61, Austin @4.70  ← SKIP (forma)
+RSL vs Dallas:                  RSL @1.88, Dallas @3.70
+Vancouver vs Houston:           Vancouver @1.55, Houston @5.00 ← SKIP (forma)
+Portland vs San Diego:          Portland @2.10, San Diego @2.97
+LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
+```
+
+---
+
+## Sessione 18 Agosto 2026 — Riepilogo Lavoro Svolto
+
+### Schedine HTML create
+| File | Contenuto |
+|------|-----------|
+| `reports/schedina_mattina_18ago.html` | Over 3.5 Slovan @1.88 + Sydney @1.27 + Guoan @2.95 → tripla @7.04×, €20 → **PERSA** (Thailand 2-1) |
+| `reports/schedina_ucl_18ago.html` | 1 Dinamo @1.75 + Under Fener @2.07 + 1 Levski @3.10 → tripla @11.22 |
+
+### Ticket Netwin Aperti (al 18/08 sera)
+| Ticket | Selezioni | Stake | Pot. Vincita | Cashout |
+|--------|-----------|-------|-------------|---------|
+| **1303** | Kingsley BTTS + Guoan 2 + Thailand 1 + Dinamo 1 | €10 | €113.87 | ~€9 |
+| **F009** | 10 sel. UCL/UEL (18-20 ago) — 9/10 aperte | €5 | €212.47 | ~€5 |
+| **B402** | 9 sel. UCL/UEL (18-20 ago) — 8/9 aperte | €2 | €118.58 | ~€2 |
+| **D80A** | 9 sel. UCL/UEL (18-20 ago) — 8/9 aperte | €3 | €439.39 | ~€3 |
+
+**Saldo Netwin**: €59.72
+
+### Picks stasera (18/08 21:00) per ticket aperti
+- **Dinamo 1** @1.76 → serve a F009 e D80A ⭐⭐
+- **Levski DC X2** @1.37 → serve a F009 (pareggio o AEK)
+- **Levski DC 12** @1.34 → serve a B402 (Levski o AEK)
+- **Levski AEK 2** @2.48 → serve a D80A (AEK outright)
+- ~~**Fener 2 (Lyon)** @2.03~~ → ❌ ABBANDONATO (non giochiamo più)
+- ~~**Under 2.5 Fener** @2.07~~ → ❌ ABBANDONATO
+
+### Live Monitor — `scripts/live_monitor.py`
+- Usa **API-Football** (non Sofascore, bloccata con 403)
+- Polling ogni 30 secondi
+- Notifiche **Telegram** su gol con pick Poisson aggiornati al minuto
+- Telegram chat_id: 466378357
+- Avvio: `python3 scripts/live_monitor.py`
+- **TODO**: deployare sul Pi come servizio systemd (Task #29)
+
+### Sofascore Match IDs utili
+| Partita | ID |
+|---------|-----|
+| Kingsley vs Gwelup | 16816280 |
+| Shanghai Shenhua vs Guoan | 16851672 |
+| Dinamo Zagabria vs Viking | 16707702 |
+| Levski vs AEK | 16707695 |
+| Fenerbahce vs Lyon | 16707704 |
+
+### Lesson Learned — Gare di Ritorno
+⚠️ Prima di analizzare una gara di ritorno, obbligatorio verificare:
+1. **xG e possesso della gara di andata** — se le stats contraddicono il risultato, la squadra "perdente" è più pericolosa di quanto dica il punteggio
+2. **Motivazione reale** — la squadra avanti nell'aggregato può giocare in controllo/risparmio
+3. **Rotazioni** — verifica se la squadra forte cambia formazione essendo già qualificata
+4. **Esempio**: Thailand 1 @1.43 analizzata male — Singapore aveva 75% possesso nella gara di andata ma aveva perso 1-3. Nel ritorno Singapore ha vinto 2-1 e si è qualificata.
+
+### Analisi UCL 18/08 — Sesto Senso
+**Fenerbahce vs Lyon**: Fener senza Lukaku, Amrabat, Soyuncu, Ederson, Gunok, Oosterwolde (6 assenti). Ha perso 2-1 in campionato sabato. Under 2.5 ⭐, Fener 1 ❌ rischio alto.
+**Levski vs AEK**: Levski 8V/9 ma manca Sangare/Kamdem/Bouras. AEK 13 senza sconfitta ma solo amichevoli estate. DC 12 B402 ⭐⭐.
+**Dinamo vs Viking**: Dinamo 11 gol in 2 qualificazioni, Viking debutto assoluto ai playoff UCL. Pick più solido della serata ⭐⭐.
+
+---
+
+### Schedina Svezia 18/08 (sera) — 5 selezioni
+| Partita | Pick | Quota |
+|---------|------|-------|
+| Skovde vs Falkenbergs | 2 @1.24 | ⭐ |
+| Karlstad vs Sandviken | DC X2 @1.24 | ⭐ |
+| Karlbergs vs Brage | DC X2 @1.33 | ⭐ |
+| Eskilstuna vs Oddevold | 2 @1.51 | 👀 |
+| Nosaby vs Trelleborg | DC 1X @1.80 | 👀 |
+
+**Quota: 5.55×** · Tutte le partite ore 18:30 · Quote verificate e inserite su Netwin
+
+---
+
+## Sessione 19 Agosto 2026 — Riepilogo Lavoro Svolto
+
+### Schedine HTML create (19 Agosto 2026)
+| File | Contenuto | Quota | Esito |
+|------|-----------|-------|:---:|
+| `reports/schedina_asia_19ago.html` | 5 selezioni Asia & Coppe: Shanghai Port 1 + Pohang 1 + Jeonbuk 1 + Nagano 1 + Reilac Shiga 1 | **4.05×** | Conclusa |
+| `reports/schedina_doppia_pomeriggio_19ago.html` | 2 Multiple Pomeriggio: Super Sicura (5 eventi 3.84x) + Maxi Quota (11 eventi 119x) | **3.84×** / **119.37×** | Conclusa |
+| `reports/schedina_merge_sicura_19ago.html` | **Merge Super Sicura (6 eventi)**: Simba Over 1.5 + Ordabasy Over 1.5 + Kifisia Over 1.5 + Slobozia DC X2 + Sepsi DC X2 + Celtic 1 Corner | **4.36×** (~4.80×) | **CASSA PIENA 100% VINCENTE! 🏆** |
+| `reports/schedina_serale_19ago.html` | 2 Multiple Serata: Super Sicura Serale (6 eventi 3.88x) + Alta Quota (8 eventi 22.62x) | **3.88×** | **CASSA PIENA 100% VINCENTE! 🏆 (€30 ➔ €116.60)** |
+
+### Lezioni Apprese & Validazioni (19 Agosto 2026)
+1. **Trappola 1X2 in Trasferta nelle Coppe Secche**: East Bengal finita 0-0 nei 90 min (2 pali). Il segno 2 secco nelle coppe a eliminazione diretta è rischioso; le **Doppie Chance X2** (es. Slobozia e Sepsi) e gli **Over 1.5** (Simba, Ordabasy, Kifisia) garantiscono la sicurezza matematica.
+2. **Successo della Strategia Merge & Super Sicura**: Entrambe le multiple blindate (Pomeriggio @4.80x e Serata @3.88x) hanno chiuso con 6 su 6 vinte al 100%.
+3. **Regola Over 2.5 Sotto Quota (@1.12-@1.18)**: L'Under inaspettato nel match KV Vesturbaer (0-1) ha mostrato che chiedere 3 gol a quota @1.12 in leghe minori ha un'asimmetria di rischio sfavorevole. Se un match ha aspettativa over ma quota schiacciata, o si scende a **Over 1.5** o si esclude la selezione.
+
+---
+
+### Esiti Ticket Notturni (20 Agosto 2026)
+- **Ticket #1 (Multipla Booster 6 selezioni)**: 4 su 6 prese (Cerro DC X2 ✅, Pelotas DC 1X ✅, Houston 2 GG ✅, Forge 1 ✅, Fortaleza 1-1 ❌, Inter Miami 2 4-2 ❌) ➔ Non vincente (-€10.00).
+- **Ticket #2 (Maxi Value Sesto Senso 4 selezioni)**: 2 su 4 prese (Flamengo 1 ✅, Austin FC DC X2 @2.00 ✅, Fortaleza 1-1 ❌, Columbus 1-2 ❌) ➔ Non vincente (-€10.00).
+
+### Lesson Learned Notte 20 Agosto (Sesto Senso Rafforzato):
+1. **Trappola "Posizione in Classifica vs Punti Reali" (Caso Fortaleza vs Sao Bernardo)**:
+   - *Analisi*: Fortaleza sembrava favorita per la distanza in classifica (es. 5ª vs 12ª), ma il divario reale era di **soli 6 punti** in un campionato storicamente equilibrato e ad alto tasso di pareggio come la Serie B brasiliana.
+   - *Regola*: **Se il distacco in classifica è ampio solo sulla carta ma la differenza reale è $\le 6$ punti, MAI forzare il segno 1 secco: giocare sempre la Doppia Chance (DC 1X) o mercati protetti (Under/No Gol)!**
+2. **Conferma Value Bet Analitiche Contro-Mercato**: Centrata in pieno la quota **@2.00** su **Austin FC DC X2** (vittoria 1-2 a Seattle) grazie allo studio accurato sulle 6 sconfitte e 7 assenze di Seattle.
+3. **Volatilità Leghe Riserve / Sviluppo (MLS Next Pro)**: Evitare segni secchi in trasferta (New England II caduto 4-2) a causa dei continui cambi di roster.
+4. **Trappola Over 2.5 vs Falli Tattici e Gioco Spezzettato (Caso Elva vs Maardu 1-0)**:
+   - *Analisi*: Nonostante le statistiche storiche di 3.5 gol a match, lo scontro diretto tra 4ª e 6ª (34 vs 32 punti) si è trasformato in una battaglia a centrocampo con ben **9 cartellini totali (5-4)** e zero continuità di gioco.
+   - *Regola Fondamentale*: **Negli scontri diretti equilibrati di classifica (Δ punti ≤ 3), non forzare l'Over 2.5 sotto-quota (@1.37): giocare sempre l'Over 1.5 o la Doppia Chance (DC 1X è finita 1-0 ✅) per proteggersi dal gioco spezzettato!**
+5. **BAN PERMANENTE CAMPIONATI ARABI & LEGHE MINORI OPACHE (Caso El Mansurah)**:
+   - *Analisi*: Campionati arabi (Egitto 2nd Div, Iraq, Golfo) e leghe opache soffrono di tempi di recupero infiniti (+12 minuti), rigori casuali al 98°, feed dati lenti o inaffidabili su Sofascore/Flashscore e imprevedibilità tattica.
+   - *Regola Fondamentale*: **BAN ASSOLUTO sui campionati arabi/minori opachi! Scommettere SOLO su competizioni con copertura TV/VAR ufficiale e feed live garantiti al secondo: Coppe Europee UEFA (UCL, UEL, UECL), Campionati Nazionali Europei regolamentati e Leghe Nordiche/Scandinave.**
+6. **STRATEGIA DI CONTINUITÀ & CONSISTENZA (Eliminazione della "Sconfitta per 1 Errore")**:
+   - *Analisi*: Le ultime schedine perse hanno fallito per **esattamente 1 evento su 4 o 1 su 6** (Elva 1-0, El Mansurah, Copenhagen 0-0). Quando forziamo 5-6 eventi, la probabilità congiunta crolla dal 70% al 35%.
+   - *Protocollo Vincita Continua*: **Preferire sempre schedine da 3 o 4 EVENTI DI PURO ACCIAIO (Probabilità reale per evento > 85%, Quota 3.50x - 5.50x con Bonus) basati su Corner Asimmetrici, Cartellini TotalCorner e Doppie Chance Blindate. Zero eventi "borderline" riempitivi.**
+7. **TRAPPOLA DEL SEGNO 2 FISSO IN TRASFERTA NELLE COPPE (Caso Copenhagen 0-0 & East Bengal 0-0)**:
+   - *Analisi*: Nelle gare d'andata o coppe a eliminazione diretta, la favorita in trasferta (Copenhagen @1.66) gioca spesso in controllo accontentandosi del pareggio, mentre la sfavorita si barrica.
+   - *Regola Fondamentale*: **MAI giocare il segno 2 fisso in trasferta nelle coppe: usare SEMPRE la Doppia Chance (X2), l'Over 1.5 o mercati speciali (Corner Asimmetrici)!**
+8. **CARTELLINI & PROFILO AMBIENTALE/GEOGRAFICO (Caso PAOK 5 Cartellini ✅ vs Mjällby-Salisburgo Under ❌)**:
+   - *Analisi*: L'Over Cartellini richiede pressione ambientale e contrasti duri (es. Toumba Stadium PAOK 5 cartellini @1.70 ✅). Nelle sfide tra squadre nordiche/austriache con possesso palla pulito e basso agonismo (Mjällby-Salisburgo 0-1, 2-6 corner), i cartellini crollano.
+   - *Regola Fondamentale*: **Giocare l'Over Cartellini SOLO su derby, stadi caldi del Sud Europa (Grecia, Turchia, Balcani), Sudamerica o gare di ritorno ad altissima tensione! Evitare Over Cartellini su sfide nordiche/austriache pulite.**
+
+---
+
+## Registro Cassa Ufficiale BAgent (Dalla Cassa Piena del 19 Agosto)
+
 | # | Data & Ora | Ticket / Descrizione | Selezioni | Stake (€) | Quota Tot. | Esito | Incasso (€) | Netto (€) | Saldo Netwin |
 |---|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **1** | **19/08 16:30** | **🏆 MERGE SUPER SICURA** *(Simba, Ordabasy, Kifisia, Slobozia, Sepsi, Celtic)* | **6 eventi** | **20.00 €** | **4.80×** | **✅ VINTO (6/6)** | **+96.00 €** | **+76.00 €** | **~116.00 €** |
@@ -360,10 +555,22 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **8** | **21/08 01:25** | **Quaterna d'Acciaio Notturna** | 4 eventi | **20.00 €** | 5.10× | ❌ Perso *(3/4 prese, Novorizontino 3-0 ✅, Morelia 1-3 ✅, LAFC 2-1 ✅)* | 0.00 € | -20.00 € | **37.32 €** |
 | **9** | **21/08 01:40** | **Tripla Pura Statistica** | 3 eventi | **37.00 €** | 3.10× | ❌ Perso *(Morelia 1-3 ✅)* | 0.00 € | -37.00 € | **0.32 €** |
 | **10** | **21/08 10:00** | **Tripla Mattutina 21 Agosto** *(Blacktown, Northcote, Karvina)* | **3 eventi** | **20.00 €** | **3.13×** | ❌ Perso *(2/3 prese, Northcote 3-2 ✅, Blacktown 2-1 ✅)* | 0.00 € | -20.00 € | **-** |
+| **11** | **21/08 18:00** | **💎 Quaterna d'Acciaio Serale (Sanzioni & Combo)** *(Stoccarda, Galata, Dasilva, Marsiglia)* | **4 eventi** | **20.00 €** | **6.17×** | **⏱️ IN CORSO** | *(Pot. +123.40 €)* | *(Pot. +103.40 €)* | **-** |
 
 ---
 
-### Lesson Learned Mattina 21 Agosto (Regola Inviolabile #9):
+## Sessione 21 Agosto 2026 (Sera) — Ticket Ufficiale #11 su Netwin
+- [18:00] 🇩🇪 Hansa Rostock vs VfB Stoccarda ➔ **2 + Over 1.5 Gol** @1.30 (ID: 246)
+- [20:00] 🇹🇷 Erzurumspor FK vs Galatasaray ➔ **Over 4.5 Cartellini Totali** @1.89 (ID: 785)
+- [20:45] 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Arsenal vs Coventry City ➔ **Dasilva Jay Cartellino o Almeno 2 Falli** @1.63 (ID: 5629)
+- [20:45] 🇫🇷 Olympique Marsiglia vs Strasburgo ➔ **1X + Over 1.5 Gol** @1.40 (ID: 3538)
+
+* **Quota Base**: **5.61×** | **Quota con Bonus Netwin (+10%)**: **6.17×**
+* **Stato**: Iniziato alle 18:00 con Stoccarda ⏱️
+
+---
+
+### Lesson Learned Mattina 21 Agosto (Regola Inviolabile #9 & #10):
 9. **NELLE LEGHE GIOVANILI (U19/U20/U23): GIOCARE SEMPRE E SOLO OVER GOL, MAI IL SEGNO 1X2 SECCO!**:
    - *Analisi*: Nel match **Karvina U19 vs Opava U19 (2-4)** ci sono stati ben **6 GOL e 13 Corner**! Avevamo identificato l'Over 2.5 @1.28 come giocata d'acciaio. Giocando il segno 1 fisso su ragazzi di 18 anni, il Karvina è crollato 2-4. Sul Northcote City U23 avevamo previsto la rimonta e l'Over ed è finita esattamente **3-2 (1 + Over preso ✅)**!
    - *Regola*: **Nelle leghe giovanili/U19/U20/U23, scommettere ESCLUSIVAMENTE su Over 2.5 Gol o Under 4.5. VIETATO giocare l'1X2 secco!**
@@ -374,4 +581,4 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 13:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 16:16 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
