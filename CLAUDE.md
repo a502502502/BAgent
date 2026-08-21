@@ -357,30 +357,18 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 2.96× | ❌ Perso *(Elva 1-0, 9 gialli)* | 0.00 € | -20.00 € | **87.32 €** |
 | **6** | **20/08 13:56** | **Multipla 6 Pomeriggio/Sera** | 6 eventi | **10.00 €** | 24.57× | ❌ Perso *(El Mansurah 92°)* | 0.00 € | -10.00 € | **77.32 €** |
 | **7** | **20/08 17:51** | **Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **20.00 €** | **10.74×** | ❌ Perso *(4/5 prese, Copen. 0-0)* | 0.00 € | -20.00 € | **57.32 €** |
-| **8** | **21/08 01:25** | **🛡️ Quaterna d'Acciaio Notturna** *(Novorizontino, Corinthians, Morelia, LAFC 2)* | **4 eventi** | **20.00 €** | **5.10×** | **⏱️ IN CORSO** | *(Pot. +102.00 €)* | *(Pot. +82.00 €)* | **37.32 €** |
-| **9** | **21/08 01:40** | **💎 Tripla Pura Statistica** *(Botafogo, Corinthians, Morelia)* | **3 eventi** | **37.00 €** | **3.10×** | **⏱️ IN CORSO** | *(Pot. +114.70 €)* | *(Pot. +77.70 €)* | **0.32 €** |
-
-* **Saldo Netwin Liquido Attuale**: **`0.32 €`**
-* **Capitale Totale Attivo in Gioco**: **`57.00 €`** (Ticket #8 + Ticket #9)
-* **Vincita Totale Potenziale Attesa**: **`+216.70 €` ➔ Saldo Proiettato: `217.02 €`!** 🚀
+| **8** | **21/08 01:25** | **Quaterna d'Acciaio Notturna** | 4 eventi | **20.00 €** | 5.10× | ❌ Perso *(3/4 prese, Novorizontino 3-0 ✅, Morelia 1-3 ✅, LAFC 2-1 ✅)* | 0.00 € | -20.00 € | **37.32 €** |
+| **9** | **21/08 01:40** | **Tripla Pura Statistica** | 3 eventi | **37.00 €** | 3.10× | ❌ Perso *(Morelia 1-3 ✅)* | 0.00 € | -37.00 € | **0.32 €** |
+| **10** | **21/08 10:00** | **Tripla Mattutina 21 Agosto** *(Blacktown, Northcote, Karvina)* | **3 eventi** | **20.00 €** | **3.13×** | ❌ Perso *(2/3 prese, Northcote 3-2 ✅, Blacktown 2-1 ✅)* | 0.00 € | -20.00 € | **-** |
 
 ---
 
-## Sessione 21 Agosto 2026 (Notte) — Ticket Attivi su Netwin
-
-### Ticket #8: Quaterna d'Acciaio Notturna (Stake 20.00 € ➔ Pot. 102.00 €)
-- [02:30] Grêmio Novorizontino vs América MG ➔ **1 Fisso** @1.53
-- [02:30] Corinthians vs Rosario Central ➔ **Over 5.5 Cartellini** @1.54
-- [03:00] Atlético Morelia vs Correcaminos UAT ➔ **Over 2.5 Gol** @1.48
-- [04:00] Los Angeles FC 2 vs Sporting Kansas City II ➔ **Over 2.5 Gol** @1.33
-
-### Ticket #9: Tripla Pura Statistica (Stake 37.00 € ➔ Pot. 114.70 €)
-- [02:30] Botafogo RJ vs Cienciano (Sudamericana) ➔ **Over 2.5 Gol** @1.26 (Assedio rimonta 1-6)
-- [02:30] Corinthians vs Rosario Central (Libertadores) ➔ **Over 5.5 Cartellini** @1.54 (8 cartellini all'andata, arbitro Herrera)
-- [03:00] Atlético Morelia vs Correcaminos UAT (Liga Expansion) ➔ **Over 2.5 Gol** @1.48 (Media gol 3.75, difese aperte)
-* **Stake Ufficiale: €37.00** · **Quota Totale: ~3.10×** · **Vincita a Cassa: €114.70** · **Stato: In Corso ⏱️**
+### Lesson Learned Mattina 21 Agosto (Regola Inviolabile #9):
+9. **NELLE LEGHE GIOVANILI (U19/U20/U23): GIOCARE SEMPRE E SOLO OVER GOL, MAI IL SEGNO 1X2 SECCO!**:
+   - *Analisi*: Nel match **Karvina U19 vs Opava U19 (2-4)** ci sono stati ben **6 GOL e 13 Corner**! Avevamo identificato l'Over 2.5 @1.28 come giocata d'acciaio. Giocando il segno 1 fisso su ragazzi di 18 anni, il Karvina è crollato 2-4. Sul Northcote City U23 avevamo previsto la rimonta e l'Over ed è finita esattamente **3-2 (1 + Over preso ✅)**!
+   - *Regola*: **Nelle leghe giovanili/U19/U20/U23, scommettere ESCLUSIVAMENTE su Over 2.5 Gol o Under 4.5. VIETATO giocare l'1X2 secco!**
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 01:40 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 13:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
 
