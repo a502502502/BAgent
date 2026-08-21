@@ -584,9 +584,10 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ### Lesson Learned Mattina 21 Agosto (Regola Inviolabile #9 & #10):
 9. **NELLE LEGHE GIOVANILI (U19/U20/U23): GIOCARE SEMPRE E SOLO OVER GOL, MAI IL SEGNO 1X2 SECCO!**
-10. **LA TRAPPOLA DELLE PRIME 1-3 GIORNATE & CAMPIONE STATISTICO INSUFFICIENTE (N ≤ 3)**:
-   - *Regola*: **MAI fidarsi delle classifiche con meno di 5-6 partite giocate! Puntare SOLO su squadre dal valore assoluto di rosa consolidato (Arsenal, Galatasaray, Stoccarda, Marsiglia) o campionati già maturi.**
+10. **LA TRAPPOLA DELLE PRIME 1-3 GIORNATE & IL DEBUTTO ALLA 1ª GIORNATA (Caso Marsiglia & Karvina)**:
+   - *Analisi*: Alla 1ª giornata di campionato (come Marsiglia con nuovo allenatore De Zerbi o Premier League/Ligue 1 all'esordio), le squadre sono in rodaggio atletico e i meccanismi difensivi sono ancora immaturi.
+   - *Regola Fondamentale*: **ALLA 1ª GIORNATA DI CAMPIONATO: VIETATO IL SEGNO 1X2 SECCO! Usare ESCLUSIVAMENTE la Doppia Chance di protezione (DC 1X copre l'1-1, 2-1, 2-0) o le linee Gol/Sanzioni, oppure escludere la partita dal ticket principale come fatto per la Tripla d'Oro!**
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 16:44 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 16:54 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
