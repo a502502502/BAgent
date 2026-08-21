@@ -589,9 +589,11 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 11. **OBBLIGO COLONNA "MOTIVAZIONE TATTICA & SESTO SENSO" IN TUTTE LE TABELLE**:
    - *Regola Fondamentale*: **In OGNI tabella di schedine, ticket o pronostici, è OBBLIGATORIO inserire una colonna/riga dedicata con la "Motivazione Tattica / Lettura del Sesto Senso / Protezione Rischio" per ciascuna partita. L'utente e l'agente devono sempre avere sott'occhio il motivo esatto della scelta (es. assenze, duello 1v1, copertura pareggio, statistiche falli).*
 12. **LA TRAPPOLA DELLA PARTITA "TROPPO PULITA" & L'INDICE DI AGONISMO (Falli e Cartellini)**:
-   - *Analisi*: Nelle sfide tra corazzate e piccole all'Emirates/Etihad o gare a senso unico (3-0 rapido), il ritmo si addormenta, scatta il fair play inglese e i falli crollano a zero ("partita troppo pulita").
    - *Regola Fondamentale*: **MAI giocare mercati Sanzioni/Falli/Cartellini su partite a divario enorme e a basso agonismo! Su queste gare giocare ESCLUSIVAMENTE GOL, TIRI e COMBO OFFENSIVE (es. 1 + Over 1.5). Riservare i mercati Falli e Cartellini SOLO a derby infuocati, scontri salvezza all'ultimo sangue o gare di ritorno ad altissima tensione!**
+13. **L'ARSENAL CORNER ENGINE & L'ASIMMETRIA DEI CALCI D'ANGOLO (Set-Piece Machine)**:
+   - *Analisi*: L'Arsenal di Arteta e Nicolas Jover è la squadra #1 al mondo per generazione di corner in casa (media 8.4 corner/m all'Emirates contro 2.1 concessi, ratio 4:1). Lo schema tattico isola Saka e Martinelli sul fondo per provocare appositamente la deviazione in corner per gli schemi su palla inattiva.
+   - *Regola Fondamentale*: **Quando l'Arsenal (o Man City/Inter) gioca in casa contro squadre arroccate, il mercato CORNER (1X2 Corner, Over 6.5 Corner Squadra Casa o Handicap Corner -3.5) ha una probabilità reale > 90%! È il mercato di nicchia perfetto da inserire nei ticket!**
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 22:28 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 22:30 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
