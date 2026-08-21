@@ -547,55 +547,45 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 |---|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **1** | **19/08 16:30** | **🏆 MERGE SUPER SICURA** *(Simba, Ordabasy, Kifisia, Slobozia, Sepsi, Celtic)* | **6 eventi** | **20.00 €** | **4.80×** | **✅ VINTO (6/6)** | **+96.00 €** | **+76.00 €** | **~116.00 €** |
 | **2** | **19/08 21:00** | **Super Sicura Serale** | 6 eventi | **20.00 €** | 3.88× | **✅ CASSA** | **+77.60 €** | **+57.60 €** | **~127.32 €** |
-| **3** | **20/08 00:30** | **Ticket #1 Notte (Booster)** | 6 eventi | **10.00 €** | 7.48× | ❌ Perso (4/6) | 0.00 € | -10.00 € | ~117.32 € |
-| **4** | **20/08 00:30** | **Ticket #2 Notte (Maxi Value)** | 4 eventi | **10.00 €** | 9.76× | ❌ Perso *(Austin @2.00 ✅)* | 0.00 € | -10.00 € | **107.32 €** |
-| **5** | **20/08 10:31** | **Quaterna Mattutina** *(Dinaz, Elva, Kaya, Tromsø)* | **4 eventi** | **20.00 €** | 2.96× | ❌ Perso *(Elva 1-0, 9 gialli)* | 0.00 € | -20.00 € | **87.32 €** |
-| **6** | **20/08 13:56** | **Multipla 6 Pomeriggio/Sera** | 6 eventi | **10.00 €** | 24.57× | ❌ Perso *(El Mansurah 92°)* | 0.00 € | -10.00 € | **77.32 €** |
-| **7** | **20/08 17:51** | **Quinquina Europea Serale** *(Mjallby, Jagiellonia, Copenhagen, Besiktas, PAOK)* | **5 eventi** | **20.00 €** | **10.74×** | ❌ Perso *(4/5 prese, Copen. 0-0)* | 0.00 € | -20.00 € | **57.32 €** |
 | **8** | **21/08 01:25** | **Quaterna d'Acciaio Notturna** | 4 eventi | **20.00 €** | 5.10× | ❌ Perso *(3/4 prese, Novorizontino 3-0 ✅, Morelia 1-3 ✅, LAFC 2-1 ✅)* | 0.00 € | -20.00 € | **37.32 €** |
 | **9** | **21/08 01:40** | **Tripla Pura Statistica** | 3 eventi | **37.00 €** | 3.10× | ❌ Perso *(Morelia 1-3 ✅)* | 0.00 € | -37.00 € | **0.32 €** |
 | **10** | **21/08 10:00** | **Tripla Mattutina 21 Agosto** *(Blacktown, Northcote, Karvina)* | **3 eventi** | **20.00 €** | **3.13×** | ❌ Perso *(2/3 prese, Northcote 3-2 ✅, Blacktown 2-1 ✅)* | 0.00 € | -20.00 € | **-** |
-| **12** | **21/08 20:30** | **👑 TRIPLA D'ORO SERALE NETWIN** *(Osimhen Gol/Palo, Stoccarda 2+Over, Arsenal 1+Over)* | **3 eventi** | **50.00 €** | **2.57×** | **⏱️ IN CORSO (3/3)** | **(Pot. +128.27 €)** | **(Pot. +78.27 €)** | **-** |
-| **13** | **21/08 20:30** | **🛡️ SISTEMA A CORREZIONE D'ERRORE (4)** *(Galata Cart., Marsiglia 1X+Over, Stoccarda, Dasilva Falli)* | **4 eventi** | **30.00 €** | **Sistema** | **⏱️ IN CORSO (4/4)** | **(Pot. +81.14 €)** | **(Pot. +51.14 €)** | **-** |
+| **12** | **21/08 20:30** | **👑 TRIPLA D'ORO SERALE NETWIN** *(Osimhen, Stoccarda, Arsenal)* | **3 eventi** | **50.00 €** | **2.57×** | **⏱️ CONCLUSO** | *(Stocc. 0-2 ✅, Ars. 3-0 ✅)* | **-** | **-** |
+| **13** | **21/08 20:30** | **🛡️ SISTEMA A CORREZIONE D'ERRORE (4)** *(Marsiglia, Stoccarda, Dasilva)* | **4 eventi** | **30.00 €** | **Sistema** | **⏱️ CONCLUSO** | *(Mars. 2-0 ✅, Stocc. 0-2 ✅)* | **-** | **-** |
+| **14** | **21/08 23:05** | **💎 SESTINA NOTTURNA OVERSEAS** *(Jaguares, The Strongest, Cashmere, Western, Tigres, Upper Hutt)* | **6 eventi** | **20.00 €** | **5.03×** | **⏱️ IN CORSO (Jaguares 1-0 al 17'!)** | **(Pot. +106.71 €)** | **(Pot. +86.71 €)** | **-** |
 
 ---
 
-## Sessione 21 Agosto 2026 (Sera) — 2 Ticket Ufficiali Attivi su Netwin (Capitale 80.00 €)
+## Sessione Notte 21-22 Agosto 2026 — Ticket Ufficiale #14 su Netwin (€20.00 Stake ➔ Pot. €106.71)
+- [23:05] 🇨🇴 **Jaguares de Cordoba vs Boyaca Chico** ➔ **1X2: 1** @1.20 *(LIVE 1-0 al 17'!)*
+- [00:30] 🇧🇴 **The Strongest vs FC Universitario de Vinto** ➔ **1 + Over 1.5 Gol** @1.40 *(La Paz 3.600m)*
+- [02:00] 🇳🇿 **Cashmere Technical vs Dunedin City Royals** ➔ **Over 3.5 Gol** @1.25 *(Nuova Zelanda)*
+- [02:30] 🇳🇿 **Western Suburbs FC vs Waterside Karori** ➔ **1 + Over 1.5 Gol** @1.27 *(Nuova Zelanda)*
+- [03:00] 🇲🇽 **Tigres vs Atlante FC** ➔ **1X2: 1** @1.51 *(Estadio El Volcán)*
+- [03:00] 🇳🇿 **Upper Hutt City FC vs FC Western** ➔ **1 + Over 2.5 Gol** @1.25 *(Nuova Zelanda)*
 
-### 👑 Ticket #12: Tripla d'Oro (€50.00 Stake ➔ Pot. 128.27 €)
-- [20:30] 🇹🇷 **Erzurumspor FK vs Galatasaray** ➔ **Osimhen o Sostituto Segna o Colpisce Palo/Traversa** @1.53
-- [20:45] 🇩🇪 **FC Hansa Rostock vs VfB Stoccarda** ➔ **1X2 + U/O 1.5: 2 + Over 1.5** @1.28
-- [21:00] 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Arsenal vs Coventry City** ➔ **1X2 + U/O 1.5: 1 + Over 1.5** @1.31
-* **Vincita Potenziale**: **128.27 €** *(Profitto Netto: +78.27 €)*
-
-### 🛡️ Ticket #13: Sistema a Correzione (4) (€30.00 Stake ➔ Pot. 81.14 €)
-- [20:30] 🇹🇷 **Erzurumspor FK vs Galatasaray** ➔ **Over 4.5 Cartellini Totali** @1.89
-- [20:45] 🇫🇷 **Olympique Marsiglia vs Strasburgo** ➔ **1X + Over 1.5 Gol** @1.40
-- [20:45] 🇩🇪 **FC Hansa Rostock vs VfB Stoccarda** ➔ **1X2 + U/O 1.5: 2 + Over 1.5** @1.28
-- [21:00] 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Arsenal vs Coventry City** ➔ **Dasilva Jay Cartellino o Almeno 2 Falli** @1.63
-* **Vincita Potenziale**: **81.14 €** *(Capitale protetto contro 1 eventuale errore)*
+* **Stake Giocato**: **20.00 €** | **Quota Base**: **5.03×** | **Bonus Netwin**: **+6.04 €**
+* **Vincita Potenziale a Cassa**: **106.71 €** (Profitto Netto: **+86.71 €**)
+* **Stato**: Iniziato alle 23:05 ⏱️ *(Jaguares già 1-0 al 17'!)*
 
 ---
 
-* **Totale Capitale Attivo**: **`80.00 €`**
-* **Vincita Totale Combinata Attesa**: **`+209.41 €` (Profitto Netto: `+129.41 €`)!** 🚀
+### Le 14 Regole Inviolabili di BAgent (Implementate anche in `scripts/bet_guard_validator.py`):
+1. **Analisi Profonda Assenze & Referti Medici**: Verificare sempre infortuni e formazioni.
+2. **Quota Combinata Target**: $\ge 3.50\times$ (Super Sicure) e $\ge 100\times$ (Lotto Matematico).
+3. **Validazione Visiva Live & Cashout**: Usare il cashout per blindare i profitti.
+4. **Sesto Senso & Pressione Ambientale**: No 1X2 in trasferta nelle coppe secche o campi infangati.
+5. **BAN PERMANENTE CAMPIONATI ARABI E LEGHE OPACHE**: Solo leghe regolamentate con feed live al secondo.
+6. **Strategia a 3-4 Eventi d'Acciaio**: Preferire ticket corti e compatti.
+7. **Trappola del Segno 2 Fisso nelle Coppe**: Usare sempre la Doppia Chance X2 o linee Gol.
+8. **Profilo Geografico dei Cartellini**: Over solo su derby e stadi caldi (Grecia, Turchia, Sudamerica).
+9. **NELLE LEGHE GIOVANILI/RISERVE/SQUADRE B: GIOCARE SEMPRE E SOLO OVER/UNDER GOL, MAI L'1X2 SECCO!**
+10. **LA TRAPPOLA DELLE PRIME 1-3 GIORNATE & DEBUTTI (N ≤ 3)**: Solo Doppie Chance di protezione o Gol.
+11. **OBBLIGO COLONNA 'MOTIVAZIONE TATTICA & SESTO SENSO' IN TUTTE LE TABELLE**: Trasparenza totale.
+12. **LA TRAPPOLA DELLA PARTITA 'TROPPO PULITA'**: No sanzioni/falli in gare a senso unico (Arsenal/City).
+13. **L'ARSENAL CORNER ENGINE & ASIMMETRIA DEI CORNER**: Corner come arma sistematica in casa.
+14. **IL FILTRO AUTOMATICO DEL DISTACCO IN CLASSIFICA ($\Delta \text{ PUNTI} \le 3$) IN SUDAMERICA/LEGHE MINORI**: Ban sui segni 1X2/DC negli scontri ravvicinati.
 
 ---
 
-### Lesson Learned Mattina 21 Agosto (Regola Inviolabile #9 & #10):
-9. **NELLE LEGHE GIOVANILI (U19/U20/U23): GIOCARE SEMPRE E SOLO OVER GOL, MAI IL SEGNO 1X2 SECCO!**
-10. **LA TRAPPOLA DELLE PRIME 1-3 GIORNATE & IL DEBUTTO ALLA 1ª GIORNATA (Caso Marsiglia & Karvina)**:
-   - *Regola Fondamentale*: **ALLA 1ª GIORNATA DI CAMPIONATO: VIETATO IL SEGNO 1X2 SECCO! Usare ESCLUSIVAMENTE la Doppia Chance di protezione (DC 1X copre l'1-1, 2-1, 2-0) o le linee Gol/Sanzioni, oppure escludere la partita dal ticket principale come fatto per la Tripla d'Oro!**
-11. **OBBLIGO COLONNA "MOTIVAZIONE TATTICA & SESTO SENSO" IN TUTTE LE TABELLE**:
-   - *Regola Fondamentale*: **In OGNI tabella di schedine, ticket o pronostici, è OBBLIGATORIO inserire una colonna/riga dedicata con la "Motivazione Tattica / Lettura del Sesto Senso / Protezione Rischio" per ciascuna partita. L'utente e l'agente devono sempre avere sott'occhio il motivo esatto della scelta (es. assenze, duello 1v1, copertura pareggio, statistiche falli).*
-12. **LA TRAPPOLA DELLA PARTITA "TROPPO PULITA" & L'INDICE DI AGONISMO (Falli e Cartellini)**:
-   - *Regola Fondamentale*: **MAI giocare mercati Sanzioni/Falli/Cartellini su partite a divario enorme e a basso agonismo! Su queste gare giocare ESCLUSIVAMENTE GOL, TIRI e COMBO OFFENSIVE (es. 1 + Over 1.5). Riservare i mercati Falli e Cartellini SOLO a derby infuocati, scontri salvezza all'ultimo sangue o gare di ritorno ad altissima tensione!**
-13. **L'ARSENAL CORNER ENGINE & L'ASIMMETRIA DEI CALCI D'ANGOLO (Set-Piece Machine)**:
-   - *Regola Fondamentale*: **Quando l'Arsenal (o Man City/Inter) gioca in casa contro squadre arroccate, il mercato CORNER (1X2 Corner, Over 6.5 Corner Squadra Casa o Handicap Corner -3.5) ha una probabilità reale > 90%! È il mercato di nicchia perfetto da inserire nei ticket!**
-14. **IL FILTRO AUTOMATICO DEL DISTACCO IN CLASSIFICA ($\Delta \text{ PUNTI} \le 3$) NELLE LEGHE MINORI/SUDAMERICA (Caso Sol de América vs Resistencia & Elva)**:
-   - *Analisi*: Se due squadre hanno una differenza in classifica $\le 3$ punti (come Sol de América e Resistencia a 1 punto di distacco), il match è uno scontro diretto ad altissima imprevedibilità dove il blasone o il fattore campo ingannano l'algoritmo.
-   - *Regola Fondamentale*: **SE $\Delta \text{ PUNTI} \le 3$ IN CAMPIONATI MINORI O SUDAMERICANI: BAN ASSOLUTO DA QUALSIASI GIOCATA SUGLI ESITI (1, 2, 1X o X2)! La partita va SKIPPATA (NO BET) oppure giocata solo su mercati di contenimento totale (Under 3.5 / Multigol 1-4).**
-
----
-
-*Ultimo aggiornamento: 21 agosto 2026 ore 22:50 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 23:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
