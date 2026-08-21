@@ -555,18 +555,19 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **8** | **21/08 01:25** | **Quaterna d'Acciaio Notturna** | 4 eventi | **20.00 €** | 5.10× | ❌ Perso *(3/4 prese, Novorizontino 3-0 ✅, Morelia 1-3 ✅, LAFC 2-1 ✅)* | 0.00 € | -20.00 € | **37.32 €** |
 | **9** | **21/08 01:40** | **Tripla Pura Statistica** | 3 eventi | **37.00 €** | 3.10× | ❌ Perso *(Morelia 1-3 ✅)* | 0.00 € | -37.00 € | **0.32 €** |
 | **10** | **21/08 10:00** | **Tripla Mattutina 21 Agosto** *(Blacktown, Northcote, Karvina)* | **3 eventi** | **20.00 €** | **3.13×** | ❌ Perso *(2/3 prese, Northcote 3-2 ✅, Blacktown 2-1 ✅)* | 0.00 € | -20.00 € | **-** |
-| **11** | **21/08 18:00** | **💎 Quaterna d'Acciaio Serale (Sanzioni & Combo)** *(Stoccarda, Galata, Dasilva, Marsiglia)* | **4 eventi** | **20.00 €** | **6.17×** | **⏱️ IN CORSO** | *(Pot. +123.40 €)* | *(Pot. +103.40 €)* | **-** |
+| **12** | **21/08 20:30** | **👑 TRIPLA D'ORO SERALE NETWIN** *(Osimhen Gol/Palo, Stoccarda 2+Over, Arsenal 1+Over)* | **3 eventi** | **50.00 €** | **2.57×** | **⏱️ IN CORSO (3/3)** | **(Pot. +128.27 €)** | **(Pot. +78.27 €)** | **-** |
 
 ---
 
-## Sessione 21 Agosto 2026 (Sera) — Ticket Ufficiale #11 su Netwin
-- [18:00] 🇩🇪 Hansa Rostock vs VfB Stoccarda ➔ **2 + Over 1.5 Gol** @1.30 (ID: 246)
-- [20:00] 🇹🇷 Erzurumspor FK vs Galatasaray ➔ **Over 4.5 Cartellini Totali** @1.89 (ID: 785)
-- [20:45] 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Arsenal vs Coventry City ➔ **Dasilva Jay Cartellino o Almeno 2 Falli** @1.63 (ID: 5629)
-- [20:45] 🇫🇷 Olympique Marsiglia vs Strasburgo ➔ **1X + Over 1.5 Gol** @1.40 (ID: 3538)
+## Sessione 21 Agosto 2026 (Sera) — Ticket Ufficiale #12 su Netwin (€50.00 Stake)
+- [20:30] 🇹🇷 **Erzurumspor FK vs Galatasaray** ➔ **Osimhen o Sostituto Segna o Colpisce Palo/Traversa** @1.53
+- [20:45] 🇩🇪 **FC Hansa Rostock vs VfB Stoccarda** ➔ **1X2 + U/O 1.5: 2 + Over 1.5** @1.28
+- [21:00] 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Arsenal vs Coventry City** ➔ **1X2 + U/O 1.5: 1 + Over 1.5** @1.31
 
-* **Quota Base**: **5.61×** | **Quota con Bonus Netwin (+10%)**: **6.17×**
-* **Stato**: Iniziato alle 18:00 con Stoccarda ⏱️
+* **Stake Ufficiale Giocato**: **50.00 €**
+* **Quota Totale Netwin**: **2.57×**
+* **Vincita Potenziale a Cassa**: **128.27 €** (Profitto Netto: **+78.27 €**)
+* **Stato**: Iniziato alle 20:30 ⏱️
 
 ---
 
@@ -581,4 +582,4 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 16:16 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 16:43 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
