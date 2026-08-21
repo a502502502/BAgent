@@ -368,7 +368,10 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
    - *Analisi*: Nel match **Karvina U19 vs Opava U19 (2-4)** ci sono stati ben **6 GOL e 13 Corner**! Avevamo identificato l'Over 2.5 @1.28 come giocata d'acciaio. Giocando il segno 1 fisso su ragazzi di 18 anni, il Karvina è crollato 2-4. Sul Northcote City U23 avevamo previsto la rimonta e l'Over ed è finita esattamente **3-2 (1 + Over preso ✅)**!
    - *Regola*: **Nelle leghe giovanili/U19/U20/U23, scommettere ESCLUSIVAMENTE su Over 2.5 Gol o Under 4.5. VIETATO giocare l'1X2 secco!**
 
+10. **LA TRAPPOLA DELLE PRIME 1-3 GIORNATE & CAMPIONE STATISTICO INSUFFICIENTE (N ≤ 3)**:
+   - *Analisi*: All'inizio di un campionato o nelle prime 1-3 giornate, la classifica è pura casualità statistica (piccolo campione $N \le 3$). Nelle giovanili poi le rose cambiano del 70% ogni estate. Basare un pronostico 1X2 su sole 2 partite giocate porta a errori gravi come il Karvina U19.
+   - *Regola Fondamentale*: **MAI fidarsi delle classifiche con meno di 5-6 partite giocate! Se il campionato è alle prime 1-3 giornate, puntare SOLO su squadre dal valore assoluto di rosa consolidato (Arsenal, Galatasaray, Real Madrid, Bayern) o campionati già maturi (10+ giornate giocate come Svezia, Norvegia, Brasile). Zero 1X2 su squadre minori a inizio stagione.**
+
 ---
 
 *Ultimo aggiornamento: 21 agosto 2026 ore 13:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
-
