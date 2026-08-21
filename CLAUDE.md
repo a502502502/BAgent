@@ -556,30 +556,37 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **9** | **21/08 01:40** | **Tripla Pura Statistica** | 3 eventi | **37.00 €** | 3.10× | ❌ Perso *(Morelia 1-3 ✅)* | 0.00 € | -37.00 € | **0.32 €** |
 | **10** | **21/08 10:00** | **Tripla Mattutina 21 Agosto** *(Blacktown, Northcote, Karvina)* | **3 eventi** | **20.00 €** | **3.13×** | ❌ Perso *(2/3 prese, Northcote 3-2 ✅, Blacktown 2-1 ✅)* | 0.00 € | -20.00 € | **-** |
 | **12** | **21/08 20:30** | **👑 TRIPLA D'ORO SERALE NETWIN** *(Osimhen Gol/Palo, Stoccarda 2+Over, Arsenal 1+Over)* | **3 eventi** | **50.00 €** | **2.57×** | **⏱️ IN CORSO (3/3)** | **(Pot. +128.27 €)** | **(Pot. +78.27 €)** | **-** |
+| **13** | **21/08 20:30** | **🛡️ SISTEMA A CORREZIONE D'ERRORE (4)** *(Galata Cart., Marsiglia 1X+Over, Stoccarda, Dasilva Falli)* | **4 eventi** | **30.00 €** | **Sistema** | **⏱️ IN CORSO (4/4)** | **(Pot. +81.14 €)** | **(Pot. +51.14 €)** | **-** |
 
 ---
 
-## Sessione 21 Agosto 2026 (Sera) — Ticket Ufficiale #12 su Netwin (€50.00 Stake)
+## Sessione 21 Agosto 2026 (Sera) — 2 Ticket Ufficiali Attivi su Netwin (Capitale 80.00 €)
+
+### 👑 Ticket #12: Tripla d'Oro (€50.00 Stake ➔ Pot. 128.27 €)
 - [20:30] 🇹🇷 **Erzurumspor FK vs Galatasaray** ➔ **Osimhen o Sostituto Segna o Colpisce Palo/Traversa** @1.53
 - [20:45] 🇩🇪 **FC Hansa Rostock vs VfB Stoccarda** ➔ **1X2 + U/O 1.5: 2 + Over 1.5** @1.28
 - [21:00] 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Arsenal vs Coventry City** ➔ **1X2 + U/O 1.5: 1 + Over 1.5** @1.31
+* **Vincita Potenziale**: **128.27 €** *(Profitto Netto: +78.27 €)*
 
-* **Stake Ufficiale Giocato**: **50.00 €**
-* **Quota Totale Netwin**: **2.57×**
-* **Vincita Potenziale a Cassa**: **128.27 €** (Profitto Netto: **+78.27 €**)
-* **Stato**: Iniziato alle 20:30 ⏱️
+### 🛡️ Ticket #13: Sistema a Correzione (4) (€30.00 Stake ➔ Pot. 81.14 €)
+- [20:30] 🇹🇷 **Erzurumspor FK vs Galatasaray** ➔ **Over 4.5 Cartellini Totali** @1.89
+- [20:45] 🇫🇷 **Olympique Marsiglia vs Strasburgo** ➔ **1X + Over 1.5 Gol** @1.40
+- [20:45] 🇩🇪 **FC Hansa Rostock vs VfB Stoccarda** ➔ **1X2 + U/O 1.5: 2 + Over 1.5** @1.28
+- [21:00] 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Arsenal vs Coventry City** ➔ **Dasilva Jay Cartellino o Almeno 2 Falli** @1.63
+* **Vincita Potenziale**: **81.14 €** *(Capitale protetto contro 1 eventuale errore)*
+
+---
+
+* **Totale Capitale Attivo**: **`80.00 €`**
+* **Vincita Totale Combinata Attesa**: **`+209.41 €` (Profitto Netto: `+129.41 €`)!** 🚀
 
 ---
 
 ### Lesson Learned Mattina 21 Agosto (Regola Inviolabile #9 & #10):
-9. **NELLE LEGHE GIOVANILI (U19/U20/U23): GIOCARE SEMPRE E SOLO OVER GOL, MAI IL SEGNO 1X2 SECCO!**:
-   - *Analisi*: Nel match **Karvina U19 vs Opava U19 (2-4)** ci sono stati ben **6 GOL e 13 Corner**! Avevamo identificato l'Over 2.5 @1.28 come giocata d'acciaio. Giocando il segno 1 fisso su ragazzi di 18 anni, il Karvina è crollato 2-4. Sul Northcote City U23 avevamo previsto la rimonta e l'Over ed è finita esattamente **3-2 (1 + Over preso ✅)**!
-   - *Regola*: **Nelle leghe giovanili/U19/U20/U23, scommettere ESCLUSIVAMENTE su Over 2.5 Gol o Under 4.5. VIETATO giocare l'1X2 secco!**
-
+9. **NELLE LEGHE GIOVANILI (U19/U20/U23): GIOCARE SEMPRE E SOLO OVER GOL, MAI IL SEGNO 1X2 SECCO!**
 10. **LA TRAPPOLA DELLE PRIME 1-3 GIORNATE & CAMPIONE STATISTICO INSUFFICIENTE (N ≤ 3)**:
-   - *Analisi*: All'inizio di un campionato o nelle prime 1-3 giornate, la classifica è pura casualità statistica (piccolo campione $N \le 3$). Nelle giovanili poi le rose cambiano del 70% ogni estate. Basare un pronostico 1X2 su sole 2 partite giocate porta a errori gravi come il Karvina U19.
-   - *Regola Fondamentale*: **MAI fidarsi delle classifiche con meno di 5-6 partite giocate! Se il campionato è alle prime 1-3 giornate, puntare SOLO su squadre dal valore assoluto di rosa consolidato (Arsenal, Galatasaray, Real Madrid, Bayern) o campionati già maturi (10+ giornate giocate come Svezia, Norvegia, Brasile). Zero 1X2 su squadre minori a inizio stagione.**
+   - *Regola*: **MAI fidarsi delle classifiche con meno di 5-6 partite giocate! Puntare SOLO su squadre dal valore assoluto di rosa consolidato (Arsenal, Galatasaray, Stoccarda, Marsiglia) o campionati già maturi.**
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 16:43 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 16:44 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
