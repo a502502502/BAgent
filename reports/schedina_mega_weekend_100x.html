@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mega Multipla Weekend 100× — BAgent Engine</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; padding: 24px 16px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 24px; }
+  .badge { display: inline-block; background: rgba(210,153,34,0.15); border: 1px solid #d29922; border-radius: 20px; padding: 6px 18px; font-size: 13px; color: #d29922; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+  h1 { font-size: 26px; font-weight: 700; color: #f0f6fc; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #8b949e; }
+  .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; }
+  .stat { flex: 1; background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 12px; text-align: center; }
+  .stat .val { font-size: 20px; font-weight: 700; color: #3fb950; }
+  .stat .lbl { font-size: 11px; color: #8b949e; text-transform: uppercase; }
+  .day-header { font-size: 14px; font-weight: 700; color: #58a6ff; text-transform: uppercase; letter-spacing: 1px; margin: 18px 0 8px 0; border-bottom: 1px solid #30363d; padding-bottom: 4px; }
+  .match-card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; margin-bottom: 8px; padding: 12px 16px; }
+  .match-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .teams { font-size: 14px; font-weight: 600; color: #f0f6fc; }
+  .pick-val { font-size: 13px; font-weight: 700; color: #3fb950; }
+  .pick-q { font-size: 14px; font-weight: 700; color: #58a6ff; margin-left: 10px; }
+  .mot { font-size: 12px; color: #8b949e; margin-top: 4px; line-height: 1.4; background: #0d1117; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #58a6ff; }
+  .totale { background: linear-gradient(135deg, rgba(210,153,34,0.2), rgba(63,185,80,0.2)); border: 1px solid #d29922; border-radius: 14px; padding: 20px; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+  .totale-val { font-size: 32px; font-weight: 700; color: #d29922; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="badge">BAgent Engine · Progetto Lotto Matematico</div>
+    <h1>Mega Multipla Weekend 4 Giorni (21 - 24 Agosto 2026)</h1>
+    <div class="subtitle">17 Selezioni con Probabilità Singola ≥ 85% · Solo Grandi Campionati</div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="val">17</div>
+      <div class="lbl">Eventi Selezionati</div>
+    </div>
+    <div class="stat">
+      <div class="val">105.16× (Bonus: 168.26×)</div>
+      <div class="lbl">Quota con Mega Bonus (+60%)</div>
+    </div>
+    <div class="stat">
+      <div class="val">336.52 €</div>
+      <div class="lbl">Incasso Atteso (Stake: 2.00 €)</div>
+    </div>
+  </div>
+
+  <!-- VENERDÌ 21 -->
+  <div class="day-header">📅 VENERDÌ 21 AGOSTO (5 Eventi)</div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Hansa Rostock vs VfB Stoccarda (DFB Pokal)</span><div><span class="pick-val">2 + Over 1.5 Gol</span><span class="pick-q">@1.30</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Stoccarda titolare da Champions contro la 3ª divisione decimata da 8 infortunati. Vittoria 0-2, 0-3 o 1-3.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Arsenal vs Coventry City (Premier League)</span><div><span class="pick-val">Dasilva Cartellino o 2 Falli Commessi</span><span class="pick-q">@1.63</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Marcatura diretta su Bukayo Saka (2.45 falli subiti/m). Dasilva fa 2.33 falli di media a partita.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Erzurumspor vs Galatasaray (Super Lig)</span><div><span class="pick-val">Osimhen Segna o Colpisce Palo/Traversa</span><span class="pick-q">@1.53</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Osimhen affamato di gol contro una neopromossa. Il mercato copre sia i gol che i legni colpiti!</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Marsiglia vs Strasburgo (Ligue 1)</span><div><span class="pick-val">1X + Over 1.5 Gol</span><span class="pick-q">@1.40</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Protezione 1ª giornata per De Zerbi: 65k del Vélodrome, copre sia 2-0/2-1 sia il pareggio 1-1.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">FC Emmen vs Jong AZ (Eerste Divisie)</span><div><span class="pick-val">Over 2.5 Gol</span><span class="pick-q">@1.42</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Campionato ad altissima vocazione offensiva (media 3.40 gol a partita).</div>
+  </div>
+
+  <!-- SABATO 22 -->
+  <div class="day-header">📅 SABATO 22 AGOSTO (6 Eventi)</div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Manchester City vs Ipswich (Premier League)</span><div><span class="pick-val">1 + Over 1.5 Gol</span><span class="pick-q">@1.25</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Fortino dell'Etihad Stadium: Haaland e De Bruyne contro neopromossa.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Real Madrid vs Real Valladolid (LaLiga)</span><div><span class="pick-val">1X2: 1 (Real Madrid)</span><span class="pick-q">@1.20</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Bernabéu sold out per il debutto casalingo di Mbappé e Vinicius Jr.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Inter vs Monza (Serie A)</span><div><span class="pick-val">1X + Over 1.5 Gol</span><span class="pick-q">@1.25</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Campioni d'Italia a San Siro: Lautaro e Thuram, copre 2-0, 2-1 e 1-1.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">PSV Eindhoven vs Almere City (Eredivisie)</span><div><span class="pick-val">1 + Over 1.5 Gol</span><span class="pick-q">@1.22</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> PSV macchina da gol inarrestabile al Philips Stadion (3.1 gol a match).</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Bayern Monaco vs SSV Ulm (DFB Pokal)</span><div><span class="pick-val">Over 2.5 Gol</span><span class="pick-q">@1.30</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Harry Kane e il Bayern segnano 3 gol da soli contro la neopromossa.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Aston Villa vs Arsenal (Premier League)</span><div><span class="pick-val">Over 1.5 Gol</span><span class="pick-q">@1.24</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Sfida spettacolare tra due dei migliori attacchi d'Inghilterra (Emery vs Arteta).</div>
+  </div>
+
+  <!-- DOMENICA 23 -->
+  <div class="day-header">📅 DOMENICA 23 AGOSTO (5 Eventi)</div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Barcellona vs Athletic Club (LaLiga)</span><div><span class="pick-val">1X + Over 1.5 Gol</span><span class="pick-q">@1.28</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Lewandowski e Lamine Yamal in casa: protezione 1X che copre 1-1, 2-1 e 2-0.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Napoli vs Bologna (Serie A)</span><div><span class="pick-val">1X + Over 1.5 Gol</span><span class="pick-q">@1.32</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Debutto di Antonio Conte al Maradona: spinta feroce del pubblico napoletano.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Sporting CP vs Nacional (Liga Portugal)</span><div><span class="pick-val">1 + Over 1.5 Gol</span><span class="pick-q">@1.24</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Campioni di Portogallo dominatori assoluti allo Stadio Alvalade.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">PEC Zwolle vs Feyenoord (Eredivisie)</span><div><span class="pick-val">X2 + Over 1.5 Gol</span><span class="pick-q">@1.25</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Feyenoord travolgente in trasferta, protezione X2 in caso di pareggio con gol.</div>
+  </div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Roma vs Empoli (Serie A)</span><div><span class="pick-val">1X + Over 1.5 Gol</span><span class="pick-q">@1.28</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Stadio Olimpico gremito con Dybala, Soulé e Dovbyk: copre 2-0, 2-1 e 1-1.</div>
+  </div>
+
+  <!-- LUNEDÌ 24 -->
+  <div class="day-header">📅 LUNEDÌ 24 AGOSTO (1 Evento)</div>
+  <div class="match-card">
+    <div class="match-top"><span class="teams">Atletico Madrid vs Girona (LaLiga)</span><div><span class="pick-val">1X + Over 1.5 Gol</span><span class="pick-q">@1.32</span></div></div>
+    <div class="mot">🧠 <b>Motivazione:</b> Simeone al Metropolitano con Julian Alvarez e Griezmann: fortino insuperabile.</div>
+  </div>
+
+  <div class="totale">
+    <div>
+      <div style="font-size:14px; color:#c9d1d9; font-weight:600;">💰 Incasso a Cassa con Mega Bonus Netwin (+60%)</div>
+      <div style="font-size:12px; color:#8b949e;">Puntata Simbolica 2.00 € ➔ Guadagno Netto: +334.52 €!</div>
+    </div>
+    <div class="totale-val">168.26×</div>
+  </div>
+</div>
+</body>
+</html>
