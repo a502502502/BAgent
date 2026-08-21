@@ -588,7 +588,10 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
    - *Regola Fondamentale*: **ALLA 1ª GIORNATA DI CAMPIONATO: VIETATO IL SEGNO 1X2 SECCO! Usare ESCLUSIVAMENTE la Doppia Chance di protezione (DC 1X copre l'1-1, 2-1, 2-0) o le linee Gol/Sanzioni, oppure escludere la partita dal ticket principale come fatto per la Tripla d'Oro!**
 11. **OBBLIGO COLONNA "MOTIVAZIONE TATTICA & SESTO SENSO" IN TUTTE LE TABELLE**:
    - *Regola Fondamentale*: **In OGNI tabella di schedine, ticket o pronostici, è OBBLIGATORIO inserire una colonna/riga dedicata con la "Motivazione Tattica / Lettura del Sesto Senso / Protezione Rischio" per ciascuna partita. L'utente e l'agente devono sempre avere sott'occhio il motivo esatto della scelta (es. assenze, duello 1v1, copertura pareggio, statistiche falli).*
+12. **LA TRAPPOLA DELLA PARTITA "TROPPO PULITA" & L'INDICE DI AGONISMO (Falli e Cartellini)**:
+   - *Analisi*: Nelle sfide tra corazzate e piccole all'Emirates/Etihad o gare a senso unico (3-0 rapido), il ritmo si addormenta, scatta il fair play inglese e i falli crollano a zero ("partita troppo pulita").
+   - *Regola Fondamentale*: **MAI giocare mercati Sanzioni/Falli/Cartellini su partite a divario enorme e a basso agonismo! Su queste gare giocare ESCLUSIVAMENTE GOL, TIRI e COMBO OFFENSIVE (es. 1 + Over 1.5). Riservare i mercati Falli e Cartellini SOLO a derby infuocati, scontri salvezza all'ultimo sangue o gare di ritorno ad altissima tensione!**
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 16:56 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 22:28 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
