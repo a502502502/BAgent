@@ -591,9 +591,11 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 12. **LA TRAPPOLA DELLA PARTITA "TROPPO PULITA" & L'INDICE DI AGONISMO (Falli e Cartellini)**:
    - *Regola Fondamentale*: **MAI giocare mercati Sanzioni/Falli/Cartellini su partite a divario enorme e a basso agonismo! Su queste gare giocare ESCLUSIVAMENTE GOL, TIRI e COMBO OFFENSIVE (es. 1 + Over 1.5). Riservare i mercati Falli e Cartellini SOLO a derby infuocati, scontri salvezza all'ultimo sangue o gare di ritorno ad altissima tensione!**
 13. **L'ARSENAL CORNER ENGINE & L'ASIMMETRIA DEI CALCI D'ANGOLO (Set-Piece Machine)**:
-   - *Analisi*: L'Arsenal di Arteta e Nicolas Jover è la squadra #1 al mondo per generazione di corner in casa (media 8.4 corner/m all'Emirates contro 2.1 concessi, ratio 4:1). Lo schema tattico isola Saka e Martinelli sul fondo per provocare appositamente la deviazione in corner per gli schemi su palla inattiva.
    - *Regola Fondamentale*: **Quando l'Arsenal (o Man City/Inter) gioca in casa contro squadre arroccate, il mercato CORNER (1X2 Corner, Over 6.5 Corner Squadra Casa o Handicap Corner -3.5) ha una probabilità reale > 90%! È il mercato di nicchia perfetto da inserire nei ticket!**
+14. **IL FILTRO AUTOMATICO DEL DISTACCO IN CLASSIFICA ($\Delta \text{ PUNTI} \le 3$) NELLE LEGHE MINORI/SUDAMERICA (Caso Sol de América vs Resistencia & Elva)**:
+   - *Analisi*: Se due squadre hanno una differenza in classifica $\le 3$ punti (come Sol de América e Resistencia a 1 punto di distacco), il match è uno scontro diretto ad altissima imprevedibilità dove il blasone o il fattore campo ingannano l'algoritmo.
+   - *Regola Fondamentale*: **SE $\Delta \text{ PUNTI} \le 3$ IN CAMPIONATI MINORI O SUDAMERICANI: BAN ASSOLUTO DA QUALSIASI GIOCATA SUGLI ESITI (1, 2, 1X o X2)! La partita va SKIPPATA (NO BET) oppure giocata solo su mercati di contenimento totale (Under 3.5 / Multigol 1-4).**
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 22:30 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 21 agosto 2026 ore 22:50 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
