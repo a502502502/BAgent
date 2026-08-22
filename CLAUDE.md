@@ -588,7 +588,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-## Sessione 22 Agosto 2026 (Serale) — Ticket Attivo Ufficiale
+## Sessione 22 Agosto 2026 (Serale) — I 3 Ticket Ufficiali in Gioco su Netwin
 
 ### 🛡️ Ticket #15: Quaterna d'Acciaio Serale (Stake 20.00 € ➔ Pot. 121.24 €)
 * **Stake**: 20.00 € | **Quota Base**: 5.89× | **Bonus Netwin**: +3.53 € | **Vincita Potenziale**: **121.24 €**
@@ -598,6 +598,20 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 3. [20:45] **Tolosa vs Lione** ➔ **MultiGol 1-3 Casa (Tolosa)** @1.32
 4. [21:30] **Espanyol vs Real Madrid** ➔ **X2 + Over 2.5 Gol** @1.78
 
+### 💎 Ticket #16: La Doppia d'Acciaio (Quota 2.60×)
+* **Quota Base**: 2.60× | **Stato**: In Corso ⏱️
+1. [18:30] **Inter vs Monza** ➔ **Lautaro Martinez (o Sost.) Segna o Palo/Trav.** @1.67
+2. [21:30] **Espanyol vs Real Madrid** ➔ **2 + Over 1.5 Gol (Real Madrid)** @1.56
+
+### 🚀 Ticket #17: Quinquina Potenziata (Stake 27.00 € ➔ Pot. 157.29 €)
+* **Stake**: 27.00 € | **Quota Base**: 5.66× | **Bonus Netwin**: +4.58 € | **Vincita Potenziale**: **157.29 €**
+* **Stato**: In Corso (5/5 aperte) ⏱️
+1. [18:00] **Juventus U23 vs Novara** ➔ **1X2: 1** @1.40 *(Live 1-0)*
+2. [18:30] **Inter vs Monza** ➔ **Lautaro Martinez (o Sost.) Segna o Palo/Trav.** @1.67
+3. [18:30] **Brentford vs Tottenham** ➔ **Over 4.5 Corner Brentford (Sq.1)** @1.49
+4. [20:45] **Tolosa vs Lione** ➔ **MultiGol 1-3 Casa (Tolosa)** @1.32
+5. [21:30] **Espanyol vs Real Madrid** ➔ **Over 2.5 Cartellini Totali** @1.23
+
 ---
 
-*Ultimo aggiornamento: 22 agosto 2026 ore 17:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 22 agosto 2026 ore 19:23 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
