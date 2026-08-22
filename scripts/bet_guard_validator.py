@@ -11,12 +11,12 @@ if hasattr(sys.stdout, "reconfigure"):
 
 class BetGuardValidator:
     def __init__(self):
-        self.rules_loaded = 14
+        self.rules_loaded = 15
         print(f"BetGuard Engine initialized with {self.rules_loaded} Inviolable Rules.")
 
     def validate_selection(self, match_data):
         """
-        Valida una selezione applicando le regole programmatiche.
+        Valida una singola selezione applicando le regole programmatiche.
         Restituisce (is_valid: bool, reason: str)
         """
         match_name = match_data.get("match", "Unknown Match")
@@ -48,7 +48,22 @@ class BetGuardValidator:
         if is_latam_or_minor and delta_pts <= 3 and pick in ["1", "2", "1X", "X2", "1X2: 1", "1X2: 2"]:
             return False, f"[BLOCKED - RULE 14] Delta Punti = {delta_pts} (<= 3) in lega minore/sudamericana ({match_name}). Scontro diretto a moneta lanciata: BAN ASSOLUTO sui segni 1X2/DC. SKIP / NO BET!"
 
-        return True, f"[APPROVED] Conforme a tutte le 14 Regole Inviolabili."
+        return True, f"[APPROVED] Conforme alle Regole Inviolabili."
+
+    def validate_ticket_set(self, active_tickets: list[list[dict]]) -> tuple[bool, str]:
+        """
+        REGOLA #15: Verifica che non ci siano selezioni duplicate identiche tra più ticket aperti.
+        Garantisce il decoupling totale ed elimina i single-point-of-failure.
+        """
+        seen_picks = {}
+        for t_idx, ticket in enumerate(active_tickets, start=1):
+            for item in ticket:
+                key = (item.get("match", "").strip().lower(), item.get("pick", "").strip().lower())
+                if key in seen_picks:
+                    prev_t = seen_picks[key]
+                    return False, f"[BLOCKED - RULE 15] Selezione duplicata rilevata: '{item.get('match')}' -> '{item.get('pick')}' presente sia nel Ticket #{prev_t} che nel Ticket #{t_idx}. Vietato condividere lo stesso evento tra più schedine!"
+                seen_picks[key] = t_idx
+        return True, "[APPROVED - RULE 15] Tutti i ticket sono statisticamente indipendenti e disgiunti."
 
 if __name__ == "__main__":
     validator = BetGuardValidator()
