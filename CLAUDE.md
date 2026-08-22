@@ -588,4 +588,16 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 21 agosto 2026 ore 23:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+## Sessione 22 Agosto 2026 (Serale) — Ticket Attivo Ufficiale
+
+### 🛡️ Ticket #15: Quaterna d'Acciaio Serale (Stake 20.00 € ➔ Pot. 121.24 €)
+* **Stake**: 20.00 € | **Quota Base**: 5.89× | **Bonus Netwin**: +3.53 € | **Vincita Potenziale**: **121.24 €**
+* **Stato**: In Corso (4/4 aperte) ⏱️
+1. [18:30] **Inter vs Monza** ➔ **Lautaro Martinez (o Sost.) Segna o Palo/Trav.** @1.67
+2. [18:30] **Brentford vs Tottenham** ➔ **Over 4.5 Corner Brentford (Sq.1)** @1.50
+3. [20:45] **Tolosa vs Lione** ➔ **MultiGol 1-3 Casa (Tolosa)** @1.32
+4. [21:30] **Espanyol vs Real Madrid** ➔ **X2 + Over 2.5 Gol** @1.78
+
+---
+
+*Ultimo aggiornamento: 22 agosto 2026 ore 17:25 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
