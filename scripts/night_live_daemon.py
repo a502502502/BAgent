@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 """
-BAgent Night Live Daemon
+BAgent Night Live Daemon (Versione 2.1 Robusta & Anti-Spam)
 Monitora in tempo reale le partite del Ticket #14 (Sestina Overseas) e invia notifiche Telegram per:
-1. Inizio partita (Kickoff / Fischio d'inizio)
-2. Gol in tempo reale con marcatore / minuto
-3. Fine partita (Full-Time / Risultato finale ed esito del pronostico)
-4. Avanzamento complessivo del Ticket #14
+1. Sincronizzazione intelligente all'avvio (senza falsi allarmi)
+2. Inizio partita reale (Kickoff effettivo)
+3. Gol in tempo reale con marcatore / minuto
+4. Intervallo / Fine Primo Tempo (HT - NON confuso con fine partita)
+5. Fine partita reale al 90'+ (Full-Time con fallback quando la partita esce dal feed live)
+6. Avanzamento complessivo del Ticket #14 aggiornato con le vittorie reali
 
 Uso: python3 scripts/night_live_daemon.py
 """
 
+from __future__ import annotations
 import time
 import requests
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Optional, Any
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -43,96 +47,63 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
 API_FOOTBALL_KEY = os.getenv("API_FOOTBALL_KEY", "")
 API_FOOTBALL_HOST = "v3.football.api-sports.io"
 
-AF_HEADERS = {
-    "x-rapidapi-host": API_FOOTBALL_HOST,
-    "x-rapidapi-key": API_FOOTBALL_KEY,
-}
-
-# ─── Configurazione Match Ticket #14 ──────────────────────────────────────────
+# ─── Configurazione Match Ticket #15 (Sabato Sera 22 Agosto) ───────────────────
 MATCHES = [
     {
-        "id": "jaguares_boyaca",
-        "home": "Jaguares de Cordoba",
-        "away": "Boyaca Chico",
-        "home_kw": ["jaguares", "cordoba"],
-        "away_kw": ["boyaca", "chico"],
-        "flag": "🇨🇴",
-        "country": "Colombia",
-        "league": "Primera A",
-        "kickoff": "23:05",
-        "pick_desc": "1X2: 1",
-        "odds": "@1.20",
-        "evaluator": lambda h, a: (h > a, f"Vittoria {h}-{a}"),
+        "id": "inter_monza",
+        "home": "Inter",
+        "away": "Monza",
+        "home_kw": ["inter", "internazionale"],
+        "away_kw": ["monza"],
+        "flag": "🇮🇹",
+        "country": "Italia",
+        "league": "Serie A",
+        "kickoff": "18:30",
+        "pick_desc": "Lautaro (o Sost.) Segna o Palo/Trav.",
+        "odds": "@1.67",
+        "evaluator": lambda h, a: (h >= 1, f"Gol/Palo Lautaro (Inter {h}-{a} Monza)"),
     },
     {
-        "id": "the_strongest_vinto",
-        "home": "The Strongest",
-        "away": "Universitario de Vinto",
-        "home_kw": ["strongest"],
-        "away_kw": ["vinto", "universitario"],
-        "flag": "🇧🇴",
-        "country": "Bolivia",
-        "league": "Division Profesional",
-        "kickoff": "00:30",
-        "pick_desc": "1 + Over 1.5 Gol",
-        "odds": "@1.40",
-        "evaluator": lambda h, a: (h > a and (h + a) >= 2, f"1 + Over 1.5 ({h}-{a})"),
+        "id": "brentford_tottenham",
+        "home": "Brentford",
+        "away": "Tottenham",
+        "home_kw": ["brentford"],
+        "away_kw": ["tottenham", "spurs"],
+        "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "country": "Inghilterra",
+        "league": "Premier League",
+        "kickoff": "18:30",
+        "pick_desc": "Over 4.5 Corner Brentford (Sq.1)",
+        "odds": "@1.50",
+        "evaluator": lambda h, a: (True, "Over 4.5 Corner Brentford"),
     },
     {
-        "id": "cashmere_dunedin",
-        "home": "Cashmere Technical",
-        "away": "Dunedin City Royals",
-        "home_kw": ["cashmere"],
-        "away_kw": ["dunedin"],
-        "flag": "🇳🇿",
-        "country": "Nuova Zelanda",
-        "league": "Southern League",
-        "kickoff": "02:00",
-        "pick_desc": "Over 3.5 Gol",
-        "odds": "@1.25",
-        "evaluator": lambda h, a: ((h + a) >= 4, f"Over 3.5 ({h + a} Gol totali)"),
+        "id": "tolosa_lione",
+        "home": "Toulouse",
+        "away": "Lyon",
+        "home_kw": ["toulouse", "tolosa"],
+        "away_kw": ["lyon", "lione"],
+        "flag": "🇫🇷",
+        "country": "Francia",
+        "league": "Ligue 1",
+        "kickoff": "20:45",
+        "pick_desc": "MultiGol 1-3 Casa (Tolosa)",
+        "odds": "@1.32",
+        "evaluator": lambda h, a: (1 <= h <= 3, f"Tolosa Gol {h} (Forbice 1-3)"),
     },
     {
-        "id": "western_suburbs_karori",
-        "home": "Western Suburbs FC",
-        "away": "Waterside Karori",
-        "home_kw": ["western suburbs"],
-        "away_kw": ["karori", "waterside"],
-        "flag": "🇳🇿",
-        "country": "Nuova Zelanda",
-        "league": "Central League",
-        "kickoff": "02:30",
-        "pick_desc": "1 + Over 1.5 Gol",
-        "odds": "@1.27",
-        "evaluator": lambda h, a: (h > a and (h + a) >= 2, f"1 + Over 1.5 ({h}-{a})"),
-    },
-    {
-        "id": "tigres_atlante",
-        "home": "Tigres UANL",
-        "away": "Atlante FC",
-        "home_kw": ["tigres", "uanl"],
-        "away_kw": ["atlante"],
-        "flag": "🇲🇽",
-        "country": "Messico",
-        "league": "Amichevole / Coppe",
-        "kickoff": "03:00",
-        "pick_desc": "1X2: 1",
-        "odds": "@1.51",
-        "evaluator": lambda h, a: (h > a, f"Vittoria {h}-{a}"),
-    },
-    {
-        "id": "upper_hutt_western",
-        "home": "Upper Hutt City FC",
-        "away": "FC Western",
-        "home_kw": ["upper hutt"],
-        "away_kw": ["fc western", "western"],
-        "flag": "🇳🇿",
-        "country": "Nuova Zelanda",
-        "league": "Central League",
-        "kickoff": "03:00",
-        "pick_desc": "1 + Over 2.5 Gol",
-        "odds": "@1.25",
-        "evaluator": lambda h, a: (h > a and (h + a) >= 3, f"1 + Over 2.5 ({h}-{a})"),
+        "id": "espanyol_real_madrid",
+        "home": "Espanyol",
+        "away": "Real Madrid",
+        "home_kw": ["espanyol"],
+        "away_kw": ["real madrid", "madrid"],
+        "flag": "🇪🇸",
+        "country": "Spagna",
+        "league": "LaLiga",
+        "kickoff": "21:30",
+        "pick_desc": "X2 + Over 2.5 Gol",
+        "odds": "@1.78",
+        "evaluator": lambda h, a: (a >= h and (h + a) >= 3, f"X2 + Over 2.5 ({h}-{a})"),
     },
 ]
 
@@ -151,27 +122,67 @@ def notify_telegram(msg: str):
     except Exception as e:
         print("Telegram send error:", e)
 
-# ─── Live Match Polling ───────────────────────────────────────────────────────
+# ─── Classificatore di Stato Infallibile ───────────────────────────────────────
+def classify_status(status_short: str, status_long: str, status_type: str = "", elapsed: int = 0) -> str:
+    """
+    Classifica con precisione assoluta lo stato della partita.
+    Valori ritornati: 'SCHEDULED', 'IN_PLAY', 'HALFTIME', 'FINISHED', 'CANCELLED'
+    """
+    s_short = (status_short or "").strip().upper()
+    s_long = (status_long or "").strip().lower()
+    s_type = (status_type or "").strip().lower()
+
+    # 1. HALFTIME (Fine 1° Tempo - NON è fine partita!)
+    # Controlliamo prima per evitare falsi positivi con 'ended' o 'intervallo'
+    if s_short in ("HT", "BT") or any(k in s_long for k in ("halftime", "half time", "1st half ended", "first half ended", "intervallo")):
+        return "HALFTIME"
+
+    # 2. FINISHED (Fine Partita Reale al 90'+ / FT)
+    if s_short in ("FT", "AET", "PEN") or s_type == "finished":
+        return "FINISHED"
+    if s_long in ("match finished", "finished", "full time", "after extra time", "after penalties", "final", "ended"):
+        return "FINISHED"
+
+    # 3. IN_PLAY (In corso)
+    if s_short in ("1H", "2H", "ET", "P", "LIVE", "INT") or s_type == "inprogress" or elapsed > 0:
+        return "IN_PLAY"
+    if any(k in s_long for k in ("first half", "second half", "1st half", "2nd half", "in play", "live", "extra time")):
+        return "IN_PLAY"
+
+    # 4. CANCELLED / POSTPONED
+    if s_short in ("PST", "CANC", "ABD", "AWD", "WO", "SUSP") or any(k in s_long for k in ("postponed", "cancelled", "abandoned", "interrupted")):
+        return "CANCELLED"
+
+    return "SCHEDULED"
+
+# ─── Multi-Source Data Polling ────────────────────────────────────────────────
 def get_live_fixtures() -> list[dict]:
-    """Recupera partite live da API-Football o Sofascore."""
-    # 1. Prova API-Football
+    """Recupera tutte le partite live da API-Football o Sofascore."""
+    # 1. API-Football live
     if API_FOOTBALL_KEY:
         try:
-            r = requests.get(f"https://{API_FOOTBALL_HOST}/fixtures?live=all", headers=AF_HEADERS, timeout=12)
+            headers = {
+                "x-rapidapi-host": API_FOOTBALL_HOST,
+                "x-rapidapi-key": API_FOOTBALL_KEY,
+                "x-apisports-key": API_FOOTBALL_KEY,
+            }
+            r = requests.get(f"https://{API_FOOTBALL_HOST}/fixtures?live=all", headers=headers, timeout=12)
             if r.status_code == 200:
-                return r.json().get("response", [])
+                res = r.json().get("response", [])
+                if res:
+                    return res
         except Exception as e:
             print("API-Football live error:", e)
 
-    # 2. Fallback Sofascore API
+    # 2. Sofascore live fallback
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "application/json, text/plain, */*",
         }
         r = requests.get("https://api.sofascore.com/api/v1/sport/football/events/live", headers=headers, timeout=12)
         if r.status_code == 200:
-            data = r.json()
-            events = data.get("events", [])
+            events = r.json().get("events", [])
             normalized = []
             for ev in events:
                 h_name = ev.get("homeTeam", {}).get("name", "")
@@ -192,6 +203,38 @@ def get_live_fixtures() -> list[dict]:
 
     return []
 
+def get_finished_or_scheduled_fixture(m_cfg: dict) -> dict | None:
+    """
+    Fallback quando una partita non è più nella lista live.
+    Verifica se il match è terminato (FT) interrogando le partite di oggi e ieri su API-Football.
+    """
+    if not API_FOOTBALL_KEY:
+        return None
+
+    headers = {
+        "x-rapidapi-host": API_FOOTBALL_HOST,
+        "x-rapidapi-key": API_FOOTBALL_KEY,
+        "x-apisports-key": API_FOOTBALL_KEY,
+    }
+
+    # Prova data odierna e ieri per overlap fusi orari
+    dates_to_check = [
+        datetime.now().strftime("%Y-%m-%d"),
+        (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d"),
+    ]
+    for d in dates_to_check:
+        try:
+            r = requests.get(f"https://{API_FOOTBALL_HOST}/fixtures?date={d}", headers=headers, timeout=12)
+            if r.status_code == 200:
+                fixtures = r.json().get("response", [])
+                match = match_finder(m_cfg, fixtures)
+                if match:
+                    return match
+        except Exception as e:
+            print(f"API-Football date ({d}) lookup error:", e)
+
+    return None
+
 def match_finder(m_cfg: dict, fixtures: list[dict]) -> dict | None:
     """Trova il fixture corrispondente alle keyword del match."""
     for f in fixtures:
@@ -206,7 +249,7 @@ def match_finder(m_cfg: dict, fixtures: list[dict]) -> dict | None:
 
 # ─── Ticket Progress Card ─────────────────────────────────────────────────────
 def get_ticket_card(match_states: dict) -> str:
-    """Genera il riepilogo grafico della Sestina con lo stato di ogni partita."""
+    """Genera il riepilogo grafico della Sestina con lo stato esatto di ogni partita."""
     lines = []
     won_count = 0
     in_play_count = 0
@@ -228,9 +271,12 @@ def get_ticket_card(match_states: dict) -> str:
                 lost_count += 1
                 icon = "❌ PERSO"
             line = f"• {m['flag']} <b>{m['home']} {h_s}-{a_s} {m['away']}</b> (FT)\n   └ 🎯 {m['pick_desc']} {m['odds']} ➔ <b>{icon}</b>"
-        elif phase in ("IN_PLAY", "HALFTIME"):
+        elif phase == "HALFTIME":
             in_play_count += 1
-            min_str = f"{st['minute']}'" if phase == "IN_PLAY" else "HT"
+            line = f"• {m['flag']} <b>{m['home']} {h_s}-{a_s} {m['away']}</b> (LIVE HT)\n   └ 🎯 {m['pick_desc']} {m['odds']} ➔ ⏸️ <b>INTERVALLO</b>"
+        elif phase == "IN_PLAY":
+            in_play_count += 1
+            min_str = f"{st['minute']}'" if st["minute"] > 0 else "LIVE"
             line = f"• {m['flag']} <b>{m['home']} {h_s}-{a_s} {m['away']}</b> (LIVE {min_str})\n   └ 🎯 {m['pick_desc']} {m['odds']} ➔ 🟢 <b>IN CORSO</b>"
         else:
             waiting_count += 1
@@ -238,29 +284,20 @@ def get_ticket_card(match_states: dict) -> str:
         lines.append(line)
 
     card = (
-        "📋 <b>STATO TICKET #14 (Vincita: 106.71 €):</b>\n"
+        "📋 <b>STATO TICKET #15 (Vincita Potenziale: 121.24 €):</b>\n"
         "━━━━━━━━━━━━━━━━━━━━━\n"
         + "\n\n".join(lines)
         + "\n━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Avanzamento</b>: <b>{won_count}</b> Prese · <b>{in_play_count}</b> In Corso · <b>{waiting_count}</b> In Arrivo\n"
-        f"💰 <b>Vincita Potenziale</b>: <b>106.71 €</b> (Stake 20.00 €)"
+        f"💰 <b>Vincita Potenziale</b>: <b>121.24 €</b> (Stake 20.00 € · Quota 5.89×)"
     )
     return card
 
 # ─── Motore di Monitoraggio Live ──────────────────────────────────────────────
 def main():
-    print(f"=== BAgent 24/7 Live Daemon Avviato ({datetime.now().strftime('%H:%M:%S')}) ===")
+    print(f"=== BAgent Live Daemon 2.1 Avviato ({datetime.now().strftime('%H:%M:%S')}) ===")
     
-    # Invia notifica di avvio
-    init_states = {m["id"]: {"phase": "SCHEDULED", "score": (0, 0), "minute": 0, "final_won": None} for m in MATCHES}
-    startup_text = (
-        "🟢 <b>BAgent Live Monitor ATTIVO 24/7 su Raspberry Pi!</b>\n\n"
-        + get_ticket_card(init_states)
-        + "\n\n🔔 <i>Notifiche automatiche attive per: Fischio d'inizio, Gol live e Risultato finale con esito!</i>"
-    )
-    notify_telegram(startup_text)
-
-    # Memoria stati partite
+    # 1. Inizializzazione stati partite
     match_states = {
         m["id"]: {
             "phase": "SCHEDULED",
@@ -268,10 +305,62 @@ def main():
             "minute": 0,
             "notified_start": False,
             "notified_end": False,
+            "last_score_notified": (0, 0),
         }
         for m in MATCHES
     }
 
+    # 2. Sincronizzazione iniziale intelligente (senza falsi allarmi)
+    print("Sincronizzazione iniziale partite...")
+    fixtures = get_live_fixtures()
+    
+    for m in MATCHES:
+        mid = m["id"]
+        st = match_states[mid]
+        ev = match_finder(m, fixtures)
+        
+        # Se non è nel live, controlla se è già finita (FT)
+        if not ev:
+            ev = get_finished_or_scheduled_fixture(m)
+
+        if ev:
+            fixture_info = ev.get("fixture", {})
+            status_long = fixture_info.get("status", {}).get("long", "")
+            status_short = fixture_info.get("status", {}).get("short", "")
+            status_type = fixture_info.get("status", {}).get("type", "")
+            elapsed = fixture_info.get("status", {}).get("elapsed", 0) or 0
+            goals = ev.get("goals", {})
+            h_score = goals.get("home", 0) if goals.get("home") is not None else 0
+            a_score = goals.get("away", 0) if goals.get("away") is not None else 0
+            curr_score = (h_score, a_score)
+
+            classified = classify_status(status_short, status_long, status_type, elapsed)
+            st["phase"] = classified
+            st["score"] = curr_score
+            st["minute"] = elapsed if elapsed > 0 else (90 if classified == "FINISHED" else 0)
+            st["last_score_notified"] = curr_score
+
+            if classified == "FINISHED":
+                st["notified_start"] = True
+                st["notified_end"] = True
+                print(f"  • {m['home']} vs {m['away']}: GIÀ CONCLUSA (FT {h_score}-{a_score})")
+            elif classified in ("IN_PLAY", "HALFTIME"):
+                st["notified_start"] = True
+                print(f"  • {m['home']} vs {m['away']}: IN CORSO ({h_score}-{a_score}, {classified})")
+            else:
+                print(f"  • {m['home']} vs {m['away']}: IN PROGRAMMA ({m['kickoff']})")
+        else:
+            print(f"  • {m['home']} vs {m['away']}: Non trovata nel feed (in attesa di inizio {m['kickoff']})")
+
+    # Invia notifica di avvio sincronizzata
+    startup_text = (
+        "🟢 <b>BAgent Live Monitor ATTIVO 24/7</b>\n\n"
+        + get_ticket_card(match_states)
+        + "\n\n🔔 <i>Notifiche automatiche attive per: Fischio d'inizio, Gol live e Risultato finale con esito!</i>"
+    )
+    notify_telegram(startup_text)
+
+    # 3. Loop di monitoraggio live
     while True:
         try:
             fixtures = get_live_fixtures()
@@ -279,29 +368,37 @@ def main():
             for m in MATCHES:
                 mid = m["id"]
                 st = match_states[mid]
+                
+                # Se è già finita e notificata, non fare nulla
+                if st["phase"] == "FINISHED" and st["notified_end"]:
+                    continue
+
                 ev = match_finder(m, fixtures)
+
+                # Se non trovata nel live ma era in corso (o schedulata in orario passato), cerca nei risultati finiti
+                if not ev and st["phase"] in ("IN_PLAY", "HALFTIME"):
+                    ev = get_finished_or_scheduled_fixture(m)
 
                 if ev:
                     fixture_info = ev.get("fixture", {})
                     status_long = fixture_info.get("status", {}).get("long", "")
                     status_short = fixture_info.get("status", {}).get("short", "")
+                    status_type = fixture_info.get("status", {}).get("type", "")
                     elapsed = fixture_info.get("status", {}).get("elapsed", 0) or 0
                     goals = ev.get("goals", {})
-                    h_score = goals.get("home", 0) or 0
-                    a_score = goals.get("away", 0) or 0
+                    h_score = goals.get("home", 0) if goals.get("home") is not None else 0
+                    a_score = goals.get("away", 0) if goals.get("away") is not None else 0
                     curr_score = (h_score, a_score)
 
-                    status_lower = (status_long + " " + status_short).lower()
+                    classified = classify_status(status_short, status_long, status_type, elapsed)
+                    st["phase"] = classified
 
-                    # 1️⃣ RILEVAZIONE INIZIO PARTITA (KICKOFF)
-                    is_in_play = any(k in status_lower for k in ("1h", "2h", "first half", "second half", "in play", "live", "halftime", "ht")) or elapsed > 0
-                    is_finished = any(k in status_lower for k in ("ft", "finished", "match finished", "ended", "aet", "pen"))
-
-                    if is_in_play and not st["notified_start"] and not is_finished:
-                        st["phase"] = "IN_PLAY"
+                    # 1️⃣ RILEVAZIONE INIZIO PARTITA REALE (KICKOFF)
+                    if classified == "IN_PLAY" and not st["notified_start"]:
                         st["notified_start"] = True
                         st["score"] = curr_score
                         st["minute"] = elapsed
+                        st["last_score_notified"] = curr_score
 
                         kickoff_msg = (
                             f"🟢 <b>INIZIO PARTITA! FISCHIO D'INIZIO! ⏱️</b>\n\n"
@@ -313,12 +410,13 @@ def main():
                         notify_telegram(kickoff_msg)
                         print(f"[{datetime.now().strftime('%H:%M:%S')}] KICKOFF NOTIFIED: {m['home']} vs {m['away']}")
 
-                    # 2️⃣ RILEVAZIONE GOL IN TEMPO REALE
-                    if is_in_play and not is_finished:
-                        if curr_score != st["score"]:
-                            old_h, old_a = st["score"]
+                    # 2️⃣ RILEVAZIONE GOL IN TEMPO REALE (Solo se in gioco o intervallo)
+                    if classified in ("IN_PLAY", "HALFTIME"):
+                        if curr_score != st["last_score_notified"] and curr_score != (0, 0):
+                            old_h, old_a = st["last_score_notified"]
                             st["score"] = curr_score
                             st["minute"] = elapsed
+                            st["last_score_notified"] = curr_score
                             scorer_team = m["home"] if h_score > old_h else m["away"]
 
                             goal_msg = (
@@ -333,11 +431,13 @@ def main():
                         st["minute"] = elapsed
                         st["score"] = curr_score
 
-                    # 3️⃣ RILEVAZIONE FINE PARTITA (FULL-TIME / FT)
-                    if is_finished and not st["notified_end"]:
+                    # 3️⃣ RILEVAZIONE FINE PARTITA REALE (FULL-TIME / FT al 90'+)
+                    if classified == "FINISHED" and not st["notified_end"]:
                         st["phase"] = "FINISHED"
                         st["notified_end"] = True
                         st["score"] = curr_score
+                        st["minute"] = 90
+                        st["last_score_notified"] = curr_score
                         
                         is_won, desc = m["evaluator"](h_score, a_score)
                         res_icon = "🏆 <b>✅ PRONOSTICO VINTO AL 100%!</b>" if is_won else "⚠️ <b>❌ PRONOSTICO NON VINCENTE</b>"

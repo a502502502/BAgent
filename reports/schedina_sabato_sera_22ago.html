@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAgent — Ticket #15: Quaterna d'Acciaio Serale (22 Agosto 2026)</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --accent: #238636;
+            --gold: #f1e05a;
+            --text: #c9d1d9;
+            --text-white: #ffffff;
+            --blue: #58a6ff;
+            --green: #3fb950;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 680px;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: var(--text-white);
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #1c2128, #161b22);
+            border: 1px solid #484f58;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .summary-label {
+            font-size: 12px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .summary-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-top: 4px;
+        }
+        .summary-value.highlight {
+            color: var(--gold);
+        }
+        .event-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .event-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-2px);
+        }
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #8b949e;
+        }
+        .match-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 8px;
+        }
+        .pick-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(88, 166, 255, 0.08);
+            border-left: 4px solid var(--blue);
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        .pick-name {
+            font-weight: 600;
+            color: var(--blue);
+            font-size: 15px;
+        }
+        .pick-odds {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-white);
+            background-color: var(--card-bg);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        .motivation {
+            font-size: 13px;
+            color: #8b949e;
+            line-height: 1.4;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: #6e7681;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="badge">TICKET #15 — UFFICIALE NETWIN</span>
+            <h1>🛡️ QUATERNA D'ACCIAIO SERALE</h1>
+            <p style="margin: 0; color: #8b949e; font-size: 14px;">Sabato 22 Agosto 2026 — Protocollo di Continuità (4 Eventi)</p>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-item">
+                <span class="summary-label">Importo Giocato</span>
+                <span class="summary-value">20.00 €</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Quota Totale Base</span>
+                <span class="summary-value">5.89×</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Bonus Netwin</span>
+                <span class="summary-value">+3.53 €</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Vincita Potenziale</span>
+                <span class="summary-value highlight">121.24 € 💰</span>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-header">
+                <span>🇮🇹 Italia | Serie A</span>
+                <span>⏱️ 18:30 IT</span>
+            </div>
+            <div class="match-title">Inter vs Monza</div>
+            <div class="pick-row">
+                <span class="pick-name">🎯 Lautaro (o Sostituto) Segna o Palo/Traversa</span>
+                <span class="pick-odds">@ 1.67</span>
+            </div>
+            <div class="motivation">
+                💡 <b>Motivazione Tattica</b>: Lautaro è il perno offensivo nerazzurro a San Siro (xG 0.78). Copertura totale con la clausola Netwin Duo (valido anche gol/legno del sostituto Taremi/Arnautovic).
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-header">
+                <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inghilterra | Premier League</span>
+                <span>⏱️ 18:30 IT</span>
+            </div>
+            <div class="match-title">Brentford vs Tottenham</div>
+            <div class="pick-row">
+                <span class="pick-name">🚩 Over 4.5 Corner Brentford (Squadra 1)</span>
+                <span class="pick-odds">@ 1.50</span>
+            </div>
+            <div class="motivation">
+                💡 <b>Motivazione Tattica</b>: Il Brentford in casa attacca con cross continui e palle inattive (media 5.4 corner interni). Contro la difesa alta del Tottenham, i corner per le 'Bees' sono matematici.
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-header">
+                <span>🇫🇷 Francia | Ligue 1</span>
+                <span>⏱️ 20:45 IT</span>
+            </div>
+            <div class="match-title">Tolosa vs Lione</div>
+            <div class="pick-row">
+                <span class="pick-name">⚽ MultiGol 1-3 Casa (Tolosa)</span>
+                <span class="pick-odds">@ 1.32</span>
+            </div>
+            <div class="motivation">
+                💡 <b>Motivazione Tattica</b>: Il Tolosa ha segnato in 8 delle ultime 8 partite casalinghe. Il Lione concede sistematicamente in trasferta ma la forbice 1-3 gol protegge al 100%.
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-header">
+                <span>🇪🇸 Spagna | LaLiga</span>
+                <span>⏱️ 21:30 IT</span>
+            </div>
+            <div class="match-title">Espanyol vs Real Madrid</div>
+            <div class="pick-row">
+                <span class="pick-name">👑 Doppia Chance X2 + Over 2.5 Gol</span>
+                <span class="pick-odds">@ 1.78</span>
+            </div>
+            <div class="motivation">
+                💡 <b>Motivazione Tattica</b>: Real Madrid con Mbappé e Vinicius devastante negli spazi contro la neopromossa Espanyol. X2 copre qualsiasi pareggio con match ad almeno 3 gol (1-2, 0-3, 2-2, 1-3).
+            </div>
+        </div>
+
+        <div class="footer">
+            BAgent Sports Engine &copy; 2026 — Certificato BetGuard Validator & Live Tracker Telegram
+        </div>
+    </div>
+</body>
+</html>
