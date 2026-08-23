@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 """
 BAgent Corner & Live Tracker (Domenica 23 Agosto 2026)
-Invia notifiche Telegram IMMEDIATAMENTE per:
-1. OGNI SINGOLO CORNER guadagnato dalle squadre target
-2. Target raggiunto (Over centrato!)
-3. Riepilogo periodico a intervalli regolari
+Invia notifiche Telegram IMMEDIATAMENTE per OGNI SINGOLO CORNER
+con Minuto di Gioco e Minuti Rimanenti al fischio finale!
 """
 
 from __future__ import annotations
@@ -225,6 +223,16 @@ def get_corner_progress_bar(current: int, target: int) -> str:
     bar = "■" * filled + "□" * max(0, target - filled)
     return f"[{bar}] {current}/{target}"
 
+def get_remaining_time_str(elapsed: int, phase: str) -> str:
+    if phase == "HALFTIME":
+        return "45' rimasti (2° Tempo)"
+    if phase == "FINISHED":
+        return "Conclusa"
+    if elapsed <= 0:
+        return "90' da giocare"
+    left_min = max(0, 90 - elapsed)
+    return f"~{left_min}' rimanenti"
+
 def get_ticket_card(match_states: dict) -> str:
     lines = []
     won_count = 0
@@ -240,6 +248,7 @@ def get_ticket_card(match_states: dict) -> str:
         c_a = st.get("c_away", 0)
         c_tot = c_h + c_a
         elapsed = st.get("minute", 0)
+        rem_str = get_remaining_time_str(elapsed, phase)
         
         if m["target_type"] == "HOME":
             curr_tracked = c_h
@@ -260,10 +269,10 @@ def get_ticket_card(match_states: dict) -> str:
             icon = f"❌ NON RAGGIUNTO ({curr_tracked}/{target})"
         elif phase == "HALFTIME":
             in_play_count += 1
-            icon = f"⏸️ INTERVALLO ({prog_bar})"
+            icon = f"⏸️ INTERVALLO ({prog_bar} · 45' al 90')"
         elif phase == "IN_PLAY":
             in_play_count += 1
-            icon = f"🟢 LIVE {elapsed}' ({prog_bar})"
+            icon = f"🟢 LIVE {elapsed}' ({prog_bar} · {rem_str})"
         else:
             waiting_count += 1
             icon = f"⏳ IN ARRIVO (Target: {target})"
@@ -284,7 +293,7 @@ def get_ticket_card(match_states: dict) -> str:
     return card
 
 def main():
-    print(f"=== BAgent Corner Live Monitor 3.0 Avviato ({datetime.now().strftime('%H:%M:%S')}) ===")
+    print(f"=== BAgent Corner Live Monitor 3.1 Avviato ({datetime.now().strftime('%H:%M:%S')}) ===")
     
     match_states = {
         m["id"]: {
@@ -300,7 +309,7 @@ def main():
         for m in MATCHES
     }
 
-    # Primo invio live istantaneo
+    # Sincronizzazione iniziale
     fixtures = get_live_fixtures()
     for m in MATCHES:
         mid = m["id"]
@@ -328,7 +337,7 @@ def main():
                     match_states[mid]["target_hit"] = True
 
     startup_card = (
-        "🟢 <b>AGGIORNAMENTO LIVE CORNER IN TEMPO REALE</b> ⏱️\n\n"
+        "🟢 <b>AGGIORNAMENTO MINUTAGGIO & CORNER IN TEMPO REALE</b> ⏱️\n\n"
         + get_ticket_card(match_states)
     )
     notify_telegram(startup_card)
@@ -380,33 +389,35 @@ def main():
                         desc_c = f"Corner Totali: {c_tot} ({c_h}-{c_a})"
 
                     target = m["target_val"]
+                    rem_min = max(0, 90 - elapsed)
 
-                    # 1️⃣ NOTIFICA TARGET RAGGIUNTO (VITTORIA!)
+                    # 1️⃣ NOTIFICA TARGET RAGGIUNTO (VITTORIA LIVE!)
                     if curr_tracked >= target and not st["target_hit"]:
                         st["target_hit"] = True
                         target_hit_msg = (
                             f"🎉 <b>TARGET CORNER RAGGIUNTO & VINTO! 🏁✅</b>\n\n"
-                            f"{m['flag']} <b>{m['home']} vs {m['away']}</b> ({elapsed}')\n"
-                            f"🚩 <b>{desc_c}</b> (Target {target} RAGGIUNTO!)\n"
-                            f"🎯 Pronostico: <b>{m['pick_desc']} {m['odds']} ➔ PRESO!</b> 💰\n\n"
+                            f"{m['flag']} <b>{m['home']} vs {m['away']}</b> (⏱️ <b>{elapsed}'</b> · Quota {m['odds']})\n"
+                            f"🚩 <b>{desc_c}</b> (Target {target} RAGGIUNTO al {elapsed}')\n"
+                            f"🎯 Pronostico: <b>{m['pick_desc']} ➔ PRESO CON SUCCESSO!</b> 💰\n\n"
                             + get_ticket_card(match_states)
                         )
                         notify_telegram(target_hit_msg)
-                        print(f"[{datetime.now().strftime('%H:%M:%S')}] TARGET HIT: {m['home']} vs {m['away']} ({curr_tracked}/{target})")
+                        print(f"[{datetime.now().strftime('%H:%M:%S')}] TARGET HIT: {m['home']} vs {m['away']} ({curr_tracked}/{target}) at min {elapsed}")
 
-                    # 2️⃣ NOTIFICA AD OGNI SINGOLO NUOVO CORNER
+                    # 2️⃣ NOTIFICA AD OGNI SINGOLO NUOVO CORNER CON MINUTO & TEMPO RIMASTO
                     elif curr_tracked > st["last_c_notified"] and classified in ("IN_PLAY", "HALFTIME"):
                         st["last_c_notified"] = curr_tracked
                         left_c = max(0, target - curr_tracked)
                         corner_alert_msg = (
-                            f"🚩 <b>CORNER UPDATE! ({elapsed}')</b>\n\n"
+                            f"🚩 <b>CORNER UPDATE! ⏱️ Minuto {elapsed}'</b> (~{rem_min}' al 90')\n\n"
                             f"{m['flag']} <b>{m['home']} vs {m['away']}</b>\n"
                             f"📊 <b>{desc_c}</b>\n"
-                            f"🎯 Nostro Pick: <b>{m['pick_desc']} {m['odds']}</b>\n"
-                            f"📈 Progresso: {get_corner_progress_bar(curr_tracked, target)} (Mancano {left_c} corner!)"
+                            f"🎯 Obiettivo: <b>{m['pick_desc']} {m['odds']}</b>\n"
+                            f"⏳ <i>Mancano <b>{left_c} corner</b> nei restanti ~{rem_min} minuti di gara!</i>\n"
+                            f"📈 Progresso: {get_corner_progress_bar(curr_tracked, target)}"
                         )
                         notify_telegram(corner_alert_msg)
-                        print(f"[{datetime.now().strftime('%H:%M:%S')}] CORNER UPDATE: {m['home']} vs {m['away']} ({curr_tracked}/{target})")
+                        print(f"[{datetime.now().strftime('%H:%M:%S')}] CORNER UPDATE: {m['home']} vs {m['away']} ({curr_tracked}/{target}) min {elapsed}")
 
                     # 3️⃣ NOTIFICA FINE PARTITA (FT)
                     if classified == "FINISHED" and not st["notified_end"]:
@@ -414,7 +425,7 @@ def main():
                         is_won = curr_tracked >= target
                         res_icon = "🏆 <b>✅ PRONOSTICO CORNER VINTO!</b>" if is_won else "⚠️ <b>❌ NON RAGGIUNTO</b>"
                         ft_msg = (
-                            f"🏁 <b>FISCHIO FINALE! RISULTATO CORNER DEFINITIVO</b>\n\n"
+                            f"🏁 <b>FISCHIO FINALE (90'+)! RISULTATO CORNER DEFINITIVO</b>\n\n"
                             f"{m['flag']} <b>{m['home']} vs {m['away']}</b> (FT)\n"
                             f"🚩 <b>{desc_c}</b>\n"
                             f"🎯 Nostro Pick: <b>{m['pick_desc']} {m['odds']}</b>\n"
@@ -426,7 +437,7 @@ def main():
             # Riepilogo periodico ogni 15 minuti
             if time.time() - last_periodic_time > 900:
                 last_periodic_time = time.time()
-                notify_telegram("📊 <b>AGGIORNAMENTO PERIODICO SCHEDINE</b>\n\n" + get_ticket_card(match_states))
+                notify_telegram("📊 <b>AGGIORNAMENTO PERIODICO TICKET #19</b>\n\n" + get_ticket_card(match_states))
 
         except Exception as e:
             print(f"[{datetime.now().strftime('%H:%M:%S')}] Polling error:", e)
