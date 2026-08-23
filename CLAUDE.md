@@ -627,15 +627,23 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 5. [18:30] **Frosinone vs Juventus** (ID: 5866) ➔ **Over 4.5 Corner Squadra 2 (Juventus)** @1.33
 6. [21:30] **Elche vs FC Barcellona** (ID: 13180) ➔ **Over 5.5 Corner Squadra 2 (Barcellona)** @1.62
 
-### 🥊 Ticket #20: Cinquina Duelli d'Acciaio & Falli 1v1 (100% Micro-Statistiche — Quota ~6.95×)
-* **Eventi**: 5 | **Quota Base**: 5.88× | **Mega Bonus Netwin (5 Eventi)**: +18% | **Quota con Bonus**: **`~6.95×`** 💰
-* **Stato**: Pronto e Allineato per Domenica 23 Agosto ⏱️
-1. [15:00] **Brighton vs Aston Villa** ➔ **João Pedro Over 1.5 Falli Subiti** @1.35
-2. [15:00] **Manchester City vs Bournemouth** ➔ **Jack Grealish Over 1.5 Falli Subiti** @1.45
-3. [17:30] **Newcastle vs Liverpool** ➔ **Bruno Guimarães Over 1.5 Falli Commessi** @1.48
-4. [18:30] **Frosinone vs Juventus** ➔ **Kenan Yildiz Over 1.5 Falli Subiti** @1.45
-5. [21:30] **Elche vs FC Barcellona** ➔ **Lamine Yamal Over 1.5 Falli Subiti** @1.40
+### 🏆 Ticket #20: Cinquina Master Mix Ufficiale Netwin (Stake 20.00 € ➔ Pot. 113.65 €)
+* **Stake**: 20.00 € | **Quota Base**: 5.36× | **Bonus Netwin**: +6.43 € | **Vincita Potenziale**: **`113.65 €`** 💰
+* **Stato**: In Giocata / 5 Selezioni Aperte ⏱️
+1. [15:00] **Brighton vs Aston Villa** ➔ **MultiGol 1-3 Ospite (Aston Villa)** @1.43
+2. [15:00] **Angers vs Lilla** ➔ **X2 + MultiGol 1-4** @1.45
+3. [17:00] **Atlético Madrid vs Villarreal** ➔ **Over 8.5 Tiri Totali Squadra 2 (Villarreal)** @1.33
+4. [20:45] **Rennes vs PSG** ➔ **Ospite Segna 2° Tempo (PSG)** @1.35
+5. [21:30] **Elche vs FC Barcellona** ➔ **2 + Over 1.5 Gol (Barcellona)** @1.44
+
+### ⚔️ Ticket #21: Quaterna Sanzioni, Falli & Protezioni (Stake 13.00 € ➔ Pot. 77.93 €)
+* **Stake**: 13.00 € | **Quota Base**: 5.82× | **Bonus Netwin**: +2.27 € | **Vincita Potenziale**: **`77.93 €`** 💰
+* **Stato**: Registrato / In Partenza dalle 17:30 ⏱️
+1. [17:30] **Newcastle vs Liverpool** ➔ **Over 3.5 Cartellini Totali Match** @1.48
+2. [18:30] **Venezia vs Lecce** ➔ **1X + Under 3.5 Gol** @1.61
+3. [18:30] **Frosinone vs Juventus** ➔ **X2 + MultiGol 2-5 : SI** @1.38
+4. [20:45] **Torino vs Milan** ➔ **Over 10.5 Falli Commessi Squadra 2 (Milan)** @1.77
 
 ---
 
-*Ultimo aggiornamento: 23 agosto 2026 ore 00:45 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 23 agosto 2026 ore 16:09 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
