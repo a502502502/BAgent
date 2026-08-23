@@ -595,9 +595,9 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 * **Stake**: 20.00 € | **Quota Base**: 5.89× | **Bonus Netwin**: +3.53 € | **Vincita Potenziale**: **121.24 €**
 * **Stato**: In Corso (4/4 aperte) ⏱️
 1. [18:30] **Inter vs Monza** ➔ **Lautaro Martinez (o Sost.) Segna o Palo/Trav.** @1.67
-2. [18:30] **Brentford vs Tottenham** ➔ **Over 4.5 Corner Brentford (Sq.1)** @1.50
+2. [18:30] **Brentford vs Tottenham** ➔ **Over 4.5 Corner Brentford (Sq.1)** @1.49
 3. [20:45] **Tolosa vs Lione** ➔ **MultiGol 1-3 Casa (Tolosa)** @1.32
-4. [21:30] **Espanyol vs Real Madrid** ➔ **X2 + Over 2.5 Gol** @1.78
+4. [21:30] **Espanyol vs Real Madrid** ➔ **Over 2.5 Cartellini Totali** @1.23
 
 ### 💎 Ticket #16: La Doppia d'Acciaio (Quota 2.60×)
 * **Quota Base**: 2.60× | **Stato**: In Corso ⏱️
@@ -615,4 +615,27 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Ultimo aggiornamento: 22 agosto 2026 ore 19:23 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+## Sessione 23 Agosto 2026 (Domenica) — Ticket Ufficiale Master su Netwin
+
+### 🚩 Ticket #19: Sestina Corner d'Acciaio Ufficiale Netwin (Quota 8.44× ➔ Pot. 255.97 €)
+* **Stake**: 30.00 € | **Quota Base**: 8.44× | **Bonus Netwin**: +2.54 € | **Vincita Potenziale**: **`255.97 €`** 💰
+* **Stato**: In Giocata / Apertura Domenica 23 Agosto ⏱️
+1. [15:00] **Brighton vs Aston Villa** (ID: 1702) ➔ **Over 7.5 Corner Totali** @1.24
+2. [15:00] **Manchester City vs Bournemouth** (ID: 4117) ➔ **Over 6.5 Corner Squadra 1 (City)** @1.70
+3. [17:00] **Atlético Madrid vs Villarreal** (ID: 3385) ➔ **Over 7.5 Corner Totali Match** @1.24
+4. [17:30] **Newcastle vs Liverpool** (ID: 6915) ➔ **Over 9.5 Corner Totali Match** @1.50
+5. [18:30] **Frosinone vs Juventus** (ID: 5866) ➔ **Over 4.5 Corner Squadra 2 (Juventus)** @1.33
+6. [21:30] **Elche vs FC Barcellona** (ID: 13180) ➔ **Over 5.5 Corner Squadra 2 (Barcellona)** @1.62
+
+### 🥊 Ticket #20: Cinquina Duelli d'Acciaio & Falli 1v1 (100% Micro-Statistiche — Quota ~6.95×)
+* **Eventi**: 5 | **Quota Base**: 5.88× | **Mega Bonus Netwin (5 Eventi)**: +18% | **Quota con Bonus**: **`~6.95×`** 💰
+* **Stato**: Pronto e Allineato per Domenica 23 Agosto ⏱️
+1. [15:00] **Brighton vs Aston Villa** ➔ **João Pedro Over 1.5 Falli Subiti** @1.35
+2. [15:00] **Manchester City vs Bournemouth** ➔ **Jack Grealish Over 1.5 Falli Subiti** @1.45
+3. [17:30] **Newcastle vs Liverpool** ➔ **Bruno Guimarães Over 1.5 Falli Commessi** @1.48
+4. [18:30] **Frosinone vs Juventus** ➔ **Kenan Yildiz Over 1.5 Falli Subiti** @1.45
+5. [21:30] **Elche vs FC Barcellona** ➔ **Lamine Yamal Over 1.5 Falli Subiti** @1.40
+
+---
+
+*Ultimo aggiornamento: 23 agosto 2026 ore 00:45 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
