@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-BAgent Corner & Foul Live Daemon (Domenica 23 Agosto 2026)
-Monitora in tempo reale ESCLUSIVAMENTE i Calci d'Angolo per il Ticket #19 (e i Falli).
-Zero spam di gol o notifiche inutili: solo avanzamento corner, alert traguardi e vittoria del target!
-
-Uso: python3 scripts/night_live_daemon.py
+BAgent Corner & Live Tracker (Domenica 23 Agosto 2026)
+Invia notifiche Telegram IMMEDIATAMENTE per:
+1. OGNI SINGOLO CORNER guadagnato dalle squadre target
+2. Target raggiunto (Over centrato!)
+3. Riepilogo periodico a intervalli regolari
 """
 
 from __future__ import annotations
@@ -15,7 +15,6 @@ import os
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Optional, Any
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -42,7 +41,6 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
 API_FOOTBALL_KEY = os.getenv("API_FOOTBALL_KEY", "")
 API_FOOTBALL_HOST = "v3.football.api-sports.io"
 
-# ─── Configurazione Match Ticket #19 (Domenica 23 Agosto 2026 - Corner) ───────
 MATCHES = [
     {
         "id": "brighton_villa",
@@ -136,10 +134,8 @@ MATCHES = [
     },
 ]
 
-# ─── Telegram Helper ──────────────────────────────────────────────────────────
 def notify_telegram(msg: str):
     if not TELEGRAM_TOKEN:
-        print("Telegram token non configurato.")
         return
     try:
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
@@ -151,7 +147,6 @@ def notify_telegram(msg: str):
     except Exception as e:
         print("Telegram send error:", e)
 
-# ─── Classificatore di Stato ──────────────────────────────────────────────────
 def classify_status(status_short: str, status_long: str, status_type: str = "", elapsed: int = 0) -> str:
     s_short = (status_short or "").strip().upper()
     s_long = (status_long or "").strip().lower()
@@ -171,12 +166,9 @@ def classify_status(status_short: str, status_long: str, status_type: str = "", 
         return "CANCELLED"
     return "SCHEDULED"
 
-# ─── API-Football Live & Statistics ───────────────────────────────────────────
-def get_live_fixtures_and_stats() -> list[dict]:
-    """Recupera le partite live con le statistiche dei corner da API-Football."""
+def get_live_fixtures() -> list[dict]:
     if not API_FOOTBALL_KEY:
         return []
-    
     headers = {
         "x-rapidapi-host": API_FOOTBALL_HOST,
         "x-rapidapi-key": API_FOOTBALL_KEY,
@@ -191,7 +183,6 @@ def get_live_fixtures_and_stats() -> list[dict]:
     return []
 
 def get_fixture_corners(fixture_id: int) -> tuple[int, int]:
-    """Recupera i corner precisi (home, away) per un dato fixture ID."""
     if not API_FOOTBALL_KEY or not fixture_id:
         return 0, 0
     headers = {
@@ -229,7 +220,6 @@ def match_finder(m_cfg: dict, fixtures: list[dict]) -> dict | None:
             return f
     return None
 
-# ─── Ticket Progress Card (100% Corner Focus) ─────────────────────────────────
 def get_corner_progress_bar(current: int, target: int) -> str:
     filled = min(current, target)
     bar = "■" * filled + "□" * max(0, target - filled)
@@ -244,13 +234,13 @@ def get_ticket_card(match_states: dict) -> str:
 
     for m in MATCHES:
         mid = m["id"]
-        st = match_states.get(mid, {"phase": "SCHEDULED", "c_home": 0, "c_away": 0, "target_hit": False})
+        st = match_states.get(mid, {"phase": "SCHEDULED", "c_home": 0, "c_away": 0, "target_hit": False, "minute": 0})
         phase = st["phase"]
         c_h = st.get("c_home", 0)
         c_a = st.get("c_away", 0)
         c_tot = c_h + c_a
+        elapsed = st.get("minute", 0)
         
-        # Conteggio rilevante
         if m["target_type"] == "HOME":
             curr_tracked = c_h
         elif m["target_type"] == "AWAY":
@@ -264,16 +254,19 @@ def get_ticket_card(match_states: dict) -> str:
 
         if is_won:
             won_count += 1
-            icon = "✅ TARGET PRESO!"
+            icon = f"✅ PRESO! ({curr_tracked}/{target})"
         elif phase == "FINISHED":
             lost_count += 1
-            icon = "❌ NON RAGGIUNTO"
-        elif phase in ("IN_PLAY", "HALFTIME"):
+            icon = f"❌ NON RAGGIUNTO ({curr_tracked}/{target})"
+        elif phase == "HALFTIME":
             in_play_count += 1
-            icon = f"🟢 IN CORSO ({prog_bar})"
+            icon = f"⏸️ INTERVALLO ({prog_bar})"
+        elif phase == "IN_PLAY":
+            in_play_count += 1
+            icon = f"🟢 LIVE {elapsed}' ({prog_bar})"
         else:
             waiting_count += 1
-            icon = f"⏳ IN ARRIVO (Target: {target} corner)"
+            icon = f"⏳ IN ARRIVO (Target: {target})"
 
         lines.append(
             f"• {m['flag']} <b>{m['home']} vs {m['away']}</b> ({m['kickoff']})\n"
@@ -281,7 +274,7 @@ def get_ticket_card(match_states: dict) -> str:
         )
 
     card = (
-        "📋 <b>STATO TICKET #19 (SESTINA CORNER · Vincita: 255.97 €):</b>\n"
+        "📋 <b>STATO LIVE TICKET #19 (Vincita: 255.97 €):</b>\n"
         "━━━━━━━━━━━━━━━━━━━━━\n"
         + "\n\n".join(lines)
         + "\n━━━━━━━━━━━━━━━━━━━━━\n"
@@ -290,9 +283,8 @@ def get_ticket_card(match_states: dict) -> str:
     )
     return card
 
-# ─── Motore di Monitoraggio Live Corner ───────────────────────────────────────
 def main():
-    print(f"=== BAgent Corner Live Monitor Avviato ({datetime.now().strftime('%H:%M:%S')}) ===")
+    print(f"=== BAgent Corner Live Monitor 3.0 Avviato ({datetime.now().strftime('%H:%M:%S')}) ===")
     
     match_states = {
         m["id"]: {
@@ -303,21 +295,49 @@ def main():
             "target_hit": False,
             "notified_start": False,
             "notified_end": False,
-            "last_c_notified": 0,
+            "last_c_notified": -1,
         }
         for m in MATCHES
     }
 
-    startup_text = (
-        "🟢 <b>BAgent Corner & Foul Monitor ATTIVO 24/7</b>\n\n"
-        "🎯 <i>Modalità Attiva: Aggiornamenti ESCLUSIVI sui Calci d'Angolo e Duelli (Zero Spam di Gol)!</i>\n\n"
+    # Primo invio live istantaneo
+    fixtures = get_live_fixtures()
+    for m in MATCHES:
+        mid = m["id"]
+        ev = match_finder(m, fixtures)
+        if ev:
+            fid = ev.get("fixture", {}).get("id")
+            elapsed = ev.get("fixture", {}).get("status", {}).get("elapsed", 0) or 0
+            st_short = ev.get("fixture", {}).get("status", {}).get("short", "")
+            st_long = ev.get("fixture", {}).get("status", {}).get("long", "")
+            match_states[mid]["phase"] = classify_status(st_short, st_long, elapsed=elapsed)
+            match_states[mid]["minute"] = elapsed
+            if fid:
+                c_h, c_a = get_fixture_corners(fid)
+                match_states[mid]["c_home"] = c_h
+                match_states[mid]["c_away"] = c_a
+                
+                if m["target_type"] == "HOME":
+                    curr_c = c_h
+                elif m["target_type"] == "AWAY":
+                    curr_c = c_a
+                else:
+                    curr_c = c_h + c_a
+                match_states[mid]["last_c_notified"] = curr_c
+                if curr_c >= m["target_val"]:
+                    match_states[mid]["target_hit"] = True
+
+    startup_card = (
+        "🟢 <b>AGGIORNAMENTO LIVE CORNER IN TEMPO REALE</b> ⏱️\n\n"
         + get_ticket_card(match_states)
     )
-    notify_telegram(startup_text)
+    notify_telegram(startup_card)
+
+    last_periodic_time = time.time()
 
     while True:
         try:
-            fixtures = get_live_fixtures_and_stats()
+            fixtures = get_live_fixtures()
 
             for m in MATCHES:
                 mid = m["id"]
@@ -340,7 +360,6 @@ def main():
                     st["phase"] = classified
                     st["minute"] = elapsed
 
-                    # Recupera i corner esatti
                     if fid:
                         c_h, c_a = get_fixture_corners(fid)
                         st["c_home"] = c_h
@@ -362,47 +381,34 @@ def main():
 
                     target = m["target_val"]
 
-                    # 1️⃣ NOTIFICA KICKOFF
-                    if classified == "IN_PLAY" and not st["notified_start"]:
-                        st["notified_start"] = True
-                        kickoff_msg = (
-                            f"🟢 <b>INIZIO PARTITA! FISCHIO D'INIZIO! ⏱️</b>\n\n"
-                            f"{m['flag']} <b>{m['home']} vs {m['away']}</b> ({m['league']})\n"
-                            f"🎯 Nostro Obiettivo: <b>{m['pick_desc']} {m['odds']}</b> (Target: {target} corner)\n\n"
-                            + get_ticket_card(match_states)
-                        )
-                        notify_telegram(kickoff_msg)
-                        print(f"[{datetime.now().strftime('%H:%M:%S')}] KICKOFF: {m['home']} vs {m['away']}")
-
-                    # 2️⃣ NOTIFICA TARGET RAGGIUNTO (Esito Vincente Live!)
+                    # 1️⃣ NOTIFICA TARGET RAGGIUNTO (VITTORIA!)
                     if curr_tracked >= target and not st["target_hit"]:
                         st["target_hit"] = True
                         target_hit_msg = (
                             f"🎉 <b>TARGET CORNER RAGGIUNTO & VINTO! 🏁✅</b>\n\n"
                             f"{m['flag']} <b>{m['home']} vs {m['away']}</b> ({elapsed}')\n"
                             f"🚩 <b>{desc_c}</b> (Target {target} RAGGIUNTO!)\n"
-                            f"🎯 Pronostico: <b>{m['pick_desc']} {m['odds']} ➔ PRESO AL 100%!</b> 💰\n\n"
+                            f"🎯 Pronostico: <b>{m['pick_desc']} {m['odds']} ➔ PRESO!</b> 💰\n\n"
                             + get_ticket_card(match_states)
                         )
                         notify_telegram(target_hit_msg)
                         print(f"[{datetime.now().strftime('%H:%M:%S')}] TARGET HIT: {m['home']} vs {m['away']} ({curr_tracked}/{target})")
 
-                    # 3️⃣ NOTIFICA AGGIORNAMENTO CORNER (Ogni nuovo corner significativo)
+                    # 2️⃣ NOTIFICA AD OGNI SINGOLO NUOVO CORNER
                     elif curr_tracked > st["last_c_notified"] and classified in ("IN_PLAY", "HALFTIME"):
                         st["last_c_notified"] = curr_tracked
                         left_c = max(0, target - curr_tracked)
-                        if not st["target_hit"] and left_c <= 3:
-                            corner_alert_msg = (
-                                f"🚩 <b>CORNER ALERT! ({elapsed}')</b>\n\n"
-                                f"{m['flag']} <b>{m['home']} vs {m['away']}</b>\n"
-                                f"📊 <b>{desc_c}</b>\n"
-                                f"⏳ <i>Mancano solo <b>{left_c} corner</b> per centrare la quota {m['odds']}!</i>\n"
-                                f"📈 Progresso: {get_corner_progress_bar(curr_tracked, target)}"
-                            )
-                            notify_telegram(corner_alert_msg)
-                            print(f"[{datetime.now().strftime('%H:%M:%S')}] CORNER UPDATE: {m['home']} vs {m['away']} ({curr_tracked}/{target})")
+                        corner_alert_msg = (
+                            f"🚩 <b>CORNER UPDATE! ({elapsed}')</b>\n\n"
+                            f"{m['flag']} <b>{m['home']} vs {m['away']}</b>\n"
+                            f"📊 <b>{desc_c}</b>\n"
+                            f"🎯 Nostro Pick: <b>{m['pick_desc']} {m['odds']}</b>\n"
+                            f"📈 Progresso: {get_corner_progress_bar(curr_tracked, target)} (Mancano {left_c} corner!)"
+                        )
+                        notify_telegram(corner_alert_msg)
+                        print(f"[{datetime.now().strftime('%H:%M:%S')}] CORNER UPDATE: {m['home']} vs {m['away']} ({curr_tracked}/{target})")
 
-                    # 4️⃣ NOTIFICA FINE PARTITA (FT)
+                    # 3️⃣ NOTIFICA FINE PARTITA (FT)
                     if classified == "FINISHED" and not st["notified_end"]:
                         st["notified_end"] = True
                         is_won = curr_tracked >= target
@@ -416,12 +422,16 @@ def main():
                             + get_ticket_card(match_states)
                         )
                         notify_telegram(ft_msg)
-                        print(f"[{datetime.now().strftime('%H:%M:%S')}] FULL-TIME: {m['home']} vs {m['away']} -> {res_icon}")
+
+            # Riepilogo periodico ogni 15 minuti
+            if time.time() - last_periodic_time > 900:
+                last_periodic_time = time.time()
+                notify_telegram("📊 <b>AGGIORNAMENTO PERIODICO SCHEDINE</b>\n\n" + get_ticket_card(match_states))
 
         except Exception as e:
             print(f"[{datetime.now().strftime('%H:%M:%S')}] Polling error:", e)
 
-        time.sleep(25)
+        time.sleep(20)
 
 if __name__ == "__main__":
     main()
