@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
-BAgent Corner & Live Tracker (Domenica 23 Agosto 2026)
-Invia notifiche Telegram IMMEDIATAMENTE per OGNI SINGOLO CORNER
-con Minuto di Gioco e Minuti Rimanenti al fischio finale!
+BAgent Corner & Live Tracker (Domenica 23 Agosto 2026 - v3.5 Ultra-Reattivo)
+Garantisce notifiche immediate su OGNI NUOVO CORNER con:
+- Protezione contro cali a zero temporanei dell'API (monotonia crescente)
+- Minuto di gioco e minuti rimanenti al 90'
+- Notifica dedicata di Intervallo (HT) e Fine Partita (FT)
 """
 
 from __future__ import annotations
@@ -14,8 +16,8 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
+# Unbuffered output
+sys.stdout.reconfigure(line_buffering=True)
 
 # Carica .env
 env_path = Path(__file__).resolve().parent.parent / ".env"
@@ -139,11 +141,11 @@ def notify_telegram(msg: str):
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
         r = requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": msg, "parse_mode": "HTML"}, timeout=10)
         if r.status_code == 200:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Telegram notifica inviata con successo!")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Telegram notifica inviata con successo!", flush=True)
         else:
-            print(f"Telegram warning: status {r.status_code} - {r.text[:80]}")
+            print(f"Telegram warning: status {r.status_code} - {r.text[:80]}", flush=True)
     except Exception as e:
-        print("Telegram send error:", e)
+        print("Telegram send error:", e, flush=True)
 
 def classify_status(status_short: str, status_long: str, status_type: str = "", elapsed: int = 0) -> str:
     s_short = (status_short or "").strip().upper()
@@ -177,12 +179,12 @@ def get_live_fixtures() -> list[dict]:
         if r.status_code == 200:
             return r.json().get("response", [])
     except Exception as e:
-        print("API-Football live error:", e)
+        print("API-Football live error:", e, flush=True)
     return []
 
-def get_fixture_corners(fixture_id: int) -> tuple[int, int]:
+def get_fixture_corners(fixture_id: int) -> tuple[Optional[int], Optional[int]]:
     if not API_FOOTBALL_KEY or not fixture_id:
-        return 0, 0
+        return None, None
     headers = {
         "x-rapidapi-host": API_FOOTBALL_HOST,
         "x-rapidapi-key": API_FOOTBALL_KEY,
@@ -193,6 +195,7 @@ def get_fixture_corners(fixture_id: int) -> tuple[int, int]:
         if r.status_code == 200:
             res = r.json().get("response", [])
             h_c, a_c = 0, 0
+            found = False
             for idx, team_stat in enumerate(res):
                 stats = team_stat.get("statistics", [])
                 for s in stats:
@@ -201,12 +204,15 @@ def get_fixture_corners(fixture_id: int) -> tuple[int, int]:
                         c_val = int(val) if val is not None and str(val).isdigit() else 0
                         if idx == 0:
                             h_c = c_val
+                            found = True
                         else:
                             a_c = c_val
-            return h_c, a_c
+                            found = True
+            if found:
+                return h_c, a_c
     except Exception as e:
-        print(f"Stats lookup error for fid {fixture_id}:", e)
-    return 0, 0
+        print(f"Stats lookup error for fid {fixture_id}:", e, flush=True)
+    return None, None
 
 def match_finder(m_cfg: dict, fixtures: list[dict]) -> dict | None:
     for f in fixtures:
@@ -293,7 +299,7 @@ def get_ticket_card(match_states: dict) -> str:
     return card
 
 def main():
-    print(f"=== BAgent Corner Live Monitor 3.1 Avviato ({datetime.now().strftime('%H:%M:%S')}) ===")
+    print(f"=== BAgent Corner Live Monitor 3.5 Avviato ({datetime.now().strftime('%H:%M:%S')}) ===", flush=True)
     
     match_states = {
         m["id"]: {
@@ -303,6 +309,7 @@ def main():
             "minute": 0,
             "target_hit": False,
             "notified_start": False,
+            "notified_ht": False,
             "notified_end": False,
             "last_c_notified": -1,
         }
@@ -322,27 +329,24 @@ def main():
             match_states[mid]["phase"] = classify_status(st_short, st_long, elapsed=elapsed)
             match_states[mid]["minute"] = elapsed
             if fid:
-                c_h, c_a = get_fixture_corners(fid)
-                match_states[mid]["c_home"] = c_h
-                match_states[mid]["c_away"] = c_a
+                new_h, new_a = get_fixture_corners(fid)
+                if new_h is not None and new_a is not None:
+                    match_states[mid]["c_home"] = max(match_states[mid]["c_home"], new_h)
+                    match_states[mid]["c_away"] = max(match_states[mid]["c_away"], new_a)
                 
-                if m["target_type"] == "HOME":
-                    curr_c = c_h
-                elif m["target_type"] == "AWAY":
-                    curr_c = c_a
-                else:
-                    curr_c = c_h + c_a
+                c_h = match_states[mid]["c_home"]
+                c_a = match_states[mid]["c_away"]
+                curr_c = c_h if m["target_type"] == "HOME" else (c_a if m["target_type"] == "AWAY" else c_h + c_a)
                 match_states[mid]["last_c_notified"] = curr_c
                 if curr_c >= m["target_val"]:
                     match_states[mid]["target_hit"] = True
 
+    # Invia subito il quadro completo all'avvio
     startup_card = (
-        "🟢 <b>AGGIORNAMENTO MINUTAGGIO & CORNER IN TEMPO REALE</b> ⏱️\n\n"
+        "🟢 <b>QUADRO AGGIORNATO CORNER & MINUTAGGIO (LIVE)</b> ⏱️\n\n"
         + get_ticket_card(match_states)
     )
     notify_telegram(startup_card)
-
-    last_periodic_time = time.time()
 
     while True:
         try:
@@ -370,9 +374,10 @@ def main():
                     st["minute"] = elapsed
 
                     if fid:
-                        c_h, c_a = get_fixture_corners(fid)
-                        st["c_home"] = c_h
-                        st["c_away"] = c_a
+                        new_h, new_a = get_fixture_corners(fid)
+                        if new_h is not None and new_a is not None:
+                            st["c_home"] = max(st["c_home"], new_h)
+                            st["c_away"] = max(st["c_away"], new_a)
 
                     c_h = st["c_home"]
                     c_a = st["c_away"]
@@ -397,12 +402,12 @@ def main():
                         target_hit_msg = (
                             f"🎉 <b>TARGET CORNER RAGGIUNTO & VINTO! 🏁✅</b>\n\n"
                             f"{m['flag']} <b>{m['home']} vs {m['away']}</b> (⏱️ <b>{elapsed}'</b> · Quota {m['odds']})\n"
-                            f"🚩 <b>{desc_c}</b> (Target {target} RAGGIUNTO al {elapsed}')\n"
+                            f"🚩 <b>{desc_c}</b> (Target {target} RAGGIUNTO!)\n"
                             f"🎯 Pronostico: <b>{m['pick_desc']} ➔ PRESO CON SUCCESSO!</b> 💰\n\n"
                             + get_ticket_card(match_states)
                         )
                         notify_telegram(target_hit_msg)
-                        print(f"[{datetime.now().strftime('%H:%M:%S')}] TARGET HIT: {m['home']} vs {m['away']} ({curr_tracked}/{target}) at min {elapsed}")
+                        print(f"[{datetime.now().strftime('%H:%M:%S')}] TARGET HIT: {m['home']} vs {m['away']} ({curr_tracked}/{target})", flush=True)
 
                     # 2️⃣ NOTIFICA AD OGNI SINGOLO NUOVO CORNER CON MINUTO & TEMPO RIMASTO
                     elif curr_tracked > st["last_c_notified"] and classified in ("IN_PLAY", "HALFTIME"):
@@ -417,9 +422,24 @@ def main():
                             f"📈 Progresso: {get_corner_progress_bar(curr_tracked, target)}"
                         )
                         notify_telegram(corner_alert_msg)
-                        print(f"[{datetime.now().strftime('%H:%M:%S')}] CORNER UPDATE: {m['home']} vs {m['away']} ({curr_tracked}/{target}) min {elapsed}")
+                        print(f"[{datetime.now().strftime('%H:%M:%S')}] CORNER UPDATE: {m['home']} vs {m['away']} ({curr_tracked}/{target}) min {elapsed}", flush=True)
 
-                    # 3️⃣ NOTIFICA FINE PARTITA (FT)
+                    # 3️⃣ NOTIFICA INTERVALLO (HT)
+                    if classified == "HALFTIME" and not st["notified_ht"]:
+                        st["notified_ht"] = True
+                        left_c = max(0, target - curr_tracked)
+                        ht_msg = (
+                            f"⏸️ <b>FINE PRIMO TEMPO / INTERVALLO (HT)</b>\n\n"
+                            f"{m['flag']} <b>{m['home']} vs {m['away']}</b> (HT)\n"
+                            f"🚩 <b>{desc_c}</b>\n"
+                            f"🎯 Nostro Pick: <b>{m['pick_desc']} {m['odds']}</b>\n"
+                            f"⏳ <i>Situazione all'intervallo: mancano <b>{left_c} corner</b> nei 45' del secondo tempo!</i>\n"
+                            f"📈 Progresso: {get_corner_progress_bar(curr_tracked, target)}"
+                        )
+                        notify_telegram(ht_msg)
+                        print(f"[{datetime.now().strftime('%H:%M:%S')}] HT NOTIFIED: {m['home']} vs {m['away']}", flush=True)
+
+                    # 4️⃣ NOTIFICA FINE PARTITA (FT)
                     if classified == "FINISHED" and not st["notified_end"]:
                         st["notified_end"] = True
                         is_won = curr_tracked >= target
@@ -433,16 +453,12 @@ def main():
                             + get_ticket_card(match_states)
                         )
                         notify_telegram(ft_msg)
-
-            # Riepilogo periodico ogni 15 minuti
-            if time.time() - last_periodic_time > 900:
-                last_periodic_time = time.time()
-                notify_telegram("📊 <b>AGGIORNAMENTO PERIODICO TICKET #19</b>\n\n" + get_ticket_card(match_states))
+                        print(f"[{datetime.now().strftime('%H:%M:%S')}] FT NOTIFIED: {m['home']} vs {m['away']}", flush=True)
 
         except Exception as e:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Polling error:", e)
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Polling error:", e, flush=True)
 
-        time.sleep(20)
+        time.sleep(10)
 
 if __name__ == "__main__":
     main()
