@@ -599,6 +599,9 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 19. **PREFERENZA PER LE LINEE CUMULATIVE DEL MATCH (TOTAL CORNER / TOTAL CARDS)**:
     - *Analisi*: Nel match Atalanta-Sassuolo (4 corner Atalanta + 4 corner Sassuolo = 8 corner totali), l'Over 4.5 Corner Atalanta è saltato per 1 solo corner, mentre l'Over 7.5 Corner Totali Match @1.25 sarebbe entrato facilmente (come l'Over 7.5 Totali in Rennes-PSG ✅).
     - *Regola Fondamentale*: **Preferire sempre le linee totali del match (`Over Corner Totali Match` es. Over 7.5 / Over 8.5 e `Over Cartellini Totali Match` es. Over 2.5) rispetto alle linee di singola squadra, perché assorbono i cali di una singola formazione sommando il contributo di entrambi i fronti!**
+20. **OBBLIGO DI VERIFICA ROSTER UFFICIALE SU SQLITE PRIMA DI OGNI MENZIONE (`storage/database/bagent.db`)**:
+    - *Analisi*: MAI affidarsi alla memoria pregressa dell'LLM per i trasferimenti e le rose della stagione 2026/2027 (es. Marc Cucurella è passato al Real Madrid, Trent Alexander-Arnold è al Real Madrid, Jordan Henderson e Liam Delap sono al Chelsea, Joachim Andersen e Oscar Bobb sono al Fulham).
+    - *Regola Fondamentale*: **PRIMA di citare qualsiasi giocatore o duello 1v1, è OBBLIGATORIO interrogare il database con `python scripts/query_player.py "<Nome>"`. Vietato scrivere nomi di giocatori associati a una squadra senza riscontro nel DB SQLite!**
 
 ---
 
