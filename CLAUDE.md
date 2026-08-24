@@ -6,7 +6,7 @@
 
 Sistema di analisi scommesse sportive (calcio + tennis) con:
 - Modello Poisson per stima probabilità gol
-- Sesto Senso (ricerca notizie/infortuni obbligatoria prima di ogni previsione)
+- Sesto Senso = OBBLIGATORIO & QUOTIDIANO (lettura stampa sportiva internazionale + infortuni)
 - Edge formula: `Edge = (prob × quota) - 1`
 - MultiplaAdvisor per costruire accumulator con quota ≥ 30 e prob > 79%
 - Database SQLite con storico partite, statistiche, log previsioni
@@ -15,7 +15,7 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
 
 ## Regole di Analisi (SEMPRE in vigore)
 
-- **Sesto Senso = obbligatorio**: ricerca web su infortuni, squalifiche, formazioni per ogni partita analizzata
+- **Sesto Senso = OBBLIGATORIO & QUOTIDIANO**: Lettura integrale dei quotidiani sportivi di riferimento (*La Gazzetta dello Sport*, *BBC Sport*, *Marca*, *Kicker*, *L'Équipe*) TUTTI I GIORNI prima di qualsiasi tabella o calcolo. L'informazione giornalistica e i retroscena di spogliatoio/mercato sono parte integrante e imprescindibile del Sesto Senso.
 - **FootyStats = obbligatorio**: SEMPRE consultare https://footystats.org prima di ogni analisi per estrarre avg goals, Over2.5%, BTTS%, xG, forma recente. MAI stimare probabilità senza dati reali da FootyStats.
 - **Edge formula**: `Edge = (prob × quota) - 1` — solo informativo, non decisionale
 - **Probabilità proprie**: NON derivare da quote bookmaker, usare Poisson + dati FootyStats reali
@@ -611,6 +611,9 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
       - 🇩🇪 **Bundesliga**: *Kicker* (`kicker.de/bundesliga/`), *Bild Sport*.
       - 🇫🇷 **Ligue 1**: *L'Équipe* (`lequipe.fr/Football/Ligue-1/`).
       - 🌎 **Sudamerica**: *Globo Esporte* (Brasile), *Diario Olé* (Argentina).
+22. **IL SESTO SENSO QUOTIDIANO CONTINUO (Daily Press & Sesto Senso Ingestion as Core Prerequisite)**:
+    - *Analisi*: Un modello puramente matematico o numerico perde valore se non è costantemente nutrito dalle notizie fresche di giornata (infortuni della notte, conferenze stampa delle 14:30, riscaldamenti delle 18:30).
+    - *Regola Fondamentale*: **La lettura dei giornali e l'analisi del Sesto Senso NON è opzionale né una tantum: è una REGOLA GIORNALIERA CONTINUA. Nessuna tabella, schedina o calcolo di quote può essere generato senza aver prima eseguito l'ingestione della rassegna stampa quotidiana e integrato le informazioni nei ragionamenti tattici!**
 
 ---
 
