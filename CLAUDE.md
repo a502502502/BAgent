@@ -1046,10 +1046,20 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ### 🎯 Ticket #26: Doppia Live Corner In-Play (Stake 30.00 € ➔ Pot. 91.35 €)
 * **Stake**: 30.00 € | **Quota Totale Base**: 3.05× | **Vincita Potenziale**: **`91.35 €`** 💰
-* **Stato**: Registrato Live ⏱️
-1. [20:45] **Roma - Fiorentina** ➔ **Over 6.5 Corner Totali Live** @2.10 ❌ *(Partita chiusa con 2 corner totali 1-1)*
-2. [21:00] **Fulham - Chelsea** ➔ **Over 11.5 Corner Totali Live** @1.45 ⏱️ *(Live 7 corner al 83')*
+* **Stato**: Concluso ⏱️
+1. [20:45] **Roma - Fiorentina** ➔ **Over 6.5 Corner Totali Live** @2.10 ❌ *(Partita chiusa con 2 corner totali)*
+2. [21:00] **Fulham - Chelsea** ➔ **Over 11.5 Corner Totali Live** @1.45 ❌ *(Partita chiusa con 7 corner)*
+
+### 🌙 Ticket #27: Multipla Notturna Overseas "For Fun" (Quota 10.00× ➔ Pot. ~125.00 €)
+* **Quota Base**: 10.00× | **Bonus Netwin (6 eventi)**: +25% | **Quota Finale**: **`~12.50×`** 💰
+* **Stato**: In Giocata / Notte 24-25 Agosto ⏱️
+1. 🇺🇸 **Charleston Battery vs Miami FC** ➔ **Over 2.5 Gol Totali** @1.50
+2. 🇧🇷 **Sc Recife Pe vs America Mg** ➔ **1X2: 1 (Sport Recife)** @1.63
+3. 🇦🇷 **Tigre vs Central Cordoba** ➔ **Under 2.5 Gol Totali** @1.45
+4. 🇨🇴 **Boyaca Patriotas vs Atletico Fc** ➔ **1X2: 1 (Boyaca Patriotas)** @1.34
+5. 🇧🇷 **Botafogo vs Athletico Paranaense** ➔ **Doppia Chance 1X (Botafogo)** @1.40
+6. 🇧🇷 **Athletic Club vs Novorizontino** ➔ **Under 2.5 Gol Totali** @1.50
 
 ---
 
-*Ultimo aggiornamento: 24 agosto 2026 ore 21:56 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 24 agosto 2026 ore 23:05 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
