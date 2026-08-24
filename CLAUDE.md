@@ -587,67 +587,39 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 14. **IL FILTRO AUTOMATICO DEL DISTACCO IN CLASSIFICA ($\Delta \text{ PUNTI} \le 3$) IN SUDAMERICA/LEGHE MINORI**: Ban sui segni 1X2/DC negli scontri ravvicinati.
 15. **DIVIETO ASSOLUTO DI DUPLICAZIONE DELLA STESSA SELEZIONE SU PIÙ TICKET (PRINCIPIO DI DECOUPLING & ZERO SINGLE-POINT-OF-FAILURE)**: MAI inserire lo stesso identico pronostico in 2 o più schedine attive nella stessa sessione. Ogni ticket deve essere statisticamente indipendente per evitare che un singolo evento negativo abbatta l'intera cassa giornaliera!
 16. **AUDIT PREVENTIVO SULL'INTEGRITÀ DELLA ROSA (PRE-MATCH LINEUP & SQUAD INTEGRITY FILTER)**: MAI affidarsi alle sole medie statistiche o storiche della stagione passata. È OBBLIGATORIO eseguire un audit approfondito sulle formazioni 60 minuti prima:
-    - *Talisman Check*: Presenza del capocannoniere/uomo chiave (es. Watkins non convocato per cessione imminente ad Al-Hilal).
+    - *Talisman Check*: Presenza del capocannoniere/uomo chiave (es. Watkins non convocato per cessione imminente).
     - *Spine Check*: Presenza del portiere titolare (Dibu Martínez vs Bizot), mediano di rottura (Onana/Douglas Luiz) e centrali.
-    - *Youth Emergency Check*: Se la squadra schiera debuttanti U19 (es. 18enne Hemmings) ed è decimata, scatta il BAN IMMEDIATO da mercati a favore (MultiGol o Corner) e si punta invece A FAVORE DELL'AVVERSARIO (1X / Over Gol avversario) o si evita la gara!
+    - *Youth Emergency Check*: Se la squadra schiera debuttanti U19 d'emergenza ed è decimata, scatta il BAN IMMEDIATO da mercati a favore e si punta invece A FAVORE DELL'AVVERSARIO o si evita la gara!
+17. **LA TRAPPOLA DEI CORNER NELLE GOLEADE CENTRALI (Caso Elche - Barcellona 0-5 con 1 solo corner)**:
+    - *Analisi*: Squadre con attacco verticale e penetrazioni centrali (Barcellona di Flick con Yamal/Raphinha/Lewandowski che tagliano dentro l'area, Real Madrid) segnano 4-5 gol con tiri diretti senza mai andare sul fondo a crossare. I corner di squadra crollano a 1-2 anche vincendo 0-5.
+    - *Regola Fondamentale*: **MAI giocare Over Corner di squadra alti (>5.5) su squadre da penetrazione centrale! Su queste formazioni giocare SEMPRE `1X2 + Over Gol` (es. `X2 + Over 2.5 @1.60` stravinta!) o `Tiri in Porta`. Riservare gli Over Corner SOLO a squadre con ali che crossano dal fondo per schema (Arsenal, Porto con 12 corner, Man City).**
+18. **L'ASIMMETRIA DEI FALLI: POSSESSO vs NON POSSESSO (Caso Torino - Milan 1-2)**:
+    - *Analisi*: La squadra che domina il possesso palla (Milan 63% possesso con Fonseca) NON commette falli ma li subisce (9 falli Milan contro 16 falli Torino).
+    - *Regola Fondamentale*: **MAI scommettere sull'Over Falli della favorita tecnica di possesso! L'Over Falli Commessi va giocato ESCLUSIVAMENTE SULLA SQUADRA SFAVORITA/DIFENSIVA (che deve rincorrere e spendere falli tattici) o sui `Falli Totali del Match`.**
+19. **PREFERENZA PER LE LINEE CUMULATIVE DEL MATCH (TOTAL CORNER / TOTAL CARDS)**:
+    - *Analisi*: Nel match Atalanta-Sassuolo (4 corner Atalanta + 4 corner Sassuolo = 8 corner totali), l'Over 4.5 Corner Atalanta è saltato per 1 solo corner, mentre l'Over 7.5 Corner Totali Match @1.25 sarebbe entrato facilmente (come l'Over 7.5 Totali in Rennes-PSG ✅).
+    - *Regola Fondamentale*: **Preferire sempre le linee totali del match (`Over Corner Totali Match` es. Over 7.5 / Over 8.5 e `Over Cartellini Totali Match` es. Over 2.5) rispetto alle linee di singola squadra, perché assorbono i cali di una singola formazione sommando il contributo di entrambi i fronti!**
 
 ---
 
-## Sessione 22 Agosto 2026 (Serale) — I 3 Ticket Ufficiali in Gioco su Netwin
+## Sessione 23 Agosto 2026 (Domenica) — Esiti dei Ticket Netwin & Retrospect
 
-### 🛡️ Ticket #15: Quaterna d'Acciaio Serale (Stake 20.00 € ➔ Pot. 121.24 €)
-* **Stake**: 20.00 € | **Quota Base**: 5.89× | **Bonus Netwin**: +3.53 € | **Vincita Potenziale**: **121.24 €**
-* **Stato**: In Corso (4/4 aperte) ⏱️
-1. [18:30] **Inter vs Monza** ➔ **Lautaro Martinez (o Sost.) Segna o Palo/Trav.** @1.67
-2. [18:30] **Brentford vs Tottenham** ➔ **Over 4.5 Corner Brentford (Sq.1)** @1.49
-3. [20:45] **Tolosa vs Lione** ➔ **MultiGol 1-3 Casa (Tolosa)** @1.32
-4. [21:30] **Espanyol vs Real Madrid** ➔ **Over 2.5 Cartellini Totali** @1.23
+### 🚩 Ticket #19: Sestina Corner d'Acciaio (Stake 30.00 € / 20.00 €)
+1. [15:00] **Brighton vs Aston Villa** ➔ **Over 7.5 Corner Totali** @1.24 ✅
+2. [15:00] **Man City vs Bournemouth** ➔ **Over 6.5 Corner City** @1.70 ✅
+3. [17:00] **Atlético Madrid vs Villarreal** ➔ **Over 7.5 Corner Totali Match** @1.24 ✅
+4. [17:30] **Newcastle vs Liverpool** ➔ **Over 9.5 Corner Totali Match** @1.50 ✅
+5. [20:45] **Rennes vs PSG** ➔ **Over 7.5 Corner Totali Match** @1.21 ✅
+6. [21:30] **Porto vs Arouca** ➔ **Over 5.5 Corner Porto** @1.39 ✅ (12 Corner!)
+7. [20:45] **Atalanta vs Sassuolo** ➔ **Over 4.5 Corner Atalanta** @1.33 ❌ *(4 corner, mancato per 1!)*
+8. [21:30] **Elche vs Barcellona** ➔ **Over 5.5 Corner Barcellona** @1.60 ❌ *(1 corner per goleada centrale 0-5)*
 
-### 💎 Ticket #16: La Doppia d'Acciaio (Quota 2.60×)
-* **Quota Base**: 2.60× | **Stato**: In Corso ⏱️
-1. [18:30] **Inter vs Monza** ➔ **Lautaro Martinez (o Sost.) Segna o Palo/Trav.** @1.67
-2. [21:30] **Espanyol vs Real Madrid** ➔ **2 + Over 1.5 Gol (Real Madrid)** @1.56
-
-### 🚀 Ticket #17: Quinquina Potenziata (Stake 27.00 € ➔ Pot. 157.29 €)
-* **Stake**: 27.00 € | **Quota Base**: 5.66× | **Bonus Netwin**: +4.58 € | **Vincita Potenziale**: **157.29 €**
-* **Stato**: In Corso (5/5 aperte) ⏱️
-1. [18:00] **Juventus U23 vs Novara** ➔ **1X2: 1** @1.40 *(Live 1-0)*
-2. [18:30] **Inter vs Monza** ➔ **Lautaro Martinez (o Sost.) Segna o Palo/Trav.** @1.67
-3. [18:30] **Brentford vs Tottenham** ➔ **Over 4.5 Corner Brentford (Sq.1)** @1.49
-4. [20:45] **Tolosa vs Lione** ➔ **MultiGol 1-3 Casa (Tolosa)** @1.32
-5. [21:30] **Espanyol vs Real Madrid** ➔ **Over 2.5 Cartellini Totali** @1.23
+### 🏆 Ticket #20 & #21: Sanzioni, Combo & Retrospect
+1. [20:45] **Rennes vs PSG** ➔ **Over 2.5 Cartellini Totali** @1.62 ✅
+2. [21:30] **Elche vs Barcellona** ➔ **X2 + Over 2.5 Gol** @1.60 ✅ (0-5 Barça!)
+3. [20:45] **Torino vs Milan** ➔ **Over 10.5 Falli Commessi Milan** @1.77 ❌ *(Milan di possesso ha fatto 9 falli)*
 
 ---
 
-## Sessione 23 Agosto 2026 (Domenica) — Ticket Ufficiale Master su Netwin
-
-### 🚩 Ticket #19: Sestina Corner d'Acciaio Ufficiale Netwin (Quota 8.44× ➔ Pot. 255.97 €)
-* **Stake**: 30.00 € | **Quota Base**: 8.44× | **Bonus Netwin**: +2.54 € | **Vincita Potenziale**: **`255.97 €`** 💰
-* **Stato**: In Giocata / Apertura Domenica 23 Agosto ⏱️
-1. [15:00] **Brighton vs Aston Villa** (ID: 1702) ➔ **Over 7.5 Corner Totali** @1.24
-2. [15:00] **Manchester City vs Bournemouth** (ID: 4117) ➔ **Over 6.5 Corner Squadra 1 (City)** @1.70
-3. [17:00] **Atlético Madrid vs Villarreal** (ID: 3385) ➔ **Over 7.5 Corner Totali Match** @1.24
-4. [17:30] **Newcastle vs Liverpool** (ID: 6915) ➔ **Over 9.5 Corner Totali Match** @1.50
-5. [18:30] **Frosinone vs Juventus** (ID: 5866) ➔ **Over 4.5 Corner Squadra 2 (Juventus)** @1.33
-6. [21:30] **Elche vs FC Barcellona** (ID: 13180) ➔ **Over 5.5 Corner Squadra 2 (Barcellona)** @1.62
-
-### 🏆 Ticket #20: Cinquina Master Mix Ufficiale Netwin (Stake 20.00 € ➔ Pot. 113.65 €)
-* **Stake**: 20.00 € | **Quota Base**: 5.36× | **Bonus Netwin**: +6.43 € | **Vincita Potenziale**: **`113.65 €`** 💰
-* **Stato**: In Giocata / 5 Selezioni Aperte ⏱️
-1. [15:00] **Brighton vs Aston Villa** ➔ **MultiGol 1-3 Ospite (Aston Villa)** @1.43
-2. [15:00] **Angers vs Lilla** ➔ **X2 + MultiGol 1-4** @1.45
-3. [17:00] **Atlético Madrid vs Villarreal** ➔ **Over 8.5 Tiri Totali Squadra 2 (Villarreal)** @1.33
-4. [20:45] **Rennes vs PSG** ➔ **Ospite Segna 2° Tempo (PSG)** @1.35
-5. [21:30] **Elche vs FC Barcellona** ➔ **2 + Over 1.5 Gol (Barcellona)** @1.44
-
-### ⚔️ Ticket #21: Quaterna Sanzioni, Falli & Protezioni (Stake 13.00 € ➔ Pot. 77.93 €)
-* **Stake**: 13.00 € | **Quota Base**: 5.82× | **Bonus Netwin**: +2.27 € | **Vincita Potenziale**: **`77.93 €`** 💰
-* **Stato**: Registrato / In Partenza dalle 17:30 ⏱️
-1. [17:30] **Newcastle vs Liverpool** ➔ **Over 3.5 Cartellini Totali Match** @1.48
-2. [18:30] **Venezia vs Lecce** ➔ **1X + Under 3.5 Gol** @1.61
-3. [18:30] **Frosinone vs Juventus** ➔ **X2 + MultiGol 2-5 : SI** @1.38
-4. [20:45] **Torino vs Milan** ➔ **Over 10.5 Falli Commessi Squadra 2 (Milan)** @1.77
-
----
-
-*Ultimo aggiornamento: 23 agosto 2026 ore 16:09 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Saldo Netwin al 24 Agosto 2026 ore 09:20: `116,45 €`*  
+*Ultimo aggiornamento: 24 agosto 2026 ore 09:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
