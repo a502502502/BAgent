@@ -602,6 +602,15 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 20. **OBBLIGO DI VERIFICA ROSTER UFFICIALE SU SQLITE PRIMA DI OGNI MENZIONE (`storage/database/bagent.db`)**:
     - *Analisi*: MAI affidarsi alla memoria pregressa dell'LLM per i trasferimenti e le rose della stagione 2026/2027 (es. Marc Cucurella è passato al Real Madrid, Trent Alexander-Arnold è al Real Madrid, Jordan Henderson e Liam Delap sono al Chelsea, Joachim Andersen e Oscar Bobb sono al Fulham).
     - *Regola Fondamentale*: **PRIMA di citare qualsiasi giocatore o duello 1v1, è OBBLIGATORIO interrogare il database con `python scripts/query_player.py "<Nome>"`. Vietato scrivere nomi di giocatori associati a una squadra senza riscontro nel DB SQLite!**
+21. **PROTOCOLLO OBBLIGATORIO DI RASSEGNA STAMPA MULTI-LEGA (Full-Text Specialized Journalism)**:
+    - *Analisi*: I soli dati statistici o le formazioni grafiche del web non riportano retroscena dell'ultimo minuto (es. Moise Kean in panchina per trattativa imminente col Como svelata solo dal corpo del testo di Gazzetta.it).
+    - *Regola Fondamentale*: **PRIMA di emettere qualsiasi pronostico, è TASSATIVO leggere l'INTERO CORPO DEL TESTO dei principali quotidiani sportivi specifici per ciascuna lega:**
+      - 🇮🇹 **Serie A / B**: *La Gazzetta dello Sport* (`gazzetta.it/Calcio/Serie-A/`), *Corriere dello Sport*, *Sky Sport*.
+      - 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Premier League**: *BBC Sport Football*, *The Athletic*, *Sky Sports UK*, *The Guardian*.
+      - 🇪🇸 **LaLiga**: *Marca* (`marca.com/futbol/primera-division.html`), *AS* (`as.com/futbol/`).
+      - 🇩🇪 **Bundesliga**: *Kicker* (`kicker.de/bundesliga/`), *Bild Sport*.
+      - 🇫🇷 **Ligue 1**: *L'Équipe* (`lequipe.fr/Football/Ligue-1/`).
+      - 🌎 **Sudamerica**: *Globo Esporte* (Brasile), *Diario Olé* (Argentina).
 
 ---
 
