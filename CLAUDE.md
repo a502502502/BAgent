@@ -1021,13 +1021,23 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ### ⚔️ Ticket #24: Cinquina Duelli Roma-Fiorentina (Stake 5.00 € ➔ Pot. 49.97 €)
 * **Stake**: 5.00 € | **Quota Base**: 9.90× | **Bonus Netwin**: +0.49 € | **Vincita Potenziale**: **`49.97 €`** 💰
-* **Stato**: Tutti i 5 Giocatori TITOLARI UFFICIALI! (In partenza ore 20:45) ⏱️
+* **Stato**: Tutti i 5 Giocatori TITOLARI UFFICIALI! (Live 0-0 all'Olimpico) ⏱️
 1. [20:45] **Roma - Fiorentina** ➔ **Dybala Over 2.5 Falli Subiti** @2.00 (Titolare)
 2. [20:45] **Roma - Fiorentina** ➔ **Rodrigo Mora Over 0.5 Falli Subiti** @1.47 (Titolare)
 3. [20:45] **Roma - Fiorentina** ➔ **Manu Koné Over 1.5 Falli Subiti** @1.65 (Titolare)
 4. [20:45] **Roma - Fiorentina** ➔ **Cher Ndour Over 1.5 Falli Commessi** @1.70 (Titolare)
 5. [20:45] **Roma - Fiorentina** ➔ **Joao Mário Over 0.5 Falli Commessi** @1.20 (Titolare)
 
+### 👑 Ticket #25: Sestina Master Duelli Roma-Fiorentina (Stake 20.00 € ➔ Pot. 157.03 €)
+* **Stake**: 20.00 € | **Quota Base**: 7.62× | **Bonus Netwin**: +4.57 € | **Vincita Potenziale**: **`157.03 €`** 💰 | **Ref**: `DF07EA0818317B1A4706`
+* **Stato**: Tutti i 6 Giocatori TITOLARI UFFICIALI! (Live 0-0 all'Olimpico) ⏱️
+1. [20:45] **Roma - Fiorentina** ➔ **Dybala Over 1.5 Falli Subiti** @1.40 (Titolare)
+2. [20:45] **Roma - Fiorentina** ➔ **Cristante Over 0.5 Falli Subiti** @2.00 (Titolare)
+3. [20:45] **Roma - Fiorentina** ➔ **Wesley Franca Over 0.5 Falli Subiti** @1.10 (Titolare)
+4. [20:45] **Roma - Fiorentina** ➔ **Nicolò Fagioli Over 0.5 Falli Subiti** @1.20 (Titolare)
+5. [20:45] **Roma - Fiorentina** ➔ **Cher Ndour Over 0.5 Falli Subiti** @1.25 (Titolare)
+6. [20:45] **Roma - Fiorentina** ➔ **Manu Koné Over 1.5 Falli Subiti** @1.65 (Titolare)
+
 ---
 
-*Ultimo aggiornamento: 24 agosto 2026 ore 20:30 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 24 agosto 2026 ore 20:42 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
