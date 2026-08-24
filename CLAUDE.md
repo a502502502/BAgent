@@ -1012,6 +1012,13 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 8. [21:00] **Fulham - Chelsea** ➔ **Caicedo Over 1.5 Falli Commessi** @1.55
 9. [21:00] **Fulham - Chelsea** ➔ **Cole Palmer Over 1.5 Falli Subiti** @1.80
 
+### 🚩 Ticket #23: Tripla Corner & LaLiga Ufficiale Netwin (Stake 10.00 € ➔ Pot. 54.97 €)
+* **Stake**: 10.00 € | **Quota Base**: 5.49× | **Vincita Potenziale**: **`54.97 €`** 💰 | **Ref**: `DF07EA0818311A1F780A`
+* **Stato**: 1 Vinta su 3 (In Corso) ⏱️
+1. [18:30] **Bologna - Lazio** ➔ **Over 8.5 Corner Totali** @1.77 ✅ **PRESA! (12 CORNER TOTALI 6-6!)**
+2. [19:30] **Osasuna - Levante** ➔ **1X2: 1** @1.86 ⏱️ *(Live 0-0 al Sadar)*
+3. [20:45] **Roma - Fiorentina** ➔ **Over 8.5 Corner Totali** @1.67 ⏱️ *(In partenza ore 20:45)*
+
 ---
 
-*Ultimo aggiornamento: 24 agosto 2026 ore 20:05 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+*Ultimo aggiornamento: 24 agosto 2026 ore 20:10 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
