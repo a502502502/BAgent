@@ -586,6 +586,10 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 13. **L'ARSENAL CORNER ENGINE & ASIMMETRIA DEI CORNER**: Corner come arma sistematica in casa.
 14. **IL FILTRO AUTOMATICO DEL DISTACCO IN CLASSIFICA ($\Delta \text{ PUNTI} \le 3$) IN SUDAMERICA/LEGHE MINORI**: Ban sui segni 1X2/DC negli scontri ravvicinati.
 15. **DIVIETO ASSOLUTO DI DUPLICAZIONE DELLA STESSA SELEZIONE SU PIÙ TICKET (PRINCIPIO DI DECOUPLING & ZERO SINGLE-POINT-OF-FAILURE)**: MAI inserire lo stesso identico pronostico in 2 o più schedine attive nella stessa sessione. Ogni ticket deve essere statisticamente indipendente per evitare che un singolo evento negativo abbatta l'intera cassa giornaliera!
+16. **AUDIT PREVENTIVO SULL'INTEGRITÀ DELLA ROSA (PRE-MATCH LINEUP & SQUAD INTEGRITY FILTER)**: MAI affidarsi alle sole medie statistiche o storiche della stagione passata. È OBBLIGATORIO eseguire un audit approfondito sulle formazioni 60 minuti prima:
+    - *Talisman Check*: Presenza del capocannoniere/uomo chiave (es. Watkins non convocato per cessione imminente ad Al-Hilal).
+    - *Spine Check*: Presenza del portiere titolare (Dibu Martínez vs Bizot), mediano di rottura (Onana/Douglas Luiz) e centrali.
+    - *Youth Emergency Check*: Se la squadra schiera debuttanti U19 (es. 18enne Hemmings) ed è decimata, scatta il BAN IMMEDIATO da mercati a favore (MultiGol o Corner) e si punta invece A FAVORE DELL'AVVERSARIO (1X / Over Gol avversario) o si evita la gara!
 
 ---
 
