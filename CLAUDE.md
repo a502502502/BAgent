@@ -636,5 +636,64 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-*Saldo Netwin al 24 Agosto 2026 ore 09:20: `116,45 €`*  
-*Ultimo aggiornamento: 24 agosto 2026 ore 09:20 — BAgent su Antigravity (Tutto sincronizzato su GitHub)*
+## Sessione Pomeriggio 24 Agosto 2026 — Verifica Quote Reali & Correzione Tabelle Mattutine
+
+### 🎯 Obiettivo della sessione
+Riprendere l'handover di stamattina (`docs/session_handover_2026_08_24.md`) e **verificare sul campo, quota per quota, tutte le tabelle prodotte** prima di piazzare qualsiasi ticket — invece di fidarsi ciecamente dei numeri stimati al mattino.
+
+### 🚨 Discrepanze Gravi Trovate (quote mattutine vs reali)
+| Selezione originale (handover mattina) | Quota citata | Quota REALE verificata (Netwin/Domusbet) | Esito |
+|---|---|---|---|
+| Bologna Over 7.5 Corner Totali | @1.24 | Linea reale è **8.5**, Over @1.76 (Netwin) / @1.88 (Domusbet) | ❌ Quota fittizia, soglia sbagliata |
+| Roma Over 7.5 Corner Totali | @1.25 | Linea reale è **8.5**, Over @1.69 (Netwin) / @1.70 (Domusbet) | ❌ Quota fittizia, soglia sbagliata |
+| Fulham Over 3.5 Cartellini | @1.44 | Linea reale è **4.5**, Over @1.86 (Netwin) / @1.91 (Domusbet) | ❌ Soglia sbagliata |
+| Osasuna 1X (DC) | @1.18 | Reale @1.21 (sopra quota minima 1.20) | 🟡 Leggero scostamento |
+| Zaccagni 2+ Falli Subiti | @1.40 | Reale **@1.20** (più sicuro del previsto) | ✅ Meglio del previsto |
+| Dybala 2+ Falli Subiti | @1.45 | Reale **@1.40** (identica su Netwin e Domusbet) | ✅ Confermata |
+| Palmer 2+ Falli Subiti | @1.50 | Reale **@1.80** (meno sicuro del previsto) | 🔴 Sopravvalutata al mattino |
+
+**Lezione**: le tabelle del mattino vanno sempre trattate come bozze di lavoro, mai come quote definitive. La verifica pomeridiana ha ribaltato la valutazione di più selezioni in entrambe le direzioni.
+
+### 🔍 Scoperta: la sezione "Falli" (non "Sanzioni") contiene i mercati per singolo giocatore
+Su Netwin i mercati **Falli Commessi / Falli Subiti per giocatore** (soglie 0.5/1.5/2.5) si trovano sotto la tab **"Falli"** in "Altri Mercati" — NON sotto "Sanzioni" (che contiene solo i Cartellini). Errore iniziale di ricerca in questa sessione, poi corretto.
+
+### 📰 Test Empirico: quanto "pesa" davvero una linea Falli Totali?
+Controllate le 4 partite di Serie A giocate il **23 Agosto 2026** (giornata 1) per calibrare se una linea Falli Totali di 25.5 fosse realistica:
+| Partita | Falli Totali |
+|---|---|
+| Frosinone-Juventus | **33** (outlier) |
+| Venezia-Lecce | ≤19 |
+| Atalanta-Sassuolo | ≤19 |
+| Torino-Milan | ≤19 |
+
+**Solo 1 partita su 4 (25%) ha superato quota 25 falli.** Questo ha smontato l'ipotesi (pur logicamente sensata: "partita tecnica e bilanciata = più falli") che l'Over 25.5 Falli Totali Roma-Fiorentina @1.70 fosse un buon value bet — il campione reale della giornata dice il contrario. **Ticket scartato.**
+
+### 🩺 Formazioni: FootyStats come early-warning su assenze non ancora note
+Controllando la lineup più recente su FootyStats per Osasuna-Levante, **Ante Budimir risultava in panchina** (titolare Raúl García) — smentendo la narrativa "Budimir bomber a El Sadar" della tabella mattutina. Poi confermato titolare nelle probabili formazioni Sofascore del pomeriggio, ma il caso dimostra l'utilità di incrociare più fonti prima di fissare un pick su un singolo giocatore.
+
+### 🎫 Le 3 Schedine Finali della Sessione (`reports/schedina_24ago.html`)
+| Schedina | Selezioni | Quota | Rischio |
+|---|---|---|---|
+| **Alta Quota — Falli Commessi/Subiti** | Zaccagni, Palmer, Caicedo, Berge, Soulé, Dybala, Kean, Frattesi, Dovbyk (9 sel.) | **~18.80×** | Alto |
+| **Super Sicura — Gol & DC** | Osasuna DC1X, Chelsea X2, Dybala O1.5 Subiti, Palmer O1.5 Subiti (4 sel.) | **~3.75×** | Basso |
+| **Corner & Sanzioni Totali Match** | Bologna O8.5 Corner, Roma O8.5 Corner, Osasuna DC1X (3 sel.) | **~3.60×** | Medio |
+
+Tutti i giocatori/selezioni confermati **titolari nelle probabili formazioni** Sofascore del pomeriggio prima del piazzamento.
+
+### Le Nuove Regole Inviolabili Aggiunte Oggi
+23. **VERIFICA EMPIRICA SU GIORNATE RECENTI PRIMA DI FIDARSI DI UNA LINEA TOTALI (Falli/Corner/Cartellini)**:
+    - *Analisi*: Il caso Roma-Fiorentina (Over 25.5 Falli Totali) ha mostrato che una linea "logicamente giustificabile" (tecnica + equilibrio = più falli) può essere smentita da un campione reale delle partite già giocate nello stesso turno/weekend.
+    - *Regola Fondamentale*: **Prima di puntare su una linea Totali di squadra (Falli, Corner, Cartellini), controllare SEMPRE le statistiche reali delle partite già concluse nella stessa giornata/weekend dello stesso campionato. Un'ipotesi tattica senza riscontro empirico recente resta solo un'ipotesi.**
+24. **LA SEZIONE "FALLI" ≠ "SANZIONI" SU NETWIN**:
+    - *Regola Fondamentale*: **I mercati Falli Commessi/Subiti per singolo giocatore si trovano SEMPRE sotto la tab "Falli" (Altri Mercati), non "Sanzioni" (che è solo Cartellini). Verificare in entrambe le sezioni prima di concludere che un mercato non esista.**
+25. **DOPPIA VERIFICA NETWIN + DOMUSBET PER LE QUOTE PIÙ ALTE**:
+    - *Analisi*: Sui mercati Falli per giocatore le quote sono risultate IDENTICHE su Netwin e Domusbet (stesso fornitore quote), ma su Corner/Cartellini Totali Match Domusbet ha pagato sensibilmente di più (es. Bologna Corner O8.5: Netwin @1.76 vs Domusbet @1.88).
+    - *Regola Fondamentale*: **Per i mercati "di squadra" (Corner/Cartellini Totali) conviene sempre controllare anche Domusbet oltre a Netwin. Per i mercati "per giocatore" (Falli individuali) le quote tendono a coincidere, quindi non serve incrociare le due piattaforme.**
+
+### ⚠️ Nota Tecnica: automazione click su Netwin inaffidabile per liste lunghe
+Il tentativo di costruire automaticamente (via click programmatico) le 3 schedine da 9+4+3 selezioni sui mercati "Falli per giocatore" è fallito nella maggior parte dei tentativi — le liste virtualizzate molto lunghe (100+ righe per partita) non rispondono in modo affidabile ai click automatizzati, mentre i pannelli compatti (1X2/DC/Corner con poche righe) funzionano bene. **Per prenotazioni future su mercati "per giocatore": costruire la schedina manualmente usando l'HTML di riferimento come checklist**, non affidarsi all'automazione completa.
+
+---
+
+*Saldo Netwin al 24 Agosto 2026 ore 17:45: `116,45 €` (nessuna schedina ancora piazzata, in attesa formazioni ufficiali definitive)*  
+*Ultimo aggiornamento: 24 agosto 2026 ore 17:45 — BAgent (Sessione pomeridiana di verifica quote, sincronizzato su GitHub)*
