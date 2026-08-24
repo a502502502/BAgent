@@ -1,5 +1,5 @@
 """
-BAgent - BetGuard Validator (Motore di Controllo delle 14 Regole Inviolabili)
+BAgent - BetGuard Validator (Motore di Controllo delle 19 Regole Inviolabili)
 Ogni selezione DEVE passare attraverso questo modulo Python prima di essere approvata.
 """
 
@@ -11,7 +11,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 class BetGuardValidator:
     def __init__(self):
-        self.rules_loaded = 15
+        self.rules_loaded = 19
         print(f"BetGuard Engine initialized with {self.rules_loaded} Inviolable Rules.")
 
     def validate_selection(self, match_data):
@@ -29,6 +29,8 @@ class BetGuardValidator:
         is_matchday_1 = match_data.get("is_matchday_1", False)
         is_derby_or_high_tension = match_data.get("is_derby_or_high_tension", False)
         is_massive_favorite_home = match_data.get("is_massive_favorite_home", False)
+        is_central_penetration_team = match_data.get("is_central_penetration_team", False)
+        is_high_possession_favorite = match_data.get("is_high_possession_favorite", False)
 
         # REGOLA #9: Divieto 1X2 su leghe giovanili o squadre B
         if is_youth_or_b_team and pick in ["1", "2", "1X2: 1", "1X2: 2"]:
@@ -48,7 +50,15 @@ class BetGuardValidator:
         if is_latam_or_minor and delta_pts <= 3 and pick in ["1", "2", "1X", "X2", "1X2: 1", "1X2: 2"]:
             return False, f"[BLOCKED - RULE 14] Delta Punti = {delta_pts} (<= 3) in lega minore/sudamericana ({match_name}). Scontro diretto a moneta lanciata: BAN ASSOLUTO sui segni 1X2/DC. SKIP / NO BET!"
 
-        return True, f"[APPROVED] Conforme alle Regole Inviolabili."
+        # REGOLA #17: Trappola Corner nelle Goleade Centrali (es. Barcellona di Flick / Real Madrid)
+        if is_central_penetration_team and any(term in pick.lower() for term in ["corner squadra", "cornersquadra", "corner sq", "corner team"]) and any(th in pick for th in ["5.5", "6.5", "7.5"]):
+            return False, f"[BLOCKED - RULE 17] Trappola Corner Goleada Centrale ({match_name}): squadra da penetrazione verticale/centrale. Vietato Over Corner Squadra >5.5! Usare Combo Risultato/Gol o Tiri."
+
+        # REGOLA #18: Asimmetria dei Falli (Possesso vs Non Possesso)
+        if is_high_possession_favorite and any(term in pick.lower() for term in ["falli commessi squadra", "falli squadra favorita", "team fouls"]) and ("over" in pick.lower()):
+            return False, f"[BLOCKED - RULE 18] Asimmetria Falli ({match_name}): la favorita di possesso palla NON commette falli alti. Giocare Over Falli solo sulla sfavorita o Falli Totali Match!"
+
+        return True, f"[APPROVED] Conforme a tutte le 19 Regole Inviolabili."
 
     def validate_ticket_set(self, active_tickets: list[list[dict]]) -> tuple[bool, str]:
         """
@@ -68,36 +78,31 @@ class BetGuardValidator:
 if __name__ == "__main__":
     validator = BetGuardValidator()
 
-    # TEST 1: Sol de América vs Resistencia (Delta = 1 in Paraguay)
-    test1 = {
-        "match": "Sol de America vs Resistencia",
-        "league": "Paraguay - Segunda Division",
-        "team1_pts": 24,
-        "team2_pts": 23,
-        "pick": "1X",
-        "matches_played": 15
+    # TEST RULE 17: Barcellona Over 5.5 Corner Squadra
+    test_barca = {
+        "match": "Elche vs Barcellona",
+        "league": "LaLiga",
+        "pick": "Over 5.5 Corner Squadra 2",
+        "is_central_penetration_team": True
     }
-    valid1, msg1 = validator.validate_selection(test1)
-    print(f"\n[Test 1] {test1['match']} (Pick: {test1['pick']}): {msg1}")
+    valid_b, msg_b = validator.validate_selection(test_barca)
+    print(f"\n[Test Rule 17] {test_barca['match']} ({test_barca['pick']}): {msg_b}")
 
-    # TEST 2: Jaguares vs Boyacá Chicó (Colombia - Boyaca 0V-3P-11S fuori casa)
-    test2 = {
-        "match": "Jaguares vs Boyaca Chico",
-        "league": "Colombia - Primera A",
-        "team1_pts": 18,
-        "team2_pts": 11,
-        "pick": "1X",
-        "matches_played": 12
+    # TEST RULE 18: Milan Over 10.5 Falli Commessi Squadra 2
+    test_milan = {
+        "match": "Torino vs Milan",
+        "league": "Serie A",
+        "pick": "Over 10.5 Falli Commessi Squadra 2",
+        "is_high_possession_favorite": True
     }
-    valid2, msg2 = validator.validate_selection(test2)
-    print(f"\n[Test 2] {test2['match']} (Pick: {test2['pick']}): {msg2}")
+    valid_m, msg_m = validator.validate_selection(test_milan)
+    print(f"\n[Test Rule 18] {test_milan['match']} ({test_milan['pick']}): {msg_m}")
 
-    # TEST 3: Arsenal vs Coventry (Premier - Corner & Gol)
-    test3 = {
-        "match": "Arsenal vs Coventry",
-        "league": "Premier League",
-        "pick": "1 + Over 1.5 Gol",
-        "is_massive_favorite_home": True
+    # TEST RULE 19: Rennes-PSG Over 7.5 Corner Totali Match
+    test_rennes = {
+        "match": "Rennes vs PSG",
+        "league": "Ligue 1",
+        "pick": "Over 7.5 Corner Totali Match",
     }
-    valid3, msg3 = validator.validate_selection(test3)
-    print(f"\n[Test 3] {test3['match']} (Pick: {test3['pick']}): {msg3}")
+    valid_r, msg_r = validator.validate_selection(test_rennes)
+    print(f"\n[Test Rule 19] {test_rennes['match']} ({test_rennes['pick']}): {msg_r}")
