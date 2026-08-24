@@ -921,7 +921,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 
 ---
 
-### Le 14 Regole Inviolabili di BAgent (Implementate anche in `scripts/bet_guard_validator.py`):
+### Le 17 Regole Inviolabili di BAgent (Implementate anche in `scripts/bet_guard_validator.py`):
 1. **Analisi Profonda Assenze & Referti Medici**: Verificare sempre infortuni e formazioni.
 2. **Quota Combinata Target**: $\ge 3.50\times$ (Super Sicure) e $\ge 100\times$ (Lotto Matematico).
 3. **Validazione Visiva Live & Cashout**: Usare il cashout per blindare i profitti.
@@ -941,6 +941,12 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
     - *Talisman Check*: Presenza del capocannoniere/uomo chiave (es. Watkins non convocato per cessione imminente ad Al-Hilal).
     - *Spine Check*: Presenza del portiere titolare (Dibu Martínez vs Bizot), mediano di rottura (Onana/Douglas Luiz) e centrali.
     - *Youth Emergency Check*: Se la squadra schiera debuttanti U19 (es. 18enne Hemmings) ed è decimata, scatta il BAN IMMEDIATO da mercati a favore (MultiGol o Corner) e si punta invece A FAVORE DELL'AVVERSARIO (1X / Over Gol avversario) o si evita la gara!
+17. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
+    - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo) per essere concatenati in multiple da 5-9 eventi.
+    - *Regola Operativa*:
+      1. **Massimo 3 o 4 Eventi per Schedina** (Quota target $3.50\times - 5.50\times$ con Bonus): Ritorno al modello matematico vincente del 19 Agosto (100% Cassa).
+      2. **Priorità a Mercati di Squadra e Linee Protette**: Doppie Chance con Gol (1X + Over 1.5 / X2 + Over 1.5), Corner di Squadra Asimmetrici (Over 4.5/5.5 Corner della favorita in casa), MultiGol 1-3.
+      3. **Falli Giocatore SOLO in Singola o Doppia di Valore Certificato**, mai come riempitivo di multiple lunghe!
 
 ---
 
