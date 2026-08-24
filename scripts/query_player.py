@@ -14,6 +14,10 @@ import argparse
 import unicodedata
 from pathlib import Path
 
+# Force UTF-8 encoding for cross-platform terminal compatibility
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = ROOT / "storage" / "database" / "bagent.db"
 
