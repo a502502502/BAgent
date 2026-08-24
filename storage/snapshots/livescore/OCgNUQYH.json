@@ -1,0 +1,114 @@
+{
+  "mid": "OCgNUQYH",
+  "updated_at": "2026-08-24 20:15:41.356867",
+  "stats": {
+    "Expected goals (xG)": {
+      "home": "0.00",
+      "away": "0.00"
+    },
+    "Ball possession": {
+      "home": "0%",
+      "away": "0%"
+    },
+    "Total shots": {
+      "home": "0",
+      "away": "0"
+    },
+    "Shots on target": {
+      "home": "0",
+      "away": "0"
+    },
+    "Big chances": {
+      "home": "0",
+      "away": "0"
+    },
+    "Corner kicks": {
+      "home": "0",
+      "away": "0"
+    },
+    "xG on target (xGOT)": {
+      "home": "0.00",
+      "away": "0.00"
+    },
+    "Shots off target": {
+      "home": "0",
+      "away": "0"
+    },
+    "Blocked shots": {
+      "home": "0",
+      "away": "0"
+    },
+    "Shots inside the box": {
+      "home": "0",
+      "away": "0"
+    },
+    "Shots outside the box": {
+      "home": "0",
+      "away": "0"
+    },
+    "Hit the woodwork": {
+      "home": "0",
+      "away": "0"
+    },
+    "Touches in opposition box": {
+      "home": "0",
+      "away": "0"
+    },
+    "Accurate through passes": {
+      "home": "0",
+      "away": "0"
+    },
+    "Offsides": {
+      "home": "0",
+      "away": "0"
+    },
+    "Free kicks": {
+      "home": "0",
+      "away": "0"
+    },
+    "Expected assists (xA)": {
+      "home": "0.00",
+      "away": "0.00"
+    },
+    "Throw ins": {
+      "home": "0",
+      "away": "0"
+    },
+    "Fouls": {
+      "home": "0",
+      "away": "0"
+    },
+    "Duels won": {
+      "home": "0",
+      "away": "0"
+    },
+    "Clearances": {
+      "home": "0",
+      "away": "0"
+    },
+    "Interceptions": {
+      "home": "0",
+      "away": "0"
+    },
+    "Errors leading to shot": {
+      "home": "0",
+      "away": "0"
+    },
+    "Errors leading to goal": {
+      "home": "0",
+      "away": "0"
+    },
+    "Goalkeeper saves": {
+      "home": "0",
+      "away": "0"
+    },
+    "xGOT faced": {
+      "home": "0.00",
+      "away": "0.00"
+    },
+    "Goals prevented": {
+      "home": "0.00",
+      "away": "0.00"
+    }
+  }
+}
