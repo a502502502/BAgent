@@ -54,11 +54,16 @@ class BetGuardValidator:
         if is_central_penetration_team and any(term in pick.lower() for term in ["corner squadra", "cornersquadra", "corner sq", "corner team"]) and any(th in pick for th in ["5.5", "6.5", "7.5"]):
             return False, f"[BLOCKED - RULE 17] Trappola Corner Goleada Centrale ({match_name}): squadra da penetrazione verticale/centrale. Vietato Over Corner Squadra >5.5! Usare Combo Risultato/Gol o Tiri."
 
-        # REGOLA #18: Asimmetria dei Falli (Possesso vs Non Possesso)
-        if is_high_possession_favorite and any(term in pick.lower() for term in ["falli commessi squadra", "falli squadra favorita", "team fouls"]) and ("over" in pick.lower()):
-            return False, f"[BLOCKED - RULE 18] Asimmetria Falli ({match_name}): la favorita di possesso palla NON commette falli alti. Giocare Over Falli solo sulla sfavorita o Falli Totali Match!"
+        # REGOLA #20: Audit Rosa SQLite Obbligatorio su Giocatori
+        player_name = match_data.get("player_target")
+        if player_name and not match_data.get("player_verified_in_db", False):
+            return False, f"[BLOCKED - RULE 20] Il giocatore target '{player_name}' non è stato verificato nel DB SQLite (storage/database/bagent.db). Eseguire prima query_player.py!"
 
-        return True, f"[APPROVED] Conforme a tutte le 19 Regole Inviolabili."
+        # REGOLA #21 & #22: Rassegna Stampa Obbligatoria Pre-Calcolo
+        if not match_data.get("press_scanned", False):
+            return False, f"[BLOCKED - RULE 21/22] Rassegna Stampa non eseguita per {match_name} ({league}). TASSATIVO leggere Gazzetta/BBC/Marca prima del calcolo quote!"
+
+        return True, f"[APPROVED] Conforme a tutte le 22 Regole Inviolabili."
 
     def validate_ticket_set(self, active_tickets: list[list[dict]]) -> tuple[bool, str]:
         """
