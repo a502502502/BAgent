@@ -554,6 +554,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **13** | **21/08 20:30** | **🛡️ SISTEMA A CORREZIONE D'ERRORE (4)** *(Marsiglia, Stoccarda, Dasilva)* | **4 eventi** | **30.00 €** | **Sistema** | **⏱️ CONCLUSO** | *(Mars. 2-0 ✅, Stocc. 0-2 ✅)* | **-** | **-** |
 | **14** | **21/08 23:05** | **💎 SESTINA NOTTURNA OVERSEAS** *(Jaguares, The Strongest, Cashmere, Western, Tigres, Upper Hutt)* | **6 eventi** | **20.00 €** | **5.03×** | **⏱️ IN CORSO (Jaguares 1-0 al 17'!)** | **(Pot. +106.71 €)** | **(Pot. +86.71 €)** | **-** |
 | **28** | **25/08** | **🇰🇷 TRIPLA K LEAGUE 1** *(Gimcheon-Jeonbuk DC X2, Jeju-Pohang Under 2.5, Seoul-Bucheon Over 2.5 — costruita con Regola #27, forma reale + classifica)* | 3 eventi | **40.00 €** | **3.78×** | **🛡️ CASHOUT LIVE (82')** *(Leg 3 Over 2.5 a rischio, cashback preso a scopo assicurativo)* | **+10.00 €** | **-30.00 €** | **-** |
+| **29** | **25/08 sera** | **🌍 MULTIPLA MLS AMERICAS SERALE** *(Brann W Over2.5, Sabah-Hapoel O1.5 Cartellini Sq.1, Valencia-Betis Under2.5, Lask-Celtic O1.5, Bodo/Glimt O8.5 Corner, Juventude Under2.5, Goianiense-Botafogo Under2.5)* | 7 eventi | **10.00 €** | **10.96×** | **⏱️ IN CORSO** | **(Pot. +120.56 €)** | **(Pot. +110.56 €)** | **-** |
 
 ---
 
@@ -777,6 +778,19 @@ Dati recuperati programmaticamente con `FootballExternalCollector` (`services/fo
 **Lezione di processo**: prima versione della tabella (senza controllo forma reale) prevedeva "1 Seoul" secco — corretto in Over 2.5 dopo aver scoperto che l'avversario Bucheon era la squadra più in forma del campionato, non un underdog. Vedi Regola #27.
 
 **Esito Live — Cashout all'82'**: al momento della decisione il punteggio era Gimcheon-Jeonbuk 0-0 (Leg 1 solido), Jeju-Pohang 0-2 (Leg 2 al limite esatto, zero gol di margine), Seoul-Bucheon 1-0 (Leg 3 a rischio, servivano 2 gol in ~8 minuti). Probabilità congiunta stimata ~5-9%. Preso il cashback di 10.00 € offerto da Netwin (pari a un'implicita ~9% di probabilità di vittoria vista dal bookmaker) invece di rischiare l'intero stake — coerente con la regola di Assicurazione & Cashout Matematico quando la varianza residua è alta e il tempo di recupero scarso.
+
+---
+
+### 🌍 Ticket #29: Multipla Serale 7 Eventi (Stake 10.00 € → Pot. 120.56 € con bonus) — costruita con analisi xG/classifica approfondita su richiesta esplicita di "recupero"
+* **Stake**: 10.00 € | **Quota Totale (con bonus Netwin)**: 10.96× | **Vincita Potenziale**: **120.56 €**
+* **Stato**: In Corso ⏱️ | **Ref/screenshot confermato dall'utente su Netwin**
+1. [18:00] **SK Brann - FK Austria Wien** (UEFA Champions League Donne) ➔ **Over 2.5 Gol** @1.37 — entrambe 4.0 gol fatti/gara media in Coppa
+2. [18:45] **Sabah Masazir - Hapoel Beer Sheva** (UEFA Champions League) ➔ **Over 1.5 Cartellini Squadra 1 (Sabah)** @1.39 — ⚠️ *pick inserita direttamente su Netwin, diversa dalla raccomandazione originale (Over 1.5 Gol); mercato cartellini non analizzato da BAgent*
+3. [21:00] **Valencia - Real Betis** (LaLiga) ➔ **Under 2.5 Gol** @1.66 — Lo Celso ed Ezzalzouli (Betis) infortunati, xG basso da entrambe le parti
+4. [21:00] **LASK Linz - Celtic** (UEFA Champions League, ritorno) ➔ **Over 1.5 Gol** @1.14 — xG entrambe >2/gara in campionato, Lask deve rimontare lo 0-3 dell'andata
+5. [21:00] **Bodo Glimt - Nijmegen** (UEFA Champions League, ritorno) ➔ **Over 8.5 Corner Totali (esc. TS)** @1.37 — xG Bodo 2.47 fatti/0.75 subiti, avanti 3-1 dall'andata
+6. [26/08 00:30] **Juventude RS - CRB** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.48 — Juventude 2° in classifica, miglior difesa del torneo (0.1 gol subiti/gara in casa)
+7. [26/08 00:30] **Goianiense GO - Botafogo SP** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.50 — Δ classifica solo 2 punti (11° vs 14°), mercato protetto per Regola #14; media 1.8 gol totali/gara nelle ultime 5 di Atletico Goianiense
 
 ---
 
