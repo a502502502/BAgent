@@ -174,6 +174,72 @@ class FootballExternalCollector:
     def odds(self, fixture_id: int) -> dict:
         return self._get("odds", {"fixture": fixture_id})
 
+    def list_available_markets(self, fixture_id: int) -> list[str]:
+        """
+        Elenca tutti i nomi di mercato disponibili per una fixture, su tutti
+        i bookmaker restituiti da API-Football (es. Bet365, 10Bet...).
+
+        Utile per scoprire in anticipo se un mercato "di nicchia" (falli
+        giocatore, cartellini giocatore, corner squadra...) esiste prima di
+        andare a cercarlo a mano su Netwin/Domusbet.
+        """
+        raw = self.odds(fixture_id)
+        resp = raw.get("response", [])
+        if not resp:
+            return []
+        markets: set[str] = set()
+        for bm in resp[0].get("bookmakers", []):
+            for bet in bm.get("bets", []):
+                markets.add(bet["name"])
+        return sorted(markets)
+
+    def player_prop_odds(
+        self,
+        fixture_id: int,
+        market: str,
+        bookmaker: Optional[str] = None,
+    ) -> list[dict[str, Any]]:
+        """
+        Estrae le quote per un mercato "per giocatore" (es. 'Player Fouls
+        Committed', 'Player to be booked', 'Player Shots On Target').
+
+        `market` fa match parziale case-insensitive sul nome del mercato
+        (es. "fouls committed" trova "Player Fouls Committed").
+        `bookmaker` opzionale filtra su un singolo bookmaker (es. "Bet365");
+        se omesso, restituisce i risultati di TUTTI i bookmaker disponibili.
+
+        Ritorna una lista di dict: {bookmaker, market, player, line, odd}.
+        Nota: sono le quote del bookmaker restituito da API-Football (di
+        solito Bet365/10Bet), NON quelle di Netwin/Domusbet — usare questo
+        metodo per decidere a colpo d'occhio quali giocatori/soglie valgono
+        la pena, poi confermare il numero esatto su Netwin prima di giocare.
+        """
+        raw = self.odds(fixture_id)
+        resp = raw.get("response", [])
+        if not resp:
+            return []
+
+        market_lower = market.lower()
+        out: list[dict[str, Any]] = []
+        for bm in resp[0].get("bookmakers", []):
+            bm_name = bm.get("name", "")
+            if bookmaker and bookmaker.lower() != bm_name.lower():
+                continue
+            for bet in bm.get("bets", []):
+                if market_lower not in bet["name"].lower():
+                    continue
+                for v in bet.get("values", []):
+                    value = v.get("value", "")
+                    player, _, line = value.partition(" - ")
+                    out.append({
+                        "bookmaker": bm_name,
+                        "market": bet["name"],
+                        "player": player.strip() or value,
+                        "line": line.strip(),
+                        "odd": v.get("odd"),
+                    })
+        return out
+
     def fixture_stats(self, fixture_id: int) -> dict:
         """Statistiche della partita: possesso, tiri, corner, ecc."""
         return self._get("fixtures/statistics", {"fixture": fixture_id})
