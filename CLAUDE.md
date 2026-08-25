@@ -553,6 +553,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **12** | **21/08 20:30** | **👑 TRIPLA D'ORO SERALE NETWIN** *(Osimhen, Stoccarda, Arsenal)* | **3 eventi** | **50.00 €** | **2.57×** | **⏱️ CONCLUSO** | *(Stocc. 0-2 ✅, Ars. 3-0 ✅)* | **-** | **-** |
 | **13** | **21/08 20:30** | **🛡️ SISTEMA A CORREZIONE D'ERRORE (4)** *(Marsiglia, Stoccarda, Dasilva)* | **4 eventi** | **30.00 €** | **Sistema** | **⏱️ CONCLUSO** | *(Mars. 2-0 ✅, Stocc. 0-2 ✅)* | **-** | **-** |
 | **14** | **21/08 23:05** | **💎 SESTINA NOTTURNA OVERSEAS** *(Jaguares, The Strongest, Cashmere, Western, Tigres, Upper Hutt)* | **6 eventi** | **20.00 €** | **5.03×** | **⏱️ IN CORSO (Jaguares 1-0 al 17'!)** | **(Pot. +106.71 €)** | **(Pot. +86.71 €)** | **-** |
+| **28** | **25/08** | **🇰🇷 TRIPLA K LEAGUE 1** *(Gimcheon-Jeonbuk DC X2, Jeju-Pohang Under 2.5, Seoul-Bucheon Over 2.5 — costruita con Regola #27, forma reale + classifica)* | 3 eventi | **40.00 €** | **3.78×** | **⏱️ IN CORSO** | **(Pot. +151.20 €)** | **(Pot. +111.20 €)** | **-** |
 
 ---
 
@@ -763,6 +764,19 @@ Dati recuperati programmaticamente con `FootballExternalCollector` (`services/fo
 3. La quota "più sicura" del Ticket #22 (Zaccagni @1.20) è quella saltata per un pelo (1 fallo subito contro gli 1.5 richiesti) — ulteriore promemoria che le quote basse sui prop-giocatore non eliminano la varianza individuale.
 
 *Nota tecnica*: `FootballExternalCollector.player_stats(fixture_id)` restituisce minuti giocati e `fouls.committed` / `fouls.drawn` per ogni giocatore — fonte molto più rapida di una verifica manuale su Sofascore per liquidare ticket con molte leg su singolo giocatore. Utilizzare questo endpoint per le prossime retrospettive.
+
+---
+
+### 🇰🇷 Ticket #28: Tripla K League 1 (Stake 40.00 € → Pot. 151.20 €) — prima applicazione della Regola #27
+* **Stake**: 40.00 € | **Quota Base**: 3.78× | **Vincita Potenziale**: **151.20 €** (bonus Netwin non confermato)
+* **Stato**: In Corso ⏱️
+1. **Gimcheon Sangmu - Jeonbuk** ➔ **DC X2 (Jeonbuk o pareggio)** @1.30 — Gimcheon 11° (26pt, 14 pareggi su 24!), Jeonbuk 3° (37pt), distacco reale 11 punti
+2. **Jeju United - Pohang** ➔ **Under 2.5 Gol** @1.57 — Jeju 5° (35pt), 0 gol subiti in casa nelle ultime 2; Pohang 7° (31pt), appena spento 0-3 a Bucheon
+3. **Seoul - Bucheon** ➔ **Over 2.5 Gol** @1.85 — Seoul 1° in classifica, miglior attacco del torneo (46 gol/24 gare); Bucheon 9° ma in forma esplosiva (3-0 su Pohang, 3-2 su Jeonbuk)
+
+**Lezione di processo**: prima versione della tabella (senza controllo forma reale) prevedeva "1 Seoul" secco — corretto in Over 2.5 dopo aver scoperto che l'avversario Bucheon era la squadra più in forma del campionato, non un underdog. Vedi Regola #27.
+
+---
 
 ## Sessione 22 Agosto 2026 (Serale) — I 3 Ticket Ufficiali in Gioco su Netwin
 
