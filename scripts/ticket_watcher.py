@@ -78,6 +78,10 @@ def eval_leg(market: str, goals_home: int | None, goals_away: int | None) -> str
         return "❌ PERSA" if total > threshold else f"✅ in corso, regge ({total}/{int(threshold)} gol max)"
 
 
+def event_key(ev: dict) -> str:
+    return f"{ev['minute']}_{ev['extra']}_{ev['type']}_{ev['player']}"
+
+
 def main() -> None:
     data = load_watch()
     c = FootballExternalCollector()
@@ -101,11 +105,31 @@ def main() -> None:
             any_change = True
         leg["last_state"] = state_key
 
+        # Eventi nuovi (gol/cartellini/sostituzioni) rispetto all'ultimo controllo
+        seen = set(leg.get("seen_events", []))
+        new_event_lines = []
+        if status not in ("NS",):
+            for ev in c.events(leg["fixture_id"]):
+                key = event_key(ev)
+                if key in seen:
+                    continue
+                seen.add(key)
+                if ev["type"] == "subst":
+                    continue  # troppo rumore per una notifica, si tiene solo gol/cartellini
+                extra_txt = f"+{ev['extra']}" if ev.get("extra") else ""
+                icon = "⚽" if ev["type"] == "Goal" else ("🟨" if ev.get("detail") == "Yellow Card" else "🟥")
+                new_event_lines.append(f"    {icon} {ev['minute']}{extra_txt}' {ev['player']} ({ev['team']})")
+        leg["seen_events"] = list(seen)
+        if new_event_lines:
+            any_change = True
+
         verdict = eval_leg(leg["market"], gh, ga)
         score_txt = f"{gh}-{ga}" if gh is not None else "-"
         status_txt = f"{status} {elapsed}'" if elapsed else status
         lines.append(f"<b>{leg['label']}</b>")
         lines.append(f"  {home} {score_txt} {away} | {status_txt}")
+        if new_event_lines:
+            lines.extend(new_event_lines)
         lines.append(f"  Pick: {leg['market']} @{leg['odd']} → {verdict}\n")
 
     lines.append(f"Quota totale: {data['total_odd']}× | Stake: {data['stake']}€")
