@@ -555,7 +555,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **14** | **21/08 23:05** | **💎 SESTINA NOTTURNA OVERSEAS** *(Jaguares, The Strongest, Cashmere, Western, Tigres, Upper Hutt)* | **6 eventi** | **20.00 €** | **5.03×** | **⏱️ IN CORSO (Jaguares 1-0 al 17'!)** | **(Pot. +106.71 €)** | **(Pot. +86.71 €)** | **-** |
 | **28** | **25/08** | **🇰🇷 TRIPLA K LEAGUE 1** *(Gimcheon-Jeonbuk DC X2, Jeju-Pohang Under 2.5, Seoul-Bucheon Over 2.5 — costruita con Regola #27, forma reale + classifica)* | 3 eventi | **40.00 €** | **3.78×** | **🛡️ CASHOUT LIVE (82')** *(Leg 3 Over 2.5 a rischio, cashback preso a scopo assicurativo)* | **+10.00 €** | **-30.00 €** | **-** |
 | **29** | **25/08 sera** | **🌍 MULTIPLA MLS AMERICAS SERALE** *(Brann W Over2.5, Sabah-Hapoel O1.5 Cartellini Sq.1, Valencia-Betis Under2.5, Lask-Celtic O1.5, Bodo/Glimt O8.5 Corner, Juventude Under2.5, Goianiense-Botafogo Under2.5)* | 7 eventi | **10.00 €** | **10.96×** | ❌ **Perso (4/7)** *(Bodo/Glimt Corner, Juventude Under, Goianiense Under fallite)* | 0.00 € | **-10.00 €** | **-** |
-| **30** | **26/08 00:00-00:30** | **🔄 TICKET DI RECUPERO NOTTURNO (Betsson)** *(Deportivo Madryn-Godoy Cruz, Juventude-CRB, Goianiense-Botafogo — tutte Under 2.5)* | 3 eventi | **20.00 €** | **3.43×** | ❌ **Perso (1/3)** *(Madryn-Godoy Cruz 2-0 ✅; Juventude-CRB e Goianiense-Botafogo erano le stesse partite del Ticket #29, già finite Over 2.5 ❌❌)* | 0.00 € | **-20.00 €** | **-** |
+| **30** | **26/08 00:00-00:30** | **🔄 TICKET DI RECUPERO NOTTURNO (Betsson)** *(2 de Mayo-Guarani DC1X, Deportivo Madryn-Godoy Cruz Under2.5, Juventude-CRB Under2.5, Goianiense-Botafogo Under2.5)* | 4 eventi | **20.00 €** | **4.94×** | ❌ **Perso (2/4)** *(2 de Mayo-Guarani 0-0 ✅, Madryn-Godoy Cruz 2-0 ✅; Juventude-CRB 2-1 ❌ e Goianiense-Botafogo 3-0 ❌ — stesse partite del Ticket #29, già finite Over 2.5)* | 0.00 € | **-20.00 €** | **-** |
 
 ---
 
@@ -799,14 +799,16 @@ Dati recuperati programmaticamente con `FootballExternalCollector` (`services/fo
 
 ---
 
-### 🔄 Ticket #30: Recupero Notturno su Betsson (Stake 20.00 € → Pot. 68.55 €) — costruito dopo la chiusura del Ticket #29
-* **Stake**: 20.00 € | **Quota Totale**: 3.43× | **Vincita Potenziale**: 68.55 €
-* **Stato**: ❌ **Concluso — Perso (1/3)** | **Netto: -20.00 €**
-1. [26/08 00:00] **Deportivo Madryn - Godoy Cruz** (Argentina Primera Nacional) ➔ **Under 2.5 Gol** @1.42 — Δ classifica 0 punti (5° vs 6° a pari punti), entrambe in ottima forma, H2H stagionale diretto 0-0 ➔ **FT 2-0 (2 gol) ✅**
-2. [26/08 00:30] **Juventude RS - CRB** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.62 — *stessa identica partita della leg 6 del Ticket #29* ➔ **FT 2-1 (3 gol) ❌**
-3. [26/08 00:30] **Atlético Goianiense - Botafogo SP** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.49 — *stessa identica partita della leg 7 del Ticket #29* ➔ **FT 3-0 (3 gol) ❌**
+### 🔄 Ticket #30: Recupero Notturno su Betsson (Stake 20.00 € → Pot. 98.77 €) — costruito dopo la chiusura del Ticket #29
+* **Stake**: 20.00 € | **Quota Totale**: 4.94× | **Vincita Potenziale**: 98.77 €
+* **Stato**: ❌ **Concluso — Perso (2/4)** | **Netto: -20.00 €**
+* *Nota di correzione*: registrato inizialmente come 3 selezioni (errore di trascrizione, mancava la prima gamba) — corretto dopo che l'utente ha mostrato lo screenshot reale del ticket Betsson.
+1. [25/08 23:30] **CS 2 de Mayo - Club Guarani** (Paraguay Primera División) ➔ **Doppia Chance 1X** @1.44 ➔ **FT 0-0 ✅**
+2. [26/08 00:00] **Deportivo Madryn - Godoy Cruz** (Argentina Primera Nacional) ➔ **Under 2.5 Gol** @1.42 — Δ classifica 0 punti (5° vs 6° a pari punti), entrambe in ottima forma, H2H stagionale diretto 0-0 ➔ **FT 2-0 (2 gol) ✅**
+3. [26/08 00:30] **Juventude RS - CRB** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.62 — *stessa identica partita della leg 6 del Ticket #29* ➔ **FT 2-1 (3 gol) ❌**
+4. [26/08 00:30] **Atlético Goianiense - Botafogo SP** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.49 — *stessa identica partita della leg 7 del Ticket #29* ➔ **FT 3-0 (3 gol) ❌**
 
-**Lezione di processo**: le leg 2 e 3 duplicano esattamente due partite già perse nel Ticket #29 (stesso mercato, bookmaker diverso) — la sessione notturna aveva notato la sovrapposizione (Regola #15) ma l'aveva considerata accettabile perché il Ticket #29 era già chiuso/perso al momento del piazzamento, quindi senza rischio di correlazione tra ticket *attivi* contemporaneamente. Corretto in linea di principio, ma il risultato mostra che ripetere la stessa analisi (Under 2.5) su due partite già sfavorevoli in un altro ticket non ha cambiato l'esito — un promemoria che un'analisi solida non garantisce risultati diversi alla seconda occasione sulla stessa gara.
+**Lezione di processo**: le leg 3 e 4 duplicano esattamente due partite già perse nel Ticket #29 (stesso mercato, bookmaker diverso) — la sessione notturna aveva notato la sovrapposizione (Regola #15) ma l'aveva considerata accettabile perché il Ticket #29 era già chiuso/perso al momento del piazzamento, quindi senza rischio di correlazione tra ticket *attivi* contemporaneamente. Corretto in linea di principio, ma il risultato mostra che ripetere la stessa analisi (Under 2.5) su due partite già sfavorevoli in un altro ticket non ha cambiato l'esito — un promemoria che un'analisi solida non garantisce risultati diversi alla seconda occasione sulla stessa gara.
 
 ---
 
