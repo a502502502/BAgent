@@ -158,7 +158,7 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
   - 🛡️ **Assicurazione & Cashout Matematico**: Quando i primi eventi della schedina sono già vinti (es. Kaya Over 2.5 preso al 62' e Mariupol avanti 0-1), usare il tasto **Cashout su Netwin** o una singola di copertura sull'ultimo match per blindare il **100% di profitto netto garantito**, azzerando la varianza!
 - Quota combinata target: ≥ 3.50× (Super Sicure) fino a 20-30× (Alta Quota)
 - Probabilità minima per selezione in Super Sicure: > 80% (Media > 85%)
-- Verificare quote reali su **Netwin** (non stime)
+- **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
 ---
@@ -353,7 +353,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
   - 🛡️ **Assicurazione & Cashout Matematico**: Quando i primi eventi della schedina sono già vinti (es. Kaya Over 2.5 preso al 62' e Mariupol avanti 0-1), usare il tasto **Cashout su Netwin** o una singola di copertura sull'ultimo match per blindare il **100% di profitto netto garantito**, azzerando la varianza!
 - Quota combinata target: ≥ 3.50× (Super Sicure) fino a 20-30× (Alta Quota)
 - Probabilità minima per selezione in Super Sicure: > 80% (Media > 85%)
-- Verificare quote reali su **Netwin** (non stime)
+- **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
 ---
@@ -634,6 +634,10 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 29. **BAN UNDER 2.5 GOL SULLE LEGHE MINORI — USARE UNDER 3.5 O MERCATI ALTERNATIVI**:
     - *Analisi*: Pattern osservato ripetutamente su campionati minori (Serie B Brasiliana, Primera Nacional Argentina, ecc.): le selezioni Under 2.5 Gol saltano con frequenza sproporzionata rispetto a quanto la forma recente/classifica suggerirebbe. Conferma diretta nel Ticket #29/#30 (25-26 Agosto): Juventude RS-CRB e Atlético Goianiense-Botafogo SP, entrambe Under 2.5 costruite su dati solidi (miglior difesa del torneo per Juventude, Δ classifica ≤3 per Goianiense-Botafogo), sono saltate entrambe — una per xG di partita reale sopra soglia (4.0), l'altra per un episodio di finalizzazione clinica sopra media (Goianiense 3 gol da xG 1.93). Le leghe minori hanno più varianza strutturale (arbitraggio meno prevedibile, rose meno stabili, meno dati storici affidabili) che rende la soglia stretta 2.5 particolarmente fragile.
     - *Regola Fondamentale*: **Nelle leghe minori (fuori dai campionati Top-5 europei e dalle Coppe UEFA), MAI giocare Under 2.5 Gol secco. Preferire sempre Under 3.5 Gol (margine di sicurezza maggiore) oppure spostarsi su un mercato alternativo (Doppia Chance, Corner Totali, Cartellini) dove la varianza strutturale delle leghe minori pesa meno.**
+30. **THE ODDS API PER LE LINEE ALTERNATIVE (Under 3.5 e oltre) — GRATIS, GIÀ ATTIVA**:
+    - *Analisi*: `services/football/external/sources/odds_api.py` (`OddsAPICollector`) ha una chiave già configurata in `.env`, piano gratuito 500 richieste/mese. Copre esplicitamente Brazil Serie B e Argentina Primera División tra gli altri. Verificato il 26 Agosto: `get_event_odds(sport_key, event_id, markets="alternate_totals")` restituisce le linee 1.5/2.5/3.5+ da 7+ bookmaker reali (Pinnacle, LeoVegas, Coral, Ladbrokes, Codere...) — esattamente il dato che serve per applicare la Regola #29 con un numero reale, non solo per principio.
+    - *Attenzione ai costi*: la chiamata bulk (`get_odds`, 1X2 + Over/Under 2.5 su tutta la giornata di un campionato) costa pochissimo; la chiamata per singolo evento sui mercati alternativi (`get_event_odds`) costa **2-4 richieste per partita** — usarla solo sulle partite realmente in valutazione per una schedina, mai su un intero campionato a tappeto.
+    - *Regola Fondamentale*: **Prima di consigliare Under 3.5 (o un'altra linea alternativa) su una lega minore per la Regola #29, controllare la quota reale via `OddsAPICollector.get_event_odds(..., markets="alternate_totals")` invece di limitarsi a menzionare il mercato senza numero.**
 
 ---
 
