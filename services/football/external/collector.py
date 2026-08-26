@@ -171,6 +171,33 @@ class FootballExternalCollector:
     def lineups(self, fixture_id: int) -> dict:
         return self._get("fixtures/lineups", {"fixture": fixture_id})
 
+    def events_raw(self, fixture_id: int) -> dict:
+        """Eventi grezzi della partita (gol, cartellini, sostituzioni)."""
+        return self._get("fixtures/events", {"fixture": fixture_id})
+
+    def events(self, fixture_id: int) -> list[dict]:
+        """
+        Eventi della partita in formato pulito, ordinati per minuto.
+        Ogni evento: {minute, type, detail, team, player, assist}.
+        type: 'Goal' | 'Card' | 'subst' | 'Var'
+        Fonte affidabile per notifiche live (gol/cartellini/sostituzioni con
+        minuto preciso) — preferire questa a Flashscore incidents_raw(), che
+        non e' documentata e richiede parsing di un formato proprietario.
+        """
+        raw = self.events_raw(fixture_id)
+        out = []
+        for ev in raw.get("response", []):
+            out.append({
+                "minute": ev["time"]["elapsed"],
+                "extra": ev["time"].get("extra"),
+                "type": ev["type"],
+                "detail": ev.get("detail"),
+                "team": ev["team"]["name"],
+                "player": (ev.get("player") or {}).get("name"),
+                "assist": (ev.get("assist") or {}).get("name"),
+            })
+        return out
+
     def odds(self, fixture_id: int) -> dict:
         return self._get("odds", {"fixture": fixture_id})
 
