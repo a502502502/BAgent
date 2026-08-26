@@ -199,7 +199,22 @@ class FootballExternalCollector:
         return out
 
     def odds(self, fixture_id: int) -> dict:
+        """Quote PRE-partita (fisse al momento del kickoff, non si aggiornano a match in corso)."""
         return self._get("odds", {"fixture": fixture_id})
+
+    def live_odds(self, fixture_id: Optional[int] = None) -> dict:
+        """
+        Quote LIVE (in-play), aggiornate in tempo reale per le partite in
+        corso. Utile per proporre una giocata riparatoria mentre un ticket
+        sta andando male: include mercati come 'To Win 2nd Half', 'Double
+        Chance', '3-Way Handicap', 'Over/Under Line' (soglia adattata al
+        punteggio attuale), 'Final Score' (con i risultati ormai impossibili
+        segnati 'suspended': True).
+        Senza fixture_id, restituisce TUTTE le partite live con quote
+        disponibili in quel momento (utile per scovare opportunita').
+        """
+        params = {"fixture": fixture_id} if fixture_id else {}
+        return self._get("odds/live", params)
 
     def list_available_markets(self, fixture_id: int) -> list[str]:
         """
