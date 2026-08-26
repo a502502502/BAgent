@@ -786,14 +786,14 @@ Dati recuperati programmaticamente con `FootballExternalCollector` (`services/fo
 
 ### 🌍 Ticket #29: Multipla Serale 7 Eventi (Stake 10.00 € → Pot. 120.56 € con bonus) — costruita con analisi xG/classifica approfondita su richiesta esplicita di "recupero"
 * **Stake**: 10.00 € | **Quota Totale (con bonus Netwin)**: 10.96× | **Vincita Potenziale**: **120.56 €**
-* **Stato**: In Corso ⏱️ | **Ref/screenshot confermato dall'utente su Netwin**
-1. [18:00] **SK Brann - FK Austria Wien** (UEFA Champions League Donne) ➔ **Over 2.5 Gol** @1.37 — entrambe 4.0 gol fatti/gara media in Coppa
-2. [18:45] **Sabah Masazir - Hapoel Beer Sheva** (UEFA Champions League, ritorno) ➔ **Over 1.5 Cartellini Squadra 1 (Sabah)** @1.39 — ⚠️ *pick inserita direttamente su Netwin, diversa dalla raccomandazione originale (Over 1.5 Gol); gamba più debole del ticket dopo analisi a posteriori (Regola #28): Sabah ha fatto **0 gialli** nelle ultime 2 gare UCL (0.67 gialli/gara di media). All'andata (Hapoel 2-1 Sabah) è stato **Hapoel** — non Sabah — a fare più falli e cartellini nonostante il 67% di possesso (12 falli/3 gialli Hapoel vs 6 falli/0 gialli Sabah), conferma della Regola #18 (chi ha il possesso fa più falli, non chi si difende). L'ipotesi tattica "Sabah dovrà fermare il gioco con i falli" non regge sui dati reali dell'andata.*
-3. [21:00] **Valencia - Real Betis** (LaLiga) ➔ **Under 2.5 Gol** @1.66 — Lo Celso ed Ezzalzouli (Betis) infortunati, xG basso da entrambe le parti
-4. [21:00] **LASK Linz - Celtic** (UEFA Champions League, ritorno) ➔ **Over 1.5 Gol** @1.14 — xG entrambe >2/gara in campionato, Lask deve rimontare lo 0-3 dell'andata
-5. [21:00] **Bodo Glimt - Nijmegen** (UEFA Champions League, ritorno) ➔ **Over 8.5 Corner Totali (esc. TS)** @1.37 — xG Bodo 2.47 fatti/0.75 subiti, avanti 3-1 dall'andata
-6. [26/08 00:30] **Juventude RS - CRB** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.48 — Juventude 2° in classifica, miglior difesa del torneo (0.1 gol subiti/gara in casa)
-7. [26/08 00:30] **Goianiense GO - Botafogo SP** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.50 — Δ classifica solo 2 punti (11° vs 14°), mercato protetto per Regola #14; media 1.8 gol totali/gara nelle ultime 5 di Atletico Goianiense
+* **Stato**: ❌ **PERSO (5/7 prese)** — bruciato dalla leg 5 (corner Bodø Glimt). Verificato via API-Football la notte 25-26/08.
+1. [18:00] **SK Brann - FK Austria Wien** (UEFA Champions League Donne) ➔ **Over 2.5 Gol** @1.37 — entrambe 4.0 gol fatti/gara media in Coppa → **✅ VINTA** (2-1 FT)
+2. [18:45] **Sabah Masazir - Hapoel Beer Sheva** (UEFA Champions League, ritorno) ➔ **Over 1.5 Cartellini Squadra 1 (Sabah)** @1.39 — ⚠️ *pick inserita direttamente su Netwin, diversa dalla raccomandazione originale (Over 1.5 Gol); gamba più debole del ticket dopo analisi a posteriori (Regola #28): Sabah ha fatto **0 gialli** nelle ultime 2 gare UCL (0.67 gialli/gara di media). All'andata (Hapoel 2-1 Sabah) è stato **Hapoel** — non Sabah — a fare più falli e cartellini nonostante il 67% di possesso (12 falli/3 gialli Hapoel vs 6 falli/0 gialli Sabah), conferma della Regola #18 (chi ha il possesso fa più falli, non chi si difende). L'ipotesi tattica "Sabah dovrà fermare il gioco con i falli" non regge sui dati reali dell'andata.* → **✅ VINTA** (2 gialli Sabah, match chiuso 5-2 AET)
+3. [21:00] **Valencia - Real Betis** (LaLiga) ➔ **Under 2.5 Gol** @1.66 — Lo Celso ed Ezzalzouli (Betis) infortunati, xG basso da entrambe le parti → **✅ VINTA** (0-1 FT)
+4. [21:00] **LASK Linz - Celtic** (UEFA Champions League, ritorno) ➔ **Over 1.5 Gol** @1.14 — xG entrambe >2/gara in campionato, Lask deve rimontare lo 0-3 dell'andata → **✅ VINTA** (4-1 dopo supplementari)
+5. [21:00] **Bodo Glimt - Nijmegen** (UEFA Champions League, ritorno) ➔ **Over 8.5 Corner Totali (esc. TS)** @1.37 — xG Bodo 2.47 fatti/0.75 subiti, avanti 3-1 dall'andata → **❌ PERSA** (3-0 FT ma solo **4-2 = 6 corner totali**, sotto la soglia 8.5 nonostante dominio totale e 10 uomini avversari dal 3' — nuova conferma della **Regola #17** (Trappola Corner nelle Goleate Centrali): gol da qualità individuale/centrale, non da azioni sulla fascia, non generano corner anche in vittorie nette)
+6. [26/08 00:30] **Juventude RS - CRB** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.48 — Juventude 2° in classifica, miglior difesa del torneo (0.1 gol subiti/gara in casa) — *irrilevante ai fini del ticket, già perso sulla leg 5*
+7. [26/08 00:30] **Goianiense GO - Botafogo SP** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.50 — Δ classifica solo 2 punti (11° vs 14°), mercato protetto per Regola #14; media 1.8 gol totali/gara nelle ultime 5 di Atletico Goianiense — *irrilevante ai fini del ticket, già perso sulla leg 5*
 
 ---
 
@@ -910,3 +910,35 @@ Dati recuperati programmaticamente con `FootballExternalCollector` (`services/fo
 ---
 
 *Ultimo aggiornamento: 25 agosto 2026 — BAgent (Retrospettiva esiti reali Ticket 22/23/25/26/27 verificata via API-Football, conflitto Git in CLAUDE.md risolto)*
+
+---
+
+## Sessione Notte 25-26 Agosto 2026 — Nuovo Mac, Live Betting, Ticket #29 Bruciato, Recupero
+
+### 🖥️ Setup Ambiente su Nuovo Computer
+Sessione ripresa da un secondo Mac. `.env` e `.venv` già presenti; **mancava il collegamento a `data/`** (solo `historical/` e `netwin_session/` locali). Risolto con symlink individuali da `data/*` → `/Users/flashmac/Google Drive/My Drive/B-Agent/BAgent/data/*` (bagent.db, matches.db, csv_import, football, cache, predictions, CSV storici). `bagent.db` aveva il journal file (stato dirty) → risolto con `PRAGMA wal_checkpoint`. **Nota per prossime sessioni**: se `data/` risulta vuota su un Mac nuovo, ricontrollare/ricreare questi symlink prima di qualunque query DB.
+
+### 🎫 Ticket #29 — Esito Finale: PERSO (5/7)
+Bruciato dalla leg 5 (Bodø Glimt Over 8.5 Corner Totali): 3-0 finale ma solo 6 corner totali. Le altre 4 leg già decise erano tutte vinte. Vedi dettaglio aggiornato nella sezione Ticket #29 sopra. **Conferma Regola #17** con un caso ancora più netto (10 uomini avversari per 87', dominio quasi totale, comunque pochi corner).
+
+### 📊 Live Betting su Bodø Glimt-Nijmegen — Netwin vs Betsson
+Analizzato lo scenario "0-0 tardivo da favorita schiacciante" (Nijmegen in 10 dal 3', Bodø 74% possesso) come possibile value bet live secondo la Strategia In-Play del CLAUDE.md. **Riscontro**: il mercato Netwin aveva già prezzato tutto (1X2 "1" @1.18, Over 1.5 @1.16 sotto quota minima) — niente value clamoroso. **Betsson offriva quote migliori sullo stesso mercato** (Over 2.5 Gol @1.75-1.80 vs @1.66 Netwin) e aveva un mercato Corner Live assente su Netwin. **Nuova prassi**: per le quote live, controllare sempre anche Betsson oltre a Netwin/Domusbet (estensione della Regola #25 al live, non solo al prematch).
+
+### 🏆 Tris Live Vincente su Betsson (formazioni verificate, Regola #16)
+Su richiesta di scansionare mercati live disponibili, proposta una tabella di 4 selezioni su Betsson (Bodø Glimt Over2.5/Over Corner, Birmingham-Brentford Over5.5, Doncaster-Middlesbrough Over2.5). L'utente ha chiesto controllo formazioni prima di fidarsi (partite di EFL Cup = rischio squadre rimaneggiate) — verificate via lineup API-Football: Brentford e Middlesbrough schieravano titolari veri (Callum Wilson, Luke Ayling), nessun'emergenza giovanili. Utente ha piazzato 3 delle 4 (escluso il corner) e **vinte tutte e 3**: Bodø Glimt 3-0, Birmingham-Brentford 1-6, Doncaster-Middlesbrough 1-3 FT.
+
+### 🔄 Costruzione Ticket di Recupero (post Ticket #29)
+Utente ha proposto Paraguay (2 De Mayo-Guarani, DC 1X @1.43) — analisi classifica/forma/H2H a favore ma **assenze non verificabili** (API-Football senza copertura infortuni per questa lega, dato onestamente segnalato come limite). Poi propostosi Deportivo Madryn-Godoy Cruz (Argentina Primera Nacional): Δ punti = 0, H2H diretto stagionale 0-0, Madryn miglior difesa recente → Under 2.5 @1.42.
+
+**Momento importante**: l'utente ha suggerito da screenshot dell'app due partite (Goianiense-Botafogo SP, Juventude-CRB) che si sono rivelate **le stesse identiche gambe 6-7 del Ticket #29 già perso** (CRB compariva come "Brasil AL" nel nome breve Betsson) — segnalato subito prima di procedere. Dato che il Ticket #29 era già chiuso perso, la Regola #15 (no duplicazione) non si applicava più (nessun rischio di correlazione tra ticket attivi), quindi rianalizzate come selezioni pulite: Juventude 2 gol fatti in 5 gare (attacco spento) vs CRB 0 gol subiti in 5 gare; Goianiense-Botafogo con Δ punti 2 (Regola #14). Entrambe Under 2.5.
+
+Controllato anche il mercato Cartellini (Regola #8, Sudamerica = ambiente valido) come alternativa: quote Betsson già ben prezzate rispetto alla media storica (~4.0-4.2 cartellini/gara vs linea 4.5), nessun value chiaro — l'utente ha confermato di tenere le 3 Under Gol.
+
+**Ticket finale costruito**: `reports/schedina_recupero_notte_25ago.html` — 3 selezioni (Madryn-Godoy Cruz Under2.5 @1.42, Juventude-CRB Under2.5 @1.62, Goianiense-Botafogo Under2.5 @1.49), quota combinata 3.43×, stake 20€ → potenziale 68.55€. Kickoff 00:00 e 00:30 (26/08).
+
+### 🐛 Nota tecnica: ricerca su Betsson
+Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scommesse`) a volte non riceve il testo se si clicca subito dopo una `navigate` — serve un secondo click esplicito sul campo (usare `find` per ottenere il `ref` se le coordinate falliscono) prima di digitare.
+
+---
+
+*Ultimo aggiornamento: notte 25-26 agosto 2026 — BAgent (Sessione multi-computer: setup Mac nuovo, esito Ticket #29, tris live vincente su Betsson, ticket di recupero costruito e in attesa di esito)*
