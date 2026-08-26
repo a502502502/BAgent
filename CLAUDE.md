@@ -554,7 +554,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **13** | **21/08 20:30** | **🛡️ SISTEMA A CORREZIONE D'ERRORE (4)** *(Marsiglia, Stoccarda, Dasilva)* | **4 eventi** | **30.00 €** | **Sistema** | **⏱️ CONCLUSO** | *(Mars. 2-0 ✅, Stocc. 0-2 ✅)* | **-** | **-** |
 | **14** | **21/08 23:05** | **💎 SESTINA NOTTURNA OVERSEAS** *(Jaguares, The Strongest, Cashmere, Western, Tigres, Upper Hutt)* | **6 eventi** | **20.00 €** | **5.03×** | **⏱️ IN CORSO (Jaguares 1-0 al 17'!)** | **(Pot. +106.71 €)** | **(Pot. +86.71 €)** | **-** |
 | **28** | **25/08** | **🇰🇷 TRIPLA K LEAGUE 1** *(Gimcheon-Jeonbuk DC X2, Jeju-Pohang Under 2.5, Seoul-Bucheon Over 2.5 — costruita con Regola #27, forma reale + classifica)* | 3 eventi | **40.00 €** | **3.78×** | **🛡️ CASHOUT LIVE (82')** *(Leg 3 Over 2.5 a rischio, cashback preso a scopo assicurativo)* | **+10.00 €** | **-30.00 €** | **-** |
-| **29** | **25/08 sera** | **🌍 MULTIPLA MLS AMERICAS SERALE** *(Brann W Over2.5, Sabah-Hapoel O1.5 Cartellini Sq.1, Valencia-Betis Under2.5, Lask-Celtic O1.5, Bodo/Glimt O8.5 Corner, Juventude Under2.5, Goianiense-Botafogo Under2.5)* | 7 eventi | **10.00 €** | **10.96×** | **⏱️ IN CORSO** | **(Pot. +120.56 €)** | **(Pot. +110.56 €)** | **-** |
+| **29** | **25/08 sera** | **🌍 MULTIPLA MLS AMERICAS SERALE** *(Brann W Over2.5, Sabah-Hapoel O1.5 Cartellini Sq.1, Valencia-Betis Under2.5, Lask-Celtic O1.5, Bodo/Glimt O8.5 Corner, Juventude Under2.5, Goianiense-Botafogo Under2.5)* | 7 eventi | **10.00 €** | **10.96×** | ❌ **Perso (4/7)** *(Bodo/Glimt Corner, Juventude Under, Goianiense Under fallite)* | 0.00 € | **-10.00 €** | **-** |
 
 ---
 
@@ -785,15 +785,17 @@ Dati recuperati programmaticamente con `FootballExternalCollector` (`services/fo
 ---
 
 ### 🌍 Ticket #29: Multipla Serale 7 Eventi (Stake 10.00 € → Pot. 120.56 € con bonus) — costruita con analisi xG/classifica approfondita su richiesta esplicita di "recupero"
-* **Stake**: 10.00 € | **Quota Totale (con bonus Netwin)**: 10.96× | **Vincita Potenziale**: **120.56 €**
-* **Stato**: In Corso ⏱️ | **Ref/screenshot confermato dall'utente su Netwin**
-1. [18:00] **SK Brann - FK Austria Wien** (UEFA Champions League Donne) ➔ **Over 2.5 Gol** @1.37 — entrambe 4.0 gol fatti/gara media in Coppa
-2. [18:45] **Sabah Masazir - Hapoel Beer Sheva** (UEFA Champions League, ritorno) ➔ **Over 1.5 Cartellini Squadra 1 (Sabah)** @1.39 — ⚠️ *pick inserita direttamente su Netwin, diversa dalla raccomandazione originale (Over 1.5 Gol); gamba più debole del ticket dopo analisi a posteriori (Regola #28): Sabah ha fatto **0 gialli** nelle ultime 2 gare UCL (0.67 gialli/gara di media). All'andata (Hapoel 2-1 Sabah) è stato **Hapoel** — non Sabah — a fare più falli e cartellini nonostante il 67% di possesso (12 falli/3 gialli Hapoel vs 6 falli/0 gialli Sabah), conferma della Regola #18 (chi ha il possesso fa più falli, non chi si difende). L'ipotesi tattica "Sabah dovrà fermare il gioco con i falli" non regge sui dati reali dell'andata.*
-3. [21:00] **Valencia - Real Betis** (LaLiga) ➔ **Under 2.5 Gol** @1.66 — Lo Celso ed Ezzalzouli (Betis) infortunati, xG basso da entrambe le parti
-4. [21:00] **LASK Linz - Celtic** (UEFA Champions League, ritorno) ➔ **Over 1.5 Gol** @1.14 — xG entrambe >2/gara in campionato, Lask deve rimontare lo 0-3 dell'andata
-5. [21:00] **Bodo Glimt - Nijmegen** (UEFA Champions League, ritorno) ➔ **Over 8.5 Corner Totali (esc. TS)** @1.37 — xG Bodo 2.47 fatti/0.75 subiti, avanti 3-1 dall'andata
-6. [26/08 00:30] **Juventude RS - CRB** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.48 — Juventude 2° in classifica, miglior difesa del torneo (0.1 gol subiti/gara in casa)
-7. [26/08 00:30] **Goianiense GO - Botafogo SP** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.50 — Δ classifica solo 2 punti (11° vs 14°), mercato protetto per Regola #14; media 1.8 gol totali/gara nelle ultime 5 di Atletico Goianiense
+* **Stake**: 10.00 € | **Quota Totale (con bonus Netwin)**: 10.96× | **Vincita Potenziale**: 120.56 €
+* **Stato**: ❌ **Concluso — Perso (4/7)** | **Netto: -10.00 €**
+1. [18:00] **SK Brann - FK Austria Wien** (UEFA Champions League Donne) ➔ **Over 2.5 Gol** @1.37 — entrambe 4.0 gol fatti/gara media in Coppa ➔ **FT 2-1 (3 gol) ✅**
+2. [18:45] **Sabah Masazir - Hapoel Beer Sheva** (UEFA Champions League, ritorno) ➔ **Over 1.5 Cartellini Squadra 1 (Sabah)** @1.39 — ⚠️ *pick inserita direttamente su Netwin, diversa dalla raccomandazione originale (Over 1.5 Gol); gamba più debole del ticket dopo analisi a posteriori (Regola #28): Sabah ha fatto **0 gialli** nelle ultime 2 gare UCL (0.67 gialli/gara di media). All'andata (Hapoel 2-1 Sabah) è stato **Hapoel** — non Sabah — a fare più falli e cartellini nonostante il 67% di possesso (12 falli/3 gialli Hapoel vs 6 falli/0 gialli Sabah), conferma della Regola #18 (chi ha il possesso fa più falli, non chi si difende). L'ipotesi tattica "Sabah dovrà fermare il gioco con i falli" non regge sui dati reali dell'andata.* ➔ **AET 5-2, Sabah 22 falli/2 gialli ✅** — la gara di ritorno (Sabah in rimonta disperata su un aggregato in bilico, tempi supplementari) ha prodotto un profilo di falli completamente diverso dall'andata: la pick ha vinto nonostante il precedente sfavorevole, promemoria che i dati di una singola gara precedente non garantiscono lo stesso pattern in un contesto diverso (qui con supplementari e maggiore disperazione)
+3. [21:00] **Valencia - Real Betis** (LaLiga) ➔ **Under 2.5 Gol** @1.66 — Lo Celso ed Ezzalzouli (Betis) infortunati, xG basso da entrambe le parti ➔ **FT 0-1 (1 gol) ✅**
+4. [21:00] **LASK Linz - Celtic** (UEFA Champions League, ritorno) ➔ **Over 1.5 Gol** @1.14 — xG entrambe >2/gara in campionato, Lask deve rimontare lo 0-3 dell'andata ➔ **AET 5-1 (6 gol) ✅**
+5. [21:00] **Bodo Glimt - Nijmegen** (UEFA Champions League, ritorno) ➔ **Over 8.5 Corner Totali (esc. TS)** @1.37 — xG Bodo 2.47 fatti/0.75 subiti, avanti 3-1 dall'andata ➔ **FT 3-0, solo 6 corner totali (4-2) ❌** — nuova conferma della Regola #17 (Trappola dei Corner nelle Goleate Centrali): Bodo ha vinto comodamente 3-0 ma con pochissimi corner propri, stesso pattern già visto su Roma 4-0 e Barcellona-Elche 0-5
+6. [26/08 00:30] **Juventude RS - CRB** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.48 — Juventude 2° in classifica, miglior difesa del torneo (0.1 gol subiti/gara in casa) ➔ **FT 2-1 (3 gol) ❌**
+7. [26/08 00:30] **Goianiense GO - Botafogo SP** (Brasile Serie B) ➔ **Under 2.5 Gol** @1.50 — Δ classifica solo 2 punti (11° vs 14°), mercato protetto per Regola #14; media 1.8 gol totali/gara nelle ultime 5 di Atletico Goianiense ➔ **FT 3-0 (3 gol) ❌**
+
+**Lezioni**: 4/7 vinte ma serviva 7/7 — ennesima conferma della Regola #26 (dispersione in troppi eventi). Le 2 gare brasiliane (le uniche non europee/regolamentate in senso stretto) sono state entrambe perse nonostante l'analisi approfondita — coerente con il pattern già visto nella retrospettiva di ieri (leghe minori più imprevedibili). La Regola #17 (Corner nelle Goleate) si conferma per la terza volta in pochi giorni.
 
 ---
 
