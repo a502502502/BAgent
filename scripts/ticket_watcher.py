@@ -82,6 +82,58 @@ def event_key(ev: dict) -> str:
     return f"{ev['minute']}_{ev['extra']}_{ev['type']}_{ev['player']}"
 
 
+def is_at_risk(market: str, gh: int | None, ga: int | None, elapsed: int | None, status: str) -> bool:
+    """Segnala una selezione sui gol come 'a rischio', per proporre di
+    guardare le quote live di riparazione. Criteri semplici, deliberatamente
+    prudenti (falsi positivi meglio di falsi negativi):
+      - Under X.5: il totale gol e' gia' al valore massimo consentito (un
+        solo gol in piu', di chiunque, la fa saltare)
+      - Over X.5: si e' nel secondo tempo e manca ancora almeno un gol
+    """
+    if gh is None or ga is None or status in ("NS", "FT", "AET", "PEN"):
+        return False
+    m = market.lower()
+    if "gol" not in m and "goal" not in m:
+        return False
+    import re
+    match = re.search(r"(over|under)\s*([\d.]+)", m)
+    if not match:
+        return False
+    direction, threshold = match.group(1), float(match.group(2))
+    total = gh + ga
+    if direction == "under":
+        return total >= threshold - 0.5  # es. soglia 2.5 -> a rischio da 2 gol in su
+    else:
+        return (elapsed or 0) >= 46 and total <= threshold - 0.5
+
+
+def format_live_odds(c: FootballExternalCollector, fixture_id: int) -> list[str]:
+    """Snapshot compatto delle quote live per una possibile riparazione.
+    Non propone nulla in autonomia -- mostra solo i mercati principali con
+    quota reale, la decisione resta a chi legge."""
+    try:
+        raw = c.live_odds(fixture_id)
+    except Exception as e:
+        return [f"    (quote live non disponibili: {e})"]
+    resp = raw.get("response", [])
+    if not resp:
+        return ["    (nessuna quota live al momento)"]
+    lines = ["    💡 <i>Quote live per riparazione:</i>"]
+    wanted_markets = {"Fulltime Result", "Double Chance", "Over/Under Line", "To Win 2nd Half", "3-Way Handicap"}
+    for market in resp[0].get("odds", []):
+        if market["name"] not in wanted_markets:
+            continue
+        vals = ", ".join(
+            f"{v['value']}"
+            + (f"({v['handicap']})" if v.get("handicap") else "")
+            + f"@{v['odd']}"
+            for v in market["values"] if not v.get("suspended")
+        )
+        if vals:
+            lines.append(f"      {market['name']}: {vals}")
+    return lines
+
+
 def main() -> None:
     data = load_watch()
     c = FootballExternalCollector()
@@ -130,7 +182,15 @@ def main() -> None:
         lines.append(f"  {home} {score_txt} {away} | {status_txt}")
         if new_event_lines:
             lines.extend(new_event_lines)
-        lines.append(f"  Pick: {leg['market']} @{leg['odd']} → {verdict}\n")
+        lines.append(f"  Pick: {leg['market']} @{leg['odd']} → {verdict}")
+
+        at_risk_now = is_at_risk(leg["market"], gh, ga, elapsed, status)
+        if at_risk_now and not leg.get("was_at_risk"):
+            lines.append("  ⚠️ <b>A RISCHIO</b> — valuta una riparazione:")
+            lines.extend(format_live_odds(c, leg["fixture_id"]))
+            any_change = True
+        leg["was_at_risk"] = at_risk_now
+        lines.append("")
 
     lines.append(f"Quota totale: {data['total_odd']}× | Stake: {data['stake']}€")
 
