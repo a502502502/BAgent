@@ -32,12 +32,12 @@ def push_realtime_match_update(qarabag_score: str, qarabag_min: str, cards_count
     now = datetime.now().strftime("%H:%M:%S")
     msg = (
         f"⚡ <b>AGGIORNAMENTO IN-PLAY REAL-TIME</b> ({now})\n\n"
-        f"👑 <b>TICKET #30 IN GIOCO (20.00 € @ 3.65× ➔ POT. 73.00 €):</b>\n"
+        f"👑 <b>TICKET #30 CONFERMATO (20.00 € @ 3.75× ➔ POT. 75.00 €):</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━\n"
         f"1️⃣ 🇦🇿 <b>Qarabağ vs FC Twente</b> ({qarabag_min})\n"
         f"   └ ⚽ Risultato: <b>{qarabag_score}</b>\n"
         f"   └ 🟨 Cartellini Totali nel Match: <b>{cards_count}</b>\n"
-        f"   └ 🎯 Nostra Giocata: <b>1X (DC @ 1.75) ➔ 🟢 ATTIVA & IN GESTIONE</b>\n\n"
+        f"   └ 🎯 Nostra Giocata: <b>Over 4.5 Cartellini Totali @ 1.80 ➔ 🟨 IN CORSO</b>\n\n"
         f"2️⃣ 🇱🇹 <b>Kauno Žalgiris vs Beşiktaş</b> ({besiktas_min})\n"
         f"   └ ⚽ Risultato: <b>{besiktas_score}</b>\n"
         f"   └ 🎯 Nostra Giocata: <b>Beşiktaş Over 1.5 Gol @ 1.50</b>\n\n"
@@ -45,8 +45,8 @@ def push_realtime_match_update(qarabag_score: str, qarabag_min: str, cards_count
         f"   └ 🚩 Corner Battuti dal PAOK: <b>{paok_corners} / 4</b>\n"
         f"   └ 🎯 Nostra Giocata: <b>PAOK Over 3.5 Corner @ 1.39</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━\n"
-        f"💰 <b>Vincita a Cassa</b>: <b>73.00 € (+53.00 € Netto)</b>\n"
-        f"🛡️ <i>Radar Live BAgent ricalibrato e attivo al 100%!</i>"
+        f"💰 <b>Vincita a Cassa</b>: <b>75.00 € (+55.00 € Netto)</b>\n"
+        f"🛡️ <i>Sintonizzato al 100% su Over 4.5 Cartellini di Rohit Saggi!</i>"
     )
     return send_telegram(msg)
 
