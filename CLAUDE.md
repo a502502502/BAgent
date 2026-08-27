@@ -639,6 +639,9 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
     - *Regola Fondamentale*: **Quando un ticket aperto arriva all'ultimo evento con 2+ gambe già vinte, il sistema DEVE generare e inviare automaticamente su Telegram l'alert con le 2 opzioni matematiche calcolate in Euro:**
       1. **Break-Even Insurance**: Stake $= \text{Stake Iniziale} / (\text{Quota Copertura} - 1)$ ➔ Rimborso 100% dello stake a P&L = 0.00 €.
       2. **Profit-Lock**: Stake $= \text{Vincita Potenziale} / \text{Quota Copertura}$ ➔ Incasso matematico identico e garantito in ogni scenario.
+32. **RISULTATO DI ANDATA OBBLIGATORIO IN TABELLA NELLE COPPE (KNOCKOUT TIE CONTEXT)**:
+    - *Principio Inviolabile*: Nelle partite di coppa a eliminazione diretta (Champions League, Europa League, Conference League, Coppe Nazionali, Copa Libertadores), il risultato della gara di andata è il **fattore tattico primario** che detta l'inerzia del match (chi deve rimontare spinge a testa bassa e concede contropiede/corner; chi gestisce un vantaggio ampio fa possesso e rallenta i ritmi).
+    - *Regola Operativa*: **In OGNI tabella di analisi, report HTML o riepilogo scommesse, per ciascuna partita di coppa con formula andata/ritorno DEVE ESSERE SEMPRE ed ESPLICITAMENTE indicato il risultato dell'andata** (es. `Hapoel Tel Aviv vs Atalanta (Andata: 0-0)`, `Brighton vs Tromsø (Andata: 2-1)`). Vietato omettere questo dato.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
