@@ -963,4 +963,23 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-*Ultimo aggiornamento: notte 25-26 agosto 2026 — BAgent (Sessione multi-computer: setup Mac nuovo, esito Ticket #29, tris live vincente su Betsson, ticket di recupero costruito e in attesa di esito)*
+## Sessione 27 Agosto 2026 — Play-off di Ritorno UEFA (Europa & Conference League)
+
+### 🛡️ Ticket #31 (Proposta): Tripla d'Acciaio Europea (Quota ~3.65× - 4.00× con Bonus)
+* **Filosofia**: Rispetto ferreo della Regola #26 (Max 3 eventi) e Sesto Senso (Regole #21, #22).
+1. [17:00] **FC Copenhagen vs Inter Turku** ➔ **1 + Over 1.5 Gol** @1.45 *(o 1 secco @1.29)*
+2. [16:45] **SC Freiburg vs Motherwell** ➔ **1 + Over 1.5 Gol** @1.40 *(Andata 1-3 Friburgo)*
+3. [16:45] **AS Monaco vs Górnik Zabrze** ➔ **Over 2.5 Gol Totali** @1.55 *(Andata 2-3 Monaco)*
+
+### 🚀 Ticket #32 (Proposta): Quaterna d'Oro Pesante (Quota 8.92× Base ➔ ~10.25× con Bonus)
+* **Filosofia**: Value combo a campo aperto sulle sfide di ritorno europee da dentro-o-fuori.
+1. [16:45] **AS Monaco vs Górnik Zabrze** ➔ **1 + Over 2.5 Gol** @1.85
+2. [17:00] **Brann vs PAOK Salonicco** ➔ **Gol (Entrambe Segnano)** @1.67 *(Andata 1-1)*
+3. [18:00] **Ajax vs FC Sion** ➔ **1 + Over 2.5 Gol** @1.75 *(Andata 2-4 Ajax)*
+4. [16:45] **SC Freiburg vs Motherwell** ➔ **1 + Over 2.5 Gol** @1.65
+
+*Eventuale 5ª gamba booster*: [18:30] **Brighton vs Tromsø** ➔ **1 + Over 2.5 Gol** @1.55 (Porta quota a **~16.50× con Bonus**).
+
+---
+
+*Ultimo aggiornamento: 27 agosto 2026 ore 00:20 — BAgent (Sessione Play-off UEFA Ritorno, Sesto Senso & Ticket d'Acciaio e Pesante registrati su GitHub)*
