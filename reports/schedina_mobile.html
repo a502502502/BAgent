@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BAgent Mobile — Schedine & Match Live</title>
+<style>
+  :root {
+    --bg: #090d16;
+    --card-bg: #111827;
+    --card-border: #1f2937;
+    --accent-blue: #38bdf8;
+    --accent-green: #34d399;
+    --accent-yellow: #fbbf24;
+    --accent-red: #f43f5e;
+    --accent-purple: #c084fc;
+    --text-primary: #f9fafb;
+    --text-muted: #9ca3af;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 12px 12px 80px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* TOP APP BAR */
+  .app-header {
+    background: linear-gradient(180deg, #111827 0%, #090d16 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .app-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .live-pill {
+    background: rgba(52,211,153,0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(52,211,153,0.3);
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 10.5px;
+    font-weight: 700;
+  }
+  .bankroll-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #1f2937;
+    text-align: center;
+  }
+  .b-item { background: #0f172a; padding: 6px; border-radius: 8px; font-size: 11px; }
+  .b-item span { display: block; color: var(--text-muted); font-size: 9.5px; }
+  .b-item strong { font-size: 12px; }
+
+  /* NAVIGATION TABS */
+  .nav-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    position: sticky;
+    top: 8px;
+    z-index: 99;
+    background: rgba(9, 13, 22, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 4px 0;
+  }
+  .tab-btn {
+    flex: 1;
+    background: #111827;
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+    padding: 8px 4px;
+    border-radius: 10px;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn.active {
+    background: #0369a1;
+    color: #fff;
+    border-color: var(--accent-blue);
+  }
+
+  /* CARDS */
+  .ticket-card {
+    background: #111827;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+  .ticket-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .ticket-tag {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--accent-yellow);
+  }
+  .ticket-odds-badge {
+    font-size: 17px;
+    font-weight: 900;
+    color: var(--accent-blue);
+    background: #0f172a;
+    padding: 2px 8px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+  }
+
+  .netwin-code-box {
+    background: #0b1120;
+    border: 1px dashed #38bdf8;
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .code-text { font-family: monospace; font-size: 13px; font-weight: 800; color: var(--accent-blue); }
+  .copy-btn {
+    background: var(--accent-blue);
+    color: #090d16;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .match-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 12px;
+  }
+  .match-row:last-child { border-bottom: none; }
+  .match-time { color: var(--text-muted); font-size: 10.5px; width: 38px; }
+  .match-name { flex: 1; font-weight: 600; padding: 0 6px; }
+  .match-pick {
+    background: rgba(56,189,248,0.15);
+    color: var(--accent-blue);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: right;
+  }
+  .match-odd { font-weight: 800; color: #fff; width: 44px; text-align: right; font-size: 11.5px; }
+
+  .ticket-footer {
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+  }
+  .stake-val { color: var(--accent-green); font-weight: 800; }
+  .win-val { color: #fff; font-weight: 800; font-size: 13px; }
+
+  /* MATCH CARDS (TABELLA 1 SU MOBILE) */
+  .match-card {
+    background: #111827;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .mc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .mc-title { font-size: 13.5px; font-weight: bold; color: #fff; }
+  .mc-badge { padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+  .mc-badge-conf { background: rgba(192,132,252,0.2); color: var(--accent-purple); }
+  .mc-badge-uel { background: rgba(56,189,248,0.2); color: var(--accent-blue); }
+  .mc-badge-liga { background: rgba(251,191,36,0.2); color: var(--accent-yellow); }
+  .mc-andata { font-size: 11px; color: var(--accent-yellow); font-weight: 600; margin-bottom: 6px; }
+  .mc-sense {
+    background: #0b1120;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    border-left: 2px solid var(--accent-blue);
+  }
+  .mc-stats { font-size: 10.5px; color: var(--text-muted); margin-top: 4px; }
+  .mc-pick-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0f172a;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  /* BOTTOM STICKY BAR */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--card-border);
+    padding: 10px 14px;
+    display: flex;
+    gap: 8px;
+    z-index: 999;
+  }
+  .btn-action {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+  }
+  .btn-wa { background: #16a34a; color: #fff; }
+  .btn-tg { background: #0284c7; color: #fff; }
+  .btn-copy { background: #334155; color: #fff; }
+
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-green);
+    color: #090d16;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 12px;
+    display: none;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+</style>
+</head>
+<body>
+
+<div id="toast" class="toast">✅ Copiato negli appunti!</div>
+
+<!-- TOP APP HEADER -->
+<div class="app-header">
+  <div class="app-brand">
+    <div class="brand-title">🚀 BAgent Mobile</div>
+    <div class="live-pill">● 27 AGOSTO LIVE</div>
+  </div>
+  <div class="bankroll-bar">
+    <div class="b-item"><span>BANKROLL</span><strong style="color:var(--accent-green);">300.00 €</strong></div>
+    <div class="b-item"><span>HARD CAP</span><strong style="color:var(--accent-blue);">24.00 €</strong></div>
+    <div class="b-item"><span>STATUS</span><strong style="color:var(--accent-yellow);">17:00 AUDIT</strong></div>
+  </div>
+</div>
+
+<!-- NAVIGATION TABS -->
+<div class="nav-tabs">
+  <div class="tab-btn active" onclick="showTab('tickets')">💎 4 Ticket</div>
+  <div class="tab-btn" onclick="showTab('matches')">📊 13 Match</div>
+  <div class="tab-btn" onclick="showTab('duels')">⚔️ Duelli 1v1</div>
+</div>
+
+<!-- SECTION 1: TICKETS -->
+<div id="sec-tickets">
+
+  <!-- TICKET 30 -->
+  <div class="ticket-card" style="border: 2px solid var(--accent-green);">
+    <div class="ticket-top">
+      <div>
+        <span class="ticket-tag" style="color:var(--accent-green);">⚡ POMERIDIANA TOP VALUE (18:00 - 19:00)</span>
+        <div style="font-size:14px; font-weight:bold; color:#fff;">🏆 Ticket #30: Terzina d'Elite</div>
+      </div>
+      <div class="ticket-odds-badge" style="color:var(--accent-green);">2.92×</div>
+    </div>
+    
+    <div class="netwin-code-box">
+      <div>
+        <div style="font-size:10px; color:var(--text-muted);">Codice Netwin:</div>
+        <div class="code-text">NW-1800-T30</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('NW-1800-T30')">📋 COPIA</button>
+    </div>
+
+    <div class="match-row">
+      <div class="match-time">18:00</div>
+      <div class="match-name">Qarabag - Twente</div>
+      <div class="match-pick" style="background:rgba(244,63,94,0.15); color:var(--accent-red);">O3.5 Cartellini</div>
+      <div class="match-odd">@ 1.40</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">19:00</div>
+      <div class="match-name">Kauno - Besiktas</div>
+      <div class="match-pick" style="background:rgba(52,211,153,0.15); color:var(--accent-green);">Besiktas O1.5</div>
+      <div class="match-odd">@ 1.50</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">19:00</div>
+      <div class="match-name">Brann - PAOK</div>
+      <div class="match-pick" style="background:rgba(251,191,36,0.15); color:var(--accent-yellow);">PAOK O3.5 Corn</div>
+      <div class="match-odd">@ 1.39</div>
+    </div>
+
+    <div class="ticket-footer">
+      <div>Stake: <span class="stake-val">15.00 € (5%)</span></div>
+      <div>Vincita: <span class="win-val">43.80 €</span></div>
+    </div>
+  </div>
+
+  <!-- TICKET 31 -->
+  <div class="ticket-card">
+    <div class="ticket-top">
+      <div>
+        <span class="ticket-tag" style="color:var(--accent-blue);">SUPER SICURA (20:00 - 21:00)</span>
+        <div style="font-size:14px; font-weight:bold; color:#fff;">👑 Ticket #31: Gol & Doppie Chance</div>
+      </div>
+      <div class="ticket-odds-badge">2.21×</div>
+    </div>
+    
+    <div class="netwin-code-box">
+      <div>
+        <div style="font-size:10px; color:var(--text-muted);">Codice Netwin:</div>
+        <div class="code-text">NW-8924-T31</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('NW-8924-T31')">📋 COPIA</button>
+    </div>
+
+    <div class="match-row">
+      <div class="match-time">20:00</div>
+      <div class="match-name">Hapoel - Atalanta</div>
+      <div class="match-pick">X2 + Over 1.5</div>
+      <div class="match-odd">@ 1.33</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">21:00</div>
+      <div class="match-name">Barça - Athletic</div>
+      <div class="match-pick">1X + Over 1.5</div>
+      <div class="match-odd">@ 1.28</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">20:30</div>
+      <div class="match-name">Chelsea - Luton</div>
+      <div class="match-pick">1 + Over 1.5</div>
+      <div class="match-odd">@ 1.30</div>
+    </div>
+
+    <div class="ticket-footer">
+      <div>Stake: <span class="stake-val">20.00 € (6.7%)</span></div>
+      <div>Vincita: <span class="win-val">44.20 €</span></div>
+    </div>
+  </div>
+
+  <!-- TICKET 32 -->
+  <div class="ticket-card">
+    <div class="ticket-top">
+      <div>
+        <span class="ticket-tag" style="color:var(--accent-yellow);">SPECIAL STATS (20:30 - 21:00)</span>
+        <div style="font-size:14px; font-weight:bold; color:#fff;">🚩 Ticket #32: Corner & Sanzioni</div>
+      </div>
+      <div class="ticket-odds-badge" style="color:var(--accent-yellow);">2.45×</div>
+    </div>
+    
+    <div class="netwin-code-box">
+      <div>
+        <div style="font-size:10px; color:var(--text-muted);">Codice Netwin:</div>
+        <div class="code-text">NW-4710-T32</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('NW-4710-T32')">📋 COPIA</button>
+    </div>
+
+    <div class="match-row">
+      <div class="match-time">20:30</div>
+      <div class="match-name">Chelsea - Luton</div>
+      <div class="match-pick" style="background:rgba(251,191,36,0.15); color:var(--accent-yellow);">O7.5 Corner</div>
+      <div class="match-odd">@ 1.28</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">20:30</div>
+      <div class="match-name">Brighton - Tromsø</div>
+      <div class="match-pick" style="background:rgba(251,191,36,0.15); color:var(--accent-yellow);">O7.5 Corner</div>
+      <div class="match-odd">@ 1.32</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">21:00</div>
+      <div class="match-name">Partizan - Getafe</div>
+      <div class="match-pick" style="background:rgba(244,63,94,0.15); color:var(--accent-red);">O3.5 Cartellini</div>
+      <div class="match-odd">@ 1.45</div>
+    </div>
+
+    <div class="ticket-footer">
+      <div>Stake: <span class="stake-val">20.00 € (6.7%)</span></div>
+      <div>Vincita: <span class="win-val">49.00 €</span></div>
+    </div>
+  </div>
+
+  <!-- TICKET 33 -->
+  <div class="ticket-card">
+    <div class="ticket-top">
+      <div>
+        <span class="ticket-tag" style="color:var(--accent-red);">ALTA QUOTA (20:00 - 21:00)</span>
+        <div style="font-size:14px; font-weight:bold; color:#fff;">🚀 Ticket #33: Quaterna d'Elite</div>
+      </div>
+      <div class="ticket-odds-badge" style="color:var(--accent-red);">7.79×</div>
+    </div>
+    
+    <div class="netwin-code-box">
+      <div>
+        <div style="font-size:10px; color:var(--text-muted);">Codice Netwin:</div>
+        <div class="code-text">NW-6351-T33</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('NW-6351-T33')">📋 COPIA</button>
+    </div>
+
+    <div class="match-row">
+      <div class="match-time">20:00</div>
+      <div class="match-name">Hapoel - Atalanta</div>
+      <div class="match-pick">2 + Over 1.5</div>
+      <div class="match-odd">@ 1.55</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">21:00</div>
+      <div class="match-name">Barça - Athletic</div>
+      <div class="match-pick">1 + Over 2.5</div>
+      <div class="match-odd">@ 1.72</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">20:30</div>
+      <div class="match-name">Chelsea - Luton</div>
+      <div class="match-pick">1 + Over 2.5</div>
+      <div class="match-odd">@ 1.58</div>
+    </div>
+    <div class="match-row">
+      <div class="match-time">21:00</div>
+      <div class="match-name">Partizan - Getafe</div>
+      <div class="match-pick" style="background:rgba(244,63,94,0.15); color:var(--accent-red);">O4.5 Cartellini</div>
+      <div class="match-odd">@ 1.85</div>
+    </div>
+
+    <div class="ticket-footer">
+      <div>Stake: <span class="stake-val">5.00 € (1.7%)</span></div>
+      <div>Vincita: <span class="win-val">38.95 €</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SECTION 2: MATCHES (TABELLA 1 FORM FACTOR MOBILE) -->
+<div id="sec-matches" style="display:none;">
+
+  <!-- QARABAG -->
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">18:00 • Qarabag vs Twente</div>
+      <span class="mc-badge mc-badge-conf">Conference</span>
+    </div>
+    <div class="mc-andata">📊 Andata: 1-0 Qarabag a Enschede</div>
+    <div class="mc-sense">
+      🧠 <strong>Sesto Senso:</strong> Twente obbligato all'assalto in un clima infuocato (28°C). Arbitro severo Rohit Saggi (3.8f).
+      <div class="mc-stats">📊 <strong>Stats:</strong> All'andata 6 gialli e 17 falli. Over 3.5 all'86% di probabilità.</div>
+    </div>
+    <div class="mc-pick-bar">
+      <div>Pick: <strong style="color:var(--accent-red);">Over 3.5 Cartellini</strong></div>
+      <div>Quota: <strong style="color:#fff;">@ 1.40</strong></div>
+    </div>
+  </div>
+
+  <!-- BESIKTAS -->
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">19:00 • Kauno Zalgiris vs Besiktas</div>
+      <span class="mc-badge mc-badge-uel">Europa League</span>
+    </div>
+    <div class="mc-andata">📊 Andata: 3-0 Besiktas a Istanbul</div>
+    <div class="mc-sense">
+      🧠 <strong>Sesto Senso:</strong> Turchi con attacco atomico (Oh, Trossard, Vlahovic).
+      <div class="mc-stats">📊 <strong>Stats:</strong> Besiktas produce >2.5 xG contro formazioni tier 4 (Edge +18.5%).</div>
+    </div>
+    <div class="mc-pick-bar">
+      <div>Pick: <strong style="color:var(--accent-green);">Besiktas Over 1.5 Gol</strong></div>
+      <div>Quota: <strong style="color:#fff;">@ 1.50</strong></div>
+    </div>
+  </div>
+
+  <!-- LILLESTROM -->
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">19:00 • Lillestrom vs Egnatia</div>
+      <span class="mc-badge mc-badge-uel">Europa League</span>
+    </div>
+    <div class="mc-andata">📊 Andata: 0-0 in Albania</div>
+    <div class="mc-sense">
+      🧠 <strong>Sesto Senso:</strong> Dopo lo 0-0 d'andata, all'Åråsen il Lillestrom DEVE vincere per passare.
+      <div class="mc-stats">📊 <strong>Stats:</strong> Norvegesi imbattuti nelle ultime 7 sfide europee in casa (83% prob).</div>
+    </div>
+    <div class="mc-pick-bar">
+      <div>Pick: <strong style="color:var(--accent-blue);">1X + Over 1.5 Gol</strong></div>
+      <div>Quota: <strong style="color:#fff;">@ 1.32</strong></div>
+    </div>
+  </div>
+
+  <!-- ATALANTA -->
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">20:00 • Hapoel Tel Aviv vs Atalanta</div>
+      <span class="mc-badge mc-badge-conf">Conference</span>
+    </div>
+    <div class="mc-andata">📊 Andata: 0-0 a Bergamo</div>
+    <div class="mc-sense">
+      🧠 <strong>Sesto Senso:</strong> A Miskolc Scamacca e CDK titolari per chiudere la qualificazione nei 90'.
+      <div class="mc-stats">📊 <strong>Stats:</strong> All'andata 4 corner totali ➔ NO Over Corner! Atalanta 80% Over 1.5 trasferta.</div>
+    </div>
+    <div class="mc-pick-bar">
+      <div>Pick: <strong style="color:var(--accent-blue);">X2 + Over 1.5 Gol</strong></div>
+      <div>Quota: <strong style="color:#fff;">@ 1.33</strong></div>
+    </div>
+  </div>
+
+  <!-- BARCELLONA -->
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">21:00 • Barcellona vs Athletic Bilbao</div>
+      <span class="mc-badge mc-badge-liga">LaLiga</span>
+    </div>
+    <div class="mc-andata">📊 2ª Giornata Campionato</div>
+    <div class="mc-sense">
+      🧠 <strong>Sesto Senso:</strong> Lamine Yamal e Raphinha titolari al Camp Nou; arbitro Gil Manzano (27.2f).
+      <div class="mc-stats">📊 <strong>Stats:</strong> Barça 91% Over 1.5 nelle ultime 22 partite interne (media 2.82 gol/m).</div>
+    </div>
+    <div class="mc-pick-bar">
+      <div>Pick: <strong style="color:var(--accent-blue);">1X + Over 1.5 Gol</strong></div>
+      <div>Quota: <strong style="color:#fff;">@ 1.28</strong></div>
+    </div>
+  </div>
+
+  <!-- BRIGHTON -->
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">20:30 • Brighton vs Tromsø</div>
+      <span class="mc-badge mc-badge-conf">Conference</span>
+    </div>
+    <div class="mc-andata">📊 Andata: 0-0 in Norvegia</div>
+    <div class="mc-sense">
+      🧠 <strong>Sesto Senso:</strong> Assedio inglese all'Amex Stadium: Mitoma e Minteh ad attaccare il blocco basso.
+      <div class="mc-stats">📊 <strong>Stats:</strong> All'andata 9 corner Brighton. Media interna: 10.4 corner/m.</div>
+    </div>
+    <div class="mc-pick-bar">
+      <div>Pick: <strong style="color:var(--accent-yellow);">Over 7.5 Corner Totali</strong></div>
+      <div>Quota: <strong style="color:#fff;">@ 1.32</strong></div>
+    </div>
+  </div>
+
+  <!-- PARTIZAN -->
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">21:00 • Partizan vs Getafe</div>
+      <span class="mc-badge mc-badge-conf">Conference</span>
+    </div>
+    <div class="mc-andata">📊 Andata: 3-1 Getafe a Madrid</div>
+    <div class="mc-sense">
+      🧠 <strong>Sesto Senso:</strong> Getafe di Bordalás a fare catenaccio e falli tattici nella bolgia di Belgrado.
+      <div class="mc-stats">📊 <strong>Stats:</strong> All'andata 7 cartellini e 33 falli. Getafe media 5.4 cartellini/m.</div>
+    </div>
+    <div class="mc-pick-bar">
+      <div>Pick: <strong style="color:var(--accent-red);">Over 3.5 Cartellini</strong></div>
+      <div>Quota: <strong style="color:#fff;">@ 1.45</strong></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SECTION 3: DUELLI 1V1 -->
+<div id="sec-duels" style="display:none;">
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">Charles De Ketelaere (#17)</div>
+      <span class="mc-badge mc-badge-conf">Atalanta</span>
+    </div>
+    <div class="mc-sense">
+      🎯 Marcatore: Coco / Chico (Hapoel)<br>
+      ⚡ Media falli subiti: <strong>2.4 / match</strong><br>
+      Riceve palla spalle alla porta sulla trequarti; i centrali israeliani entrano subito da dietro per non farlo girare.
+    </div>
+    <div class="mc-pick-bar">
+      <div>Over 0.5: <strong>@ 1.18</strong></div>
+      <div>Over 1.5: <strong style="color:var(--accent-blue);">@ 1.55</strong></div>
+    </div>
+  </div>
+
+  <div class="match-card">
+    <div class="mc-header">
+      <div class="mc-title">Raphinha (#11)</div>
+      <span class="mc-badge mc-badge-liga">Barcellona</span>
+    </div>
+    <div class="mc-sense">
+      🎯 Marcatore: Yuri Berchiche / Boiro (Athletic)<br>
+      ⚡ Media falli subiti: <strong>2.6 / match</strong><br>
+      Dribbling stretto e rientri verso il centro; terzini baschi costretti all'ostruzione fallosa.
+    </div>
+    <div class="mc-pick-bar">
+      <div>Over 0.5: <strong>@ 1.15</strong></div>
+      <div>Over 1.5: <strong style="color:var(--accent-blue);">@ 1.48</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM STICKY ACTION BAR -->
+<div class="bottom-bar">
+  <button class="btn-action btn-copy" onclick="copyAllTickets()">📋 Copia Tutti</button>
+  <a class="btn-action btn-wa" href="https://api.whatsapp.com/send?text=Ecco%20i%20Ticket%20Quantitativi%20BAgent:%20https://github.com/a502502502/BAgent/blob/main/reports/schedina_mobile.html" target="_blank">📲 WhatsApp</a>
+  <a class="btn-action btn-tg" href="https://t.me/share/url?url=https://github.com/a502502502/BAgent/blob/main/reports/schedina_mobile.html&text=BAgent%20Mobile%20Report" target="_blank">✈️ Telegram</a>
+</div>
+
+<script>
+function showTab(tabName) {
+  document.getElementById('sec-tickets').style.display = tabName === 'tickets' ? 'block' : 'none';
+  document.getElementById('sec-matches').style.display = tabName === 'matches' ? 'block' : 'none';
+  document.getElementById('sec-duels').style.display = tabName === 'duels' ? 'block' : 'none';
+  
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs[0].className = 'tab-btn' + (tabName === 'tickets' ? ' active' : '');
+  tabs[1].className = 'tab-btn' + (tabName === 'matches' ? ' active' : '');
+  tabs[2].className = 'tab-btn' + (tabName === 'duels' ? ' active' : '');
+}
+
+function copyCode(code) {
+  navigator.clipboard.writeText(code).then(() => {
+    const t = document.getElementById('toast');
+    t.innerText = `✅ Codice ${code} copiato! Incollalo su Netwin.`;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2500);
+  });
+}
+
+function copyAllTickets() {
+  const text = `🏆 BAGENT TICKETS (27 Agosto 2026)\n\n` +
+    `⚡ TICKET #30 (Pomeridiana @ 2.92x) [Cod: NW-1800-T30]\n` +
+    `• Qarabag-Twente: O3.5 Cartellini @1.40\n` +
+    `• Kauno-Besiktas: Besiktas O1.5 @1.50\n` +
+    `• Brann-PAOK: PAOK O3.5 Corner @1.39\n` +
+    `💵 Stake: 15.00 € (Pot: 43.80 €)\n\n` +
+    `👑 TICKET #31 (Gol & DC @ 2.21x) [Cod: NW-8924-T31]\n` +
+    `• Hapoel-Atalanta: X2+O1.5 @1.33\n` +
+    `• Barça-Athletic: 1X+O1.5 @1.28\n` +
+    `• Chelsea-Luton: 1+O1.5 @1.30\n` +
+    `💵 Stake: 20.00 € (Pot: 44.20 €)\n\n` +
+    `🚩 TICKET #32 (Corner & Cart @ 2.45x) [Cod: NW-4710-T32]\n` +
+    `• Chelsea-Luton: O7.5 Corn @1.28\n` +
+    `• Brighton-Tromsø: O7.5 Corn @1.32\n` +
+    `• Partizan-Getafe: O3.5 Cart @1.45\n` +
+    `💵 Stake: 20.00 € (Pot: 49.00 €)\n\n` +
+    `🚀 TICKET #33 (Alta Quota @ 7.79x) [Cod: NW-6351-T33]\n` +
+    `• Atalanta 2+O1.5 @1.55 | Barça 1+O2.5 @1.72 | Chelsea 1+O2.5 @1.58 | Partizan O4.5 Cart @1.85\n` +
+    `💵 Stake: 5.00 € (Pot: 38.95 €)`;
+  navigator.clipboard.writeText(text).then(() => {
+    const t = document.getElementById('toast');
+    t.innerText = '✅ Tutte le Schedine copiate!';
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2500);
+  });
+}
+</script>
+
+</body>
+</html>
