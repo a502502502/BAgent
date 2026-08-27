@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedine — 26 Agosto 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; padding: 24px 16px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 28px; }
+  header .badge { display: inline-block; background: rgba(56,139,253,0.15); border: 1px solid #388bfd; border-radius: 20px; padding: 6px 18px; font-size: 13px; color: #58a6ff; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+  header h1 { font-size: 24px; font-weight: 700; color: #f0f6fc; margin-bottom: 6px; }
+  header .subtitle { font-size: 13px; color: #8b949e; }
+
+  .schedina-block { background: #161b22; border: 1px solid #30363d; border-radius: 14px; padding: 20px; margin-bottom: 24px; }
+  .schedina-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #30363d; padding-bottom: 14px; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+  .schedina-title { font-size: 18px; font-weight: 700; color: #f0f6fc; }
+  .schedina-tag { padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; }
+  .tag-gold { background: rgba(227,179,65,0.15); color: #e3b341; border: 1px solid rgba(227,179,65,0.3); }
+  .tag-blue { background: rgba(56,139,253,0.15); color: #58a6ff; border: 1px solid rgba(56,139,253,0.3); }
+  .tag-red { background: rgba(248,81,73,0.15); color: #f85149; border: 1px solid rgba(248,81,73,0.3); }
+  .tag-purple { background: rgba(163,113,247,0.15); color: #a371f7; border: 1px solid rgba(163,113,247,0.3); }
+
+  .match-row { padding: 12px 14px; background: #0d1117; border-radius: 8px; margin-bottom: 8px; }
+  .match-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+  .match-time { font-size: 11px; color: #8b949e; width: 60px; flex-shrink: 0; }
+  .match-info { flex: 1; margin: 0 12px; min-width: 160px; }
+  .match-name { font-size: 13px; font-weight: 600; color: #f0f6fc; }
+  .match-andata { font-size: 11px; color: #6e7681; margin-top: 2px; }
+  .match-pick { font-size: 13px; font-weight: 700; color: #3fb950; margin-right: 12px; text-align: right; }
+  .match-quota { font-size: 14px; font-weight: 700; color: #f0f6fc; text-align: right; min-width: 55px; }
+  .sesto-senso { font-size: 11px; color: #8b949e; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #21262d; line-height: 1.5; }
+  .sesto-senso b { color: #d29922; }
+
+  .totale-box { margin-top: 16px; padding: 14px 18px; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; }
+  .tot-gold { background: linear-gradient(135deg, rgba(227,179,65,0.1), rgba(227,179,65,0.2)); border: 1px solid #e3b341; }
+  .tot-blue { background: linear-gradient(135deg, rgba(56,139,253,0.1), rgba(56,139,253,0.2)); border: 1px solid #388bfd; }
+  .tot-red { background: linear-gradient(135deg, rgba(248,81,73,0.1), rgba(248,81,73,0.2)); border: 1px solid #f85149; }
+  .tot-purple { background: linear-gradient(135deg, rgba(163,113,247,0.1), rgba(163,113,247,0.2)); border: 1px solid #a371f7; }
+  .tot-label { font-size: 13px; color: #c9d1d9; }
+  .tot-val { font-size: 24px; font-weight: 700; }
+  .tot-gold .tot-val { color: #e3b341; }
+  .tot-blue .tot-val { color: #58a6ff; }
+  .tot-red .tot-val { color: #f85149; }
+  .tot-purple .tot-val { color: #a371f7; }
+
+  .warning-box { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.3); border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; font-size: 12px; color: #f0a8a3; line-height: 1.6; }
+
+  footer { text-align: center; margin-top: 24px; font-size: 11px; color: #444d56; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">BAgent Engine · Sesto Senso &amp; Decision Intelligence</div>
+    <h1>Schedine — Mercoledì 26 Agosto 2026</h1>
+    <div class="subtitle">4 tabelle · Champions League, La Liga, Champions League Femminile</div>
+  </header>
+
+  <!-- TABELLA 1 -->
+  <div class="schedina-block">
+    <div class="schedina-header">
+      <div class="schedina-title">⚽ Tabella 1 — Gol (Coppe &amp; La Liga)</div>
+      <span class="schedina-tag tag-gold">6 selezioni · Quota 12.05×</span>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info">
+          <div class="match-name">Lyon vs Fenerbahçe</div>
+          <div class="match-andata">Andata: Fenerbahçe 1-1 Lyon</div>
+        </div>
+        <span class="match-pick">1 (Lyon)</span>
+        <span class="match-quota">@1.90</span>
+      </div>
+      <div class="sesto-senso"><b>Sesto Senso:</b> xG andata 0.73 (Lyon) contro 0.43 (Fenerbahçe) nonostante 1-1; solo Asensio assenza fresca (rating 8.0 il 22/08 prima di infortunarsi), Söyüncü/Günok/Aktürkoğlu fuori da settimane; precedenti storici 2 vittorie e 2 pareggi per Lyon, Fenerbahçe mai vincente.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info">
+          <div class="match-name">Real Madrid vs Real Sociedad</div>
+          <div class="match-andata">La Liga, 1ª giornata</div>
+        </div>
+        <span class="match-pick">1 (Real Madrid)</span>
+        <span class="match-quota">@1.31</span>
+      </div>
+      <div class="sesto-senso"><b>Sesto Senso:</b> Favorito casalingo netto nonostante 7 assenti incluso Militao e Tchouameni (spina dorsale) e Rodrygo; Real Sociedad reduce da sconfitta 0-1 col Betis.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info">
+          <div class="match-name">Celje vs Slovan Bratislava</div>
+          <div class="match-andata">Andata: Slovan Bratislava 1-1 Celje</div>
+        </div>
+        <span class="match-pick">Over 1.5 Gol</span>
+        <span class="match-quota">@1.36</span>
+      </div>
+      <div class="sesto-senso"><b>Sesto Senso:</b> Slovan Bratislava imbattuto da 11 partite, Celje 4 gare senza sconfitta — entrambe in forma. Nell'andata Celje più preciso (4 tiri in porta su 8 totali) nonostante Slovan avesse creato di più.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info">
+          <div class="match-name">Viking vs Dinamo Zagabria</div>
+          <div class="match-andata">Andata: Dinamo Zagabria 2-2 Viking</div>
+        </div>
+        <span class="match-pick">Over 2.5 Gol</span>
+        <span class="match-quota">@1.57</span>
+      </div>
+      <div class="sesto-senso"><b>Sesto Senso:</b> Dinamo Zagabria: 28 partite senza sconfitta, 5 vittorie consecutive, Over 2.5 Gol in 4 delle ultime 5 uscite. Nell'andata Dinamo ha dominato (23 tiri contro 6) ma Viking clinico in ripartenza.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info">
+          <div class="match-name">Viking vs Dinamo Zagabria</div>
+          <div class="match-andata">Stessa gara, mercato corner</div>
+        </div>
+        <span class="match-pick">Over 9.5 Corner Tot.</span>
+        <span class="match-quota">@1.62</span>
+      </div>
+      <div class="sesto-senso"><b>Sesto Senso:</b> Dinamo Zagabria: Over 10.5 Corner in 4 delle ultime 5 partite — stesso pattern di dominio della pick sui gol, mercato diverso sulla stessa gara (rischio concentrato consapevole, non diversificato).</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info">
+          <div class="match-name">AEK Athens vs Levski Sofia</div>
+          <div class="match-andata">Andata: Levski Sofia 0-0 AEK Athens</div>
+        </div>
+        <span class="match-pick">Over 1.5 Gol</span>
+        <span class="match-quota">@1.35</span>
+      </div>
+      <div class="sesto-senso"><b>Sesto Senso:</b> Levski su striscia utile lunga, più pericoloso dell'AEK nell'andata (15 tiri/3 in porta contro 12/1) nonostante lo 0-0. AEK ha creato 2 grandi occasioni e colpito una traversa senza segnare — tie apertissimo.</div>
+    </div>
+
+    <div class="totale-box tot-gold">
+      <div>
+        <div class="tot-label">Quota Totale</div>
+        <div style="font-size: 11px; color: #8b949e;">1.90 × 1.31 × 1.36 × 1.57 × 1.62 × 1.35</div>
+      </div>
+      <div class="tot-val">12.05×</div>
+    </div>
+  </div>
+
+  <!-- TABELLA 2 -->
+  <div class="schedina-block">
+    <div class="schedina-header">
+      <div class="schedina-title">🟨 Tabella 2 — Falli Totali</div>
+      <span class="schedina-tag tag-blue">4 selezioni · Quota 12.75× · Esplorativa</span>
+    </div>
+
+    <div class="warning-box">⚠️ Ogni pick si basa su un solo dato storico (la gara d'andata, n=1) — molto più fragile della Tabella 1. Da trattare come rischio più alto, non come alternativa equivalente.</div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info"><div class="match-name">Viking vs Dinamo Zagabria</div></div>
+        <span class="match-pick">Under 25.5 Falli</span>
+        <span class="match-quota">@1.93</span>
+      </div>
+      <div class="sesto-senso">Andata 22 falli nonostante il dominio totale di Dinamo — gara fisica ma non fallosa.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info"><div class="match-name">Celje vs Slovan Bratislava</div></div>
+        <span class="match-pick">Under 26.5 Falli</span>
+        <span class="match-quota">@1.82</span>
+      </div>
+      <div class="sesto-senso">Andata 25 falli, sotto la soglia di mercato.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info"><div class="match-name">AEK Athens vs Levski Sofia</div></div>
+        <span class="match-pick">Under 25.5 Falli</span>
+        <span class="match-quota">@1.88</span>
+      </div>
+      <div class="sesto-senso">Andata 25 falli; entrambe con un solo cartellino nell'ultima di campionato.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">21:00</span>
+        <div class="match-info"><div class="match-name">Lyon vs Fenerbahçe</div></div>
+        <span class="match-pick">Over 25.5 Falli</span>
+        <span class="match-quota">@1.93</span>
+      </div>
+      <div class="sesto-senso">Andata 26 falli, unica sopra soglia — ma segnale debole, entrambe poco cartellinate di recente.</div>
+    </div>
+
+    <div class="totale-box tot-blue">
+      <div>
+        <div class="tot-label">Quota Totale</div>
+        <div style="font-size: 11px; color: #8b949e;">1.93 × 1.82 × 1.88 × 1.93</div>
+      </div>
+      <div class="tot-val">12.75×</div>
+    </div>
+  </div>
+
+  <!-- TABELLA 3 -->
+  <div class="schedina-block">
+    <div class="schedina-header">
+      <div class="schedina-title">👩 Tabella 3 — Champions League Femminile</div>
+      <span class="schedina-tag tag-purple">3 selezioni · Quota 3.01×</span>
+    </div>
+
+    <div class="warning-box">ℹ️ Nessun dato xG né infortuni disponibile per questa competizione; forma recente ferma a maggio (rientro dalla pausa estiva).</div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">19:00</span>
+        <div class="match-info"><div class="match-name">Eintracht Frankfurt vs PSG</div></div>
+        <span class="match-pick">Over 2.5 Gol</span>
+        <span class="match-quota">@1.57</span>
+      </div>
+      <div class="sesto-senso">Frankfurt 8-0 su Omonia e 2-0 su Malmö in Champions — attacco fuori scala.</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">19:30</span>
+        <div class="match-info"><div class="match-name">Ajax vs Real Madrid</div></div>
+        <span class="match-pick">2 (Real Madrid)</span>
+        <span class="match-quota">@1.35</span>
+      </div>
+      <div class="sesto-senso">Real Madrid dominante in trasferta (0-4, 0-2 nelle ultime uscite esterne).</div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">19:45</span>
+        <div class="match-info"><div class="match-name">Chelsea vs Real Sociedad</div></div>
+        <span class="match-pick">Over 2.5 Gol</span>
+        <span class="match-quota">@1.42</span>
+      </div>
+      <div class="sesto-senso">Chelsea @1.13 secco è sotto la quota minima di regolamento (1.20) — il gol sfrutta il gap di qualità restando sopra soglia.</div>
+    </div>
+
+    <div class="totale-box tot-purple">
+      <div>
+        <div class="tot-label">Quota Totale</div>
+        <div style="font-size: 11px; color: #8b949e;">1.57 × 1.35 × 1.42</div>
+      </div>
+      <div class="tot-val">3.01×</div>
+    </div>
+  </div>
+
+  <!-- TABELLA 4 -->
+  <div class="schedina-block">
+    <div class="schedina-header">
+      <div class="schedina-title">🚫 Tabella 4 — "Fuori Regole" (sperimentale)</div>
+      <span class="schedina-tag tag-red">5 selezioni · Quota stimata &gt;15× · Nessuna verifica reale</span>
+    </div>
+
+    <div class="warning-box">⚠️ Deroga esplicita alle Regole #5 (leghe minori/opache bandite), #9 (mai segno secco su giovanili/riserve) e #27 (forma reale obbligatoria). Ricerca di rassegna stampa fatta ma con esito nullo su tutte e 4 le partite verificate — solo pagine automatiche di stat/quote, zero analisi giornalistica reale disponibile. Basata solo sul numero della quota, non su un vero Sesto Senso.</div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">18:00</span>
+        <div class="match-info">
+          <div class="match-name">Smouha vs Asyut Petroleum</div>
+          <div class="match-andata">🇪🇬 Egitto Premier League — banned Regola #5</div>
+        </div>
+        <span class="match-pick">1 + Over 1.5</span>
+        <span class="match-quota">@1.56 / @1.51</span>
+      </div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">18:30</span>
+        <div class="match-info">
+          <div class="match-name">Orsha vs Dinamo Minsk 2</div>
+          <div class="match-andata">🇧🇾 Bielorussia — squadra riserve, banned Regola #9</div>
+        </div>
+        <span class="match-pick">Over 3.5 Gol</span>
+        <span class="match-quota">@2.05</span>
+      </div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">18:30</span>
+        <div class="match-info">
+          <div class="match-name">Nk Dinamo Predavac vs Hrvatski Dragovoljac</div>
+          <div class="match-andata">🇭🇷 Coppa Croazia, lega minore</div>
+        </div>
+        <span class="match-pick">2 + Over 2.5</span>
+        <span class="match-quota">@1.86 / @1.62</span>
+      </div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">18:30</span>
+        <div class="match-info">
+          <div class="match-name">Lillestrøm U19 vs Tromsø U19</div>
+          <div class="match-andata">🇳🇴 Giovanili — Regola #9 rispettata (solo Over/Under)</div>
+        </div>
+        <span class="match-pick">Over 1.5 Gol</span>
+        <span class="match-quota">@1.21</span>
+      </div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-top">
+        <span class="match-time">18:00</span>
+        <div class="match-info">
+          <div class="match-name">Usce Novi Beograd U19 vs Spartak Subotica</div>
+          <div class="match-andata">🇷🇸 Giovanili — segno secco in deroga Regola #9</div>
+        </div>
+        <span class="match-pick">1</span>
+        <span class="match-quota">@1.84</span>
+      </div>
+    </div>
+
+    <div class="totale-box tot-red">
+      <div>
+        <div class="tot-label">Quota Totale (stimata)</div>
+        <div style="font-size: 11px; color: #8b949e;">Esperimento fuori metodo — non registrato nel Registro Cassa allo stesso livello delle altre</div>
+      </div>
+      <div class="tot-val">&gt;15×</div>
+    </div>
+  </div>
+
+  <footer>
+    BAgent · Sesto Senso &amp; Decision Intelligence · 26 Agosto 2026
+  </footer>
+
+</div>
+</body>
+</html>
