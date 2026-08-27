@@ -153,6 +153,7 @@ def execute_2hour_cycle() -> dict:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] ✅ Portale Web aggiornato con successo!", flush=True)
     return portal_data
 
+def run_telegram_listener():
     """Ascolta i comandi dell'utente su Telegram e risponde in tempo reale."""
     if not TELEGRAM_TOKEN:
         print("Telegram bot token non presente.", flush=True)
