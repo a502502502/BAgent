@@ -553,9 +553,10 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 | **12** | **21/08 20:30** | **👑 TRIPLA D'ORO SERALE NETWIN** *(Osimhen, Stoccarda, Arsenal)* | **3 eventi** | **50.00 €** | **2.57×** | **⏱️ CONCLUSO** | *(Stocc. 0-2 ✅, Ars. 3-0 ✅)* | **-** | **-** |
 | **13** | **21/08 20:30** | **🛡️ SISTEMA A CORREZIONE D'ERRORE (4)** *(Marsiglia, Stoccarda, Dasilva)* | **4 eventi** | **30.00 €** | **Sistema** | **⏱️ CONCLUSO** | *(Mars. 2-0 ✅, Stocc. 0-2 ✅)* | **-** | **-** |
 | **14** | **21/08 23:05** | **💎 SESTINA NOTTURNA OVERSEAS** *(Jaguares, The Strongest, Cashmere, Western, Tigres, Upper Hutt)* | **6 eventi** | **20.00 €** | **5.03×** | **⏱️ IN CORSO (Jaguares 1-0 al 17'!)** | **(Pot. +106.71 €)** | **(Pot. +86.71 €)** | **-** |
-| **28** | **25/08** | **🇰🇷 TRIPLA K LEAGUE 1** *(Gimcheon-Jeonbuk DC X2, Jeju-Pohang Under 2.5, Seoul-Bucheon Over 2.5 — costruita con Regola #27, forma reale + classifica)* | 3 eventi | **40.00 €** | **3.78×** | **🛡️ CASHOUT LIVE (82')** *(Leg 3 Over 2.5 a rischio, cashback preso a scopo assicurativo)* | **+10.00 €** | **-30.00 €** | **-** |
-| **29** | **25/08 sera** | **🌍 MULTIPLA MLS AMERICAS SERALE** *(Brann W Over2.5, Sabah-Hapoel O1.5 Cartellini Sq.1, Valencia-Betis Under2.5, Lask-Celtic O1.5, Bodo/Glimt O8.5 Corner, Juventude Under2.5, Goianiense-Botafogo Under2.5)* | 7 eventi | **10.00 €** | **10.96×** | ❌ **Perso (4/7)** *(Bodo/Glimt Corner, Juventude Under, Goianiense Under fallite)* | 0.00 € | **-10.00 €** | **-** |
-| **30** | **26/08 00:00-00:30** | **🔄 TICKET DI RECUPERO NOTTURNO (Betsson)** *(2 de Mayo-Guarani DC1X, Deportivo Madryn-Godoy Cruz Under2.5, Juventude-CRB Under2.5, Goianiense-Botafogo Under2.5)* | 4 eventi | **20.00 €** | **4.94×** | ❌ **Perso (2/4)** *(2 de Mayo-Guarani 0-0 ✅, Madryn-Godoy Cruz 2-0 ✅; Juventude-CRB 2-1 ❌ e Goianiense-Botafogo 3-0 ❌ — stesse partite del Ticket #29, già finite Over 2.5)* | 0.00 € | **-20.00 €** | **-** |
+| **28** | **25/08** | **🇰🇷 TRIPLA K LEAGUE 1** *(Gimcheon-Jeonbuk DC X2, Jeju-Pohang Under 2.5, Seoul-Bucheon Over 2.5)* | 3 eventi | **40.00 €** | **3.78×** | **🛡️ CASHOUT LIVE (82')** | **+10.00 €** | **-30.00 €** | **-** |
+| **29** | **25/08 sera** | **🌍 MULTIPLA MLS AMERICAS SERALE** | 7 eventi | **10.00 €** | **10.96×** | ❌ **Perso (4/7)** | 0.00 € | **-10.00 €** | **-** |
+| **30** | **26/08 00:00** | **🔄 TICKET DI RECUPERO NOTTURNO** | 4 eventi | **20.00 €** | **4.94×** | ❌ **Perso (2/4)** | 0.00 € | **-20.00 €** | **-** |
+| **💰** | **27/08 09:20** | **🏦 INIEZIONE CAPITALE & RESET BANKROLL UFFICIALE** | - | - | - | **✅ REGISTRATO** | **+300.00 €** | - | **`300.00 €`** |
 
 ---
 
