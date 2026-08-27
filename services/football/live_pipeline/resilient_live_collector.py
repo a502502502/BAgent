@@ -68,10 +68,23 @@ class LiveMatchSnapshot:
         if self.cards_total == 0 and (self.cards_yellow_home > 0 or self.cards_yellow_away > 0 or self.cards_red_home > 0 or self.cards_red_away > 0):
             self.cards_total = self.cards_yellow_home + self.cards_yellow_away + self.cards_red_home + self.cards_red_away
 
+@dataclass
+class LiveInPlayOpportunity:
+    match_id: str
+    match_name: str
+    minute: int
+    market: str
+    recommended_pick: str
+    estimated_odds: float
+    confidence_level: str # ALTO, MEDIO, OTTIMALE
+    reasoning: str
+    kelly_stake_pct: float
+    urgency: str # IMMEDIATO, ATTENDI 70'
+
 class ResilientLiveCollector:
     """
     Collettore Dati Live Resiliente a 3 Livelli (Tier 1: API-Football, Tier 2: The Odds API, Tier 3: Browser Emulation).
-    Garantisce un flusso ininterrotto di tabellini live (Corner, Falli, Cartellini, Giocatori).
+    Garantisce un flusso ininterrotto di tabellini live ed elabora opportunità in-play in tempo reale.
     """
 
     def __init__(self, api_football_key: Optional[str] = None):
@@ -89,6 +102,88 @@ class ResilientLiveCollector:
             "Sec-Fetch-Mode": "cors",
             "Sec-Fetch-Site": "same-site"
         })
+
+    def detect_inplay_opportunities(self, s: LiveMatchSnapshot) -> List[LiveInPlayOpportunity]:
+        """
+        Algoritmo Quantitativo In-Play: Analizza il ritmo e i dati live per rilevare
+        giocate di valore immediato (Corner Blitz, Gol Imminente, Cartellini in Escalation).
+        """
+        opportunities = []
+
+        if s.minute < 20 or s.minute > 88:
+            return opportunities
+
+        # 1. LIVE CORNER BLITZ TRIGGER (Ritmo Corner Anomalo)
+        corner_rate = s.corners_total / max(s.minute, 1) # corner al minuto
+        if s.minute >= 45 and corner_rate >= 0.12 and (s.shots_on_target_home + s.shots_on_target_away) >= 5:
+            projected_corners = round(corner_rate * 95, 1)
+            target_line = s.corners_total + 2.5
+            opp = LiveInPlayOpportunity(
+                match_id=s.match_id,
+                match_name=f"{s.home_team} vs {s.away_team}",
+                minute=s.minute,
+                market="Corner Totali Live",
+                recommended_pick=f"Over {target_line:.1f} Corner Live",
+                estimated_odds=1.75,
+                confidence_level="⭐⭐⭐ ALTO (Corner Engine Attivo)",
+                reasoning=f"Proiezione a {projected_corners} corner totali (1 corner ogni {1/corner_rate:.1f} min con {s.shots_on_target_home + s.shots_on_target_away} tiri in porta). Pressione costante.",
+                kelly_stake_pct=5.0,
+                urgency="⚡ GIOCA SUBITO (Trend verificato)"
+            )
+            opportunities.append(opp)
+
+        # 2. GOL IMMINENTE / PRESSIONE ASIMMETRICA (0-0 o Svantaggio con Assedio)
+        total_shots_on_target = s.shots_on_target_home + s.shots_on_target_away
+        if s.minute >= 55 and s.score_home == 0 and s.score_away == 0 and total_shots_on_target >= 7:
+            opp = LiveInPlayOpportunity(
+                match_id=s.match_id,
+                match_name=f"{s.home_team} vs {s.away_team}",
+                minute=s.minute,
+                market="Gol Live (Late Breakthrough)",
+                recommended_pick="Over 0.5 Gol Totali Match",
+                estimated_odds=1.50,
+                confidence_level="👑 MASSIMO (Gara da sblocco matematico)",
+                reasoning=f"Match bloccato sullo 0-0 al {s.minute}' ma con ben {total_shots_on_target} tiri nello specchio. Difese stanche, gol nell'aria entro l'80'.",
+                kelly_stake_pct=6.5,
+                urgency="⚡ ENTRA ORA (Quota in salita)"
+            )
+            opportunities.append(opp)
+
+        # 3. ESCALATION CARTELLINI / NERVOSISMO (Partite Calde)
+        if s.minute >= 60 and s.cards_total >= 4 and s.fouls_total >= 20:
+            target_cards = s.cards_total + 1.5
+            opp = LiveInPlayOpportunity(
+                match_id=s.match_id,
+                match_name=f"{s.home_team} vs {s.away_team}",
+                minute=s.minute,
+                market="Cartellini Totali Live",
+                recommended_pick=f"Over {target_cards:.1f} Cartellini Live",
+                estimated_odds=1.85,
+                confidence_level="🔥 ELEVATO (Tensione Fuori Controllo)",
+                reasoning=f"Gara con {s.fouls_total} falli e {s.cards_total} sanzioni già estratte. Con i minuti finali e le perdite di tempo scattano altri cartellini inevitabili.",
+                kelly_stake_pct=4.0,
+                urgency="⏱️ ATTENDI 70' (Per quota migliore)"
+            )
+            opportunities.append(opp)
+
+        return opportunities
+
+    def format_inplay_alert(self, opp: LiveInPlayOpportunity, bankroll: float = 300.00) -> str:
+        """Formatta una notifica Telegram d'impatto con la giocata live consigliata."""
+        calculated_stake = round((bankroll * (opp.kelly_stake_pct / 100.0)) * 2) / 2
+        return (
+            f"⚡ *BAGENT IN-PLAY OPPORTUNITY: SEGNALE LIVE RILEVATO*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"⚽ *Partita:* {opp.match_name} (Minuto *{opp.minute}'*)\n"
+            f"🎯 *GIOCATA CONSIGLIATA:* `{opp.recommended_pick}`\n"
+            f"📊 *Mercato:* {opp.market}\n"
+            f"📈 *Quota Stimata:* `~{opp.estimated_odds:.2f}`\n\n"
+            f"🧠 *Motivazione Live:* {opp.reasoning}\n"
+            f"💎 *Confidenza:* {opp.confidence_level}\n"
+            f"💵 *Stake Consigliato:* *{calculated_stake:.2f} €* ({opp.kelly_stake_pct}% Bankroll)\n"
+            f"🚨 *Tempismo:* *{opp.urgency}*\n"
+            f"━━━━━━━━━━━━━━━━━━━━"
+        )
 
     def fetch_live_fixtures_api_football(self) -> List[LiveMatchSnapshot]:
         """

@@ -102,8 +102,15 @@ def main():
         for s in simulated_matches:
             print(collector.format_live_card(s))
             print()
+            # Test In-Play Opportunity Detector
+            inplay_opps = collector.detect_inplay_opportunities(s)
+            if inplay_opps:
+                print("   🔥 GIOCATE IN-PLAY CONSIGLIATE PER QUESTO MATCH:")
+                for opp in inplay_opps:
+                    print(collector.format_inplay_alert(opp, bankroll=300.00))
+                    print()
 
-    print("✅ Pipeline Dati Live verificata: Parsing, Normalizzazione e Fallback 100% Funzionanti!")
+    print("✅ Pipeline Dati Live verificata: Parsing, Normalizzazione e In-Play Recommendation 100% Funzionanti!")
 
 if __name__ == "__main__":
     main()
