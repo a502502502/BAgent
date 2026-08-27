@@ -26,11 +26,11 @@ class NetwinBookingCodeEngine:
                 "ticket_id": "30",
                 "name": "Ticket #30: Pomeridiana d'Elite (Ore 18:00 & 19:00)",
                 "code": "NW-1800-T30",
-                "odds": "2.88",
+                "odds": "2.92",
                 "stake": "15.00 €",
-                "potential_win": "43.20 €",
+                "potential_win": "43.80 €",
                 "events": [
-                    "Qarabag vs Twente ➔ X o GG: SI @ 1.38",
+                    "Qarabag vs Twente ➔ Over 3.5 Cartellini Totali @ 1.40",
                     "Kauno Zalgiris vs Besiktas ➔ Besiktas Over 1.5 Gol @ 1.50",
                     "Brann vs PAOK ➔ PAOK Over 3.5 Corner @ 1.39"
                 ]
@@ -80,7 +80,7 @@ class NetwinBookingCodeEngine:
 if __name__ == "__main__":
     engine = NetwinBookingCodeEngine()
     slips = engine.get_today_booking_slips()
-    print("📋 CODICI PRENOTAZIONE NETWIN AGGIORNATI (CON TICKET POMERIDIANO #30):")
+    print("📋 CODICI PRENOTAZIONE NETWIN AGGIORNATI CON OVER CARTELLINI QARABAG-TWENTE:")
     for tid, slip in slips.items():
         print(f"\n[{slip['name']}]")
         print(f"  👉 CODICE PRENOTAZIONE: {slip['code']}")
