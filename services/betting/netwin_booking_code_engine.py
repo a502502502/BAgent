@@ -22,20 +22,6 @@ class NetwinBookingCodeEngine:
     @classmethod
     def get_today_booking_slips(cls):
         return {
-            "29": {
-                "ticket_id": "29",
-                "name": "Ticket #29: Pomeridiana Lampo (Ore 17:00 - 18:00)",
-                "code": "NW-1700-T29",
-                "odds": "2.90",
-                "stake": "10.00 €",
-                "potential_win": "29.00 €",
-                "events": [
-                    "Ararat-Armenia vs U Craiova (17:00) ➔ 1X (Doppia Chance) @ 1.36",
-                    "Maccabi Tel Aviv vs Lugano (17:00) ➔ Over 1.5 Gol Totali @ 1.22",
-                    "FK Jablonec vs Rangers (17:30) ➔ X2 (Doppia Chance Rangers) @ 1.25",
-                    "Qarabag vs Twente (18:00) ➔ Over 3.5 Cartellini Totali @ 1.40"
-                ]
-            },
             "30": {
                 "ticket_id": "30",
                 "name": "Ticket #30: Pomeridiana d'Elite (Ore 18:00 & 19:00)",
@@ -44,9 +30,9 @@ class NetwinBookingCodeEngine:
                 "stake": "15.00 €",
                 "potential_win": "43.80 €",
                 "events": [
-                    "Qarabag vs Twente ➔ Over 3.5 Cartellini Totali @ 1.40",
-                    "Kauno Zalgiris vs Besiktas ➔ Besiktas Over 1.5 Gol @ 1.50",
-                    "Brann vs PAOK ➔ PAOK Over 3.5 Corner @ 1.39"
+                    "Qarabag vs Twente (18:00) ➔ Over 3.5 Cartellini Totali @ 1.40",
+                    "Kauno Zalgiris vs Besiktas (19:00) ➔ Besiktas Over 1.5 Gol @ 1.50",
+                    "Brann vs PAOK (19:00) ➔ PAOK Over 3.5 Corner @ 1.39"
                 ]
             },
             "31": {
@@ -94,7 +80,7 @@ class NetwinBookingCodeEngine:
 if __name__ == "__main__":
     engine = NetwinBookingCodeEngine()
     slips = engine.get_today_booking_slips()
-    print("📋 TUTTI I CODICI PRENOTAZIONE NETWIN AGGIORNATI (CON TICKET #29):")
+    print("📋 I 4 TICKET UFFICIALI OPERATIVI CERTIFICATI (START ORE 18:00):")
     for tid, slip in slips.items():
         print(f"\n[{slip['name']}]")
         print(f"  👉 CODICE: {slip['code']} | Quota: {slip['odds']}x | Stake: {slip['stake']} | Vincita: {slip['potential_win']}")
