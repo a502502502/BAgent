@@ -631,6 +631,9 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
       - **Drop $\ge 10\%$**: Flag `🔥 SMART MONEY` ➔ Segnale di alta convinzione quantitativa.
       - **Drop $\ge 15\%$ multi-book**: Flag `🚨 STEAM MOVE` ➔ Alert Telegram immediato su `@A502502_bot`.
       - **Verifica CLV Post-Match**: Misurare sempre se la quota giocata ha battuto la linea di chiusura (`CLV > 0%`) per certificare il vero valore atteso a lungo termine.
+25. **PIPELINE DATI LIVE RESILIENTE & ANTI-BLOCCO (`services/football/live_pipeline/resilient_live_collector.py`)**:
+    - *Analisi*: I siti web consumer (Sofascore/FotMob/Flashscore) bloccano le chiamate raw da script con Cloudflare (HTTP 403), rischiando di interrompere il monitoraggio live delle schedine aperte.
+    - *Regola Fondamentale*: **L'ingestione dei dati in tempo reale (Corner, Falli, Cartellini, Tiri) DEVE avvenire tramite la pipeline multi-livello normalizzata su `LiveMatchSnapshot` (Tier 1: API-Football live endpoints; Tier 2: The Odds API; Tier 3: Browser Session Headers) eliminando i single-point-of-failure.**
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
