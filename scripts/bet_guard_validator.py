@@ -63,7 +63,18 @@ class BetGuardValidator:
         if not match_data.get("press_scanned", False):
             return False, f"[BLOCKED - RULE 21/22] Rassegna Stampa non eseguita per {match_name} ({league}). TASSATIVO leggere Gazzetta/BBC/Marca prima del calcolo quote!"
 
-        return True, f"[APPROVED] Conforme a tutte le 22 Regole Inviolabili."
+        # REGOLA #23: Kelly Criterion Staking Guard
+        stake = match_data.get("stake")
+        bankroll = match_data.get("bankroll", 116.45)
+        edge = match_data.get("edge", 0.05)
+        if stake is not None:
+            if edge <= 0 and stake > 0:
+                return False, f"[BLOCKED - RULE 23] Edge negativo o nullo ({edge:+.2f}%). Vietato allocare stake ({stake:.2f} €) su scommesse a valore negativo!"
+            max_allowed = bankroll * 0.08
+            if stake > max_allowed:
+                return False, f"[BLOCKED - RULE 23] Stake richiesto ({stake:.2f} €) supera il tetto massimo Kelly dell'8% del bankroll ({max_allowed:.2f} €)."
+
+        return True, f"[APPROVED] Conforme a tutte le 23 Regole Inviolabili."
 
     def validate_ticket_set(self, active_tickets: list[list[dict]]) -> tuple[bool, str]:
         """
