@@ -642,6 +642,15 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 32. **RISULTATO DI ANDATA OBBLIGATORIO IN TABELLA NELLE COPPE (KNOCKOUT TIE CONTEXT)**:
     - *Principio Inviolabile*: Nelle partite di coppa a eliminazione diretta (Champions League, Europa League, Conference League, Coppe Nazionali, Copa Libertadores), il risultato della gara di andata è il **fattore tattico primario** che detta l'inerzia del match (chi deve rimontare spinge a testa bassa e concede contropiede/corner; chi gestisce un vantaggio ampio fa possesso e rallenta i ritmi).
     - *Regola Operativa*: **In OGNI tabella di analisi, report HTML o riepilogo scommesse, per ciascuna partita di coppa con formula andata/ritorno DEVE ESSERE SEMPRE ed ESPLICITAMENTE indicato il risultato dell'andata** (es. `Hapoel Tel Aviv vs Atalanta (Andata: 0-0)`, `Brighton vs Tromsø (Andata: 2-1)`). Vietato omettere questo dato.
+33. **STATISTICHE CORRELATE DI ANDATA OBBLIGATORIE NELLA MOTIVAZIONE (SUPPORTING STATS RULE)**:
+    - *Principio Inviolabile*: Una proposta quantitativa non può essere un'opinione astratta, ma deve essere giustificata dal **dato numerico esatto della partita di andata e dalle medie di quel mercato**.
+    - *Regola Operativa*: **Nella colonna Intelligence/Sesto Senso, indicare SEMPRE il dato reale del mercato proposto registrato all'andata**:
+      - Se si propongono **Cartellini**: specificare *quanti cartellini e falli ci sono stati all'andata* (es. *All'andata 7 cartellini e 33 falli; media Getafe 5.4 cartellini/m*).
+      - Se si propongono **Corner**: specificare *quanti corner ci sono stati all'andata* (es. *All'andata 11 corner totali, con 8 corner dell'Atalanta*).
+      - Se si propongono **Gol/Combo**: specificare *il volume di tiri e xG della prima gara* (es. *All'andata 22 tiri totali e 2.85 xG complessivi*).
+34. **VERIFICA OBBLIGATORIA RISULTATI PASSATI SU DATABASE UFFICIALE UEFA.COM / FONTI LIVE (ZERO ALLUCINAZIONI)**:
+    - *Principio Inviolabile*: È **TASSATIVAMENTE VIETATO** generare, stimare o dedurre risultati di gare precedenti (gare di andata, precedenti H2H, gironi o marcatori) basandosi sulla memoria parametrica dell'LLM.
+    - *Regola Operativa*: **Per qualsiasi partita di coppa o torneo internazionale, i risultati passati e i dati della gara di andata DEVONO essere SEMPRE ed OBBLIGATORIAMENTE verificati in tempo reale interrogando il database ufficiale live di UEFA.com (o Transfermarkt / Sofascore / API-Football ufficiali)** prima di scrivere qualsiasi report, tabella o motivazione. Ogni singolo punteggio, marcatore, corner o fallo citato DEVE essere certificato al 100% dalla fonte ufficiale.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
