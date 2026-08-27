@@ -24,6 +24,7 @@ class OddsMovement:
     is_smart_money: bool = False
     is_steam_move: bool = False
     signal_strength: str = "NEUTRAL"
+    actionable_verdict: str = "VALUTARE"
     detected_at: datetime = field(default_factory=datetime.utcnow)
     notes: str = ""
 
@@ -40,6 +41,7 @@ class DroppingOddsDetector:
     SMART_MONEY_THRESHOLD = 10.0 # 10% di calo quota
     STEAM_MOVE_THRESHOLD = 15.0  # 15% di crollo improvviso
     MODERATE_DROP_THRESHOLD = 6.0
+    MIN_BETTABLE_ODDS = 1.20     # Regola Inviolabile: Quota minima 1.20
 
     def __init__(self):
         self.tracked_events: Dict[str, OddsMovement] = {}
@@ -60,6 +62,49 @@ class DroppingOddsDetector:
             return 0.0
         return ((bet_odds / closing_odds) - 1.0) * 100.0
 
+    def evaluate_actionable_verdict(
+        self,
+        current_odds: float,
+        drop_pct: float,
+        estimated_prob: Optional[float] = None
+    ) -> tuple[str, str]:
+        """
+        Determina in modo chiaro se CONVIENE SCOMMETTERE SUBITO oppure NO.
+        """
+        if current_odds < self.MIN_BETTABLE_ODDS:
+            return (
+                "🛑 NON SCOMMETTERE (Quota Troppo Bassa)",
+                f"La quota è crollata a {current_odds:.2f}, sotto la nostra quota minima di sicurezza di {self.MIN_BETTABLE_ODDS:.2f}. Margine azzerato."
+            )
+
+        # Se abbiamo la probabilità stimata, controlliamo l'Edge residuo
+        if estimated_prob:
+            residual_edge = (estimated_prob * current_odds) - 1.0
+            if residual_edge <= 0:
+                return (
+                    "🛑 NON SCOMMETTERE (Valore Esaurito)",
+                    f"Il mercato ha già assorbito tutto il vantaggio (Edge residuo: {residual_edge*100:+.1f}%). Il prezzo non regala più valore."
+                )
+            else:
+                return (
+                    "✅ SCOMMETTI SUBITO (Valore Confermato)",
+                    f"La quota a {current_odds:.2f} mantiene ancora un Edge positivo del {residual_edge*100:+.1f}%. Conviene puntare prima che scenda ancora!"
+                )
+
+        # Valutazione di default basata sulla quota residua
+        if current_odds >= 1.35:
+            return (
+                "✅ SCOMMETTI SUBITO (Ottima Opportunità)",
+                f"La quota a {current_odds:.2f} è ancora ampiamente giocabile e in pieno trend favorevole dei professionisti."
+            )
+        elif current_odds >= self.MIN_BETTABLE_ODDS:
+            return (
+                "👀 VALUTA COMBO O SCOMMETTI (Quota al Limite)",
+                f"La quota secca è scesa a {current_odds:.2f}. Giocabile solo in multipla protetta o valutando combo con Over Gol."
+            )
+        else:
+            return ("🛑 NON SCOMMETTERE", "Condizioni di mercato non convenienti.")
+
     def analyze_movement(
         self,
         event_id: str,
@@ -70,10 +115,11 @@ class DroppingOddsDetector:
         opening_odds: float,
         current_odds: float,
         bookmakers_count: int = 1,
-        closing_odds: Optional[float] = None
+        closing_odds: Optional[float] = None,
+        estimated_prob: Optional[float] = None
     ) -> OddsMovement:
         """
-        Analizza il movimento di quota ed emette un verdetto quantitativo.
+        Analizza il movimento di quota ed emette un verdetto quantitativo e operativo.
         """
         drop_pct = self.calculate_drop(opening_odds, current_odds)
         clv_pct = self.calculate_clv(current_odds, closing_odds) if closing_odds else None
@@ -81,15 +127,21 @@ class DroppingOddsDetector:
         is_smart_money = drop_pct >= self.SMART_MONEY_THRESHOLD
         is_steam_move = drop_pct >= self.STEAM_MOVE_THRESHOLD and bookmakers_count >= 3
 
+        actionable_verdict, action_details = self.evaluate_actionable_verdict(
+            current_odds=current_odds,
+            drop_pct=drop_pct,
+            estimated_prob=estimated_prob
+        )
+
         if is_steam_move:
             signal = "🚨 STEAM MOVE (Crollo Massiccio Multi-Bookmaker: Notizia Improvvisa)"
-            notes = "Il mercato internazionale sta riversando volumi eccezionali su questo esito. Scommettere subito prima dell'ulteriore crollo!"
+            notes = action_details
         elif is_smart_money:
             signal = "🔥 SMART MONEY (Flusso Professionale Rilevato: Sharp Action)"
-            notes = "Gli scommettitori istituzionali stanno comprando questa selezione. Elevata probabilità di chiusura a quota molto inferiore."
+            notes = action_details
         elif drop_pct >= self.MODERATE_DROP_THRESHOLD:
             signal = "👀 MODERATE DROP (Leggero Favore del Mercato)"
-            notes = "Trend di quota positivo ma non ancora determinante."
+            notes = action_details
         elif drop_pct <= -5.0:
             signal = "⚠️ DRIFTING ODDS (Quota in Salita / Mercato Sfavorevole)"
             notes = "La quota sta salendo. Possibile calo di fiducia o notizie negative dell'ultima ora."
@@ -112,6 +164,7 @@ class DroppingOddsDetector:
             is_smart_money=is_smart_money,
             is_steam_move=is_steam_move,
             signal_strength=signal,
+            actionable_verdict=actionable_verdict,
             notes=notes
         )
 
@@ -120,7 +173,7 @@ class DroppingOddsDetector:
         return movement
 
     def format_telegram_alert(self, movement: OddsMovement) -> Optional[str]:
-        """Formatta un alert Telegram immediato se il movimento è rilevante."""
+        """Formatta un alert Telegram immediato con il verdetto operativo chiaro."""
         if not (movement.is_smart_money or movement.is_steam_move):
             return None
 
@@ -137,7 +190,8 @@ class DroppingOddsDetector:
             f"• Crollo (Drop): *{movement.drop_pct:.2f}%*\n"
             f"• Bookmaker Coinvolti: {movement.bookmakers_count}\n\n"
             f"🧠 *Segnale:* {movement.signal_strength}\n"
-            f"💡 *Nota Operativa:* {movement.notes}\n"
+            f"👉 *VERDETTO OPERATIVO:* *{movement.actionable_verdict}*\n"
+            f"💡 *Dettaglio:* {movement.notes}\n"
             f"━━━━━━━━━━━━━━━━━━━━"
         )
         return msg
