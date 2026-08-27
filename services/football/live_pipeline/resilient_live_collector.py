@@ -252,6 +252,52 @@ class ResilientLiveCollector:
             print(f"[Tier 1 Error] Stats fetch for {fixture_id} failed: {e}")
         return None
 
+    def fetch_live_player_props_api_football(self, fixture_id: str) -> Dict[str, LivePlayerStat]:
+        """
+        Step 3: Estrae i dati granulari per singolo giocatore (Falli Commessi, Falli Subiti, Minuti, Tiri, Cartellini)
+        dall'endpoint ufficiale fixtures/players.
+        """
+        player_dict = {}
+        if not self.api_football_key:
+            return player_dict
+
+        url = f"https://v3.football.api-sports.io/fixtures/players?fixture={fixture_id}"
+        headers = {
+            "x-apisports-key": self.api_football_key,
+            "x-rapidapi-host": "v3.football.api-sports.io"
+        }
+
+        try:
+            r = requests.get(url, headers=headers, timeout=10)
+            if r.status_code == 200:
+                response = r.json().get("response", [])
+                for team_block in response:
+                    team_name = team_block.get("team", {}).get("name", "")
+                    players = team_block.get("players", [])
+                    for p in players:
+                        p_info = p.get("player", {})
+                        stats = p.get("statistics", [{}])[0]
+                        games = stats.get("games", {})
+                        fouls = stats.get("fouls", {})
+                        cards = stats.get("cards", {})
+
+                        name = p_info.get("name", "")
+                        stat_obj = LivePlayerStat(
+                            player_name=name,
+                            team_name=team_name,
+                            fouls_committed=fouls.get("committed") or 0,
+                            fouls_suffered=fouls.get("drawn") or 0,
+                            yellow_cards=cards.get("yellow") or 0,
+                            red_cards=cards.get("red") or 0,
+                            minutes_played=games.get("minutes") or 0,
+                            is_starter=not games.get("substitute", False)
+                        )
+                        player_dict[name.lower()] = stat_obj
+        except Exception as e:
+            print(f"[Tier 1 Error] Player props fetch for {fixture_id} failed: {e}")
+
+        return player_dict
+
     def parse_stats_to_snapshot(self, snapshot: LiveMatchSnapshot, raw_stats: List[Dict[str, Any]]) -> LiveMatchSnapshot:
         """
         Popola il LiveMatchSnapshot con le statistiche analitiche.
