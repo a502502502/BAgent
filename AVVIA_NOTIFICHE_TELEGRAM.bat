@@ -1,23 +1,18 @@
 @echo off
-title BAgent Telegram Live Schedine Notifier
+title BAgent Telegram Real-Time In-Play Live Notifier
 color 0A
 echo ======================================================================
-echo          ROBOT BAGENT TELEGRAM LIVE NOTIFIER - SERIE LIVE
+echo          ROBOT BAGENT TELEGRAM LIVE NOTIFIER (LOOP 60 SECONDI)
 echo ======================================================================
-echo  Questo batch controlla in tempo reale le tue schedine giocate
-echo  e ti invia notifiche istantanee su Telegram per:
-echo    * Gol e avanzamento eventi
-echo    * Corner e Cartellini raggiunti
-echo    * Alert di Copertura Matematica (Dutching Profit-Lock) al 75'-80'
-echo    * Notifica finale di CASSA e VINCITA!
+echo  Fonti Dati: UEFA.com MatchCenter + Sofascore Feed + Netwin Live
+echo.
+echo  Notifiche inviate automaticamente sul tuo smartphone per:
+echo    [1] Ogni Gol segnato (Besiktas, Atalanta, Barcellona, Chelsea)
+echo    [2] Corner del PAOK (1/4, 2/4, 3/4, 4/4)
+echo    [3] Alert di Copertura Matematica Dutching al 75'-80'
+echo    [4] Notifica di CASSA VINTA!
 echo ======================================================================
 echo.
 cd /d "%~dp0"
-python scripts/telegram_live_betslip_notifier.py
-echo.
-echo ======================================================================
-echo  Avvio loop continuo in background...
-echo  Premi CTRL+C per fermare il notifier in qualsiasi momento.
-echo ======================================================================
-python scripts/live_lineup_sentinel_5min.py
+python scripts/telegram_live_inplay_poller.py
 pause
