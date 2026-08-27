@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BAgent — Centrale Operativa 24/7 (Raspberry Pi)</title>
+<style>
+  :root {
+    --bg: #070d19;
+    --card-bg: #111c30;
+    --card-border: #1e293b;
+    --accent-blue: #38bdf8;
+    --accent-green: #10b981;
+    --accent-yellow: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-purple: #a855f7;
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+  
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #111c30 0%, #0a1120 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.6);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .brand { font-size: 18px; font-weight: 800; color: var(--accent-blue); display: flex; align-items: center; gap: 6px; }
+  .status-badge { background: #064e3b; color: #a7f3d0; border: 1px solid #059669; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .stat-card {
+    background: #091120;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+  .stat-val { font-size: 16px; font-weight: 800; color: var(--accent-green); margin-top: 2px; }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-size: 14.5px;
+    color: var(--accent-yellow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* TICKETS */
+  .ticket-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .ticket-card {
+    background: #0a1222;
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .ticket-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .ticket-title { font-size: 13px; font-weight: 700; color: #fff; }
+  .ticket-odds { font-size: 18px; font-weight: 900; color: var(--accent-blue); }
+  .ticket-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+  .cashout-box {
+    background: #1e1b4b;
+    border: 1px solid #4338ca;
+    color: #c7d2fe;
+    font-size: 11px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  th { background: #070d19; color: var(--text-muted); font-size: 10px; text-transform: uppercase; padding: 6px; text-align: left; border-bottom: 1px solid var(--card-border); }
+  td { padding: 6px; border-bottom: 1px solid var(--card-border); vertical-align: middle; }
+  .sesto-senso-cell { font-size: 10.5px; color: #cbd5e1; line-height: 1.3; }
+
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 10px; }
+  .badge-blue { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+  .badge-green { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+  .badge-yellow { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+  .badge-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+  
+  /* ACTION BUTTONS */
+  .btn-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .btn {
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn-green { background: #065f46; border-color: var(--accent-green); color: #ecfdf5; }
+  .btn-blue { background: #0369a1; border-color: var(--accent-blue); color: #f0f9ff; }
+
+  .pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="brand">
+        🍓 BAgent Hub 24/7 — Portale Autonomo Raspberry Pi
+      </div>
+      <div class="status-badge">
+        <span class="pulse">●</span> ATTIVO ●
+      </div>
+    </div>
+    
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">💰 Bankroll</div>
+        <div class="stat-val">300.00 €</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🛡️ Hard Cap (8%)</div>
+        <div class="stat-val" style="color:var(--accent-blue);">24.00 €</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">⏱️ Ultimo Refresh</div>
+        <div class="stat-val" style="color:#fff; font-size:12px;">21:36:24</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🔄 Prossimo Ciclo</div>
+        <div class="stat-val" style="color:var(--accent-yellow); font-size:12px;">Tra 2 ore esatte (Ore 23:30)</div>
+      </div>
+    </div>
+
+    <div class="btn-bar">
+      <a class="btn btn-green" href="https://t.me/A502502_bot" target="_blank">📲 Apri Bot Telegram (@A502502_bot)</a>
+      <a class="btn btn-blue" href="javascript:location.reload()">🔄 Ricarica Live</a>
+    </div>
+  </div>
+
+  <!-- SEZIONE 1: TICKET IN CORSO -->
+  <div class="card">
+    <h2>
+      <span>🎫 SCHEDINE & TICKET IN GIOCO (LIVE)</span>
+      <span class="badge badge-green">1 Attivi</span>
+    </h2>
+    <div class="ticket-grid">
+      
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <div>
+                    <span class="badge badge-yellow">IN CORSO</span>
+                    <h3 class="ticket-title">🏆 Ticket #34: Quintina d'Elite Serale</h3>
+                </div>
+                <div class="ticket-odds">4.80×</div>
+            </div>
+            <div class="ticket-meta">
+                <span>Rif: <code>DF07EA081B31840F2C06</code></span>
+                <span>Stake: <strong>20.00 €</strong> ➔ Pot: <strong style="color:var(--accent-green);">96.07 €</strong></span>
+            </div>
+            <table>
+                <tbody>
+                    
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:00</td>
+                <td style="width: 45%;">Ajax vs Sion</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1X + Over 1.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.22 <span style="font-size:10px;">✅</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:00</td>
+                <td style="width: 45%;">Hapoel Tel Aviv vs Atalanta</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + Over 1.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.41 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:30</td>
+                <td style="width: 45%;">Chelsea vs Luton</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1 (1X2)</span></td>
+                <td style="width: 15%; text-align: right;">@1.09 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">21:00</td>
+                <td style="width: 45%;">Partizan vs Getafe</td>
+                <td style="width: 25%;"><span class="badge badge-blue">Over 4.5 Cartellini</span></td>
+                <td style="width: 15%; text-align: right;">@1.83 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">21:00</td>
+                <td style="width: 45%;">Barcellona vs Athletic Bilbao</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1X + Over 2.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.40 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+                </tbody>
+            </table>
+            <div class="cashout-box">🛡️ <strong>Cashout / Take-Profit Suggerito:</strong> Ajax 5-2 già vinta, Brighton 3-0 già vinta. Valutare cashout se Barça chiude il primo tempo in vantaggio!</div>
+        </div>
+        
+    </div>
+  </div>
+
+  <!-- SEZIONE 2: OPPORTUNITÀ D'ORO FILTRATE DA BETGUARD -->
+  <div class="card">
+    <h2>
+      <span>💎 OPPORTUNITÀ D'ORO VALIDATE DA BETGUARD (PROSSIME 24H)</span>
+      <span class="badge badge-blue">Regola #26 Attiva</span>
+    </h2>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 8%;">Ora</th>
+            <th style="width: 25%;">Partita & Torneo</th>
+            <th style="width: 15%;">Mercato Netwin</th>
+            <th style="width: 8%;">Quota</th>
+            <th style="width: 8%;">Edge</th>
+            <th style="width: 36%;">Sesto Senso & Validazione BetGuard</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+            <td style="font-weight: 700; color: var(--accent-blue);">16:45</td>
+            <td><strong>SC Freiburg vs Motherwell</strong><br><span style="font-size: 10px; color: var(--text-muted);">Conference League</span></td>
+            <td><span class="badge badge-green">1 + Over 1.5 Gol</span></td>
+            <td style="font-weight: 800;">@1.40</td>
+            <td><span class="badge badge-purple">+8.5%</span></td>
+            <td class="sesto-senso-cell">Friburgo dominante (1-3 all'andata, 5-1 in coppa). Motherwell costretto a scoprirsi.</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: var(--accent-blue);">17:00</td>
+            <td><strong>FC Copenhagen vs Inter Turku</strong><br><span style="font-size: 10px; color: var(--text-muted);">Conference League</span></td>
+            <td><span class="badge badge-green">1 + Over 1.5 Gol</span></td>
+            <td style="font-weight: 800;">@1.45</td>
+            <td><span class="badge badge-purple">+7.2%</span></td>
+            <td class="sesto-senso-cell">Parken Stadium sold-out: i danesi devono vincere per andare ai gironi dopo lo 0-0 tattico dell'andata.</td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

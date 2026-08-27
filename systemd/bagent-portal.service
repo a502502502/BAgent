@@ -1,0 +1,17 @@
+[Unit]
+Description=BAgent 24/7 Autonomous Portal & Telegram Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/BAgent
+ExecStart=/home/pi/BAgent/.venv/bin/python3 scripts/auto_portal_bot.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
