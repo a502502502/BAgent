@@ -656,6 +656,13 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
     - *Regola Operativa*: **Nessuna previsione per la gara di ritorno può contraddire le evidenze oggettive dell'andata**:
       - Se l'andata ha registrato $\le 5$ corner a causa di un blocco difensivo basso e denso (es. *Hapoel-Atalanta con soli 4 corner*), è **SEVERAMENTE VIETATO giocare Over Corner $\ge 7.5$**. Il mercato corretto deve spostarsi su *Combo Risultato/Gol (X2 + Over 1.5)* o *DNB*.
       - Se l'andata ha registrato un clima di scontro violento con molti cartellini e falli (es. *Partizan-Getafe con 7 cartellini e 33 falli*), la gara di ritorno — con la necessità di rimonta — amplifica il nervosismo, rendendo l'**Over Cartellini (Over 3.5 / 4.5) la selezione d'acciaio**.
+36. **LETTURA OBBLIGATORIA PRE-CALCOLO DI SOFASCORE NEWS (`https://www.sofascore.com/news?category=football`) PER IL SESTO SENSO**:
+    - *Principio Inviolabile*: È **TASSATIVO E VINCOLANTE** consultare e leggere la pagina di Sofascore News (`https://www.sofascore.com/news?category=football` e relative sezioni di campionato) **PRIMA di eseguire qualsiasi calcolo quote, stima Poisson o composizione di ticket**.
+    - *Regola Operativa*: L'agente deve effettuare la scansione degli articoli più recenti per estrarre:
+      1. *Assenze, infortuni, squalifiche e turnover dell'ultimo minuto*.
+      2. *Dichiarazioni dei tecnici e assetto tattico annunciato* (es. catenaccio basso vs pressione ultra-offensiva).
+      3. *Metriche di rating e duelli 1v1 sui singoli giocatori*.
+      Queste informazioni devono essere **esplicitamente riflesse nelle motivazioni della colonna "Sesto Senso"** per confermare o scartare le quote calcolate.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
