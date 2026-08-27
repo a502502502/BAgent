@@ -663,6 +663,10 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
       2. *Dichiarazioni dei tecnici e assetto tattico annunciato* (es. catenaccio basso vs pressione ultra-offensiva).
       3. *Metriche di rating e duelli 1v1 sui singoli giocatori*.
       Queste informazioni devono essere **esplicitamente riflesse nelle motivazioni della colonna "Sesto Senso"** per confermare o scartare le quote calcolate.
+37. **TRAPPOLA DEL RITORNO CON LARGO VANTAGGIO ($\ge 3$ GOL) / DIVIETO DI SEGNO 1X2 FISSO CON TURNOVER**:
+    - *Principio Inviolabile*: Quando una squadra ha accumulato un vantaggio di $\ge 3$ gol nella gara di andata in trasferta (es. *Anderlecht 3-0 Kairat*), la gara di ritorno al proprio stadio presenta **urgenza di qualificazione pari a zero** e un **turnover massiccio di giovani/riserve**, rendendo il segno fisso (1 o 2, oppure 1+Over) una classica *trappola psicologica e probabilistica*.
+    - *Regola Operativa*: **È SEVERAMENTE VIETATO consigliare l'1 fisso o la vittoria secca su match con qualificazione già chiusa e giovani in campo**.
+      - Il mercato deve spostarsi esclusivamente su mercati di gol neutri (*Over 1.5 Gol Totali Match @ 1.20*, *Ambedue le Squadre Segnano/Gol @ 1.70*) o doppie chance di sicurezza (*1X*), evidenziando il rischio calo di concentrazione nel Sesto Senso.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
