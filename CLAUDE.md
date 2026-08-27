@@ -634,6 +634,11 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 25. **PIPELINE DATI LIVE RESILIENTE & ANTI-BLOCCO (`services/football/live_pipeline/resilient_live_collector.py`)**:
     - *Analisi*: I siti web consumer (Sofascore/FotMob/Flashscore) bloccano le chiamate raw da script con Cloudflare (HTTP 403), rischiando di interrompere il monitoraggio live delle schedine aperte.
     - *Regola Fondamentale*: **L'ingestione dei dati in tempo reale (Corner, Falli, Cartellini, Tiri) DEVE avvenire tramite la pipeline multi-livello normalizzata su `LiveMatchSnapshot` (Tier 1: API-Football live endpoints; Tier 2: The Odds API; Tier 3: Browser Session Headers) eliminando i single-point-of-failure.**
+31. **ONE-CLICK LIVE INSURANCE & DUTCHING ENGINE (`services/betting/one_click_live_insurance_engine.py`)**:
+    - *Analisi*: Nei minuti finali (65'-80') di partite decisive con ticket aperti ad alto potenziale, il panico o il calcolo manuale errato porta a perdite evitabili o alla mancata protezione del capitale.
+    - *Regola Fondamentale*: **Quando un ticket aperto arriva all'ultimo evento con 2+ gambe già vinte, il sistema DEVE generare e inviare automaticamente su Telegram l'alert con le 2 opzioni matematiche calcolate in Euro:**
+      1. **Break-Even Insurance**: Stake $= \text{Stake Iniziale} / (\text{Quota Copertura} - 1)$ ➔ Rimborso 100% dello stake a P&L = 0.00 €.
+      2. **Profit-Lock**: Stake $= \text{Vincita Potenziale} / \text{Quota Copertura}$ ➔ Incasso matematico identico e garantito in ogni scenario.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
