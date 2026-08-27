@@ -667,6 +667,12 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
     - *Principio Inviolabile*: Quando una squadra ha accumulato un vantaggio di $\ge 3$ gol nella gara di andata in trasferta (es. *Anderlecht 3-0 Kairat*), la gara di ritorno al proprio stadio presenta **urgenza di qualificazione pari a zero** e un **turnover massiccio di giovani/riserve**, rendendo il segno fisso (1 o 2, oppure 1+Over) una classica *trappola psicologica e probabilistica*.
     - *Regola Operativa*: **È SEVERAMENTE VIETATO consigliare l'1 fisso o la vittoria secca su match con qualificazione già chiusa e giovani in campo**.
       - Il mercato deve spostarsi esclusivamente su mercati di gol neutri (*Over 1.5 Gol Totali Match @ 1.20*, *Ambedue le Squadre Segnano/Gol @ 1.70*) o doppie chance di sicurezza (*1X*), evidenziando il rischio calo di concentrazione nel Sesto Senso.
+38. **VERIFICA OBBLIGATORIA FORMAZIONI UFFICIALI 60' PRE-MATCH (NESSUNA CONCLUSIONE DEFINITIVA SENZA DISTINTE)**:
+    - *Principio Inviolabile*: Qualsiasi analisi, tabella o proposta formulata prima della pubblicazione delle distinte ufficiali è da considerarsi **"STIMA PRE-MATCH PROBABILISTICA SUB-JUDICE"**. È TASSATIVAMENTE VIETATO dare conclusioni definitive o considerare congelato un ticket prima dell'audit delle formazioni.
+    - *Regola Operativa*: **A 60 minuti esatti dal calcio d'inizio di ciascun blocco di partite (ore 19:00, 19:30, 20:00)**, il sistema DEVE eseguire l'audit con `lineup_confirmation_service.py`:
+      1. *Talisman & Spine Check*: Verifica che i titolari chiave (es. Scamacca/CDK per Atalanta, Lamine Yamal/Raphinha per Barça, Mitoma per Brighton) siano regolarmente in campo dal 1'.
+      2. *Turnover Alert*: Se un tecnico schiera riserve inattese o moduli conservativi, la giocata viene **istantaneamente ricalcolata o sospesa prima del piazzamento**.
+      3. *Via Libera Operativo*: Solo con l'esito `✅ LINEUP CONFERMATA` il ticket passa allo status di *Esecuzione Ufficiale*.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
