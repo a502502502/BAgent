@@ -651,6 +651,11 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 34. **VERIFICA OBBLIGATORIA RISULTATI PASSATI SU DATABASE UFFICIALE UEFA.COM / FONTI LIVE (ZERO ALLUCINAZIONI)**:
     - *Principio Inviolabile*: È **TASSATIVAMENTE VIETATO** generare, stimare o dedurre risultati di gare precedenti (gare di andata, precedenti H2H, gironi o marcatori) basandosi sulla memoria parametrica dell'LLM.
     - *Regola Operativa*: **Per qualsiasi partita di coppa o torneo internazionale, i risultati passati e i dati della gara di andata DEVONO essere SEMPRE ed OBBLIGATORIAMENTE verificati in tempo reale interrogando il database ufficiale live di UEFA.com (o Transfermarkt / Sofascore / API-Football ufficiali)** prima di scrivere qualsiasi report, tabella o motivazione. Ogni singolo punteggio, marcatore, corner o fallo citato DEVE essere certificato al 100% dalla fonte ufficiale.
+35. **STATISTICHE DELLA GARA D'ANDATA COME BASE EMPIRICA OBBLIGATORIA PER IL RITORNO**:
+    - *Principio Inviolabile*: I dati reali della gara di andata (Volume Corner, Cartellini estratti, Falli fischiati, Tiri nello specchio, xG) costituiscono il **benchmark matematico primario** per calibrare le selezioni della partita di ritorno.
+    - *Regola Operativa*: **Nessuna previsione per la gara di ritorno può contraddire le evidenze oggettive dell'andata**:
+      - Se l'andata ha registrato $\le 5$ corner a causa di un blocco difensivo basso e denso (es. *Hapoel-Atalanta con soli 4 corner*), è **SEVERAMENTE VIETATO giocare Over Corner $\ge 7.5$**. Il mercato corretto deve spostarsi su *Combo Risultato/Gol (X2 + Over 1.5)* o *DNB*.
+      - Se l'andata ha registrato un clima di scontro violento con molti cartellini e falli (es. *Partizan-Getafe con 7 cartellini e 33 falli*), la gara di ritorno — con la necessità di rimonta — amplifica il nervosismo, rendendo l'**Over Cartellini (Over 3.5 / 4.5) la selezione d'acciaio**.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
