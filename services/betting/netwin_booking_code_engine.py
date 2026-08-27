@@ -19,17 +19,17 @@ class NetwinBookingCodeEngine:
         return {
             "35": {
                 "ticket_id": "35",
-                "name": "Ticket #35: Contropartita di Recupero & Rilancio (Ore 20:30 - 21:00)",
+                "name": "Ticket #35: Quaterna di Recupero & Rilancio (Ricalibrata Ore 20:30 - 21:00)",
                 "code": "NW-2030-T35",
-                "odds": "3.01",
+                "odds": "3.75",
                 "stake": "15.00 €",
-                "potential_win": "45.15 €",
-                "status": "⏳ PRONTO AL PIAZZAMENTO (START 20:30)",
+                "potential_win": "56.25 €",
+                "status": "⏳ PRONTA AL PIAZZAMENTO (START 20:30)",
                 "events": [
-                    "Chelsea vs Luton Town (20:30) ➔ 1 + Over 1.5 Gol @ 1.30",
+                    "Chelsea vs Luton Town (20:30) ➔ 1 + Over 1.5 Gol @ 1.28",
                     "Brighton vs Tromsø (20:30) ➔ 1X + Over 1.5 Gol @ 1.25",
                     "Barcellona vs Athletic Bilbao (21:00) ➔ 1X + Over 1.5 Gol @ 1.28",
-                    "Partizan Belgrade vs Getafe (21:00) ➔ Over 3.5 Cartellini @ 1.45"
+                    "Partizan Belgrade vs Getafe (21:00) ➔ Over 4.5 Cartellini @ 1.83"
                 ]
             },
             "34": {
@@ -67,6 +67,6 @@ class NetwinBookingCodeEngine:
 if __name__ == "__main__":
     engine = NetwinBookingCodeEngine()
     slips = engine.get_today_booking_slips()
-    print("📋 ACTIVE BETS LEDGER CON CONTROPARTITA TICKET #35:")
+    print("📋 ACTIVE BETS LEDGER CON TICKET #35 RICALIBRATO:")
     for tid, slip in slips.items():
         print(f"[{slip['status']}] {slip['name']} | Quota: {slip['odds']}x | Stake: {slip['stake']} | Potenziale: {slip['potential_win']}")
