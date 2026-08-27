@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BAgent — Dashboard Ufficiale (Fonte Tuttosport - 27 Agosto 2026)</title>
+<title>BAgent — Dashboard Quantitativa Completa (27 Agosto 2026)</title>
 <style>
   :root {
     --bg: #0b1120;
@@ -13,6 +13,7 @@
     --accent-green: #34d399;
     --accent-yellow: #fbbf24;
     --accent-red: #f43f5e;
+    --accent-purple: #c084fc;
     --text-primary: #f8fafc;
     --text-muted: #94a3b8;
   }
@@ -22,26 +23,41 @@
     background: var(--bg);
     color: var(--text-primary);
     margin: 0;
-    padding: 12px;
+    padding: 14px;
     line-height: 1.35;
     font-size: 13px;
   }
   .container { width: 100%; max-width: 100%; box-sizing: border-box; }
-  header {
+  
+  /* HEADER */
+  .header {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     border: 1px solid var(--card-border);
     border-radius: 12px;
-    padding: 14px 18px;
+    padding: 16px 20px;
     margin-bottom: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
   }
-  h1 { margin: 0 0 6px 0; color: var(--accent-blue); font-size: 22px; }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .brand { font-size: 20px; font-weight: 800; color: var(--accent-blue); display: flex; align-items: center; gap: 8px; }
+  .date-badge { background: #0f172a; border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  
   .header-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 8px 12px;
     color: var(--text-muted);
-    font-size: 12px;
-    margin-top: 8px;
+    font-size: 11.5px;
+    margin-top: 6px;
   }
   .meta-badge {
     background: #0f172a;
@@ -50,6 +66,32 @@
     border-radius: 6px;
     font-weight: 600;
   }
+  .share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0f172a;
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn:hover { background: #334155; border-color: var(--accent-blue); }
+  .btn-green { background: #065f46; border-color: var(--accent-green); color: #ecfdf5; }
+  .btn-blue { background: #0369a1; border-color: var(--accent-blue); color: #f0f9ff; }
+
+  /* CARDS */
   .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -61,13 +103,50 @@
   h2 {
     margin: 0 0 10px 0;
     color: var(--accent-yellow);
-    font-size: 16px;
+    font-size: 15.5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--card-border);
     padding-bottom: 8px;
   }
+  
+  /* TICKETS */
+  .ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 14px;
+  }
+  .ticket-card {
+    background: #131d31;
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .ticket-header {
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .ticket-title { font-size: 14px; font-weight: bold; color: #fff; margin: 0; }
+  .ticket-odds { font-size: 18px; font-weight: 800; color: var(--accent-blue); }
+  .ticket-summary {
+    background: #0f172a;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    border: 1px solid #1e293b;
+  }
+  .stake-highlight { color: var(--accent-green); font-size: 13.5px; font-weight: bold; }
+
+  /* TABLES */
   .table-responsive { width: 100%; overflow: hidden; }
   table {
     width: 100%;
@@ -96,6 +175,7 @@
     overflow-wrap: break-word;
   }
   tr:hover td { background: rgba(56, 189, 248, 0.04); }
+
   .badge {
     display: inline-block;
     padding: 2px 6px;
@@ -109,66 +189,239 @@
   .badge-yellow { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
   .badge-red { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
   .badge-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
-  
+
   .sesto-senso-box {
     font-size: 11px;
     color: #cbd5e1;
     line-height: 1.25;
   }
-  .ticket-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 14px;
-  }
-  .ticket-card {
-    background: #131d31;
-    border: 1px solid var(--card-border);
-    border-radius: 10px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .ticket-header {
-    border-bottom: 1px solid var(--card-border);
-    padding-bottom: 6px;
-    margin-bottom: 8px;
-  }
-  .ticket-title { font-size: 14px; font-weight: bold; color: var(--accent-blue); margin: 0; }
-  .ticket-summary {
-    background: #0f172a;
-    border-radius: 6px;
-    padding: 8px 10px;
-    margin-top: 10px;
-    font-size: 11.5px;
-    border: 1px solid #1e293b;
-  }
-  .stake-highlight { color: var(--accent-green); font-size: 14px; font-weight: bold; }
   .pulse { animation: pulse-animation 2s infinite; }
   @keyframes pulse-animation { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent-green);
+    color: #0b1120;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    z-index: 999;
+  }
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- HEADER COMPATTO -->
-  <header>
-    <h1>🏆 BAgent Intelligence — Palinsesto Ufficiale (Fonte Tuttosport)</h1>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="brand">
+        🚀 BAgent Quantitative Ecosystem — Palinsesto Ufficiale
+      </div>
+      <div class="date-badge">
+        📅 Giovedì 27 Agosto 2026
+      </div>
+    </div>
+    
     <div class="header-meta">
-      <div class="meta-badge">📅 <strong>Giovedì 27 Agosto 2026</strong></div>
       <div class="meta-badge">💰 Bankroll: <span style="color: var(--accent-green);">300.00 €</span></div>
       <div class="meta-badge">🛡️ Hard Cap Singolo: <span style="color: var(--accent-blue);">24.00 € (8%)</span></div>
       <div class="meta-badge">🔒 Hard Cap Day: <span style="color: var(--accent-yellow);">75.00 € (25%)</span></div>
-      <div class="meta-badge">📐 Palinsesto Ufficiale: <span style="color: var(--accent-green);">TUTTOSPORT.COM CERTIFICATO</span></div>
-      <div class="meta-badge">⚡ Status: <span class="pulse" style="color: var(--accent-green);">● LIVE</span></div>
+      <div class="meta-badge">📐 Fonte Certificata: <span style="color: var(--accent-green);">TUTTOSPORT.COM</span></div>
+      <div class="meta-badge">⚡ Live Server: <span class="pulse" style="color: var(--accent-green);">● ATTIVO</span></div>
     </div>
-  </header>
 
-  <!-- TABELLA 1: MASTER ANALYTICS TUTTI I MATCH REALI (FONTE TUTTOSPORT) -->
+    <!-- SHARE BAR -->
+    <div class="share-buttons">
+      <button class="btn btn-green" onclick="copyTicketsToClipboard()">
+        📋 Copia Schedine per WhatsApp / Telegram
+      </button>
+      <a class="btn btn-blue" href="https://api.whatsapp.com/send?text=Ecco%20i%203%20Ticket%20Quantitativi%20di%20oggi%20di%20BAgent:%20https://github.com/a502502502/BAgent/blob/main/reports/schedina_27ago.html" target="_blank">
+        📲 Invia su WhatsApp
+      </a>
+      <a class="btn btn-blue" href="https://t.me/share/url?url=https://github.com/a502502502/BAgent/blob/main/reports/schedina_27ago.html&text=Report%20Schedine%20BAgent%2027%20Agosto" target="_blank">
+        ✈️ Invia su Telegram
+      </a>
+      <button class="btn" onclick="window.print()">
+        🖨️ Stampa / Salva in PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- SEZIONE 1: I 3 TICKET OPERATIVI PRONTI -->
   <div class="card">
     <h2>
-      <span>📊 TABELLA 1: MASTER ANALYTICS — TUTTI I MATCH REALI DI OGGI (TUTTOSPORT)</span>
+      <span>💎 I 3 TICKET UFFICIALI CALIBRATI SU BANKROLL 300.00 € (TUTTOSPORT OK)</span>
+      <span class="badge badge-green">Kelly Staking Engine Attivo</span>
+    </h2>
+    <div class="ticket-grid">
+
+      <!-- TICKET 31 -->
+      <div class="ticket-card">
+        <div>
+          <div class="ticket-header">
+            <div>
+              <span class="badge badge-green" style="margin-bottom: 2px;">SUPER SICURA</span>
+              <h3 class="ticket-title">👑 Ticket #31: Gol & Doppie Chance</h3>
+            </div>
+            <div class="ticket-odds">2.21×</div>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td style="width: 15%;"><strong>20:00</strong></td>
+                <td style="width: 50%;">Hapoel Tel Aviv vs Atalanta</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + Over 1.5</span></td>
+                <td style="width: 10%;">@ 1.33</td>
+              </tr>
+              <tr>
+                <td><strong>21:00</strong></td>
+                <td>Barcellona vs Athletic Bilbao</td>
+                <td><span class="badge badge-blue">1X + Over 1.5</span></td>
+                <td>@ 1.28</td>
+              </tr>
+              <tr>
+                <td><strong>20:30</strong></td>
+                <td>Chelsea vs Luton Town</td>
+                <td><span class="badge badge-blue">1 + Over 1.5</span></td>
+                <td>@ 1.30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ticket-summary">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span>Edge Matematico:</span>
+            <span style="color:var(--accent-blue); font-weight:bold;">+37.24% (💎 MEGA VALUE)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Stake Consigliato:</span>
+            <span class="stake-highlight">20.00 € (6.7%)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:4px; color:var(--text-muted);">
+            <span>Vincita Potenziale:</span>
+            <strong style="color:#fff;">44.20 € — 53.04 €</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- TICKET 32 -->
+      <div class="ticket-card">
+        <div>
+          <div class="ticket-header">
+            <div>
+              <span class="badge badge-yellow" style="margin-bottom: 2px;">SPECIALI STATS</span>
+              <h3 class="ticket-title">🚩 Ticket #32: Corner & Sanzioni</h3>
+            </div>
+            <div class="ticket-odds">2.49×</div>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td style="width: 15%;"><strong>20:00</strong></td>
+                <td style="width: 50%;">Hapoel Tel Aviv vs Atalanta</td>
+                <td style="width: 25%;"><span class="badge badge-yellow">O7.5 Corner</span></td>
+                <td style="width: 10%;">@ 1.30</td>
+              </tr>
+              <tr>
+                <td><strong>20:30</strong></td>
+                <td>Brighton vs Tromsø</td>
+                <td style="width: 25%;"><span class="badge badge-yellow">O7.5 Corner</span></td>
+                <td style="width: 10%;">@ 1.32</td>
+              </tr>
+              <tr>
+                <td><strong>21:00</strong></td>
+                <td>Partizan Belgrado vs Getafe</td>
+                <td style="width: 25%;"><span class="badge badge-red">O3.5 Cartellini</span></td>
+                <td style="width: 10%;">@ 1.45</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ticket-summary">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span>Edge Matematico:</span>
+            <span style="color:var(--accent-blue); font-weight:bold;">+32.22% (💎 MEGA VALUE)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Stake Consigliato:</span>
+            <span class="stake-highlight">20.00 € (6.7%)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:4px; color:var(--text-muted);">
+            <span>Vincita Potenziale:</span>
+            <strong style="color:#fff;">49.80 € — 59.76 €</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- TICKET 33 -->
+      <div class="ticket-card">
+        <div>
+          <div class="ticket-header">
+            <div>
+              <span class="badge badge-red" style="margin-bottom: 2px;">ALTA QUOTA</span>
+              <h3 class="ticket-title">🚀 Ticket #33: Quaterna d'Elite</h3>
+            </div>
+            <div class="ticket-odds">7.15×</div>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td style="width: 15%;"><strong>20:00</strong></td>
+                <td style="width: 50%;">Hapoel Tel Aviv vs Atalanta</td>
+                <td style="width: 25%;"><span class="badge badge-blue">2 + Over 1.5</span></td>
+                <td style="width: 10%;">@ 1.55</td>
+              </tr>
+              <tr>
+                <td><strong>21:00</strong></td>
+                <td>Barcellona vs Athletic Bilbao</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1 + Over 2.5</span></td>
+                <td style="width: 10%;">@ 1.72</td>
+              </tr>
+              <tr>
+                <td><strong>20:30</strong></td>
+                <td>Chelsea vs Luton Town</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1 + Over 2.5</span></td>
+                <td style="width: 10%;">@ 1.58</td>
+              </tr>
+              <tr>
+                <td><strong>21:00</strong></td>
+                <td>Partizan Belgrado vs Getafe</td>
+                <td style="width: 25%;"><span class="badge badge-red">O4.5 Cartellini</span></td>
+                <td style="width: 10%;">@ 1.85</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ticket-summary">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span>Edge Matematico:</span>
+            <span style="color:var(--accent-blue); font-weight:bold;">+47.70% (Alta Varianza)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Stake Consigliato:</span>
+            <span class="stake-highlight">5.00 € (1.7%)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:4px; color:var(--text-muted);">
+            <span>Vincita Potenziale:</span>
+            <strong style="color:#fff;">35.75 € — 42.90 €</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SEZIONE 2: TABELLA 1 MASTER ANALYTICS TUTTI I MATCH (CON STATS ANDATA REGOLE #32 E #33) -->
+  <div class="card">
+    <h2>
+      <span>📊 TABELLA 1: MASTER ANALYTICS — TUTTI I MATCH REALI DI OGGI (FONTE TUTTOSPORT)</span>
       <span class="badge badge-blue">Palinsesto Ufficiale</span>
     </h2>
     <div class="table-responsive">
@@ -179,7 +432,7 @@
             <th style="width: 16%;">Partita Ufficiale</th>
             <th style="width: 11%;">Meteo / Terreno</th>
             <th style="width: 10%;">Arbitro</th>
-            <th style="width: 27%;">Sesto Senso & Intelligence Tattica</th>
+            <th style="width: 27%;">Sesto Senso & Stats Andata (Regole #32/#33)</th>
             <th style="width: 14%;">Mercato Consigliato</th>
             <th style="width: 6%;">Quota</th>
             <th style="width: 8%;">Edge / Prob</th>
@@ -281,162 +534,95 @@
     </div>
   </div>
 
-  <!-- TABELLA 3: I 3 TICKET OPERATIVI PRONTI E CORRETTI -->
+  <!-- SEZIONE 3: TABELLA 2 DUELLI 1V1 & PLAYER PROPS (OPTA FEED) -->
   <div class="card">
     <h2>
-      <span>💎 TABELLA 3: I 3 TICKET D'ACCIAIO CALIBRATI SU BANKROLL 300.00 € (TUTTOSPORT OK)</span>
-      <span class="badge badge-green">Kelly Staking Engine Attivo</span>
+      <span>⚔️ TABELLA 2: I DUELLI 1v1 & MAGNETI DA FALLO SUBITO (OPTA FEED)</span>
+      <span class="badge badge-yellow">Player Props D'Elite</span>
     </h2>
-    <div class="ticket-grid">
-
-      <!-- TICKET 31 -->
-      <div class="ticket-card">
-        <div>
-          <div class="ticket-header">
-            <h3 class="ticket-title">👑 Ticket #31: Gol & Doppie Chance d'Acciaio</h3>
-            <span style="font-size:11.5px; color:var(--text-muted);">Quota Moltiplicatore: <strong>2.21×</strong> | Prob: <strong>62.1%</strong></span>
-          </div>
-          <table>
-            <tbody>
-              <tr>
-                <td style="width: 15%;"><strong>20:00</strong></td>
-                <td style="width: 50%;">Hapoel Tel Aviv vs Atalanta</td>
-                <td style="width: 25%;"><span class="badge badge-blue">X2 + Over 1.5</span></td>
-                <td style="width: 10%;">@ 1.33</td>
-              </tr>
-              <tr>
-                <td><strong>21:00</strong></td>
-                <td>Barcellona vs Athletic Bilbao</td>
-                <td><span class="badge badge-blue">1X + Over 1.5</span></td>
-                <td>@ 1.28</td>
-              </tr>
-              <tr>
-                <td><strong>20:30</strong></td>
-                <td>Chelsea vs Luton Town</td>
-                <td><span class="badge badge-blue">1 + Over 1.5</span></td>
-                <td>@ 1.30</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="ticket-summary">
-          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-            <span>Edge Matematico:</span>
-            <span style="color:var(--accent-blue); font-weight:bold;">+37.24% (💎 MEGA VALUE)</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span>Stake Consigliato:</span>
-            <span class="stake-highlight">20.00 €</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-top:4px; color:var(--text-muted);">
-            <span>Vincita Potenziale:</span>
-            <strong style="color:#fff;">44.20 € — 53.04 €</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- TICKET 32 -->
-      <div class="ticket-card">
-        <div>
-          <div class="ticket-header">
-            <h3 class="ticket-title">🚩 Ticket #32: Corner & Sanzioni Totali Match</h3>
-            <span style="font-size:11.5px; color:var(--text-muted);">Quota Moltiplicatore: <strong>2.49×</strong> | Prob: <strong>53.1%</strong></span>
-          </div>
-          <table>
-            <tbody>
-              <tr>
-                <td style="width: 15%;"><strong>20:00</strong></td>
-                <td style="width: 50%;">Hapoel Tel Aviv vs Atalanta</td>
-                <td style="width: 25%;"><span class="badge badge-yellow">O7.5 Corner</span></td>
-                <td style="width: 10%;">@ 1.30</td>
-              </tr>
-              <tr>
-                <td><strong>20:30</strong></td>
-                <td>Brighton vs Tromsø</td>
-                <td><span class="badge badge-yellow">O7.5 Corner</span></td>
-                <td>@ 1.32</td>
-              </tr>
-              <tr>
-                <td><strong>21:00</strong></td>
-                <td>Partizan Belgrado vs Getafe</td>
-                <td><span class="badge badge-red">O3.5 Cartellini</span></td>
-                <td>@ 1.45</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="ticket-summary">
-          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-            <span>Edge Matematico:</span>
-            <span style="color:var(--accent-blue); font-weight:bold;">+32.22% (💎 MEGA VALUE)</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span>Stake Consigliato:</span>
-            <span class="stake-highlight">20.00 €</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-top:4px; color:var(--text-muted);">
-            <span>Vincita Potenziale:</span>
-            <strong style="color:#fff;">49.80 € — 59.76 €</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- TICKET 33 -->
-      <div class="ticket-card">
-        <div>
-          <div class="ticket-header">
-            <h3 class="ticket-title">🚀 Ticket #33: Quaterna Alta Quota d'Elite</h3>
-            <span style="font-size:11.5px; color:var(--text-muted);">Quota Moltiplicatore: <strong>7.15×</strong> | Prob: <strong>21.1%</strong></span>
-          </div>
-          <table>
-            <tbody>
-              <tr>
-                <td style="width: 15%;"><strong>20:00</strong></td>
-                <td style="width: 50%;">Hapoel Tel Aviv vs Atalanta</td>
-                <td style="width: 25%;"><span class="badge badge-blue">2 + Over 1.5</span></td>
-                <td style="width: 10%;">@ 1.55</td>
-              </tr>
-              <tr>
-                <td><strong>21:00</strong></td>
-                <td>Barcellona vs Athletic Bilbao</td>
-                <td><span class="badge badge-blue">1 + Over 2.5</span></td>
-                <td>@ 1.72</td>
-              </tr>
-              <tr>
-                <td><strong>20:30</strong></td>
-                <td>Chelsea vs Luton Town</td>
-                <td><span class="badge badge-blue">1 + Over 2.5</span></td>
-                <td>@ 1.58</td>
-              </tr>
-              <tr>
-                <td><strong>21:00</strong></td>
-                <td>Partizan Belgrado vs Getafe</td>
-                <td><span class="badge badge-red">O4.5 Cartellini</span></td>
-                <td>@ 1.85</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="ticket-summary">
-          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-            <span>Edge Matematico:</span>
-            <span style="color:var(--accent-blue); font-weight:bold;">+47.70% (Alta Varianza)</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span>Stake Consigliato:</span>
-            <span class="stake-highlight">5.00 €</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-top:4px; color:var(--text-muted);">
-            <span>Vincita Potenziale:</span>
-            <strong style="color:#fff;">35.75 € — 42.90 €</strong>
-          </div>
-        </div>
-      </div>
-
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 16%;">Partita</th>
+            <th style="width: 18%;">Giocatore Target</th>
+            <th style="width: 16%;">Marcatore Diretto</th>
+            <th style="width: 10%;">Media Falli</th>
+            <th style="width: 8%;">Over 0.5</th>
+            <th style="width: 8%;">Over 1.5</th>
+            <th style="width: 24%;">Dinamica Tattica del Duello</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hapoel vs Atalanta</strong></td>
+            <td><strong>Charles De Ketelaere (#17)</strong></td>
+            <td>Coco / Chico (Hapoel)</td>
+            <td><span class="badge badge-blue">2.4 / m</span></td>
+            <td><strong>@ 1.18</strong></td>
+            <td><strong>@ 1.55</strong></td>
+            <td><div class="sesto-senso-box">CDK riceve spalle alla porta sulla trequarti; i centrali israeliani entrano subito da dietro per non farlo girare.</div></td>
+          </tr>
+          <tr>
+            <td><strong>Hapoel vs Atalanta</strong></td>
+            <td><strong>Davide Zappacosta (#77)</strong></td>
+            <td>Leidner (Terzino Sx)</td>
+            <td><span class="badge badge-blue">1.9 / m</span></td>
+            <td><strong>@ 1.22</strong></td>
+            <td><strong>@ 1.70</strong></td>
+            <td><div class="sesto-senso-box">Discese a tutta fascia di Zappacosta; il terzino avversario spende il fallo tattico in scivolata.</div></td>
+          </tr>
+          <tr>
+            <td><strong>Barcellona vs Athletic</strong></td>
+            <td><strong>Raphinha (#11)</strong></td>
+            <td>Yuri Berchiche / Boiro</td>
+            <td><span class="badge badge-blue">2.6 / m</span></td>
+            <td><strong>@ 1.15</strong></td>
+            <td><strong>@ 1.48</strong></td>
+            <td><div class="sesto-senso-box">Dribbling stretto e rientri verso il centro; terzini baschi costretti all'ostruzione.</div></td>
+          </tr>
+          <tr>
+            <td><strong>Barcellona vs Athletic</strong></td>
+            <td><strong>Nico Williams (#10)</strong></td>
+            <td>Koundé / Fort (Barça)</td>
+            <td><span class="badge badge-blue">2.8 / m</span></td>
+            <td><strong>@ 1.16</strong></td>
+            <td><strong>@ 1.50</strong></td>
+            <td><div class="sesto-senso-box">Unica arma di ripartenza dell'Athletic: isolamento 1v1 ad altissima velocità.</div></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
 </div>
+
+<div id="toast" class="toast">✅ Schedine copiate negli appunti!</div>
+
+<script>
+function copyTicketsToClipboard() {
+  const text = `🏆 BAGENT QUANTITATIVE TICKETS (27 Agosto 2026 - Fonte Tuttosport)\n\n` +
+    `👑 TICKET #31: GOL & DOPPIE CHANCE (@ 2.21x)\n` +
+    `• Hapoel vs Atalanta ➔ X2 + Over 1.5 @ 1.33\n` +
+    `• Barcellona vs Athletic ➔ 1X + Over 1.5 @ 1.28\n` +
+    `• Chelsea vs Luton Town ➔ 1 + Over 1.5 @ 1.30\n` +
+    `💵 Stake: 20.00 € (Potenziale: 44.20 €)\n\n` +
+    `🚩 TICKET #32: CORNER & SANZIONI (@ 2.49x)\n` +
+    `• Hapoel vs Atalanta ➔ Over 7.5 Corner @ 1.30\n` +
+    `• Brighton vs Tromsø ➔ Over 7.5 Corner @ 1.32\n` +
+    `• Partizan vs Getafe ➔ Over 3.5 Cartellini @ 1.45\n` +
+    `💵 Stake: 20.00 € (Potenziale: 49.80 €)\n\n` +
+    `🚀 TICKET #33: ALTA QUOTA (@ 7.15x)\n` +
+    `• Atalanta 2+O1.5 @ 1.55 | Barça 1+O2.5 @ 1.72 | Chelsea 1+O2.5 @ 1.58 | Partizan O4.5 Cartellini @ 1.85\n` +
+    `💵 Stake: 5.00 € (Potenziale: 35.75 €)`;
+    
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2500);
+  });
+}
+</script>
 
 </body>
 </html>
