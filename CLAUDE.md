@@ -617,6 +617,13 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
 22. **IL SESTO SENSO QUOTIDIANO CONTINUO (Daily Press & Sesto Senso Ingestion as Core Prerequisite)**:
     - *Analisi*: Un modello puramente matematico o numerico perde valore se non è costantemente nutrito dalle notizie fresche di giornata (infortuni della notte, conferenze stampa delle 14:30, riscaldamenti delle 18:30).
     - *Regola Fondamentale*: **La lettura dei giornali e l'analisi del Sesto Senso NON è opzionale né una tantum: è una REGOLA GIORNALIERA CONTINUA. Nessuna tabella, schedina o calcolo di quote può essere generato senza aver prima eseguito l'ingestione della rassegna stampa quotidiana e integrato le informazioni nei ragionamenti tattici!**
+23. **STAKING PLAN SCIENTIFICO: FRACTIONAL KELLY CRITERION (`services/betting/kelly_staking_engine.py`)**:
+    - *Analisi*: Scommettere importi arbitrari o sbilanciati porta al drawdown rapido anche con un edge positivo elevato.
+    - *Regola Fondamentale*: **Ogni schedina DEVE avere il proprio stake calcolato in euro tramite il Fractional Kelly Criterion ($0.25 \times \text{Full Kelly}$):**
+      $$\text{Stake} = \text{Bankroll} \times \left( \frac{p \cdot \text{Odds} - 1}{\text{Odds} - 1} \right) \times \text{Fraction}$$
+      - **Zero Stake ($0.00\text{ €}$)** se l'Edge $\le 0$.
+      - **Hard Cap Singolo Ticket**: Massimo **8%** del Bankroll totale (es. max 9.32€ su 116.45€).
+      - **Hard Cap Giornaliero Totale**: Massimo **25%** del Bankroll complessivo impegnato contemporaneamente su tutti i ticket.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
