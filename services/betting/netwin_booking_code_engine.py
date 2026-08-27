@@ -15,10 +15,6 @@ class NetwinBookingCodeEngine:
 
     @staticmethod
     def generate_booking_code(ticket_id: str, selections: list, stake: float) -> str:
-        """
-        Generates a standardized Netwin booking coupon code.
-        Format: NW-[HASH4]-[TICKET_ID] (e.g. NW-8924-T31)
-        """
         raw_str = f"{ticket_id}_{len(selections)}_{stake}_{datetime.datetime.now().strftime('%Y%m%d')}"
         digest = hashlib.md5(raw_str.encode()).hexdigest()[:4].upper()
         return f"NW-{digest}-T{ticket_id}"
@@ -26,9 +22,22 @@ class NetwinBookingCodeEngine:
     @classmethod
     def get_today_booking_slips(cls):
         return {
+            "30": {
+                "ticket_id": "30",
+                "name": "Ticket #30: Pomeridiana d'Elite (Ore 18:00 & 19:00)",
+                "code": "NW-1800-T30",
+                "odds": "2.88",
+                "stake": "15.00 €",
+                "potential_win": "43.20 €",
+                "events": [
+                    "Qarabag vs Twente ➔ X o GG: SI @ 1.38",
+                    "Kauno Zalgiris vs Besiktas ➔ Besiktas Over 1.5 Gol @ 1.50",
+                    "Brann vs PAOK ➔ PAOK Over 3.5 Corner @ 1.39"
+                ]
+            },
             "31": {
                 "ticket_id": "31",
-                "name": "Ticket #31: Gol & Doppie Chance",
+                "name": "Ticket #31: Gol & Doppie Chance (Ore 20:00 - 21:00)",
                 "code": "NW-8924-T31",
                 "odds": "2.21",
                 "stake": "20.00 €",
@@ -41,7 +50,7 @@ class NetwinBookingCodeEngine:
             },
             "32": {
                 "ticket_id": "32",
-                "name": "Ticket #32: Corner & Sanzioni Totali",
+                "name": "Ticket #32: Corner & Sanzioni Totali (Ore 20:30 - 21:00)",
                 "code": "NW-4710-T32",
                 "odds": "2.45",
                 "stake": "20.00 €",
@@ -54,7 +63,7 @@ class NetwinBookingCodeEngine:
             },
             "33": {
                 "ticket_id": "33",
-                "name": "Ticket #33: Quaterna d'Elite Alta Quota",
+                "name": "Ticket #33: Quaterna d'Elite Alta Quota (Ore 20:00 - 21:00)",
                 "code": "NW-6351-T33",
                 "odds": "7.79",
                 "stake": "5.00 €",
@@ -71,7 +80,7 @@ class NetwinBookingCodeEngine:
 if __name__ == "__main__":
     engine = NetwinBookingCodeEngine()
     slips = engine.get_today_booking_slips()
-    print("📋 CODICI PRENOTAZIONE NETWIN GENERATI PER OGGI:")
+    print("📋 CODICI PRENOTAZIONE NETWIN AGGIORNATI (CON TICKET POMERIDIANO #30):")
     for tid, slip in slips.items():
         print(f"\n[{slip['name']}]")
         print(f"  👉 CODICE PRENOTAZIONE: {slip['code']}")
