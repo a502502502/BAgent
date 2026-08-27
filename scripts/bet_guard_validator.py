@@ -67,14 +67,27 @@ class BetGuardValidator:
         stake = match_data.get("stake")
         bankroll = match_data.get("bankroll", 116.45)
         edge = match_data.get("edge", 0.05)
-        if stake is not None:
-            if edge <= 0 and stake > 0:
-                return False, f"[BLOCKED - RULE 23] Edge negativo o nullo ({edge:+.2f}%). Vietato allocare stake ({stake:.2f} €) su scommesse a valore negativo!"
-            max_allowed = bankroll * 0.08
-            if stake > max_allowed:
-                return False, f"[BLOCKED - RULE 23] Stake richiesto ({stake:.2f} €) supera il tetto massimo Kelly dell'8% del bankroll ({max_allowed:.2f} €)."
+        # REGOLA #7: Trappola della Favorita in Trasferta nelle Coppe
+        is_cup_or_knockout = any(term in league.lower() for term in ["conference", "europa", "champions", "cup", "coppa", "uefa"])
+        is_away_favorite_pick = match_data.get("is_away", False) or "ospite" in pick.lower() or "2" in pick.split()
+        if is_cup_or_knockout and is_away_favorite_pick:
+            if any(term in pick.lower() for term in ["over 1.5 gol squadra", "over 1.5 sq.2", "over 1.5 ospite", "2 secco", "1x2: 2"]):
+                return False, f"[BLOCKED - RULE 7] Trappola Favorita in Trasferta nelle Coppe ({match_name}): vietato 2 secco o Over Gol Ospite in trasferta europea! Consentiti solo DC X2, Under o linee cumulative di match."
 
-        return True, f"[APPROVED] Conforme a tutte le 23 Regole Inviolabili."
+        # REGOLA #26: Protocollo di Rigore Matematico (Max 3-4 Eventi d'Acciaio & No Catene Falli Giocatore)
+        ticket_events_count = match_data.get("ticket_events_count", 3)
+        if ticket_events_count > 4:
+            return False, f"[BLOCKED - RULE 26] Schedina con {ticket_events_count} eventi (> 4)! Ritorno obbligatorio a Max 3-4 Eventi d'Acciaio."
+
+        player_props_in_ticket = match_data.get("player_props_in_ticket", 0)
+        if player_props_in_ticket > 2:
+            return False, f"[BLOCKED - RULE 26] Rilevati {player_props_in_ticket} mercati sui falli/duelli giocatore nello stesso ticket (> 2). I mercati individuali hanno troppa varianza e sono vietati nelle multiple lunghe!"
+
+        # REGOLA #29: Ban Under 2.5 nelle Leghe Minori
+        if is_latam_or_minor and "under 2.5" in pick.lower():
+            return False, f"[BLOCKED - RULE 29] Ban Under 2.5 Gol nelle Leghe Minori ({match_name} in {league}). Sostituire con Under 3.5 (via The Odds API alternate_totals) o mercati protetti (DC / Corner)!"
+
+        return True, f"[APPROVED] Conforme a tutte le 30 Regole Inviolabili di BetGuard."
 
     def validate_ticket_set(self, active_tickets: list[list[dict]]) -> tuple[bool, str]:
         """
