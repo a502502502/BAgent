@@ -623,8 +623,14 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
     - *Regola Fondamentale*: **Ogni schedina DEVE avere il proprio stake calcolato in euro tramite il Fractional Kelly Criterion ($0.25 \times \text{Full Kelly}$):**
       $$\text{Stake} = \text{Bankroll} \times \left( \frac{p \cdot \text{Odds} - 1}{\text{Odds} - 1} \right) \times \text{Fraction}$$
       - **Zero Stake ($0.00\text{ €}$)** se l'Edge $\le 0$.
-      - **Hard Cap Singolo Ticket**: Massimo **8%** del Bankroll totale (es. max 9.32€ su 116.45€).
+      - **Hard Cap Singolo Ticket**: Massimo **8%** del Bankroll totale (es. max 24.00€ su 300.00€).
       - **Hard Cap Giornaliero Totale**: Massimo **25%** del Bankroll complessivo impegnato contemporaneamente su tutti i ticket.
+24. **DROPPING ODDS & CLOSING LINE VALUE (CLV) TRACKER (`services/betting/dropping_odds_detector.py`)**:
+    - *Analisi*: I movimenti rapidi di quota dei bookmaker internazionali riflettono flussi finanziari di scommettitori istituzionali (*Smart Money*) e notizie dell'ultima ora non ancora assimilate dal pubblico.
+    - *Regola Fondamentale*: **Monitorare sistematicamente la variazione di quota pre-match:**
+      - **Drop $\ge 10\%$**: Flag `🔥 SMART MONEY` ➔ Segnale di alta convinzione quantitativa.
+      - **Drop $\ge 15\%$ multi-book**: Flag `🚨 STEAM MOVE` ➔ Alert Telegram immediato su `@A502502_bot`.
+      - **Verifica CLV Post-Match**: Misurare sempre se la quota giocata ha battuto la linea di chiusura (`CLV > 0%`) per certificare il vero valore atteso a lungo termine.
 26. **PROTOCOLLO DI RIGORE MATEMATICO (STOP ALLA DISPERSIONE DEI MICRO-PROPS & RITORNO A 3-4 EVENTI D'ACCIAIO)**:
     - *Principio Inviolabile*: I mercati sui singoli giocatori (Falli Giocatore / Duelli 1v1) soffrono di una varianza individuale troppo alta (rotazioni, cambi tattici, partite a basso ritmo, minutaggio imprevedibile) per essere concatenati in multiple da 5-9 eventi.
     - *Regola Operativa*:
