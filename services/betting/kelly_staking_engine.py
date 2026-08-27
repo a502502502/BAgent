@@ -37,7 +37,7 @@ class KellyStakingEngine:
     HARD_CAP_DAILY_TOTAL_PCT = 0.25    # Max 25% del bankroll impegnato contemporaneamente
     MINIMUM_STAKE_EUR = 2.00           # Limite minimo di puntata bookmaker (Netwin / ADM)
 
-    def __init__(self, current_bankroll: float = 116.45):
+    def __init__(self, current_bankroll: float = 300.00):
         self.bankroll = max(current_bankroll, 1.0)
 
     def set_bankroll(self, new_bankroll: float):
