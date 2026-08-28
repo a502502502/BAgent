@@ -1101,6 +1101,32 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 * 🚀 **PROFITTO NETTO INCASSATO**: **+115.96 €**
 * 📈 **ROI TOTALE DELLA SERATA**: **+276.1% SUL CAPITALE!**
 
-*Ultimo aggiornamento: 28 agosto 2026 ore 23:28 — BAgent (Serata trionfale: Ticket #37 Vinto 100%, Ticket #36 Cashout 65€, +115.96€ profitto netto)*
+---
+
+## 📅 PROGRAMMA & PROPOSTE DEFINITIVE SABATO 29 AGOSTO 2026
+
+### 🛡️ Proposta A — Ticket #38: Quaterna d'Acciaio Europea (Quota ~4.52×)
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1 (1X2 Liverpool)** @ **1.54**
+2. 🇩🇪 [15:30] **RB Lipsia vs Gladbach** ➔ **1X + Over 1.5 Gol** @ **1.35**
+3. 🇩🇪 [18:30] **Borussia Dortmund vs Amburgo** ➔ **1 + Over 1.5 Gol** @ **1.50**
+4. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **1 (1X2 Lione)** @ **1.45**
+* Stake consigliato: 20.00 € ➔ Vincita Potenziale: ~90.40 €
+
+### ⚡ Proposta B — Ticket #39: Cinquina Sperimentale con Colpo Siviglia (Quota ~9.62× + Bonus)
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1 + Over 1.5 Gol** @ **1.72**
+2. 🇩🇪 [15:30] **Elversberg vs Bayer Leverkusen** ➔ **2 (1X2 Leverkusen)** @ **1.58**
+3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] **Tottenham vs Newcastle** ➔ **Gol (Entrambe Segnano)** @ **1.48**
+4. 🇮🇹 [20:45] **Juventus vs Parma** ➔ **1X + Under 3.5 Gol** @ **1.45**
+5. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance 1X** @ **1.65**
+* Stake consigliato: 15.00 € ➔ Vincita Potenziale: ~153.00 €
+
+### 💎 Proposta C — Ticket #40: Mix Ibrido Corner & Cartellini (Quota ~4.30×)
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **Liverpool Over 1.5 Gol Casa** @ **1.45**
+2. 🇩🇪 [15:30] **RB Lipsia vs Gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32**
+3. 🇩🇪 [18:30] **Borussia Dortmund vs Amburgo** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45**
+4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Over 4.5 Cartellini Totali** @ **1.55**
+* Stake consigliato: 20.00 € ➔ Vincita Potenziale: ~86.00 €
+
+*Ultimo aggiornamento: 29 agosto 2026 ore 00:38 — BAgent (Proposte Sabato 29 Agosto: Ticket #38, #39 e #40 registrati nel ledger)*
 
 
