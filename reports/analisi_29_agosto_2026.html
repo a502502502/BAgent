@@ -13,6 +13,7 @@
     --accent-gold: #ffd700;
     --accent-blue: #38bdf8;
     --accent-green: #4ade80;
+    --accent-purple: #c084fc;
     --accent-red: #f87171;
     --text-main: #f1f5f9;
     --text-muted: #94a3b8;
@@ -27,9 +28,9 @@
     padding: 24px; 
   }
 
-  /* Widescreen Full-Width Container */
+  /* Widescreen Container */
   .container { 
-    max-width: 1550px; 
+    max-width: 1600px; 
     width: 96%; 
     margin: 0 auto; 
   }
@@ -46,7 +47,7 @@
     gap: 16px;
   }
   .main-header-title h1 { 
-    font-size: 2.1em; 
+    font-size: 2.2em; 
     color: var(--accent-gold); 
     letter-spacing: -0.5px; 
     font-weight: 800;
@@ -55,6 +56,11 @@
     color: var(--text-muted); 
     font-size: 0.95em; 
     margin-top: 4px;
+  }
+  .header-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
   }
   .status-badge { 
     display: inline-flex; 
@@ -67,7 +73,18 @@
     font-weight: 800; 
     padding: 8px 16px; 
     border-radius: 30px; 
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+  }
+  .profit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1e1b4b;
+    border: 1px solid #4f46e5;
+    color: #a5b4fc;
+    font-size: 0.85em;
+    font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 30px;
   }
 
   /* Breaking News Strip */
@@ -114,32 +131,84 @@
   .tag-yellow { background: #f59e0b; color: #000; }
   .tag-blue { background: #3b82f6; color: #fff; }
 
-  /* Section Titles */
+  /* Section Heading */
   .section-heading {
     font-size: 1.4em;
     color: #fff;
     font-weight: 800;
-    margin: 32px 0 16px 0;
+    margin: 36px 0 18px 0;
     display: flex;
     align-items: center;
     gap: 10px;
     border-left: 4px solid var(--accent-gold);
-    padding-left: 12px;
+    padding-left: 14px;
   }
 
-  /* Multi-Column Matches Grid (Wide Screen) */
+  /* 3-Column Tickets Grid */
+  .tickets-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .combo-card { 
+    background: linear-gradient(135deg, #0f172a, #1e293b); 
+    border: 2px solid var(--accent-gold); 
+    border-radius: 18px; 
+    padding: 24px; 
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .combo-card.alt-blue { border-color: var(--accent-blue); }
+  .combo-card.alt-purple { border-color: var(--accent-purple); }
+  
+  .combo-card h3 { 
+    color: var(--accent-gold); 
+    font-size: 1.25em; 
+    margin-bottom: 12px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+  }
+  .combo-card.alt-blue h3 { color: var(--accent-blue); }
+  .combo-card.alt-purple h3 { color: var(--accent-purple); }
+
+  .combo-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 0.92em; 
+    margin: 12px 0; 
+  }
+  .combo-table td { 
+    padding: 10px 6px; 
+    border-bottom: 1px solid #334155; 
+  }
+  .combo-total { 
+    font-size: 1.35em; 
+    font-weight: 800; 
+    color: var(--accent-gold); 
+    text-align: center; 
+    margin-top: 16px; 
+    padding-top: 14px; 
+    border-top: 2px dashed #475569; 
+  }
+
+  /* Multi-Column Matches Grid */
   .matches-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); 
     gap: 24px; 
   }
 
-  /* Match Card */
   .match-card { 
     background: var(--bg-card); 
     border: 1px solid var(--border-color); 
     border-radius: 16px; 
-    padding: 20px; 
+    padding: 22px; 
     box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
     display: flex; 
     flex-direction: column; 
@@ -180,7 +249,6 @@
     margin-bottom: 12px; 
   }
   
-  /* Lineup Grid inside card */
   .lineup-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
@@ -217,7 +285,6 @@
     padding-top: 6px; 
   }
 
-  /* Sesto Senso Box */
   .sesto-senso { 
     background: #051a14; 
     border: 1px solid #065f46; 
@@ -239,7 +306,6 @@
     line-height: 1.5; 
   }
 
-  /* Pick Badge */
   .pick-container { 
     margin-top: 14px; 
     padding-top: 12px; 
@@ -276,7 +342,6 @@
     border-radius: 6px; 
   }
 
-  /* Warning Box */
   .warning-box { 
     background: #261603; 
     border: 1px solid #d97706; 
@@ -288,59 +353,6 @@
     line-height: 1.5;
   }
 
-  /* Tickets Grid (Side-by-Side Widescreen) */
-  .tickets-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 16px;
-  }
-  .combo-card { 
-    background: linear-gradient(135deg, #0f172a, #1e293b); 
-    border: 2px solid var(--accent-gold); 
-    border-radius: 18px; 
-    padding: 24px; 
-    box-shadow: 0 8px 30px rgba(0,0,0,0.5); 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .combo-card.alt { 
-    border-color: var(--accent-blue); 
-  }
-  .combo-card h3 { 
-    color: var(--accent-gold); 
-    font-size: 1.3em; 
-    margin-bottom: 16px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
-  }
-  .combo-card.alt h3 { 
-    color: var(--accent-blue); 
-  }
-  .combo-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    font-size: 0.95em; 
-    margin: 12px 0; 
-  }
-  .combo-table td { 
-    padding: 10px 8px; 
-    border-bottom: 1px solid #334155; 
-  }
-  .combo-total { 
-    font-size: 1.4em; 
-    font-weight: 800; 
-    color: var(--accent-gold); 
-    text-align: center; 
-    margin-top: 16px; 
-    padding-top: 14px; 
-    border-top: 2px dashed #475569; 
-  }
-
   .footer { 
     text-align: center; 
     color: var(--text-muted); 
@@ -350,9 +362,8 @@
     border-top: 1px solid var(--border-color); 
   }
   
-  @media (max-width: 1050px) {
-    .tickets-grid { grid-template-columns: 1fr; }
-    .matches-grid { grid-template-columns: 1fr; }
+  @media (max-width: 1200px) {
+    .tickets-grid-3 { grid-template-columns: 1fr; }
   }
   @media (max-width: 650px) {
     .lineup-grid { grid-template-columns: 1fr; }
@@ -366,10 +377,13 @@
   <!-- TOP HEADER -->
   <div class="main-header">
     <div class="main-header-title">
-      <h1>🛡️ BAgent — Master Dashboard Sabato 29 Agosto 2026</h1>
-      <p>Panoramica Widescreen Completa • Premier League, Bundesliga, Serie A, LaLiga, Ligue 1</p>
+      <h1>🛡️ BAgent — Master Suite Widescreen Sabato 29 Agosto 2026</h1>
+      <p>Panoramica Completa • Premier League, Bundesliga, Serie A, LaLiga, Ligue 1</p>
     </div>
-    <div class="status-badge">● ANALISI TATTICA & STEP 4 COMPLETATI</div>
+    <div class="header-badges">
+      <div class="profit-badge">💰 CASSA IERI: +115.96 € NETTI</div>
+      <div class="status-badge">● STEP 4 COMPLETATO (3 TICKET PRONTI)</div>
+    </div>
   </div>
 
   <!-- BREAKING NEWS STRIP -->
@@ -391,7 +405,60 @@
     </div>
   </div>
 
-  <!-- SEZIONE 1: LE 6 SCHEDE MATCH APPROFONDITE (GRID MULTI-COLONNA) -->
+  <!-- SEZIONE 1: I 3 TICKET PRONTI PER SABATO (3 COLONNE AFFIANCATE) -->
+  <div class="section-heading">🎫 I 3 TICKET UFFICIALI PER SABATO 29 AGOSTO</div>
+  
+  <div class="tickets-grid-3">
+
+    <!-- TICKET 38: QUATERNA D'ACCIAIO -->
+    <div class="combo-card">
+      <div>
+        <h3>🛡️ TICKET #38: QUATERNA D'ACCIAIO <span>4 EVENTI</span></h3>
+        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Massima solidità sui 4 match più asimmetrici del sabato.</p>
+        <table class="combo-table">
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>1 (1X2 Liverpool)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.54</strong></td></tr>
+          <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Gladbach</strong></td><td><strong>1X + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.35</strong></td></tr>
+          <tr><td>🇩🇪 [18:30] <strong>Borussia Dortmund vs Amburgo</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.50</strong></td></tr>
+          <tr><td>🇫🇷 [20:45] <strong>Olympique Lione vs Le Havre</strong></td><td><strong>1 (1X2 Lione)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.45</strong></td></tr>
+        </table>
+      </div>
+      <div class="combo-total">QUOTA COMBINATA: ~4.52× 🛡️<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 20.00 € ➔ Vincita: 90.40 €</span></div>
+    </div>
+
+    <!-- TICKET 39: CINQUINA SPERIMENTALE -->
+    <div class="combo-card alt-blue">
+      <div>
+        <h3>⚡ TICKET #39: CINQUINA SPERIMENTALE <span>5 EVENTI (+BONUS)</span></h3>
+        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Include Premier, Serie A e il colpo serale al Sánchez-Pizjuán.</p>
+        <table class="combo-table">
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.72</strong></td></tr>
+          <tr><td>🇩🇪 [15:30] <strong>Elversberg vs Leverkusen</strong></td><td><strong>2 (1X2 Leverkusen)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.58</strong></td></tr>
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] <strong>Tottenham vs Newcastle</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.48</strong></td></tr>
+          <tr><td>🇮🇹 [20:45] <strong>Juventus vs Parma</strong></td><td><strong>1X + Under 3.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.45</strong></td></tr>
+          <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Doppia Chance 1X</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.65</strong></td></tr>
+        </table>
+      </div>
+      <div class="combo-total" style="color:var(--accent-blue);">QUOTA: ~9.62× (+6% Bonus) ⚡<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 15.00 € ➔ Vincita: ~153.00 €</span></div>
+    </div>
+
+    <!-- TICKET 40: MIX IBRIDO CORNER & CARTELLINI -->
+    <div class="combo-card alt-purple">
+      <div>
+        <h3>💎 TICKET #40: MIX IBRIDO CORNER & CARTELLINI <span>4 EVENTI</span></h3>
+        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Sfrutta il dominio corner e la miniera cartellini di Siviglia.</p>
+        <table class="combo-table">
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>Liverpool Over 1.5 Gol Casa</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.45</strong></td></tr>
+          <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Gladbach</strong></td><td><strong>1X2 Corner: 1 (Lipsia)</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.32</strong></td></tr>
+          <tr><td>🇩🇪 [18:30] <strong>Dortmund vs Amburgo</strong></td><td><strong>1X2 Corner 1°T: 1 (Dortmund)</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.45</strong></td></tr>
+          <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Over 4.5 Cartellini Totali</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.55</strong></td></tr>
+        </table>
+      </div>
+      <div class="combo-total" style="color:var(--accent-purple);">QUOTA COMBINATA: ~4.30× 💎<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 20.00 € ➔ Vincita: ~86.00 €</span></div>
+    </div>
+
+  </div>
+
+  <!-- SEZIONE 2: LE 6 SCHEDE MATCH APPROFONDITE (GRID MULTI-COLONNA) -->
   <div class="section-heading">🏟️ ANALISI TATTICA MATCH PER MATCH (SESTO SENSO)</div>
   <div class="matches-grid">
 
@@ -400,7 +467,7 @@
       <div>
         <div class="match-header">
           <span class="match-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League (MD2)</span>
-          <span class="match-time">13:30 CEST (12:30 BST)</span>
+          <span class="match-time">13:30 CEST</span>
         </div>
         <div class="match-teams">🏟️ Liverpool FC vs Nottingham Forest</div>
 
@@ -427,7 +494,7 @@
 
       <div class="pick-container">
         <div class="pick-badge">⭐ BASE D'ACCIAIO: 1 (1X2 Liverpool) <span class="quota">@ 1.54</span></div>
-        <div class="edge-badge">Edge: +8.4% • Combo: 1 + Over 1.5 @ 1.72</div>
+        <div class="edge-badge">Corner: Liverpool Over 5.5 @ 1.48</div>
       </div>
     </div>
 
@@ -463,7 +530,7 @@
 
       <div class="pick-container">
         <div class="pick-badge">⭐ BASE D'ACCIAIO: 1 + Over 1.5 Gol <span class="quota">@ 1.50</span></div>
-        <div class="edge-badge">Edge: +9.0% • 1X2 Corner BVB @ 1.25</div>
+        <div class="edge-badge">Corner: 1° Tempo BVB @ 1.45</div>
       </div>
     </div>
 
@@ -484,7 +551,7 @@
 
       <div class="pick-container">
         <div class="pick-badge">⭐ BASE D'ACCIAIO: 1X + Over 1.5 Gol <span class="quota">@ 1.35</span></div>
-        <div class="edge-badge">Edge: +6.8% • 1 secco @ 1.55</div>
+        <div class="edge-badge">Corner: 1X2 Lipsia @ 1.32</div>
       </div>
     </div>
 
@@ -493,7 +560,7 @@
       <div>
         <div class="match-header">
           <span class="match-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League (MD2)</span>
-          <span class="match-time">18:30 CEST (17:30 BST)</span>
+          <span class="match-time">18:30 CEST</span>
         </div>
         <div class="match-teams">🏟️ Tottenham Hotspur vs Newcastle United</div>
 
@@ -513,7 +580,7 @@
     <div class="match-card">
       <div>
         <div class="match-header">
-          <span class="match-league">🇪🇸 LaLiga (MD3) — COLPO SPERIMENTALE</span>
+          <span class="match-league">🇪🇸 LaLiga (MD3) — MINIERA CARTELLINI</span>
           <span class="match-time">21:30 CEST</span>
         </div>
         <div class="match-teams">🏟️ Sevilla FC vs Atlético de Madrid</div>
@@ -524,14 +591,14 @@
         </div>
 
         <div class="sesto-senso">
-          <h4>🧠 Sesto Senso</h4>
-          <p>L'assenza dei 3 attaccanti titolari rende l'Atlético privo di peso offensivo. La Doppia Chance interna del Siviglia ha un valore clamoroso.</p>
+          <h4>🧠 Sesto Senso & Arbitro Alberola Rojas</h4>
+          <p>L'arbitro Rojas fischia tantissimo (media 5.2 cartellini). L'ambiente infuocato e la tensione a centrocampo produrranno una raffica di falli e sanzioni.</p>
         </div>
       </div>
 
       <div class="pick-container">
-        <div class="pick-badge">💥 COLPO SPERIMENTALE: Doppia Chance 1X <span class="quota">@ 1.65</span></div>
-        <div class="edge-badge">Edge Anti-Trappola: +9.2% • Under 2.5 @ 1.80</div>
+        <div class="pick-badge">🟨 CARTELLINI: Over 4.5 Totali <span class="quota">@ 1.55</span></div>
+        <div class="edge-badge">Doppia Chance: 1X @ 1.65</div>
       </div>
     </div>
 
@@ -554,44 +621,6 @@
         <div class="pick-badge">🛡️ COMBO PROTETTA: 1X + Under 3.5 Gol <span class="quota">@ 1.45</span></div>
         <div class="edge-badge">Edge: +6.5% • 1 secco @ 1.22</div>
       </div>
-    </div>
-
-  </div>
-
-  <!-- SEZIONE 2: I 2 TICKET PRONTI PER SABATO (AFFIANCATI IN WIDESCREEN) -->
-  <div class="section-heading">🎫 I 2 TICKET PRONTI PER SABATO 29 AGOSTO</div>
-  
-  <div class="tickets-grid">
-
-    <!-- TICKET 38: QUATERNA D'ACCIAIO -->
-    <div class="combo-card">
-      <div>
-        <h3>🛡️ TICKET #38: QUATERNA D'ACCIAIO <span>4 EVENTI</span></h3>
-        <p style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 12px;">Il blocco di massima affidabilità sui 4 match più asimmetrici del sabato.</p>
-        <table class="combo-table">
-          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Nottingham Forest</strong></td><td><strong>1 (1X2 Liverpool)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.54</strong></td></tr>
-          <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Borussia M'gladbach</strong></td><td><strong>1X + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.35</strong></td></tr>
-          <tr><td>🇩🇪 [18:30] <strong>Borussia Dortmund vs Amburgo</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.50</strong></td></tr>
-          <tr><td>🇫🇷 [20:45] <strong>Olympique Lione vs Le Havre</strong></td><td><strong>1 (1X2 Lione)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.45</strong></td></tr>
-        </table>
-      </div>
-      <div class="combo-total">QUOTA COMBINATA: ~4.52× 🛡️<br><span style="font-size:0.8em; color:var(--accent-green);">Stake 20.00 € ➔ Vincita: 90.40 €</span></div>
-    </div>
-
-    <!-- TICKET 39: CINQUINA SPERIMENTALE -->
-    <div class="combo-card alt">
-      <div>
-        <h3>⚡ TICKET #39: CINQUINA SPERIMENTALE <span>5 EVENTI (+BONUS)</span></h3>
-        <p style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 12px;">Include la Premier, la Serie A e il colpo serale al Sánchez-Pizjuán.</p>
-        <table class="combo-table">
-          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Nottingham Forest</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.72</strong></td></tr>
-          <tr><td>🇩🇪 [15:30] <strong>Elversberg vs Bayer Leverkusen</strong></td><td><strong>2 (1X2 Leverkusen)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.58</strong></td></tr>
-          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] <strong>Tottenham vs Newcastle</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.48</strong></td></tr>
-          <tr><td>🇮🇹 [20:45] <strong>Juventus vs Parma</strong></td><td><strong>1X + Under 3.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.45</strong></td></tr>
-          <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Doppia Chance 1X</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.65</strong></td></tr>
-        </table>
-      </div>
-      <div class="combo-total" style="color:var(--accent-blue);">QUOTA COMBINATA: ~9.62× (+6% Bonus) ⚡<br><span style="font-size:0.8em; color:var(--accent-green);">Stake 15.00 € ➔ Vincita: ~153.00 €</span></div>
     </div>
 
   </div>
