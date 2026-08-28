@@ -126,20 +126,36 @@ def execute_2hour_cycle() -> dict:
         "bankroll": 300.00,
         "active_tickets": [
             {
-                "title": "🏆 Ticket #34: Quintina d'Elite Serale",
+                "title": "🏆 Ticket #36: Quintina d'Elite Serale",
                 "badge": "IN GIOCO",
-                "odds": "4.80×",
+                "odds": "9.36× (Bonus: 11.24 €)",
                 "stake": "20.00 €",
-                "potential": "96.07 €",
-                "ref": "DF07EA081B31840F2C06",
+                "potential": "198.55 €",
+                "ref": "NETWIN-T36-28AGO",
                 "status": "IN CORSO",
-                "cashout_note": "Ajax 5-2 vinta, Brighton 3-0 vinta.",
+                "cashout_note": "Kickoff ore 20:30-21:30.",
                 "events": [
-                    {"time": "20:00", "match": "Ajax vs Sion", "pick": "1X + Over 1.5", "odd": "1.22", "status": "✅"},
-                    {"time": "20:00", "match": "Hapoel Tel Aviv vs Atalanta", "pick": "X2 + Over 1.5", "odd": "1.41", "status": "⏳"},
-                    {"time": "20:30", "match": "Chelsea vs Luton", "pick": "1 (1X2)", "odd": "1.09", "status": "⏳"},
-                    {"time": "21:00", "match": "Partizan vs Getafe", "pick": "Over 4.5 Cartellini", "odd": "1.83", "status": "⏳"},
-                    {"time": "21:00", "match": "Barcellona vs Athletic Bilbao", "pick": "1X + Over 2.5", "odd": "1.40", "status": "⏳"}
+                    {"time": "20:30", "match": "Bayern Monaco vs Stoccarda", "pick": "1 + Over 2.5", "odd": "1.32", "status": "⏳"},
+                    {"time": "20:45", "match": "Lilla vs PSG", "pick": "Gol (Entrambe Segnano)", "odd": "1.74", "status": "⏳"},
+                    {"time": "20:45", "match": "Milan vs Venezia", "pick": "1 (1X2)", "odd": "1.48", "status": "⏳"},
+                    {"time": "21:00", "match": "Crystal Palace vs Man City", "pick": "Over 2.5", "odd": "1.68", "status": "⏳"},
+                    {"time": "21:30", "match": "Alavés vs Villarreal", "pick": "Gol (Entrambe Segnano)", "odd": "1.64", "status": "⏳"}
+                ]
+            },
+            {
+                "title": "🛡️ Ticket #37: Quaterna d'Acciaio Ibrida",
+                "badge": "IN GIOCO",
+                "odds": "4.10× (Bonus: 2.70 €)",
+                "stake": "22.00 €",
+                "potential": "92.96 €",
+                "ref": "NETWIN-T37-28AGO",
+                "status": "IN CORSO",
+                "cashout_note": "Kickoff ore 20:30-21:15.",
+                "events": [
+                    {"time": "20:30", "match": "Bayern Monaco vs Stoccarda", "pick": "1X2 Corner 1°T: 1", "odd": "1.48", "status": "⏳"},
+                    {"time": "20:45", "match": "Lilla vs PSG", "pick": "X2 + Over 1.5", "odd": "1.50", "status": "⏳"},
+                    {"time": "21:00", "match": "Crystal Palace vs Man City", "pick": "1X2 Corner: 2", "odd": "1.40", "status": "⏳"},
+                    {"time": "21:15", "match": "Rio Ave vs Sporting CP", "pick": "1X2: 2", "odd": "1.32", "status": "⏳"}
                 ]
             }
         ],
@@ -208,18 +224,19 @@ def run_telegram_listener():
 
                     elif text.startswith("/tickets"):
                         tickets_msg = (
-                            "🎫 <b>SCHEDINE IN GIOCO (LIVE REPORT):</b>\n\n"
-                            "🟢 <b>Ticket #34 (Quintina d'Elite @ 4.80×):</b>\n"
-                            "• Ajax vs Sion: 1X+O1.5 ➔ <b>5-2 ✅ PRESO!</b>\n"
-                            "• Brighton vs Tromsø: 1X+O1.5 ➔ <b>3-0 ✅ PRESO!</b>\n"
-                            "• Chelsea vs Luton: 1 (1X2) ➔ <i>Live 1-0</i>\n"
-                            "• Partizan vs Getafe: O4.5 Cart ➔ <i>Live 2T</i>\n"
-                            "• Barça vs Bilbao: 1X+O2.5 ➔ <i>Live 2T</i>\n\n"
-                            "🛡️ <b>Ticket #35 (Quaterna d'Acciaio @ 3.75×):</b>\n"
-                            "• Brighton vs Tromsø: 1X+O1.5 ➔ <b>3-0 ✅ PRESO!</b>\n"
-                            "• Chelsea vs Luton: 1+O1.5 ➔ <i>Live 1-0</i>\n"
-                            "• Barça vs Bilbao: 1X+O1.5 ➔ <i>Live 2T</i>\n"
-                            "• Partizan vs Getafe: O4.5 Cart ➔ <i>Live 2T</i>"
+                            "🎫 <b>SCHEDINE IN GIOCO (LIVE REPORT 28 AGOSTO):</b>\n\n"
+                            "🏆 <b>Ticket #36 (Quintina d'Elite @ 9.36× + Bonus = 198.55 €):</b>\n"
+                            "• Bayern vs Stoccarda: 1+O2.5 @ 1.32 ➔ <i>Ore 20:30</i>\n"
+                            "• Lilla vs PSG: Gol @ 1.74 ➔ <i>Ore 20:45</i>\n"
+                            "• Milan vs Venezia: 1 (1X2) @ 1.48 ➔ <i>Ore 20:45</i>\n"
+                            "• Palace vs Man City: Over 2.5 @ 1.68 ➔ <i>Ore 21:00</i>\n"
+                            "• Alavés vs Villarreal: Gol @ 1.64 ➔ <i>Ore 21:30</i>\n\n"
+                            "🛡️ <b>Ticket #37 (Quaterna d'Acciaio Ibrida @ 4.10× + Bonus = 92.96 €):</b>\n"
+                            "• Bayern vs Stoccarda: 1X2 Corner 1°T (1) @ 1.48 ➔ <i>Ore 20:30</i>\n"
+                            "• Lilla vs PSG: X2+O1.5 @ 1.50 ➔ <i>Ore 20:45</i>\n"
+                            "• Palace vs Man City: 1X2 Corner (2) @ 1.40 ➔ <i>Ore 21:00</i>\n"
+                            "• Rio Ave vs Sporting CP: 2 (1X2) @ 1.32 ➔ <i>Ore 21:15</i>\n\n"
+                            "💰 <i>Totale Vincita Potenziale: 291.51 €!</i>"
                         )
                         notify_telegram(tickets_msg, chat_id=chat_id)
 
