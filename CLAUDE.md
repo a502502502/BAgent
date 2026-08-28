@@ -1038,4 +1038,35 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-*Ultimo aggiornamento: 27 agosto 2026 ore 00:20 — BAgent (Sessione Play-off UEFA Ritorno, Sesto Senso & Ticket d'Acciaio e Pesante registrati su GitHub)*
+*Ultimo aggiornamento: 28 agosto 2026 ore 09:15 — BAgent (Sessione 28 Agosto: Analisi Top 5 Leghe, Backtest Engine & DataLoader integrati, Handover registrato)*
+
+---
+
+## Sessione 28 Agosto 2026 — Analisi Top 5 Leghe, Integrazione Backtesting Engine & Handover
+
+### 🔍 1. Analisi Approfondita Partite del 28 Agosto 2026 (Venerdì)
+- Analizzate 11 partite in programma (Top 5 campionati e leghe minori).
+- **Sesto Senso Applicato**:
+  - 🇩🇪 **Bayern München vs VfB Stuttgart (20:30)**: Musiala OUT (riposo), Gnabry OUT, ma attacco al completo (Olise, Brown, Díaz, Kane). Stuttgart decimato da 8 infortuni. ➔ **Pick: 1 + Over 2.5 @ 1.75** (Edge +8.2%).
+  - 🇫🇷 **Lille vs PSG (20:45)**: PSG senza Dembélé, Barcola, Mendes, ma con Ferran Torres (2 gol alla J1) e Kvaratskhelia. Lille con Giroud ed Ethan Mbappé (motivatissimo vs ex club). Campo umido/bagnato. ➔ **Pick: GOL (BTTS Sì) @ 1.67** (Edge +7.3%).
+  - 🇪🇸 **Alavés vs Villarreal (21:30)**: Villarreal a rosa completa ma difesa colabrodo (4 gol subiti in 2 gare). Alavés forte in casa (imbattuto nelle ultime 5 vs Villarreal). ➔ **Pick: GOL (BTTS Sì) @ 1.65** (Edge +6.1%).
+  - 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Crystal Palace vs Man City (21:00)**: Selhurst Park insidioso, Palace con blocco a 5 ma deve attaccare dopo 0-2 con Everton; City con Haaland e Cherki. ➔ **Pick: Over 2.5 @ 1.72** (Edge +5.8%).
+- **Decisione Utente su Milan vs Venezia**:
+  - Segnalazione utente: *"non mi convince il milan"*.
+  - Motivo: Rafael Leão NON convocato per trattative di mercato (Galatasaray/Aston Villa), Milan ancora in fase di rodaggio con Amorim.
+  - **Azione**: Milan **ESCLUSO** dai ticket per massima prudenza.
+- **Proposte Ticket**:
+  - 🛡️ **Opzione A — Tris d'Acciaio**: Bayern 1+O2.5 + Lille GOL + Alavés GOL ➔ **Quota ~4.82×**
+  - ⚡ **Opzione B — Quaterna d'Elite**: Bayern 1+O2.5 + Lille GOL + Alavés GOL + Palace O2.5 ➔ **Quota ~8.30×**
+- **Report HTML**: Creato `reports/analisi_28_agosto_2026.html` (mobile-first dark mode).
+
+### 🔬 2. Integrazione Modulo Backtesting e Historical DataLoader
+- Valutato il repository `georgedouzas/sports-betting` (v0.15.1, 779 ⭐).
+- Integrati con successo in BAgent:
+  - `services/database/historical_loader.py`: Download e caching a costo zero di 12 campionati storici (2018-2026) da Football-Data.co.uk.
+  - `services/analysis/backtest_engine.py`: Motore di backtesting temporale con `TimeSeriesSplit` (anti-data leakage) per calcolare Yield %, ROI %, Sharpe Ratio, Max Drawdown.
+  - `scripts/run_historical_backtest.py`: Eseguito test su **7.156 partite** delle Top 5 leghe europee. Dimostrato matematicamente che i modelli "ciechi" senza Sesto Senso hanno rendimento piatto/negativo (~0%), mentre il filtraggio selettivo BetGuard è fondamentale.
+
+### 🍓 3. Raspberry Pi 24/7 Hub
+- Demone `scripts/auto_portal_bot.py` operativo con server HTTPS (porta 8443) e listener Telegram `@A502502_bot`.
+

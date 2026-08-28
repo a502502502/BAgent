@@ -2,7 +2,7 @@
 """
 scripts/auto_portal_bot.py — Demone 24/7 Autonomo per Raspberry Pi.
 1. Esegue scansione e analisi ogni 2 ore con Sesto Senso e Regole BetGuard.
-2. Serve la Dashboard Web Live su porta 8080 (http://100.120.216.25:8080).
+2. Serve la Dashboard Web Live su porta 8443 (https://100.120.216.25:8443).
 3. Ascolta ed esegue comandi interattivi su Telegram (@A502502_bot).
 """
 
@@ -12,6 +12,7 @@ import time
 import json
 import threading
 import http.server
+import ssl
 import socketserver
 import requests
 from datetime import datetime, timedelta
@@ -38,7 +39,7 @@ if env_path.exists():
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
 API_KEY = os.getenv("API_FOOTBALL_KEY", "")
-PORT = 8080
+PORT = 8443
 PORTAL_DIR = ROOT / "portal"
 
 validator = BetGuardValidator()
@@ -63,8 +64,12 @@ class CustomHTTPHandler(http.server.SimpleHTTPRequestHandler):
 
 def run_web_server():
     try:
+        cert_path = Path.home() / "BAgent" / "certs" / "portal.pem"
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        ssl_context.load_cert_chain(certfile=cert_path)
         with socketserver.TCPServer(("", PORT), CustomHTTPHandler) as httpd:
-            print(f"🌐 Web Server BAgent attivo su http://0.0.0.0:{PORT}", flush=True)
+            httpd.socket = ssl_context.wrap_socket(httpd.socket, server_side=True)
+            print(f"🌐 Web Server BAgent attivo su https://0.0.0.0:{PORT}", flush=True)
             httpd.serve_forever()
     except Exception as e:
         print(f"Web server error: {e}", flush=True)
@@ -197,7 +202,7 @@ def run_telegram_listener():
                             "👉 <b>Link Web Diretto (Senza VPN)</b>:\n"
                             "https://htmlpreview.github.io/?https://github.com/a502502502/BAgent/blob/main/portal/index.html\n\n"
                             "👉 <b>Link Rete Locale / Wi-Fi</b>:\n"
-                            "http://192.168.1.70:8080"
+                            "https://192.168.1.70:8443"
                         )
                         notify_telegram(portal_msg, chat_id=chat_id)
 
@@ -263,7 +268,7 @@ def main():
     tele_thread = threading.Thread(target=run_telegram_listener, daemon=True)
     tele_thread.start()
     
-    notify_telegram("🚀 <b>BAGENT 24/7 OPERATIVO SU RASPBERRY PI!</b>\n\n🌐 Portale attivo su: http://100.120.216.25:8080\nInvia /help per i comandi remoti.")
+    notify_telegram("🚀 <b>BAGENT 24/7 OPERATIVO SU RASPBERRY PI!</b>\n\n🌐 Portale attivo su: https://100.120.216.25:8443\nInvia /help per i comandi remoti.")
 
     # 4. Loop principale ogni 2 ore (7200 secondi)
     while True:
