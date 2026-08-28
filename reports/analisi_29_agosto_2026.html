@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🛡️ BAgent — Analisi Sabato 29 Agosto 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #0a0e17; color: #e0e6ed; line-height: 1.6; padding: 16px; }
+  .container { max-width: 950px; margin: 0 auto; }
+  
+  /* Header */
+  .main-header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #1e2a42; }
+  h1 { font-size: 1.8em; color: #ffd700; margin-bottom: 6px; letter-spacing: -0.5px; }
+  .subtitle { color: #8892a4; font-size: 0.9em; }
+  .status-badge { display: inline-block; background: #0f2d18; border: 1px solid #22c55e; color: #4ade80; font-size: 0.8em; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 10px; }
+
+  /* Breaking News */
+  .breaking { background: linear-gradient(135deg, #2a0808, #180404); border: 1px solid #ef4444; border-radius: 12px; padding: 16px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15); }
+  .breaking h2 { color: #f87171; font-size: 1.1em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .breaking-item { padding: 8px 0; border-bottom: 1px solid #3b1212; font-size: 0.92em; }
+  .breaking-item:last-child { border-bottom: none; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 800; margin-right: 8px; text-transform: uppercase; }
+  .tag-red { background: #ef4444; color: #fff; }
+  .tag-yellow { background: #f59e0b; color: #000; }
+  .tag-blue { background: #3b82f6; color: #fff; }
+
+  /* Match Card */
+  .match-card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+  .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px; }
+  .match-league { font-size: 0.8em; color: #60a5fa; font-weight: 700; text-transform: uppercase; }
+  .match-time { font-size: 0.85em; color: #fbbf24; font-weight: 800; background: #27200a; padding: 2px 8px; border-radius: 6px; border: 1px solid #785207; }
+  .match-teams { font-size: 1.25em; font-weight: 800; color: #fff; margin-bottom: 12px; }
+  
+  /* Lineup Grid */
+  .lineup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .lineup-box { background: #0b0f19; border: 1px solid #1f2937; border-radius: 10px; padding: 12px; font-size: 0.82em; }
+  .lineup-box h4 { color: #93c5fd; font-size: 0.9em; margin-bottom: 6px; font-weight: 700; }
+  .lineup-box .formation { color: #facc15; font-weight: 700; margin-bottom: 4px; }
+  .lineup-box .players { color: #d1d5db; line-height: 1.4; }
+  .lineup-box .out { color: #f87171; font-size: 0.85em; margin-top: 8px; border-top: 1px dashed #374151; padding-top: 6px; }
+
+  /* Sesto Senso Box */
+  .sesto-senso { background: #061a14; border: 1px solid #059669; border-radius: 10px; padding: 14px; margin: 14px 0; font-size: 0.88em; }
+  .sesto-senso h4 { color: #34d399; margin-bottom: 6px; font-weight: 700; }
+  .sesto-senso p { color: #d1fae5; line-height: 1.5; }
+
+  /* Pick Badge */
+  .pick-container { margin: 14px 0 6px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .pick-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #064e3b, #022c22); border: 1px solid #10b981; border-radius: 8px; padding: 8px 16px; font-weight: 800; color: #6ee7b7; font-size: 1.05em; }
+  .pick-badge .quota { color: #ffd700; font-size: 1.15em; }
+  .edge-badge { background: #1e3a8a; color: #93c5fd; border: 1px solid #3b82f6; font-size: 0.8em; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+
+  /* Warning Box */
+  .warning-box { background: #261603; border: 1px solid #d97706; border-radius: 10px; padding: 12px; margin: 12px 0; font-size: 0.85em; color: #fde68a; }
+
+  /* Ticket Section */
+  .combo-section { margin-top: 32px; }
+  .combo-card { background: linear-gradient(135deg, #111827, #1e293b); border: 2px solid #ffd700; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+  .combo-card.alt { border-color: #38bdf8; }
+  .combo-card h3 { color: #ffd700; font-size: 1.2em; margin-bottom: 12px; display: flex; justify-content: space-between; }
+  .combo-card.alt h3 { color: #38bdf8; }
+  .combo-table { width: 100%; border-collapse: collapse; font-size: 0.9em; margin: 10px 0; }
+  .combo-table td { padding: 8px 6px; border-bottom: 1px solid #1f2937; }
+  .combo-total { font-size: 1.3em; font-weight: 800; color: #ffd700; text-align: center; margin-top: 14px; padding-top: 12px; border-top: 1px dashed #374151; }
+
+  .footer { text-align: center; color: #6b7280; font-size: 0.8em; margin-top: 30px; padding-top: 16px; border-top: 1px solid #1f2937; }
+  
+  @media (max-width: 650px) {
+    .lineup-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="main-header">
+    <h1>🛡️ BAgent — Master Dashboard Sabato 29 Agosto 2026</h1>
+    <p class="subtitle">Premier League • Bundesliga • Serie A • LaLiga • Ligue 1</p>
+    <div class="status-badge">● ANALISI TATTICA & STEP 4 COMPLETATI</div>
+  </div>
+
+  <!-- BREAKING NEWS BOX -->
+  <div class="breaking">
+    <h2>🚨 BREAKING NEWS & ALLERTE TRAPPOLA (SESTO SENSO)</h2>
+    <div class="breaking-item">
+      <span class="tag tag-red">ALLERTA TRAPPOLA</span>
+      <strong>Atlético Madrid decimato a Siviglia</strong>: Le Normand squalificato (rosso), Sørloth infortunato, Julián Álvarez in forte dubbio (febbre) e Griezmann volato in MLS. 32°C di caldo a Siviglia. <strong>Vietato il 2 secco</strong>!
+    </div>
+    <div class="breaking-item">
+      <span class="tag tag-yellow">INFORTUNIO PESANTE</span>
+      <strong>Kenan Yildiz (Juventus)</strong>: grave infortunio al piede sinistro, fuori diversi mesi. La Juve imposterà un match di controllo e basso ritmo contro il Parma.
+    </div>
+    <div class="breaking-item">
+      <span class="tag tag-blue">FESTA A DORTMUND</span>
+      <strong>Signal Iduna Park tutto esaurito (81.000)</strong> per il debutto del Dortmund contro l'Amburgo che si presenta con la difesa a pezzi (Omari e Muheim infortunati).
+    </div>
+  </div>
+
+  <!-- MATCH 1: LIVERPOOL vs FOREST -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League (MD2)</span>
+      <span class="match-time">13:30 CEST (12:30 BST)</span>
+    </div>
+    <div class="match-teams">🏟️ Liverpool FC vs Nottingham Forest</div>
+
+    <div class="lineup-grid">
+      <div class="lineup-box">
+        <h4>Liverpool (4-3-3) — Andoni Iraola</h4>
+        <div class="formation">Anfield (Debutto Casalingo)</div>
+        <div class="players">Alisson; Frimpong, Jacquet, Van Dijk, Kerkez; Szoboszlai, Gravenberch, Florian Wirtz; Rio Ngumoha, Alexander Isak, Cody Gakpo.</div>
+        <div class="out">❌ Chiesa (schiena), Ekitiké (tendine), Bradley, Gomez.</div>
+      </div>
+      <div class="lineup-box">
+        <h4>Nottingham Forest (3-4-2-1) — Oliver Glasner</h4>
+        <div class="formation">Assetto di Ripartenza</div>
+        <div class="players">Sels; Cunha, Milenković, Murillo; Ola Aina, McAtee, Remberg, Netz; Gibbs-White, Ndoye; Igor Jesus (o Wood).</div>
+        <div class="out">❌ Sangaré (fuori lista), Savona (crociato), Yates.</div>
+      </div>
+    </div>
+
+    <div class="sesto-senso">
+      <h4>🧠 Sesto Senso & Dinamica Tattica</h4>
+      <p>Iraola debutta ad Anfield dopo il pirotecnico 2-2 di Newcastle. Il campo sarà bagnato da pioggia battente (gioco ultra-rapido per le frecce Wirtz, Isak e Frimpong). Il Forest ha una mediana decimata senza Sangaré.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">⭐ BASE D'ACCIAIO: 1 (1X2 Liverpool) <span class="quota">@ 1.54</span></div>
+      <div class="edge-badge">Edge: +8.4% • Opzione Combo: 1 + Over 1.5 @ 1.72</div>
+    </div>
+  </div>
+
+  <!-- MATCH 2: DORTMUND vs HAMBURGER SV -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🇩🇪 Bundesliga (MD1)</span>
+      <span class="match-time">18:30 CEST</span>
+    </div>
+    <div class="match-teams">🏟️ Borussia Dortmund vs Hamburger SV</div>
+
+    <div class="lineup-grid">
+      <div class="lineup-box">
+        <h4>Borussia Dortmund (4-3-3) — Niko Kovač</h4>
+        <div class="formation">Signal Iduna Park (81.000 tifosi)</div>
+        <div class="players">Kobel; Svensson, Waldemar Anton, Joane Gadou, Julian Ryerson; Felix Nmecha, Joey Veerman, Bensebaini; Karetsas, Serhou Guirassy, Konstantelias.</div>
+        <div class="out">❌ Emre Can, Nico Schlotterbeck (lungodegenti).</div>
+      </div>
+      <div class="lineup-box">
+        <h4>Hamburger SV (4-2-3-1)</h4>
+        <div class="formation">Difesa d'Emergenza Neopromossa</div>
+        <div class="players">Heuer Fernandes; Capaldo, Sebastiaan Bornauw, Jordan Torunarigha, Lemke; Sambi Lokonga, Remberg; Bakery Jatta, Grønbæk, Adeline; Patson Daka.</div>
+        <div class="out">❌ Warmed Omari (spalla), Miro Muheim (adduttori).</div>
+      </div>
+    </div>
+
+    <div class="sesto-senso">
+      <h4>🧠 Sesto Senso & Dinamica Tattica</h4>
+      <p>Scenario gemello rispetto a Bayern-Stoccarda di ieri: il Dortmund ha un Muro Giallo infuocato e un Guirassy dominante al centro. L'Amburgo si presenta con una linea a 4 inedita e priva dei suoi terzini titolari.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">⭐ BASE D'ACCIAIO: 1 + Over 1.5 Gol <span class="quota">@ 1.50</span></div>
+      <div class="edge-badge">Edge: +9.0% • 1X2 Corner BVB @ 1.25</div>
+    </div>
+  </div>
+
+  <!-- MATCH 3: RB LEIPZIG vs GLADBACH -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🇩🇪 Bundesliga (MD1)</span>
+      <span class="match-time">15:30 CEST</span>
+    </div>
+    <div class="match-teams">🏟️ RB Leipzig vs Borussia Mönchengladbach</div>
+
+    <div class="sesto-senso">
+      <h4>🧠 Sesto Senso & Dinamica Tattica</h4>
+      <p>Demichelis debutta in Bundesliga dopo il 6-0 in DFB-Pokal. Bakayoko, Nusa e Gomis attaccano la fragile difesa del Gladbach (priva di Konoplya e Chiarodia). Lipsia imbattuto nelle ultime 6 sfide casalinghe contro il Gladbach.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">⭐ BASE D'ACCIAIO: 1X + Over 1.5 Gol <span class="quota">@ 1.35</span></div>
+      <div class="edge-badge">Edge: +6.8% • 1 secco @ 1.55</div>
+    </div>
+  </div>
+
+  <!-- MATCH 4: TOTTENHAM vs NEWCASTLE -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League (MD2)</span>
+      <span class="match-time">18:30 CEST (17:30 BST)</span>
+    </div>
+    <div class="match-teams">🏟️ Tottenham Hotspur vs Newcastle United</div>
+
+    <div class="sesto-senso">
+      <h4>🧠 Sesto Senso & Dinamica Tattica</h4>
+      <p>Lo scontro tra la linea difensiva altissima di De Zerbi e le verticalizzazioni fulminee di Jaissle. Il Tottenham deve riscattare lo 0-3 con il Brentford; il Newcastle ha fatto 2-2 col Liverpool. Entrambe concedono tantissimo dietro.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">🔥 VALUE GOL: Gol (Entrambe Segnano) <span class="quota">@ 1.48</span></div>
+      <div class="edge-badge">Edge: +7.5% • Over 2.5 @ 1.55</div>
+    </div>
+  </div>
+
+  <!-- MATCH 5: SEVILLA vs ATLÉTICO (TRAPPOLA RILEVATA) -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🇪🇸 LaLiga (MD3) — COLPO SPERIMENTALE</span>
+      <span class="match-time">21:30 CEST</span>
+    </div>
+    <div class="match-teams">🏟️ Sevilla FC vs Atlético de Madrid</div>
+
+    <div class="warning-box">
+      ⚠️ <strong>TRAPPOLA SULL'ATLÉTICO SEGNALATA DA BETGUARD</strong><br>
+      Simeone senza Le Normand (squalificato), Sørloth (infortunato), Julián Álvarez (febbre/dubbio) e Griezmann (MLS). Il Siviglia è a punteggio pieno (2 su 2) e al Sánchez-Pizjuán ci saranno 32°C di caldo torrido. Giocata di enorme valore sulla Doppia Chance casalinga!
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">💥 COLPO SPERIMENTALE: Doppia Chance 1X <span class="quota">@ 1.65</span></div>
+      <div class="edge-badge">Edge Anti-Trappola: +9.2% • Under 2.5 @ 1.80</div>
+    </div>
+  </div>
+
+  <!-- SCHEDINE PROPOSTE -->
+  <div class="combo-section">
+    <h2 style="color: #ffd700; text-align: center; margin-bottom: 20px;">🎫 I 2 TICKET PRONTI PER SABATO 29 AGOSTO</h2>
+
+    <!-- TICKET 38: QUATERNA D'ACCIAIO -->
+    <div class="combo-card">
+      <h3>🛡️ TICKET #38: QUATERNA D'ACCIAIO EUROPEA <span>4 EVENTI</span></h3>
+      <table class="combo-table">
+        <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Nottingham Forest</strong></td><td><strong>1 (1X2 Liverpool)</strong></td><td style="color:#ffd700; text-align:right;"><strong>@ 1.54</strong></td></tr>
+        <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Borussia M'gladbach</strong></td><td><strong>1X + Over 1.5 Gol</strong></td><td style="color:#ffd700; text-align:right;"><strong>@ 1.35</strong></td></tr>
+        <tr><td>🇩🇪 [18:30] <strong>Borussia Dortmund vs Amburgo</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:#ffd700; text-align:right;"><strong>@ 1.50</strong></td></tr>
+        <tr><td>🇫🇷 [20:45] <strong>Olympique Lione vs Le Havre</strong></td><td><strong>1 (1X2 Lione)</strong></td><td style="color:#ffd700; text-align:right;"><strong>@ 1.45</strong></td></tr>
+      </table>
+      <div class="combo-total">QUOTA TOTALE COMBINATA: ~4.52× 🛡️ (Stake 20.00 € ➔ Vincita: 90.40 €)</div>
+    </div>
+
+    <!-- TICKET 39: CINQUINA SPERIMENTALE -->
+    <div class="combo-card alt">
+      <h3>⚡ TICKET #39: CINQUINA SPERIMENTALE AD ALTA QUOTA <span>5 EVENTI (+BONUS)</span></h3>
+      <table class="combo-table">
+        <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Nottingham Forest</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.72</strong></td></tr>
+        <tr><td>🇩🇪 [15:30] <strong>Elversberg vs Bayer Leverkusen</strong></td><td><strong>2 (1X2 Leverkusen)</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.58</strong></td></tr>
+        <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] <strong>Tottenham vs Newcastle</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.48</strong></td></tr>
+        <tr><td>🇮🇹 [20:45] <strong>Juventus vs Parma</strong></td><td><strong>1X + Under 3.5 Gol</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.45</strong></td></tr>
+        <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Doppia Chance 1X</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.65</strong></td></tr>
+      </table>
+      <div class="combo-total" style="color:#38bdf8;">QUOTA COMBINATA: ~9.62× (+6% Bonus) ⚡ (Stake 15.00 € ➔ Vincita: ~153.00 €)</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    🛡️ <strong>BAgent System</strong> • Generato per Sabato 29 Agosto 2026 • Validato BetGuard al 100%
+  </div>
+
+</div>
+</body>
+</html>
