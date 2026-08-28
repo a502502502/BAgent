@@ -1075,26 +1075,26 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ## 🎫 TICKET UFFICIALI PIAZZATI — NOTTE 28 AGOSTO 2026
 
 ### 🏆 Ticket #36: Quintina d'Elite Serale (Quota 9.29× + Bonus = 196.99 €)
-* **Piattaforma**: Netwin | **Stato**: In Giocata / 28 Agosto ⏱️
+* **Piattaforma**: Netwin | **Stato**: 4/5 VINTE (In Attesa Alavés-Villarreal) ⏱️
 * **Importo Puntato**: 20.00 € | **Bonus Multiple**: 11.15 € | **Vincita Potenziale**: **196.99 €**
-1. 🇩🇪 [20:30] **Bayern Monaco vs Stoccarda** (Palinsesto 982) ➔ **1X2 + U/O 2.5: 1 + OV** @ **1.32**
-2. 🇮🇹 [20:45] **Milan vs Venezia** (Palinsesto 1182) ➔ **1X2: 1 (Milan)** @ **1.46**
-3. 🇫🇷 [20:45] **Lilla vs PSG** (Palinsesto 1649) ➔ **G/NG: Gol** @ **1.75**
-4. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** (Palinsesto 1329) ➔ **U/O 2.5: Over** @ **1.68**
-5. 🇪🇸 [21:30] **Alavés vs Villarreal** (Palinsesto 1708) ➔ **G/NG: Gol** @ **1.64**
+1. 🇩🇪 [20:30] **Bayern Monaco vs Stoccarda** (5-1 FT) ➔ **1 + Over 2.5** @ **1.32** ➔ **✅ VINTO!**
+2. 🇮🇹 [20:45] **Milan vs Venezia** (2-0 FT) ➔ **1X2: 1 (Milan)** @ **1.46** ➔ **✅ VINTO!**
+3. 🇫🇷 [20:45] **Lilla vs PSG** (2-2 FT) ➔ **G/NG: Gol** @ **1.75** ➔ **✅ VINTO!**
+4. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** (1-4 FT) ➔ **U/O 2.5: Over** @ **1.68** ➔ **✅ VINTO!**
+5. 🇪🇸 [21:30] **Alavés vs Villarreal** ➔ **G/NG: Gol** @ **1.64** ➔ **In corso...** ⏳
 
 ---
 
 ### 🛡️ Ticket #37: Quaterna d'Acciaio Ibrida (Quota 4.10× + Bonus = 92.96 €)
-* **Piattaforma**: Netwin | **Stato**: In Giocata / 28 Agosto ⏱️
-* **Importo Puntato**: 22.00 € | **Bonus Multiple**: 2.70 € | **Vincita Potenziale**: **92.96 €**
-1. 🇩🇪 [20:30] **Bayern Monaco vs Stoccarda** ➔ **1X2 Corner Tempo 1: 1 (Bayern)** @ **1.48**
-2. 🇫🇷 [20:45] **Lilla vs PSG** ➔ **X2 + U/O 1.5: X2 + OV** @ **1.50**
-3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** ➔ **1X2 Corner (esc.TS): 2 (Man City)** @ **1.40**
-4. 🇵🇹 [21:15] **Rio Ave vs Sporting CP** ➔ **1X2: 2 (Sporting CP)** @ **1.32**
+* **Piattaforma**: Netwin | **Stato**: 🏆 VINTO AL 100% (4/4) ✅✅✅✅
+* **Importo Puntato**: 22.00 € | **Bonus Multiple**: 2.70 € | **INCASSO REALE**: **92.96 € NETTI!** 💰
+1. 🇩🇪 [20:30] **Bayern Monaco vs Stoccarda** ➔ **1X2 Corner Tempo 1: 1 (Bayern)** @ **1.48** ➔ **✅ VINTO!**
+2. 🇫🇷 [20:45] **Lilla vs PSG** (2-2 FT) ➔ **X2 + U/O 1.5: X2 + OV** @ **1.50** ➔ **✅ VINTO!**
+3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** (6-2 Corner) ➔ **1X2 Corner (esc.TS): 2 (Man City)** @ **1.40** ➔ **✅ VINTO!**
+4. 🇵🇹 [21:15] **Rio Ave vs Sporting CP** (0-4 FT) ➔ **1X2: 2 (Sporting CP)** @ **1.32** ➔ **✅ VINTO!**
 
-*Totale Capitale Investito Stasera*: 42.00 € | *Potenziale Ritorno Lordo Totale*: **291.51 €** 🚀
+*Totale Incassato Finora*: **92.96 €** | *In corsa per altri 196.99 € con Alavés-Villarreal!* 🚀
 
-*Ultimo aggiornamento: 28 agosto 2026 ore 15:10 — BAgent (Ticket #36 e Ticket #37 registrati nel master ledger)*
+*Ultimo aggiornamento: 28 agosto 2026 ore 23:25 — BAgent (Ticket #37 VINTO AL 100%, Ticket #36 4/5 vinte)*
 
 
