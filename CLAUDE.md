@@ -1074,14 +1074,14 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ## 🎫 TICKET UFFICIALI PIAZZATI — NOTTE 28 AGOSTO 2026
 
-### 🏆 Ticket #36: Quintina d'Elite Serale (Quota 9.29× + Bonus = 196.99 €)
-* **Piattaforma**: Netwin | **Stato**: 4/5 VINTE (In Attesa Alavés-Villarreal) ⏱️
-* **Importo Puntato**: 20.00 € | **Bonus Multiple**: 11.15 € | **Vincita Potenziale**: **196.99 €**
+### 🏆 Ticket #36: Quintina d'Elite Serale (Quota 9.29×)
+* **Piattaforma**: Netwin | **Stato**: 💰 CASHOUT ESEGUITO A 65.00 € ✅ (4/5 Vinte)
+* **Importo Puntato**: 20.00 € | **INCASSO CASHOUT**: **65.00 €** *(Profitto Netto: +45.00 € / +225% ROI)*
 1. 🇩🇪 [20:30] **Bayern Monaco vs Stoccarda** (5-1 FT) ➔ **1 + Over 2.5** @ **1.32** ➔ **✅ VINTO!**
 2. 🇮🇹 [20:45] **Milan vs Venezia** (2-0 FT) ➔ **1X2: 1 (Milan)** @ **1.46** ➔ **✅ VINTO!**
 3. 🇫🇷 [20:45] **Lilla vs PSG** (2-2 FT) ➔ **G/NG: Gol** @ **1.75** ➔ **✅ VINTO!**
 4. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** (1-4 FT) ➔ **U/O 2.5: Over** @ **1.68** ➔ **✅ VINTO!**
-5. 🇪🇸 [21:30] **Alavés vs Villarreal** ➔ **G/NG: Gol** @ **1.64** ➔ **In corso...** ⏳
+5. 🇪🇸 [21:30] **Alavés vs Villarreal** ➔ **G/NG: Gol** @ **1.64** ➔ *Cashout eseguito prima del fischio finale!*
 
 ---
 
@@ -1093,8 +1093,14 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** (6-2 Corner) ➔ **1X2 Corner (esc.TS): 2 (Man City)** @ **1.40** ➔ **✅ VINTO!**
 4. 🇵🇹 [21:15] **Rio Ave vs Sporting CP** (0-4 FT) ➔ **1X2: 2 (Sporting CP)** @ **1.32** ➔ **✅ VINTO!**
 
-*Totale Incassato Finora*: **92.96 €** | *In corsa per altri 196.99 € con Alavés-Villarreal!* 🚀
+---
 
-*Ultimo aggiornamento: 28 agosto 2026 ore 23:25 — BAgent (Ticket #37 VINTO AL 100%, Ticket #36 4/5 vinte)*
+### 💎 BILANCIO FINANZIARIO DEFINITIVO NOTTE 28 AGOSTO 2026:
+* 💵 **Capitale Totale Investito**: **42.00 €**
+* 💰 **Totale Incassato Realmente**: **157.96 €** *(65.00 € Cashout #36 + 92.96 € Vincita #37)*
+* 🚀 **PROFITTO NETTO INCASSATO**: **+115.96 €**
+* 📈 **ROI TOTALE DELLA SERATA**: **+276.1% SUL CAPITALE!**
+
+*Ultimo aggiornamento: 28 agosto 2026 ore 23:28 — BAgent (Serata trionfale: Ticket #37 Vinto 100%, Ticket #36 Cashout 65€, +115.96€ profitto netto)*
 
 
