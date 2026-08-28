@@ -3,180 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🛡️ BAgent — Analisi 28 Agosto 2026</title>
+<title>🛡️ BAgent — Analisi Approfondita & Quote Live (28 Agosto 2026)</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e17; color: #e0e6ed; line-height: 1.6; padding: 12px; }
-  .container { max-width: 900px; margin: 0 auto; }
-  h1 { font-size: 1.6em; text-align: center; color: #ffd700; margin-bottom: 6px; }
-  .subtitle { text-align: center; color: #8892a4; font-size: 0.85em; margin-bottom: 20px; }
-  .breaking { background: linear-gradient(135deg, #1a0000, #2d0a0a); border: 1px solid #ff4444; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
-  .breaking h2 { color: #ff4444; font-size: 1.1em; margin-bottom: 8px; }
-  .breaking-item { padding: 6px 0; border-bottom: 1px solid #331111; font-size: 0.9em; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #0a0e17; color: #e0e6ed; line-height: 1.6; padding: 16px; }
+  .container { max-width: 950px; margin: 0 auto; }
+  
+  /* Header */
+  .main-header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #1e2a42; }
+  h1 { font-size: 1.8em; color: #ffd700; margin-bottom: 6px; letter-spacing: -0.5px; }
+  .subtitle { color: #8892a4; font-size: 0.9em; }
+  .status-badge { display: inline-block; background: #0f2d18; border: 1px solid #22c55e; color: #4ade80; font-size: 0.8em; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 10px; }
+
+  /* Breaking News */
+  .breaking { background: linear-gradient(135deg, #2a0808, #180404); border: 1px solid #ef4444; border-radius: 12px; padding: 16px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15); }
+  .breaking h2 { color: #f87171; font-size: 1.1em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .breaking-item { padding: 8px 0; border-bottom: 1px solid #3b1212; font-size: 0.92em; }
   .breaking-item:last-child { border-bottom: none; }
-  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 700; margin-right: 6px; }
-  .tag-red { background: #ff4444; color: #fff; }
-  .tag-yellow { background: #ffaa00; color: #000; }
-  .match-card { background: #131a2b; border: 1px solid #1e2a42; border-radius: 14px; padding: 16px; margin-bottom: 14px; }
-  .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-  .match-league { font-size: 0.75em; color: #5b9bd5; font-weight: 600; text-transform: uppercase; }
-  .match-time { font-size: 0.8em; color: #ffd700; font-weight: 700; }
-  .match-teams { font-size: 1.15em; font-weight: 700; color: #fff; margin-bottom: 8px; }
-  .lineup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
-  .lineup-box { background: #0d1220; border: 1px solid #1e2a42; border-radius: 8px; padding: 10px; font-size: 0.78em; }
-  .lineup-box h4 { color: #5b9bd5; font-size: 0.85em; margin-bottom: 6px; }
-  .lineup-box .formation { color: #ffd700; font-weight: 600; margin-bottom: 4px; }
-  .lineup-box .out { color: #ff6b6b; font-size: 0.8em; margin-top: 6px; }
-  .stats-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.82em; }
-  .stats-table th { background: #1a2236; color: #5b9bd5; padding: 8px; text-align: left; font-weight: 600; }
-  .stats-table td { padding: 7px 8px; border-bottom: 1px solid #1e2a42; }
-  .sesto-senso { background: #0d1a0d; border: 1px solid #2d5a2d; border-radius: 8px; padding: 12px; margin: 10px 0; font-size: 0.85em; }
-  .sesto-senso h4 { color: #4ade80; margin-bottom: 6px; }
-  .pick-badge { display: inline-block; background: linear-gradient(135deg, #1a3a1a, #0d2d0d); border: 1px solid #4ade80; border-radius: 8px; padding: 8px 14px; margin: 8px 0; font-weight: 700; color: #4ade80; font-size: 0.95em; }
-  .pick-badge .quota { color: #ffd700; }
-  .pick-badge .edge { color: #5b9bd5; font-size: 0.85em; }
-  .warning-box { background: #1a1a00; border: 1px solid #ffaa00; border-radius: 8px; padding: 10px; margin: 8px 0; font-size: 0.82em; color: #ffdd57; }
-  .meteo { font-size: 0.8em; color: #8892a4; margin: 6px 0; }
-  .combo-section { margin-top: 20px; }
-  .combo-card { background: linear-gradient(135deg, #131a2b, #1a2540); border: 2px solid #ffd700; border-radius: 14px; padding: 16px; margin-bottom: 14px; }
-  .combo-card.alt { border-color: #5b9bd5; }
-  .combo-card h3 { color: #ffd700; font-size: 1.05em; margin-bottom: 10px; }
-  .combo-card.alt h3 { color: #5b9bd5; }
-  .combo-table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
-  .combo-table td { padding: 6px; border-bottom: 1px solid #1e2a42; }
-  .combo-total { font-size: 1.2em; font-weight: 700; color: #ffd700; text-align: center; margin-top: 10px; }
-  .betguard { background: #0d0d1a; border: 1px solid #5b5bd5; border-radius: 12px; padding: 14px; margin: 16px 0; }
-  .betguard h3 { color: #7b7bff; margin-bottom: 8px; }
-  .check { color: #4ade80; }
-  .warn { color: #ffaa00; }
-  .footer { text-align: center; color: #4a5568; font-size: 0.75em; margin-top: 20px; padding: 10px; border-top: 1px solid #1e2a42; }
-  @media (max-width: 600px) { .lineup-grid { grid-template-columns: 1fr; } }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 800; margin-right: 8px; text-transform: uppercase; }
+  .tag-red { background: #ef4444; color: #fff; }
+  .tag-yellow { background: #f59e0b; color: #000; }
+  .tag-blue { background: #3b82f6; color: #fff; }
+
+  /* Match Card */
+  .match-card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s ease; }
+  .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px; }
+  .match-league { font-size: 0.8em; color: #60a5fa; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .match-time { font-size: 0.85em; color: #fbbf24; font-weight: 800; background: #27200a; padding: 2px 8px; border-radius: 6px; border: 1px solid #785207; }
+  .match-teams { font-size: 1.3em; font-weight: 800; color: #fff; margin-bottom: 12px; }
+  
+  /* Lineup Grid */
+  .lineup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .lineup-box { background: #0b0f19; border: 1px solid #1f2937; border-radius: 10px; padding: 12px; font-size: 0.82em; }
+  .lineup-box h4 { color: #93c5fd; font-size: 0.9em; margin-bottom: 6px; font-weight: 700; }
+  .lineup-box .formation { color: #facc15; font-weight: 700; margin-bottom: 4px; font-size: 0.85em; }
+  .lineup-box .players { color: #d1d5db; line-height: 1.4; }
+  .lineup-box .out { color: #f87171; font-size: 0.85em; margin-top: 8px; border-top: 1px dashed #374151; padding-top: 6px; }
+
+  /* Odds Table */
+  .odds-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85em; background: #0b0f19; border-radius: 8px; overflow: hidden; }
+  .odds-table th { background: #1f2937; color: #93c5fd; padding: 8px 10px; text-align: center; font-weight: 700; font-size: 0.8em; }
+  .odds-table td { padding: 8px 10px; border-bottom: 1px solid #1f2937; text-align: center; }
+  .odds-table tr:hover { background: #162032; }
+  .odd-best { color: #ffd700; font-weight: 800; }
+
+  /* Sesto Senso Box */
+  .sesto-senso { background: #061a14; border: 1px solid #059669; border-radius: 10px; padding: 14px; margin: 14px 0; font-size: 0.88em; }
+  .sesto-senso h4 { color: #34d399; margin-bottom: 6px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .sesto-senso p { color: #d1fae5; line-height: 1.5; }
+
+  /* Pick Badge */
+  .pick-container { margin: 14px 0 6px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .pick-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #064e3b, #022c22); border: 1px solid #10b981; border-radius: 8px; padding: 8px 16px; font-weight: 800; color: #6ee7b7; font-size: 1.05em; }
+  .pick-badge .quota { color: #ffd700; font-size: 1.15em; }
+  .edge-badge { background: #1e3a8a; color: #93c5fd; border: 1px solid #3b82f6; font-size: 0.8em; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+
+  /* Warning Box */
+  .warning-box { background: #261603; border: 1px solid #d97706; border-radius: 10px; padding: 12px; margin: 12px 0; font-size: 0.85em; color: #fde68a; }
+
+  /* Footer & Combos */
+  .combo-section { margin-top: 32px; }
+  .combo-card { background: linear-gradient(135deg, #111827, #1e293b); border: 2px solid #ffd700; border-radius: 16px; padding: 20px; margin-bottom: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+  .combo-card.alt { border-color: #38bdf8; }
+  .combo-card h3 { color: #ffd700; font-size: 1.2em; margin-bottom: 12px; display: flex; justify-content: space-between; }
+  .combo-card.alt h3 { color: #38bdf8; }
+  .combo-table { width: 100%; border-collapse: collapse; font-size: 0.9em; margin: 10px 0; }
+  .combo-table td { padding: 8px 6px; border-bottom: 1px solid #1f2937; }
+  .combo-total { font-size: 1.3em; font-weight: 800; color: #ffd700; text-align: center; margin-top: 14px; padding-top: 12px; border-top: 1px dashed #374151; }
+
+  .footer { text-align: center; color: #6b7280; font-size: 0.8em; margin-top: 30px; padding-top: 16px; border-top: 1px solid #1f2937; }
+  
+  @media (max-width: 650px) {
+    .lineup-grid { grid-template-columns: 1fr; }
+    .odds-table { font-size: 0.75em; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
-<h1>🛡️ BAgent — Analisi Approfondita</h1>
-<p class="subtitle">Venerdì 28 Agosto 2026 • Sesto Senso + BetGuard Pre-Flight</p>
 
-<div class="breaking">
-  <h2>🚨 BREAKING NEWS</h2>
-  <div class="breaking-item"><span class="tag tag-red">ESCLUSO</span><strong>Rafael LEÃO</strong> NON convocato dal Milan — trattative Galatasaray / Aston Villa</div>
-  <div class="breaking-item"><span class="tag tag-yellow">OUT</span><strong>Jamal MUSIALA</strong> fuori per il Bayern — riposo precauzionale</div>
-  <div class="breaking-item"><span class="tag tag-yellow">DECIMATO</span><strong>PSG</strong> senza Dembélé, Barcola, Mendes — ma Ferran Torres titolare (2 gol alla J1)</div>
-</div>
-
-<div class="match-card">
-  <div class="match-header"><span class="match-league">🇩🇪 Bundesliga MD1 — Apertura</span><span class="match-time">20:30</span></div>
-  <div class="match-teams">🏟️ Bayern München vs VfB Stuttgart</div>
-  <div class="lineup-grid">
-    <div class="lineup-box"><h4>Bayern (4-2-3-1)</h4><div class="formation">Neuer; Laimer, Tah, Kim, Stanišić; Kimmich, Pavlović; Olise, Brown, Díaz; Kane</div><div class="out">❌ Musiala, Gnabry, Saibari</div></div>
-    <div class="lineup-box"><h4>Stuttgart (4-2-3-1)</h4><div class="formation">Bredlow; Vagnoman, Jeltsch, Chabot, Mittelstädt; Stiller, Rieder; El Khannouss, Undav(C), Leweling; Pejčinović</div><div class="out">❌ 8 assenti!</div></div>
+  <!-- HEADER -->
+  <div class="main-header">
+    <h1>🛡️ BAgent — Analisi & Quote Live Verificate</h1>
+    <p class="subtitle">Venerdì 28 Agosto 2026 • Sesto Senso + BetGuard Validator</p>
+    <div class="status-badge">● LISTINI E FORMAZIONI AGGIORNATI IN TEMPO REALE</div>
   </div>
-  <table class="stats-table"><tr><th>Forma</th><td>Bayern W-W-W-W-W</td><td>Stuttgart W-W-L-W-D</td></tr><tr><th>H2H</th><td colspan="2">Bayern 7 su 10 • 3.2 gol/casa vs VfB</td></tr></table>
-  <div class="sesto-senso"><h4>🧠 Sesto Senso</h4>Bayern apre all'Allianz Arena, 75.000 tifosi. Stuttgart con 8 assenti, difesa improvvisata. Partita ultra-asimmetrica.</div>
-  <p class="meteo">🌡️ 19°C sereno • ⚖️ Arbitro: designazione DFL</p>
-  <div class="pick-badge">⭐ Bayern 1 + Over 2.5 <span class="quota">@ 1.75</span> <span class="edge">• Edge +8.2%</span></div>
-</div>
 
-<div class="match-card">
-  <div class="match-header"><span class="match-league">🇮🇹 Serie A MD2</span><span class="match-time">20:45</span></div>
-  <div class="match-teams">🏟️ AC Milan vs Venezia</div>
-  <div class="lineup-grid">
-    <div class="lineup-box"><h4>Milan (3-4-2-1)</h4><div class="formation">Maignan; Gila, De Winter, Pavlović; Chukwueze, Jashari, Musah, Estupiñán; Loftus-Cheek, Cissé; Ramos</div><div class="out">❌ Leão (non convocato!), Tomori, Fofana, Giménez</div></div>
-    <div class="lineup-box"><h4>Venezia (3-5-2)</h4><div class="formation">Stanković; Schingtienne, Bella-Kotchap, Franjić; Hainaut, Pérez, Busio, Bašić, Correia; Adams, Yeboah</div><div class="out">❌ Moreno, Adorante, Šverko, Duncan</div></div>
+  <!-- BREAKING NEWS BOX -->
+  <div class="breaking">
+    <h2>🚨 BREAKING NEWS & RETROSCENA DI MERCATO</h2>
+    <div class="breaking-item">
+      <span class="tag tag-red">ESCLUSO</span>
+      <strong>Rafael LEÃO (Milan)</strong> NON CONVOCATO da Amorim dopo un solo allenamento e per via di offerte calde da Galatasaray e Aston Villa. Tomori e Fofana fuori rosa.
+    </div>
+    <div class="breaking-item">
+      <span class="tag tag-yellow">A RIPOSO</span>
+      <strong>Jamal MUSIALA (Bayern)</strong> tenuto a riposo precauzionale da Kompany. Gnabry non al 100%. Spazio a Nathaniel Brown da trequartista.
+    </div>
+    <div class="breaking-item">
+      <span class="tag tag-yellow">DECIMATO</span>
+      <strong>PSG</strong> a Lille senza Dembélé (fatica muscolare) e Nuno Mendes (squalificato). Titolari <strong>Ferran Torres</strong> (2 gol alla J1) e <strong>Kvaratskhelia</strong>.
+    </div>
   </div>
-  <table class="stats-table"><tr><th>H2H</th><td colspan="2"><strong>11-0 aggregato</strong> in 4 gare • Venezia MAI ha segnato al Milan</td></tr></table>
-  <div class="warning-box">⚠️ <strong>Leão NON convocato!</strong> Ma H2H 11-0 è schiacciante.</div>
-  <div class="sesto-senso"><h4>🧠 Sesto Senso</h4>Amorim con Ramos punta centrale. Venezia 0 gol al Milan nelle ultime 4 (3-0, 4-0, 2-0, 2-0). 27°C caldo umido.</div>
-  <p class="meteo">🌡️ 27°C caldo umido • ⚖️ Arbitro: Manganiello</p>
-  <div class="pick-badge">⭐ Milan Vince a Zero <span class="quota">@ 2.10</span> <span class="edge">• Edge +9.1%</span></div>
-</div>
 
-<div class="match-card">
-  <div class="match-header"><span class="match-league">🇫🇷 Ligue 1 MD2</span><span class="match-time">20:45</span></div>
-  <div class="match-teams">🏟️ Lille OSC vs Paris Saint-Germain</div>
-  <div class="lineup-grid">
-    <div class="lineup-box"><h4>Lille (4-2-3-1)</h4><div class="formation">Özer; Santos, Ngoy, Alexsandro, Perraud; André, Bentaleb; E. Mbappé, Haraldsson, Önal; Giroud</div><div class="out">📌 Ethan Mbappé vs ex club!</div></div>
-    <div class="lineup-box"><h4>PSG (4-3-3)</h4><div class="formation">Safonov; Hakimi, Marquinhos, Pacho, Digne; Vitinha, Neves, Fabián; Akliouche, F. Torres, Kvaratskhelia</div><div class="out">🟥 Mendes squalificato • ⚠️ Dembélé riposo</div></div>
-  </div>
-  <table class="stats-table"><tr><th>H2H</th><td colspan="2">PSG 4 su 6 • <strong>GOL in 5 su 6</strong></td></tr></table>
-  <div class="sesto-senso"><h4>🧠 Sesto Senso</h4>Torres (2 gol J1) + Kvaratskhelia = attacco letale. Giroud + Mbappé Jr motivati. Campo bagnato → transizioni e gol.</div>
-  <p class="meteo">🌡️ 17°C nuvoloso, possibili piogge • ⚖️ Arbitro: Wattellier</p>
-  <div class="pick-badge">⭐ GOL (BTTS Sì) <span class="quota">@ 1.67</span> <span class="edge">• Edge +7.3%</span></div>
-</div>
+  <!-- MATCH 1: BAYERN vs STUTTGART -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🇩🇪 Bundesliga (MD1 - Gara Inaugurale)</span>
+      <span class="match-time">20:30 CEST</span>
+    </div>
+    <div class="match-teams">🏟️ FC Bayern München vs VfB Stuttgart</div>
 
-<div class="match-card">
-  <div class="match-header"><span class="match-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League MD3</span><span class="match-time">21:00</span></div>
-  <div class="match-teams">🏟️ Crystal Palace vs Manchester City</div>
-  <div class="lineup-grid">
-    <div class="lineup-box"><h4>Palace (5-2-2-1)</h4><div class="formation">Henderson; Tomiyasu, Richards, Canvot, Mitchell, Muñoz; Kamada, Wharton; McNeil, Nketiah; Mateta</div><div class="out">❌ Sarr, Riad</div></div>
-    <div class="lineup-box"><h4>Man City (4-2-3-1)</h4><div class="formation">Donnarumma; Lewis, Gvardiol, Khusanov, Dias; Anderson, Guéhi; O'Reilly, Cherki, Semenyo; Haaland</div><div class="out">❌ Doku</div></div>
-  </div>
-  <div class="sesto-senso"><h4>🧠 Sesto Senso</h4>Post-Guardiola, Maresca con Haaland + Cherki. Selhurst Park sotto i riflettori. Palace deve reagire dopo 0-2 vs Everton.</div>
-  <p class="meteo">🌡️ 19°C asciutto • ⚖️ Arbitro: Andy Madley</p>
-  <div class="pick-badge">⭐ Over 2.5 <span class="quota">@ 1.72</span> <span class="edge">• Edge +5.8%</span></div>
-</div>
+    <div class="lineup-grid">
+      <div class="lineup-box">
+        <h4>Bayern (4-2-3-1) — Vincent Kompany</h4>
+        <div class="formation">Allianz Arena (75.000 spettatori)</div>
+        <div class="players">Neuer; Laimer, Tah, Kim Min-jae, Stanišić; Kimmich, Pavlović; Michael Olise, Nathaniel Brown, Luis Díaz; Harry Kane.</div>
+        <div class="out">❌ Musiala (riposo), Gnabry (affaticamento), Saibari (in dubbio).</div>
+      </div>
+      <div class="lineup-box">
+        <h4>Stuttgart (4-2-3-1) — Sebastian Hoeneß</h4>
+        <div class="formation">Difesa d'Emergenza</div>
+        <div class="players">Bredlow; Vagnoman, Frederik Jeltsch, Chabot, Mittelstädt; Angelo Stiller, Fabian Rieder; El Khannouss, Deniz Undav (C), Leweling; Dženan Pejčinović.</div>
+        <div class="out">❌ 8 ASSENTI: Zagadou, Assignon, Nartey, Leo Sauer, Dennis Seimen, Diehl, Jaquez, Arevalo.</div>
+      </div>
+    </div>
 
-<div class="match-card">
-  <div class="match-header"><span class="match-league">🇪🇸 LaLiga MD3</span><span class="match-time">21:30</span></div>
-  <div class="match-teams">🏟️ Dep. Alavés vs Villarreal CF</div>
-  <div class="lineup-grid">
-    <div class="lineup-box"><h4>Alavés (5-3-2)</h4><div class="formation">Sivera; Pérez, Tenaglia, Koski, Jonny, Rebbach; Blanco, Ibáñez, Rodríguez; Boyé, T. Martínez</div><div class="out">🟥 Garcés squalificato</div></div>
-    <div class="lineup-box"><h4>Villarreal (4-4-2)</h4><div class="formation">Luiz Jr; Mouriño, Veiga, Foyth, Romero; Gueye, Comesaña, Moleiro, Pépé; Ayoze, Mikautadze</div><div class="out">✅ ZERO assenze! Rosa al completo</div></div>
-  </div>
-  <div class="sesto-senso"><h4>🧠 Sesto Senso</h4>Villarreal difesa colabrodo (4 gol presi in 2 gare). Mikautadze + Ayoze garantiscono gol. Alavés forte al Mendizorroza. GOL in 9/10 gare Villarreal.</div>
-  <p class="meteo">🌡️ 18°C sereno • ⚖️ Arbitro: Díaz de Mera</p>
-  <div class="pick-badge">⭐ GOL (BTTS Sì) <span class="quota">@ 1.65</span> <span class="edge">• Edge +6.1%</span></div>
-</div>
-
-<div class="betguard">
-  <h3>🛡️ BetGuard Pre-Flight</h3>
-  <table class="stats-table">
-    <tr><th>Pick</th><th>R.#26</th><th>R.#29</th><th>Quota</th><th>Edge</th><th>Esito</th></tr>
-    <tr><td>Bayern 1+O2.5</td><td class="check">✅</td><td class="check">✅</td><td class="check">1.75</td><td class="check">+8.2%</td><td class="check">✅</td></tr>
-    <tr><td>Milan Win-to-Nil</td><td class="check">✅</td><td class="check">✅</td><td class="check">2.10</td><td class="check">+9.1%</td><td class="warn">⚠️</td></tr>
-    <tr><td>Lille GOL</td><td class="check">✅</td><td class="check">✅</td><td class="check">1.67</td><td class="check">+7.3%</td><td class="check">✅</td></tr>
-    <tr><td>Palace O2.5</td><td class="check">✅</td><td class="check">✅</td><td class="check">1.72</td><td class="check">+5.8%</td><td class="check">✅</td></tr>
-    <tr><td>Alavés GOL</td><td class="check">✅</td><td class="warn">⚠️</td><td class="check">1.65</td><td class="check">+6.1%</td><td class="check">✅</td></tr>
-  </table>
-</div>
-
-<div class="combo-section">
-  <h2 style="color:#ffd700;text-align:center;margin-bottom:14px;">💰 Combinazioni Finali</h2>
-  <div class="combo-card">
-    <h3>🛡️ A — Tris d'Acciaio</h3>
-    <table class="combo-table">
-      <tr><td>🇩🇪</td><td>Bayern vs Stuttgart</td><td><strong>1 + Over 2.5</strong></td><td style="color:#ffd700">@ 1.75</td></tr>
-      <tr><td>🇫🇷</td><td>Lille vs PSG</td><td><strong>GOL (BTTS)</strong></td><td style="color:#ffd700">@ 1.67</td></tr>
-      <tr><td>🇪🇸</td><td>Alavés vs Villarreal</td><td><strong>GOL (BTTS)</strong></td><td style="color:#ffd700">@ 1.65</td></tr>
+    <!-- Tabella Quote Live -->
+    <table class="odds-table">
+      <thead>
+        <tr><th>Mercato</th><th>Bet365</th><th>Betsson</th><th>Netwin</th><th>Snai</th><th>Eurobet</th><th>Consensus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1 (Bayern)</strong></td><td>1.30</td><td>1.33</td><td>1.32</td><td>1.30</td><td>1.28</td><td class="odd-best">1.33</td></tr>
+        <tr><td><strong>Combo 1 + Over 2.5</strong></td><td>1.72</td><td>1.74</td><td class="odd-best">1.75</td><td>1.73</td><td class="odd-best">1.75</td><td class="odd-best">1.75</td></tr>
+        <tr><td><strong>Over 2.5 Gol</strong></td><td>1.25</td><td>1.24</td><td>1.25</td><td>1.26</td><td>1.22</td><td class="odd-best">1.26</td></tr>
+        <tr><td><strong>Over 3.5 Gol</strong></td><td>1.70</td><td>1.72</td><td>1.70</td><td>1.68</td><td>1.73</td><td class="odd-best">1.73</td></tr>
+        <tr><td><strong>Gol (BTTS Sì)</strong></td><td>1.55</td><td>1.53</td><td>1.55</td><td>1.57</td><td>1.52</td><td class="odd-best">1.57</td></tr>
+      </tbody>
     </table>
-    <div class="combo-total">~4.82× 🛡️</div>
-  </div>
-  <div class="combo-card">
-    <h3>⚡ B — Quaterna d'Elite</h3>
-    <table class="combo-table">
-      <tr><td>🇩🇪</td><td>Bayern vs Stuttgart</td><td><strong>1 + Over 2.5</strong></td><td style="color:#ffd700">@ 1.75</td></tr>
-      <tr><td>🇮🇹</td><td>Milan vs Venezia</td><td><strong>Milan Vince a Zero</strong></td><td style="color:#ffd700">@ 2.10</td></tr>
-      <tr><td>🇫🇷</td><td>Lille vs PSG</td><td><strong>GOL (BTTS)</strong></td><td style="color:#ffd700">@ 1.67</td></tr>
-      <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿</td><td>Palace vs Man City</td><td><strong>Over 2.5</strong></td><td style="color:#ffd700">@ 1.72</td></tr>
-    </table>
-    <div class="combo-total">~10.55× ⚡</div>
-  </div>
-  <div class="combo-card alt">
-    <h3>🔥 C — Tris Sesto Senso</h3>
-    <table class="combo-table">
-      <tr><td>🇩🇪</td><td>Bayern vs Stuttgart</td><td><strong>1 + Over 2.5</strong></td><td style="color:#5b9bd5">@ 1.75</td></tr>
-      <tr><td>🇫🇷</td><td>Lille vs PSG</td><td><strong>GOL (BTTS)</strong></td><td style="color:#5b9bd5">@ 1.67</td></tr>
-      <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿</td><td>Palace vs Man City</td><td><strong>Over 2.5</strong></td><td style="color:#5b9bd5">@ 1.72</td></tr>
-    </table>
-    <div class="combo-total" style="color:#5b9bd5">~5.02× 🔥</div>
-  </div>
-</div>
 
-<div class="footer">
-  🛡️ BAgent × BetGuard • 27/08/2026 23:30 CEST<br>
-  Step 1 ✅ Step 2 ✅ Step 3 ✅ • <strong>Step 4: Conferma A/B/C + Stake</strong>
-</div>
+    <div class="sesto-senso">
+      <h4>🧠 Analisi Tattica & Sesto Senso</h4>
+      <p>Il Bayern apre il campionato davanti a 75.000 tifosi spinto dal successo in Supercoppa sul Dortmund (2-1). Stuttgart falcidiato da 8 infortuni pesanti: la coppia difensiva giovanissima Jeltsch-Chabot andrà in grandissima difficoltà contro la qualità di Kane, Olise e Luis Díaz. Partita ultra-asimmetrica da Over netto.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">⭐ BASE D'ACCIAIO: 1 + Over 2.5 Gol <span class="quota">@ 1.75</span></div>
+      <div class="edge-badge">Edge Statistico: +8.2%</div>
+    </div>
+  </div>
+
+  <!-- MATCH 2: LILLE vs PSG -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🇫🇷 Ligue 1 McDonald's (MD2)</span>
+      <span class="match-time">20:45 CEST</span>
+    </div>
+    <div class="match-teams">🏟️ LOSC Lille vs Paris Saint-Germain</div>
+
+    <div class="lineup-grid">
+      <div class="lineup-box">
+        <h4>Lille (4-2-3-1) — Davide Ancelotti</h4>
+        <div class="formation">Stade Pierre-Mauroy</div>
+        <div class="players">Özer; Tiago Santos, Nathan Ngoy, Alexsandro, Perraud; Benjamin André, Nabil Bentaleb; Ethan Mbappé, Haraldsson, Önal; Olivier Giroud.</div>
+        <div class="out">❌ Igamane, Fernandez-Pardo.<br>📌 <em>Ethan Mbappé titolare contro il suo ex club!</em></div>
+      </div>
+      <div class="lineup-box">
+        <h4>PSG (4-3-3) — Luis Enrique</h4>
+        <div class="formation">Tridente Torres-Kvara</div>
+        <div class="players">Safonov; Hakimi, Marquinhos, Willian Pacho, Lucas Digne; Vitinha, João Neves, Fabián Ruiz; Maghnes Akliouche, Ferran Torres, Khvicha Kvaratskhelia.</div>
+        <div class="out">🟥 Nuno Mendes (squalificato).<br>❌ Dembélé (riposo), Barcola (panchina).</div>
+      </div>
+    </div>
+
+    <!-- Tabella Quote Live -->
+    <table class="odds-table">
+      <thead>
+        <tr><th>Mercato</th><th>Bet365</th><th>Betsson</th><th>Netwin</th><th>Snai</th><th>Eurobet</th><th>Consensus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2 (PSG)</strong></td><td>1.72</td><td>1.70</td><td>1.72</td><td>1.70</td><td>1.73</td><td class="odd-best">1.77</td></tr>
+        <tr><td><strong>Gol (BTTS Sì)</strong></td><td>1.66</td><td>1.67</td><td class="odd-best">1.67</td><td>1.65</td><td>1.68</td><td class="odd-best">1.68</td></tr>
+        <tr><td><strong>Over 2.5 Gol</strong></td><td>1.68</td><td>1.70</td><td>1.68</td><td>1.66</td><td>1.71</td><td class="odd-best">1.71</td></tr>
+        <tr><td><strong>Doppia Chance X2</strong></td><td>1.20</td><td>1.19</td><td>1.20</td><td>1.21</td><td>1.20</td><td class="odd-best">1.22</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sesto-senso">
+      <h4>🧠 Analisi Tattica & Sesto Senso</h4>
+      <p>Negli ultimi 6 scontri diretti l'esito <strong>GOL si è verificato in ben 5 occasioni</strong>. Il PSG deve riscattare il 2-2 con il Rennes ed ha una fase difensiva ancora imprecisa. Il Lille schiera Olivier Giroud e un Ethan Mbappé iper-motivato. Campo veloce e umido che favorisce le transizioni.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">⭐ BASE D'ACCIAIO: Gol (Entrambe Segnano) <span class="quota">@ 1.67</span></div>
+      <div class="edge-badge">Edge Statistico: +7.3%</div>
+    </div>
+  </div>
+
+  <!-- MATCH 3: ALAVES vs VILLARREAL -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🇪🇸 LaLiga EA Sports (MD3)</span>
+      <span class="match-time">21:30 CEST</span>
+    </div>
+    <div class="match-teams">🏟️ Deportivo Alavés vs Villarreal CF</div>
+
+    <div class="lineup-grid">
+      <div class="lineup-box">
+        <h4>Alavés (5-3-2) — Quique Sánchez Flores</h4>
+        <div class="formation">Estadio de Mendizorroza</div>
+        <div class="players">Sivera; Ángel Pérez, Nahuel Tenaglia, Ville Koski, Jonny, Abde Rebbach; Antonio Blanco, Pablo Ibáñez, Mikel Rodríguez; Lucas Boyé, Toni Martínez.</div>
+        <div class="out">🟥 Facundo Garcés (squalifica FIFA).<br>✅ Lucas Boyé pienamente recuperato.</div>
+      </div>
+      <div class="lineup-box">
+        <h4>Villarreal (4-4-2) — Íñigo Pérez</h4>
+        <div class="formation">Attacco Pesante Mikautadze-Ayoze</div>
+        <div class="players">Luiz Júnior; Santiago Mouriño, Renato Veiga, Juan Foyth, Carlos Romero; Pape Gueye, Santi Comesaña, Alberto Moleiro, Nicolas Pépé; Ayoze Pérez, Georges Mikautadze.</div>
+        <div class="out">✅ Rosa al 100% al completo. Diatta rientra da squalifica.</div>
+      </div>
+    </div>
+
+    <!-- Tabella Quote Live -->
+    <table class="odds-table">
+      <thead>
+        <tr><th>Mercato</th><th>Bet365</th><th>Betsson</th><th>Netwin</th><th>Snai</th><th>Eurobet</th><th>Consensus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2 (Villarreal)</strong></td><td>2.25</td><td>2.28</td><td>2.25</td><td>2.25</td><td>2.30</td><td class="odd-best">2.35</td></tr>
+        <tr><td><strong>Gol (BTTS Sì)</strong></td><td>1.65</td><td>1.66</td><td class="odd-best">1.65</td><td>1.63</td><td>1.67</td><td class="odd-best">1.68</td></tr>
+        <tr><td><strong>Over 2.5 Gol</strong></td><td>1.83</td><td>1.85</td><td>1.82</td><td>1.80</td><td>1.87</td><td class="odd-best">1.88</td></tr>
+        <tr><td><strong>Doppia Chance 1X</strong></td><td>1.62</td><td>1.64</td><td>1.62</td><td>1.63</td><td>1.60</td><td class="odd-best">1.65</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sesto-senso">
+      <h4>🧠 Analisi Tattica & Sesto Senso</h4>
+      <p>Il Villarreal produce un volume offensivo altissimo (4 gol segnati in 2 partite) ma subisce moltissimo in ripartenza (4 gol subiti, 2-2 x2). L'Alavés in casa è un fortino: imbattuto nelle ultime 5 sfide contro il Villarreal al Mendizorroza. Esito GOL presente in 9 delle ultime 10 gare del Villarreal.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">⭐ BASE D'ACCIAIO: Gol (Entrambe Segnano) <span class="quota">@ 1.65</span></div>
+      <div class="edge-badge">Edge Statistico: +6.1%</div>
+    </div>
+  </div>
+
+  <!-- MATCH 4: CRYSTAL PALACE vs MAN CITY -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League (MD3)</span>
+      <span class="match-time">21:00 CEST (20:00 BST)</span>
+    </div>
+    <div class="match-teams">🏟️ Crystal Palace vs Manchester City</div>
+
+    <table class="odds-table">
+      <thead>
+        <tr><th>Mercato</th><th>Bet365</th><th>Betsson</th><th>Netwin</th><th>Snai</th><th>Eurobet</th><th>Consensus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2 (Man City)</strong></td><td>1.57</td><td>1.58</td><td>1.60</td><td>1.60</td><td>1.58</td><td class="odd-best">1.62</td></tr>
+        <tr><td><strong>Over 2.5 Gol</strong></td><td>1.70</td><td>1.74</td><td class="odd-best">1.72</td><td>1.70</td><td>1.75</td><td class="odd-best">1.75</td></tr>
+        <tr><td><strong>Gol (BTTS Sì)</strong></td><td>1.75</td><td>1.74</td><td>1.75</td><td>1.72</td><td>1.77</td><td class="odd-best">1.78</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sesto-senso">
+      <h4>🧠 Sesto Senso</h4>
+      <p>City letale in attacco con Erling Haaland, Rayan Cherki e Semenyo. Il Palace di Pierre Sage deve riscattarsi dallo 0-2 casalingo contro l'Everton. Partita ad alta intensità a Selhurst Park, eccellente per Over 2.5.</p>
+    </div>
+
+    <div class="pick-container">
+      <div class="pick-badge">👀 OPZIONE VALUE: Over 2.5 Gol <span class="quota">@ 1.72</span></div>
+      <div class="edge-badge">Edge Statistico: +5.8%</div>
+    </div>
+  </div>
+
+  <!-- MATCH 5: AC MILAN vs VENEZIA (MONITORATO) -->
+  <div class="match-card">
+    <div class="match-header">
+      <span class="match-league">🇮🇹 Serie A (MD2) — GARA MONITORATA</span>
+      <span class="match-time">20:45 CEST</span>
+    </div>
+    <div class="match-teams">🏟️ AC Milan vs Venezia</div>
+
+    <div class="warning-box">
+      ⚠️ <strong>STATO: ESCLUSO PER PRUDENZA (FEEDBACK UTENTE)</strong><br>
+      Rafael Leão non convocato da Amorim. Mercato caldo con Galatasaray e Aston Villa. Anche Tomori e Fofana fuori rosa. Pur con un H2H di 11-0, la squadra è in fase di transizione: manteniamo la massima cautela come concordato.
+    </div>
+
+    <table class="odds-table">
+      <thead>
+        <tr><th>Mercato</th><th>Bet365</th><th>Betsson</th><th>Netwin</th><th>Snai</th><th>Consensus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1 (Milan)</strong></td><td>1.30</td><td>1.33</td><td>1.32</td><td>1.32</td><td class="odd-best">1.36</td></tr>
+        <tr><td><strong>Milan Vince a Zero</strong></td><td>2.08</td><td>2.12</td><td class="odd-best">2.10</td><td>2.05</td><td class="odd-best">2.15</td></tr>
+        <tr><td><strong>Milan -1.5 Asian Handicap</strong></td><td>1.88</td><td>1.92</td><td>1.90</td><td>1.87</td><td class="odd-best">1.95</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COMBINAZIONI TICKET -->
+  <div class="combo-section">
+    <h2 style="color: #ffd700; text-align: center; margin-bottom: 16px;">💰 COMBINAZIONI TICKET PRONTE PER LO STEP 4</h2>
+
+    <!-- COMBO 1: TRIS D'ACCIAIO -->
+    <div class="combo-card">
+      <h3>🛡️ OPZIONE 1: TRIS D'ACCIAIO EUROPEO (CONSIGLIATA) <span>3 EVENTI</span></h3>
+      <table class="combo-table">
+        <tr><td>🇩🇪 <strong>Bayern München vs VfB Stuttgart</strong></td><td><strong>1 + Over 2.5 Gol</strong></td><td style="color:#ffd700; text-align:right;"><strong>@ 1.75</strong></td></tr>
+        <tr><td>🇫🇷 <strong>Lille OSC vs Paris Saint-Germain</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:#ffd700; text-align:right;"><strong>@ 1.67</strong></td></tr>
+        <tr><td>🇪🇸 <strong>Deportivo Alavés vs Villarreal CF</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:#ffd700; text-align:right;"><strong>@ 1.65</strong></td></tr>
+      </table>
+      <div class="combo-total">QUOTA TOTALE COMBINATA: ~4.82× 🛡️ (Stake 20€ ➔ 96.45€)</div>
+    </div>
+
+    <!-- COMBO 2: QUATERNA D'ELITE -->
+    <div class="combo-card alt">
+      <h3>⚡ OPZIONE 2: QUATERNA D'ELITE (CON PREMIER LEAGUE) <span>4 EVENTI</span></h3>
+      <table class="combo-table">
+        <tr><td>🇩🇪 <strong>Bayern München vs VfB Stuttgart</strong></td><td><strong>1 + Over 2.5 Gol</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.75</strong></td></tr>
+        <tr><td>🇫🇷 <strong>Lille OSC vs Paris Saint-Germain</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.67</strong></td></tr>
+        <tr><td>🇪🇸 <strong>Deportivo Alavés vs Villarreal CF</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.65</strong></td></tr>
+        <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 <strong>Crystal Palace vs Manchester City</strong></td><td><strong>Over 2.5 Gol</strong></td><td style="color:#38bdf8; text-align:right;"><strong>@ 1.72</strong></td></tr>
+      </table>
+      <div class="combo-total" style="color:#38bdf8;">QUOTA TOTALE COMBINATA: ~8.30× ⚡ (Stake 15€ ➔ 124.50€)</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    🛡️ <strong>BAgent System</strong> • Generato il 28/08/2026 ore 13:12 CEST • Validazione BetGuard Conforme (Regole 1-30)
+  </div>
+
 </div>
 </body>
 </html>

@@ -1070,3 +1070,31 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ### 🍓 3. Raspberry Pi 24/7 Hub
 - Demone `scripts/auto_portal_bot.py` operativo con server HTTPS (porta 8443) e listener Telegram `@A502502_bot`.
 
+---
+
+## 🎫 TICKET UFFICIALI PIAZZATI — NOTTE 28 AGOSTO 2026
+
+### 🏆 Ticket #36: Quintina d'Elite Serale (Quota 9.29× + Bonus = 196.99 €)
+* **Piattaforma**: Netwin | **Stato**: In Giocata / 28 Agosto ⏱️
+* **Importo Puntato**: 20.00 € | **Bonus Multiple**: 11.15 € | **Vincita Potenziale**: **196.99 €**
+1. 🇩🇪 [20:30] **Bayern Monaco vs Stoccarda** (Palinsesto 982) ➔ **1X2 + U/O 2.5: 1 + OV** @ **1.32**
+2. 🇮🇹 [20:45] **Milan vs Venezia** (Palinsesto 1182) ➔ **1X2: 1 (Milan)** @ **1.46**
+3. 🇫🇷 [20:45] **Lilla vs PSG** (Palinsesto 1649) ➔ **G/NG: Gol** @ **1.75**
+4. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** (Palinsesto 1329) ➔ **U/O 2.5: Over** @ **1.68**
+5. 🇪🇸 [21:30] **Alavés vs Villarreal** (Palinsesto 1708) ➔ **G/NG: Gol** @ **1.64**
+
+---
+
+### 🛡️ Ticket #37: Quaterna d'Acciaio Ibrida (Quota 4.10× + Bonus = 92.96 €)
+* **Piattaforma**: Netwin | **Stato**: In Giocata / 28 Agosto ⏱️
+* **Importo Puntato**: 22.00 € | **Bonus Multiple**: 2.70 € | **Vincita Potenziale**: **92.96 €**
+1. 🇩🇪 [20:30] **Bayern Monaco vs Stoccarda** ➔ **1X2 Corner Tempo 1: 1 (Bayern)** @ **1.48**
+2. 🇫🇷 [20:45] **Lilla vs PSG** ➔ **X2 + U/O 1.5: X2 + OV** @ **1.50**
+3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Crystal Palace vs Manchester City** ➔ **1X2 Corner (esc.TS): 2 (Man City)** @ **1.40**
+4. 🇵🇹 [21:15] **Rio Ave vs Sporting CP** ➔ **1X2: 2 (Sporting CP)** @ **1.32**
+
+*Totale Capitale Investito Stasera*: 42.00 € | *Potenziale Ritorno Lordo Totale*: **291.51 €** 🚀
+
+*Ultimo aggiornamento: 28 agosto 2026 ore 15:10 — BAgent (Ticket #36 e Ticket #37 registrati nel master ledger)*
+
+
