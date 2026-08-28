@@ -30,7 +30,7 @@
 
   /* Widescreen Container */
   .container { 
-    max-width: 1600px; 
+    max-width: 1650px; 
     width: 96%; 
     margin: 0 auto; 
   }
@@ -47,7 +47,7 @@
     gap: 16px;
   }
   .main-header-title h1 { 
-    font-size: 2.2em; 
+    font-size: 2.3em; 
     color: var(--accent-gold); 
     letter-spacing: -0.5px; 
     font-weight: 800;
@@ -86,6 +86,25 @@
     padding: 8px 16px;
     border-radius: 30px;
   }
+
+  /* Financial Summary Bar */
+  .finance-bar {
+    background: linear-gradient(135deg, #1e1b4b, #0f172a);
+    border: 1px solid #6366f1;
+    border-radius: 14px;
+    padding: 16px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    text-align: center;
+  }
+  .finance-item h4 { color: var(--text-muted); font-size: 0.8em; text-transform: uppercase; margin-bottom: 4px; }
+  .finance-item .val { font-size: 1.5em; font-weight: 800; color: #fff; }
+  .finance-item .val.green { color: var(--accent-green); }
+  .finance-item .val.gold { color: var(--accent-gold); }
 
   /* Breaking News Strip */
   .breaking { 
@@ -131,6 +150,72 @@
   .tag-yellow { background: #f59e0b; color: #000; }
   .tag-blue { background: #3b82f6; color: #fff; }
 
+  /* Section Heading */
+  .section-heading {
+    font-size: 1.4em;
+    color: #fff;
+    font-weight: 800;
+    margin: 36px 0 18px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 4px solid var(--accent-gold);
+    padding-left: 14px;
+  }
+
+  /* 3-Column Tickets Grid */
+  .tickets-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .combo-card { 
+    background: linear-gradient(135deg, #0f172a, #1e293b); 
+    border: 2px solid var(--accent-gold); 
+    border-radius: 18px; 
+    padding: 24px; 
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .combo-card.alt-purple { border-color: var(--accent-purple); }
+  .combo-card.alt-blue { border-color: var(--accent-blue); }
+  
+  .combo-card h3 { 
+    color: var(--accent-gold); 
+    font-size: 1.25em; 
+    margin-bottom: 12px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+  }
+  .combo-card.alt-purple h3 { color: var(--accent-purple); }
+  .combo-card.alt-blue h3 { color: var(--accent-blue); }
+
+  .combo-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 0.92em; 
+    margin: 12px 0; 
+  }
+  .combo-table td { 
+    padding: 10px 6px; 
+    border-bottom: 1px solid #334155; 
+  }
+  .combo-total { 
+    font-size: 1.35em; 
+    font-weight: 800; 
+    color: var(--accent-gold); 
+    text-align: center; 
+    margin-top: 16px; 
+    padding-top: 14px; 
+    border-top: 2px dashed #475569; 
+  }
+
   /* Referee Intelligence Master Table */
   .ref-table-box {
     background: #0b1120;
@@ -166,72 +251,6 @@
   }
   .ref-table tr:hover {
     background: rgba(30, 58, 138, 0.15);
-  }
-
-  /* Section Heading */
-  .section-heading {
-    font-size: 1.4em;
-    color: #fff;
-    font-weight: 800;
-    margin: 36px 0 18px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-left: 4px solid var(--accent-gold);
-    padding-left: 14px;
-  }
-
-  /* 3-Column Tickets Grid */
-  .tickets-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-    gap: 24px;
-    margin-bottom: 36px;
-  }
-  .combo-card { 
-    background: linear-gradient(135deg, #0f172a, #1e293b); 
-    border: 2px solid var(--accent-gold); 
-    border-radius: 18px; 
-    padding: 24px; 
-    box-shadow: 0 8px 30px rgba(0,0,0,0.5); 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .combo-card.alt-blue { border-color: var(--accent-blue); }
-  .combo-card.alt-purple { border-color: var(--accent-purple); }
-  
-  .combo-card h3 { 
-    color: var(--accent-gold); 
-    font-size: 1.25em; 
-    margin-bottom: 12px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
-  }
-  .combo-card.alt-blue h3 { color: var(--accent-blue); }
-  .combo-card.alt-purple h3 { color: var(--accent-purple); }
-
-  .combo-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    font-size: 0.92em; 
-    margin: 12px 0; 
-  }
-  .combo-table td { 
-    padding: 10px 6px; 
-    border-bottom: 1px solid #334155; 
-  }
-  .combo-total { 
-    font-size: 1.35em; 
-    font-weight: 800; 
-    color: var(--accent-gold); 
-    text-align: center; 
-    margin-top: 16px; 
-    padding-top: 14px; 
-    border-top: 2px dashed #475569; 
   }
 
   /* Multi-Column Matches Grid */
@@ -322,7 +341,6 @@
     padding-top: 6px; 
   }
 
-  /* Referee Box Inside Match */
   .referee-box {
     background: #0c1829;
     border: 1px solid #2563eb;
@@ -439,11 +457,31 @@
   <div class="main-header">
     <div class="main-header-title">
       <h1>🛡️ BAgent — Master Suite Widescreen Sabato 29 Agosto 2026</h1>
-      <p>Panoramica Completa • Premier League, Bundesliga, Serie A, LaLiga, Ligue 1</p>
+      <p>Dashboard Ufficiale • Analisi Tattica, Formazioni, Intelligence Arbitrale e 3 Ticket a Massima Garanzia</p>
     </div>
     <div class="header-badges">
       <div class="profit-badge">💰 CASSA IERI: +115.96 € NETTI</div>
       <div class="status-badge">● STEP 4 COMPLETATO (3 TICKET PRONTI)</div>
+    </div>
+  </div>
+
+  <!-- FINANCIAL STRIP -->
+  <div class="finance-bar">
+    <div class="finance-item">
+      <h4>Capitale Reinvestito Sabato</h4>
+      <div class="val">55.00 €</div>
+    </div>
+    <div class="finance-item">
+      <h4>Incasso Netto Notte 28 Ago</h4>
+      <div class="val green">+115.96 €</div>
+    </div>
+    <div class="finance-item">
+      <h4>Potenziale Ritorno Lordo</h4>
+      <div class="val gold">329.40 € 🚀</div>
+    </div>
+    <div class="finance-item">
+      <h4>Numero Ticket Ufficiali</h4>
+      <div class="val">3 Tranches</div>
     </div>
   </div>
 
@@ -466,7 +504,60 @@
     </div>
   </div>
 
-  <!-- SEZIONE DEDICATA AGLI ARBITRI -->
+  <!-- SEZIONE 1: I 3 TICKET DEFINITIVI A MASSIMA GARANZIA -->
+  <div class="section-heading">🎫 I 3 TICKET A MASSIMA GARANZIA PER SABATO 29 AGOSTO</div>
+  
+  <div class="tickets-grid-3">
+
+    <!-- TICKET 38: QUATERNA D'ACCIAIO -->
+    <div class="combo-card">
+      <div>
+        <h3>🛡️ 1. LA ROCCAFORTE D'ACCIAIO <span>4 EVENTI</span></h3>
+        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Massima solidità con 4 favorite casalinghe senza trappole.</p>
+        <table class="combo-table">
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>1 (1X2 Liverpool)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.54</strong></td></tr>
+          <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Gladbach</strong></td><td><strong>1X + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.35</strong></td></tr>
+          <tr><td>🇩🇪 [18:30] <strong>Borussia Dortmund vs Amburgo</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.50</strong></td></tr>
+          <tr><td>🇫🇷 [20:45] <strong>Olympique Lione vs Le Havre</strong></td><td><strong>1 (1X2 Lione)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.45</strong></td></tr>
+        </table>
+      </div>
+      <div class="combo-total">QUOTA COMBINATA: ~4.52× 🛡️<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 20.00 € ➔ Vincita: 90.40 €</span></div>
+    </div>
+
+    <!-- TICKET 40: CORAZZATA CORNER & CARTELLINI -->
+    <div class="combo-card alt-purple">
+      <div>
+        <h3>💎 2. CORAZZATA CORNER & CARTELLINI <span>4 EVENTI</span></h3>
+        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Zero ansia da risultato esatto: domina su corner e sanzioni.</p>
+        <table class="combo-table">
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>Liverpool Over 1.5 Gol Casa</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.45</strong></td></tr>
+          <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Gladbach</strong></td><td><strong>1X2 Corner: 1 (Lipsia)</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.32</strong></td></tr>
+          <tr><td>🇩🇪 [18:30] <strong>Dortmund vs Amburgo</strong></td><td><strong>1X2 Corner 1°T: 1 (Dortmund)</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.45</strong></td></tr>
+          <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Over 4.5 Cartellini Totali</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.55</strong></td></tr>
+        </table>
+      </div>
+      <div class="combo-total" style="color:var(--accent-purple);">QUOTA COMBINATA: ~4.30× 💎<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 20.00 € ➔ Vincita: ~86.00 €</span></div>
+    </div>
+
+    <!-- TICKET 39: CINQUINA D'ELITE AD ALTO RENDIMENTO -->
+    <div class="combo-card alt-blue">
+      <div>
+        <h3>⚡ 3. LA QUINTINA D'ELITE <span>5 EVENTI (+BONUS)</span></h3>
+        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Include Premier, Serie A e il colpo serale al Sánchez-Pizjuán.</p>
+        <table class="combo-table">
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.72</strong></td></tr>
+          <tr><td>🇩🇪 [15:30] <strong>Elversberg vs Leverkusen</strong></td><td><strong>2 (1X2 Leverkusen)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.58</strong></td></tr>
+          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] <strong>Tottenham vs Newcastle</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.48</strong></td></tr>
+          <tr><td>🇮🇹 [20:45] <strong>Juventus vs Parma</strong></td><td><strong>1X + Under 3.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.45</strong></td></tr>
+          <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Doppia Chance 1X</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.65</strong></td></tr>
+        </table>
+      </div>
+      <div class="combo-total" style="color:var(--accent-blue);">QUOTA: ~9.62× (+6% Bonus) ⚡<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 15.00 € ➔ Vincita: ~153.00 €</span></div>
+    </div>
+
+  </div>
+
+  <!-- SEZIONE INTELLIGENCE ARBITRI -->
   <div class="ref-table-box">
     <h3>⚖️ INTELLIGENCE ARBITRALE: DESIGNATORI & STATISTICHE CARTELLINI</h3>
     <table class="ref-table">
@@ -547,59 +638,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <!-- SEZIONE 1: I 3 TICKET PRONTI PER SABATO (3 COLONNE AFFIANCATE) -->
-  <div class="section-heading">🎫 I 3 TICKET UFFICIALI PER SABATO 29 AGOSTO</div>
-  
-  <div class="tickets-grid-3">
-
-    <!-- TICKET 38: QUATERNA D'ACCIAIO -->
-    <div class="combo-card">
-      <div>
-        <h3>🛡️ TICKET #38: QUATERNA D'ACCIAIO <span>4 EVENTI</span></h3>
-        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Massima solidità sui 4 match più asimmetrici del sabato.</p>
-        <table class="combo-table">
-          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>1 (1X2 Liverpool)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.54</strong></td></tr>
-          <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Gladbach</strong></td><td><strong>1X + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.35</strong></td></tr>
-          <tr><td>🇩🇪 [18:30] <strong>Borussia Dortmund vs Amburgo</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.50</strong></td></tr>
-          <tr><td>🇫🇷 [20:45] <strong>Olympique Lione vs Le Havre</strong></td><td><strong>1 (1X2 Lione)</strong></td><td style="color:var(--accent-gold); text-align:right;"><strong>@ 1.45</strong></td></tr>
-        </table>
-      </div>
-      <div class="combo-total">QUOTA COMBINATA: ~4.52× 🛡️<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 20.00 € ➔ Vincita: 90.40 €</span></div>
-    </div>
-
-    <!-- TICKET 39: CINQUINA SPERIMENTALE -->
-    <div class="combo-card alt-blue">
-      <div>
-        <h3>⚡ TICKET #39: CINQUINA SPERIMENTALE <span>5 EVENTI (+BONUS)</span></h3>
-        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Include Premier, Serie A e il colpo serale al Sánchez-Pizjuán.</p>
-        <table class="combo-table">
-          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>1 + Over 1.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.72</strong></td></tr>
-          <tr><td>🇩🇪 [15:30] <strong>Elversberg vs Leverkusen</strong></td><td><strong>2 (1X2 Leverkusen)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.58</strong></td></tr>
-          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] <strong>Tottenham vs Newcastle</strong></td><td><strong>Gol (Entrambe Segnano)</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.48</strong></td></tr>
-          <tr><td>🇮🇹 [20:45] <strong>Juventus vs Parma</strong></td><td><strong>1X + Under 3.5 Gol</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.45</strong></td></tr>
-          <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Doppia Chance 1X</strong></td><td style="color:var(--accent-blue); text-align:right;"><strong>@ 1.65</strong></td></tr>
-        </table>
-      </div>
-      <div class="combo-total" style="color:var(--accent-blue);">QUOTA: ~9.62× (+6% Bonus) ⚡<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 15.00 € ➔ Vincita: ~153.00 €</span></div>
-    </div>
-
-    <!-- TICKET 40: MIX IBRIDO CORNER & CARTELLINI -->
-    <div class="combo-card alt-purple">
-      <div>
-        <h3>💎 TICKET #40: MIX IBRIDO CORNER & CARTELLINI <span>4 EVENTI</span></h3>
-        <p style="color: var(--text-muted); font-size: 0.88em; margin-bottom: 12px;">Sfrutta il dominio corner e la miniera cartellini di Siviglia.</p>
-        <table class="combo-table">
-          <tr><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] <strong>Liverpool vs Forest</strong></td><td><strong>Liverpool Over 1.5 Gol Casa</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.45</strong></td></tr>
-          <tr><td>🇩🇪 [15:30] <strong>RB Lipsia vs Gladbach</strong></td><td><strong>1X2 Corner: 1 (Lipsia)</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.32</strong></td></tr>
-          <tr><td>🇩🇪 [18:30] <strong>Dortmund vs Amburgo</strong></td><td><strong>1X2 Corner 1°T: 1 (Dortmund)</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.45</strong></td></tr>
-          <tr><td>🇪🇸 [21:30] <strong>Siviglia vs Atlético Madrid</strong></td><td><strong>Over 4.5 Cartellini Totali</strong></td><td style="color:var(--accent-purple); text-align:right;"><strong>@ 1.55</strong></td></tr>
-        </table>
-      </div>
-      <div class="combo-total" style="color:var(--accent-purple);">QUOTA COMBINATA: ~4.30× 💎<br><span style="font-size:0.75em; color:var(--accent-green);">Stake 20.00 € ➔ Vincita: ~86.00 €</span></div>
-    </div>
-
   </div>
 
   <!-- SEZIONE 2: LE 6 SCHEDE MATCH APPROFONDITE (GRID MULTI-COLONNA) -->
@@ -783,6 +821,21 @@
         <div class="referee-box">
           <span>⚖️ Arbitro: <strong>Francesco Fourneau</strong> (VAR AIA Lissone)</span>
           <span class="referee-badge">4.0 Cartellini / 23.0 Falli</span>
+        </div>
+
+        <div class="lineup-grid">
+          <div class="lineup-box">
+            <h4>Juventus (4-2-3-1) — Spalletti</h4>
+            <div class="formation">Allianz Stadium (Torino)</div>
+            <div class="players">Vicario; Kalulu, Bremer, Lloyd Kelly, Cambiaso; Locatelli, Douglas Luiz; Conceição, McKennie, Boga; Vlahović (o Kolo Muani).</div>
+            <div class="out">❌ Kenan Yildiz (piede sinistro KO).</div>
+          </div>
+          <div class="lineup-box">
+            <h4>Parma (4-3-3) — Carlos Cuesta</h4>
+            <div class="formation">Blocco Basso</div>
+            <div class="players">Suzuki; Coulibaly, Osorio, Circati, Valeri; Sohm, Bernabé, Estévez; Dennis Man, Bonny, Mihăilă.</div>
+            <div class="out">❌ Nicolussi Caviglia, Daffara.</div>
+          </div>
         </div>
 
         <div class="sesto-senso">
