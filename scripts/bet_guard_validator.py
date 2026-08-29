@@ -36,9 +36,10 @@ class BetGuardValidator:
         if is_youth_or_b_team and pick in ["1", "2", "1X2: 1", "1X2: 2"]:
             return False, f"[BLOCKED - RULE 9] Vietato 1X2 secco su squadre B/giovanili ({match_name}). Consentiti solo Over/Under o DC."
 
-        # REGOLA #10: Campione ridotto (N <= 3) & Debutto alla 1ª Giornata
-        if is_matchday_1 and pick in ["1", "2", "1X2: 1", "1X2: 2"]:
-            return False, f"[BLOCKED - RULE 10] Alla 1ª giornata vietato 1X2 secco ({match_name}). Usare DC di protezione (1X/X2) o Gol."
+        # REGOLA #31: BAN TOTALE 1ª GIORNATA DI CAMPIONATO (Hard Gate Matchday 1)
+        if is_matchday_1:
+            if pick in ["1", "2", "1X2: 1", "1X2: 2", "1X2", "1X", "X2"] or "over" in pick.lower() or "combo" in pick.lower():
+                return False, f"[BLOCKED - RULE 31] BAN TOTALE 1ª GIORNATA: Vietato scommettere su squadre al debutto in campionato ({match_name}). Rodaggio estivo, nuovi innesti e varianza massima: SKIP / NO BET fino alla 2ª-3ª giornata!"
 
         # REGOLA #12: Trappola partita 'troppo pulita' su sanzioni/falli
         if is_massive_favorite_home and not is_derby_or_high_tension and any(term in pick.lower() for term in ["cartellin", "falli", "cards", "fouls"]):
