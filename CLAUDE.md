@@ -1109,6 +1109,14 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 29 AGOSTO 2026
 
+### 👑 Ticket #43: La Doppia d'Acciaio ad Alto Stake (Quota 2.51×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Inizio ore 20:45)
+* **Importo Puntato**: 50.00 € | **Vincita Potenziale**: **125.40 €** | **Ref**: `NETWIN-T43-29AGO`
+1. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **U/O Gol Casa: Lione Over 1.5 Casa** @ **1.52** ⏳
+2. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance: 1X (Siviglia o Pareggio)** @ **1.65** ⏳
+
+---
+
 ### 🏆 Ticket #42: Tripla Serale Real Sociedad + Porto + Juventus (Quota 2.66×)
 * **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Iniziato ore 19:12)
 * **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **53.29 €** | **Ref**: `DF07EA081D312EC35E0C`
@@ -1129,17 +1137,17 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ---
 
 ### ❌ Ticket Chiusi / Conclusi:
-* 🔴 **Ticket #41** (20.00 € @ 5.30×) ➔ Chiuso (Tottenham 0-2 Newcastle, mancato gol Spurs).
+* 🔴 **Ticket #41** (20.00 € @ 5.30×) ➔ Chiuso (Tottenham 0-2 Newcastle).
 * 🔴 **Ticket #38** (20.00 € @ 4.52×) ➔ Chiuso (Liverpool 2-2).
 * 🔴 **Ticket #39** (20.00 € @ 9.62×) ➔ Chiuso (Liverpool 2-2).
 
 ---
 
 ### 💎 QUADRO FINANZIARIO LIVE SABATO 29 AGOSTO 2026:
-* 💵 **Ticket Attivi in Corsa**: **Ticket #42** (20 € ➔ 53.29 €) + **Ticket #40** (20 € ➔ 86.00 €)
-* 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **139.29 €**!
-* 💳 **Saldo Utente su Netwin**: **131.02 €**
+* 💵 **Ticket Attivi in Corsa**: **Ticket #43** (50 € ➔ 125.40 €) + **Ticket #42** (20 € ➔ 53.29 €) + **Ticket #40** (20 € ➔ 86.00 €)
+* 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **264.69 €**!
+* 💳 **Saldo Utente su Netwin**: **81.02 €** *(dopo i 50€ del Ticket #43)*
 
-*Ultimo aggiornamento: 29 agosto 2026 ore 20:38 — BAgent (Ticket #41 chiuso per Tottenham 0-2 Newcastle)*
+*Ultimo aggiornamento: 29 agosto 2026 ore 20:42 — BAgent (Ticket #43 registrato come PIAZZATO a 50.00€)*
 
 
