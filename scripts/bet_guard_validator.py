@@ -41,6 +41,11 @@ class BetGuardValidator:
             if pick in ["1", "2", "1X2: 1", "1X2: 2", "1X2", "1X", "X2"] or "over" in pick.lower() or "combo" in pick.lower():
                 return False, f"[BLOCKED - RULE 31] BAN TOTALE 1ª GIORNATA: Vietato scommettere su squadre al debutto in campionato ({match_name}). Rodaggio estivo, nuovi innesti e varianza massima: SKIP / NO BET fino alla 2ª-3ª giornata!"
 
+        # REGOLA #32: FALLACIA DELL'ASSENZA OFFENSIVA (Divieto 1X2 contro Big solo per assenza punte)
+        is_bet_against_big_due_to_missing_forwards = match_data.get("is_bet_against_big_due_to_missing_forwards", False)
+        if is_bet_against_big_due_to_missing_forwards:
+            return False, f"[BLOCKED - RULE 32] FALLACIA DELL'ASSENZA OFFENSIVA ({match_name}): Vietato puntare sulla sfavorita (o 1X/X2) solo perché la big non ha le punte titolari! Il divario qualitativo tra le rose rimane intatto. Usare solo mercati sanzioni/statistici."
+
         # REGOLA #12: Trappola partita 'troppo pulita' su sanzioni/falli
         if is_massive_favorite_home and not is_derby_or_high_tension and any(term in pick.lower() for term in ["cartellin", "falli", "cards", "fouls"]):
             return False, f"[BLOCKED - RULE 12] Gara a senso unico 'troppo pulita' ({match_name}). Vietati mercati sanzioni/falli, consentiti solo Gol/Tiri/Corner."
