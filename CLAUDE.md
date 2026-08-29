@@ -1113,9 +1113,9 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ## 🎫 TICKET UFFICIALI IN GIOCO — NOTTE DOMENICA 30 AGOSTO 2026
 
-### 💎 Ticket #44: La Tripla Notturna d'Acciaio (Quota 2.57×)
-* **Piattaforma**: Netwin | **Stato**: IN ATTESA DI PIAZZAMENTO / ATTIVO ⏱️
-* **Importo Puntato**: Da confermare (es. 20.00 € - 30.00 €) | **Quota**: **2.57×** | **Ref**: `NETWIN-T44-30AGO`
+### 💎 Ticket #44: La Tripla Notturna d'Acciaio (Quota 2.57× + Bonus = 2.65×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Stake confermato)
+* **Importo Puntato**: **30.00 €** | **Vincita Potenziale**: **79.50 €** | **Ref**: `NETWIN-T44-30AGO`
 1. 🇲🇽 [Liga MX] **CF Pachuca vs CD Guadalajara (Chivas)** ➔ **Doppia Chance: X2 (Chivas)** @ **1.34** ⏳
 2. 🇧🇷 [Serie A Brasile] **São Paulo vs Red Bull Bragantino** ➔ **Doppia Chance: 1X (São Paulo)** @ **1.40** ⏳
 3. 🇺🇸 [MLS] **Inter Miami vs CF Montréal** ➔ **1X2: 1 (Inter Miami)** @ **1.37** ⏳
