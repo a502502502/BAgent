@@ -1103,44 +1103,38 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-## 🎫 TICKET UFFICIALI PIAZZATI — SABATO 29 AGOSTO 2026
+## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 29 AGOSTO 2026
 
-### 🛡️ Ticket #38: Quaterna d'Acciaio Europea (Quota 4.52×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️
-* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **90.40 €** | **Ref**: `NETWIN-T38-29AGO`
-1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1X2: 1 (Liverpool)** @ **1.54**
-2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X + U/O 1.5: 1X + OV** @ **1.35**
-3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.50**
-4. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **1X2: 1 (Lione)** @ **1.45**
-
----
-
-### ⚡ Ticket #39: Cinquina d'Elite ad Alto Rendimento (Quota 9.62× + Bonus Netwin)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️
-* **Importo Puntato**: 20.00 € | **Bonus Multiple**: ~11.54 € | **Vincita Potenziale**: **~203.94 €** | **Ref**: `NETWIN-T39-29AGO`
-1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.72**
-2. 🇩🇪 [15:30] **SV Elversberg vs Bayer Leverkusen** ➔ **1X2: 2 (Leverkusen)** @ **1.58**
-3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] **Tottenham vs Newcastle United** ➔ **G/NG: Gol (Sì)** @ **1.48**
-4. 🇮🇹 [20:45] **Juventus vs Parma** ➔ **1X + U/O 3.5: 1X + UN** @ **1.45**
-5. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance: 1X** @ **1.65**
+### 🛡️ Ticket #41: Recupero d'Acciaio Serale (Quota 5.30×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Inizio ore 18:30)
+* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **106.00 €** | **Ref**: `NETWIN-T41-29AGO`
+1. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.50** ⏳
+2. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] **Tottenham vs Newcastle United** ➔ **G/NG: Gol (Sì)** @ **1.48** ⏳
+3. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **1X2: 1 (Lione)** @ **1.45** ⏳
+4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance: 1X** @ **1.65** ⏳
 
 ---
 
 ### 💎 Ticket #40: Corazzata Corner & Cartellini (Quota 4.30×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️
+* **Piattaforma**: Netwin | **Stato**: 1/4 VINTO — IN GIOCO ⏱️
 * **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **86.00 €** | **Ref**: `NETWIN-T40-29AGO`
-1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **U/O Gol Casa: Over 1.5 Casa** @ **1.45**
-2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32**
-3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45**
-4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **U/O Cartellini: Over 4.5** @ **1.55**
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** (2-2 FT) ➔ **U/O Gol Casa: Over 1.5 Casa** @ **1.45** ➔ **✅ VINTO!**
+2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32** ➔ **In corso...** ⏳
+3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45** ⏳
+4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **U/O Cartellini: Over 4.5** @ **1.55** ⏳
 
 ---
 
-### 💎 QUADRO FINANZIARIO DEFINITIVO SABATO 29 AGOSTO 2026:
-* 💵 **Totale Capitale Investito Oggi**: **60.00 €** (3 Ticket da 20.00 € ciascuno)
-* 💰 **Finanziato da**: Profitto netto di ieri (+115.96 €) ➔ **Bankroll sempre in verde di +55.96 € a prescindere!**
-* 🚀 **POTENZIALE VINCITA LORDA TOTALE**: **380.34 €**!
+### ❌ Ticket Chiusi / Conclusi:
+* 🔴 **Ticket #38** (20.00 € @ 4.52×) ➔ Chiuso (Liverpool 2-2).
+* 🔴 **Ticket #39** (20.00 € @ 9.62×) ➔ Chiuso (Liverpool 2-2).
 
-*Ultimo aggiornamento: 29 agosto 2026 ore 12:42 — BAgent (Ticket #38, #39, #40 registrati come PIAZZATI a 20.00€ ciascuno)*
+---
+
+### 💎 QUADRO FINANZIARIO LIVE SABATO 29 AGOSTO 2026:
+* 💵 **Ticket Attivi in Corsa**: **Ticket #40** (20 € ➔ 86.00 €) + **Ticket #41** (20 € ➔ 106.00 €)
+* 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **192.00 €**!
+
+*Ultimo aggiornamento: 29 agosto 2026 ore 15:35 — BAgent (Ticket #41 registrato come PIAZZATO a 20.00€, Ticket #40 1/4 vinta)*
 
 
