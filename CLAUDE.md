@@ -1112,19 +1112,9 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ### 🏆 Ticket #42: Tripla Serale Real Sociedad + Porto + Juventus (Quota 2.66×)
 * **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Iniziato ore 19:12)
 * **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **53.29 €** | **Ref**: `DF07EA081D312EC35E0C`
-1. 🇵🇹 [19:00] **Academico de Viseu FC vs FC Porto** (0-1 parziale) ➔ **U/O 2.5: Over** @ **1.35** ⏳
-2. 🇪🇸 [19:00] **Real Sociedad vs Espanyol** (1-0 parziale) ➔ **1X2: 1 (Real Sociedad)** @ **1.40** ⏳
+1. 🇵🇹 [19:00] **Academico de Viseu FC vs FC Porto** ➔ **U/O 2.5: Over** @ **1.35** ⏳
+2. 🇪🇸 [19:00] **Real Sociedad vs Espanyol** ➔ **1X2: 1 (Real Sociedad)** @ **1.40** ⏳
 3. 🇮🇹 [20:45] **Juventus vs Parma** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.41** ⏳
-
----
-
-### 🛡️ Ticket #41: Recupero d'Acciaio Serale (Quota 5.30×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Inizio ore 18:30)
-* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **106.00 €** | **Ref**: `NETWIN-T41-29AGO`
-1. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.50** ⏳
-2. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] **Tottenham vs Newcastle United** ➔ **G/NG: Gol (Sì)** @ **1.48** ⏳
-3. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **1X2: 1 (Lione)** @ **1.45** ⏳
-4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance: 1X** @ **1.65** ⏳
 
 ---
 
@@ -1139,16 +1129,17 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ---
 
 ### ❌ Ticket Chiusi / Conclusi:
+* 🔴 **Ticket #41** (20.00 € @ 5.30×) ➔ Chiuso (Tottenham 0-2 Newcastle, mancato gol Spurs).
 * 🔴 **Ticket #38** (20.00 € @ 4.52×) ➔ Chiuso (Liverpool 2-2).
 * 🔴 **Ticket #39** (20.00 € @ 9.62×) ➔ Chiuso (Liverpool 2-2).
 
 ---
 
 ### 💎 QUADRO FINANZIARIO LIVE SABATO 29 AGOSTO 2026:
-* 💵 **Ticket Attivi in Corsa**: **Ticket #40** (20 € ➔ 86.00 €) + **Ticket #41** (20 € ➔ 106.00 €) + **Ticket #42** (20 € ➔ 53.29 €)
-* 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **245.29 €**!
+* 💵 **Ticket Attivi in Corsa**: **Ticket #42** (20 € ➔ 53.29 €) + **Ticket #40** (20 € ➔ 86.00 €)
+* 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **139.29 €**!
 * 💳 **Saldo Utente su Netwin**: **131.02 €**
 
-*Ultimo aggiornamento: 29 agosto 2026 ore 19:15 — BAgent (Ticket #42 registrato da screenshot Netwin, Ref DF07EA081D312EC35E0C)*
+*Ultimo aggiornamento: 29 agosto 2026 ore 20:38 — BAgent (Ticket #41 chiuso per Tottenham 0-2 Newcastle)*
 
 
