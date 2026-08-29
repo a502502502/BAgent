@@ -1103,30 +1103,39 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-## 📅 PROGRAMMA & PROPOSTE DEFINITIVE SABATO 29 AGOSTO 2026
+## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 29 AGOSTO 2026
 
-### 🛡️ Proposta A — Ticket #38: Quaterna d'Acciaio Europea (Quota ~4.52×)
-1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1 (1X2 Liverpool)** @ **1.54**
-2. 🇩🇪 [15:30] **RB Lipsia vs Gladbach** ➔ **1X + Over 1.5 Gol** @ **1.35**
-3. 🇩🇪 [18:30] **Borussia Dortmund vs Amburgo** ➔ **1 + Over 1.5 Gol** @ **1.50**
-4. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **1 (1X2 Lione)** @ **1.45**
-* Stake consigliato: 20.00 € ➔ Vincita Potenziale: ~90.40 €
+### 🛡️ Ticket #38: Quaterna d'Acciaio Europea (Quota 4.52×)
+* **Piattaforma**: Netwin | **Stato**: In Giocata / 29 Agosto ⏱️
+* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **90.40 €** | **Ref**: `NETWIN-T38-29AGO`
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1X2: 1 (Liverpool)** @ **1.54**
+2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X + U/O 1.5: 1X + OV** @ **1.35**
+3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.50**
+4. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **1X2: 1 (Lione)** @ **1.45**
 
-### ⚡ Proposta B — Ticket #39: Cinquina Sperimentale con Colpo Siviglia (Quota ~9.62× + Bonus)
-1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1 + Over 1.5 Gol** @ **1.72**
-2. 🇩🇪 [15:30] **Elversberg vs Bayer Leverkusen** ➔ **2 (1X2 Leverkusen)** @ **1.58**
-3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] **Tottenham vs Newcastle** ➔ **Gol (Entrambe Segnano)** @ **1.48**
-4. 🇮🇹 [20:45] **Juventus vs Parma** ➔ **1X + Under 3.5 Gol** @ **1.45**
-5. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance 1X** @ **1.65**
-* Stake consigliato: 15.00 € ➔ Vincita Potenziale: ~153.00 €
+---
 
-### 💎 Proposta C — Ticket #40: Mix Ibrido Corner & Cartellini (Quota ~4.30×)
-1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **Liverpool Over 1.5 Gol Casa** @ **1.45**
-2. 🇩🇪 [15:30] **RB Lipsia vs Gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32**
-3. 🇩🇪 [18:30] **Borussia Dortmund vs Amburgo** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45**
-4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Over 4.5 Cartellini Totali** @ **1.55**
-* Stake consigliato: 20.00 € ➔ Vincita Potenziale: ~86.00 €
+### ⚡ Ticket #39: Cinquina Sperimentale ad Alto Rendimento (Quota 9.62× + Bonus)
+* **Piattaforma**: Netwin | **Stato**: In Giocata / 29 Agosto ⏱️
+* **Importo Puntato**: 15.00 € | **Bonus Multiple**: ~8.65 € | **Vincita Potenziale**: **~153.00 €** | **Ref**: `NETWIN-T39-29AGO`
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.72**
+2. 🇩🇪 [15:30] **SV Elversberg vs Bayer Leverkusen** ➔ **1X2: 2 (Leverkusen)** @ **1.58**
+3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] **Tottenham vs Newcastle United** ➔ **G/NG: Gol (Sì)** @ **1.48**
+4. 🇮🇹 [20:45] **Juventus vs Parma** ➔ **1X + U/O 3.5: 1X + UN** @ **1.45**
+5. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance: 1X** @ **1.65**
 
-*Ultimo aggiornamento: 29 agosto 2026 ore 00:38 — BAgent (Proposte Sabato 29 Agosto: Ticket #38, #39 e #40 registrati nel ledger)*
+---
+
+### 💎 Ticket #40: Mix Ibrido Corner & Cartellini (Quota 4.30×)
+* **Piattaforma**: Netwin | **Stato**: In Giocata / 29 Agosto ⏱️
+* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **86.00 €** | **Ref**: `NETWIN-T40-29AGO`
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **U/O Gol Casa: Over 1.5 Casa** @ **1.45**
+2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32**
+3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45**
+4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **U/O Cartellini: Over 4.5** @ **1.55**
+
+*Totale Capitale Investito Sabato*: **55.00 €** | *Potenziale Ritorno Lordo Totale*: **329.40 €** 🚀
+
+*Ultimo aggiornamento: 29 agosto 2026 ore 12:40 — BAgent (Ticket #38, #39 e #40 bloccati ufficialmente nel master ledger)*
 
 
