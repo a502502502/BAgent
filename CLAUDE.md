@@ -1109,6 +1109,15 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 29 AGOSTO 2026
 
+### 🏆 Ticket #42: Tripla Serale Real Sociedad + Porto + Juventus (Quota 2.66×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Iniziato ore 19:12)
+* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **53.29 €** | **Ref**: `DF07EA081D312EC35E0C`
+1. 🇵🇹 [19:00] **Academico de Viseu FC vs FC Porto** (0-1 parziale) ➔ **U/O 2.5: Over** @ **1.35** ⏳
+2. 🇪🇸 [19:00] **Real Sociedad vs Espanyol** (1-0 parziale) ➔ **1X2: 1 (Real Sociedad)** @ **1.40** ⏳
+3. 🇮🇹 [20:45] **Juventus vs Parma** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.41** ⏳
+
+---
+
 ### 🛡️ Ticket #41: Recupero d'Acciaio Serale (Quota 5.30×)
 * **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Inizio ore 18:30)
 * **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **106.00 €** | **Ref**: `NETWIN-T41-29AGO`
@@ -1123,7 +1132,7 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 * **Piattaforma**: Netwin | **Stato**: 1/4 VINTO — IN GIOCO ⏱️
 * **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **86.00 €** | **Ref**: `NETWIN-T40-29AGO`
 1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** (2-2 FT) ➔ **U/O Gol Casa: Over 1.5 Casa** @ **1.45** ➔ **✅ VINTO!**
-2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32** ➔ **In corso...** ⏳
+2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32** ⏳
 3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45** ⏳
 4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **U/O Cartellini: Over 4.5** @ **1.55** ⏳
 
@@ -1136,9 +1145,10 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ---
 
 ### 💎 QUADRO FINANZIARIO LIVE SABATO 29 AGOSTO 2026:
-* 💵 **Ticket Attivi in Corsa**: **Ticket #40** (20 € ➔ 86.00 €) + **Ticket #41** (20 € ➔ 106.00 €)
-* 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **192.00 €**!
+* 💵 **Ticket Attivi in Corsa**: **Ticket #40** (20 € ➔ 86.00 €) + **Ticket #41** (20 € ➔ 106.00 €) + **Ticket #42** (20 € ➔ 53.29 €)
+* 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **245.29 €**!
+* 💳 **Saldo Utente su Netwin**: **131.02 €**
 
-*Ultimo aggiornamento: 29 agosto 2026 ore 15:35 — BAgent (Ticket #41 registrato come PIAZZATO a 20.00€, Ticket #40 1/4 vinta)*
+*Ultimo aggiornamento: 29 agosto 2026 ore 19:15 — BAgent (Ticket #42 registrato da screenshot Netwin, Ref DF07EA081D312EC35E0C)*
 
 
