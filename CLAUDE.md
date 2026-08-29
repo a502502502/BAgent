@@ -162,6 +162,10 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
   - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO proporre scommesse 1X2, Over o combo sul risultato finale su squadre che stanno giocando la loro **1ª partita di campionato (Matchday 1)**.
   - 🔬 **Motivazione Scientifica & Sesto Senso**: Alla 1ª giornata le squadre sono reduci dalla preparazione estiva, i nuovi acquisti non sono rodati, le gerarchie tattiche sono instabili e la varianza è massima (es. pareggi o sconfitte shock delle favorite). Si inizia ad analizzare e scommettere su un campionato **SOLO dalla 2ª o 3ª giornata in poi**, quando esistono riscontri agonistici reali di forma!
 
+- **Regola #32 (FALLACIA DELL'ASSENZA OFFENSIVA — No 1X2 Contro Big solo per Assenza Punte)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO puntare sulla sfavorita (1X, 2 o Doppia Chance) solo perché alla squadra big mancano i centravanti titolari.
+  - 🔬 **Motivazione Scientifica & Sesto Senso (Lezione Siviglia-Atlético 0-3 del 29/08/2026)**: L'assenza delle punte titolari in una big riduce il volume potenziale dei gol, ma **NON cancella l'abisso tecnico, atletico e strutturale tra le due rose**. Centrocampisti, ali e calci piazzati di una big sono comunque in grado di dominare una squadra fragile. In questi contesti, se proprio si interviene, si usano SOLO mercati alternativi/sanzioni, MAI puntate sull'esito favorevole all'inferiore!
+
 - **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
