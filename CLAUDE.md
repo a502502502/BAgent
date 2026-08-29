@@ -1103,10 +1103,10 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 29 AGOSTO 2026
+## 🎫 TICKET UFFICIALI PIAZZATI — SABATO 29 AGOSTO 2026
 
 ### 🛡️ Ticket #38: Quaterna d'Acciaio Europea (Quota 4.52×)
-* **Piattaforma**: Netwin | **Stato**: In Giocata / 29 Agosto ⏱️
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️
 * **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **90.40 €** | **Ref**: `NETWIN-T38-29AGO`
 1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1X2: 1 (Liverpool)** @ **1.54**
 2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X + U/O 1.5: 1X + OV** @ **1.35**
@@ -1115,9 +1115,9 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### ⚡ Ticket #39: Cinquina Sperimentale ad Alto Rendimento (Quota 9.62× + Bonus)
-* **Piattaforma**: Netwin | **Stato**: In Giocata / 29 Agosto ⏱️
-* **Importo Puntato**: 15.00 € | **Bonus Multiple**: ~8.65 € | **Vincita Potenziale**: **~153.00 €** | **Ref**: `NETWIN-T39-29AGO`
+### ⚡ Ticket #39: Cinquina d'Elite ad Alto Rendimento (Quota 9.62× + Bonus Netwin)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️
+* **Importo Puntato**: 20.00 € | **Bonus Multiple**: ~11.54 € | **Vincita Potenziale**: **~203.94 €** | **Ref**: `NETWIN-T39-29AGO`
 1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.72**
 2. 🇩🇪 [15:30] **SV Elversberg vs Bayer Leverkusen** ➔ **1X2: 2 (Leverkusen)** @ **1.58**
 3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [18:30] **Tottenham vs Newcastle United** ➔ **G/NG: Gol (Sì)** @ **1.48**
@@ -1126,16 +1126,21 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 💎 Ticket #40: Mix Ibrido Corner & Cartellini (Quota 4.30×)
-* **Piattaforma**: Netwin | **Stato**: In Giocata / 29 Agosto ⏱️
+### 💎 Ticket #40: Corazzata Corner & Cartellini (Quota 4.30×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️
 * **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **86.00 €** | **Ref**: `NETWIN-T40-29AGO`
 1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** ➔ **U/O Gol Casa: Over 1.5 Casa** @ **1.45**
 2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32**
 3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45**
 4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **U/O Cartellini: Over 4.5** @ **1.55**
 
-*Totale Capitale Investito Sabato*: **55.00 €** | *Potenziale Ritorno Lordo Totale*: **329.40 €** 🚀
+---
 
-*Ultimo aggiornamento: 29 agosto 2026 ore 12:40 — BAgent (Ticket #38, #39 e #40 bloccati ufficialmente nel master ledger)*
+### 💎 QUADRO FINANZIARIO DEFINITIVO SABATO 29 AGOSTO 2026:
+* 💵 **Totale Capitale Investito Oggi**: **60.00 €** (3 Ticket da 20.00 € ciascuno)
+* 💰 **Finanziato da**: Profitto netto di ieri (+115.96 €) ➔ **Bankroll sempre in verde di +55.96 € a prescindere!**
+* 🚀 **POTENZIALE VINCITA LORDA TOTALE**: **380.34 €**!
+
+*Ultimo aggiornamento: 29 agosto 2026 ore 12:42 — BAgent (Ticket #38, #39, #40 registrati come PIAZZATI a 20.00€ ciascuno)*
 
 
