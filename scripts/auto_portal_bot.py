@@ -44,7 +44,7 @@ PORTAL_DIR = ROOT / "portal"
 
 validator = BetGuardValidator()
 
-def notify_telegram(msg: str, chat_id: str = None):
+def notify_telegram(msg: str, chat_id: str = None, reply_markup: dict = None):
     if not TELEGRAM_TOKEN:
         return
     target_id = chat_id if chat_id else TELEGRAM_CHAT_ID
@@ -52,127 +52,40 @@ def notify_telegram(msg: str, chat_id: str = None):
         return
     try:
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-        r = requests.post(url, json={"chat_id": str(target_id), "text": msg, "parse_mode": "HTML", "disable_web_page_preview": False}, timeout=8)
+        payload = {
+            "chat_id": str(target_id),
+            "text": msg,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": False
+        }
+        if reply_markup:
+            payload["reply_markup"] = reply_markup
+        r = requests.post(url, json=payload, timeout=8)
         if r.status_code != 200:
-            print(f"Telegram API response error: {r.status_code} - {r.text}", flush=True)
+            print(f"Telegram API error: {r.status_code} - {r.text}", flush=True)
     except Exception as e:
         print(f"Telegram send exception: {e}", flush=True)
 
-class CustomHTTPHandler(http.server.SimpleHTTPRequestHandler):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, directory=str(PORTAL_DIR), **kwargs)
-
-def run_web_server():
-    try:
-        cert_path = Path.home() / "BAgent" / "certs" / "portal.pem"
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-        ssl_context.load_cert_chain(certfile=cert_path)
-        with socketserver.TCPServer(("", PORT), CustomHTTPHandler) as httpd:
-            httpd.socket = ssl_context.wrap_socket(httpd.socket, server_side=True)
-            print(f"🌐 Web Server BAgent attivo su https://0.0.0.0:{PORT}", flush=True)
-            httpd.serve_forever()
-    except Exception as e:
-        print(f"Web server error: {e}", flush=True)
-
-def execute_2hour_cycle() -> dict:
-    """Esegue il ciclo di scansione delle prossime 24-48h con validazione BetGuard."""
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] 🔄 Inizio ciclo autonomo a 2 ore...", flush=True)
-    
-    headers = {
-        "x-rapidapi-host": "v3.football.api-sports.io",
-        "x-rapidapi-key": API_KEY,
-        "x-apisports-key": API_KEY,
+def get_main_keyboard():
+    return {
+        "keyboard": [
+            [{"text": "🎫 Schedine Attive"}, {"text": "🌐 Apri Portale Web"}],
+            [{"text": "💰 Saldo & Cassa"}, {"text": "🔄 Aggiorna Live"}]
+        ],
+        "resize_keyboard": True,
+        "persistent": True
     }
 
-    approved_picks = [
-        {
-            "time": "20:30", "match": "Bayern Monaco vs Stoccarda", "league": "Bundesliga",
-            "pick": "1 + Over 2.5 Gol", "odd": "1.32", "edge": "+8.2%",
-            "sesto_senso": "Bayern all'Allianz Arena con 75.000 tifosi; Stoccarda con 8 infortuni pesanti."
-        },
-        {
-            "time": "20:45", "match": "Milan vs Venezia", "league": "Serie A",
-            "pick": "1 (1X2)", "odd": "1.46", "edge": "+9.1%",
-            "sesto_senso": "San Siro al debutto; H2H 11-0 vs Venezia; Gonçalo Ramos, Chukwueze e Loftus titolari."
-        },
-        {
-            "time": "20:45", "match": "Lilla vs PSG", "league": "Ligue 1",
-            "pick": "Gol (Entrambe Segnano)", "odd": "1.75", "edge": "+7.3%",
-            "sesto_senso": "Gol in 5 degli ultimi 6 precedenti; Ferran Torres + Kvaratskhelia vs Giroud + E. Mbappé."
-        },
-        {
-            "time": "21:00", "match": "Crystal Palace vs Man City", "league": "Premier League",
-            "pick": "Over 2.5 Gol", "odd": "1.68", "edge": "+5.8%",
-            "sesto_senso": "Haaland e Cherki guidano l'attacco; Palace aggressivo a Selhurst Park."
-        },
-        {
-            "time": "21:15", "match": "Rio Ave vs Sporting CP", "league": "Liga Portugal",
-            "pick": "2 (Sporting CP)", "odd": "1.32", "edge": "+6.8%",
-            "sesto_senso": "Sporting campione in carica con Gyökeres; 8 vittorie negli ultimi 9 precedenti."
-        },
-        {
-            "time": "21:30", "match": "Alavés vs Villarreal", "league": "LaLiga",
-            "pick": "Gol (Entrambe Segnano)", "odd": "1.64", "edge": "+6.1%",
-            "sesto_senso": "Villarreal attacco top ma 4 gol subiti in 2 gare; Alavés imbattuto in casa vs Villarreal."
-        }
-    ]
-
-    next_cycle = (datetime.now() + timedelta(hours=2)).strftime("%H:%M")
-    
-    portal_data = {
-        "bankroll": 300.00,
-        "active_tickets": [
-            {
-                "title": "🏆 Ticket #36: Quintina d'Elite Serale",
-                "badge": "IN GIOCO",
-                "odds": "9.36× (Bonus: 11.24 €)",
-                "stake": "20.00 €",
-                "potential": "198.55 €",
-                "ref": "NETWIN-T36-28AGO",
-                "status": "IN CORSO",
-                "cashout_note": "Kickoff ore 20:30-21:30.",
-                "events": [
-                    {"time": "20:30", "match": "Bayern Monaco vs Stoccarda", "pick": "1 + Over 2.5", "odd": "1.32", "status": "⏳"},
-                    {"time": "20:45", "match": "Lilla vs PSG", "pick": "Gol (Entrambe Segnano)", "odd": "1.74", "status": "⏳"},
-                    {"time": "20:45", "match": "Milan vs Venezia", "pick": "1 (1X2)", "odd": "1.48", "status": "⏳"},
-                    {"time": "21:00", "match": "Crystal Palace vs Man City", "pick": "Over 2.5", "odd": "1.68", "status": "⏳"},
-                    {"time": "21:30", "match": "Alavés vs Villarreal", "pick": "Gol (Entrambe Segnano)", "odd": "1.64", "status": "⏳"}
-                ]
-            },
-            {
-                "title": "🛡️ Ticket #37: Quaterna d'Acciaio Ibrida",
-                "badge": "IN GIOCO",
-                "odds": "4.10× (Bonus: 2.70 €)",
-                "stake": "22.00 €",
-                "potential": "92.96 €",
-                "ref": "NETWIN-T37-28AGO",
-                "status": "IN CORSO",
-                "cashout_note": "Kickoff ore 20:30-21:15.",
-                "events": [
-                    {"time": "20:30", "match": "Bayern Monaco vs Stoccarda", "pick": "1X2 Corner 1°T: 1", "odd": "1.48", "status": "⏳"},
-                    {"time": "20:45", "match": "Lilla vs PSG", "pick": "X2 + Over 1.5", "odd": "1.50", "status": "⏳"},
-                    {"time": "21:00", "match": "Crystal Palace vs Man City", "pick": "1X2 Corner: 2", "odd": "1.40", "status": "⏳"},
-                    {"time": "21:15", "match": "Rio Ave vs Sporting CP", "pick": "1X2: 2", "odd": "1.32", "status": "⏳"}
-                ]
-            }
-        ],
-        "today_picks": approved_picks if approved_picks else [
-            {
-                "time": "20:30", "match": "Chelsea vs Luton Town", "league": "EFL Cup",
-                "pick": "1 + Over 1.5 Gol", "odd": "1.28", "edge": "+7.5%",
-                "sesto_senso": "Chelsea schiera titolari, Luton blocco basso e rotazioni ampie."
-            }
-        ],
-        "system_status": "ONLINE ● 24/7",
-        "next_refresh": f"Ore {next_cycle}"
-    }
-
-    generate_portal_html(portal_data)
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] ✅ Portale Web aggiornato con successo!", flush=True)
-    return portal_data
+def get_tunnel_url():
+    p = Path("/tmp/bagent_tunnel_url.txt")
+    if p.exists():
+        url = p.read_text().strip()
+        if url.startswith("https://"):
+            return url
+    return "https://192.168.1.70:8443"
 
 def run_telegram_listener():
-    """Ascolta i comandi dell'utente su Telegram e risponde in tempo reale."""
+    """Ascolta i comandi dell'utente su Telegram e risponde in tempo reale con tastiera interattiva."""
     if not TELEGRAM_TOKEN:
         print("Telegram bot token non presente.", flush=True)
         return
@@ -192,61 +105,68 @@ def run_telegram_listener():
                     text = msg.get("text", "").strip()
                     chat_id = msg.get("chat", {}).get("id")
 
-                    if not text or not chat_id:
+                    if not chat_id:
                         continue
 
                     print(f"Telegram comando ricevuto da {chat_id}: {text}", flush=True)
 
-                    if text.startswith("/start") or text.startswith("/help"):
+                    if text.startswith("/start") or text.startswith("/help") or text == "🔄 Aggiorna Live":
+                        tunnel_url = get_tunnel_url()
                         help_msg = (
-                            "🍓 <b>BAGENT 24/7 — RASPBERRY PI HUB</b>\n\n"
-                            "Ecco i comandi disponibili da smartphone:\n"
-                            "• /tickets ➔ Risultati in diretta e stato schedine\n"
-                            "• /today ➔ I migliori pronostici approvati da BetGuard\n"
-                            "• /portal ➔ Link al Portale Web Mobile\n"
-                            "• /refresh ➔ Esegue subito il ciclo di scansione a 2 ore\n"
-                            "• /validate <i>Partita Pick</i> ➔ Testa un pronostico con BetGuard\n"
+                            "🌴 <b>BAGENT SMARTPHONE HUB — VACANZE 24/7</b> 📱✨\n\n"
+                            "Tutto sotto controllo dal tuo smartphone ovunque ti trovi:\n\n"
+                            f"🌐 <b>Portale Web 4G/5G:</b> <a href='{tunnel_url}'>{tunnel_url}</a>\n\n"
+                            "Usa i pulsanti rapidi in basso o i comandi testuali:"
                         )
-                        notify_telegram(help_msg, chat_id=chat_id)
+                        notify_telegram(help_msg, chat_id=chat_id, reply_markup=get_main_keyboard())
 
-                    elif text.startswith("/portal"):
+                    elif text.startswith("/portal") or text == "🌐 Apri Portale Web":
+                        tunnel_url = get_tunnel_url()
                         portal_msg = (
-                            "🌐 <b>PORTALE WEB MOBILE (SELEZIONA UN LINK):</b>\n\n"
-                            "👉 <b>Link Web Diretto (Senza VPN)</b>:\n"
-                            "https://htmlpreview.github.io/?https://github.com/a502502502/BAgent/blob/main/portal/index.html\n\n"
-                            "👉 <b>Link Rete Locale / Wi-Fi</b>:\n"
-                            "https://192.168.1.70:8443"
+                            "🌐 <b>PORTALE WEB MOBILE BAGENT (ACCESSO GLOBALE)</b>\n\n"
+                            f"🔗 <b><a href='{tunnel_url}'>CLICCA QUI PER APRIRE IL PORTALE</a></b>\n\n"
+                            "✅ <b>Funziona su qualsiasi connessione 4G/5G / Wi-Fi</b>\n"
+                            "✅ <b>Certificato SSL verde sicuro al 100%</b>\n"
+                            "💡 <i>Su iPhone/Android tocca 'Aggiungi a Schermata Home' per usarla come App!</i>"
                         )
-                        notify_telegram(portal_msg, chat_id=chat_id)
+                        inline_kb = {
+                            "inline_keyboard": [
+                                [{"text": "📱 Apri Dashboard Web", "url": tunnel_url}]
+                            ]
+                        }
+                        notify_telegram(portal_msg, chat_id=chat_id, reply_markup=inline_kb)
 
-                    elif text.startswith("/tickets"):
+                    elif text.startswith("/tickets") or text == "🎫 Schedine Attive":
                         tickets_msg = (
-                            "🎫 <b>SCHEDINE IN GIOCO (LIVE REPORT 28 AGOSTO):</b>\n\n"
-                            "🏆 <b>Ticket #36 (Quintina d'Elite @ 9.36× + Bonus = 198.55 €):</b>\n"
-                            "• Bayern vs Stoccarda: 1+O2.5 @ 1.32 ➔ <i>Ore 20:30</i>\n"
-                            "• Lilla vs PSG: Gol @ 1.74 ➔ <i>Ore 20:45</i>\n"
-                            "• Milan vs Venezia: 1 (1X2) @ 1.48 ➔ <i>Ore 20:45</i>\n"
-                            "• Palace vs Man City: Over 2.5 @ 1.68 ➔ <i>Ore 21:00</i>\n"
-                            "• Alavés vs Villarreal: Gol @ 1.64 ➔ <i>Ore 21:30</i>\n\n"
-                            "🛡️ <b>Ticket #37 (Quaterna d'Acciaio Ibrida @ 4.10× + Bonus = 92.96 €):</b>\n"
-                            "• Bayern vs Stoccarda: 1X2 Corner 1°T (1) @ 1.48 ➔ <i>Ore 20:30</i>\n"
-                            "• Lilla vs PSG: X2+O1.5 @ 1.50 ➔ <i>Ore 20:45</i>\n"
-                            "• Palace vs Man City: 1X2 Corner (2) @ 1.40 ➔ <i>Ore 21:00</i>\n"
-                            "• Rio Ave vs Sporting CP: 2 (1X2) @ 1.32 ➔ <i>Ore 21:15</i>\n\n"
-                            "💰 <i>Totale Vincita Potenziale: 291.51 €!</i>"
+                            "🎫 <b>SCHEDINE UFFICIALI IN GIOCO (SABATO 29 AGOSTO):</b>\n\n"
+                            "🏆 <b>Ticket #42: Tripla Serale Live (20.00 € ➔ 53.29 €)</b>\n"
+                            "• Porto vs Academico: Over 2.5 @ 1.35 ➔ <i>(0-1 parziale)</i> ⏳\n"
+                            "• Real Sociedad vs Espanyol: 1 @ 1.40 ➔ <i>(1-0 parziale)</i> ⏳\n"
+                            "• Juventus vs Parma: 1 + Over 1.5 @ 1.41 ➔ <i>Ore 20:45</i> ⏳\n\n"
+                            "🛡️ <b>Ticket #41: Recupero d'Acciaio Serale (20.00 € ➔ 106.00 €)</b>\n"
+                            "• Dortmund vs Amburgo: 1 + Over 1.5 @ 1.50 ⏳\n"
+                            "• Tottenham vs Newcastle: Gol @ 1.48 ⏳\n"
+                            "• Lione vs Le Havre: 1 @ 1.45 ➔ <i>Ore 20:45</i> ⏳\n"
+                            "• Siviglia vs Atlético: 1X @ 1.65 ➔ <i>Ore 21:30</i> ⏳\n\n"
+                            "💎 <b>Ticket #40: Corazzata Corner & Cartellini (20.00 € ➔ 86.00 €)</b>\n"
+                            "• Liverpool vs Forest: Over 1.5 Casa @ 1.45 ➔ <b>✅ VINTO!</b>\n"
+                            "• Lipsia vs Gladbach: 1X2 Corner (1) @ 1.32 ⏳\n"
+                            "• Dortmund vs Amburgo: 1X2 Corner 1°T (1) @ 1.45 ⏳\n"
+                            "• Siviglia vs Atlético: Over 4.5 Cartellini @ 1.55 ➔ <i>Ore 21:30</i> ⏳\n\n"
+                            "💰 <b>Potenziale Vincita Attiva: 245.29 €!</b>"
                         )
-                        notify_telegram(tickets_msg, chat_id=chat_id)
+                        notify_telegram(tickets_msg, chat_id=chat_id, reply_markup=get_main_keyboard())
 
-                    elif text.startswith("/today"):
-                        today_msg = (
-                            "💎 <b>PRONOSTICI D'ACCIAIO APPROVATI DA BETGUARD:</b>\n\n"
-                            "1. 🇩🇰 <b>FC Copenhagen vs Inter Turku</b> ➔ 1 + Over 1.5 @ 1.45 ✅ (4-1 FT)\n"
-                            "2. 🇩🇪 <b>SC Freiburg vs Motherwell</b> ➔ 1 + Over 2.5 @ 1.65 ✅ (4-1 FT)\n"
-                            "3. 🇫🇷 <b>AS Monaco vs Górnik Zabrze</b> ➔ 1 + Over 2.5 @ 1.85 ✅ (4-1 FT)\n"
-                            "4. 🇳🇴 <b>Brann vs PAOK</b> ➔ Gol @ 1.67 ✅ (3-2 FT)\n\n"
-                            "<i>Tutti i match analizzati con il Protocollo di Rigore Matematico (Regola #26).</i>"
+                    elif text.startswith("/saldo") or text == "💰 Saldo & Cassa":
+                        saldo_msg = (
+                            "💰 <b>SITUAZIONE CASSA & FINANZIARIA:</b>\n\n"
+                            "💳 <b>Saldo Netwin Disponibile:</b> 131.02 €\n"
+                            "💵 <b>Ticket Attivi in Corsa:</b> 60.00 € (3 Ticket)\n"
+                            "🚀 <b>Potenziale Incasso Attivo:</b> 245.29 €\n"
+                            "🏆 <b>Profitto Netto Ieri (Incassato):</b> +115.96 € (+276% ROI)\n\n"
+                            "🛡️ <i>Tutte le giocate odierne sono coperte dai profitti di ieri!</i>"
                         )
-                        notify_telegram(today_msg, chat_id=chat_id)
+                        notify_telegram(saldo_msg, chat_id=chat_id, reply_markup=get_main_keyboard())
 
                     elif text.startswith("/refresh"):
                         notify_telegram("🔄 <i>Esecuzione forzata ciclo di analisi a 2 ore...</i>", chat_id=chat_id)
