@@ -1113,6 +1113,18 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ## 🎫 TICKET UFFICIALI IN GIOCO — NOTTE DOMENICA 30 AGOSTO 2026
 
+### 🚀 Ticket #45: La Bomba Notturna a Mercati Ibridi (Quota 7.60× + Bonus)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Stake confermato)
+* **Importo Puntato**: **11.00 €** | **Vincita Potenziale**: **83.60 €** *(fino a ~92.00 € con bonus)* | **Ref**: `NETWIN-T45-30AGO`
+1. 🇺🇸 [MLS] **Inter Miami vs CF Montréal** ➔ **1X + U/O 1.5: 1X + OV** @ **1.25** ⏳
+2. 🇲🇽 [Liga MX] **Atlas vs Querétaro** ➔ **Chance Mix: X o GG** @ **1.48** ⏳
+3. 🇲🇽 [Liga MX] **CF Pachuca vs CD Guadalajara (Chivas)** ➔ **Chance Mix: X o GG** @ **1.50** ⏳
+4. 🇺🇸 [MLS] **DC United vs Los Angeles FC (LAFC)** ➔ **Doppia Chance: X2 (LAFC)** @ **1.26** ⏳
+5. 🇧🇷 [Serie A Brasile] **São Paulo vs Red Bull Bragantino** ➔ **Doppia Chance: 1X (São Paulo)** @ **1.40** ⏳
+6. 🇨🇴 [Primera B] **Real Cartagena vs Tigres** ➔ **MultiGol Casa: 1-3 Casa** @ **1.30** ⏳
+
+---
+
 ### 💎 Ticket #44: La Tripla Notturna d'Acciaio (Quota 2.57× + Bonus = 2.65×)
 * **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Stake confermato)
 * **Importo Puntato**: **30.00 €** | **Vincita Potenziale**: **79.50 €** | **Ref**: `NETWIN-T44-30AGO`
