@@ -158,6 +158,10 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
   - 🛡️ **Assicurazione & Cashout Matematico**: Quando i primi eventi della schedina sono già vinti (es. Kaya Over 2.5 preso al 62' e Mariupol avanti 0-1), usare il tasto **Cashout su Netwin** o una singola di copertura sull'ultimo match per blindare il **100% di profitto netto garantito**, azzerando la varianza!
 - Quota combinata target: ≥ 3.50× (Super Sicure) fino a 20-30× (Alta Quota)
 - Probabilità minima per selezione in Super Sicure: > 80% (Media > 85%)
+- **Regola #31 (BAN TOTALE 1ª GIORNATA DI CAMPIONATO — Hard Gate Matchday 1)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO proporre scommesse 1X2, Over o combo sul risultato finale su squadre che stanno giocando la loro **1ª partita di campionato (Matchday 1)**.
+  - 🔬 **Motivazione Scientifica & Sesto Senso**: Alla 1ª giornata le squadre sono reduci dalla preparazione estiva, i nuovi acquisti non sono rodati, le gerarchie tattiche sono instabili e la varianza è massima (es. pareggi o sconfitte shock delle favorite). Si inizia ad analizzare e scommettere su un campionato **SOLO dalla 2ª o 3ª giornata in poi**, quando esistono riscontri agonistici reali di forma!
+
 - **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
