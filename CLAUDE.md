@@ -1111,32 +1111,27 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 29 AGOSTO 2026
+## 🎫 TICKET UFFICIALI IN GIOCO — NOTTE DOMENICA 30 AGOSTO 2026
 
-### 👑 Ticket #43: La Doppia d'Acciaio ad Alto Stake (Quota 2.51×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Inizio ore 20:45)
-* **Importo Puntato**: 50.00 € | **Vincita Potenziale**: **125.40 €** | **Ref**: `NETWIN-T43-29AGO`
-1. 🇫🇷 [20:45] **Olympique Lione vs Le Havre** ➔ **U/O Gol Casa: Lione Over 1.5 Casa** @ **1.52** ⏳
-2. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **Doppia Chance: 1X (Siviglia o Pareggio)** @ **1.65** ⏳
-
----
-
-### 🏆 Ticket #42: Tripla Serale Real Sociedad + Porto + Juventus (Quota 2.66×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Iniziato ore 19:12)
-* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **53.29 €** | **Ref**: `DF07EA081D312EC35E0C`
-1. 🇵🇹 [19:00] **Academico de Viseu FC vs FC Porto** ➔ **U/O 2.5: Over** @ **1.35** ⏳
-2. 🇪🇸 [19:00] **Real Sociedad vs Espanyol** ➔ **1X2: 1 (Real Sociedad)** @ **1.40** ⏳
-3. 🇮🇹 [20:45] **Juventus vs Parma** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.41** ⏳
+### 💎 Ticket #44: La Tripla Notturna d'Acciaio (Quota 2.57×)
+* **Piattaforma**: Netwin | **Stato**: IN ATTESA DI PIAZZAMENTO / ATTIVO ⏱️
+* **Importo Puntato**: Da confermare (es. 20.00 € - 30.00 €) | **Quota**: **2.57×** | **Ref**: `NETWIN-T44-30AGO`
+1. 🇲🇽 [Liga MX] **CF Pachuca vs CD Guadalajara (Chivas)** ➔ **Doppia Chance: X2 (Chivas)** @ **1.34** ⏳
+2. 🇧🇷 [Serie A Brasile] **São Paulo vs Red Bull Bragantino** ➔ **Doppia Chance: 1X (São Paulo)** @ **1.40** ⏳
+3. 🇺🇸 [MLS] **Inter Miami vs CF Montréal** ➔ **1X2: 1 (Inter Miami)** @ **1.37** ⏳
 
 ---
 
-### 💎 Ticket #40: Corazzata Corner & Cartellini (Quota 4.30×)
-* **Piattaforma**: Netwin | **Stato**: 1/4 VINTO — IN GIOCO ⏱️
-* **Importo Puntato**: 20.00 € | **Vincita Potenziale**: **86.00 €** | **Ref**: `NETWIN-T40-29AGO`
-1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [13:30] **Liverpool vs Nottingham Forest** (2-2 FT) ➔ **U/O Gol Casa: Over 1.5 Casa** @ **1.45** ➔ **✅ VINTO!**
-2. 🇩🇪 [15:30] **RB Lipsia vs Borussia M'gladbach** ➔ **1X2 Corner: 1 (Lipsia)** @ **1.32** ⏳
-3. 🇩🇪 [18:30] **Borussia Dortmund vs Hamburger SV** ➔ **1X2 Corner 1° Tempo: 1 (Dortmund)** @ **1.45** ⏳
-4. 🇪🇸 [21:30] **Siviglia vs Atlético Madrid** ➔ **U/O Cartellini: Over 4.5** @ **1.55** ⏳
+## 🎫 STORICO TICKET PRECEDENTI:
+
+### 👑 Ticket #43: La Doppia d'Acciaio (50.00 € @ 2.51×)
+* **Stato**: Concluso (Lione 1-1, Siviglia 0-3).
+
+### 🏆 Ticket #42: Tripla Serale Real Sociedad + Porto + Juventus (20.00 € @ 2.66×)
+* **Stato**: Concluso (Real Sociedad 2-1 ✅, Porto 0-3 ✅, Juve 2-0 ✅).
+
+### 💎 Ticket #40: Corazzata Corner & Cartellini (20.00 € @ 4.30×)
+* **Stato**: Cashout Eseguito a 28.00 € ✅ (+8.00 € Netto).
 
 ---
 
