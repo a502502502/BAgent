@@ -166,6 +166,15 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
   - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO puntare sulla sfavorita (1X, 2 o Doppia Chance) solo perché alla squadra big mancano i centravanti titolari.
   - 🔬 **Motivazione Scientifica & Sesto Senso (Lezione Siviglia-Atlético 0-3 del 29/08/2026)**: L'assenza delle punte titolari in una big riduce il volume potenziale dei gol, ma **NON cancella l'abisso tecnico, atletico e strutturale tra le due rose**. Centrocampisti, ali e calci piazzati di una big sono comunque in grado di dominare una squadra fragile. In questi contesti, se proprio si interviene, si usano SOLO mercati alternativi/sanzioni, MAI puntate sull'esito favorevole all'inferiore!
 
+- **Regola #33 (PROTOCOLLO DI SCANSIONE ONNIMERCATO — Adattamento Dinamico al DNA del Match)**:
+  - 🎯 **Principio Fondamentale**: Non essere MAI rigidi o limitati a 2-3 tipologie di scommessa. Per OGNI singola partita del palinsesto, BAgent deve scansionare TUTTI i mercati disponibili (1X2, Doppie Chance Combo, Asian Handicap, Multigol Squadra, Multigol Tempi, Tiri in Porta, Tiri Totali, Corner 1X2/Handicap, Cartellini Over, Chance Mix X o GG, Entrambi i Tempi Over 0.5) e selezionare unicamente il **MERCATO A MASSIMA ASIMMETRIA E MINIMA VARIANZA** calzato sul DNA tattico di quello specifico match!
+  - 🔬 **Mappatura DNA ➔ Mercato Ottimale**:
+    * *Assedio su fascia contro catenaccio* ➔ 1X2 Corner / Tiri in Porta / Multigol Casa 1-3.
+    * *Derby / Scontro Salvezza ad alta tensione* ➔ Over Cartellini / Falli.
+    * *Scontro aperto ad alto ritmo* ➔ Chance Mix (X o GG) / Over 0.5 Entrambi i Tempi / Over 2.5.
+    * *Partita equilibrata e bloccata* ➔ Doppia Chance + Under 3.5 / Multigol 1-3 Totale.
+    * *Gara a sviluppo lento con accelerazione nella ripresa* ➔ Multigol 2° Tempo / Tempo con più Gol: 2°T.
+
 - **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
