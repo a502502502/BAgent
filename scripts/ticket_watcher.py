@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 """
 BAgent Ticket Watcher
 Controlla lo stato live delle selezioni di un ticket tracciato in
