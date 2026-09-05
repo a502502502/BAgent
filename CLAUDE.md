@@ -1168,6 +1168,21 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 * 🚀 **POTENZIALE VINCITA LORDA ATTIVA**: **264.69 €**!
 * 💳 **Saldo Utente su Netwin**: **81.02 €** *(dopo i 50€ del Ticket #43)*
 
-*Ultimo aggiornamento: 29 agosto 2026 ore 20:42 — BAgent (Ticket #43 registrato come PIAZZATO a 50.00€)*
+---
+
+## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 5 SETTEMBRE 2026
+
+### 🛡️ Ticket #46: La Tripla d'Acciaio Serale (Quota 2.96×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSO ⏱️ (Screenshot verificato)
+* **Importo Puntato**: **50.00 €** | **Vincita Potenziale**: **148.10 €** | **Ref**: `DF07EA090531AF06EF04`
+1. 🇮🇹 [20:45] **Roma vs Atalanta** ➔ **1X2: 1 (Roma)** @ **1.65** ⏳
+2. 🇪🇸 [21:00] **Villarreal vs Deportivo La Coruna** ➔ **1X2 Corner (esc.TS): 1 (Villarreal)** @ **1.36** ⏳
+3. 🇵🇹 [21:30] **Sporting vs Nacional** ➔ **U/O 2,5: Over 2.5** @ **1.32** ⏳
+
+---
+
+### 💳 Saldo Utente su Netwin: **180.70 €** *(verificato da screenshot 05/09/2026 ore 20:03)*
+*Ultimo aggiornamento: 5 settembre 2026 ore 20:05 — BAgent (Ticket #46 registrato come PIAZZATO a 50.00€)*
+
 
 
