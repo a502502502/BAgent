@@ -1212,38 +1212,32 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 💳 Saldo Utente su Netwin: **143.24 €** *(180.70 € - 50€ T46 - 30€ T47 - 30€ T48 + 72.54€ Vinto T48)*
-*Pre-giocata Ticket #49 e #50: 143.24 € | Post-puntate (55.00 €): 88.24 € residui*
+---
+
+## 🎫 TICKET UFFICIALI CONCLUSI — DOMENICA 6 SETTEMBRE 2026 (SERA)
+
+### 🟢 Ticket #49: La Tripla d'Acciaio Serale (Quota 2.58×)
+* **Piattaforma**: Netwin | **Stato**: 🏆 VINTO AL 100% (3/3) 🟢 💰
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.58×** | **Vincita Realizzata**: **77.40 €** *(Profitto Netto: +47.40 €)* | **Ref**: `NETWIN-T49-06SET`
+1. 🇮🇹 [20:45] **Juventus vs AC Milan** (1-1 FT) ➔ **Under 3.5 Gol** @ **1.28** 🟢 *(Finita 1-1: gara bloccata, presa in scioltezza)*
+2. 🇫🇷 [20:45] **Marseille vs Paris FC** (5-4 Corner) ➔ **1X2 Corner: 1 (Marseille)** @ **1.40** 🟢 *(Finita 5-4 nei corner all'ultimo respiro)*
+3. 🇧🇷 [21:00] **Remo vs Flamengo** (4-9 Corner) ➔ **1X2 Corner: 2 (Flamengo)** @ **1.44** 🟢 *(Flamengo stradominante 9-4 nei corner e 17 tiri a 5)*
 
 ---
 
-## 🎫 TICKET UFFICIALI IN GIOCO — DOMENICA 6 SETTEMBRE 2026 (SERA & NOTTE)
-
-### 🏆 Ticket #49: La Tripla d'Acciaio Serale (Quota 2.58×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSA ⏱️ (Stake confermato)
-* **Importo Puntato**: **30.00 €** | **Vincita Potenziale**: **77.40 €** *(Profitto Netto: +47.40 €)* | **Ref**: `NETWIN-T49-06SET`
-1. 🇫🇷 [20:45] **Marseille vs Paris FC** ➔ **1X2 Corner: 1 (Marseille)** @ **1.40** ⏳
-2. 🇧🇷 [21:00] **Remo vs Flamengo** ➔ **1X2 Corner: 2 (Flamengo)** @ **1.44** ⏳
-3. 🇮🇹 [20:45] **Juventus vs AC Milan** ➔ **Under/Over 3.5: Under 3.5 Gol** @ **1.28** ⏳
+### 🔴 Ticket #51: La Tripla d'Attacco Alta Quota (Quota 4.60×)
+* **Piattaforma**: Netwin | **Stato**: CHIUSO / PERDENTE 🔴 (Beffa Espanyol per 1 solo gol)
+* **Importo Puntato**: **20.00 €** | **Vincita Potenziale**: **91.94 €**
+1. 🇧🇷 [21:00] **Cruzeiro vs Athletico PR** (2-1 FT) ➔ **1X2: 1 (Cruzeiro)** @ **1.71** 🟢 *(Rimonta completata al 73' 2-1!)*
+2. 🇧🇷 [21:00] **Remo vs Flamengo** (0-1 FT) ➔ **1X2: 2 (Flamengo)** @ **1.43** 🟢 *(Vittoria corsara 0-1!)*
+3. 🇪🇸 [21:00] **Espanyol vs Sevilla** (0-1 FT) ➔ **G/NG: Gol** @ **1.88** 🔴 *(Finita 0-1: Siviglia sterile, gol isolato all'84', Espanyol a secco)*
 
 ---
 
-### 🚀 Ticket #50: La Quaterna Onnimercato Serale + Notturna (Quota 3.25×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSA ⏱️ (Stake confermato)
-* **Importo Puntato**: **25.00 €** | **Vincita Potenziale**: **81.25 €** *(Profitto Netto: +56.25 €)* | **Ref**: `NETWIN-T50-06SET`
-1. 🇫🇷 [20:45] **Marseille vs Paris FC** ➔ **1X2 Corner: 1 (Marseille)** @ **1.40** ⏳
-2. 🇧🇷 [21:00] **Remo vs Flamengo** ➔ **1X2 Corner: 2 (Flamengo)** @ **1.44** ⏳
-3. 🇮🇹 [20:45] **Juventus vs AC Milan** ➔ **Under/Over 3.5: Under 3.5 Gol** @ **1.28** ⏳
-4. 🇲🇽 [01:00] **Cruz Azul vs Santos Laguna** ➔ **1X + U/O 1.5: 1X + OV** @ **1.26** ⏳
-
----
-
-### 💰 Bilancio Finanziario Potenziale Recupero:
-* **Capitale Investito Totale**: **55.00 €** (30€ T49 + 25€ T50)
-* **Saldo Residuo Immediato**: **88.24 €**
-* **Incasso se entra solo T49 (entro le 23:00)**: **77.40 €** ➔ Saldo a **165.64 €** (recupero completato!)
-* **Incasso se entrano entrambi**: **158.65 €** ➔ Saldo a **246.89 €** (+103.65 € profitto netto totale!)
-*Ultimo aggiornamento: 6 settembre 2026 ore 20:41 — BAgent*
+### 💳 Saldo Utente su Netwin: **170.64 €**
+*(Partenza ore 20:30: 143.24 € - 30.00 € T49 - 20.00 € T51 + 77.40 € Incasso T49 = **170.64 €**)*
+* 🚀 **Profitto Netto Incassato Stasera**: **+27.40 €** (recupero completato, cassa quasi integralmente ripristinata!)
+*Ultimo aggiornamento: 6 settembre 2026 ore 22:52 — BAgent*
 
 
 
