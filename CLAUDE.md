@@ -1190,8 +1190,18 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 💳 Saldo Utente su Netwin: **100.70 €** *(180.70 € - 50.00 € T46 - 30.00 € T47)*
-*Ultimo aggiornamento: 6 settembre 2026 ore 13:20 — BAgent (Ticket #46 e #47 archiviati)*
+### 🟢 Ticket #48: Opzione 1 Notturna "Pura Statistica — ZERO 1X2" (Quota 2.42×)
+* **Piattaforma**: Netwin | **Stato**: CHIUSO / VINCENTE 🟢 💰 (4 su 4 PRESE!)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.42×** | **Vincita Realizzata**: **72.54 €** *(Profitto Netto: +42.54 €)*
+1. 🇧🇷 [23:30] **São Paulo vs Atlético-MG** ➔ **Doppia Chance: 1X** @ **1.23** 🟢 *(Finita 2-0, 16-2 corner)*
+2. 🇵🇾 [23:30] **Sp. San Lorenzo vs CS 2 de Mayo** ➔ **Doppia Chance: X2** @ **1.27** 🟢 *(Finita 1-2)*
+3. 🇺🇸 [01:30] **Philadelphia vs CF Montréal** ➔ **1X2 Corner: 1** @ **1.29** 🟢 *(Finita 6-1 corner)*
+4. 🇺🇸 [03:05] **Inter Miami vs Atlanta United** ➔ **Over 2.5 Gol** @ **1.20** 🟢 *(Finita 2-2, 4 gol totali)*
+
+---
+
+### 💳 Saldo Utente su Netwin: **143.24 €** *(180.70 € - 50€ T46 - 30€ T47 - 30€ T48 + 72.54€ Vinto T48)*
+*Ultimo aggiornamento: 6 settembre 2026 ore 13:21 — BAgent (Ticket #48 registrato come VINTO a 72.54 €)*
 
 
 
