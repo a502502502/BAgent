@@ -1236,11 +1236,28 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 💳 Saldo Utente su Netwin: **262.58 €**
-*(Partenza ore 20:30: 143.24 € - 30.00 € T49 - 20.00 € T51 + 77.40 € Incasso T49 + 91.94 € Incasso T51 = **262.58 €**)*
+### 💳 Saldo Utente su Netwin: **212.58 €** *(262.58 € - 50.00 € puntati su Ticket #52)*
 * 🚀 **DOPPIA CASSA STASERA — EN PLEIN TOTALE**: **+119.34 € DI PROFITTO NETTO INCASSATO!**
 * 📈 **ROI SERATA**: **+238.7% SUL CAPITALE INVESTITO!**
-*Ultimo aggiornamento: 6 settembre 2026 ore 23:02 — BAgent*
+
+---
+
+## 🎫 TICKET UFFICIALI IN GIOCO — NOTTE DOMENICA 6 / LUNEDÌ 7 SETTEMBRE 2026
+
+### 🌙 Ticket #52: La Tripla d'Acciaio Notturna (Quota 3.01×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Stake confermato)
+* **Importo Puntato**: **50.00 €** | **Quota Totale**: **3.01×** | **Vincita Potenziale**: **150.58 €** *(Profitto Netto: +100.58 €)* | **Ref**: `NETWIN-T52-06SET`
+1. 🇧🇷 [23:30] **Botafogo vs Palmeiras** ➔ **X2 + U/O 4.5: X2 + UN** @ **1.55** ⏳ *(Palmeiras titolare con Abel Ferreira; Botafogo in crisi con tecnico ad interim)*
+2. 🇧🇷 [00:30] **Corinthians vs Chapecoense** ➔ **1X2 Corner (esc.TS): 1 (Corinthians)** @ **1.34** ⏳ *(Assedio Diniz sulle fasce; senza Yuri Alberto e senza Bolasie)*
+3. 🇲🇽 [01:00] **Cruz Azul vs Santos Laguna** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.45** ⏳ *(Cruz Azul capolista imbattuta in casa contro Santos in caduta libera)*
+
+---
+
+### 💎 QUADRO FINANZIARIO NOTTE:
+* 💵 **Capitale Residuo in Cassa**: **212.58 €** *(già protetto e in attivo di +69.34 € rispetto alla partenza di 143 €!)*
+* 🚀 **Vincita Potenziale Attiva**: **150.58 €**
+* 📈 **Saldo Atteso a Cassa con Ticket #52**: **363.16 €**!
+*Ultimo aggiornamento: 6 settembre 2026 ore 23:14 — BAgent*
 
 
 
