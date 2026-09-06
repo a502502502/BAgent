@@ -175,6 +175,18 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
     * *Partita equilibrata e bloccata* ➔ Doppia Chance + Under 3.5 / Multigol 1-3 Totale.
     * *Gara a sviluppo lento con accelerazione nella ripresa* ➔ Multigol 2° Tempo / Tempo con più Gol: 2°T.
 
+- **Regola #34 (BAN TOTALE AL BLASONE & PRIMATO ASSOLUTO DELLA RECENCY DELLA STAGIONE IN CORSO — Name Bias Ban)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO assegnare superiorità, fiducie tattiche o mercati asimmetrici a una squadra basandosi sul suo blasone storico, nome prestigioso, trofei passati o sui risultati dei campionati degli anni precedenti (es. 2024, 2025).
+  - 🔬 **Motivazione Scientifica & Lezione Marseille-Paris FC 2-3 e Espanyol-Sevilla 0-0 del 06/09/2026**:
+    * Il nome "Marsiglia" o "Siviglia" appartiene alla storia, ma in campo ci vanno la rosa, l'allenatore e la condizione atletica del campionato ATTUALE.
+    * Il Paris FC (neopromossa sulla carta, ma con nuova proprietà e reduce da un roboante 3-0 al Nizza nella stagione in corso) è andato al Vélodrome con baricentro alto, tirando 17 volte e segnando 3 gol. Considerarlo un blocco basso da schiacciare è stato un grave errore di name bias.
+    * Il Siviglia, nobile europea, nella stagione in corso produce un attacco sterile (0 tiri nel primo tempo, 0-0 a Barcellona), distruggendo qualsiasi scommessa su Gol/Gol basata sul passato.
+  - 📌 **Direttiva Operativa**: L'analisi statistica DEVE pesare al **100% solo le ultime 3-5 partite della STAGIONE IN CORSO** (`recent_season_form`). H2H precedenti a 12 mesi o statistiche di due anni prima hanno valore nullo. Se una neopromossa vola nel campionato attuale, è una squadra di vertice; se una big arranca nelle ultime 3 giornate, è una squadra fragile.
+
+- **Regola #35 (VERIFICA ANAGRAFICA OBBLIGATORIA DELLO STAFF TECNICO DA API — Zero Allucinazioni)**:
+  - 🛑 **Divieto Assoluto**: È VIETATO citare allenatori, assetti tattici o dichiarazioni di tecnici basandosi sulla memoria parametrica o su stagioni passate (es. De Zerbi al Marsiglia nel 2026, quando in realtà siede Bruno Genesio).
+  - 📌 **Direttiva Operativa**: Prima di redigere l'analisi, BAgent DEVE interrogare l'endpoint `/coachs?team={id}` tramite `collector.current_coach(team_id)` o verificare le formazioni ufficiali su `/fixtures/lineups`. Se il nome del tecnico non è validato da API, non può essere menzionato nel report.
+
 - **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
