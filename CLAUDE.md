@@ -1236,16 +1236,17 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 💳 Saldo Utente su Netwin: **212.58 €** *(262.58 € - 50.00 € puntati su Ticket #52)*
+### 💳 Saldo Utente su Netwin: **182.58 €** *(262.58 € - 50.00 € T52 - 30.00 € T53)*
 * 🚀 **DOPPIA CASSA STASERA — EN PLEIN TOTALE**: **+119.34 € DI PROFITTO NETTO INCASSATO!**
 * 📈 **ROI SERATA**: **+238.7% SUL CAPITALE INVESTITO!**
+* 🛡️ **Liquidità protetta in cassa**: anche con 80 € di ticket notturni attivi, la cassa liquida (182.58 €) supera il saldo pre-weekend (180.70 €)!
 
 ---
 
 ## 🎫 TICKET UFFICIALI IN GIOCO — NOTTE DOMENICA 6 / LUNEDÌ 7 SETTEMBRE 2026
 
 ### 🌙 Ticket #52: La Tripla d'Acciaio Notturna (Quota 3.01×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Stake confermato)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSA ⏱️ (Botafogo-Palmeiras 0-0 al 30')
 * **Importo Puntato**: **50.00 €** | **Quota Totale**: **3.01×** | **Vincita Potenziale**: **150.58 €** *(Profitto Netto: +100.58 €)* | **Ref**: `NETWIN-T52-06SET`
 1. 🇧🇷 [23:30] **Botafogo vs Palmeiras** ➔ **X2 + U/O 4.5: X2 + UN** @ **1.55** ⏳ *(Palmeiras titolare con Abel Ferreira; Botafogo in crisi con tecnico ad interim)*
 2. 🇧🇷 [00:30] **Corinthians vs Chapecoense** ➔ **1X2 Corner (esc.TS): 1 (Corinthians)** @ **1.34** ⏳ *(Assedio Diniz sulle fasce; senza Yuri Alberto e senza Bolasie)*
@@ -1253,11 +1254,21 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
+### 🛡️ Ticket #53: La Quaterna d'Assicurazione Notturna (Quota 3.46×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Stake confermato)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **3.46×** | **Vincita Potenziale**: **103.80 €** *(Profitto Netto: +73.80 €)* | **Ref**: `NETWIN-T53-06SET`
+1. 🇦🇷 [00:00] **Sol de America vs CS Belgrano** ➔ **Under / Over 2.5: Under 2.5 Gol** @ **1.38** ⏳ *(Torneo Federal A: catenaccio provinciale argentino)*
+2. 🇨🇱 [00:30] **Palestino vs U. de Concepción** ➔ **Doppia Chance: 1X (Palestino)** @ **1.21** ⏳ *(Palestino imbattuto in casa; U. de Concepcion 2 ko esterni)*
+3. 🇵🇪 [01:30] **FBC Melgar vs ADT Tarma** ➔ **Esito Finale 1X2: 1 (FBC Melgar)** @ **1.48** ⏳ *(ADT 8 gol subiti nelle ultime 2 trasferte [5-1 e 3-1])*
+4. 🇧🇴 [02:00] **Nacional Potosí vs Blooming** ➔ **Esito Finale 1X2: 1 (Nacional Potosí)** @ **1.40** ⏳ *(Altitudine estrema 4.067m: Potosí 5-1 e 3-0 in casa, Blooming 0-3)*
+
+---
+
 ### 💎 QUADRO FINANZIARIO NOTTE:
-* 💵 **Capitale Residuo in Cassa**: **212.58 €** *(già protetto e in attivo di +69.34 € rispetto alla partenza di 143 €!)*
-* 🚀 **Vincita Potenziale Attiva**: **150.58 €**
-* 📈 **Saldo Atteso a Cassa con Ticket #52**: **363.16 €**!
-*Ultimo aggiornamento: 6 settembre 2026 ore 23:14 — BAgent*
+* 💵 **Capitale Residuo in Cassa (Liquido)**: **182.58 €** *(già protetto e in attivo!)*
+* 🚀 **Vincita Potenziale Complessiva Attiva**: **254.38 €** *(150.58 € T52 + 103.80 € T53)*
+* 📈 **Saldo Atteso a Cassa all'alba con en plein**: **436.96 €**! 💰
+*Ultimo aggiornamento: 6 settembre 2026 ore 23:59 — BAgent*
 
 
 
