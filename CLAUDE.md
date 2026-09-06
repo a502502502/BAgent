@@ -1201,7 +1201,38 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ---
 
 ### 💳 Saldo Utente su Netwin: **143.24 €** *(180.70 € - 50€ T46 - 30€ T47 - 30€ T48 + 72.54€ Vinto T48)*
-*Ultimo aggiornamento: 6 settembre 2026 ore 13:21 — BAgent (Ticket #48 registrato come VINTO a 72.54 €)*
+*Pre-giocata Ticket #49 e #50: 143.24 € | Post-puntate (55.00 €): 88.24 € residui*
+
+---
+
+## 🎫 TICKET UFFICIALI IN GIOCO — DOMENICA 6 SETTEMBRE 2026 (SERA & NOTTE)
+
+### 🏆 Ticket #49: La Tripla d'Acciaio Serale (Quota 2.58×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSA ⏱️ (Stake confermato)
+* **Importo Puntato**: **30.00 €** | **Vincita Potenziale**: **77.40 €** *(Profitto Netto: +47.40 €)* | **Ref**: `NETWIN-T49-06SET`
+1. 🇫🇷 [20:45] **Marseille vs Paris FC** ➔ **1X2 Corner: 1 (Marseille)** @ **1.40** ⏳
+2. 🇧🇷 [21:00] **Remo vs Flamengo** ➔ **1X2 Corner: 2 (Flamengo)** @ **1.44** ⏳
+3. 🇮🇹 [20:45] **Juventus vs AC Milan** ➔ **Under/Over 3.5: Under 3.5 Gol** @ **1.28** ⏳
+
+---
+
+### 🚀 Ticket #50: La Quaterna Onnimercato Serale + Notturna (Quota 3.25×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSA ⏱️ (Stake confermato)
+* **Importo Puntato**: **25.00 €** | **Vincita Potenziale**: **81.25 €** *(Profitto Netto: +56.25 €)* | **Ref**: `NETWIN-T50-06SET`
+1. 🇫🇷 [20:45] **Marseille vs Paris FC** ➔ **1X2 Corner: 1 (Marseille)** @ **1.40** ⏳
+2. 🇧🇷 [21:00] **Remo vs Flamengo** ➔ **1X2 Corner: 2 (Flamengo)** @ **1.44** ⏳
+3. 🇮🇹 [20:45] **Juventus vs AC Milan** ➔ **Under/Over 3.5: Under 3.5 Gol** @ **1.28** ⏳
+4. 🇲🇽 [01:00] **Cruz Azul vs Santos Laguna** ➔ **1X + U/O 1.5: 1X + OV** @ **1.26** ⏳
+
+---
+
+### 💰 Bilancio Finanziario Potenziale Recupero:
+* **Capitale Investito Totale**: **55.00 €** (30€ T49 + 25€ T50)
+* **Saldo Residuo Immediato**: **88.24 €**
+* **Incasso se entra solo T49 (entro le 23:00)**: **77.40 €** ➔ Saldo a **165.64 €** (recupero completato!)
+* **Incasso se entrano entrambi**: **158.65 €** ➔ Saldo a **246.89 €** (+103.65 € profitto netto totale!)
+*Ultimo aggiornamento: 6 settembre 2026 ore 20:41 — BAgent*
+
 
 
 
