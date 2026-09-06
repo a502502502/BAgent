@@ -1170,19 +1170,29 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-## 🎫 TICKET UFFICIALI IN GIOCO — SABATO 5 SETTEMBRE 2026
+## 🎫 TICKET UFFICIALI CONCLUSI — SABATO 5 SETTEMBRE 2026
 
-### 🛡️ Ticket #46: La Tripla d'Acciaio Serale (Quota 2.96×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSO ⏱️ (Screenshot verificato)
+### 🔴 Ticket #46: La Tripla d'Acciaio Serale (Quota 2.96×)
+* **Piattaforma**: Netwin | **Stato**: CHIUSO / PERDENTE 🔴 (Beffa Sporting per 1 gol)
 * **Importo Puntato**: **50.00 €** | **Vincita Potenziale**: **148.10 €** | **Ref**: `DF07EA090531AF06EF04`
-1. 🇮🇹 [20:45] **Roma vs Atalanta** ➔ **1X2: 1 (Roma)** @ **1.65** ⏳
-2. 🇪🇸 [21:00] **Villarreal vs Deportivo La Coruna** ➔ **1X2 Corner (esc.TS): 1 (Villarreal)** @ **1.36** ⏳
-3. 🇵🇹 [21:30] **Sporting vs Nacional** ➔ **U/O 2,5: Over 2.5** @ **1.32** ⏳
+1. 🇮🇹 [20:45] **Roma vs Atalanta** ➔ **1X2: 1 (Roma)** @ **1.65** 🟢 *(Finita 2-1: rimonta epica 89' Hermoso, 93' Soulé)*
+2. 🇪🇸 [21:00] **Villarreal vs Deportivo La Coruna** ➔ **1X2 Corner: 1 (Villarreal)** @ **1.36** 🟢 *(Finita 7-1 nei corner, pur perdendo 2-3 la gara)*
+3. 🇵🇹 [21:30] **Sporting vs Nacional** ➔ **Over 2.5 Gol** @ **1.32** 🔴 *(Finita 2-0: 2-0 al 49', poi cambi conservativi e ritmo crollato)*
 
 ---
 
-### 💳 Saldo Utente su Netwin: **180.70 €** *(verificato da screenshot 05/09/2026 ore 20:03)*
-*Ultimo aggiornamento: 5 settembre 2026 ore 20:05 — BAgent (Ticket #46 registrato come PIAZZATO a 50.00€)*
+### 🔴 Ticket #47: La Notturna Sud/Nord America (Quota 6.40×)
+* **Piattaforma**: Netwin | **Stato**: CHIUSO / PERDENTE 🔴 (Beffa Miami 1 all'87' su rigore)
+* **Importo Puntato**: **30.00 €** | **Vincita Potenziale**: **192.00 €**
+1. 🇵🇾 [23:30] **Sp. San Lorenzo vs CS 2 de Mayo** ➔ **Over 2.5 Gol** @ **2.28** 🟢 *(Finita 1-2: presa a quota altissima!)*
+2. 🇧🇷 [23:30] **São Paulo vs Atlético-MG** ➔ **1X2: 1 (São Paulo)** @ **1.91** 🟢 *(Finita 2-0: presa a quota favolosa!)*
+3. 🇺🇸 [01:30] **Inter Miami vs Atlanta United** ➔ **1 + Over 2.5** @ **1.47** 🔴 *(Finita 2-2: Over 2.5 già preso al 45' [2-1], ma l'1 è sfumato all'87' su rigore di Embolo)*
+
+---
+
+### 💳 Saldo Utente su Netwin: **100.70 €** *(180.70 € - 50.00 € T46 - 30.00 € T47)*
+*Ultimo aggiornamento: 6 settembre 2026 ore 13:20 — BAgent (Ticket #46 e #47 archiviati)*
+
 
 
 
