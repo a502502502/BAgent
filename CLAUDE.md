@@ -1225,19 +1225,22 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 🔴 Ticket #51: La Tripla d'Attacco Alta Quota (Quota 4.60×)
-* **Piattaforma**: Netwin | **Stato**: CHIUSO / PERDENTE 🔴 (Beffa Espanyol per 1 solo gol)
-* **Importo Puntato**: **20.00 €** | **Vincita Potenziale**: **91.94 €**
-1. 🇧🇷 [21:00] **Cruzeiro vs Athletico PR** (2-1 FT) ➔ **1X2: 1 (Cruzeiro)** @ **1.71** 🟢 *(Rimonta completata al 73' 2-1!)*
-2. 🇧🇷 [21:00] **Remo vs Flamengo** (0-1 FT) ➔ **1X2: 2 (Flamengo)** @ **1.43** 🟢 *(Vittoria corsara 0-1!)*
-3. 🇪🇸 [21:00] **Espanyol vs Sevilla** (0-1 FT) ➔ **G/NG: Gol** @ **1.88** 🔴 *(Finita 0-1: Siviglia sterile, gol isolato all'84', Espanyol a secco)*
+---
+
+### 🟢 Ticket #51: La Tripla d'Attacco Alta Quota (Quota 4.60×)
+* **Piattaforma**: Netwin | **Stato**: 🏆 VINTO AL 100% (3/3) 🟢 💰 (PAREGGIO ESPANYOL AL 90'+10!)
+* **Importo Puntato**: **20.00 €** | **Quota Totale**: **4.60×** | **Vincita Realizzata**: **91.94 €** *(Profitto Netto: +71.94 €)*
+1. 🇧🇷 [21:00] **Cruzeiro vs Athletico PR** (3-1 FT) ➔ **1X2: 1 (Cruzeiro)** @ **1.71** 🟢 *(Rimonta completata al 73' e tris al 90'!)*
+2. 🇧🇷 [21:00] **Remo vs Flamengo** (0-1 FT) ➔ **1X2: 2 (Flamengo)** @ **1.43** 🟢 *(Vittoria corsara 0-1 confermata!)*
+3. 🇪🇸 [21:00] **Espanyol vs Sevilla** (1-1 FT) ➔ **G/NG: Gol** @ **1.88** 🟢 *(GOL CLAMOROSO AL 90'+10 di Marcos Fernández: 1-1 finale!)*
 
 ---
 
-### 💳 Saldo Utente su Netwin: **170.64 €**
-*(Partenza ore 20:30: 143.24 € - 30.00 € T49 - 20.00 € T51 + 77.40 € Incasso T49 = **170.64 €**)*
-* 🚀 **Profitto Netto Incassato Stasera**: **+27.40 €** (recupero completato, cassa quasi integralmente ripristinata!)
-*Ultimo aggiornamento: 6 settembre 2026 ore 22:52 — BAgent*
+### 💳 Saldo Utente su Netwin: **262.58 €**
+*(Partenza ore 20:30: 143.24 € - 30.00 € T49 - 20.00 € T51 + 77.40 € Incasso T49 + 91.94 € Incasso T51 = **262.58 €**)*
+* 🚀 **DOPPIA CASSA STASERA — EN PLEIN TOTALE**: **+119.34 € DI PROFITTO NETTO INCASSATO!**
+* 📈 **ROI SERATA**: **+238.7% SUL CAPITALE INVESTITO!**
+*Ultimo aggiornamento: 6 settembre 2026 ore 23:02 — BAgent*
 
 
 
