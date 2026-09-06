@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🛡️ BAgent — Schedine di Recupero Domenica 6 Settembre 2026</title>
+<style>
+  :root {
+    --bg-main: #070b12;
+    --bg-card: #0f172a;
+    --bg-card-hover: #131f38;
+    --border-color: #1e293b;
+    --accent-gold: #ffd700;
+    --accent-blue: #38bdf8;
+    --accent-green: #4ade80;
+    --accent-purple: #c084fc;
+    --accent-red: #f87171;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+    background: var(--bg-main); 
+    color: var(--text-main); 
+    line-height: 1.5; 
+    padding: 24px; 
+  }
+
+  .container { 
+    max-width: 1400px; 
+    width: 96%; 
+    margin: 0 auto; 
+  }
+  
+  .main-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding-bottom: 20px; 
+    border-bottom: 1px solid var(--border-color); 
+    margin-bottom: 24px; 
+    flex-wrap: wrap; 
+    gap: 16px;
+  }
+  .main-header-title h1 { 
+    font-size: 2.2em; 
+    color: var(--accent-gold); 
+    letter-spacing: -0.5px; 
+    font-weight: 800;
+  }
+  .main-header-title p { 
+    color: var(--text-muted); 
+    font-size: 0.95em; 
+    margin-top: 4px;
+  }
+  .header-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .status-badge { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    background: #064e3b; 
+    border: 1px solid #059669; 
+    color: var(--accent-green); 
+    font-size: 0.85em; 
+    font-weight: 800; 
+    padding: 8px 16px; 
+    border-radius: 30px; 
+  }
+  .rule-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1e1b4b;
+    border: 1px solid #4f46e5;
+    color: #a5b4fc;
+    font-size: 0.85em;
+    font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 30px;
+  }
+
+  .alert-box { 
+    background: linear-gradient(135deg, #1e1b4b, #0f172a); 
+    border: 1px solid #6366f1; 
+    border-radius: 14px; 
+    padding: 18px 24px; 
+    margin-bottom: 28px; 
+  }
+  .alert-box h3 { 
+    color: #a5b4fc; 
+    font-size: 1.1em; 
+    margin-bottom: 8px; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+  }
+  .alert-box p { 
+    color: #cbd5e1; 
+    font-size: 0.92em; 
+    line-height: 1.6; 
+  }
+
+  /* Financial Metrics */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+  .metric-val {
+    font-size: 1.9em;
+    font-weight: 800;
+    margin-top: 4px;
+  }
+  .metric-label {
+    font-size: 0.78em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Ticket Columns */
+  .tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .ticket-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .ticket-card:hover {
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+  }
+  .ticket-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .ticket-title {
+    font-size: 1.3em;
+    font-weight: 800;
+    color: #fff;
+  }
+  .ticket-desc {
+    font-size: 0.82em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .badge-tag {
+    font-size: 0.75em;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+  .badge-gold { background: rgba(255,215,0,0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
+  .badge-blue { background: rgba(56,189,248,0.15); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+
+  .ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    margin: 16px 0;
+  }
+  .ticket-table th {
+    text-align: left;
+    color: var(--text-muted);
+    font-size: 0.75em;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .ticket-table td {
+    padding: 12px 6px;
+    border-bottom: 1px solid #1e293b;
+    vertical-align: middle;
+  }
+  .time-cell {
+    color: var(--accent-gold);
+    font-weight: 700;
+    font-size: 0.85em;
+    white-space: nowrap;
+  }
+  .match-name {
+    font-weight: 700;
+    color: #fff;
+  }
+  .match-sub {
+    font-size: 0.78em;
+    color: var(--text-muted);
+  }
+  .pick-cell {
+    font-weight: 800;
+    color: var(--accent-green);
+  }
+  .odd-cell {
+    font-weight: 800;
+    color: var(--accent-gold);
+    text-align: right;
+    font-size: 1.05em;
+  }
+
+  .ticket-footer {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 2px dashed #334155;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .ticket-stat-label { font-size: 0.75em; color: var(--text-muted); text-transform: uppercase; }
+  .ticket-total-odd { font-size: 1.6em; font-weight: 800; color: var(--accent-gold); }
+  .ticket-financial { text-align: right; }
+  .ticket-win-val { font-size: 1.35em; font-weight: 800; color: var(--accent-green); }
+
+  /* Insights */
+  .section-title {
+    font-size: 1.3em;
+    font-weight: 800;
+    color: #fff;
+    margin: 32px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .insight-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .insight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 6px;
+  }
+  .insight-title { font-weight: 700; color: #fff; font-size: 0.95em; }
+  .insight-odd { font-weight: 800; color: var(--accent-gold); font-size: 0.9em; }
+  .insight-text { font-size: 0.85em; color: #cbd5e1; line-height: 1.5; }
+
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8em;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header -->
+  <header class="main-header">
+    <div class="main-header-title">
+      <h1>🛡️ BAgent — Master Dashboard Recupero</h1>
+      <p>Domenica 6 Settembre 2026 | Sessione Serale & Notturna | Engine Poisson + Onnimercato</p>
+    </div>
+    <div class="header-badges">
+      <div class="status-badge">⚡ RECUPERO ATTIVO</div>
+      <div class="rule-badge">📜 PROTOCOLLO CONTINUITÀ (MAX 3-4 EVENTI)</div>
+    </div>
+  </header>
+
+  <!-- Alert Intelligence -->
+  <div class="alert-box">
+    <h3>🧠 Direttiva di Recupero: Asimmetria Pura & Zero 1X2 Forzati</h3>
+    <p>
+      Le beffe di ieri (Sporting fermo al 49' sul 2-0 e rigore dell'Atlanta all'87' su Miami) dimostrano che i segni secchi e gli Over 2.5 tirati subiscono la massima varianza episodica. 
+      La vittoria pulita del <strong>Ticket #48 (+72.54 € con 4/4)</strong> ha tracciato la rotta: <strong>1X2 Corner asimmetrici</strong> (Villarreal 7-1 e São Paulo 16-2 ieri), <strong>Under 3.5 a soglia elastica</strong> e <strong>Doppie Chance blindate</strong>. Obiettivo: chiudere in profitto netto tornando sopra i 190 € - 240 € di cassa.
+    </p>
+  </div>
+
+  <!-- Financial Metrics -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Saldo Netwin Disponibile</div>
+      <div class="metric-val" style="color:var(--accent-blue);">143.24 €</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Investimento Totale (2 Ticket)</div>
+      <div class="metric-val" style="color:var(--accent-gold);">55.00 €</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Vincita Attesa (Entrambi)</div>
+      <div class="metric-val" style="color:var(--accent-green);">158.65 €</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Nuovo Saldo Obiettivo</div>
+      <div class="metric-val" style="color:#a78bfa;">246.89 €</div>
+    </div>
+  </div>
+
+  <!-- Tickets Grid -->
+  <div class="tickets-grid">
+    
+    <!-- TICKET #49 -->
+    <div class="ticket-card">
+      <div>
+        <div class="ticket-top">
+          <div>
+            <div class="ticket-title">🏆 Ticket #49: La Tripla d'Acciaio Serale</div>
+            <div class="ticket-desc">Recupero Diretto entro le 23:00 | Chiusura rapida ante-nottata</div>
+          </div>
+          <span class="badge-tag badge-gold">Alta Sicurezza</span>
+        </div>
+
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th>Ora</th>
+              <th>Match</th>
+              <th>Mercato / Pick</th>
+              <th style="text-align:right;">Quota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-cell">20:45</td>
+              <td>
+                <div class="match-name">Marseille vs Paris FC</div>
+                <div class="match-sub">🇫🇷 Ligue 1</div>
+              </td>
+              <td class="pick-cell">1X2 Corner: 1 (Marseille)</td>
+              <td class="odd-cell">@1.40</td>
+            </tr>
+            <tr>
+              <td class="time-cell">21:00</td>
+              <td>
+                <div class="match-name">Remo vs Flamengo</div>
+                <div class="match-sub">🇧🇷 Serie A</div>
+              </td>
+              <td class="pick-cell">1X2 Corner: 2 (Flamengo)</td>
+              <td class="odd-cell">@1.44</td>
+            </tr>
+            <tr>
+              <td class="time-cell">20:45</td>
+              <td>
+                <div class="match-name">Juventus vs AC Milan</div>
+                <div class="match-sub">🇮🇹 Serie A</div>
+              </td>
+              <td class="pick-cell">Under 3.5 Gol</td>
+              <td class="odd-cell">@1.28</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ticket-footer">
+        <div>
+          <div class="ticket-stat-label">Quota Totale Multipla</div>
+          <div class="ticket-total-odd">2.58×</div>
+        </div>
+        <div class="ticket-financial">
+          <div class="ticket-stat-label">Stake: 30.00 € ➔ Vincita</div>
+          <div class="ticket-win-val">77.40 €</div>
+          <div style="font-size:0.75em; color:var(--accent-green);">Profitto Netto: +47.40 €</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TICKET #50 -->
+    <div class="ticket-card">
+      <div>
+        <div class="ticket-top">
+          <div>
+            <div class="ticket-title">🚀 Ticket #50: La Quaterna Onnimercato</div>
+            <div class="ticket-desc">Serale + Notturna | Espansione con la capolista Liga MX</div>
+          </div>
+          <span class="badge-tag badge-blue">Rendimento Alto</span>
+        </div>
+
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th>Ora</th>
+              <th>Match</th>
+              <th>Mercato / Pick</th>
+              <th style="text-align:right;">Quota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-cell">20:45</td>
+              <td>
+                <div class="match-name">Marseille vs Paris FC</div>
+                <div class="match-sub">🇫🇷 Ligue 1</div>
+              </td>
+              <td class="pick-cell">1X2 Corner: 1 (Marseille)</td>
+              <td class="odd-cell">@1.40</td>
+            </tr>
+            <tr>
+              <td class="time-cell">21:00</td>
+              <td>
+                <div class="match-name">Remo vs Flamengo</div>
+                <div class="match-sub">🇧🇷 Serie A</div>
+              </td>
+              <td class="pick-cell">1X2 Corner: 2 (Flamengo)</td>
+              <td class="odd-cell">@1.44</td>
+            </tr>
+            <tr>
+              <td class="time-cell">20:45</td>
+              <td>
+                <div class="match-name">Juventus vs AC Milan</div>
+                <div class="match-sub">🇮🇹 Serie A</div>
+              </td>
+              <td class="pick-cell">Under 3.5 Gol</td>
+              <td class="odd-cell">@1.28</td>
+            </tr>
+            <tr>
+              <td class="time-cell">01:00</td>
+              <td>
+                <div class="match-name">Cruz Azul vs Santos Laguna</div>
+                <div class="match-sub">🇲🇽 Liga MX</div>
+              </td>
+              <td class="pick-cell">1X + Over 1.5 Gol</td>
+              <td class="odd-cell">@1.26</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ticket-footer">
+        <div>
+          <div class="ticket-stat-label">Quota Totale Multipla</div>
+          <div class="ticket-total-odd">3.25×</div>
+        </div>
+        <div class="ticket-financial">
+          <div class="ticket-stat-label">Stake: 25.00 € ➔ Vincita</div>
+          <div class="ticket-win-val">81.25 €</div>
+          <div style="font-size:0.75em; color:var(--accent-green);">Profitto Netto: +56.25 €</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Deep Tactic Insights -->
+  <div class="section-title">🔬 Analisi Dettagliata per Selezione</div>
+  
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-header">
+        <span class="insight-title">Marseille vs Paris FC</span>
+        <span class="insight-odd">1X2 Corner: 1 @ 1.40</span>
+      </div>
+      <p class="insight-text">
+        Al Vélodrome il Marsiglia produce un volume enorme di traversoni e tiri dal limite contro squadre di blocco basso. Paris FC neopromossa concede campo e ripiega in area: divario statistico medio di +4.5 corner per i padroni di casa.
+      </p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <span class="insight-title">Remo vs Flamengo</span>
+        <span class="insight-odd">1X2 Corner: 2 @ 1.44</span>
+      </div>
+      <p class="insight-text">
+        Il Flamengo tiene oltre il 65% di possesso anche fuori casa e viaggia a una media di oltre 7 corner calciati. Il Remo, penultimo in classifica, batte meno di 3 corner a partita e concede costantemente respinte sul fondo.
+      </p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <span class="insight-title">Juventus vs AC Milan</span>
+        <span class="insight-odd">Under 3.5 Gol @ 1.28</span>
+      </div>
+      <p class="insight-text">
+        Gli ultimi 5 scontri diretti parlano chiaro: 0-0, 0-0, 2-0, 1-2, 0-0 (3 volte 0-0!). Sfida di vertice alla 3ª giornata, tensione massima, nessuna delle due vorrà concedere contropiedi. Soglia Under 3.5 elastica e protettiva.
+      </p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <span class="insight-title">Cruz Azul vs Santos Laguna</span>
+        <span class="insight-odd">1X + Over 1.5 Gol @ 1.26</span>
+      </div>
+      <p class="insight-text">
+        Cruz Azul imbattuto in casa e reduce da 4 vittorie consecutive su Santos Laguna negli H2H (2-1, 3-2, 1-0, 2-0). Santos Laguna in disarmo difensivo in trasferta. La combo 1X + Over 1.5 copre il 91% delle simulazioni Poisson.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    BAgent Sports Intelligence System · Generato in tempo reale il 6 Settembre 2026 ore 20:40 CEST
+  </footer>
+
+</div>
+
+</body>
+</html>
