@@ -318,6 +318,67 @@ class FootballExternalCollector:
         """Storico infortuni/squalifiche di un giocatore."""
         return self._get("sidelined", {"player": player_id})
 
+    def current_coach(self, team_id: int) -> Optional[dict[str, Any]]:
+        """
+        Recupera l'allenatore attualmente in carica per la squadra da API-Football (/coachs).
+        Evita allucinazioni da memoria LLM estraendo il contratto attivo (end: None).
+        """
+        resp = self._get("coachs", {"team": team_id}).get("response", [])
+        if not resp:
+            return None
+        for c in resp:
+            for car in c.get("career", []):
+                if car.get("team", {}).get("id") == team_id and car.get("end") is None:
+                    return {
+                        "id": c.get("id"),
+                        "name": c.get("name"),
+                        "start": car.get("start"),
+                        "nationality": c.get("nationality"),
+                    }
+        # Fallback al record più recente
+        if resp:
+            return {"id": resp[0].get("id"), "name": resp[0].get("name")}
+        return None
+
+    def recent_season_form(
+        self, team_id: int, season: int, last: int = 5
+    ) -> list[dict[str, Any]]:
+        """
+        Recupera ESCLUSIVAMENTE le ultime partite della stagione in corso per la squadra,
+        ignorando i campionati passati e H2H storici obsoleti (Regola #34).
+        """
+        resp = self._get("fixtures", {"team": team_id, "season": season}).get("response", [])
+        # Filtra solo partite già giocate (FT, AET, PEN)
+        played = [
+            f for f in resp
+            if f.get("fixture", {}).get("status", {}).get("short") in ("FT", "AET", "PEN")
+        ]
+        # Ordina per data decrescente
+        played.sort(key=lambda x: x.get("fixture", {}).get("date", ""), reverse=True)
+        results = []
+        for f in played[:last]:
+            fid = f["fixture"]["id"]
+            d = f["fixture"]["date"][:10]
+            th = f["teams"]["home"]["name"]
+            ta = f["teams"]["away"]["name"]
+            gh = f["goals"]["home"]
+            ga = f["goals"]["away"]
+            is_home = (f["teams"]["home"]["id"] == team_id)
+            goals_for = gh if is_home else ga
+            goals_against = ga if is_home else gh
+            outcome = "W" if goals_for > goals_against else ("D" if goals_for == goals_against else "L")
+            results.append({
+                "fixture_id": fid,
+                "date": d,
+                "opponent": ta if is_home else th,
+                "is_home": is_home,
+                "score": f"{gh}-{ga}",
+                "outcome": outcome,
+                "goals_for": goals_for,
+                "goals_against": goals_against,
+            })
+        return results
+
     def parse_corner_stats(self, raw_team_stats: dict) -> dict:
         """
         Estrae statistiche corner dalle statistiche stagionali squadra.
