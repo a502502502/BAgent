@@ -245,6 +245,35 @@ FIXTURES_CONFIG = {
                 "threshold": 2.5
             }
         ]
+    },
+    1634048: {
+        "label": "Corinthians Donne vs Cruzeiro Donne",
+        "competition": "🇧🇷 Brasileirão Playoff Femminile",
+        "time_cest": "22:00",
+        "bets": [
+            {
+                "ticket": "#59",
+                "ticket_name": "Doppia d'Acciaio Recupero",
+                "market": "1X2: 1",
+                "odd": 1.42,
+                "type": "match_winner_1"
+            }
+        ]
+    },
+    1498787: {
+        "label": "Nueva Chicago vs Quilmes",
+        "competition": "🇦🇷 Argentina Primera Nacional",
+        "time_cest": "22:00",
+        "bets": [
+            {
+                "ticket": "#59",
+                "ticket_name": "Doppia d'Acciaio Recupero",
+                "market": "Under 2.5 Gol",
+                "odd": 1.42,
+                "type": "under_goals",
+                "threshold": 2.5
+            }
+        ]
     }
 }
 
@@ -254,6 +283,7 @@ TICKETS_SUMMARY = {
     "#55": {"name": "Combo & Valore", "stake": 25.0, "total_odd": 2.78, "pot_win": 69.49, "total_legs": 3},
     "#57": {"name": "Sanzioni & Falli", "stake": 30.0, "total_odd": 3.82, "pot_win": 114.52, "total_legs": 4},
     "#58": {"name": "Tripla d'Acciaio Live", "stake": 50.0, "total_odd": 1.96, "pot_win": 98.00, "total_legs": 3},
+    "#59": {"name": "Doppia d'Acciaio Recupero", "stake": 30.0, "total_odd": 2.02, "pot_win": 60.49, "total_legs": 2},
 }
 
 class LiveTelegramScoreboard:
@@ -262,7 +292,7 @@ class LiveTelegramScoreboard:
         self.match_states: dict[int, dict] = {}
         self.seen_goal_events: set[tuple] = set()
         self.notified_milestones: set[tuple] = set()
-        self.legs_won: dict[str, set[int]] = {"#56": set(), "#54": set(), "#55": set(), "#57": set(), "#58": set()}
+        self.legs_won: dict[str, set[int]] = {"#56": set(), "#54": set(), "#55": set(), "#57": set(), "#58": set(), "#59": set()}
         self.notified_tickets_won: set[str] = set()
         self._init_states()
 
@@ -335,6 +365,12 @@ class LiveTelegramScoreboard:
                 res_ok = ga >= gh and tot_goals <= 3
                 tag = "🟢 FAVOREVOLE" if res_ok else "⚠️ A RISCHIO"
                 lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): {tag} (Tot. Gol: {tot_goals}/3)")
+
+            elif b_type == "match_winner_1":
+                curr = "1" if gh > ga else ("X" if gh == ga else "2")
+                res_ok = gh > ga
+                tag = "🟢 IN VANTAGGIO" if res_ok else ("⚖️ IN PARITÀ" if gh == ga else "⚠️ SOTTO")
+                lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): {tag} (Parziale: {curr})")
 
         return lines
 
@@ -513,6 +549,12 @@ class LiveTelegramScoreboard:
                     if ga >= gh and tot_goals <= 3:
                         self.legs_won[t_id].add(fid)
                         final_lines.append(f"• Ticket {t_id} ({m_label}): <b>✅ VINTO</b> (X2 + Under 3.5 preso)")
+                    else:
+                        final_lines.append(f"• Ticket {t_id} ({m_label}): <b>❌ PERSO</b>")
+                elif b_type == "match_winner_1":
+                    if gh > ga:
+                        self.legs_won[t_id].add(fid)
+                        final_lines.append(f"• Ticket {t_id} ({m_label}): <b>✅ VINTO</b> (1 preso)")
                     else:
                         final_lines.append(f"• Ticket {t_id} ({m_label}): <b>❌ PERSO</b>")
 

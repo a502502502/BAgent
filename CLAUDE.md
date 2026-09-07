@@ -1344,13 +1344,22 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026 (ORE 21:45):
+### 🛡️ Ticket #59: La Doppia d'Acciaio Recupero (Quota 2.02×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 22:00)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.02×** | **Vincita Potenziale**: **60.49 €**
+1. 🇧🇷 [22:00] **SC Corinthians SP vs Cruzeiro EC MG** (ID: 1634048) ➔ **1X2: 1** @ **1.42** ⏳
+2. 🇦🇷 [22:00] **Nueva Chicago vs Quilmes** (ID: 1498787) ➔ **Under 2.5 Gol** @ **1.42** ⏳
+
+---
+
+### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026 (ORE 21:55):
 * 💵 **Cassa Iniziale Odierna**: **286.38 €**
-* 📉 **Spesa Totale Odierna (5 Ticket)**: **172.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58)
-* 🛡️ **Liquidità Libera Protetta su Netwin**: **114.38 €**
-* 🚀 **POTENZIALE VINCITA COMPLESSIVA ATTIVA (T55 + T57 + T58)**: **282.01 €**!
-* 💰 **SALDO ATTESO A CASSA CON TRIPLETTA SERALE**: **`396.39 €`** *(+177% sul capitale originario di 143.24 €!)*
-*Ultimo aggiornamento: 7 settembre 2026 ore 21:45 — BAgent*
+* 📉 **Spesa Totale Odierna (6 Ticket)**: **202.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58 + 30 € T59)
+* 🛡️ **Liquidità Libera Protetta su Netwin**: **84.38 €**
+* 🚀 **POTENZIALE VINCITA COMPLESSIVA ATTIVA (T55 + T57 + T58 + T59)**: **342.50 €**!
+* 💰 **SALDO ATTESO A CASSA CON EN-PLEIN SERALE**: **`426.88 €`** *(+198% sul capitale originario di 143.24 €!)*
+*Ultimo aggiornamento: 7 settembre 2026 ore 21:55 — BAgent*
+
 
 
 
