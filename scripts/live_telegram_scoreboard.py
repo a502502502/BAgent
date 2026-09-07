@@ -274,6 +274,48 @@ FIXTURES_CONFIG = {
                 "threshold": 2.5
             }
         ]
+    },
+    1631996: {
+        "label": "Cerro Porteño vs Nacional Asunción",
+        "competition": "🇵🇾 Paraguay Division Profesional",
+        "time_cest": "23:30",
+        "bets": [
+            {
+                "ticket": "#60",
+                "ticket_name": "Corazzata Notturna",
+                "market": "Doppia Chance 1X",
+                "odd": 1.30,
+                "type": "double_chance_1x"
+            }
+        ]
+    },
+    1493108: {
+        "label": "Barracas Central vs Argentinos Jrs",
+        "competition": "🇦🇷 Argentina Liga Profesional",
+        "time_cest": "00:00",
+        "bets": [
+            {
+                "ticket": "#60",
+                "ticket_name": "Corazzata Notturna",
+                "market": "Doppia Chance X2",
+                "odd": 1.22,
+                "type": "double_chance_x2"
+            }
+        ]
+    },
+    1492369: {
+        "label": "Vitória vs Grêmio",
+        "competition": "🇧🇷 Brasileirão Serie A",
+        "time_cest": "01:00",
+        "bets": [
+            {
+                "ticket": "#60",
+                "ticket_name": "Corazzata Notturna",
+                "market": "Doppia Chance 1X",
+                "odd": 1.28,
+                "type": "double_chance_1x"
+            }
+        ]
     }
 }
 
@@ -284,6 +326,7 @@ TICKETS_SUMMARY = {
     "#57": {"name": "Sanzioni & Falli", "stake": 30.0, "total_odd": 3.82, "pot_win": 114.52, "total_legs": 4},
     "#58": {"name": "Tripla d'Acciaio Live", "stake": 50.0, "total_odd": 1.96, "pot_win": 98.00, "total_legs": 3},
     "#59": {"name": "Doppia d'Acciaio Recupero", "stake": 30.0, "total_odd": 2.02, "pot_win": 60.49, "total_legs": 2},
+    "#60": {"name": "Corazzata Notturna", "stake": 30.0, "total_odd": 2.03, "pot_win": 60.89, "total_legs": 3},
 }
 
 class LiveTelegramScoreboard:
@@ -292,7 +335,7 @@ class LiveTelegramScoreboard:
         self.match_states: dict[int, dict] = {}
         self.seen_goal_events: set[tuple] = set()
         self.notified_milestones: set[tuple] = set()
-        self.legs_won: dict[str, set[int]] = {"#56": set(), "#54": set(), "#55": set(), "#57": set(), "#58": set(), "#59": set()}
+        self.legs_won: dict[str, set[int]] = {"#56": set(), "#54": set(), "#55": set(), "#57": set(), "#58": set(), "#59": set(), "#60": set()}
         self.notified_tickets_won: set[str] = set()
         self._init_states()
 

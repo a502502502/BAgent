@@ -1317,30 +1317,30 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ---
 
 ### ⚖️ Ticket #55: La Tripla Combo & Doppie Chance (Quota 2.78×)
-* **Piattaforma**: Netwin | **Stato**: IN GIOCO ⏱️ (In stradominio e controllo)
-* **Importo Puntato**: **25.00 €** | **Quota Totale**: **2.78×** | **Vincita Potenziale**: **69.49 €**
-1. 🇮🇹 [20:30] **Palermo vs Sampdoria** (2-0 2H) ➔ **Doppia Chance: 1X** @ **1.17** ⏳ *(Ipotecato al 2-0!)*
-2. 🇮🇹 [20:45] **Udinese vs Lazio** (0-0 HT) ➔ **X2 + Under 3.5** @ **1.80** ⏳ *(Pieno controllo)*
-3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (0-1 1H) ➔ **Doppia Chance: X2** @ **1.32** ⏳ *(Real Sociedad avanti 0-1!)*
+* **Piattaforma**: Netwin | **Stato**: 🟢 CASSA COMPLETA / VINTO! (3/3)
+* **Importo Puntato**: **25.00 €** | **Quota Totale**: **2.78×** | **Vincita Ufficiale**: **69.49 €** (+44.49 € netti)
+1. 🇮🇹 [20:30] **Palermo vs Sampdoria** (3-1 FT) ➔ **Doppia Chance: 1X** @ **1.17** 🟢 *(Preso!)*
+2. 🇮🇹 [20:45] **Udinese vs Lazio** (1-2 FT) ➔ **X2 + Under 3.5** @ **1.80** 🟢 *(Preso!)*
+3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (2-3 90') ➔ **Doppia Chance: X2** @ **1.32** 🟢 *(Preso!)*
 
 ---
 
 ### 🟨 Ticket #57: La Quaterna Sanzioni & Falli Giocatori (Quota 3.82×)
-* **Piattaforma**: Netwin | **Stato**: IN GIOCO ⏱️ (2 su 4 già vinte!)
-* **Importo Puntato**: **30.00 €** | **Quota Totale**: **3.82×** | **Vincita Potenziale**: **114.52 €**
-1. 🇮🇹 [18:30] **Cagliari vs Lecce** (1-0 FT) ➔ **Under 3.5 Gol** @ **1.22** 🟢 *(Preso in scioltezza!)*
-2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (1-1 FT, 5 cartellini) ➔ **Over 4.5 Cartellini** @ **1.49** 🟢 *(4 gialli + 1 rosso, cassa piena!)*
-3. 🇮🇹 [20:45] **Udinese vs Lazio** (0-0 HT) ➔ **Mattia Zaccagni Over 1.5 Falli Subiti** @ **1.20** ⏳
-4. 🇪🇸 [21:30] **Elche vs Real Sociedad** (0-1 1H) ➔ **Mikel Oyarzabal Over 1.5 Falli Subiti** @ **1.75** ⏳
+* **Piattaforma**: Netwin | **Stato**: ❌ CHIUSO / PERDENTE (2/4 vinte)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **3.82×**
+1. 🇮🇹 [18:30] **Cagliari vs Lecce** (1-0 FT) ➔ **Under 3.5 Gol** @ **1.22** 🟢 *(Preso!)*
+2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (1-1 FT, 5 cartellini) ➔ **Over 4.5 Cartellini** @ **1.49** 🟢 *(Preso!)*
+3. 🇮🇹 [20:45] **Udinese vs Lazio** (1-2 FT) ➔ **Mattia Zaccagni Over 1.5 Falli Subiti** @ **1.20** 🔴 *(0 falli subiti)*
+4. 🇪🇸 [21:30] **Elche vs Real Sociedad** (2-3 90') ➔ **Mikel Oyarzabal Over 1.5 Falli Subiti** @ **1.75** 🔴 *(0 falli subiti, uscito al 70')*
 
 ---
 
 ### ⚡ Ticket #58: La Tripla d'Acciaio Live (Quota 1.96×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Live ore 21:40)
-* **Importo Puntato**: **50.00 €** | **Quota Totale**: **1.96×** | **Vincita Potenziale**: **98.00 €**
-1. 🇮🇹 [20:45] **Udinese vs Lazio** (0-0 HT) ➔ **Doppia Chance: X2** @ **1.25** ⏳
-2. 🇵🇹 [21:15] **Estoril vs Arouca** (0-0 1H 30') ➔ **Under 2.5 Gol** @ **1.40** ⏳
-3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (0-1 1H 12') ➔ **Doppia Chance: X2** @ **1.12** ⏳ *(Baschi già avanti 0-1!)*
+* **Piattaforma**: Netwin | **Stato**: 🟢 CASSA COMPLETA / VINTO! (3/3)
+* **Importo Puntato**: **50.00 €** | **Quota Totale**: **1.96×** | **Vincita Ufficiale**: **98.00 €** (+48.00 € netti)
+1. 🇮🇹 [20:45] **Udinese vs Lazio** (1-2 FT) ➔ **Doppia Chance: X2** @ **1.25** 🟢 *(Preso!)*
+2. 🇵🇹 [21:15] **Estoril vs Arouca** (0-0 FT) ➔ **Under 2.5 Gol** @ **1.40** 🟢 *(Preso!)*
+3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (2-3 90') ➔ **Doppia Chance: X2** @ **1.12** 🟢 *(Preso!)*
 
 ---
 
@@ -1348,17 +1348,27 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 * **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 22:00)
 * **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.02×** | **Vincita Potenziale**: **60.49 €**
 1. 🇧🇷 [22:00] **SC Corinthians SP vs Cruzeiro EC MG** (ID: 1634048) ➔ **1X2: 1** @ **1.42** ⏳
-2. 🇦🇷 [22:00] **Nueva Chicago vs Quilmes** (ID: 1498787) ➔ **Under 2.5 Gol** @ **1.42** ⏳
+2. 🇦🇷 [22:00] **Nueva Chicago vs Quilmes** (ID: 1498787) ➔ **Under 2.5 Gol** @ **1.42** 🟢 *(1-0 al 60')*
 
 ---
 
-### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026 (ORE 21:55):
+### 🌙 Ticket #60: La Corazzata Sudamericana Notturna (Quota 2.03×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 23:30, 00:00, 01:00)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.03×** | **Vincita Potenziale**: **60.89 €**
+1. 🇵🇾 [23:30] **Cerro Porteño vs Nacional Asunción** (ID: 1631996) ➔ **Doppia Chance: 1X** @ **1.30** ⏳
+2. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (ID: 1493108) ➔ **Doppia Chance: X2** @ **1.22** ⏳
+3. 🇧🇷 [01:00] **Vitória vs Grêmio** (ID: 1492369) ➔ **Doppia Chance: 1X** @ **1.28** ⏳
+
+---
+
+### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026 (ORE 23:25):
 * 💵 **Cassa Iniziale Odierna**: **286.38 €**
-* 📉 **Spesa Totale Odierna (6 Ticket)**: **202.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58 + 30 € T59)
-* 🛡️ **Liquidità Libera Protetta su Netwin**: **84.38 €**
-* 🚀 **POTENZIALE VINCITA COMPLESSIVA ATTIVA (T55 + T57 + T58 + T59)**: **342.50 €**!
-* 💰 **SALDO ATTESO A CASSA CON EN-PLEIN SERALE**: **`426.88 €`** *(+198% sul capitale originario di 143.24 €!)*
-*Ultimo aggiornamento: 7 settembre 2026 ore 21:55 — BAgent*
+* 📉 **Spesa Totale Odierna (7 Ticket)**: **232.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58 + 30 € T59 + 30 € T60)
+* 💰 **INCASSI UFFICIALI GIÀ ACCREDITATI**: **`+167.49 €`** (T55: 69.49 € + T58: 98.00 €)
+* 🛡️ **Liquidità Libera Attuale su Netwin**: **`221.87 €`** (84.38 € residui - 30 € T60 + 167.49 € incassati)
+* 🚀 **Vincite Potenziali Ancora Attive (T59 + T60)**: **`121.38 €`** (60.49 € + 60.89 €)
+* 👑 **MASSIMO SALDO RAGGIUNGIBILE A FINE NOTTE**: **`343.25 €`** *(+140% netto rispetto ai 143.24 € di partenza!)*
+*Ultimo aggiornamento: 7 settembre 2026 ore 23:25 — BAgent*
 
 
 
