@@ -298,8 +298,15 @@ FIXTURES_CONFIG = {
                 "ticket": "#60",
                 "ticket_name": "Corazzata Notturna",
                 "market": "Doppia Chance X2",
-                "odd": 1.22,
+                "odd": 1.21,
                 "type": "double_chance_x2"
+            },
+            {
+                "ticket": "#61",
+                "ticket_name": "Bomba Alta Quota",
+                "market": "1X2: 2",
+                "odd": 2.10,
+                "type": "match_winner_2"
             }
         ]
     },
@@ -312,8 +319,43 @@ FIXTURES_CONFIG = {
                 "ticket": "#60",
                 "ticket_name": "Corazzata Notturna",
                 "market": "Doppia Chance 1X",
-                "odd": 1.28,
+                "odd": 1.30,
                 "type": "double_chance_1x"
+            },
+            {
+                "ticket": "#61",
+                "ticket_name": "Bomba Alta Quota",
+                "market": "Doppia Chance 1X",
+                "odd": 1.32,
+                "type": "double_chance_1x"
+            }
+        ]
+    },
+    1638141: {
+        "label": "Carabobo vs Estudiantes de Mérida",
+        "competition": "🇻🇪 Venezuela Primera División",
+        "time_cest": "00:00",
+        "bets": [
+            {
+                "ticket": "#61",
+                "ticket_name": "Bomba Alta Quota",
+                "market": "1X2: 1",
+                "odd": 1.48,
+                "type": "match_winner_1"
+            }
+        ]
+    },
+    1607188: {
+        "label": "Atlético Nacional vs Deportivo Cali",
+        "competition": "🇨🇴 Colombia Copa Colombia",
+        "time_cest": "03:15",
+        "bets": [
+            {
+                "ticket": "#61",
+                "ticket_name": "Bomba Alta Quota",
+                "market": "1X2: 1",
+                "odd": 1.42,
+                "type": "match_winner_1"
             }
         ]
     }
@@ -326,7 +368,8 @@ TICKETS_SUMMARY = {
     "#57": {"name": "Sanzioni & Falli", "stake": 30.0, "total_odd": 3.82, "pot_win": 114.52, "total_legs": 4},
     "#58": {"name": "Tripla d'Acciaio Live", "stake": 50.0, "total_odd": 1.96, "pot_win": 98.00, "total_legs": 3},
     "#59": {"name": "Doppia d'Acciaio Recupero", "stake": 30.0, "total_odd": 2.02, "pot_win": 60.49, "total_legs": 2},
-    "#60": {"name": "Corazzata Notturna", "stake": 30.0, "total_odd": 2.03, "pot_win": 60.89, "total_legs": 3},
+    "#60": {"name": "Corazzata Notturna", "stake": 40.0, "total_odd": 2.06, "pot_win": 82.42, "total_legs": 3},
+    "#61": {"name": "Bomba Alta Quota", "stake": 30.0, "total_odd": 6.00, "pot_win": 180.01, "total_legs": 4},
 }
 
 class LiveTelegramScoreboard:
@@ -335,7 +378,7 @@ class LiveTelegramScoreboard:
         self.match_states: dict[int, dict] = {}
         self.seen_goal_events: set[tuple] = set()
         self.notified_milestones: set[tuple] = set()
-        self.legs_won: dict[str, set[int]] = {"#56": set(), "#54": set(), "#55": set(), "#57": set(), "#58": set(), "#59": set(), "#60": set()}
+        self.legs_won: dict[str, set[int]] = {"#56": set(), "#54": set(), "#55": set(), "#57": set(), "#58": set(), "#59": set(), "#60": set(), "#61": set()}
         self.notified_tickets_won: set[str] = set()
         self._init_states()
 
@@ -598,6 +641,12 @@ class LiveTelegramScoreboard:
                     if gh > ga:
                         self.legs_won[t_id].add(fid)
                         final_lines.append(f"• Ticket {t_id} ({m_label}): <b>✅ VINTO</b> (1 preso)")
+                    else:
+                        final_lines.append(f"• Ticket {t_id} ({m_label}): <b>❌ PERSO</b>")
+                elif b_type == "match_winner_2":
+                    if ga > gh:
+                        self.legs_won[t_id].add(fid)
+                        final_lines.append(f"• Ticket {t_id} ({m_label}): <b>✅ VINTO</b> (2 preso)")
                     else:
                         final_lines.append(f"• Ticket {t_id} ({m_label}): <b>❌ PERSO</b>")
 

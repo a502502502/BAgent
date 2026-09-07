@@ -1345,30 +1345,40 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ---
 
 ### 🛡️ Ticket #59: La Doppia d'Acciaio Recupero (Quota 2.02×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 22:00)
-* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.02×** | **Vincita Potenziale**: **60.49 €**
-1. 🇧🇷 [22:00] **SC Corinthians SP vs Cruzeiro EC MG** (ID: 1634048) ➔ **1X2: 1** @ **1.42** ⏳
-2. 🇦🇷 [22:00] **Nueva Chicago vs Quilmes** (ID: 1498787) ➔ **Under 2.5 Gol** @ **1.42** 🟢 *(1-0 al 60')*
+* **Piattaforma**: Netwin | **Stato**: 🟢 CASSA COMPLETA / VINTO! (2/2)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.02×** | **Vincita Ufficiale**: **60.49 €** (+30.49 € netti)
+1. 🇧🇷 [22:00] **SC Corinthians SP vs Cruzeiro EC MG** (3-1 FT) ➔ **1X2: 1** @ **1.42** 🟢 *(Rimonta e tris 3-1!)*
+2. 🇦🇷 [22:00] **Nueva Chicago vs Quilmes** (1-0 FT) ➔ **Under 2.5 Gol** @ **1.42** 🟢 *(1-0 blindato!)*
 
 ---
 
-### 🌙 Ticket #60: La Corazzata Sudamericana Notturna (Quota 2.03×)
+### 🌙 Ticket #60: La Corazzata Sudamericana Notturna (Quota 2.06×)
 * **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 23:30, 00:00, 01:00)
-* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.03×** | **Vincita Potenziale**: **60.89 €**
-1. 🇵🇾 [23:30] **Cerro Porteño vs Nacional Asunción** (ID: 1631996) ➔ **Doppia Chance: 1X** @ **1.30** ⏳
-2. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (ID: 1493108) ➔ **Doppia Chance: X2** @ **1.22** ⏳
-3. 🇧🇷 [01:00] **Vitória vs Grêmio** (ID: 1492369) ➔ **Doppia Chance: 1X** @ **1.28** ⏳
+* **Importo Puntato**: **40.00 €** | **Quota Totale**: **2.06×** | **Vincita Potenziale**: **82.42 €**
+1. 🇵🇾 [23:30] **Cerro Porteño vs Nacional Asunción** (ID: 1631996) ➔ **Doppia Chance: 1X** @ **1.31** 🟢 *(0-0 al 42' 1T)*
+2. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (ID: 1493108) ➔ **Doppia Chance: X2** @ **1.21** 🟢 *(0-0 al 14' 1T)*
+3. 🇧🇷 [01:00] **Vitória vs Grêmio** (ID: 1492369) ➔ **Doppia Chance: 1X** @ **1.30** ⏳
 
 ---
 
-### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026 (ORE 23:25):
+### 💣 Ticket #61: La Quaterna d'Attacco Alta Quota (Quota 5.83× + Bonus = 6.00×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 00:00, 01:00, 03:15)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **5.83×** (Bonus: +5.24 €) | **Vincita Potenziale**: **180.01 €**
+1. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (ID: 1493108) ➔ **1X2: 2** @ **2.10** 🟢 *(0-0 al 14' 1T)*
+2. 🇻🇪 [00:00] **Carabobo vs Estudiantes de Mérida** (ID: 1638141) ➔ **1X2: 1** @ **1.48** 🟢 *(0-0 al 13' 1T)*
+3. 🇧🇷 [01:00] **Vitória vs Grêmio** (ID: 1492369) ➔ **Doppia Chance: 1X** @ **1.32** ⏳
+4. 🇨🇴 [03:15] **Atlético Nacional vs Deportivo Cali** (ID: 1607188) ➔ **1X2: 1** @ **1.42** ⏳
+
+---
+
+### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ/MARTEDÌ 7-8 SETTEMBRE 2026 (ORE 00:12):
 * 💵 **Cassa Iniziale Odierna**: **286.38 €**
-* 📉 **Spesa Totale Odierna (7 Ticket)**: **232.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58 + 30 € T59 + 30 € T60)
-* 💰 **INCASSI UFFICIALI GIÀ ACCREDITATI**: **`+167.49 €`** (T55: 69.49 € + T58: 98.00 €)
-* 🛡️ **Liquidità Libera Attuale su Netwin**: **`221.87 €`** (84.38 € residui - 30 € T60 + 167.49 € incassati)
-* 🚀 **Vincite Potenziali Ancora Attive (T59 + T60)**: **`121.38 €`** (60.49 € + 60.89 €)
-* 👑 **MASSIMO SALDO RAGGIUNGIBILE A FINE NOTTE**: **`343.25 €`** *(+140% netto rispetto ai 143.24 € di partenza!)*
-*Ultimo aggiornamento: 7 settembre 2026 ore 23:25 — BAgent*
+* 📉 **Spesa Totale Odierna (8 Ticket)**: **272.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58 + 30 € T59 + 40 € T60 + 30 € T61)
+* 💰 **INCASSI UFFICIALI GIÀ ACCREDITATI**: **`+227.98 €`** (T55: 69.49 € + T58: 98.00 € + T59: 60.49 €) 🏆
+* 🛡️ **Liquidità Libera Attuale su Netwin**: **`242.36 €`** *(Al sicuro e protetta dopo aver finanziato sia il #60 che il #61!)*
+* 🚀 **Vincite Potenziali Ancora Attive (T60 + T61)**: **`262.43 €`** (82.42 € + 180.01 €)
+* 👑 **MASSIMO SALDO RAGGIUNGIBILE A FINE NOTTE**: **`504.79 €`** *(+252% rispetto al capitale di partenza di 143.24 €!)*
+*Ultimo aggiornamento: 8 settembre 2026 ore 00:12 — BAgent*
 
 
 
