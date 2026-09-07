@@ -187,6 +187,20 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
   - 🛑 **Divieto Assoluto**: È VIETATO citare allenatori, assetti tattici o dichiarazioni di tecnici basandosi sulla memoria parametrica o su stagioni passate (es. De Zerbi al Marsiglia nel 2026, quando in realtà siede Bruno Genesio).
   - 📌 **Direttiva Operativa**: Prima di redigere l'analisi, BAgent DEVE interrogare l'endpoint `/coachs?team={id}` tramite `collector.current_coach(team_id)` o verificare le formazioni ufficiali su `/fixtures/lineups`. Se il nome del tecnico non è validato da API, non può essere menzionato nel report.
 
+- **Regola #36 (MODULO COMBO VALUE OPTIMIZER — Boost Quote Valore/Raddoppio 1.75 - 2.50+ nei Campionati Maggiori)**:
+  - 🛑 **Divieto Assoluto**: Nei campionati importanti (Serie A, Premier League, La Liga, Champions League, Bundesliga), è VIETATO proporre quote 1X2 base schiacciate e passive (1.20 - 1.35) quando esiste una combinazione classica a correlazione positiva.
+  - 🔬 **Motivazione Scientifica & Architettura**:
+    * Utilizzare il modulo `ClassicComboOptimizer` (`services/analysis/classic_combo_optimizer.py`) e lo script CLI `python scripts/boost_match_combos.py --fixture <ID>`.
+    * Scarica i 100+ mercati reali da API-Football (Bet365, Marathonbet, William Hill) e calcola la distribuzione congiunta di Poisson sui dati rolling stagionali/xG.
+    * Mappa esclusivamente le **combo pre-compilate classiche** giocabili su Netwin/Domusbet:
+      1. `1X2 + Over/Under 1.5, 2.5, 3.5, 4.5` (Bet ID 25)
+      2. `1X2 + Gol/No Gol` (Bet ID 24)
+      3. `Doppia Chance + Over/Under 1.5, 2.5, 3.5` (Bet ID 38)
+      4. `Totale Squadra Over 1.5` (Bet ID 16, 17)
+      5. `Gol/No Gol + Over/Under` (Bet ID 49)
+    * Target Quota: **`1.75 – 2.50+`** con probabilità congiunta $P \ge 40-45\%$ ed Edge reale $EV \ge 0$.
+    * Hard Guardrail: Ban totale di combinazioni a trappola (es. `Under 2.5 + Gol` che paga solo per l'esatto 1-1).
+
 - **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
 
@@ -1243,24 +1257,34 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-## 🎫 TICKET UFFICIALI IN GIOCO — NOTTE DOMENICA 6 / LUNEDÌ 7 SETTEMBRE 2026
+## 🎫 TICKET UFFICIALI CONCLUSI — NOTTE DOMENICA 6 / LUNEDÌ 7 SETTEMBRE 2026
 
-### 🌙 Ticket #52: La Tripla d'Acciaio Notturna (Quota 3.01×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN CORSA ⏱️ (Botafogo-Palmeiras 0-0 al 30')
-* **Importo Puntato**: **50.00 €** | **Quota Totale**: **3.01×** | **Vincita Potenziale**: **150.58 €** *(Profitto Netto: +100.58 €)* | **Ref**: `NETWIN-T52-06SET`
-1. 🇧🇷 [23:30] **Botafogo vs Palmeiras** ➔ **X2 + U/O 4.5: X2 + UN** @ **1.55** ⏳ *(Palmeiras titolare con Abel Ferreira; Botafogo in crisi con tecnico ad interim)*
-2. 🇧🇷 [00:30] **Corinthians vs Chapecoense** ➔ **1X2 Corner (esc.TS): 1 (Corinthians)** @ **1.34** ⏳ *(Assedio Diniz sulle fasce; senza Yuri Alberto e senza Bolasie)*
-3. 🇲🇽 [01:00] **Cruz Azul vs Santos Laguna** ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.45** ⏳ *(Cruz Azul capolista imbattuta in casa contro Santos in caduta libera)*
+### 🔴 Ticket #52: La Tripla d'Acciaio Notturna (Quota 3.01×)
+* **Piattaforma**: Netwin | **Stato**: ❌ PERSO (2/3 vinti, beffa Cruz Azul 1-0 all'89')
+* **Importo Puntato**: **50.00 €** | **Quota Totale**: **3.01×** | **Ref**: `NETWIN-T52-06SET`
+1. 🇧🇷 [23:30] **Botafogo vs Palmeiras** (0-0 FT) ➔ **X2 + U/O 4.5: X2 + UN** @ **1.55** 🟢 *(Gara chiusa e gestita, cassa piena)*
+2. 🇧🇷 [00:30] **Corinthians vs Chapecoense** (5-2 Corner FT) ➔ **1X2 Corner: 1** @ **1.34** 🟢 *(Corinthians assedio 16 tiri e 5 corner contro 2)*
+3. 🇲🇽 [01:00] **Cruz Azul vs Santos Laguna** (1-0 FT) ➔ **1X2 + U/O 1.5: 1 + OV** @ **1.45** 🔴 *(Cruz Azul 24 tiri, 14 in area, gol vittoria all'89': mancato il 2° gol)*
 
 ---
 
-### 🛡️ Ticket #53: La Quaterna d'Assicurazione Notturna (Quota 3.46×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Stake confermato)
-* **Importo Puntato**: **30.00 €** | **Quota Totale**: **3.46×** | **Vincita Potenziale**: **103.80 €** *(Profitto Netto: +73.80 €)* | **Ref**: `NETWIN-T53-06SET`
-1. 🇦🇷 [00:00] **Sol de America vs CS Belgrano** ➔ **Under / Over 2.5: Under 2.5 Gol** @ **1.38** ⏳ *(Torneo Federal A: catenaccio provinciale argentino)*
-2. 🇨🇱 [00:30] **Palestino vs U. de Concepción** ➔ **Doppia Chance: 1X (Palestino)** @ **1.21** ⏳ *(Palestino imbattuto in casa; U. de Concepcion 2 ko esterni)*
-3. 🇵🇪 [01:30] **FBC Melgar vs ADT Tarma** ➔ **Esito Finale 1X2: 1 (FBC Melgar)** @ **1.48** ⏳ *(ADT 8 gol subiti nelle ultime 2 trasferte [5-1 e 3-1])*
-4. 🇧🇴 [02:00] **Nacional Potosí vs Blooming** ➔ **Esito Finale 1X2: 1 (Nacional Potosí)** @ **1.40** ⏳ *(Altitudine estrema 4.067m: Potosí 5-1 e 3-0 in casa, Blooming 0-3)*
+### 🟢 Ticket #53: La Quaterna d'Assicurazione Notturna (Quota 3.46×)
+* **Piattaforma**: Netwin | **Stato**: 🏆 VINTO AL 100% (4/4) 🟢 💰 (EN PLEIN SUDAMERICANO!)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **3.46×** | **Vincita Realizzata**: **103.80 €** *(Profitto Netto: +73.80 €)* | **Ref**: `NETWIN-T53-06SET`
+1. 🇦🇷 [00:00] **Sol de America vs CS Belgrano** (2-0 FT) ➔ **Under 2.5 Gol** @ **1.38** 🟢 *(2-0 blindato al 90'+4)*
+2. 🇨🇱 [00:30] **Palestino vs U. de Concepción** (2-1 FT) ➔ **Doppia Chance: 1X** @ **1.21** 🟢 *(Rimonta da 0-1 con rigore fallito: pari al 65' e 2-1 al 90'!)*
+3. 🇵🇪 [01:30] **FBC Melgar vs ADT Tarma** (3-0 FT) ➔ **Esito Finale: 1** @ **1.48** 🟢 *(Tris Melgar con doppietta Cuesta al 45' e 63')*
+4. 🇧🇴 [02:00] **Nacional Potosí vs Blooming** (2-1 FT) ➔ **Esito Finale: 1** @ **1.40** 🟢 *(Vittoria ad alta quota: 1-1 al 45' e gol decisivo di Azogue al 74'!)*
+
+---
+
+### 💳 SALDO TOTALE UTENTE SU NETWIN: **286.38 €** 🚀
+* **Partenza iniziale pre-recupero**: **143.24 €**
+* **Cassa serale (dopo Ticket #49 e #51)**: **262.58 €**
+* **Spesa notturna**: -80.00 € (50 € T52 + 30 € T53) ➔ Residuo liquido 182.58 €
+* **Incasso Quaterna #53**: **+103.80 €**
+* **SALDO ATTUALE DISPONIBILE**: **`286.38 €`** 🟢
+* 📈 **PERFORMANCE TOTALE OPERAZIONE**: **+143.14 € NETTI DI PROFITTO (+100.0% — CAPITALE ESATTAMENTE RADDOPPIATO!)**
 
 ---
 
@@ -1268,7 +1292,57 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 * 💵 **Capitale Residuo in Cassa (Liquido)**: **182.58 €** *(già protetto e in attivo!)*
 * 🚀 **Vincita Potenziale Complessiva Attiva**: **254.38 €** *(150.58 € T52 + 103.80 € T53)*
 * 📈 **Saldo Atteso a Cassa all'alba con en plein**: **436.96 €**! 💰
-*Ultimo aggiornamento: 6 settembre 2026 ore 23:59 — BAgent*
+*Ultimo aggiornamento notte: 7 settembre 2026 ore 04:00 — BAgent*
+
+---
+
+## 🎫 TICKET UFFICIALI ATTIVI — LUNEDÌ 7 SETTEMBRE 2026
+
+### 🚀 Ticket #56: La Tripla Pomeridiana Over (Quota 4.13×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 15:00 & 15:30)
+* **Importo Puntato**: **37.00 €** | **Quota Totale**: **4.13×** | **Vincita Potenziale**: **152.89 €**
+1. 🇹🇷 [15:00] **Göztepe U19 vs Gaziantep FK U19** (ID: 1629414) ➔ **Over 2.5 Gol** @ **1.52** ⏳
+2. 🌍 [15:00] **Corea del Nord U20 D vs Portogallo U20 D** (ID: 1637280) ➔ **Over 2.5 Gol** @ **1.38** ⏳
+3. 🇺🇿 [15:30] **Metallurg Bekabad vs FC Pakhtakor Tashkent II** (ID: 1531094) ➔ **Over 3.5 Gol** @ **1.97** ⏳
+
+---
+
+### 🛡️ Ticket #54: La Tripla Corner & Multigol Casa (Quota 2.72×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 19:00 & 20:30)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.72×** | **Vincita Potenziale**: **81.46 €**
+1. 🇩🇰 [19:00] **FC Midtjylland vs FC Nordsjaelland** (ID: 1549015) ➔ **Over 8.5 Corner (esc. TS)** @ **1.39** ⏳
+2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (ID: 1570368) ➔ **MultiGol 0-1 Casa: SI** @ **1.32** ⏳
+3. 🇮🇹 [20:30] **Palermo vs Sampdoria** (ID: 1601520) ➔ **Over 4.5 Corner Squadra 1 (Palermo)** @ **1.48** ⏳
+
+---
+
+### ⚖️ Ticket #55: La Tripla Combo & Doppie Chance (Quota 2.78×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 20:30, 20:45, 21:30)
+* **Importo Puntato**: **25.00 €** | **Quota Totale**: **2.78×** | **Vincita Potenziale**: **69.49 €**
+1. 🇮🇹 [20:30] **Palermo vs Sampdoria** (ID: 1601520) ➔ **Doppia Chance: 1X** @ **1.17** ⏳
+2. 🇮🇹 [20:45] **Udinese vs Lazio** (ID: 1550116) ➔ **X2 + Under 3.5** @ **1.80** ⏳
+3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (ID: 1570366) ➔ **Doppia Chance: X2** @ **1.32** ⏳
+
+---
+
+### 🟨 Ticket #57: La Quaterna Sanzioni & Falli Giocatori (Quota 3.82×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 18:30, 19:00, 20:45, 21:30)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **3.82×** | **Vincita Potenziale**: **114.52 €**
+1. 🇮🇹 [18:30] **Cagliari vs Lecce** (ID: 1550109) ➔ **Under 3.5 Gol** @ **1.22** ⏳
+2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (ID: 1570368) ➔ **Over 4.5 Cartellini** @ **1.49** ⏳
+3. 🇮🇹 [20:45] **Udinese vs Lazio** (ID: 1550116) ➔ **Mattia Zaccagni Over 1.5 Falli Subiti** @ **1.20** ⏳
+4. 🇪🇸 [21:30] **Elche vs Real Sociedad** (ID: 1570366) ➔ **Mikel Oyarzabal Over 1.5 Falli Subiti** @ **1.75** ⏳
+
+---
+
+### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026:
+* 💵 **Cassa Iniziale Odierna**: **286.38 €** *(dopo il raddoppio netto del capitale con T53)*
+* 📉 **Investimento Totale in Gioco (4 Ticket)**: **122.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57)
+* 🛡️ **Liquidità Libera Protetta su Netwin**: **164.38 €** *(+21.14 € sopra il capitale originario di 143.24 €, capitale iniziale protetto al 100%!)*
+* 🚀 **POTENZIALE VINCITA COMPLESSIVA ATTIVA**: **418.36 €**!
+* 💰 **MASSIMO SALDO RAGGIUNGIBILE CON EN-PLEIN**: **`582.74 €`** *(+307% sul capitale di partenza!)*
+*Ultimo aggiornamento: 7 settembre 2026 ore 14:20 — BAgent*
+
 
 
 
