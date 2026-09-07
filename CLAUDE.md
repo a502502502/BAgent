@@ -1299,49 +1299,58 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ## 🎫 TICKET UFFICIALI ATTIVI — LUNEDÌ 7 SETTEMBRE 2026
 
 ### 🚀 Ticket #56: La Tripla Pomeridiana Over (Quota 4.13×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 15:00 & 15:30)
-* **Importo Puntato**: **37.00 €** | **Quota Totale**: **4.13×** | **Vincita Potenziale**: **152.89 €**
-1. 🇹🇷 [15:00] **Göztepe U19 vs Gaziantep FK U19** (ID: 1629414) ➔ **Over 2.5 Gol** @ **1.52** ⏳
-2. 🌍 [15:00] **Corea del Nord U20 D vs Portogallo U20 D** (ID: 1637280) ➔ **Over 2.5 Gol** @ **1.38** ⏳
-3. 🇺🇿 [15:30] **Metallurg Bekabad vs FC Pakhtakor Tashkent II** (ID: 1531094) ➔ **Over 3.5 Gol** @ **1.97** ⏳
+* **Piattaforma**: Netwin | **Stato**: ❌ CHIUSO / PERDENTE (1/3)
+* **Importo Puntato**: **37.00 €** | **Quota Totale**: **4.13×**
+1. 🇹🇷 [15:00] **Göztepe U19 vs Gaziantep FK U19** (3-0 FT) ➔ **Over 2.5 Gol** @ **1.52** 🟢 *(3-0 facile!)*
+2. 🌍 [15:00] **Corea del Nord U20 D vs Portogallo U20 D** (2-0 FT) ➔ **Over 2.5 Gol** @ **1.38** 🔴 *(Mancato per 1 gol)*
+3. 🇺🇿 [15:30] **Metallurg Bekabad vs FC Pakhtakor Tashkent II** (1-0 FT) ➔ **Over 3.5 Gol** @ **1.97** 🔴
 
 ---
 
 ### 🛡️ Ticket #54: La Tripla Corner & Multigol Casa (Quota 2.72×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 19:00 & 20:30)
-* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.72×** | **Vincita Potenziale**: **81.46 €**
-1. 🇩🇰 [19:00] **FC Midtjylland vs FC Nordsjaelland** (ID: 1549015) ➔ **Over 8.5 Corner (esc. TS)** @ **1.39** ⏳
-2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (ID: 1570368) ➔ **MultiGol 0-1 Casa: SI** @ **1.32** ⏳
-3. 🇮🇹 [20:30] **Palermo vs Sampdoria** (ID: 1601520) ➔ **Over 4.5 Corner Squadra 1 (Palermo)** @ **1.48** ⏳
+* **Piattaforma**: Netwin | **Stato**: ❌ CHIUSO / PERDENTE (Beffa per 1 singolo corner a Herning)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.72×**
+1. 🇩🇰 [19:00] **FC Midtjylland vs FC Nordsjaelland** (2-2 FT, 4-4 Corner) ➔ **Over 8.5 Corner (esc. TS)** @ **1.39** 🔴 *(Fermato a 8 corner totali)*
+2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (1-1 FT) ➔ **MultiGol 0-1 Casa: SI** @ **1.32** 🟢 *(Preso in pieno!)*
+3. 🇮🇹 [20:30] **Palermo vs Sampdoria** ➔ **Over 4.5 Corner Squadra 1 (Palermo)** @ **1.48** ⏳
 
 ---
 
 ### ⚖️ Ticket #55: La Tripla Combo & Doppie Chance (Quota 2.78×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 20:30, 20:45, 21:30)
+* **Piattaforma**: Netwin | **Stato**: IN GIOCO ⏱️ (In stradominio e controllo)
 * **Importo Puntato**: **25.00 €** | **Quota Totale**: **2.78×** | **Vincita Potenziale**: **69.49 €**
-1. 🇮🇹 [20:30] **Palermo vs Sampdoria** (ID: 1601520) ➔ **Doppia Chance: 1X** @ **1.17** ⏳
-2. 🇮🇹 [20:45] **Udinese vs Lazio** (ID: 1550116) ➔ **X2 + Under 3.5** @ **1.80** ⏳
-3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (ID: 1570366) ➔ **Doppia Chance: X2** @ **1.32** ⏳
+1. 🇮🇹 [20:30] **Palermo vs Sampdoria** (2-0 2H) ➔ **Doppia Chance: 1X** @ **1.17** ⏳ *(Ipotecato al 2-0!)*
+2. 🇮🇹 [20:45] **Udinese vs Lazio** (0-0 HT) ➔ **X2 + Under 3.5** @ **1.80** ⏳ *(Pieno controllo)*
+3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (0-1 1H) ➔ **Doppia Chance: X2** @ **1.32** ⏳ *(Real Sociedad avanti 0-1!)*
 
 ---
 
 ### 🟨 Ticket #57: La Quaterna Sanzioni & Falli Giocatori (Quota 3.82×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 18:30, 19:00, 20:45, 21:30)
+* **Piattaforma**: Netwin | **Stato**: IN GIOCO ⏱️ (2 su 4 già vinte!)
 * **Importo Puntato**: **30.00 €** | **Quota Totale**: **3.82×** | **Vincita Potenziale**: **114.52 €**
-1. 🇮🇹 [18:30] **Cagliari vs Lecce** (ID: 1550109) ➔ **Under 3.5 Gol** @ **1.22** ⏳
-2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (ID: 1570368) ➔ **Over 4.5 Cartellini** @ **1.49** ⏳
-3. 🇮🇹 [20:45] **Udinese vs Lazio** (ID: 1550116) ➔ **Mattia Zaccagni Over 1.5 Falli Subiti** @ **1.20** ⏳
-4. 🇪🇸 [21:30] **Elche vs Real Sociedad** (ID: 1570366) ➔ **Mikel Oyarzabal Over 1.5 Falli Subiti** @ **1.75** ⏳
+1. 🇮🇹 [18:30] **Cagliari vs Lecce** (1-0 FT) ➔ **Under 3.5 Gol** @ **1.22** 🟢 *(Preso in scioltezza!)*
+2. 🇪🇸 [19:00] **Getafe vs Celta Vigo** (1-1 FT, 5 cartellini) ➔ **Over 4.5 Cartellini** @ **1.49** 🟢 *(4 gialli + 1 rosso, cassa piena!)*
+3. 🇮🇹 [20:45] **Udinese vs Lazio** (0-0 HT) ➔ **Mattia Zaccagni Over 1.5 Falli Subiti** @ **1.20** ⏳
+4. 🇪🇸 [21:30] **Elche vs Real Sociedad** (0-1 1H) ➔ **Mikel Oyarzabal Over 1.5 Falli Subiti** @ **1.75** ⏳
 
 ---
 
-### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026:
-* 💵 **Cassa Iniziale Odierna**: **286.38 €** *(dopo il raddoppio netto del capitale con T53)*
-* 📉 **Investimento Totale in Gioco (4 Ticket)**: **122.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57)
-* 🛡️ **Liquidità Libera Protetta su Netwin**: **164.38 €** *(+21.14 € sopra il capitale originario di 143.24 €, capitale iniziale protetto al 100%!)*
-* 🚀 **POTENZIALE VINCITA COMPLESSIVA ATTIVA**: **418.36 €**!
-* 💰 **MASSIMO SALDO RAGGIUNGIBILE CON EN-PLEIN**: **`582.74 €`** *(+307% sul capitale di partenza!)*
-*Ultimo aggiornamento: 7 settembre 2026 ore 14:20 — BAgent*
+### ⚡ Ticket #58: La Tripla d'Acciaio Live (Quota 1.96×)
+* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Live ore 21:40)
+* **Importo Puntato**: **50.00 €** | **Quota Totale**: **1.96×** | **Vincita Potenziale**: **98.00 €**
+1. 🇮🇹 [20:45] **Udinese vs Lazio** (0-0 HT) ➔ **Doppia Chance: X2** @ **1.25** ⏳
+2. 🇵🇹 [21:15] **Estoril vs Arouca** (0-0 1H 30') ➔ **Under 2.5 Gol** @ **1.40** ⏳
+3. 🇪🇸 [21:30] **Elche vs Real Sociedad** (0-1 1H 12') ➔ **Doppia Chance: X2** @ **1.12** ⏳ *(Baschi già avanti 0-1!)*
+
+---
+
+### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ 7 SETTEMBRE 2026 (ORE 21:45):
+* 💵 **Cassa Iniziale Odierna**: **286.38 €**
+* 📉 **Spesa Totale Odierna (5 Ticket)**: **172.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58)
+* 🛡️ **Liquidità Libera Protetta su Netwin**: **114.38 €**
+* 🚀 **POTENZIALE VINCITA COMPLESSIVA ATTIVA (T55 + T57 + T58)**: **282.01 €**!
+* 💰 **SALDO ATTESO A CASSA CON TRIPLETTA SERALE**: **`396.39 €`** *(+177% sul capitale originario di 143.24 €!)*
+*Ultimo aggiornamento: 7 settembre 2026 ore 21:45 — BAgent*
 
 
 
