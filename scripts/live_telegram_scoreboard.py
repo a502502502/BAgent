@@ -4,11 +4,12 @@ scripts/live_telegram_scoreboard.py — Sentinella Telegram Live Real-Time Multi
 Monitora in tempo reale tutti i match delle 4 schedine attive di oggi (Lunedì 7 Settembre 2026):
 Ticket #56 (Pomeridiana Over), Ticket #57 (Sanzioni & Falli), Ticket #54 (Corner & Multigol), Ticket #55 (Combo & Doppie Chance).
 
-Invia notifiche push istantanee su Telegram:
-- Ad ogni cambio di risultato (Gol, autore, minuto)
-- Al fischio d'inizio, fine 1° tempo e fischio finale
-- Al raggiungimento di soglie speciali (Over 2.5/3.5, Corner, Cartellini, Falli subiti Zaccagni/Oyarzabal)
-- Alla chiusura vincente di una gamba o dell'intero ticket (CASSA!)
+Gestione robusta:
+- Distinzione tra Gol Reale e Gol Annullato (VAR / correzione feed)
+- Nessuna notifica duplicata o incongruente (es. "Gol 0-0")
+- Rilevamento marcatore preciso
+- Tracciamento milestone univoco (Corner, Cartellini, Falli subiti Zaccagni/Oyarzabal)
+- Aggiornamento continuo avanzamento ticket
 """
 
 from __future__ import annotations
@@ -32,7 +33,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
 
 def send_telegram(msg: str) -> bool:
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
-        print("[TELEGRAM SKIPPED] Mancano token o chat_id")
+        print("[TELEGRAM SKIPPED] Mancano token o chat_id", flush=True)
         return False
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     try:
@@ -42,11 +43,11 @@ def send_telegram(msg: str) -> bool:
             timeout=10,
         )
         if not r.ok:
-            print(f"[TELEGRAM ERROR] {r.status_code}: {r.text[:200]}")
+            print(f"[TELEGRAM ERROR] {r.status_code}: {r.text[:200]}", flush=True)
             return False
         return True
     except Exception as e:
-        print(f"[TELEGRAM EXCEPTION] {e}")
+        print(f"[TELEGRAM EXCEPTION] {e}", flush=True)
         return False
 
 # Struttura delle 4 Schedine e delle 9 Partite
@@ -68,7 +69,7 @@ FIXTURES_CONFIG = {
     },
     1637280: {
         "label": "Corea del Nord U20 D vs Portogallo U20 D",
-        "competition": "🌍 Mondiale U20 Femminile",
+        "competition": "🌍 Mondiale U20 Donne",
         "time_cest": "15:00",
         "bets": [
             {
@@ -229,7 +230,8 @@ class LiveTelegramScoreboard:
     def __init__(self):
         self.collector = FootballExternalCollector()
         self.match_states: dict[int, dict] = {}
-        self.seen_events: set[str] = set()
+        self.seen_goal_events: set[tuple] = set()
+        self.notified_milestones: set[tuple] = set()
         self.legs_won: dict[str, set[int]] = {"#56": set(), "#54": set(), "#55": set(), "#57": set()}
         self.notified_tickets_won: set[str] = set()
         self._init_states()
@@ -239,15 +241,15 @@ class LiveTelegramScoreboard:
             self.match_states[fid] = {
                 "status": "NS",
                 "elapsed": 0,
-                "gh": None,
-                "ga": None,
+                "gh": 0,
+                "ga": 0,
                 "home_name": "",
                 "away_name": "",
                 "home_corners": 0,
                 "away_corners": 0,
                 "cards": 0,
                 "player_fouls": {},
-                "legs_status": {b["ticket"]: "IN_CORSO" for b in cfg["bets"]}
+                "initialized": False
             }
 
     def format_bet_impact(self, fid: int, gh: int, ga: int, elapsed: int) -> list[str]:
@@ -267,19 +269,22 @@ class LiveTelegramScoreboard:
                     self.legs_won[t_id].add(fid)
                     lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): <b>✅ OBIETTIVO RAGGIUNTO!</b> ({tot_goals} gol)")
                 else:
+                    self.legs_won[t_id].discard(fid)
                     remain = needed - tot_goals
-                    lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): In corsa ({tot_goals}/{needed} gol — ne serve {remain})")
+                    lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): In corsa ({tot_goals}/{needed} gol — ne mancano {remain})")
 
             elif b_type == "under_goals":
                 thresh = bet["threshold"]
                 max_allowed = int(thresh)
                 if tot_goals > max_allowed:
+                    self.legs_won[t_id].discard(fid)
                     lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): ❌ Sforata soglia ({tot_goals} gol)")
                 else:
                     lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): 🛡️ Al sicuro ({tot_goals}/{max_allowed} gol max)")
 
             elif b_type == "home_multigoal_0_1":
                 if gh > 1:
+                    self.legs_won[t_id].discard(fid)
                     lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): ❌ Casa ha segnato 2+ gol ({gh})")
                 else:
                     lines.append(f"• <b>Ticket {t_id}</b> ({m_label}): 🛡️ Al sicuro (Casa {gh} gol, max 1)")
@@ -311,7 +316,7 @@ class LiveTelegramScoreboard:
                 self.notified_tickets_won.add(t_id)
                 msg = (
                     f"🎉🎉 <b>CASSAAAA! TICKET {t_id} PRESO AL 100%!</b> 🎉🎉\n\n"
-                    f"👑 <b>{info['name']}</b> ({info['total_odd']:.2f}×)\n"
+                    f"👑 <b>{info['name']}</b> (@{info['total_odd']:.2f})\n"
                     f"━━━━━━━━━━━━━━━━━━━━━\n"
                     f"💰 <b>Stake Giocato</b>: {info['stake']:.2f} €\n"
                     f"🏆 <b>INCASSO A CASSA</b>: <b>{info['pot_win']:.2f} €</b>\n"
@@ -330,39 +335,52 @@ class LiveTelegramScoreboard:
         st = self.match_states[fid]
         new_status = f["fixture"]["status"]["short"]
         elapsed = f["fixture"]["status"]["elapsed"] or 0
-        gh = f["goals"]["home"]
-        ga = f["goals"]["away"]
+        gh = f["goals"]["home"] if f["goals"]["home"] is not None else 0
+        ga = f["goals"]["away"] if f["goals"]["away"] is not None else 0
         home = f["teams"]["home"]["name"]
         away = f["teams"]["away"]["name"]
 
         st["home_name"] = home
         st["away_name"] = away
 
-        # 1. Kickoff Alert
-        if st["status"] == "NS" and new_status in ("1H", "LIVE"):
+        # Prima sincronizzazione dello stato (silenziosa se il match è già iniziato)
+        if not st["initialized"]:
+            st["initialized"] = True
             st["status"] = new_status
-            st["gh"] = 0
-            st["ga"] = 0
+            st["elapsed"] = elapsed
+            st["gh"] = gh
+            st["ga"] = ga
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Sincronizzato {home} vs {away}: {gh}-{ga} [{new_status} {elapsed}']", flush=True)
+            return
+
+        # 1. Fischio d'inizio (se passa da NS a 1H/LIVE)
+        if st["status"] == "NS" and new_status in ("1H", "LIVE", "1T"):
+            st["status"] = new_status
+            st["gh"] = gh
+            st["ga"] = ga
+            st["elapsed"] = elapsed or 1
             msg = (
                 f"⏱️ <b>FISCHIO D'INIZIO!</b>\n\n"
                 f"{cfg['competition']}\n"
                 f"⚽ <b>{home} vs {away}</b> (1')\n"
-                f"Risultato: 0 - 0\n\n"
-                f"📋 <b>Selezioni in gioco:</b>\n" +
+                f"Risultato iniziale: 0 - 0\n\n"
+                f"📋 <b>Selezioni collegate:</b>\n" +
                 "\n".join([f"• Ticket {b['ticket']} ➔ <b>{b['market']}</b> (@{b['odd']:.2f})" for b in cfg["bets"]])
             )
             send_telegram(msg)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Kickoff notified: {home} vs {away}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Kickoff notified: {home} vs {away}", flush=True)
+            return
 
-        # 2. Score Change Alert (Gol!)
-        elif (gh is not None and ga is not None) and (gh != st["gh"] or ga != st["ga"]) and st["status"] != "NS":
-            old_gh = st["gh"] or 0
-            old_ga = st["ga"] or 0
+        old_tot = st["gh"] + st["ga"]
+        new_tot = gh + ga
+
+        # 2A. VERO GOL SEGNATO (Il totale gol è aumentato!)
+        if new_tot > old_tot and new_status in ("1H", "2H", "HT", "ET", "LIVE"):
             st["gh"] = gh
             st["ga"] = ga
             st["elapsed"] = elapsed
 
-            # Find scorer from events if available
+            # Trova marcatore reale
             events = f.get("events", [])
             scorer_str = ""
             for ev in reversed(events):
@@ -371,8 +389,11 @@ class LiveTelegramScoreboard:
                     t_name = ev.get("team", {}).get("name", "")
                     m = ev.get("time", {}).get("elapsed", elapsed)
                     detail = ev.get("detail", "Gol")
-                    scorer_str = f"⚽ Marcatore: <b>{p_name}</b> ({t_name}, {m}') [{detail}]"
-                    break
+                    ev_key = (fid, m, p_name, t_name)
+                    if ev_key not in self.seen_goal_events:
+                        self.seen_goal_events.add(ev_key)
+                        scorer_str = f"👤 Marcatore: <b>{p_name}</b> ({t_name}, {m}') [{detail}]"
+                        break
 
             impact_lines = self.format_bet_impact(fid, gh, ga, elapsed)
 
@@ -383,12 +404,30 @@ class LiveTelegramScoreboard:
             )
             if scorer_str:
                 msg += f"{scorer_str}\n"
-            msg += f"\n📊 <b>Stato Schedine Coinvolte:</b>\n" + "\n".join(impact_lines)
+            msg += f"\n📊 <b>Impatto sulle Schedine:</b>\n" + "\n".join(impact_lines)
 
             send_telegram(msg)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Goal notified: {home} {gh}-{ga} {away}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Goal notified: {home} {gh}-{ga} {away}", flush=True)
 
-        # 3. Half-Time Alert
+        # 2B. GOL ANNULLATO / RETTIFICA VAR (Il totale gol è diminuito!)
+        elif new_tot < old_tot and new_status in ("1H", "2H", "HT", "ET", "LIVE"):
+            st["gh"] = gh
+            st["ga"] = ga
+            st["elapsed"] = elapsed
+
+            impact_lines = self.format_bet_impact(fid, gh, ga, elapsed)
+
+            msg = (
+                f"❌ <b>VAR / RETTIFICA: GOL ANNULLATO!</b>\n\n"
+                f"{cfg['competition']}\n"
+                f"⚠️ Decisione arbitrale o correzione ufficiale: gol revocato!\n"
+                f"⚖️ Il punteggio di <b>{home} vs {away}</b> torna su: <b>{gh} - {ga}</b> ({elapsed}')\n\n"
+                f"📊 <b>Nuovo Stato Schedine:</b>\n" + "\n".join(impact_lines)
+            )
+            send_telegram(msg)
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Disallowed goal notified: {home} {gh}-{ga} {away}", flush=True)
+
+        # 3. Fine Primo Tempo (Intervallo)
         if st["status"] != "HT" and new_status == "HT":
             st["status"] = "HT"
             impact_lines = self.format_bet_impact(fid, gh, ga, 45)
@@ -396,16 +435,15 @@ class LiveTelegramScoreboard:
                 f"⏸️ <b>FINE PRIMO TEMPO (INTERVALLO)</b>\n\n"
                 f"{cfg['competition']}\n"
                 f"⚖️ <b>{home} {gh} - {ga} {away}</b> (45')\n\n"
-                f"📊 <b>Punto della situazione:</b>\n" + "\n".join(impact_lines)
+                f"📊 <b>Riepilogo Schedine:</b>\n" + "\n".join(impact_lines)
             )
             send_telegram(msg)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] HT notified: {home} vs {away}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] HT notified: {home} vs {away}", flush=True)
 
-        # 4. Full-Time Alert
+        # 4. Risultato Finale Definitivo
         if st["status"] != "FT" and new_status in ("FT", "AET", "PEN"):
             st["status"] = "FT"
-            # Final validation of legs
-            tot_goals = (gh or 0) + (ga or 0)
+            tot_goals = gh + ga
             final_lines = []
             for bet in cfg["bets"]:
                 t_id = bet["ticket"]
@@ -452,21 +490,17 @@ class LiveTelegramScoreboard:
                 f"🏁 <b>FISCHIO FINALE! RISULTATO DEFINITIVO</b>\n\n"
                 f"{cfg['competition']}\n"
                 f"🏆 <b>{home} {gh} - {ga} {away}</b> (FT)\n\n"
-                f"📋 <b>Esito Schedine:</b>\n" + "\n".join(final_lines)
+                f"📋 <b>Esito Ufficiale:</b>\n" + "\n".join(final_lines)
             )
             send_telegram(msg)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] FT notified: {home} {gh}-{ga} {away}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] FT notified: {home} {gh}-{ga} {away}", flush=True)
 
-        # Update basic status
+        # Aggiorna lo stato corrente
         st["status"] = new_status
         st["elapsed"] = elapsed
-        if gh is not None:
-            st["gh"] = gh
-        if ga is not None:
-            st["ga"] = ga
 
     def check_secondary_stats(self, in_play_ids: list[int]):
-        """Verifica corner, cartellini e falli giocatori per i match in-play con mercati speciali."""
+        """Verifica corner, cartellini e falli giocatori per i match in-play."""
         for fid in in_play_ids:
             cfg = FIXTURES_CONFIG.get(fid)
             if not cfg:
@@ -501,50 +535,46 @@ class LiveTelegramScoreboard:
 
                     # Check total corners (Midtjylland)
                     tot_corners = c_home + c_away
-                    if tot_corners != (st["home_corners"] + st["away_corners"]) and tot_corners > 0:
-                        st["home_corners"] = c_home
-                        st["away_corners"] = c_away
+                    if tot_corners >= 9 and (fid, "over_corners_total") not in self.notified_milestones:
                         for b in cfg["bets"]:
                             if b["type"] == "over_corners_total":
-                                if tot_corners >= 9 and fid not in self.legs_won[b["ticket"]]:
-                                    self.legs_won[b["ticket"]].add(fid)
-                                    send_telegram(
-                                        f"🚩 <b>OVER 8.5 CORNER RAGGIUNTO! ✅</b>\n\n"
-                                        f"{st['home_name']} vs {st['away_name']}\n"
-                                        f"Totale Corner: <b>{tot_corners}</b> ({c_home} - {c_away})\n"
-                                        f"🎯 <b>Ticket {b['ticket']}</b>: Selezione VINTA al 100%!"
-                                    )
+                                self.notified_milestones.add((fid, "over_corners_total"))
+                                self.legs_won[b["ticket"]].add(fid)
+                                send_telegram(
+                                    f"🚩 <b>OVER 8.5 CORNER RAGGIUNTO! ✅</b>\n\n"
+                                    f"{st['home_name']} vs {st['away_name']}\n"
+                                    f"Totale Corner: <b>{tot_corners}</b> ({c_home} - {c_away})\n"
+                                    f"🎯 <b>Ticket {b['ticket']}</b>: Selezione VINTA al 100%!"
+                                )
 
                     # Check home corners (Palermo)
-                    if c_home != st["home_corners"] and c_home > 0:
-                        st["home_corners"] = c_home
+                    if c_home >= 5 and (fid, "home_corners") not in self.notified_milestones:
                         for b in cfg["bets"]:
                             if b["type"] == "home_corners":
-                                if c_home >= 5 and fid not in self.legs_won[b["ticket"]]:
-                                    self.legs_won[b["ticket"]].add(fid)
-                                    send_telegram(
-                                        f"🚩 <b>PALERMO OVER 4.5 CORNER RAGGIUNTO! ✅</b>\n\n"
-                                        f"Palermo vs {st['away_name']}\n"
-                                        f"Corner Palermo: <b>{c_home}</b>\n"
-                                        f"🎯 <b>Ticket {b['ticket']}</b>: Selezione VINTA al 100%!"
-                                    )
+                                self.notified_milestones.add((fid, "home_corners"))
+                                self.legs_won[b["ticket"]].add(fid)
+                                send_telegram(
+                                    f"🚩 <b>PALERMO OVER 4.5 CORNER RAGGIUNTO! ✅</b>\n\n"
+                                    f"Palermo vs {st['away_name']}\n"
+                                    f"Corner Palermo: <b>{c_home}</b>\n"
+                                    f"🎯 <b>Ticket {b['ticket']}</b>: Selezione VINTA al 100%!"
+                                )
 
                     # Check cards (Getafe)
-                    if cards_tot != st["cards"] and cards_tot > 0:
-                        st["cards"] = cards_tot
+                    if cards_tot >= 5 and (fid, "over_cards") not in self.notified_milestones:
                         for b in cfg["bets"]:
                             if b["type"] == "over_cards":
-                                if cards_tot >= 5 and fid not in self.legs_won[b["ticket"]]:
-                                    self.legs_won[b["ticket"]].add(fid)
-                                    send_telegram(
-                                        f"🟨 <b>OVER 4.5 CARTELLINI RAGGIUNTO! ✅</b>\n\n"
-                                        f"Getafe vs Celta Vigo\n"
-                                        f"Totale Cartellini: <b>{cards_tot}</b>\n"
-                                        f"🎯 <b>Ticket {b['ticket']}</b>: Selezione VINTA al 100%!"
-                                    )
+                                self.notified_milestones.add((fid, "over_cards"))
+                                self.legs_won[b["ticket"]].add(fid)
+                                send_telegram(
+                                    f"🟨 <b>OVER 4.5 CARTELLINI RAGGIUNTO! ✅</b>\n\n"
+                                    f"Getafe vs Celta Vigo\n"
+                                    f"Totale Cartellini: <b>{cards_tot}</b>\n"
+                                    f"🎯 <b>Ticket {b['ticket']}</b>: Selezione VINTA al 100%!"
+                                )
 
             except Exception as e:
-                print(f"[STATS ERROR fixture {fid}]: {e}")
+                print(f"[STATS ERROR fixture {fid}]: {e}", flush=True)
 
             # Check player fouls drawn (Zaccagni / Oyarzabal)
             if has_player_fouls:
@@ -562,37 +592,24 @@ class LiveTelegramScoreboard:
                                 if b["type"] == "player_fouls_drawn":
                                     target_str = b["player_name"].lower()
                                     if target_str in p_name.lower():
-                                        old_f = st["player_fouls"].get(target_str, 0)
-                                        if fouls_drawn != old_f:
-                                            st["player_fouls"][target_str] = fouls_drawn
-                                            if fouls_drawn >= 2 and fid not in self.legs_won[b["ticket"]]:
-                                                self.legs_won[b["ticket"]].add(fid)
-                                                send_telegram(
-                                                    f"🎯 <b>FALLI SUBITI RAGGIUNTI! ✅</b>\n\n"
-                                                    f"👤 <b>{p_name}</b> ha subito <b>{fouls_drawn} falli</b>!\n"
-                                                    f"🎯 <b>Ticket {b['ticket']}</b> ({b['market']}): Selezione VINTA al 100%!"
-                                                )
+                                        milestone_key = (fid, f"foul_{target_str}")
+                                        if fouls_drawn >= 2 and milestone_key not in self.notified_milestones:
+                                            self.notified_milestones.add(milestone_key)
+                                            self.legs_won[b["ticket"]].add(fid)
+                                            send_telegram(
+                                                f"🎯 <b>FALLI SUBITI RAGGIUNTI! ✅</b>\n\n"
+                                                f"👤 <b>{p_name}</b> ha subito <b>{fouls_drawn} falli</b>!\n"
+                                                f"🎯 <b>Ticket {b['ticket']}</b> ({b['market']}): Selezione VINTA al 100%!"
+                                            )
                 except Exception as e:
-                    print(f"[PLAYER FOULS ERROR fixture {fid}]: {e}")
+                    print(f"[PLAYER FOULS ERROR fixture {fid}]: {e}", flush=True)
 
     def run_loop(self):
-        print("=" * 75)
-        print("🤖 [BAGENT] TELEGRAM LIVE SENTINEL SCOREBOARD ATTIVA")
-        print("📡 Monitoraggio 9 match per 4 Schedine (#56, #57, #54, #55)")
-        print(f"⏱️ Frequenza scansione: 45 secondi in-play | Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print("=" * 75)
-
-        send_telegram(
-            "🔔 <b>SENTINELLA LIVE RISULTATI ATTIVATA!</b>\n\n"
-            "Tutte le <b>4 schedine odierne (#56, #57, #54, #55)</b> sono collegate alla sentinella in tempo reale.\n\n"
-            "Riceverai notifiche push istantanee per:\n"
-            "⚽ <b>Ad ogni gol segnato</b> (autore, minuto, nuovo punteggio)\n"
-            "⏱️ <b>Fischio d'inizio, Intervallo e Risultati Finali</b>\n"
-            "🚩 <b>Corner totali e corner di squadra</b>\n"
-            "🟨 <b>Cartellini e falli subiti dai giocatori</b>\n"
-            "🏆 <b>Alert di Cassa istantaneo alla chiusura del ticket</b>\n\n"
-            "<i>Pronti per i primi match delle 15:00!</i>"
-        )
+        print("=" * 75, flush=True)
+        print("🤖 [BAGENT] TELEGRAM LIVE SENTINEL SCOREBOARD ATTIVA (V2 OTTIMIZZATA)", flush=True)
+        print("📡 Monitoraggio 9 match per 4 Schedine (#56, #57, #54, #55)", flush=True)
+        print(f"⏱️ Frequenza scansione: 40 secondi in-play | Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
+        print("=" * 75, flush=True)
 
         all_fids_str = "-".join(str(k) for k in FIXTURES_CONFIG.keys())
         poll_count = 0
@@ -624,7 +641,7 @@ class LiveTelegramScoreboard:
             except Exception as e:
                 print(f"[{now_str}] Errore durante il polling: {e}", flush=True)
 
-            sleep_sec = 45 if in_play_ids else 60
+            sleep_sec = 40 if in_play_ids else 60
             time.sleep(sleep_sec)
 
 if __name__ == "__main__":
