@@ -1353,32 +1353,36 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 ---
 
 ### 🌙 Ticket #60: La Corazzata Sudamericana Notturna (Quota 2.06×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 23:30, 00:00, 01:00)
-* **Importo Puntato**: **40.00 €** | **Quota Totale**: **2.06×** | **Vincita Potenziale**: **82.42 €**
-1. 🇵🇾 [23:30] **Cerro Porteño vs Nacional Asunción** (ID: 1631996) ➔ **Doppia Chance: 1X** @ **1.31** 🟢 *(0-0 al 42' 1T)*
-2. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (ID: 1493108) ➔ **Doppia Chance: X2** @ **1.21** 🟢 *(0-0 al 14' 1T)*
-3. 🇧🇷 [01:00] **Vitória vs Grêmio** (ID: 1492369) ➔ **Doppia Chance: 1X** @ **1.30** ⏳
+* **Piattaforma**: Netwin | **Stato**: 🟢 CASSA COMPLETA / VINTO! (3/3)
+* **Importo Puntato**: **40.00 €** | **Quota Totale**: **2.06×** | **Vincita Ufficiale**: **82.42 €** (+42.42 € netti)
+1. 🇵🇾 [23:30] **Cerro Porteño vs Nacional Asunción** (1-0 FT) ➔ **Doppia Chance: 1X** @ **1.31** 🟢 *(Preso al 100%!)*
+2. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (0-0 FT) ➔ **Doppia Chance: X2** @ **1.21** 🟢 *(Preso al 100%!)*
+3. 🇧🇷 [01:00] **Vitória vs Grêmio** (1-0 FT) ➔ **Doppia Chance: 1X** @ **1.30** 🟢 *(Preso al 100%!)*
 
 ---
 
 ### 💣 Ticket #61: La Quaterna d'Attacco Alta Quota (Quota 5.83× + Bonus = 6.00×)
-* **Piattaforma**: Netwin | **Stato**: PIAZZATO & IN GIOCO ⏱️ (Kickoff 00:00, 01:00, 03:15)
-* **Importo Puntato**: **30.00 €** | **Quota Totale**: **5.83×** (Bonus: +5.24 €) | **Vincita Potenziale**: **180.01 €**
-1. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (ID: 1493108) ➔ **1X2: 2** @ **2.10** 🟢 *(0-0 al 14' 1T)*
-2. 🇻🇪 [00:00] **Carabobo vs Estudiantes de Mérida** (ID: 1638141) ➔ **1X2: 1** @ **1.48** 🟢 *(0-0 al 13' 1T)*
-3. 🇧🇷 [01:00] **Vitória vs Grêmio** (ID: 1492369) ➔ **Doppia Chance: 1X** @ **1.32** ⏳
-4. 🇨🇴 [03:15] **Atlético Nacional vs Deportivo Cali** (ID: 1607188) ➔ **1X2: 1** @ **1.42** ⏳
+* **Piattaforma**: Netwin | **Stato**: ❌ CHIUSO / PERDENTE (3/4 vinte)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **5.83×**
+1. 🇦🇷 [00:00] **Barracas Central vs Argentinos Jrs** (0-0 FT) ➔ **1X2: 2** @ **2.10** 🔴 *(0-0, mancata solo questa)*
+2. 🇻🇪 [00:00] **Carabobo vs Estudiantes de Mérida** (1-0 FT) ➔ **1X2: 1** @ **1.48** 🟢 *(Preso!)*
+3. 🇧🇷 [01:00] **Vitória vs Grêmio** (1-0 FT) ➔ **Doppia Chance: 1X** @ **1.32** 🟢 *(Preso!)*
+4. 🇨🇴 [03:15] **Atlético Nacional vs Deportivo Cali** (3-0 FT) ➔ **1X2: 1** @ **1.42** 🟢 *(Tris 3-0 preso!)*
 
 ---
 
-### 💳 QUADRO FINANZIARIO LIVE LUNEDÌ/MARTEDÌ 7-8 SETTEMBRE 2026 (ORE 00:12):
-* 💵 **Cassa Iniziale Odierna**: **286.38 €**
-* 📉 **Spesa Totale Odierna (8 Ticket)**: **272.00 €** (37 € T56 + 30 € T54 + 25 € T55 + 30 € T57 + 50 € T58 + 30 € T59 + 40 € T60 + 30 € T61)
-* 💰 **INCASSI UFFICIALI GIÀ ACCREDITATI**: **`+227.98 €`** (T55: 69.49 € + T58: 98.00 € + T59: 60.49 €) 🏆
-* 🛡️ **Liquidità Libera Attuale su Netwin**: **`242.36 €`** *(Al sicuro e protetta dopo aver finanziato sia il #60 che il #61!)*
-* 🚀 **Vincite Potenziali Ancora Attive (T60 + T61)**: **`262.43 €`** (82.42 € + 180.01 €)
-* 👑 **MASSIMO SALDO RAGGIUNGIBILE A FINE NOTTE**: **`504.79 €`** *(+252% rispetto al capitale di partenza di 143.24 €!)*
-*Ultimo aggiornamento: 8 settembre 2026 ore 00:12 — BAgent*
+### 💳 SALDO TOTALE UTENTE SU NETWIN — MARTEDÌ 8 SETTEMBRE 2026 (ORE 16:30):
+* 💵 **Partenza Iniziale Operazione**: **143.24 €**
+* 📉 **Spesa Totale 8 Ticket (Lun/Mar)**: **272.00 €**
+* 🏆 **VINCITE UFFICIALI INCASSATE E ACCREDITATE**: **`+310.40 €`**
+  * ✅ **Ticket #55**: **69.49 €**
+  * ✅ **Ticket #58**: **98.00 €**
+  * ✅ **Ticket #59**: **60.49 €**
+  * ✅ **Ticket #60**: **82.42 €**
+* 💰 **SALDO REALE ATTUALE DISPONIBILE SU NETWIN**: **`324.78 €`** 🟢
+* 📈 **PROFITTO NETTO COMPLESSIVO**: **`+181.54 €` (+126.7% SUL CAPITALE ORIGINARIO — CAPITALE PIÙ CHE RADDOPPIATO!)**
+* 🎯 **Win Rate Modello Quantitativo Asimmetrico (Settembre)**: **`7 su 12 Vinte (58.3%)`**!
+*Ultimo aggiornamento: 8 settembre 2026 ore 16:30 — BAgent*
 
 
 
