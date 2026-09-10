@@ -60,10 +60,14 @@ class BetGuardValidator:
         if is_central_penetration_team and any(term in pick.lower() for term in ["corner squadra", "cornersquadra", "corner sq", "corner team"]) and any(th in pick for th in ["5.5", "6.5", "7.5"]):
             return False, f"[BLOCKED - RULE 17] Trappola Corner Goleada Centrale ({match_name}): squadra da penetrazione verticale/centrale. Vietato Over Corner Squadra >5.5! Usare Combo Risultato/Gol o Tiri."
 
-        # REGOLA #20: Audit Rosa SQLite Obbligatorio su Giocatori
+        # REGOLA #20 & #38: Hard Gate Roster & Trasferimenti 2026/2027
         player_name = match_data.get("player_target")
-        if player_name and not match_data.get("player_verified_in_db", False):
-            return False, f"[BLOCKED - RULE 20] Il giocatore target '{player_name}' non è stato verificato nel DB SQLite (storage/database/bagent.db). Eseguire prima query_player.py!"
+        target_team = match_data.get("target_team", "")
+        if player_name:
+            if not match_data.get("player_verified_in_db", False) and not match_data.get("player_roster_verified", False):
+                return False, f"[BLOCKED - RULE 38] Il giocatore target '{player_name}' non è stato verificato nella rosa 2026/2027 di '{target_team}'. Eseguire verify_squad_control.py!"
+            if not match_data.get("starter_confirmed", False):
+                return False, f"[BLOCKED - RULE 37] Formazione Ufficiale non confermata per '{player_name}'! Vietato proporre player prop senza Starting XI verificato."
 
         # REGOLA #21 & #22: Rassegna Stampa Obbligatoria Pre-Calcolo
         if not match_data.get("press_scanned", False):

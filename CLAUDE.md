@@ -28,6 +28,59 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
 - **Cartellini solo in Ambienti Caldi**: Over Cartellini solo in Grecia, Turchia, Balcani, Sudamerica, derby e sfide ad altissima tensione. Evitare sfide nordiche/austriache pulite.
 - **Scontri Diretti Equilibrati (Δ punti ≤ 3)**: Non forzare Over 2.5 (rischio partita bloccata e fallosa), usare Over 1.5 o Doppia Chance.
 - **Quote Netwin**: verificare sempre direttamente su Netwin tramite Claude in Chrome
+- **Regola #39 — Mercati Evoluti di Protezione & Flessibilità (STOP ai mercati convenzionali rigidi)**:
+  1. **MultiGol di Squadra (es. MultiGol 1-3 Casa/Ospite)**: Preferire SEMPRE a Over/Under gol totali quando una squadra deve fare la partita. Copre l'1-0, 0-1, 2-0, 1-2, 0-3... evitando di dipendere dall'avversario.
+  2. **Combo con MultiGol Esteso (es. 1X + MultiGol 1-5 o X2 + MultiGol 1-5)**: Sostituire le fragili combo "1 + Over 1.5" con "1X + MultiGol 1-5". Copre l'1-0, 2-0, 1-1, 2-1, 3-0 senza mai morire su un risultato corto.
+  3. **Casa/Ospite Segna in Entrambi i Tempi: SI**: Per le big dominanti, MA SOLO SE QUOTA >= 1.55 E EDGE POSITIVO (vedi Regola #40).
+  4. **Over Differenziato per Tempo (`OV 1°T 0.5 + OV 2°T 1.5`)**: Sfrutta la dinamica fisiologica (fase di studio nel 1°T dove basta 1 gol, difese stanche nella ripresa con almeno 2 gol).
+  5. **Doppia Chance + Entrambe Segnano (es. 1X + GG)**: Da usare negli scontri diretti ad alta intensità europea dove la favorita casalinga non perde ma subisce gol (quote eccellenti @ 1.80× - 2.00×).
+- **Regola #40 — Strict Ticket Pipeline (Il Funnel Matematico Integrato a 7 Fasi)**:
+  Implementato in `services/betting/strict_ticket_pipeline.py` e testabile con `python scripts/build_verified_ticket.py`.
+  Nessuna selezione o schedina può essere proposta senza aver superato in ordine rigido tutte le fasi:
+  1. **Fase 1 (Roster Gate - Regola #38)**: Controllo anagrafico 2026/27 (DB locale + API Transfers). Chi è ceduto viene bloccato istantaneamente.
+  2. **Fase 2 (Absence & Injury Gate)**: Query `/injuries?fixture={id}`. Giocatori infortunati, squalificati o fuori rosa scartati alla radice.
+  3. **Fase 3 (Lineup & Starting XI Gate - Regola #37)**: Distinte ufficiali obbligatorie per mercati individuali. Se parte dalla panchina o le formazioni non sono uscite, la giocata sul giocatore è BLOCCATA.
+  4. **Fase 4 (Calcolo Probabilità Coniugata Reale & Tempi)**: Se mercato composto (es. Segna Entrambi Tempi: $P_{1T} \times P_{2T}$), la probabilità reale composta e la Fair Odd ($1/P_{reale}$) DEVONO essere calcolate esplicitamente.
+  5. **Fase 5 (Filtro Edge Positivo Obbligatorio)**: $\text{Edge} = (P_{reale} \times \text{Quota}) - 1$. Se $\text{Edge} < +4.0\%$, l'evento è **BOCCIATO AUTOMATICAMENTE** (es. Bayern Segna Entrambi @ 1.20 ha Edge -23.5% = BAN TOTALE!).
+  6. **Fase 6 (Anti-Scadenza 45')**: Divieto assoluto di mercati che possono morire all'intervallo (45') a quote compresse (< 1.55). Privilegiare SEMPRE mercati con 90 minuti di vita (MultiGol, 1X+Over 1.5).
+  7. **Fase 7 (Money Management Scientifico - Kelly Frazionario)**: Max 5-8% del bankroll per singolo ticket; max 15% del bankroll per intera sessione. MAI più rischiare l'intera cassa in un solo turno.
+
+- **Regola #41 — PROTOCOLLO DEI 7 COMANDAMENTI PRE-SCHEDINA (Ordine Sequenziale Rigoroso)**:
+  🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO proporre una schedina o selezione "a braccio" o basandosi su impressioni e quote grezze.
+  📌 **Flusso Operativo Obbligatorio**:
+  1. *Esegui lo scanner assenze*: `python scripts/verify_squad_control.py --fixture <ID>` prima di formulare analisi sui giocatori.
+  2. *Valida ogni singolo mercato*: Esegui l'audit via `StrictTicketPipeline` (`scripts/build_verified_ticket.py`).
+  3. *Zero allucinazioni*: Se un giocatore non compare nella distinta ufficiale come titolare confermato, proporre SOLO mercati di squadra.
+  4. *Rifiuto matematico automatico*: Se un mercato non ha un vantaggio matematico certo sul banco ($\text{Edge} \ge +4.0\%$), NON VA GIOCATO, anche se sembra una "quota sicura" a 1.20.
+
+- **Regola #42 — SCANSIONE ONNIMERCATO & BALANCED SAFETY SCORE (Il Sweet Spot Probabilità-Valore-Quota)**:
+  🎯 **Principio Fondamentale**: "Più sicuro" per noi NON significa quota stracciata (1.10-1.20 a edge negativo = trappola mortale), né quota alta speculativa (> 2.50 a varianza ingestibile). "Più sicuro" significa il **Punto di Equilibrio Perfetto (Sweet Spot)**:
+  1. **Scansione Onnimercato (TUTTI i mercati a disposizione)**:
+     BAgent DEVE scansionare tutti i 100+ mercati bookmaker tramite `OmniMarketScanner` (`scripts/scan_omni_markets.py --fixture <ID>`):
+     - Esiti Finali & Doppie Chance (1X2, 1X, X2, Draw No Bet)
+     - Over/Under Gol (0.5, 1.5, 2.5, 3.5 totali e di squadra)
+     - Gol / No Gol (BTTS)
+     - MultiGol Squadra (1-3 Casa, 1-3 Ospite) e MultiGol Partita (1-4, 1-5, 2-4)
+     - Combo Protette Classiche (1X + Over 1.5, 1X + Under 3.5, 1X + MultiGol, X2 + Over 1.5)
+     - Corner 1X2, Corner Totali, Corner Squadra Over/Under
+     - Cartellini 1X2, Cartellini Totali Over/Under
+     - Tiri in Porta / Totali
+  2. **I 4 Pilastri del Balanced Safety Score (BSS)**:
+     - **Alta Probabilità Reale**: $P_{\text{reale}} \ge 72\% - 88\%$ (Poisson & distribuzioni congiunte). Sotto al 70% il mercato è scartato.
+     - **Quota Efficace e Utile**: Range target **`1.28 — 1.65`** (fino a 1.85 per combo a doppia chance). Penalizzazione pesante per quote stracciate $< 1.22$ ("falsa sicurezza" che distrugge il bankroll).
+     - **Edge Matematico Reale**: $\text{Edge} = (P_{\text{reale}} \times \text{Quota}) - 1 \ge \mathbf{+5.0\%}$. Nessuna scommessa può essere giocata se la quota è inferiore alla Fair Odd ($1/P$).
+     - **Respiro a 90 Minuti (Anti-Fragilità)**: Moltiplicatore premio $+20\%$ per mercati elastici (MultiGol, 1X+Over 1.5, Corner); moltiplicatore $0.0$ (bocciatura) per mercati che muoiono al 45' a quota compressa.
+- **Regola #43 — INTEGRAZIONE PROGRAMMATICA OBBLIGATORIA DEL SESTO SENSO (Hard Gate Contextual Intelligence)**:
+  🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO proporre qualsiasi quota, mercato o schedina basandosi esclusivamente su numeri, formule di Poisson o quote bookmaker SENZA aver integrato formalmente il **SESTO SENSO**.
+  🔬 **Motivazione Scientifica & Lezione Bayern-Bodo 0-0 HT**:
+  I numeri dicevano che il Bayern segna valanghe di gol, ma il Sesto Senso (giornali, motivazione d'esordio, blocco basso scandinavo, tendenza all'avvio diesel) segnalava chiaramente il rischio di un 1° tempo a ritmi bassi e senza urgenza agonistica. Saltare il Sesto Senso porta a giocare mercati ciechi a quota 1.20 che si schiantano.
+  📌 **Protocollo Operativo di Ingegnerizzazione del Sesto Senso**:
+  1. **Fase 4 di `StrictTicketPipeline` è BLOCCANTE**: Nessun candidato mercato può essere validato se non possiede una motivazione di Sesto Senso documentata (`sixth_sense_analysis`).
+  2. **Audit delle Bandiere Rosse di Sesto Senso**:
+     - `ROTATION_RISK` (turnover massiccio, coppe infrasettimanali, turnover pre-derby) ➔ Ban player props e mercati sui due tempi.
+     - `SLOW_START` / `DIESEL_TEMPO` (partita di studio, campo pesante, trasferte lunghe) ➔ Ban su mercati 1° tempo a quota compressa.
+     - `LOW_MOTIVATION` / `DEAD_RUBBER` (squadra già qualificata o appagata) ➔ Ban su handicap o vittorie larghe.
+  3. **Obbligo Rassegna & Contesto**: Prima di finalizzare una proposta, BAgent DEVE sempre specificare il retroscena tattico, il clima ambientale e la motivazione psicologica che confermano la selezione.
 
 ---
 
@@ -199,10 +252,29 @@ Contiene: `API_FOOTBALL_KEY`, `ANTHROPIC_API_KEY`, `ODDS_API_KEY`, `TELEGRAM_TOK
       4. `Totale Squadra Over 1.5` (Bet ID 16, 17)
       5. `Gol/No Gol + Over/Under` (Bet ID 49)
     * Target Quota: **`1.75 – 2.50+`** con probabilità congiunta $P \ge 40-45\%$ ed Edge reale $EV \ge 0$.
-    * Hard Guardrail: Ban totale di combinazioni a trappola (es. `Under 2.5 + Gol` che paga solo per l'esatto 1-1).
+- **Regola #37 (HARD GATE FORMAZIONI UFFICIALI SUI GIOCATORI — Zero Player Props Senza Starting XI Verificato)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO proporre qualsiasi scommessa su mercati individuali dei singoli giocatori (Falli Subiti, Falli Commessi, Tiri Totali, Tiri in Porta, Marcatori Anytime, Cartellini Giocatore, Assist) PRIMA che siano state depositate e verificate le **FORMAZIONI UFFICIALI (Starting XI)** e senza aver accertato con certezza assoluta che il giocatore sia **SCHIERATO TITOLARE DAL 1° MINUTO**.
+  - 🔬 **Motivazione Scientifica & Lezione Zaccagni/Oyarzabal del 07/09/2026 e Doku del 08/09/2026**:
+    * Proporre scommesse su giocatori prima delle distinte ufficiali espone al rischio fatale di turnover, panchina o infortunio dell'ultimo minuto (come Doku oggi nel City, o Zaccagni e Oyarzabal ieri con 0 falli subiti).
+    * Se un giocatore non parte titolare o entra al 75', la scommessa è matematicamente bruciata, distruggendo qualsiasi edge probabilistico.
+  - 📌 **Direttiva Operativa Rigorosa**:
+    1. **Fino a 60-75 minuti prima del calcio d'inizio**: BAgent DEVE proporre **ESCLUSIVAMENTE mercati di SQUADRA** (1X2, Doppie Chance, Under/Over Gol, 1X2 Corner, Corner Totali, 1X2 Falli Squadra, Falli Totali Squadra, Totale Cartellini).
+    2. **Solo a formazioni ufficiali pubblicate**: È consentito analizzare e proporre mercati su singoli giocatori, ma SOLO DOPO aver controllato la distinta ufficiale da API (`/fixtures/lineups`) o da referto ufficiale UEFA/Lega, verificando che il giocatore figuri negli 11 partenti.
+    3. Se una formazione ufficiale non è ancora disponibile o il giocatore parte dalla panchina, la giocata sul giocatore è **BLOCCATA ALLA FONTE**.
+
+- **Regola #38 (VERIFICA ANAGRAFICA ROSA & TRASFERIMENTI 2026/2027 — Hard Gate Roster Check & Zero Allucinazioni di Mercato)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO citare qualsiasi giocatore, analizzare duelli individuali 1v1 o proporre qualsiasi giocata su mercati-giocatore (Marcatori, Tiri, Tiri in Porta, Falli Commessi/Subiti, Cartellini, Assist) collegando un atleta a una squadra SENZA aver prima verificato l'effettiva appartenenza alla rosa 2026/2027 nel database SQLite locale (`storage/database/bagent.db` / `data/bagent.db`) tramite `python scripts/verify_squad_control.py --player <NOME> --team <SQUADRA>` o via API (`/players/squads?team={id}`).
+  - 🔬 **Motivazione Scientifica & Lezione Mercato Estivo 2026**:
+    * Nella sessione estiva 2026 decine di big hanno cambiato maglia (es. Robert Lewandowski trasferitosi ai Chicago Fire e sostituito al Barcellona da Gabriel Jesus e Adeyemi; Denzel Dumfries al Real Madrid; Alexander Isak al Liverpool; Ademola Lookman e Alexander Sørloth all'Atlético Madrid; Nathan Aké al Fenerbahçe; Leandro Paredes ed Enner Valencia al Boca Juniors).
+    * Affidarsi alla memoria parametrica o a dataset obsoleti genera allucinazioni distruttive (es. considerare Lewandowski al Barcellona o Cavani al Boca Juniors, bruciando il ticket prima del fischio d'inizio).
+  - 📌 **Protocollo Operativo di Controllo (Doppio Hard Gate Giocatori)**:
+    1. **Gate 1 — Controllo Rosa & Trasferimento (Regola #38)**: Prima di scrivere il nome di un giocatore associato a un club, verificare che compaia nella rosa attiva 2026 con `python scripts/verify_squad_control.py --player "Cognome" --team "Squadra"`. Se il giocatore non è tesserato con quella squadra o è stato ceduto, la giocata è BLOCCATA ALLA FONTE con status `[BLOCKED - RULE 38]`.
+    2. **Gate 2 — Controllo Formazione Ufficiale Titolare (Regola #37)**: Anche se il giocatore appartiene alla rosa, NESSUNA scommessa individuale può essere proposta prima delle distinte ufficiali (60-75 min pre-match) e senza conferma che parta titolare dal 1° minuto (`startXI`).
+    3. **Aggiornamento Database Costante**: Mantenere costantemente sincronizzato il database SQLite con `python scripts/update_squads_2026.py --today-ucl` o `--fixtures <ID>` prima di ogni sessione operativa.
 
 - **Quote da API (non più da Netwin/Domusbet/Betsson via browser)**: costruire le tabelle con API-Football (`odds()`, `player_prop_odds()`) e The Odds API (`OddsAPICollector`, incl. `alternate_totals` per le linee 3.5+ — vedi Regola #30). Niente più ricerca quote sul browser, costa troppo tempo/token: la verifica sul numero esatto e il piazzamento restano sempre a carico dell'utente su Netwin/Domusbet/Betsson
 - Escludere partite già iniziate (verificare orari live su Sofascore)
+
 
 ---
 
@@ -1371,18 +1443,189 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 
 ---
 
-### 💳 SALDO TOTALE UTENTE SU NETWIN — MARTEDÌ 8 SETTEMBRE 2026 (ORE 16:30):
+### 🔴 Ticket #62: La Tripla d'Acciaio Slot 18:45 (Quota 2.16×)
+* **Piattaforma**: Netwin | **Stato**: ❌ CHIUSO / PERDENTE (2/3 vinti, beffa Bruges 1-3 al 45')
+* **Importo Puntato**: **44.78 €** | **Quota Totale**: **2.16×**
+1. 🇳🇱 [18:45] **NEC Nimega vs Excelsior** (1-1 HT) ➔ **Doppia Chance: 1X** @ **1.20** 🟢
+2. 🇬🇷 [18:45] **AEK Atene vs LASK Linz** (1-0 HT) ➔ **Doppia Chance: 1X** @ **1.20** 🟢
+3. 🇧🇪 [18:45] **Club Bruges vs Aston Villa** (1-3 HT) ➔ **Under 3.5 Gol** @ **1.50** 🔴 *(4 gol nel solo 1° tempo)*
+
+---
+
+### 🔴 Ticket #63: La Combo Sicurezza Slot 18:45 (Quota 2.10×)
+* **Piattaforma**: Netwin | **Stato**: ❌ CHIUSO / PERDENTE (1/2, beffa Bruges)
+* **Importo Puntato**: **30.00 €** | **Quota Totale**: **2.10×**
+1. 🇬🇷 [18:45] **AEK Atene vs LASK Linz** (1-0 HT) ➔ **1X + Over 1.5 Gol** @ **1.40** ⏳
+2. 🇧🇪 [18:45] **Club Bruges vs Aston Villa** (1-3 HT) ➔ **Under 3.5 Gol** @ **1.50** 🔴
+
+---
+
+### ⏳ Ticket #64: La Cinquina d'Oro Micro-Statistica (Quota 6.24× + Bonus = 128.64 €)
+* **Piattaforma**: Netwin | **Stato**: ⏳ IN CORSO (1/5 aperta favorevole, 4 alle 21:00)
+* **Importo Puntato**: **20.00 €** | **Quota Totale**: **6.24×** | **Bonus Multipla**: **3.74 €** | **Vincita Potenziale**: **`128.64 €`**
+1. 🇬🇷 [18:45] **AEK Atene vs LASK Linz** (1-0 HT) ➔ **Doppia Chance: 1X** @ **1.20** 🟢
+2. 🇫🇷 [21:00] **Lilla vs Real Betis** ➔ **Under 3.5 Gol** @ **1.41** ⏳
+3. 🇩🇪 [21:00] **Borussia Dortmund vs Villarreal** ➔ **U/O 4.5 Corner Squadra 1 (BVB): OVER** @ **1.42** ⏳
+4. 🇵🇹 [21:00] **Porto vs Manchester City** ➔ **1X2 Corner (esc. TS): 2 (Man City)** @ **1.52** ⏳
+5. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **U/O 1.5 Cartellini Squadra 1 (Real Madrid): OVER** @ **1.71** ⏳
+
+---
+
+### ⏳ Ticket #64: La Cinquina d'Oro Micro-Statistica (Quota 6.24× + Bonus = 128.64 €)
+* **Piattaforma**: Netwin | **Stato**: ⏳ IN CORSO (1/5 presa, 4 alle 21:00)
+* **Importo Puntato**: **20.00 €** | **Quota Totale**: **6.24×** | **Bonus Multipla**: **3.74 €** | **Vincita Potenziale**: **`128.64 €`**
+1. 🇬🇷 [18:45] **AEK Atene vs LASK Linz** (1-0 FT) ➔ **Doppia Chance: 1X** @ **1.20** 🟢 *(PRESA AL 100%!)*
+2. 🇫🇷 [21:00] **Lilla vs Real Betis** ➔ **Under 3.5 Gol** @ **1.41** ⏳
+3. 🇩🇪 [21:00] **Borussia Dortmund vs Villarreal** ➔ **U/O 4.5 Corner Squadra 1 (BVB): OVER** @ **1.42** ⏳
+4. 🇵🇹 [21:00] **Porto vs Manchester City** ➔ **1X2 Corner (esc. TS): 2 (Man City)** @ **1.52** ⏳
+5. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **U/O 1.5 Cartellini Squadra 1 (Real Madrid): OVER** @ **1.71** ⏳
+
+---
+
+### ⏳ Ticket #66: La Quaterna Falli Commessi Bernabéu (Quota 3.35×)
+* **Piattaforma**: Netwin | **Stato**: ⏳ IN CORSO (4/4 aprono alle 21:00)
+* **Importo Puntato**: **20.00 €** | **Quota Totale**: **3.35×** | **Vincita Potenziale**: **`66.99 €`**
+1. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Denzel Dumfries Over 0.5 Falli Commessi** @ **1.20** ⏳
+2. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Antonio Rüdiger Over 0.5 Falli Commessi** @ **1.45** ⏳
+3. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Alessandro Bastoni Over 1.5 Falli Commessi** @ **1.75** ⏳
+4. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Lautaro Martínez Over 0.5 Falli Commessi** @ **1.10** ⏳
+
+---
+
+### ⏳ Ticket #67: La Cinquina Falli Subiti Bernabéu (Quota 6.14× + Bonus = 65.11 €)
+* **Piattaforma**: Netwin | **Stato**: ⏳ IN CORSO (5/5 aprono alle 21:00)
+* **Importo Puntato**: **10.00 €** | **Quota Totale**: **6.14×** | **Bonus Multipla**: **3.68 €** | **Vincita Potenziale**: **`65.11 €`**
+1. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Jude Bellingham Over 1.5 Falli Subiti** @ **1.50** ⏳
+2. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Kylian Mbappé Over 0.5 Falli Subiti** @ **1.40** ⏳
+3. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Vinícius Júnior Over 1.5 Falli Subiti** @ **1.30** ⏳
+4. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Brahim Díaz Over 1.5 Falli Subiti** @ **1.50** ⏳
+5. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **Nicolò Barella Over 0.5 Falli Subiti** @ **1.50** ⏳
+
+---
+
+### 🚀 Ticket #68: La Tripla Pesante d'Assalto Corner & Falli (Quota 3.99× ➔ 351.27 €)
+* **Piattaforma**: Netwin | **Stato**: ⏳ IN CORSO (3/3 aprono alle 21:00)
+* **Importo Puntato**: **88.00 €** | **Quota Totale**: **3.99×** | **Vincita Potenziale**: **`351.27 €`**
+1. 🇵🇹 [21:00] **Porto vs Manchester City** ➔ **U/O 4.5 Corner Squadra 2 (Man City): OVER** @ **1.49** ⏳
+2. 🇩🇪 [21:00] **Borussia Dortmund vs Villarreal** ➔ **U/O 4.5 Corner Squadra 1 (BVB): OVER** @ **1.41** ⏳
+3. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **1X2 Falli Commessi: 2 (Inter commette più falli)** @ **1.90** ⏳
+
+---
+
+### ⏳ Ticket #69: Seconda Cinquina Micro-Statistica (Quota 6.24× + Bonus = 64.32 €)
+* **Piattaforma**: Netwin | **Stato**: ⏳ IN CORSO (1/5 presa, 4 alle 21:00)
+* **Importo Puntato**: **10.00 €** | **Quota Totale**: **6.24×** | **Bonus Multipla**: **1.87 €** | **Vincita Potenziale**: **`64.32 €`**
+1. 🇬🇷 [18:45] **AEK Atene vs LASK Linz** (1-0 FT) ➔ **Doppia Chance: 1X** @ **1.20** 🟢 *(PRESA AL 100%!)*
+2. 🇫🇷 [21:00] **Lilla vs Real Betis** ➔ **Under 3.5 Gol** @ **1.41** ⏳
+3. 🇩🇪 [21:00] **Borussia Dortmund vs Villarreal** ➔ **U/O 4.5 Corner Squadra 1 (BVB): OVER** @ **1.42** ⏳
+4. 🇵🇹 [21:00] **Porto vs Manchester City** ➔ **1X2 Corner (esc. TS): 2 (Man City)** @ **1.52** ⏳
+5. 🇪🇸 [21:00] **Real Madrid vs Inter** ➔ **U/O 1.5 Cartellini Squadra 1 (Real Madrid): OVER** @ **1.71** ⏳
+
+---
+
+---
+
+### 💳 SALDO TOTALE UTENTE SU NETWIN — MARTEDÌ 8 SETTEMBRE 2026 (ORE 22:58):
 * 💵 **Partenza Iniziale Operazione**: **143.24 €**
-* 📉 **Spesa Totale 8 Ticket (Lun/Mar)**: **272.00 €**
-* 🏆 **VINCITE UFFICIALI INCASSATE E ACCREDITATE**: **`+310.40 €`**
-  * ✅ **Ticket #55**: **69.49 €**
-  * ✅ **Ticket #58**: **98.00 €**
-  * ✅ **Ticket #59**: **60.49 €**
-  * ✅ **Ticket #60**: **82.42 €**
-* 💰 **SALDO REALE ATTUALE DISPONIBILE SU NETWIN**: **`324.78 €`** 🟢
-* 📈 **PROFITTO NETTO COMPLESSIVO**: **`+181.54 €` (+126.7% SUL CAPITALE ORIGINARIO — CAPITALE PIÙ CHE RADDOPPIATO!)**
-* 🎯 **Win Rate Modello Quantitativo Asimmetrico (Settembre)**: **`7 su 12 Vinte (58.3%)`**!
-*Ultimo aggiornamento: 8 settembre 2026 ore 16:30 — BAgent*
+* 📊 **Esito Sessione Martedì 8 Settembre**:
+  * ❌ Ticket #64 (Cinquina 20€): Perso (Lille-Betis 2-3)
+  * ❌ Ticket #66 (Falli Commessi 20€): Perso per 1 fallo di Bastoni (1/2) e 0 di Rüdiger (Lautaro e Dumfries presi!)
+  * ❌ Ticket #67 (Falli Subiti 10€): Perso per 1 fallo di Vinícius (1/2) e 0 di Mbappé (Bellingham 4, Barella 2, Brahim 2 presi!)
+  * ❌ Ticket #68 (La Tripla Pesante 88€): BVB 9 Corner 🟢, City 4 Corner (mancava 1 corner), Real 12-10 Inter falli. Perso.
+  * ❌ Ticket #69 (Cinquina 10€): Perso (Lille-Betis 2-3)
+  * 🟢 **Ticket #70 (Live BVB Over 1.5 + Inter Segna Gol)**: **PRESO / CASSA AL 100%!**
+---
+
+---
+
+### 🏆 Ticket #71: Il Blitz Notturno Sudamericano (Quota 2.12× ➔ 169.37 €)
+* **Piattaforma**: Netwin | **Stato**: ✅ **VINTO / SBANCATO AL 100%!** 🟢
+* **Importo Puntato**: **`80.00 €`** | **Quota Totale**: **`2.12×`** | **Vincita Incassata**: **`169.37 €`**
+1. 🇧🇷 [00:00] **Fluminense vs Platense** ➔ **1X2: 1** @ **`1.58`** 🟢 *(Fluminense batte Platense 2-0 FT!)*
+2. 🇨🇴 [00:00] **Santa Fe vs Vasco da Gama** ➔ **U/O 3.5 Corner Squadra 1 (Santa Fe): OVER** @ **`1.34`** 🟢 *(Santa Fe domina la ripresa e raggiunge 5 CORNER al 90'!)*
+
+---
+
+### 🏆 Ticket #71: Il Blitz Notturno Sudamericano (Quota 2.12× ➔ 169.37 €)
+* **Piattaforma**: Netwin | **Stato**: ✅ **VINTO / SBANCATO AL 100%!** 🟢
+* **Importo Puntato**: **`80.00 €`** | **Quota Totale**: **`2.12×`** | **Vincita Incassata**: **`169.37 €`**
+1. 🇧🇷 [00:00] **Fluminense vs Platense** ➔ **1X2: 1** @ **`1.58`** 🟢 *(Fluminense batte Platense 2-0 FT!)*
+2. 🇨🇴 [00:00] **Santa Fe vs Vasco da Gama** ➔ **U/O 3.5 Corner Squadra 1 (Santa Fe): OVER** @ **`1.34`** 🟢 *(Santa Fe domina la ripresa e raggiunge 5 CORNER al 90'!)*
+
+---
+
+### ⏳ Ticket #72: La Singola Gol di Testa Stoccarda (Quota 2.50×)
+* **Piattaforma**: Netwin | **Stato**: ⏳ **IN CORSO (1H)**
+* **Importo Puntato**: **`30.00 €`** | **Quota Totale**: **`2.50×`** | **Vincita Potenziale**: **`75.00 €`**
+1. 🇩🇪 [18:45] **Stoccarda vs Viking FK** ➔ **Gol di Testa: SI** @ **`2.50`** ⏳
+
+---
+
+### ⏳ Ticket #73: Il Trittico Chicche Giocatori (Quota 3.46× ➔ 103.82 €)
+* **Piattaforma**: Netwin | **Stato**: ⏳ **IN CORSO (2 in campo, 1 alle 21:00)**
+* **Importo Puntato**: **`30.00 €`** | **Quota Totale**: **`3.46×`** | **Vincita Potenziale**: **`103.82 €`**
+1. 🇩🇪 [18:45] **Stoccarda vs Viking FK** ➔ **Undav, Deniz (Stoccarda) o Sostituto Segna o Colpisce Palo/Trav.: SI** @ **`1.56`** ⏳
+2. 🇪🇸 [18:45] **Barcellona vs Feyenoord** ➔ **Yamal, Lamine (Barcellona) o Sostituto Segna o Colpisce Palo/Trav.: SI** @ **`1.53`** ⏳
+3. 🇫🇷 [21:00] **PSG vs Slovan Bratislava** ➔ **Dembele, Ousmane (PSG) o Sostituto Segna o Colpisce Palo/Trav.: SI** @ **`1.45`** ⏳
+
+---
+
+### 🏆 Ticket #73: Il Trittico Chicche Giocatori (Quota 3.46× ➔ 103.82 €)
+* **Piattaforma**: Netwin | **Stato**: ✅ **VINTO / SBANCATO AL 100%!** 🟢
+* **Importo Puntato**: **`30.00 €`** | **Quota Totale**: **`3.46×`** | **Vincita Incassata/In Accredito**: **`103.82 €`**
+1. 🇩🇪 [18:45] **Stoccarda vs Viking FK** ➔ **Undav o Sostituto Segna o Legno: SI** @ **`1.56`** 🟢 *(CONVALIDATA VERDE DA NETWIN!)*
+2. 🇪🇸 [18:45] **Barcellona vs Feyenoord** ➔ **Yamal o Sostituto Segna o Legno: SI** @ **`1.53`** 🟢 *(CONVALIDATA VERDE DA NETWIN!)*
+3. 🇫🇷 [21:00] **PSG vs Slovan Bratislava** ➔ **Dembele o Sostituto Segna o Legno: SI** @ **`1.45`** 🟢 *(DOPPIETTA DI DEMBÉLÉ AL 17' E 23'! SBANCATA AL 100%!)*
+
+---
+
+### ⏳ Ticket #74: La Principale d'Acciaio Champions (Quota 2.84× ➔ 85.11 €)
+* **Piattaforma**: Netwin | **Stato**: ❌ **PERSO (3/4 PRESE AL 100%, bruciato per 1 gol al Maradona)**
+* **Importo Puntato**: **`30.00 €`** | **Quota Totale**: **`2.84×`** | **Vincita Potenziale**: **`85.11 €`**
+1. 🇩🇪 [18:45] **Stoccarda vs Viking FK** ➔ **1X2: 1** @ **`1.24`** 🟢 *(PRESA AL 100%! FT 3-1)*
+2. 🇪🇸 [18:45] **Barcellona vs Feyenoord** ➔ **U/O 2.5 Squadra 1 (Barça): OVER** @ **`1.25`** 🟢 *(PRESA AL 100%! FT 5-1)*
+3. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Liverpool vs Atletico Madrid** ➔ **1X + U/O 1.5: 1X + OV** @ **`1.43`** 🟢 *(PRESA AL 100%! FT 2-1 Liverpool in rimonta!)*
+4. 🇮🇹 [21:00] **Napoli vs Arsenal** ➔ **U/O 1.5: Over** @ **`1.28`** ❌ *(FT 0-1 con gol di Ødegaard al 75', clamorosa beffa con 31 tiri complessivi nel match!)*
+
+---
+
+### ⏳ Ticket #78: Il Raddoppio Pesante Live 21:00 (Quota 2.02× ➔ 100.96 €)
+* **Piattaforma**: Netwin | **Stato**: ❌ **PERSO (Beffa millimetrica su entrambi gli eventi)**
+* **Importo Puntato**: **`50.00 €`** | **Quota Totale**: **`2.02×`** | **Vincita Potenziale**: **`100.96 €`**
+1. 🏴󠁧󠁢󠁥󠁮󠁧󠁿 [21:00] **Liverpool vs Atletico Madrid** ➔ **U/O 9.5 Tiri Totali Squadra 2 (Atletico): OVER** @ **`1.59`** ❌ *(Atletico fermo a 9 tiri: mancava 1 solo tiro per vincere!)*
+2. 🇮🇹 [21:00] **Napoli vs Arsenal** ➔ **U/O 1.5 Gol Match: OVER** @ **`1.27`** ❌ *(FT 0-1)*
+
+---
+
+### 📊 Riepilogo Completo Sessione Mercoledì 9 Settembre 2026:
+* 🟢 **Ticket #73 (Chicche Quota 3.46× 30€)**: ✅ **SBANCATO AL 100%! (`+103.82 €` VINTI E ACCREDITATI!)**
+  * Undav o Sostituto Segna/Legno 🟢
+  * Yamal o Sostituto Segna/Legno 🟢
+  * Dembélé o Sostituto Segna/Legno 🟢 *(Doppietta da fuoriclasse al 17' e 23'!)*
+* 🟢 **Ticket #75 (Blitz 1° Tempo Quota 2.82× 30€)**: ✅ **SBANCATO AL 100%! (`+84.67 €` VINTI E ACCREDITATI!)**
+  * Stoccarda Over 1.5 1°T 🟢 *(3-1 al 45')*
+  * Barça 1 + Over 1.5 1°T 🟢 *(2-0 al 45')*
+* ❌ Ticket #72 (Gol di Testa 30€): Perso (4 gol di piede).
+* ❌ Ticket #74 (La Principale 30€): 3/4 prese 🟢 (Stoccarda 1, Barça Over 2.5, Liverpool 1X+Over 1.5), mancato per 1 gol a Napoli (0-1).
+* ❌ Ticket #76 (Bomber 20€): Raphinha Doppietta PRESA 🟢, Undav 0 gol.
+* ❌ Ticket #77 (Quota 12.46× 10€): Barça Gol/Gol PRESO 🟢, Stoccarda finita 3-1.
+* ❌ Ticket #78 (Live 50€): Atletico fermo a 9 tiri (mancava 1 tiro) e Napoli 0-1.
+
+---
+
+### 💳 SALDO TOTALE DEFINITIVO UTENTE SU NETWIN — MERCOLEDÌ 9 SETTEMBRE 2026 (ORE 23:00):
+* 💵 **Partenza Iniziale Operazione (Martedì 8 settembre mattina)**: **`143.24 €`**
+* 💰 **SALDO REALE LIQUIDO ATTUALE IN CASSA (10 Settembre ore 18:40)**: **`67.86 €`**
+* 🎯 **I 3 Ticket Attivi in Corso (UEFA Champions League 10 Settembre)**:
+  * 📋 **Ticket #82 (La Schedina Invincibile - Versione A)**: 50.00 € @ 3.50× ➔ Potenziale **`175.00 €`**
+  * 💣 **Ticket #83 (Formula d'Assalto Quota 11x)**: 20.00 € @ 10.98 (+ 6.58 € Bonus) ➔ Potenziale **`226.26 €`**
+  * 🎯 **Ticket #84 (Doppia d'Oro 18:45: PSV 1X+OV 1.5 & Muriqi/Lukaku Segna/Legno)**: 49.00 € @ 3.50× ➔ Potenziale **`171.35 €`**
+* 🏆 **MONTEPREMI TOTALE IN GIOCO OGGI**: **`572.61 €`**! 🔥
+* 💡 **Strategia Perfetta**: Muriqi gioca i primi 65' sui cross, poi subentra Lukaku per gli ultimi 25'; PSV copre 2-0 e 1-1.
+*Ultimo aggiornamento: 10 settembre 2026 ore 18:41 — BAgent*
+
+
+
 
 
 
