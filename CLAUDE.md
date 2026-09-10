@@ -17,6 +17,7 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
 
 - **Sesto Senso = OBBLIGATORIO & QUOTIDIANO**: Lettura integrale dei quotidiani sportivi di riferimento (*La Gazzetta dello Sport*, *BBC Sport*, *Marca*, *Kicker*, *L'Équipe*) TUTTI I GIORNI prima di qualsiasi tabella o calcolo. L'informazione giornalistica e i retroscena di spogliatoio/mercato sono parte integrante e imprescindibile del Sesto Senso.
 - **FootyStats = obbligatorio**: SEMPRE consultare https://footystats.org prima di ogni analisi per estrarre avg goals, Over2.5%, BTTS%, xG, forma recente. MAI stimare probabilità senza dati reali da FootyStats.
+- **Interazione 100% via Chat (Zero Terminale per l'Utente)**: L'utente non deve digitare comandi da terminale: interagisce esclusivamente via chat in linguaggio naturale. È compito dell'assistente invocare in background tutti gli script di controllo e calcolo (`verify_squad_control.py`, `scan_omni_markets.py`, `build_verified_ticket.py`, `scan_live_matches.py`), elaborare i dati e presentare direttamente nella conversazione i risultati già filtrati, certificati e pronti all'uso.
 - **Edge formula**: `Edge = (prob × quota) - 1` — solo informativo, non decisionale
 - **Probabilità proprie**: NON derivare da quote bookmaker, usare Poisson + dati FootyStats reali
 - **Quota minima**: 1.20
