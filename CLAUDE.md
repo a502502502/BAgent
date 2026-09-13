@@ -178,10 +178,15 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
     2. **Liga Profesional Argentina 🇦🇷 (`arg.1`)**: "Guerra Tattica, Catenaccio & Arbitraggio di Ferro". Media gol $< 2.10$, Under 2.5 al $62\%$, media oltre 30 falli e 5.8 cartellini/gara. *Mercati Re*: `Under 2.5 / Under 3.5`, `Over 4.5 / 5.5 Cartellini Totali`, `Doppia Chance Protetta`. Divieto di Over 2.5 compressi.
     3. **Eredivisie Olandese 🇳🇱 (`ned.1`)**: "Total Football & Heavy Right-Tail". Media gol $3.28$/partita, Over 2.5 al $68.5\%$. PSV, Feyenoord e Ajax macchine da gol. *Mercati Re*: `1/2 + Over 1.5`, `1/2 + Over 2.5`, `MultiGol 2-5`, `Over Corner Big`. Divieto di Under 2.5 o tetti stretti (Anti-Ceiling Regola #48).
     4. **Eliteserien Norvegese 🇳🇴 (`nor.1`)**: "Sintetico Veloce, Ritmi Alti & Fair Play". Campi in erba sintetica, rimbalzo rapido, Bodø/Glimt e Brann a trazione anteriore (Over 2.5 al $64\%$). Arbitraggi permissivi all'inglese (media $< 2.9$ cartellini). *Mercati Re*: `Over 2.5`, `Gol / BTTS`, `1X2 Corner Dominante`. **DIVIETO ASSOLUTO DI OVER CARTELLINI IN NORVEGIA**.
-  - 📌 **Integrazione Software (`services/leagues/specialized_leagues_profile.py`)**:
-    Validato come `Gate 0.9` in `StrictTicketPipeline`. Blocca istantaneamente mercati contro-natura rispetto al DNA del campionato.
+- **Regola #53 — VERIFICA OBBLIGATORIA DEL CALENDARIO UEFA & COPPE (Zero Allucinazioni Temporali Turni Infrasettimanali)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO citare turni di Champions League, Coppe Europee o turni infrasettimanali basandosi sulla memoria parametrica o su presunte abitudini di calendario senza prima aver interrogato l'API con il calendario reale della stagione corrente.
+  - 🔬 **Motivazione Scientifica & Lezione Utente 14/09/2026**:
+    La 1ª giornata della UEFA Champions League 2026/27 si è svolta l'**8-10 Settembre 2026** (conclusa con le partite di Barcellona, Bayern, PSG e Liverpool). La 2ª giornata si disputerà il **13-14 Ottobre 2026**. Questa settimana (16-17 Settembre 2026) vede invece il debutto della **UEFA Europa League** (Milan vs Benfica, Celta Vigo), della **Coppa Italia** (Genoa, Fiorentina) e della **Carabao Cup inglese**, e NON la Champions League.
+  - 📌 **Direttiva Operativa Obbligatoria**:
+    Prima di applicare `Gate 4 (Rischio Coppe Europee Infrasettimanali)`, BAgent DEVE verificare la reale fixture infrasettimanale del club (`https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard?dates=...`) evitando qualsiasi assunzione non certificata.
 
 ---
+
 
 ## Struttura Cartelle
 
