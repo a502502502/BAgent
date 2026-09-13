@@ -435,10 +435,12 @@ class SquadAbsenceChecker:
         outdated_coaches = {
             'conte': ("Antonio Conte", "Non verificato o non più presente come guida tecnica del Napoli 2026/27"),
             'italiano': ("Vincenzo Italiano", "Non verificato o non più presente come guida tecnica del Bologna 2026/27"),
-            'pioli': ("Stefano Pioli", "Non allena il Milan"),
-            'allegri': ("Massimiliano Allegri", "Non allena la Juventus"),
-            'sarri': ("Maurizio Sarri", "Non allena la Lazio"),
-            'mourinho': ("José Mourinho", "Non allena la Roma"),
+            'pioli': ("Stefano Pioli", "Non allena il Milan nel 2026/27"),
+            'allegri': ("Massimiliano Allegri", "Non allena la Juventus nel 2026/27"),
+            'sarri': ("Maurizio Sarri", "Non allena la Lazio nel 2026/27"),
+            'mourinho': ("José Mourinho", "Non allena il Fenerbahçe né la Roma nel 2026/27 (Memoria parametrica vietata)"),
+            'juric': ("Ivan Jurić", "Non verificato come guida tecnica nel 2026/27"),
+            'tudor': ("Igor Tudor", "Non verificato come guida tecnica nel 2026/27"),
         }
         for token, (name, note) in outdated_coaches.items():
             if re.search(rf"\b{re.escape(token)}\b", norm_text):
@@ -450,6 +452,8 @@ class SquadAbsenceChecker:
                     violations.append(f"Guida tecnica errata: '{name}' per il Milan ({note}).")
                 elif "juve" in (home_t + away_t).lower() and token == 'allegri':
                     violations.append(f"Guida tecnica errata: '{name}' per la Juventus ({note}).")
+                elif token == 'mourinho':
+                    violations.append(f"Guida tecnica errata/non confermata: '{name}' ({note}).")
 
         # 2. Controllo incrociato su cognomi DB 2026/27
         surnames_index = self.get_all_surnames_index()
