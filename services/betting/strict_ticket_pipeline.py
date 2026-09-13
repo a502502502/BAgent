@@ -38,6 +38,11 @@ class MarketCandidate:
     estimated_p_90: Optional[float] = None # Probabilità evento nei 90 minuti
     is_compound_time_market: bool = False  # Richiede evento in entrambi i tempi? (es. Segna Entrambi Tempi)
     is_intermediate_deadline: bool = False # Può morire al 45' cancellando il 2°T? (es. HT/FT, Gol Entrambi Tempi)
+    market_type: str = ""                  # '1X2', 'CORNER', 'FIRST_HALF', 'GOALS', 'COMBO', 'CARDS'
+    team_avg_shots: Optional[float] = None # Regola #45: media tiri totali squadra a partita
+    team_avg_shots_on_target: Optional[float] = None # Regola #45: media tiri in porta
+    has_upcoming_midweek_cup: bool = False # Rischio turnover/coppe europee infrasettimanali
+    is_first_half_only: bool = False       # Mercato che si conclude al 45'
 
 
 @dataclass
@@ -51,6 +56,17 @@ class ValidationReport:
     mathematical_edge: float = 0.0
     details: str = ""
     sixth_sense_summary: str = ""
+
+
+@dataclass
+class TicketValidationReport:
+    passed: bool
+    num_selections: int
+    total_odds: float
+    recommended_stake: float
+    stake_percentage: float
+    legs_reports: List[ValidationReport]
+    rejection_reasons: List[str]
 
 
 class StrictTicketPipeline:
@@ -106,8 +122,139 @@ class StrictTicketPipeline:
 
     def validate_candidate(self, candidate: MarketCandidate) -> ValidationReport:
         """
-        Applica il funnel sequenziale degli 8 Stadi Obbligatori.
+        Applica il funnel sequenziale degli Stadi Obbligatori con Hard Gates.
         """
+        # =====================================================================
+        # GATE 0: DIVIETO 1 O 2 FISSO SOTTO QUOTA 1.65 (Protocollo Protezione & Anti-Varianza)
+        # =====================================================================
+        is_straight_win = (
+            candidate.market_type.upper() in ["1X2", "ESITO FINALE", "WINNER"]
+            or candidate.market_name.strip().upper() in ["1", "2", "1 FISSO", "2 FISSO", "ESITO FINALE 1", "ESITO FINALE 2"]
+        )
+        if is_straight_win and candidate.bookmaker_odd < 1.65:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - PROTOCOLLO PROTEZIONE: DIVIETO 1/2 FISSO SOTTO 1.65] {candidate.market_name} @ {candidate.bookmaker_odd:.2f} su {candidate.match_name}. "
+                    f"È tassativamente vietato scommettere su 1 o 2 fisso a quota inferiore a 1.65 per l'eccessiva esposizione a pareggi ed episodi casuali (es. Athletic Bilbao 1-1). "
+                    f"Sostituire obbligatoriamente con opzioni protette: Doppia Chance (1X/X2), Combo 1X + Over 1.5, DNB o MultiGol Squadra."
+                ),
+                details="Quota < 1.65 su segno 1 o 2 secco non offre margine sufficiente a coprire il rischio pareggio."
+            )
+
+        # =====================================================================
+        # GATE 0.5: REGOLA #45 - FILTRO VOLUME OFFENSIVO SUI CORNER
+        # =====================================================================
+        is_corner_market = (
+            candidate.market_type.upper() == "CORNER"
+            or "CORNER" in candidate.market_name.upper()
+            or "ANGOLO" in candidate.market_name.upper()
+        )
+        if is_corner_market:
+            if candidate.team_avg_shots is not None and candidate.team_avg_shots < 18.0:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #45: VOLUME TIRI INSUFFICIENTE PER CORNER] {candidate.market_name} su {candidate.match_name}. "
+                        f"Media tiri registrata: {candidate.team_avg_shots:.1f} (soglia minima vincolante: >= 18.0 tiri/gara). "
+                        f"Squadre con possesso orizzontale o basso volume di conclusioni sono vietate per i corner (Lezione Liverpool-Fulham 4-8 corners)."
+                    ),
+                    details=f"Tiri squadra: {candidate.team_avg_shots:.1f}/partita < 18.0 soglia minima."
+                )
+
+        # =====================================================================
+        # GATE 0.75: REGOLA #48 - FILTRO TETTO MASSIMO SU ATTACCHI DEVASTANTI (Anti-Ceiling Trap)
+        # =====================================================================
+        # Se una squadra è una macchina da gol (es. Barcellona di Flick, Bayern, Man City) contro una difesa debole,
+        # vietare mercati con tetto massimo a 3 gol (MultiGol 1-3) per il rischio concreto di goleada (4-0, 5-0, 4-1).
+        dominant_blowout_teams = ["BARCELONA", "BARCELLONA", "BAYERN", "MANCHESTER CITY", "MAN CITY", "REAL MADRID", "PSG", "PARIS"]
+        has_dominant_offense = any(t in candidate.match_name.upper() for t in dominant_blowout_teams)
+        is_narrow_ceiling_market = "1-3" in candidate.market_name or "UNDER 2.5" in candidate.market_name.upper()
+        
+        if has_dominant_offense and is_narrow_ceiling_market and "MULTIGOL" in candidate.market_name.upper():
+            # Se la squadra dominante è quella a cui si applica il multigol
+            team_affected = any(t in candidate.market_name.upper() for t in dominant_blowout_teams)
+            if team_affected:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - ANTI-CEILING TRAP: TETTO MASSIMO SU ATTACCO DEVASTANTE] {candidate.market_name} su {candidate.match_name}. "
+                        f"Squadre con attacchi ad altissima produzione (Barça, Bayern, Man City) contro difese deboli hanno oltre il 22% di rischio goleada (4+ gol). "
+                        f"È vietato imporre un tetto a 3 gol. Usare mercati aperti verso l'alto: '2 + Over 1.5', 'Over 1.5 Squadra' o 'X2 + Over 1.5'."
+                    ),
+                    details="Rischio concreto di sconfitta per troppi gol segnati dalla favorita (4-0, 5-0, 4-1)."
+                )
+
+        # =====================================================================
+        # GATE 0.8: REGOLA #49 - DIVIETO ASSOLUTO ALLUCINAZIONE NOMINALE & AUDIT ANAGRAFICO TESTO
+        # =====================================================================
+        if candidate.sixth_sense_analysis:
+            passed_text_audit, entity_violations = self.checker.audit_text_entities(
+                text=candidate.sixth_sense_analysis,
+                match_name=candidate.match_name,
+                home_team=candidate.team_name if candidate.team_name else None
+            )
+            if not passed_text_audit:
+                violations_str = " | ".join(entity_violations)
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #49: ALLUCINAZIONE NOMINALE NON CERTIFICATA] {violations_str}. "
+                        f"È tassativamente vietato citare giocatori trasferiti o appartenenti ad altre squadre (Memoria parametrica pregressa vietata!). "
+                        f"Riscrivere l'analisi con parametri oggettivi di squadra o con la rosa reale 2026/27."
+                    ),
+                    details=f"Violazioni anagrafiche riscontrate nel Sesto Senso: {violations_str}"
+                )
+
+        # =====================================================================
+        # GATE 0.85: REGOLA #51 - FILTRO "CORTO MUSO" & DIVIETO OVER 1.5 SU SQUADRE PRAGMATICHE
+        # =====================================================================
+        pragmatic_keywords = ["allegri", "corto muso", "simeone", "gestione corta", "blocco basso"]
+        is_pragmatic_context = any(pk in (candidate.sixth_sense_analysis or "").lower() for pk in pragmatic_keywords)
+        
+        team_lower = (candidate.team_name or candidate.match_name or "").lower()
+        # Napoli 2026/27 con Allegri o squadre ad alta vocazione pragmatica/corto muso
+        if "napoli" in team_lower or is_pragmatic_context:
+            m_upper = candidate.market_name.upper()
+            if "OVER 1.5" in m_upper or "OV 1.5" in m_upper or "+ OVER 1.5" in m_upper:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #51: FILTRO CORTO MUSO (ALLEGRI/PRAGMATISMO)] Il mercato '{candidate.market_name}' "
+                        f"su '{candidate.match_name}' impone la condizione Over 1.5, escludendo l'1-0 o lo 0-1. "
+                        f"Sotto la guida di tecnici pragmatici (come Allegri al Napoli o Simeone), una volta in vantaggio "
+                        f"la squadra abbassa il ritmo e congela il minimo scarto (frequenza 1-0/0-1 oltre il 25%). "
+                        f"Obbligo tassativo di sostituire con mercati resilienti che coprono l'1-0: "
+                        f"'1X + MultiGol 1-5', '1 Fisso', 'MultiGol 1-3 Squadra' o '1X + Under 3.5'!"
+                    ),
+                    details="Vietato imporre Over 1.5 escludendo l'1-0/0-1 su squadre a gestione pragmatica 'corto muso'."
+                )
+
+        # =====================================================================
+        # GATE 0.9: REGOLA #52 - SPECIALIZZAZIONE NEI 4 CIRCUITI SATELLITE (BRASILE, ARGENTINA, OLANDA, NORVEGIA)
+        # =====================================================================
+        from services.leagues.specialized_leagues_profile import SpecializedLeagueEngine
+        league_target = candidate.tournament or candidate.match_name
+        is_coherent, audit_msg = SpecializedLeagueEngine.audit_market_for_league(league_target, candidate.market_name)
+        if not is_coherent:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=audit_msg,
+                details=f"Incompatibilità tra mercato e DNA tattico della lega ({league_target})."
+            )
+
         # =====================================================================
         # FASE 1, 2, 3: CONTROLLO ANAGRAFICO, SANITARIO & FORMAZIONI
         # =====================================================================
@@ -164,10 +311,25 @@ class StrictTicketPipeline:
                 details="Manca la colonna motivazione tattica e Sesto Senso."
             )
 
+        # Controllo coppe infrasettimanali
+        risk_flags_upper = [f.upper() for f in candidate.sixth_sense_risk_flags]
+        has_cup = candidate.has_upcoming_midweek_cup or "MIDWEEK_CUP" in risk_flags_upper
+        if has_cup and (candidate.is_intermediate_deadline or candidate.is_first_half_only or candidate.is_compound_time_market):
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=4,
+                rejection_reason=(
+                    f"[BLOCCATO - SESTO SENSO: TURNOVER PRE-COPPA & AVVIO DIESEL] {candidate.match_name} ha un impegno europeo nei giorni successivi. "
+                    f"Tassativamente vietati mercati 1° tempo o mercati rigidi sui due tempi a quota compressa (Lezione Sunderland-Arsenal 0-0 HT)!"
+                ),
+                sixth_sense_summary=candidate.sixth_sense_analysis
+            )
+
         # Controllo bandiere rosse Sesto Senso
         for flag in candidate.sixth_sense_risk_flags:
             flag_upper = flag.upper()
-            if flag_upper == "ROTATION_RISK" and (candidate.player_name or candidate.is_compound_time_market):
+            if flag_upper == "ROTATION_RISK" and (candidate.player_name or candidate.is_compound_time_market or is_straight_win):
                 return ValidationReport(
                     passed=False,
                     candidate=candidate,
@@ -175,7 +337,7 @@ class StrictTicketPipeline:
                     rejection_reason=f"[BLOCCATO - SESTO SENSO: RISCHIO TURNOVER] Rilevato turnover massiccio per {candidate.match_name}!",
                     sixth_sense_summary=candidate.sixth_sense_analysis
                 )
-            if flag_upper == "SLOW_START" and candidate.is_intermediate_deadline:
+            if flag_upper == "SLOW_START" and (candidate.is_intermediate_deadline or candidate.is_first_half_only):
                 return ValidationReport(
                     passed=False,
                     candidate=candidate,
@@ -264,3 +426,54 @@ class StrictTicketPipeline:
 
         stake = round(current_bankroll * base_pct, 2)
         return max(2.00, stake)
+
+    def validate_ticket(self, candidates: List[MarketCandidate], current_bankroll: float, proposed_stake: Optional[float] = None) -> TicketValidationReport:
+        """
+        Audit di Livello Ticket: valida tutte le selezioni ed applica i vincoli di schedina.
+        - Protocollo Continuità: Max 3-4 selezioni per ticket (5+ gambe tassativamente vietate).
+        - Staking Management: Max 8% del bankroll per singolo ticket.
+        """
+        rejection_reasons: List[str] = []
+        legs_reports: List[ValidationReport] = []
+        total_odds = 1.0
+
+        # Vincolo 1: Max 3-4 selezioni
+        if len(candidates) > 4:
+            rejection_reasons.append(
+                f"[BLOCCATO - PROTOCOLLO CONTINUITÀ] Proposte {len(candidates)} selezioni. "
+                f"Il limite assoluto è di massimo 3 o 4 eventi per ticket (stop alle schedine lunghe)."
+            )
+        elif len(candidates) < 1:
+            rejection_reasons.append("[BLOCCATO] Nessuna selezione proposta nel ticket.")
+
+        # Validazione singole selezioni
+        for c in candidates:
+            rep = self.validate_candidate(c)
+            legs_reports.append(rep)
+            if rep.passed:
+                total_odds *= c.bookmaker_odd
+            else:
+                rejection_reasons.append(f"{c.match_name} ({c.market_name}): {rep.rejection_reason}")
+
+        # Money Management
+        rec_stake = self.calculate_recommended_stake(current_bankroll, total_odds, len(candidates))
+        chosen_stake = proposed_stake if proposed_stake is not None else rec_stake
+        stake_pct = (chosen_stake / max(0.01, current_bankroll)) * 100
+
+        if chosen_stake > (current_bankroll * self.MAX_TICKET_BANKROLL_PCT) and current_bankroll > 20.0:
+            rejection_reasons.append(
+                f"[BLOCCATO - MONEY MANAGEMENT] Stake proposto di €{chosen_stake:.2f} ({stake_pct:.1f}%) "
+                f"supera il limite massimo consentito dell'8% (€{current_bankroll * self.MAX_TICKET_BANKROLL_PCT:.2f})."
+            )
+
+        ticket_passed = (len(rejection_reasons) == 0)
+
+        return TicketValidationReport(
+            passed=ticket_passed,
+            num_selections=len(candidates),
+            total_odds=round(total_odds, 2),
+            recommended_stake=chosen_stake,
+            stake_percentage=round(stake_pct, 1),
+            legs_reports=legs_reports,
+            rejection_reasons=rejection_reasons
+        )

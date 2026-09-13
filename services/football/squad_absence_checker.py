@@ -20,7 +20,9 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-DB_PATH = ROOT / "storage" / "database" / "bagent.db"
+DB_PATH = ROOT / "data" / "bagent.db"
+if not DB_PATH.exists():
+    DB_PATH = ROOT / "storage" / "database" / "bagent.db"
 
 # Caricamento credenziali da .env
 env_path = ROOT / ".env"
@@ -333,3 +335,140 @@ class SquadAbsenceChecker:
             rejection_reason=None,
             details=p_data
         )
+
+    def get_all_surnames_index(self) -> Dict[str, Tuple[str, str]]:
+        """
+        Indicizza tutti i cognomi dei giocatori registrati nel DB locale 2026/27.
+        Ritorna: dict { normalized_surname: (full_name, team_name) }
+        """
+        if hasattr(self, "_surnames_cache") and self._surnames_cache:
+            return self._surnames_cache
+
+        import re
+        cache = {}
+        common_words = {
+            'antonio', 'kevin', 'marco', 'david', 'lucas', 'andrea', 'daniel', 'mario',
+            'alex', 'diego', 'carlos', 'felipe', 'martin', 'victor', 'pablo', 'sergio',
+            'adrian', 'gabriel', 'alvaro', 'rodrigo', 'mateo', 'leonardo', 'nicolas',
+            'julian', 'thomas', 'arthur', 'samuel', 'jorge', 'matias', 'alberto', 'federico',
+            'mura', 'testa', 'forte', 'piano', 'campo', 'gioco', 'linea', 'punti', 'porto',
+            'conte', 'conti', 'costa', 'silva', 'santos',
+            'trafford', 'bernabeu', 'maradona', 'olimpico', 'anfield', 'etihad', 'emirates',
+            'allianz', 'metropolitano', 'mestalla', 'balaidos', 'meazza', 'madrid', 'manchester',
+            'london', 'paris', 'milan', 'roma', 'turin', 'naples', 'barcelona', 'bologna',
+            'primo', 'secondo', 'tempo', 'tempi', 'partita', 'partite', 'squadra', 'squadre', 'minuto', 'minuti',
+            'arena', 'stadium', 'stadio', 'ligue', 'league', 'serie', 'campionato', 'trasferta', 'europa', 'calcio', 'reale'
+        }
+
+        if self.db_path.exists():
+            con = sqlite3.connect(self.db_path)
+            cur = con.cursor()
+            cur.execute("SELECT name, team_name FROM players")
+            rows = cur.fetchall()
+            con.close()
+
+            for full_name, team_name in rows:
+                parts = [p for p in re.split(r'[\s\.\-]+', full_name) if len(p) >= 5]
+                if parts:
+                    surname = parts[-1]
+                    norm_s = normalize(surname)
+                    if norm_s not in common_words and len(norm_s) >= 5:
+                        cache[norm_s] = (full_name, team_name)
+
+        self._surnames_cache = cache
+        return cache
+
+    def audit_text_entities(
+        self,
+        text: str,
+        match_name: str,
+        home_team: Optional[str] = None,
+        away_team: Optional[str] = None
+    ) -> Tuple[bool, List[str]]:
+        """
+        Regola #49: Zero Parametric Memory Gate.
+        Scansiona il testo del Sesto Senso / motivazione per identificare allucinazioni
+        di giocatori trasferiti, indisponibili o non appartenenti alle due squadre in campo.
+        Ritorna: (passed, list_of_violations)
+        """
+        if not text or not text.strip():
+            return True, []
+
+        import re
+        norm_text = " " + normalize(text) + " "
+
+        # Risolvi squadre se non passate
+        if not home_team or not away_team:
+            for sep in [" vs ", " - ", " – ", " v "]:
+                if sep in match_name:
+                    parts = match_name.split(sep, 1)
+                    home_team = parts[0].strip()
+                    away_team = parts[1].strip()
+                    break
+
+        home_t = home_team or ""
+        away_t = away_team or ""
+
+        violations = []
+
+        # 1. Controllo figure storiche notoriamente cedute o fuori rosa
+        known_outdated = {
+            'lukaku': ("Romelu Lukaku", "Non presente nella rosa del Napoli 2026/27"),
+            'osimhen': ("Victor Osimhen", "Ceduto dal Napoli"),
+            'zielinski': ("Piotr Zieliński", "Non milita più nel Napoli (trasferito all'Inter)"),
+            'giroud': ("Olivier Giroud", "Non milita più in Serie A (MLS)"),
+            'rabiot': ("Adrien Rabiot", "Non milita più nella Juventus"),
+            'chiesa': ("Federico Chiesa", "Trasferito al Liverpool, non milita nella Juventus"),
+        }
+
+        for token, (name, note) in known_outdated.items():
+            if re.search(rf"\b{re.escape(token)}\b", norm_text):
+                # Se è citato a sproposito in un match correlato alla sua vecchia squadra
+                if "napoli" in (home_t + away_t).lower() and token in ['lukaku', 'osimhen', 'zielinski']:
+                    violations.append(f"Citazione anagrafica errata: '{name}' per il Napoli ({note}).")
+                elif "juve" in (home_t + away_t).lower() and token in ['chiesa', 'rabiot']:
+                    violations.append(f"Citazione anagrafica errata: '{name}' per la Juventus ({note}).")
+                elif "milan" in (home_t + away_t).lower() and token in ['giroud']:
+                    violations.append(f"Citazione anagrafica errata: '{name}' per il Milan ({note}).")
+
+        # 2. Controllo allenatori non verificati o cambiati rispetto alle stagioni precedenti
+        outdated_coaches = {
+            'conte': ("Antonio Conte", "Non verificato o non più presente come guida tecnica del Napoli 2026/27"),
+            'italiano': ("Vincenzo Italiano", "Non verificato o non più presente come guida tecnica del Bologna 2026/27"),
+            'pioli': ("Stefano Pioli", "Non allena il Milan"),
+            'allegri': ("Massimiliano Allegri", "Non allena la Juventus"),
+            'sarri': ("Maurizio Sarri", "Non allena la Lazio"),
+            'mourinho': ("José Mourinho", "Non allena la Roma"),
+        }
+        for token, (name, note) in outdated_coaches.items():
+            if re.search(rf"\b{re.escape(token)}\b", norm_text):
+                if "napoli" in (home_t + away_t).lower() and token == 'conte':
+                    violations.append(f"Guida tecnica errata/non confermata: '{name}' per il Napoli ({note}).")
+                elif "bologna" in (home_t + away_t).lower() and token == 'italiano':
+                    violations.append(f"Guida tecnica errata/non confermata: '{name}' per il Bologna ({note}).")
+                elif "milan" in (home_t + away_t).lower() and token == 'pioli':
+                    violations.append(f"Guida tecnica errata: '{name}' per il Milan ({note}).")
+                elif "juve" in (home_t + away_t).lower() and token == 'allegri':
+                    violations.append(f"Guida tecnica errata: '{name}' per la Juventus ({note}).")
+
+        # 2. Controllo incrociato su cognomi DB 2026/27
+        surnames_index = self.get_all_surnames_index()
+        tokens = re.findall(r'[a-zA-Z]{5,}', norm_text)
+        norm_home = normalize(home_t)
+        norm_away = normalize(away_t)
+        for tok in set(tokens):
+            if tok in norm_home or tok in norm_away:
+                continue
+            if tok in surnames_index:
+                full_name, actual_team = surnames_index[tok]
+                # Se il giocatore appartiene a un'altra squadra diversa da home e away
+                if not teams_match(home_t, actual_team) and not teams_match(away_t, actual_team):
+                    # Verifica che il token sia un match esatto nel testo
+                    if re.search(rf"\b{re.escape(tok)}\b", norm_text):
+                        violations.append(
+                            f"Allucinazione anagrafica: '{full_name}' registrato nel '{actual_team}', NON appartiene a {home_t} né a {away_t}!"
+                        )
+
+        passed = len(violations) == 0
+        return passed, violations
+

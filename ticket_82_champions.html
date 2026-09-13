@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket #82 — Champions League Invincibile</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-4 md:p-6">
+  <div class="max-w-4xl mx-auto space-y-6">
+
+    <!-- Header Card -->
+    <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[var(--border)] pb-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">UEFA Champions League</span>
+            <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Regola #39 Attiva</span>
+          </div>
+          <h1 class="text-2xl font-bold mt-2 tracking-tight">Ticket #82: La Schedina Invincibile</h1>
+          <p class="text-[var(--muted-foreground)] text-sm mt-1">5 Selezioni Protette · Modello MultiGol & Tempi Differenziati · 10 Settembre 2026</p>
+        </div>
+        <div class="flex items-baseline gap-2 bg-[var(--background)] px-4 py-2.5 rounded-xl border border-[var(--border)]">
+          <span class="text-xs text-[var(--muted-foreground)] font-medium uppercase">Quota Totale:</span>
+          <span class="text-2xl font-black text-blue-500">4.01×</span>
+        </div>
+      </div>
+
+      <!-- Live Interactive Calculator -->
+      <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-4 bg-[var(--background)] p-4 rounded-xl border border-[var(--border)]">
+        <div>
+          <label for="stakeInput" class="block text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Importo Puntata (€)</label>
+          <div class="mt-1.5 flex items-center gap-2">
+            <input type="number" id="stakeInput" value="20" min="5" max="137" step="5"
+              class="w-full bg-[var(--card)] border border-[var(--border)] rounded-lg px-3 py-1.5 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 text-[var(--foreground)]"
+              oninput="updateCalculator()">
+          </div>
+          <div class="flex gap-1.5 mt-2">
+            <button onclick="setStake(15)" class="text-xs px-2 py-0.5 rounded bg-[var(--card)] hover:bg-[var(--border)] border border-[var(--border)]">15€</button>
+            <button onclick="setStake(20)" class="text-xs px-2 py-0.5 rounded bg-[var(--card)] hover:bg-[var(--border)] border border-[var(--border)] font-bold text-blue-500">20€</button>
+            <button onclick="setStake(25)" class="text-xs px-2 py-0.5 rounded bg-[var(--card)] hover:bg-[var(--border)] border border-[var(--border)] font-bold text-emerald-500">25€</button>
+          </div>
+        </div>
+        <div>
+          <span class="block text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Vincita Potenziale</span>
+          <div class="text-2xl font-black text-emerald-500 mt-1.5" id="winDisplay">80.20 €</div>
+          <span class="text-xs text-[var(--muted-foreground)]" id="profitDisplay">Utile netto: +60.20 €</span>
+        </div>
+        <div>
+          <span class="block text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Nuovo Saldo Cassa</span>
+          <div class="text-2xl font-black text-blue-400 mt-1.5" id="bankrollDisplay">198.06 €</div>
+          <span class="text-xs text-[var(--muted-foreground)]">Cassa liquida attuale: 137.86 €</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Match Selections List -->
+    <div class="space-y-4">
+
+      <!-- Card 1: PSV vs Shakhtar -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm hover:border-blue-500/40 transition-colors">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 bg-amber-500/10 text-amber-500 border border-amber-500/20 text-xs font-bold rounded-md">18:45 CEST</span>
+            <div>
+              <h3 class="font-bold text-base tracking-tight">PSV Eindhoven <span class="text-[var(--muted-foreground)] font-normal">vs</span> Shakhtar Donetsk</h3>
+              <p class="text-xs text-[var(--muted-foreground)]">Philips Stadion, Eindhoven · Sezione: Combo DC + Over/Under</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-start sm:self-auto">
+            <span class="px-3 py-1 bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-lg text-sm font-black">1X + U/O 1.5: 1X + OV</span>
+            <span class="px-2.5 py-1 bg-[var(--background)] border border-[var(--border)] rounded-lg text-sm font-bold">@ 1.32</span>
+          </div>
+        </div>
+        <div class="mt-3 text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
+          <strong class="text-[var(--foreground)]">Protezione Totale Anti-Trappola:</strong> Il PSV in casa ha oltre l'85% di imbattibilità europea e genera 3.4 gol medi a partita. A differenza del rischioso <em>1X + Over 2.5</em>, questa formula <strong class="text-emerald-500">copre sia il 2-0 che l'1-1</strong> (oltre a 2-1, 3-0, 3-1, 2-2). Lo Shakhtar soffre il pressing olandese e difficilmente vincerà senza che si vedano almeno 2 marcature.
+        </div>
+      </div>
+
+      <!-- Card 2: Fenerbahce vs Roma -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm hover:border-blue-500/40 transition-colors">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 bg-amber-500/10 text-amber-500 border border-amber-500/20 text-xs font-bold rounded-md">18:45 CEST</span>
+            <div>
+              <h3 class="font-bold text-base tracking-tight">Fenerbahçe <span class="text-[var(--muted-foreground)] font-normal">vs</span> AS Roma</h3>
+              <p class="text-xs text-[var(--muted-foreground)]">Sukru Saracoglu, Istanbul · Sezione: MultiGol Squadra Ospite</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-start sm:self-auto">
+            <span class="px-3 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-lg text-sm font-black">MultiGol 1-3 Ospite: SI</span>
+            <span class="px-2.5 py-1 bg-[var(--background)] border border-[var(--border)] rounded-lg text-sm font-bold">@ 1.30</span>
+          </div>
+        </div>
+        <div class="mt-3 text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
+          <strong class="text-[var(--foreground)]">La Replica del Capolavoro Napoli-Arsenal:</strong> La Roma in Europa va a secco solo nel 18% delle trasferte, mentre il Fenerbahçe ha una difesa permeabile (Clean Sheet solo al 32%). Zero ansia su chi vince o sull'arbitro: la Roma segna il suo consueto gol europeo (<strong class="text-emerald-500">0-1, 1-1, 1-2, 0-2, 2-1, 2-2, 1-3</strong>) ed è già cassa piena!
+        </div>
+      </div>
+
+      <!-- Card 3: Bayern vs Bodo/Glimt -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm hover:border-blue-500/40 transition-colors">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold rounded-md">21:00 CEST</span>
+            <div>
+              <h3 class="font-bold text-base tracking-tight">Bayern Monaco <span class="text-[var(--muted-foreground)] font-normal">vs</span> Bodø/Glimt</h3>
+              <p class="text-xs text-[var(--muted-foreground)]">Allianz Arena, Monaco · Sezione: Speciali Tempi Casa</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-start sm:self-auto">
+            <span class="px-3 py-1 bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-lg text-sm font-black">Casa Segna in Entrambi i Tempi: SI</span>
+            <span class="px-2.5 py-1 bg-[var(--background)] border border-[var(--border)] rounded-lg text-sm font-bold">@ 1.32</span>
+          </div>
+        </div>
+        <div class="mt-3 text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
+          <strong class="text-[var(--foreground)]">Addio Trappola Clean Sheet:</strong> Cancellato il pericoloso <em>1X + GG</em> che chiedeva il gol ai norvegesi. Il Bayern ha 0% gare a secco in casa, segna nel 1°T nel 75% dei casi e realizza il 59.7% dei gol nella ripresa (con il 29% dal 75' al 90'). <strong class="text-emerald-500">Basta 1 gol per tempo: 2-0, 3-0, 4-0 o 5-0 con porta inviolata sono tutti vinti!</strong>
+        </div>
+      </div>
+
+      <!-- Card 4: Manchester United vs Sabah -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm hover:border-blue-500/40 transition-colors">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold rounded-md">21:00 CEST</span>
+            <div>
+              <h3 class="font-bold text-base tracking-tight">Manchester United <span class="text-[var(--muted-foreground)] font-normal">vs</span> Sabah Masazir</h3>
+              <p class="text-xs text-[var(--muted-foreground)]">Old Trafford, Manchester · Sezione: Speciali Tempi Casa</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-start sm:self-auto">
+            <span class="px-3 py-1 bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-lg text-sm font-black">Casa Segna in Entrambi i Tempi: SI</span>
+            <span class="px-2.5 py-1 bg-[var(--background)] border border-[var(--border)] rounded-lg text-sm font-bold">@ 1.35</span>
+          </div>
+        </div>
+        <div class="mt-3 text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
+          <strong class="text-[var(--foreground)]">Mismatch Strutturale:</strong> All'Old Trafford i Red Devils affrontano la cenerentola del girone. Il copione tattico abituale è sbloccare la gara nella prima mezz'ora e raddoppiare/dilagare nella ripresa sfruttando il calo atletico degli azeri.
+        </div>
+      </div>
+
+      <!-- Card 5: Como vs Leipzig -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm hover:border-blue-500/40 transition-colors">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold rounded-md">21:00 CEST</span>
+            <div>
+              <h3 class="font-bold text-base tracking-tight">Como <span class="text-[var(--muted-foreground)] font-normal">vs</span> RB Leipzig</h3>
+              <p class="text-xs text-[var(--muted-foreground)]">Stadio Giuseppe Sinigaglia, Como · Sezione: MultiGol Squadra Casa</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-start sm:self-auto">
+            <span class="px-3 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-lg text-sm font-black">MultiGol 1-3 Casa: SI</span>
+            <span class="px-2.5 py-1 bg-[var(--background)] border border-[var(--border)] rounded-lg text-sm font-bold">@ 1.31</span>
+          </div>
+        </div>
+        <div class="mt-3 text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
+          <strong class="text-[var(--foreground)]">Efficienza del Baricentro Alto:</strong> La squadra di Fàbregas gioca un calcio propositivo e in casa trova sempre la via della rete contro una difesa del Lipsia che in trasferta concede enormi spazi. Copre <strong class="text-emerald-500">1-0, 1-1, 1-2, 2-1, 2-2, 3-1, 3-2</strong>.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Strategy Footer Callout -->
+    <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4 text-xs text-[var(--muted-foreground)] flex items-center justify-between">
+      <span>🛡️ <strong>Protocollo di Protezione BAgent:</strong> Nessun cartellino dipendente dall'arbitro, zero combo rigide 1+Over, nessun obbligo di gol da parte delle sfavorite.</span>
+      <span class="font-bold text-blue-500 ml-4 whitespace-nowrap">Target: Quota 4.01×</span>
+    </div>
+
+  </div>
+
+  <script>
+    const odds = 4.01;
+    const currentBankroll = 137.86;
+
+    function setStake(amount) {
+      document.getElementById('stakeInput').value = amount;
+      updateCalculator();
+    }
+
+    function updateCalculator() {
+      const stakeInput = document.getElementById('stakeInput');
+      let stake = parseFloat(stakeInput.value) || 0;
+      if (stake < 0) stake = 0;
+
+      const potentialWin = (stake * odds).toFixed(2);
+      const profit = (potentialWin - stake).toFixed(2);
+      const newBankroll = (currentBankroll - stake + parseFloat(potentialWin)).toFixed(2);
+
+      document.getElementById('winDisplay').innerText = `${potentialWin} €`;
+      document.getElementById('profitDisplay').innerText = `Utile netto: +${profit} €`;
+      document.getElementById('bankrollDisplay').innerText = `${newBankroll} €`;
+    }
+
+    // Init
+    updateCalculator();
+  </script>
+</body>
+</html>
