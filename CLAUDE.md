@@ -83,6 +83,104 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
      - `LOW_MOTIVATION` / `DEAD_RUBBER` (squadra già qualificata o appagata) ➔ Ban su handicap o vittorie larghe.
   3. **Obbligo Rassegna & Contesto**: Prima di finalizzare una proposta, BAgent DEVE sempre specificare il retroscena tattico, il clima ambientale e la motivazione psicologica che confermano la selezione.
 
+- **Regola #44 — RICERCA ONNIMERCATO AUTONOMA & PRINCIPIO DI NEUTRALITÀ (Zero Pregiudizi di Default, Solo il Mercato Migliore)**:
+  - 🎯 **Principio Fondamentale (Neutralità & Pragmatismo Assoluto)**:
+    Noi usiamo **i mercati migliori in assoluto** per ciascuna partita e **NON denigriamo né escludiamo NESSUN mercato di default**.
+    Nessun mercato è un tabù: se per una partita il mercato migliore e più solido è un **1X2 secco** (es. Boca Juniors 1 Fisso stanotte @ 1.47, vinto 3-1), un **Under/Over**, una **Doppia Chance**, un **MultiGol**, un mercato sui **Corner**, sui **Cartellini** o una **Combo**, **SI GIOCA QUEL MERCATO SENZA ALCUN PREGIUDIZIO**.
+  - 🛑 **Cosa è Vietato**: È vietata unicamente la **pigrizia analitica**, ovvero proporre sempre e solo 1X2 o Under 2.5 per abitudine cieca quando nel sottomenu del match esistono mercati statisticamente superiori o molto più protetti.
+  - 📌 **Direttiva Operativa Obbligatoria**:
+    1. **Ricerca Autonoma e Proattiva**: Anche se l'utente fornisce solo la riga base con 1X2 e Under/Over 2.5, BAgent **HA IL DOVERE IMPERATIVO** di scansionare autonomamente (tramite `OmniMarketScanner`, modelli xG/xC/xK e banche dati) l'intero spettro dei mercati per quel match (1X2, DC, Under/Over, MultiGol Squadra, 1X2 Corner, Over Cartellini, Chance Mix, Combo).
+    2. **Scelta Imparziale del Mercato Ottimale**: BAgent valuta TUTTE le opzioni a 360° e propone all'utente **IL MERCATO CHE OFFRE IL MIGLIOR EQUILIBRIO TRA PROBABILITÀ REALE, QUOTA E RESPIRO TATTICO A 90 MINUTI**, spiegando con trasparenza perché quella specifica selezione è la più vantaggiosa per noi in quella partita, senza dogmatismi e senza chiusure a priori.
+
+- **Regola #45 — FILTRO VOLUME OFFENSIVO PER I MERCATI CORNER (Soglia Obbligatoria ≥18-20 Tiri Totali & Elevati Tiri in Porta)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO selezionare mercati sui Corner (1X2 Corner, Over Corner Totali, Over Corner Squadra) per squadre che praticano un possesso palla sterile, lento o orizzontale, o che hanno una produzione offensiva media inferiore a 16-18 conclusioni a partita.
+  - 🔬 **Motivazione Scientifica & Meccanica Balistica**:
+    I corner non nascono dalla percentuale pura di possesso palla o dal blasone del club, bensì sono una diretta conseguenza meccanica di tre fattori:
+    1. Conclusioni e tiri in porta deviati in tuffo o respinti dal portiere oltre il fondo;
+    2. Tiri dal limite o dall'interno dell'area respinti dai corpi e dalle scivolate dei difensori (Blocked Shots);
+    3. Traversoni e cross tesi dal fondo deviati in extremis dai terzini avversari.
+    Se una squadra dominante si accontenta di un vantaggio corto o non calcia verso lo specchio, la produzione di corner si blocca.
+  - 📌 **Requisiti Quantitativi Vincolanti per Selezionare i Corner**:
+    Perché una giocata su 1X2 Corner o Over Corner sia approvata dal sistema:
+    1. **Volume di Fuoco Balistico**: La squadra favorita DEVE avere una media registrata (FootyStats / ESPN / Sofascore) di **`≥ 18 — 20 tiri totali a partita`**.
+    2. **Pressione nello Specchio**: Almeno **`≥ 6-7 tiri nello specchio (Shots on Target)`** o tiri ribattuti a match.
+    3. **Asimmetria Difensiva dell'Avversario**: L'avversario deve concedere sistematicamente più di 15-18 tiri a partita e difendere con un blocco molto basso nell'ultimo terzo di campo.
+    Se questi requisiti di volume non sono certificati, il mercato Corner viene **BOCCIATO AUTOMATICAMENTE** e si opta per mercati protetti alternativi (Doppia Chance, MultiGol Squadra o Under/Over).
+
+- **Regola #46 — BLOCCO ESECUTIVO PROGRAMMATICO OBBLIGATORIO (`scripts/strict_validator.py`) & HARD GATES**:
+  - 🛑 **Divieto Assoluto di Proposta in Chat senza Audit Eseguito**:
+    È TASSATIVAMENTE VIETATO proporre all'utente qualsiasi selezione, mercato o schedina basandosi su stime narrative o ragionamenti in chat senza aver PRIMA eseguito `scripts/strict_validator.py` in background.
+    Ogni proposta presentata in chat DEVE contenere il certificato di superamento emesso dallo script con stato `🟢 CERTIFICATO ED APPROVATO`.
+  - 🛡️ **I 4 Hard Gates Inviolabili**:
+    1. **Gate 0 (Anti-Straight-Win Low Odds Ban)**: Divieto assoluto di 1 o 2 fisso a quota compressa (`< 1.65`). L'esposizione al pareggio o all'episodio fortuito è inaccettabile (Lezione Athletic Bilbao 1-1). Obbligo di sostituzione con linee protette: `1X`, `1X + Over 1.5`, `DNB`, `MultiGol 1-3 Squadra`.
+    2. **Gate 0.5 (Regola #45 Volume Corner)**: Divieto assoluto di scommettere sui corner per squadre con produzione offensiva inferiore a **`18-20 tiri totali a partita`** (Lezione Liverpool-Fulham 4-8 corners).
+    3. **Gate 4 (Rischio Coppe Europee Infrasettimanali & Tempi)**: Se una big affronta un match prima di una gara di Champions/Europa League nei 3-4 giorni successivi, sono TASSATIVAMENTE VIETATI i mercati 1° tempo a quota compressa o mercati composti sui due tempi per rischio turnover e approccio "diesel" a basso ritmo (Lezione Sunderland-Arsenal 0-0 HT).
+    4. **Gate 8 (Protocollo Continuità & Money Management)**: Max 3-4 selezioni per ticket (5+ gambe bannate per sempre) e max 8% del bankroll per singola schedina.
+
+- **Regola #47 — MERCATI AD ALTA RESILIENZA BALISTICA (MultiGol Asimmetrico Tempi, MultiGol 1-3 Squadra & Over Tiri Totali)**:
+  - 🎯 **Origine e Benchmark Competitivo (Lezione Tipster Screenshot 12/09/2026)**:
+    L'analisi di ticket vincenti su match ad alta varianza ha evidenziato 3 mercati ad altissima resilienza dove il nostro sistema convenzionale è stato vulnerabile:
+    1. **MultiGol Asimmetrico Tempi (`MG 0-2 1°T + 1-3 2°T`)**:
+       - *Meccanica*: Assorbe perfettamente lo 0-0 all'intervallo (oltre a 1-0 o 0-1) senza morire al 45' come accaduto ad Arsenal/Sunderland. Nella ripresa (`1-3 2°T`), con difese stanche e spazi aperti, basta 1 solo gol fino a un massimo di 3 per andare alla cassa.
+    2. **MultiGol di Squadra in Big Match (`MultiGol 1-3 Ospite/Casa`)**:
+       - *Meccanica*: Nei match insidiosi fuori casa (es. Napoli a Firenze, Barça o Real Madrid), scommettere su 1X2 o Over totali espone a beffe. Il `MultiGol 1-3 Squadra` copre vittorie per 0-1, 0-2, 0-3, ma anche pareggi come 1-1, 2-2 o sconfitte aperte (1-2, 2-3). È totalmente disgiunto dalla tenuta difensiva della favorita.
+    3. **Over Tiri Totali Partita (`Over 21.5 / Over 23.5 Tiri Totali`)**:
+       - *Meccanica*: Svincola completamente la giocata dall'esito 1X2 e dalla varianza di conversione dei gol. Grandi squadre offensive che subiscono gol al primo contropiede o sbattono su portieri saracinesca (es. Atalanta-Cagliari 1-2 con 25 tiri) distruggono l'1X2 o l'Over gol, ma chiudono con 24-28 conclusioni totali.
+  - 📌 **Direttiva di Integrazione Software**:
+    I tre mercati sono implementati nativamente in `OmniMarketScanner` (`services/analysis/omni_market_scanner.py`) con calcolo Poisson congiunto, distribuzioni stocastiche dei tiri e classificati come mercati elastici a 90 minuti (`90_MIN_ELASTIC`) con bonus BSS.
+
+- **Regola #48 — ANTI-CEILING TRAP (Divieto di Tetto Massimo su Attacchi Dominanti)**:
+  - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO selezionare mercati con tetto massimo stretto (`MultiGol 1-3`, `MultiGol 1-2`, `Under 2.5`) a favore di squadre con potenziale offensivo devastante (Barcellona di Flick, Bayern Monaco, Manchester City, Real Madrid) quando affrontano squadre di fascia bassa con difese fragili.
+  - 🔬 **Motivazione Scientifica & Lezione Utente 13/09/2026**:
+    In queste sfide asimmetriche la distribuzione dei gol non è un Poisson standard piatto, ma presenta una marcata coda destra (Heavy Right-Tail). Il rischio concreto di goleada (4-0, 5-0, 4-1, 6-1) supera il 22%. Perdere una schedina perché la favorita stravince segnando "troppi gol" è una distorsione algoritmica inaccettabile.
+  - 📌 **Direttiva di Integrazione**:
+    Sostituire tassativamente con **mercati aperti verso l'alto (Uncapped Markets)**: `2 + Over 1.5` (o `1 + Over 1.5`), `Over 1.5 Squadra`, `X2 + Over 1.5` o `MultiGol 2-5`. Implementato come `Gate 0.75` in `StrictTicketPipeline`.
+
+- **Regola #49 — DIVIETO ASSOLUTO DI ALLUCINAZIONE NOMINALE & AUDIT ANAGRAFICO/FORMAZIONI OBBLIGATORIO (Zero Parametric Memory Gate)**:
+  - 🛑 **Divieto Assoluto di Memoria Parametrica**:
+    È TASSATIVAMENTE VIETATO citare giocatori, allenatori o moduli tattici basandosi sulla memoria pregressa (2023-2024). Il calcio si evolve continuamente: citare Kvaratskhelia o Lukaku al Napoli nel 2026 quando Kvaratskhelia è al PSG, o Italiano al Bologna quando le panchine sono cambiate, è un errore gravissimo che mina l'attendibilità dell'analisi.
+  - 🔬 **Motivazione Scientifica & Lezione Utente 13/09/2026 (Napoli-Bologna)**:
+    Quando l'assistente formula motivazioni narrative pre-gara, l'assenza di un controllo sul testo permetteva alla memoria non aggiornata di inventare coppie d'attacco o guide tecniche fantasma. L'algoritmo deve bloccare alla radice qualsiasi discrepanza tra il testo del Sesto Senso e il database anagrafico della stagione corrente.
+  - 📌 **Direttiva di Integrazione Software (Gate 0.8)**:
+    1. **Audit Entità Testuali (`audit_text_entities`)**: In `StrictTicketPipeline.validate_candidate()`, ogni testo di Sesto Senso viene scansionato contro i 2500+ giocatori registrati in `bagent.db`. Se un giocatore citato appartiene ad un'altra squadra (es. Kvaratskhelia al PSG) o non figura nella rosa attuale del club (es. Lukaku), il ticket viene **BOCCIATO AUTOMATICAMENTE** (`[BLOCCATO - REGOLA #49: ALLUCINAZIONE NOMINALE NON CERTIFICATA]`).
+    2. **Divieto di Titolari Garantiti Pre-Distinte (Timing Gate a 60')**: Finché le formazioni ufficiali non sono depositate (kickoff > 60'), il Sesto Senso ha il **DIVIETO ASSOLUTO di dare per certa la titolarità di singoli calciatori** o di basare mercati di squadra su presenze individuali speculative.
+    3. **Analisi di Squadra Obbligatoria**: Pre-distinte, l'analisi deve basarsi esclusivamente su parametri oggettivi di collettivo: xG casalinghi/esterni 2026, medie gol fatti/subiti, congestione del calendario europeo, solidità difensiva e motivazione di classifica.
+
+- **Regola #50 — PROTOCOLLO ASSEDIO LIVE & TRIGGER ASIMMETRICO ("Underdog Leads Favorite")**:
+  - 🎯 **Principio Fondamentale & Dinamica Tattica**:
+    Quando una squadra nettamente sfavorita ("piccola", quota pre-match della favorita $\le 1.60$) passa inaspettatamente in vantaggio in una partita in-play (tra il 12' e il 78'), l'equilibrio tattico si spezza e si instaura la modalità "Assedio Asimmetrico":
+    1. La favorita riversa 8-9 uomini nella trequarti avversaria per rimontare;
+    2. La piccola si rifugia nel blocco basso ("park the bus"), spazza palloni sul fondo, perde tempo e ricorre a falli tattici di transizione.
+  - 🔬 **Attivazione Istantanea dei 4 Mercati Asimmetrici**:
+    1. **Corner Boom Favorita**: Tasso di produzione balistica pari a $\sim 1.35$ corner ogni 10 minuti di assedio ($E[\Delta \text{Corner}] = \text{Minuti Rimanenti} \times 0.135$). Si attiva la linea `Over X.5 Corner Squadra Favorita Live`.
+    2. **Cartellini Ostruzionismo Piccola**: Nel 2° tempo (dopo il 45'), il tasso sanzioni per perdite di tempo e falli sale a $\sim 0.045$ cartellini/min. Si attiva `Over X.5 Cartellini Squadra Sfavorita Live`.
+    3. **Volume Balistico Tiri Favorita**: Pressione costante con $\ge 2.8$ tiri ogni 10 minuti. Si attiva `Over X.5 Tiri Totali Favorita Live`.
+    4. **Value Bet Rimonta Live (1X / X2 Live)**: La quota della Doppia Chance a favore della big schizza da 1.15-1.25 pre-gara a quote espanse ($@ 1.55 - 2.20$) con probabilità reale residua del 60%-75%, generando un Edge matematico compreso tra $+15\%$ e $+25\%$.
+  - 📌 **Integrazione Software (`services/live/siege_engine.py`)**:
+    Implementato nel Live Sentinel (`scripts/live_tracker_sunday_suite.py` e `scripts/live_monitor.py`). Invia automaticamente un alert Telegram ad altissima priorità (`🚨 ALLERTA ASSEDIO LIVE: PICCOLA IN VANTAGGIO SULLA BIG!`) con le 4 selezioni in tempo reale non appena la sfavorita passa in vantaggio.
+
+- **Regola #51 — FILTRO "CORTO MUSO" & DIVIETO OVER 1.5 SU SQUADRE PRAGMATICHE (Lezione Allegri al Napoli)**:
+  - 🛑 **Divieto Assoluto**:
+    È TASSATIVAMENTE VIETATO selezionare mercati rigidi che escludono l'1-0 (come `1X + Over 1.5`, `1 + Over 1.5`, `Over 1.5 Squadra`) per club guidati da allenatori storicamente pragmatici e specialisti della gestione a basso ritmo / "corto muso" (in primis **Massimiliano Allegri al Napoli**, o Diego Simeone all'Atletico Madrid), specialmente contro squadre che impostano un blocco basso.
+  - 🔬 **Motivazione Scientifica & Lezione Utente 13/09/2026**:
+    La filosofia tattica di Allegri non cerca mai la goleada né il raddoppio forzato; una volta sbloccata la gara sull'1-0, la squadra abbassa l'intensità di pressing, congela il pallone, gestisce il cronometro e protegge il clean sheet con il minimo scarto. La probabilità che la partita si chiuda esattamente sull'1-0 o 0-1 sale dal normale 9-11% a oltre il 24-28%. Pretendere per forza l'Over 1.5 è un suicidio tattico che espone al tradimento del gol singolo.
+  - 📌 **Direttiva di Sostituzione Obbligatoria (Gate 0.85)**:
+    Implementato come `Gate 0.85` in `StrictTicketPipeline` (`services/betting/strict_ticket_pipeline.py`). Qualsiasi proposta che combini Napoli o contesti "corto muso" con Over 1.5 viene **BOCCIATA AUTOMATICAMENTE**. Obbligo di sostituzione con mercati resilienti che incassano sull'1-0:
+    1. `1X + MultiGol 1-5` (o `X2 + MultiGol 1-5`);
+    2. `1X + Under 3.5` (o `X2 + Under 3.5`);
+    3. `1 Fisso` (se quota $\ge 1.65$) o `Draw No Bet (DNB)`;
+    4. `MultiGol 1-3 Squadra`.
+
+- **Regola #52 — SPECIALIZZAZIONE DEI 4 CIRCUITI SATELLITE (Brasile, Argentina, Olanda, Norvegia)**:
+  - 🎯 **Principio Fondamentale & DNA Tattico**:
+    BAgent adotta modelli quantitativi e filtri dedicati per i 4 campionati satellite ad alta frequenza di scommessa:
+    1. **Brasileirão Serie A 🇧🇷 (`bra.1`)**: "Fortino Casalingo & Usura da Trasferta". Fattore campo elevatissimo ($V_{\text{casa}} \approx 48\%$) dovuto a trasferte di 3000+ km e pressione ambientale (Maracanã, Allianz Parque). *Mercati Re*: `1X + MultiGol 1-5`, `1X + Under 3.5`, `1 Fisso Big in Casa`. Divieto di 2 fissi esterni a quota compressa.
+    2. **Liga Profesional Argentina 🇦🇷 (`arg.1`)**: "Guerra Tattica, Catenaccio & Arbitraggio di Ferro". Media gol $< 2.10$, Under 2.5 al $62\%$, media oltre 30 falli e 5.8 cartellini/gara. *Mercati Re*: `Under 2.5 / Under 3.5`, `Over 4.5 / 5.5 Cartellini Totali`, `Doppia Chance Protetta`. Divieto di Over 2.5 compressi.
+    3. **Eredivisie Olandese 🇳🇱 (`ned.1`)**: "Total Football & Heavy Right-Tail". Media gol $3.28$/partita, Over 2.5 al $68.5\%$. PSV, Feyenoord e Ajax macchine da gol. *Mercati Re*: `1/2 + Over 1.5`, `1/2 + Over 2.5`, `MultiGol 2-5`, `Over Corner Big`. Divieto di Under 2.5 o tetti stretti (Anti-Ceiling Regola #48).
+    4. **Eliteserien Norvegese 🇳🇴 (`nor.1`)**: "Sintetico Veloce, Ritmi Alti & Fair Play". Campi in erba sintetica, rimbalzo rapido, Bodø/Glimt e Brann a trazione anteriore (Over 2.5 al $64\%$). Arbitraggi permissivi all'inglese (media $< 2.9$ cartellini). *Mercati Re*: `Over 2.5`, `Gol / BTTS`, `1X2 Corner Dominante`. **DIVIETO ASSOLUTO DI OVER CARTELLINI IN NORVEGIA**.
+  - 📌 **Integrazione Software (`services/leagues/specialized_leagues_profile.py`)**:
+    Validato come `Gate 0.9` in `StrictTicketPipeline`. Blocca istantaneamente mercati contro-natura rispetto al DNA del campionato.
+
 ---
 
 ## Struttura Cartelle
