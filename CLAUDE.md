@@ -182,8 +182,18 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 🛑 **Divieto Assoluto**: È TASSATIVAMENTE VIETATO citare turni di Champions League, Coppe Europee o turni infrasettimanali basandosi sulla memoria parametrica o su presunte abitudini di calendario senza prima aver interrogato l'API con il calendario reale della stagione corrente.
   - 🔬 **Motivazione Scientifica & Lezione Utente 14/09/2026**:
     La 1ª giornata della UEFA Champions League 2026/27 si è svolta l'**8-10 Settembre 2026** (conclusa con le partite di Barcellona, Bayern, PSG e Liverpool). La 2ª giornata si disputerà il **13-14 Ottobre 2026**. Questa settimana (16-17 Settembre 2026) vede invece il debutto della **UEFA Europa League** (Milan vs Benfica, Celta Vigo), della **Coppa Italia** (Genoa, Fiorentina) e della **Carabao Cup inglese**, e NON la Champions League.
-  - 📌 **Direttiva Operativa Obbligatoria**:
-    Prima di applicare `Gate 4 (Rischio Coppe Europee Infrasettimanali)`, BAgent DEVE verificare la reale fixture infrasettimanale del club (`https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard?dates=...`) evitando qualsiasi assunzione non certificata.
+- **Regola #54 — PROTOCOLLO ELASTICO DI ESPANSIONE PALINSESTO (MultiGol Tempi 1-3 1°T + 1-4 2°T & DC + MultiGol Esteso)**:
+  - 🎯 **Origine & Benchmark Vincente (Lezione Screenshot Tipster 13/09/2026 @ 8.47×)**:
+    L'analisi della schedina vincente ha dimostrato che la rigidità dei mercati convenzionali (`1X2`, `Over 1.5/2.5`) limitava drasticamente il palinsesto ed esponeva a trappole mortali (come l'1-0 del Napoli che bruciava l'Over 1.5).
+  - 🚀 **I 3 Pilastri di Espansione del Palinsesto (+300% match giocabili)**:
+    1. **MultiGol Asimmetrico Tempi (`MultiGol 1-3 1°T + 1-4 2°T : SI` @ 1.40 — 1.48)**:
+       - Rende immediatamente giocabili tutte le partite ad alto ritmo (Bundesliga, Eredivisie, Eliteserien, Premier) **SENZA dover indovinare l'esito 1X2 né chi segna**. Chiede semplicemente almeno 1 gol nei primi 45' e almeno 1 gol nella ripresa.
+    2. **Doppia Chance + MultiGol Esteso (`1X + MultiGol 1-4` o `X2 + MultiGol 1-5` @ 1.45 — 1.58)**:
+       - Sblocca i big match più spinosi (derby, scontri diretti) e le trasferte insidiose. **Non muore MAI sull'1-0 né sull'1-1 o 0-1**. Incassa sull'1-0 corto di Allegri come sul 2-1 o 3-1.
+    3. **MultiGol di Squadra (`MultiGol 1-3 Ospite/Casa` @ 1.28 — 1.42)**:
+       - Sblocca le trasferte delle grandi (es. Juventus a Sassuolo, Real Madrid). È totalmente immune ai crolli difensivi della favorita (la Juve perde 3-2 ma incassa la quota).
+  - 📌 **Direttiva di Sistema**:
+    BAgent adotta questi tre mercati come strumenti primari di scansione in `OmniMarketScanner`, preferendoli a qualsiasi combo rigida.
 
 ---
 
