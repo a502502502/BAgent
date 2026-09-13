@@ -211,19 +211,26 @@ class OmniMarketScanner:
         p_home_2t = 1.0 - poisson_pmf(0, xg_home * 0.55)
         p_home_both_halves = p_home_1t * p_home_2t
 
-        # Regola #47: MultiGol Asimmetrico per Tempi (0-2 1°T + 1-3 2°T)
-        # 1°T (0-2 gol) assorbe lo 0-0 all'intervallo; 2°T (1-3 gol) sfrutta le difese stanche
+        # Regola #47: MultiGol Asimmetrico per Tempi (0-2 1°T + 1-3 2°T & 1-3 1°T + 1-4 2°T)
         lam_tot_1t = (xg_home + xg_away) * 0.45
         lam_tot_2t = (xg_home + xg_away) * 0.55
         p_1t_0_2 = sum(poisson_pmf(k, lam_tot_1t) for k in [0, 1, 2])
         p_2t_1_3 = sum(poisson_pmf(k, lam_tot_2t) for k in [1, 2, 3])
         p_asym_mg_halves = p_1t_0_2 * p_2t_1_3
 
+        # Benchmark Tipster Vincente 13/09/2026: MultiGol 1-3 1°T + 1-4 2°T (Lipsia, Feyenoord)
+        p_1t_1_3 = sum(poisson_pmf(k, lam_tot_1t) for k in [1, 2, 3])
+        p_2t_1_4 = sum(poisson_pmf(k, lam_tot_2t) for k in [1, 2, 3, 4])
+        p_mg_1_3_1t_1_4_2t = p_1t_1_3 * p_2t_1_4
+
         # Regola #47: Tiri Totali Partita (Volume Balistico Indipendente)
-        # Stima tiri complessivi da xG e ritmo (media 13.5 tiri per gol atteso)
         exp_shots_tot = (xg_home * 8.5 + 4.5) + (xg_away * 7.5 + 4.0)
         p_shots_ov_215 = 1.0 - sum(poisson_pmf(k, exp_shots_tot) for k in range(22))
         p_shots_ov_235 = 1.0 - sum(poisson_pmf(k, exp_shots_tot) for k in range(24))
+
+        # Benchmark Tipster: Combo DC + MultiGol Esteso (1X + MultiGol 1-4, X2 + MultiGol 1-5)
+        p_1x_mg_1_4 = min(p_1x * 0.96, p_tot_mg_1_4 * 0.92)
+        p_x2_mg_1_5 = min(p_x2 * 0.97, p_tot_mg_1_5 * 0.94)
 
         theoretical_probs: Dict[Tuple[str, str], Tuple[float, str]] = {
             ("1X2", "Home"): (p_home_win, "RIGID_OUTRIGHT"),
@@ -245,12 +252,16 @@ class OmniMarketScanner:
             ("MultiGol Totale", "MultiGol 1-4"): (p_tot_mg_1_4, "90_MIN_ELASTIC"),
             ("MultiGol Totale", "MultiGol 1-5"): (p_tot_mg_1_5, "90_MIN_ELASTIC"),
             ("MultiGol Tempi", "MG 0-2 1°T + 1-3 2°T"): (p_asym_mg_halves, "90_MIN_ELASTIC"),
+            ("MultiGol Tempi", "MG 1-3 1°T + 1-4 2°T"): (p_mg_1_3_1t_1_4_2t, "90_MIN_ELASTIC"),
             ("Tiri Totali", "Over 21.5 Tiri Totali"): (p_shots_ov_215, "90_MIN_ELASTIC"),
             ("Tiri Totali", "Over 23.5 Tiri Totali"): (p_shots_ov_235, "90_MIN_ELASTIC"),
             ("Combo Protetta", "1X + Over 1.5"): (p_1x_over_15, "90_MIN_ELASTIC"),
             ("Combo Protetta", "1X + Under 3.5"): (p_1x_under_35, "90_MIN_ELASTIC"),
+            ("Combo Protetta", "1X + MultiGol 1-4"): (p_1x_mg_1_4, "90_MIN_ELASTIC"),
+            ("Combo Protetta", "1X + MultiGol 1-5"): (p_1x_mg_1_4 * 1.05, "90_MIN_ELASTIC"),
             ("Combo Protetta", "X2 + Over 1.5"): (p_x2_over_15, "90_MIN_ELASTIC"),
             ("Combo Protetta", "X2 + Under 3.5"): (p_x2_under_35, "90_MIN_ELASTIC"),
+            ("Combo Protetta", "X2 + MultiGol 1-5"): (p_x2_mg_1_5, "90_MIN_ELASTIC"),
             ("Combo Protetta", "1X + GG"): (p_1x_gg, "90_MIN_ELASTIC"),
             ("Corner Squadra", f"{home_team} Corner Over 4.5"): (p_c_home_ov_45, "90_MIN_ELASTIC"),
             ("Corner Squadra", f"{away_team} Corner Over 3.5"): (p_c_away_ov_35, "90_MIN_ELASTIC"),
