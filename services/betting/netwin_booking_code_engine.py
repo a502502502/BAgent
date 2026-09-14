@@ -17,6 +17,35 @@ class NetwinBookingCodeEngine:
     @classmethod
     def get_today_booking_slips(cls):
         return {
+            "83": {
+                "ticket_id": "83",
+                "name": "Ticket #83: Quaterna d'Oro Pomeridiana (Lunedì 14 Settembre - Start 14:30)",
+                "code": "NW-1430-T83",
+                "odds": "4.06",
+                "stake": "15.00 €",
+                "potential_win": "60.90 €",
+                "status": "⏳ PRONTA AL PIAZZAMENTO (START 14:30)",
+                "events": [
+                    "Dynamo Kyiv vs Epitsentr (14:30) ➔ 1 + Over 1.5 Gol @ 1.40",
+                    "Shakhtar Donetsk vs Ch. Odesa (17:00) ➔ 1 + Over 1.5 Gol @ 1.42",
+                    "U. Cluj vs Otelul Galati (17:00) ➔ 1X + Under 3.5 Gol @ 1.48",
+                    "Al Shamal vs Al Ittihad (18:00) ➔ X2 + Over 1.5 Gol @ 1.38"
+                ]
+            },
+            "84": {
+                "ticket_id": "84",
+                "name": "Ticket #84: Raddoppio Blindato d'Acciaio (Lunedì 14 Settembre - Start 14:30)",
+                "code": "NW-1430-T84",
+                "odds": "2.38",
+                "stake": "20.00 €",
+                "potential_win": "47.60 €",
+                "status": "⏳ PRONTA AL PIAZZAMENTO (START 14:30)",
+                "events": [
+                    "Dynamo Kyiv vs Epitsentr (14:30) ➔ 1 + Over 1.5 Gol @ 1.40",
+                    "Shakhtar Donetsk vs Ch. Odesa (17:00) ➔ 1 + Over 1.5 Gol @ 1.42",
+                    "U. Cluj vs Otelul Galati (17:00) ➔ 1X (Doppia Chance) @ 1.20"
+                ]
+            },
             "35": {
                 "ticket_id": "35",
                 "name": "Ticket #35: Quaterna di Recupero & Rilancio (Ricalibrata Ore 20:30 - 21:00)",
