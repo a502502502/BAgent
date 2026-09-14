@@ -148,6 +148,42 @@ class StrictTicketPipeline:
             )
 
         # =====================================================================
+        # GATE 0.2: REGOLA #56 - BAN TOTALE SECONDE DIVISIONI, CAMPIONATI MINORI & SQUADRE RISERVE/B
+        # =====================================================================
+        # Divieto assoluto di Seconde Categorie (Serie B, Ligue 2, LaLiga 2, Eerste Divisie, ecc.)
+        # e squadre riserve (Jong, II, 2, B, Castilla, Primavera, Next Pro, ecc.)
+        text_to_check = f"{candidate.tournament or ''} {candidate.match_name or ''}".upper()
+        
+        banned_leagues_keywords = [
+            "SERIE B", "LIGUE 2", "LALIGA 2", "LA LIGA 2", "2. BUNDESLIGA", "2.BUNDESLIGA",
+            "CHAMPIONSHIP", "LEAGUE ONE", "LEAGUE TWO", "EERSTE DIVISIE", "PRIMERA NACIONAL",
+            "PRIMERA B", "SEGUNDA", "SECOND DIVISION", "MLS NEXT PRO", "ISTHMIAN", "SOUTHERN LEAGUE",
+            "REGIONALLIGA", "SERIE C", "SERIE D", "AMATORI", "DILETTANTI", "NATIONAL LEAGUE"
+        ]
+        banned_reserve_keywords = [
+            "JONG ", "JONG-", " II", " 2", " B ", " ATLÈTIC", " ATLETIC", " CASTILLA",
+            " FORTUNA", " U21", " U23", " U19", " PRIMAVERA", " RISERVE", " RESERVES"
+        ]
+        
+        is_banned_tier2 = any(kw in text_to_check for kw in banned_leagues_keywords)
+        is_banned_reserve = any(kw in text_to_check for kw in banned_reserve_keywords)
+        
+        if is_banned_tier2 or is_banned_reserve:
+            banned_reason_type = "SECONDA CATEGORIA / SERIE B" if is_banned_tier2 else "SQUADRA RISERVE / B TEAM"
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #56: BAN SECONDE DIVISIONI & SQUADRE B/RISERVE] "
+                    f"Rilevato '{candidate.tournament}' / '{candidate.match_name}' ({banned_reason_type}). "
+                    f"È tassativamente vietato scommettere su seconde divisioni, campionati minori e squadre riserve/giovanili. "
+                    f"Ammesse esclusivamente le Prime Divisioni Nazionali d'Élite (Tier 1) e Coppe Ufficiali UEFA/FIFA."
+                ),
+                details="Violazione Regola #56: selezione appartenente a categoria minore o squadra riserve."
+            )
+
+        # =====================================================================
         # GATE 0.5: REGOLA #45 - FILTRO VOLUME OFFENSIVO SUI CORNER
         # =====================================================================
         is_corner_market = (
