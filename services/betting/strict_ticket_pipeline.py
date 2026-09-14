@@ -43,6 +43,9 @@ class MarketCandidate:
     team_avg_shots_on_target: Optional[float] = None # Regola #45: media tiri in porta
     has_upcoming_midweek_cup: bool = False # Rischio turnover/coppe europee infrasettimanali
     is_first_half_only: bool = False       # Mercato che si conclude al 45'
+    verified_standings_delta: Optional[int] = None # Regola #55: Differenza punti reale tra le due squadre
+    verified_sources_checked: bool = True  # Regola #55: Obbligo di consultazione diretta fonti reali
+    verified_source_notes: str = ""        # Regola #55: Fonti reali consultate (FootyStats / Sofascore)
 
 
 @dataclass
@@ -254,6 +257,40 @@ class StrictTicketPipeline:
                 rejection_reason=audit_msg,
                 details=f"Incompatibilità tra mercato e DNA tattico della lega ({league_target})."
             )
+
+        # =====================================================================
+        # GATE 0.95: REGOLA #55 - PROTOCOLLO FERREO DI CONSULTAZIONE FONTI REALI & SCONTRI EQUILIBRATI
+        # =====================================================================
+        # 1. Se fonti reali non sono state verificate
+        if not candidate.verified_sources_checked:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #55: MANCATA CONSULTAZIONE FONTI REALI OBIETTIVE] "
+                    f"Per la partita '{candidate.match_name}' non sono state verificate le statistiche reali su FootyStats/Sofascore. "
+                    f"Divieto assoluto di scommesse basate su memoria parametrica o supposizioni."
+                ),
+                details="Verifica fonti reali (classifica, forma, H2H) obbligatoria pre-schedina."
+            )
+
+        # 2. Se scontro diretto equilibrato (delta punti <= 3), vietare 1 o 2 secco
+        if candidate.verified_standings_delta is not None and abs(candidate.verified_standings_delta) <= 3:
+            m_upper = candidate.market_name.upper()
+            if candidate.market_type.upper() in ["1X2", "1", "2"] or m_upper in ["1", "2"]:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #55: SCONTRO DIRETTO EQUILIBRATO (Δ PUNTI <= 3)] "
+                        f"La partita '{candidate.match_name}' presenta un divario di soli {abs(candidate.verified_standings_delta)} punti. "
+                        f"In scontri diretti equilibrati è TASSATIVAMENTE VIETATO esporsi su 1 o 2 fisso (Lezione Red Star-Metz). "
+                        f"Obbligo di usare mercati protetti: Doppia Chance, MultiGol 1-4, Under 3.5."
+                    ),
+                    details=f"Δ Punti = {abs(candidate.verified_standings_delta)} <= 3. Scontro equilibrato ad alta volatilità."
+                )
 
         # =====================================================================
         # FASE 1, 2, 3: CONTROLLO ANAGRAFICO, SANITARIO & FORMAZIONI
