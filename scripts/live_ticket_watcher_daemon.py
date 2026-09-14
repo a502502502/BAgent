@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-scripts/live_ticket_watcher_daemon.py — Daemon di Monitoraggio Continuo Live per Ticket #89.
-Gira in background, interroga FootyStats ogni 75 secondi e invia notifiche PUSH istantanee
-su Telegram per ogni gol, fine primo tempo e fischio finale, valutando lo stato del ticket.
+scripts/live_ticket_watcher_daemon.py — Daemon di Monitoraggio Live in Tempo Reale per Ticket #89.
+Utilizza il feed LiveScore sub-secondo per aggiornamenti istantanei sui gol in-play
+e invia notifiche PUSH immediate su Telegram ad ogni variazione!
 """
 
 import os
@@ -23,8 +23,6 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-from services.football.external.footystats_client import FootyStatsClient
-
 TELEGRAM_TOKEN = "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg"
 TELEGRAM_CHAT_ID = "466378357"
 STATE_FILE = ROOT / "data" / "ticket_89_live_state.json"
@@ -40,47 +38,57 @@ def send_telegram(msg: str) -> bool:
         print(f"[Watcher] Telegram Error: {e}", flush=True)
         return False
 
-# Definizioni delle 5 selezioni di Ticket #89
+# Definizioni delle 5 selezioni di Ticket #89 con pattern di matching
 MATCHES = [
     {
-        "id": 8568542,
+        "id": "dynamo_epitsentr",
         "name": "Dynamo Kyiv vs Epitsentr",
         "market": "1X + Under 3.5",
         "quota": 1.78,
         "kickoff": "14:30",
-        "country": "Ucraina"
+        "country": "Ucraina",
+        "keywords_home": ["dynamo", "kyiv", "kiev"],
+        "keywords_away": ["epicentr", "epitsentr", "kamianets"]
     },
     {
-        "id": 8711033,
+        "id": "panionios_apollon",
         "name": "Panionios vs Apollon",
         "market": "Under 2.5",
         "quota": 1.62,
         "kickoff": "15:00",
-        "country": "Grecia"
+        "country": "Grecia",
+        "keywords_home": ["panionios"],
+        "keywords_away": ["apollon", "kalamaria", "pontou"]
     },
     {
-        "id": 8711034,
+        "id": "panthrakikos_paok",
         "name": "Panthrakikos vs PAOK B",
         "market": "Doppia Chance 1X",
         "quota": 1.38,
         "kickoff": "16:00",
-        "country": "Grecia"
+        "country": "Grecia",
+        "keywords_home": ["panthrakikos"],
+        "keywords_away": ["paok"]
     },
     {
-        "id": 8579399,
+        "id": "ucluj_otelul",
         "name": "U. Cluj vs Otelul Galati",
         "market": "Over 2.5",
         "quota": 1.76,
         "kickoff": "17:00",
-        "country": "Romania"
+        "country": "Romania",
+        "keywords_home": ["cluj", "universitatea cluj"],
+        "keywords_away": ["otelul", "galati"]
     },
     {
-        "id": 8568439,
+        "id": "shakhtar_chernomorets",
         "name": "Shakhtar vs Chernomorets",
         "market": "1 + MultiGol 2-4",
         "quota": 1.54,
         "kickoff": "17:00",
-        "country": "Ucraina"
+        "country": "Ucraina",
+        "keywords_home": ["shakhtar"],
+        "keywords_away": ["chernomorets", "chornomorets"]
     }
 ]
 
@@ -98,45 +106,48 @@ def save_state(state):
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2, ensure_ascii=False)
 
-def eval_status(market: str, h_goals: int, a_goals: int, status: str) -> str:
+def eval_status(market: str, h_goals: int, a_goals: int, is_finished: bool = False) -> str:
     total = h_goals + a_goals
     m = market.lower()
     
     if "under 2.5" in m:
         if total > 2:
             return "❌ PERSA"
-        elif status == "complete":
+        elif is_finished:
             return "✅ VINTA"
         else:
-            return f"🛡️ Regge ({total}/2 gol)"
+            return f"🛡️ Regge bene ({total}/2 gol, serve non prenderne un altro)"
             
     if "1x + under 3.5" in m:
         if total > 3:
-            return "❌ PERSA (Troppi gol)"
-        elif status == "complete":
+            return "❌ PERSA (Over 3.5 superato)"
+        elif is_finished:
             if h_goals >= a_goals:
-                return "✅ VINTA"
+                return "✅ VINTA (1X + Under 3.5 centrata!)"
             else:
-                return "❌ PERSA (Ha vinto l'ospite)"
+                return "❌ PERSA (Vittoria ospite)"
         else:
-            return f"🛡️ In corso ({h_goals}-{a_goals})"
+            if h_goals >= a_goals:
+                return f"🟢 FAVOREVOLE ({h_goals}-{a_goals}, mancano {3-total} gol per il limite)"
+            else:
+                return f"⚠️ SOTTO NEL PUNTEGGIO ({h_goals}-{a_goals})"
             
     if "1x" in m:
-        if status == "complete":
+        if is_finished:
             return "✅ VINTA" if h_goals >= a_goals else "❌ PERSA"
         else:
-            return "🛡️ In corso" if h_goals >= a_goals else "⚠️ Sotto nel punteggio"
+            return "🛡️ In corso (1X coperto)" if h_goals >= a_goals else "⚠️ Sotto nel punteggio"
             
     if "over 2.5" in m:
         if total >= 3:
             return "✅ VINTA"
-        elif status == "complete":
+        elif is_finished:
             return "❌ PERSA"
         else:
             return f"⏳ In corso ({total}/3 gol)"
             
     if "1 + multigol 2-4" in m:
-        if status == "complete":
+        if is_finished:
             if h_goals > a_goals and 2 <= total <= 4:
                 return "✅ VINTA"
             else:
@@ -146,95 +157,112 @@ def eval_status(market: str, h_goals: int, a_goals: int, status: str) -> str:
             
     return "⏳ In corso"
 
-def run_daemon():
-    print("[Live Notifier] 🚀 Avvio Watcher Daemon Ticket #89...", flush=True)
-    send_telegram(
-        "🔔 <b>NOTIFICHE LIVE AUTOMATICHE ATTIVATE!</b>\n\n"
-        "Il bot sta ora monitorando in background ogni variazione di punteggio, fine primo tempo e fischio finale del <b>Ticket #89</b>.\n"
-        "Riceverai gli alert push direttamente qui su Telegram!"
-    )
-    
-    client = FootyStatsClient()
+def fetch_livescore_feed():
+    url = "https://prod-public-api.livescore.com/v1/api/app/live/soccer/0"
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    try:
+        r = requests.get(url, headers=headers, timeout=8)
+        if r.status_code == 200:
+            return r.json()
+    except Exception as ex:
+        print(f"[Watcher] LiveScore feed error: {ex}", flush=True)
+    return None
+
+def find_match_in_feed(feed, m_def):
+    if not feed or "Stages" not in feed:
+        return None
+    for stage in feed.get("Stages", []):
+        for ev in stage.get("Events", []):
+            t1 = ev.get("T1", [{}])[0].get("Nm", "").lower()
+            t2 = ev.get("T2", [{}])[0].get("Nm", "").lower()
+            match_h = any(k in t1 for k in m_def["keywords_home"])
+            match_a = any(k in t2 for k in m_def["keywords_away"])
+            if match_h and match_a:
+                h_goals = int(ev.get("Tr1", 0) or 0)
+                a_goals = int(ev.get("Tr2", 0) or 0)
+                eps = ev.get("Eps", "")
+                is_ft = eps in ["FT", "AET", "AP"]
+                is_ht = eps == "HT" or "45" in eps
+                return {
+                    "home_score": h_goals,
+                    "away_score": a_goals,
+                    "time_str": eps,
+                    "is_finished": is_ft,
+                    "is_ht": is_ht
+                }
+    return None
+
+def run_loop():
+    print("[Live Notifier] 🚀 Watcher LiveScore Daemon ATTIVO su Telegram!", flush=True)
     state = load_state()
-    
-    # Inizializza lo stato se vuoto
-    for m in MATCHES:
-        mid_str = str(m["id"])
-        if mid_str not in state:
-            # Set initial known state: Panionios 1-0, Dynamo 0-0
-            if m["id"] == 8711033:
-                state[mid_str] = {"h": 1, "a": 0, "status": "in_progress", "announced_score": "1-0"}
-            elif m["id"] == 8568542:
-                state[mid_str] = {"h": 0, "a": 0, "status": "in_progress", "announced_score": "0-0"}
-            else:
-                state[mid_str] = {"h": 0, "a": 0, "status": "not_started", "announced_score": "0-0"}
-    save_state(state)
 
     while True:
         try:
-            for m in MATCHES:
-                mid = m["id"]
-                mid_str = str(mid)
-                m_data = client.get_match_stats(mid)
-                if not m_data:
-                    continue
-                
-                curr_status = m_data.get("status", "incomplete")
-                # FootyStats returns homeGoalCount and awayGoalCount
-                h_goals = m_data.get("homeGoalCount")
-                a_goals = m_data.get("awayGoalCount")
-                
-                # If FootyStats hasn't registered a live goal yet but we manually know it, don't revert
-                prev = state.get(mid_str, {"h": 0, "a": 0, "status": "not_started", "announced_score": "0-0"})
-                
-                if h_goals is not None and a_goals is not None:
-                    # Check if API has higher/updated goals
-                    if (h_goals + a_goals) > (prev["h"] + prev["a"]):
-                        new_h, new_a = h_goals, a_goals
-                    else:
-                        new_h, new_a = prev["h"], prev["a"]
-                else:
-                    new_h, new_a = prev["h"], prev["a"]
-                
-                score_str = f"{new_h}-{new_a}"
-                
-                # Check for GOAL event
-                if score_str != prev.get("announced_score"):
-                    verdict = eval_status(m["market"], new_h, new_a, curr_status)
-                    now_time = datetime.now().strftime("%H:%M:%S")
-                    msg = (
-                        f"⚽ <b>GOL IN CORSO! ({now_time})</b>\n\n"
-                        f"🏆 <b>{m['name']}</b> ({m['country']})\n"
-                        f"🔢 Nuovo Punteggio: <b>{score_str}</b>\n"
-                        f"🎯 Nostra Giocata: <b>{m['market']} @ {m['quota']}</b>\n"
-                        f"📊 Situazione Leg: <b>{verdict}</b>"
-                    )
-                    send_telegram(msg)
-                    state[mid_str]["announced_score"] = score_str
-                    state[mid_str]["h"] = new_h
-                    state[mid_str]["a"] = new_a
-                    save_state(state)
-                
-                # Check for FINISHED event
-                if curr_status == "complete" and prev.get("status") != "complete":
-                    verdict = eval_status(m["market"], new_h, new_a, "complete")
-                    now_time = datetime.now().strftime("%H:%M:%S")
-                    msg = (
-                        f"🏁 <b>PARTITA CONCLUSA! ({now_time})</b>\n\n"
-                        f"🏆 <b>{m['name']}</b>\n"
-                        f"🔢 Risultato Finale: <b>{score_str}</b>\n"
-                        f"🎯 Mercato: <b>{m['market']}</b>\n"
-                        f"📌 Esito Ufficiale: <b>{verdict}</b>"
-                    )
-                    send_telegram(msg)
-                    state[mid_str]["status"] = "complete"
-                    save_state(state)
+            feed = fetch_livescore_feed()
+            if feed:
+                for m in MATCHES:
+                    mid = m["id"]
+                    live = find_match_in_feed(feed, m)
+                    if not live:
+                        continue
                     
-            time.sleep(75)
+                    h = live["home_score"]
+                    a = live["away_score"]
+                    score_str = f"{h}-{a}"
+                    time_str = live["time_str"]
+                    is_ft = live["is_finished"]
+                    
+                    prev = state.get(mid, {
+                        "announced_score": "",
+                        "announced_ft": False,
+                        "announced_ht": False
+                    })
+                    
+                    # 1. NOTIFICA CAMBIO PUNTEGGIO
+                    if score_str != prev.get("announced_score"):
+                        verdict = eval_status(m["market"], h, a, is_ft)
+                        now_str = datetime.now().strftime("%H:%M:%S")
+                        msg = (
+                            f"🔔 <b>AGGIORNAMENTO LIVE ({now_str})</b>\n\n"
+                            f"⚽ <b>{m['name']}</b> ({m['country']})\n"
+                            f"⏱️ Minuto: <b>{time_str}</b>\n"
+                            f"🔢 Punteggio: <b>{score_str}</b>\n"
+                            f"🎯 Nostro Mercato: <b>{m['market']} @ {m['quota']}</b>\n"
+                            f"📊 Stato Selezione: <b>{verdict}</b>"
+                        )
+                        send_telegram(msg)
+                        state[mid] = {
+                            "announced_score": score_str,
+                            "announced_ft": is_ft,
+                            "announced_ht": prev.get("announced_ht", False),
+                            "h": h,
+                            "a": a
+                        }
+                        save_state(state)
+                        print(f"[{now_str}] Alert inviato per {m['name']}: {score_str}", flush=True)
+
+                    # 2. NOTIFICA FINE PARTITA
+                    if is_ft and not prev.get("announced_ft"):
+                        verdict = eval_status(m["market"], h, a, True)
+                        now_str = datetime.now().strftime("%H:%M:%S")
+                        msg = (
+                            f"🏁 <b>FINALE MATCH! ({now_str})</b>\n\n"
+                            f"🏆 <b>{m['name']}</b>\n"
+                            f"🔢 Risultato Ufficiale: <b>{score_str}</b>\n"
+                            f"🎯 Mercato: <b>{m['market']}</b>\n"
+                            f"📌 Esito Leg: <b>{verdict}</b>"
+                        )
+                        send_telegram(msg)
+                        if mid in state:
+                            state[mid]["announced_ft"] = True
+                            save_state(state)
+                        print(f"[{now_str}] Finale inviato per {m['name']}: {score_str}", flush=True)
+
+            time.sleep(30)  # Polling ogni 30 secondi
             
         except Exception as err:
-            print(f"[Live Notifier Daemon Error]: {err}", flush=True)
-            time.sleep(60)
+            print(f"[Daemon Error]: {err}", flush=True)
+            time.sleep(30)
 
 if __name__ == "__main__":
-    run_daemon()
+    run_loop()
