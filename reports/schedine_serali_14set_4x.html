@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAgent — 4 Schedine Serali con Motivazioni & Assenze (14 Settembre 2026)</title>
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --accent-green: #10b981;
+      --accent-blue: #38bdf8;
+      --accent-amber: #f59e0b;
+      --accent-purple: #a855f7;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 16px;
+      background-color: var(--bg-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 24px;
+    }
+    .badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #34d399;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 40%, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    
+    .stake-control-panel {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .stake-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .stake-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-stake {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #f1f5f9;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-stake:hover, .btn-stake.active {
+      background: #3b82f6;
+      border-color: #60a5fa;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+    }
+    
+    .tickets-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    
+    .ticket-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .ticket-card.blue { border-top: 4px solid var(--accent-blue); }
+    .ticket-card.green { border-top: 4px solid var(--accent-green); }
+    .ticket-card.amber { border-top: 4px solid var(--accent-amber); }
+    .ticket-card.purple { border-top: 4px solid var(--accent-purple); }
+    
+    .ticket-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .ticket-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .ticket-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0;
+      color: #fff;
+    }
+    .ticket-kickoff-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(251, 191, 36, 0.15);
+      color: #fcd34d;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      width: fit-content;
+      margin-top: 2px;
+    }
+    .ticket-odds-badge {
+      text-align: right;
+    }
+    .odds-number {
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+      font-family: monospace;
+    }
+    .ticket-card.blue .odds-number { color: var(--accent-blue); }
+    .ticket-card.green .odds-number { color: var(--accent-green); }
+    .ticket-card.amber .odds-number { color: var(--accent-amber); }
+    .ticket-card.purple .odds-number { color: var(--accent-purple); }
+    .odds-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .matches-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .match-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .match-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .match-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .match-time-badge {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #334155;
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 8px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 52px;
+    }
+    .ticket-card.green .match-time-badge { color: #34d399; }
+    .ticket-card.amber .match-time-badge { color: #fbbf24; }
+    .ticket-card.purple .match-time-badge { color: #c084fc; }
+    
+    .match-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .match-league {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .match-names {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .match-pick-box {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .match-pick {
+      font-size: 12px;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+    .ticket-card.green .match-pick { color: #34d399; background: rgba(16, 185, 129, 0.12); }
+    .ticket-card.amber .match-pick { color: #fbbf24; background: rgba(245, 158, 11, 0.12); }
+    .ticket-card.purple .match-pick { color: #c084fc; background: rgba(168, 85, 247, 0.12); }
+    .match-odd {
+      font-size: 12px;
+      color: #94a3b8;
+      font-family: monospace;
+      font-weight: 700;
+    }
+    
+    /* Tactical Rationale Box */
+    .match-motivation-box {
+      background: rgba(0,0,0,0.25);
+      border-left: 3px solid #3b82f6;
+      border-radius: 0 6px 6px 0;
+      padding: 8px 12px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #cbd5e1;
+    }
+    .ticket-card.green .match-motivation-box { border-left-color: #10b981; }
+    .ticket-card.amber .match-motivation-box { border-left-color: #f59e0b; }
+    .ticket-card.purple .match-motivation-box { border-left-color: #a855f7; }
+    .motivation-tag {
+      font-weight: 700;
+      color: #f8fafc;
+      margin-right: 4px;
+    }
+    
+    .ticket-footer {
+      border-top: 1px solid var(--card-border);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .payout-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .payout-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .payout-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: #10b981;
+      font-family: monospace;
+    }
+    .btn-copy {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-copy:hover {
+      background: #334155;
+      border-color: #64748b;
+    }
+    
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #000;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translateY(10px);
+      z-index: 100;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="badge-live">
+      <div class="pulse-dot"></div>
+      BAgent Quant Ecosystem • Report Completo con Assenze & Sesto Senso
+    </div>
+    <h1>4 Schedine Serali Calibrate</h1>
+    <p>14 Settembre 2026 • Tutte dalle ore 20:00 in poi • Analisi Formazioni & xG Tattico</p>
+  </div>
+
+  <div class="stake-control-panel">
+    <span class="stake-title">Simulazione Puntata Singola Schedina:</span>
+    <div class="stake-buttons">
+      <button class="btn-stake" onclick="setStake(5)">5 €</button>
+      <button class="btn-stake active" onclick="setStake(10)">10 €</button>
+      <button class="btn-stake" onclick="setStake(20)">20 €</button>
+      <button class="btn-stake" onclick="setStake(50)">50 €</button>
+    </div>
+  </div>
+
+  <div class="tickets-grid">
+
+    <!-- TICKET 1 -->
+    <div class="ticket-card blue" id="ticket-1">
+      <div>
+        <div class="ticket-top">
+          <div class="ticket-meta">
+            <h2 class="ticket-title">1. Top League Value</h2>
+            <div class="ticket-kickoff-badge">⏰ Primo Calcio d'Inizio: 20:45</div>
+          </div>
+          <div class="ticket-odds-badge">
+            <div class="odds-number">3.57×</div>
+            <div class="odds-label">Quota Totale</div>
+          </div>
+        </div>
+
+        <div class="matches-list">
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">20:45</div>
+                <div class="match-info">
+                  <div class="match-league">🇮🇹 Serie A</div>
+                  <div class="match-names">Inter vs Udinese</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">1 + Under 4.5</div>
+                <div class="match-odd">@ 1.45</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Lautaro parte dalla panchina per gestione turnover pre-Champions League; attacco affidato a Thuram-Esposito. Udinese priva di Zaniolo, Solet e Piotrowski, arroccata in un 3-4-2-1 prudente con Okoye. L'Inter vincerà controllando il cronometro senza forzare (1-0, 2-0, 3-0 coperti).
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:00</div>
+                <div class="match-info">
+                  <div class="match-league">🇪🇸 LaLiga</div>
+                  <div class="match-names">Villarreal vs Real Betis</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">Gol (GG)</div>
+                <div class="match-odd">@ 1.62</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Foyth indisponibile per il Villarreal. Attacchi strabordanti: Ayoze Pérez e Mikautadze per il Submarino Amarillo contro Isco, Antony, Fornals e Parrott nel Betis. xG combinato altissimo (2.95), entrambe le squadre concedono ripartenze veloci.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:00</div>
+                <div class="match-info">
+                  <div class="match-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</div>
+                  <div class="match-names">Leeds vs Newcastle</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">MultiGol 2-4</div>
+                <div class="match-odd">@ 1.52</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Difese rimaneggiate: out Dan Burn e Joelinton nel Newcastle; out Rodon nel Leeds. Attacchi con Okafor/Calvert-Lewin contro Elanga/Barnes/Wissa. Elland Road porta ritmi forsennati, ideale per il range 2-4 (1-1, 1-2, 2-1, 2-0).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-footer">
+        <div class="payout-box">
+          <span class="payout-label">Vincita Potenziale</span>
+          <span class="payout-value" id="payout-1">35.70 €</span>
+        </div>
+        <button class="btn-copy" onclick="copyTicket('TOP LEAGUE VALUE', '⏰ 20:45 - Inter vs Udinese: 1+Under 4.5 @ 1.45\n⏰ 21:00 - Villarreal vs Betis: Gol @ 1.62\n⏰ 21:00 - Leeds vs Newcastle: MG 2-4 @ 1.52\nQuota: 3.57x')">
+          📋 Copia
+        </button>
+      </div>
+    </div>
+
+    <!-- TICKET 2 -->
+    <div class="ticket-card green" id="ticket-2">
+      <div>
+        <div class="ticket-top">
+          <div class="ticket-meta">
+            <h2 class="ticket-title">2. Fortezze Casalinghe</h2>
+            <div class="ticket-kickoff-badge">⏰ Primo Calcio d'Inizio: 20:15</div>
+          </div>
+          <div class="ticket-odds-badge">
+            <div class="odds-number">2.65×</div>
+            <div class="odds-label">Quota Totale</div>
+          </div>
+        </div>
+
+        <div class="matches-list">
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">20:15</div>
+                <div class="match-info">
+                  <div class="match-league">🌏 AFC Champions League</div>
+                  <div class="match-names">Al Ahli vs Pakhtakor</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">1 + Over 1.5</div>
+                <div class="match-odd">@ 1.42</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Esordio nella nuova Champions asiatica a Jeddah davanti a 60.000 tifosi. Differenziale tecnico mostruoso: Al Ahli schiera Mahrez, Toney, Firmino e Kessié contro la modesta formazione uzbeka.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:15</div>
+                <div class="match-info">
+                  <div class="match-league">🇮🇸 Islanda Besta Deild</div>
+                  <div class="match-names">Vikingur Reykjavik vs Keflavik</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">1 + Over 1.5</div>
+                <div class="match-odd">@ 1.38</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Vikingur autentica dominatrice del calcio islandese, miglior attacco casalingo con media 2.80 gol/partita. Il Keflavik concede oltre 2 reti a trasferta ed è sfavorito in tutti i parametri fisici.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:45</div>
+                <div class="match-info">
+                  <div class="match-league">🇵🇹 Liga Portugal</div>
+                  <div class="match-names">SC Braga vs Estoril</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">1 Secco</div>
+                <div class="match-odd">@ 1.35</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Il Braga all'Estádio Municipal è un rullo compressore. Nonostante il forfait di Niakaté, il reparto avanzato con Pau Víctor e Fran Navarro ha una qualità troppo alta per l'Estoril (4 sconfitte nelle ultime 5 uscite esterne).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-footer">
+        <div class="payout-box">
+          <span class="payout-label">Vincita Potenziale</span>
+          <span class="payout-value" id="payout-2">26.50 €</span>
+        </div>
+        <button class="btn-copy" onclick="copyTicket('FORTEZZE CASALINGHE', '⏰ 20:15 - Al Ahli vs Pakhtakor: 1+Over 1.5 @ 1.42\n⏰ 21:15 - Vikingur Reykjavik vs Keflavik: 1+Over 1.5 @ 1.38\n⏰ 21:45 - SC Braga vs Estoril: 1 @ 1.35\nQuota: 2.65x')">
+          📋 Copia
+        </button>
+      </div>
+    </div>
+
+    <!-- TICKET 3 -->
+    <div class="ticket-card amber" id="ticket-3">
+      <div>
+        <div class="ticket-top">
+          <div class="ticket-meta">
+            <h2 class="ticket-title">3. Dutch & Spanish Goals</h2>
+            <div class="ticket-kickoff-badge">⏰ Primo Calcio d'Inizio: 20:00</div>
+          </div>
+          <div class="ticket-odds-badge">
+            <div class="odds-number">2.74×</div>
+            <div class="odds-label">Quota Totale</div>
+          </div>
+        </div>
+
+        <div class="matches-list">
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">20:00</div>
+                <div class="match-info">
+                  <div class="match-league">🇳🇱 Eerste Divisie</div>
+                  <div class="match-names">Jong PSV vs Jong AZ</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">Over 2.5</div>
+                <div class="match-odd">@ 1.45</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Classico scontro giovanile olandese tra accademie votate all'attacco puro. Media storica del torneo superiore a 3.4 gol a match; entrambe le squadre giocano con 4-3-3 aperti senza blocchi bassi.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">20:00</div>
+                <div class="match-info">
+                  <div class="match-league">🇳🇱 Eerste Divisie</div>
+                  <div class="match-names">Jong Utrecht vs Jong Ajax</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">Gol (GG)</div>
+                <div class="match-odd">@ 1.42</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Jong Ajax segna e subisce in quasi il 90% delle uscite esterne. Squadre con talento individuale sopra la media ma marcature difensive lacunose nei piazzati.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:00</div>
+                <div class="match-info">
+                  <div class="match-league">🇪🇸 LaLiga</div>
+                  <div class="match-names">Villarreal vs Real Betis</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">MultiGol 2-5</div>
+                <div class="match-odd">@ 1.33</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Protegge l'Over su un range esteso da 2 a 5 reti, escludendo gli scialbi 0-0 e 1-0. Al Madrigal le due squadre viaggiano a xG combinato di 2.95 con Mikautadze, Isco e Ayoze in campo.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-footer">
+        <div class="payout-box">
+          <span class="payout-label">Vincita Potenziale</span>
+          <span class="payout-value" id="payout-3">27.40 €</span>
+        </div>
+        <button class="btn-copy" onclick="copyTicket('DUTCH & SPANISH GOALS', '⏰ 20:00 - Jong PSV vs Jong AZ: Over 2.5 @ 1.45\n⏰ 20:00 - Jong Utrecht vs Jong Ajax: Gol @ 1.42\n⏰ 21:00 - Villarreal vs Betis: MultiGol 2-5 @ 1.33\nQuota: 2.74x')">
+          📋 Copia
+        </button>
+      </div>
+    </div>
+
+    <!-- TICKET 4 -->
+    <div class="ticket-card purple" id="ticket-4">
+      <div>
+        <div class="ticket-top">
+          <div class="ticket-meta">
+            <h2 class="ticket-title">4. Control & Drawdown</h2>
+            <div class="ticket-kickoff-badge">⏰ Primo Calcio d'Inizio: 20:00</div>
+          </div>
+          <div class="ticket-odds-badge">
+            <div class="odds-number">3.95×</div>
+            <div class="odds-label">Quota Totale</div>
+          </div>
+        </div>
+
+        <div class="matches-list">
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">20:00</div>
+                <div class="match-info">
+                  <div class="match-league">🇷🇴 Superliga</div>
+                  <div class="match-names">FCSB vs Petrolul Ploiesti</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">1X + Under 3.5</div>
+                <div class="match-odd">@ 1.40</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> FCSB con assenze pesanti dietro (Ngezana, Popescu, Duarte squalificato) che impongono prudenza. Petrolul schierato con un catenaccio 4-1-4-1 con Zima in porta e Papp out; partita chiusa a bassissimo xG.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">20:45</div>
+                <div class="match-info">
+                  <div class="match-league">🇫🇷 Ligue 2</div>
+                  <div class="match-names">Red Star vs Metz</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">Under 2.5</div>
+                <div class="match-odd">@ 1.56</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> La Ligue 2 registra il 64% di Under 2.5 stagionale. Metz di Luc Holtz solidissimo nell'occupazione degli spazi con Savanier a dettare i ritmi, mentre il Red Star al Bauer subisce pochissimo nei primi 60 minuti.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">20:45</div>
+                <div class="match-info">
+                  <div class="match-league">🇮🇹 Serie A</div>
+                  <div class="match-names">Inter vs Udinese</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">1X + Under 3.5</div>
+                <div class="match-odd">@ 1.48</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Protezione assoluta: copre le vittorie nerazzurre per 1-0, 2-0, 2-1, 3-0 e assorbe l'eventuale pareggio tattico 0-0 o 1-1, con Lautaro preservato per l'Europa.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:45</div>
+                <div class="match-info">
+                  <div class="match-league">🇵🇹 Liga Portugal</div>
+                  <div class="match-names">SC Braga vs Estoril</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">1X + Over 1.5</div>
+                <div class="match-odd">@ 1.22</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              <span class="motivation-tag">🧠 Analisi Formazioni & Tattica:</span> Cuscinetto anti-beffa che copre la vittoria del Braga o un pareggio spettacolare con almeno 2 gol totali. Estoril concede mediamente 1.8 gol a partita.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-footer">
+        <div class="payout-box">
+          <span class="payout-label">Vincita Potenziale</span>
+          <span class="payout-value" id="payout-4">39.50 €</span>
+        </div>
+        <button class="btn-copy" onclick="copyTicket('CONTROL & DRAWDOWN', '⏰ 20:00 - FCSB vs Petrolul: 1X+Under 3.5 @ 1.40\n⏰ 20:45 - Red Star vs Metz: Under 2.5 @ 1.56\n⏰ 20:45 - Inter vs Udinese: 1X+Under 3.5 @ 1.48\n⏰ 21:45 - SC Braga vs Estoril: 1X+Over 1.5 @ 1.22\nQuota: 3.95x')">
+          📋 Copia
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast">Schedina copiata negli appunti!</div>
+
+<script>
+  const odds = [3.57, 2.65, 2.74, 3.95];
+  let currentStake = 10;
+
+  function setStake(amount) {
+    currentStake = amount;
+    document.querySelectorAll('.btn-stake').forEach(b => {
+      if (b.textContent.trim() === amount + ' €') {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+    for (let i = 0; i < odds.length; i++) {
+      const payout = (odds[i] * amount).toFixed(2);
+      document.getElementById('payout-' + (i + 1)).textContent = payout + ' €';
+    }
+  }
+
+  function copyTicket(title, text) {
+    const fullText = '🎯 BAgent - ' + title + '\n' + text;
+    navigator.clipboard.writeText(fullText).then(() => {
+      showToast('Schedina ' + title + ' copiata!');
+    }).catch(() => {
+      showToast('Copiata!');
+    });
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
+  }
+</script>
+
+</body>
+</html>
