@@ -1766,10 +1766,20 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 **Regola operativa aggiunta**: per FootyStats, aprire sempre la pagina reale con il Browser tool (`mcp__Claude_Browser__*`) e leggerla per intero — mai delegare a una sottoagente con ricerca web generica. Riservare la ricerca web alle sottoagenti solo per rassegna stampa/notizie (dove FootyStats non ha comunque dati).
 
-### ⚠️ Limite FootyStats Free — Rate Limit Orario
-Scoperto un tetto sulle visualizzazioni di pagine match/H2H in piano gratuito: dopo ~5-6 pagine aperte in sequenza, FootyStats blocca ulteriori richieste ("You've reached your limit! Wait 4 hours or upgrade to Premium"). Il limite è **legato al browser/sessione, non all'account** — riattivare l'abbonamento Premium non sblocca nulla finché non si fa login nel browser stesso. Login lasciato all'utente (Claude non inserisce credenziali per policy). Se il piano di lavoro prevede il controllo di 8-15+ partite al giorno, valutare se il limite orario del piano gratuito è compatibile, o se serve restare loggati con l'account Premium in modo permanente nel browser di lavoro.
+### 🎯 Ticket #89: Il Pomeriggio d'Oro Quantitativo (Quota 10.78× ➔ 114.32 €)
+* **Piattaforma**: Netwin | **Stato**: ⏳ **IN CORSO (Kickoff 14:30 - 17:00 CEST)**
+* **Rif. Scommessa**: `DF07EA090E31DF7C7806` | **Data Giocata**: 14/09/2026 14:14 CEST
+* **Importo Puntato**: **`10.00 €`** | **Quota Totale**: **`10.78×`** | **Bonus**: **`+6.46 €`** | **Vincita Potenziale**: **`114.32 €`**
+1. 🇺🇦 [14:30] **Dynamo Kiev vs FC Epitsentr** ➔ **1X + U/O 3.5: 1X + UN** @ **`1.78`** ⏳
+2. 🇬🇷 [15:00] **Panionios vs Apollon Kalamarias (Pontou)** ➔ **U/O 2.5: Under** @ **`1.62`** ⏳
+3. 🇬🇷 [16:00] **Panthrakikos vs PAOK B** ➔ **Doppia Chance: 1X** @ **`1.38`** ⏳
+4. 🇷🇴 [17:00] **U. Cluj vs Otelul Galati** ➔ **U/O 2.5: Over** @ **`1.76`** ⏳
+5. 🇺🇦 [17:00] **Shakhtar Donetsk vs Chernomorets** ➔ **1X2 + MultiGol 2-4: 1** @ **`1.54`** ⏳
 
-*Ultimo aggiornamento: 14 settembre 2026 — BAgent (Sesto Senso completo giornata + fix metodologico verifica FootyStats)*
+*Note Tattiche*: Costruita al 100% sui dati certificati di FootyStats API: Epitsentr difensivo e imbattuto coperto da 1X+Under 3.5; Panionios-Apollon a basso indice balistico (<1.0 xG); Panthrakikos protetto dalla DC contro squadra riserve; U. Cluj con l'84% di Over 2.5 e 9 gol subiti nelle ultime 3; Shakhtar padrone del campo con 1.70 xG vs 0.20 xG.
+
+*Ultimo aggiornamento: 14 settembre 2026 ore 14:20 — BAgent (Ticket #89 registrato e notifiche push attive)*
+
 
 
 
