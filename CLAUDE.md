@@ -1738,6 +1738,39 @@ Il campo di ricerca nella sidebar sinistra di Betsson (desktop, `betsson.it/scom
 * 💡 **Strategia Perfetta**: Muriqi gioca i primi 65' sui cross, poi subentra Lukaku per gli ultimi 25'; PSV copre 2-0 e 1-1.
 *Ultimo aggiornamento: 10 settembre 2026 ore 18:41 — BAgent*
 
+---
+
+## Sessione 14 Settembre 2026 — Sesto Senso Completo & Fix Metodologico FootyStats
+
+### Riallineamento repo
+Sessione ripresa da Windows dopo 110 commit di distacco da origin/main (lavoro proseguito da altre sessioni/Mac fino al 14/9 mattina). Trovate e corrette 2 tabelle "master" generate da un'altra sessione con errori concreti:
+- **Al Shamal vs Al Ittihad (Qatar/AFC Champions)** proposta come pick → violava il **BAN Leghe Arabe/Golfo**, scartata.
+- **Allenatori sbagliati** (violazione Regola #49 coach audit): Parma dato come "Pecchia" (in realtà **Cuesta**), Villarreal dato come "Marcelino" (in realtà **Íñigo Pérez**).
+
+### Sesto Senso 14/9 — Slate europeo verificato (rassegna stampa + FootyStats + assenze)
+Partite analizzate con dati reali e fonte per ogni informazione: Como-Parma, Torino-Roma, Inter-Udinese, Leeds-Newcastle, Villarreal-Betis, Braga-Estoril, Moreirense-Marítimo, Vikingur Reykjavik-Keflavík, Shakhtar-Chornomorets. Due ticket proposti da 4 selezioni (Regola #26): **"Acciaio Europa"** (~3.9×: Como, Torino-Roma, Braga, Shakhtar) e **"Seconda Selezione"** (~6.1×: Inter, Leeds-Newcastle Under2.5, Villarreal-Betis, Moreirense).
+
+**Scoperta operativa**: le partite sudamericane (Perù/Cile/Ecuador/Uruguay/Argentina) che sembravano "di stasera" nello scan iniziale erano in realtà di **domenica 13/9, già concluse** — un bug di interpretazione fuso orario/timestamp nello script di scan (`scratch/scan_today_14sep.py`). Prima di segnare una partita come "di oggi" verificare sempre che il kickoff sia nel futuro rispetto all'ora corrente, non solo che la data nominale coincida.
+
+### Esperimento "salta Regola #5" (leghe arabe/minori) — esito
+Su richiesta esplicita dell'utente, analizzate anche Ucraina, Romania, Finlandia, Grecia, Kosovo, Georgia (fuori dal perimetro UEFA/nordico standard). Su 7 partite extra, solo **Shakhtar-Chornomorets** aveva dati abbastanza solidi da un pronostico affidabile con la ricerca web generica. Le altre 6 (Dynamo Kyiv-Epitsentr, U.Cluj-Oțelul, Inter Turku-VPS, Ballkani-?, Panionios-?, Panthrakikos-PAOK B, Dinamo Tbilisi-Gagra) sono state scartate per dati insufficienti/contraddittori — **ma la causa si è rivelata quasi tutta nel metodo di verifica, non nei dati reali** (vedi sotto).
+
+### 🚨 Fix Metodologico Critico — Verifica FootyStats via Browser, non ricerca web generica
+L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti i dati che le sottoagenti avevano dichiarato "mancanti/contraddittori" (classifica, PPG, xG, quote di mercato) erano in realtà presenti, completi e non ambigui. Riverificando con il Browser tool direttamente su footystats.org invece che con ricerca web generica delle sottoagenti, si sono corretti altri errori:
+- **Ballkani-Llapi**: l'avversario vero era **Dukagjini**, non Llapi (Llapi giocava contro Malisheva).
+- **Panionios-Apollon Kalamarias**: l'avversario vero era **Apollon Pontou**, squadra diversa, in forma clamorosa (7V-2N-1P).
+- **Panthrakikos-PAOK B**: dati completi e buoni (Over1.5 80%, Over2.5 60%) — ma PAOK B è squadra riserve ("II"), quindi solo mercati Gol per Regola #9, mai 1X2/DC secco.
+- **Dynamo Kyiv-Epitsentr**: trappola reale confermata anche con dati puliti — **Epitsentr è 5° in classifica con forma migliore (PPG 1.90) di Dynamo Kyiv 9° (PPG 1.40)**, e segna 2.25 gol/gara in trasferta. Non forzare pick pro-Dynamo nonostante il nome più blasonato.
+
+**Causa radice identificata**: le sottoagenti che fanno ricerca web generica su FootyStats (sito JS-pesante) spesso ottengono frammenti di motore di ricerca parziali o pagine in cache vecchie, e quando questi frammenti non coincidono con un'altra fonte secondaria li trattano come "ugualmente validi e contraddittori" invece di fidarsi di FootyStats come fonte primaria obbligatoria di progetto. Un caso ha anche scambiato la tabella storica "Past H2H Results" per il risultato live di una partita non ancora iniziata (falso "0-0 già concluso").
+
+**Regola operativa aggiunta**: per FootyStats, aprire sempre la pagina reale con il Browser tool (`mcp__Claude_Browser__*`) e leggerla per intero — mai delegare a una sottoagente con ricerca web generica. Riservare la ricerca web alle sottoagenti solo per rassegna stampa/notizie (dove FootyStats non ha comunque dati).
+
+### ⚠️ Limite FootyStats Free — Rate Limit Orario
+Scoperto un tetto sulle visualizzazioni di pagine match/H2H in piano gratuito: dopo ~5-6 pagine aperte in sequenza, FootyStats blocca ulteriori richieste ("You've reached your limit! Wait 4 hours or upgrade to Premium"). Il limite è **legato al browser/sessione, non all'account** — riattivare l'abbonamento Premium non sblocca nulla finché non si fa login nel browser stesso. Login lasciato all'utente (Claude non inserisce credenziali per policy). Se il piano di lavoro prevede il controllo di 8-15+ partite al giorno, valutare se il limite orario del piano gratuito è compatibile, o se serve restare loggati con l'account Premium in modo permanente nel browser di lavoro.
+
+*Ultimo aggiornamento: 14 settembre 2026 — BAgent (Sesto Senso completo giornata + fix metodologico verifica FootyStats)*
+
 
 
 
