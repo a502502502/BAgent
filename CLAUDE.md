@@ -190,10 +190,34 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
        - Rende immediatamente giocabili tutte le partite ad alto ritmo (Bundesliga, Eredivisie, Eliteserien, Premier) **SENZA dover indovinare l'esito 1X2 né chi segna**. Chiede semplicemente almeno 1 gol nei primi 45' e almeno 1 gol nella ripresa.
     2. **Doppia Chance + MultiGol Esteso (`1X + MultiGol 1-4` o `X2 + MultiGol 1-5` @ 1.45 — 1.58)**:
        - Sblocca i big match più spinosi (derby, scontri diretti) e le trasferte insidiose. **Non muore MAI sull'1-0 né sull'1-1 o 0-1**. Incassa sull'1-0 corto di Allegri come sul 2-1 o 3-1.
-    3. **MultiGol di Squadra (`MultiGol 1-3 Ospite/Casa` @ 1.28 — 1.42)**:
+     3. **MultiGol di Squadra (`MultiGol 1-3 Ospite/Casa` @ 1.28 — 1.42)**:
        - Sblocca le trasferte delle grandi (es. Juventus a Sassuolo, Real Madrid). È totalmente immune ai crolli difensivi della favorita (la Juve perde 3-2 ma incassa la quota).
   - 📌 **Direttiva di Sistema**:
     BAgent adotta questi tre mercati come strumenti primari di scansione in `OmniMarketScanner`, preferendoli a qualsiasi combo rigida.
+
+- **Regola #55 — PROTOCOLLO FERREO DI CONSULTAZIONE DIRETTA & TRIPLA VERIFICA FONTI (Zero Allucinazioni, Triplo Check Obbligatorio Pre-Schedina)**:
+  - 🛑 **Divieto Assoluto di Memoria Parametrica & Inferenza Narrativa**:
+    È TASSATIVAMENTE VIETATO formulare qualsiasi pronostico, quota, posizione di classifica, rendimento casa/trasferta o stato di forma basandosi sulla memoria pregressa o su impressioni generali. Nessuna affermazione (es. "X è in vetta", "Y ha una difesa chiusa", "H2H dominato") può essere generata senza un riscontro verificato in tempo reale su una fonte primaria ufficiale (FootyStats / Sofascore / Flashscore).
+  - 🔬 **Motivazione Scientifica & Lezione Catastrofica 14/09/2026**:
+    L'affidarsi a ricordi di stagioni passate ha portato a distorsioni inaccettabili che hanno causato la perdita delle schedine:
+    1. *Irlanda*: Shelbourne e Derry dipinti come capilista in lotta per il titolo (situazione del 2024), mentre la classifica reale vedeva lo Shelbourne 6° e Derry 5°, e in vetta c'erano Shamrock e St. Patrick's.
+    2. *Francia (Ligue 2)*: Red Star vs Metz descritta come gara sbilanciata a favore del Metz, quando in realtà erano separate da 1 solo punto (5° contro 6°), violando il principio di prudenza sugli scontri diretti equilibrati.
+    3. *Portogallo*: Moreirense vs Marítimo catalogata come "gara a basso indice di gol" proponendo l'Under 2.5, ignorando che entrambe le squadre avevano subito imbarcate pesanti (0-4 e 0-3) e avevano difese altamente permeabili.
+    4. *Argentina*: Presupporre che la squadra di casa (Defensores de Belgrano) fosse una garanzia senza controllare i precedenti diretti (dove il Deportivo Madryn era imbattuto negli ultimi 4 scontri).
+  - 📌 **Il Triplo Check Obbligatorio Pre-Schedina**:
+    Prima di proporre qualsiasi selezione, BAgent DEVE eseguire il seguente controllo incrociato obbligatorio:
+    1. **Check 1: Classifica Reale & Δ Punti della Stagione Corrente (FootyStats / Sofascore / Flashscore)**:
+       - Posizione effettiva in classifica di entrambe le squadre, punti totali e $\Delta$ punti reale. Se $\Delta \le 3$, si applica il divieto di mercati 1X2 rigidi.
+       - Forma certificata delle ultime 5 partite (`W-D-L`).
+       - Gol fatti e subiti effettivi (totali e casa/trasferta).
+    2. **Check 2: Scontri Diretti Storici (H2H Reale)**:
+       - Verifica dei tabellini degli ultimi 3-5 precedenti diretti. Vietato dichiarare "storico dominato" o "sempre Under" senza tabellini verificati.
+    3. **Check 3: Roster, Guida Tecnica & Distinte Ufficiali**:
+       - Verifica dell'allenatore attuale certificato e assenze pesanti (squalifiche e infortuni).
+  - 🛡️ **Blocco Preventivo (Safe-Discard Policy)**:
+    Se per un match i dati di classifica, forma recente o H2H non sono reperibili con certezza assoluta in tempo reale, **IL MATCH VIENE SCARTATO AUTOMATICAMENTE DAL PALINSESTO**. Nessun compromesso e zero scommesse al buio.
+  - 💻 **Integrazione Software (Gate 0.9)**:
+    Implementato come `Gate 0.9` (`SourceGroundingGate`) in `StrictTicketPipeline` (`services/betting/strict_ticket_pipeline.py`). Ogni candidato deve certificare le fonti reali (`verified_standings_source`, `verified_h2h_data`, `verified_form_data`). In assenza di fonti validate, il candidato viene bocciato con `[BLOCCATO - REGOLA #55: MANCATA CONSULTAZIONE FONTI REALI OBIETTIVE]`.
 
 ---
 
