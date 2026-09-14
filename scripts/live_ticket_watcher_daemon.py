@@ -158,15 +158,25 @@ def eval_status(market: str, h_goals: int, a_goals: int, is_finished: bool = Fal
     return "⏳ In corso"
 
 def fetch_livescore_feed():
-    url = "https://prod-public-api.livescore.com/v1/api/app/live/soccer/0"
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    stages = []
+    # 1. Live in-play feed
     try:
-        r = requests.get(url, headers=headers, timeout=8)
+        r = requests.get("https://prod-public-api.livescore.com/v1/api/app/live/soccer/0", headers=headers, timeout=6)
         if r.status_code == 200:
-            return r.json()
-    except Exception as ex:
-        print(f"[Watcher] LiveScore feed error: {ex}", flush=True)
-    return None
+            stages.extend(r.json().get("Stages", []))
+    except Exception:
+        pass
+    # 2. Date feed (for completed FT or upcoming matches)
+    try:
+        today_str = datetime.now().strftime("%Y%m%d")
+        r_date = requests.get(f"https://prod-public-api.livescore.com/v1/api/app/date/soccer/{today_str}/0", headers=headers, timeout=6)
+        if r_date.status_code == 200:
+            stages.extend(r_date.json().get("Stages", []))
+    except Exception:
+        pass
+    return {"Stages": stages}
+
 
 def find_match_in_feed(feed, m_def):
     if not feed or "Stages" not in feed:
