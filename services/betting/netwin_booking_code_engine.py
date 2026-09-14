@@ -1,6 +1,10 @@
 """
 Netwin Booking Code & Active Ticket Ledger Engine.
-Tracks live active bets and bankroll utilization.
+Updated with Monday 14 September 2026 tickets:
+- Ticket #86: Sprint Mattina & Pranzo (12:00 - 14:30) @ 3.07x
+- Ticket #83: Quaterna d'Oro Pomeridiana (14:30 - 18:00) @ 4.06x
+- Ticket #84: Raddoppio Blindato (14:30 - 17:00) @ 2.38x
+- Ticket #87: Serale d'Elite (18:30 - 22:30) @ 4.85x
 """
 
 import hashlib
@@ -17,9 +21,24 @@ class NetwinBookingCodeEngine:
     @classmethod
     def get_today_booking_slips(cls):
         return {
+            "86": {
+                "ticket_id": "86",
+                "name": "Ticket #86: Sprint Mattina & Pranzo (Start Ore 12:00)",
+                "code": "NW-1200-T86",
+                "odds": "3.07",
+                "stake": "15.00 €",
+                "potential_win": "46.05 €",
+                "status": "⏳ PRONTA AL PIAZZAMENTO (START 12:00)",
+                "events": [
+                    "FC Osaka vs Ehime (12:00) ➔ 1X (Doppia Chance) @ 1.25",
+                    "Geylang vs Tanjong Pagar (13:30) ➔ Over 2.5 Gol @ 1.35",
+                    "Shan United vs Ezra (13:30) ➔ 1 (1X2) @ 1.30",
+                    "Dynamo Kyiv vs Epitsentr (14:30) ➔ 1 + Over 1.5 Gol @ 1.40"
+                ]
+            },
             "83": {
                 "ticket_id": "83",
-                "name": "Ticket #83: Quaterna d'Oro Pomeridiana (Lunedì 14 Settembre - Start 14:30)",
+                "name": "Ticket #83: Quaterna d'Oro Pomeridiana (Start Ore 14:30)",
                 "code": "NW-1430-T83",
                 "odds": "4.06",
                 "stake": "15.00 €",
@@ -34,7 +53,7 @@ class NetwinBookingCodeEngine:
             },
             "84": {
                 "ticket_id": "84",
-                "name": "Ticket #84: Raddoppio Blindato d'Acciaio (Lunedì 14 Settembre - Start 14:30)",
+                "name": "Ticket #84: Raddoppio Blindato d'Acciaio (Start Ore 14:30)",
                 "code": "NW-1430-T84",
                 "odds": "2.38",
                 "stake": "20.00 €",
@@ -46,49 +65,20 @@ class NetwinBookingCodeEngine:
                     "U. Cluj vs Otelul Galati (17:00) ➔ 1X (Doppia Chance) @ 1.20"
                 ]
             },
-            "35": {
-                "ticket_id": "35",
-                "name": "Ticket #35: Quaterna di Recupero & Rilancio (Ricalibrata Ore 20:30 - 21:00)",
-                "code": "NW-2030-T35",
-                "odds": "3.75",
+            "87": {
+                "ticket_id": "87",
+                "name": "Ticket #87: Quintina Serale d'Elite (Start Ore 18:30)",
+                "code": "NW-1830-T87",
+                "odds": "4.85",
                 "stake": "15.00 €",
-                "potential_win": "56.25 €",
-                "status": "⏳ PRONTA AL PIAZZAMENTO (START 20:30)",
+                "potential_win": "72.75 €",
+                "status": "⏳ PRONTA AL PIAZZAMENTO (START 18:30)",
                 "events": [
-                    "Chelsea vs Luton Town (20:30) ➔ 1 + Over 1.5 Gol @ 1.28",
-                    "Brighton vs Tromsø (20:30) ➔ 1X + Over 1.5 Gol @ 1.25",
-                    "Barcellona vs Athletic Bilbao (21:00) ➔ 1X + Over 1.5 Gol @ 1.28",
-                    "Partizan Belgrade vs Getafe (21:00) ➔ Over 4.5 Cartellini @ 1.83"
-                ]
-            },
-            "34": {
-                "ticket_id": "34",
-                "name": "Ticket #34: Quintina d'Elite Serale (Ref: DF07EA081B31840F2C06)",
-                "code": "DF07EA081B31840F2C06",
-                "odds": "4.80",
-                "stake": "20.00 €",
-                "potential_win": "96.07 €",
-                "status": "🟢 ATTIVO / IN CORSO (20:00)",
-                "events": [
-                    "Ajax vs Sion (20:00) ➔ 1X + Over 1.5 Gol @ 1.22",
-                    "Hapoel Tel Aviv vs Atalanta (20:00) ➔ X2 + Over 1.5 Gol @ 1.41",
-                    "Chelsea vs Luton Town (20:30) ➔ 1 (1X2) @ 1.09",
-                    "Partizan Belgrade vs Getafe (21:00) ➔ Over 4.5 Cartellini @ 1.83",
-                    "Barcellona vs Athletic Bilbao (21:00) ➔ 1X + Over 2.5 Gol @ 1.40"
-                ]
-            },
-            "30": {
-                "ticket_id": "30",
-                "name": "Ticket #30: Pomeridiana d'Elite (Ore 18:00 & 19:00)",
-                "code": "NW-1800-T30",
-                "odds": "3.75",
-                "stake": "20.00 €",
-                "potential_win": "75.00 €",
-                "status": "⏳ IN CORSO (FINALE)",
-                "events": [
-                    "Qarabag vs Twente (18:00) ➔ Over 4.5 Cartellini Totali @ 1.80 (✅ VINTO)",
-                    "Kauno Zalgiris vs Besiktas (19:00) ➔ Besiktas Over 1.5 Gol @ 1.50",
-                    "Brann vs PAOK (19:00) ➔ PAOK Over 3.5 Corner @ 1.39"
+                    "Como vs Parma (18:30) ➔ 1X + Over 1.5 Gol @ 1.45",
+                    "Bodo/Glimt vs Sandefjord (19:00) ➔ 1 + Over 1.5 Gol @ 1.45",
+                    "Gaziantep vs Fenerbahce (19:00) ➔ X2 + Over 1.5 Gol @ 1.44",
+                    "Inter vs Udinese (20:45) ➔ 1X + MultiGol 1-4 @ 1.44",
+                    "Villarreal vs Betis (21:00) ➔ 1X + Over 1.5 Gol @ 1.48"
                 ]
             }
         }
@@ -96,6 +86,6 @@ class NetwinBookingCodeEngine:
 if __name__ == "__main__":
     engine = NetwinBookingCodeEngine()
     slips = engine.get_today_booking_slips()
-    print("📋 ACTIVE BETS LEDGER CON TICKET #35 RICALIBRATO:")
+    print("📋 ACTIVE BETS LEDGER CON LE NUOVE SCHEDINE DEL 14 SETTEMBRE:")
     for tid, slip in slips.items():
         print(f"[{slip['status']}] {slip['name']} | Quota: {slip['odds']}x | Stake: {slip['stake']} | Potenziale: {slip['potential_win']}")
