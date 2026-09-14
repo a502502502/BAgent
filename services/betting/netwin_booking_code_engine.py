@@ -21,6 +21,22 @@ class NetwinBookingCodeEngine:
     @classmethod
     def get_today_booking_slips(cls):
         return {
+            "88": {
+                "ticket_id": "88",
+                "name": "Ticket #88: Super Early Bird (Start Ore 11:30)",
+                "code": "NW-1130-T88",
+                "odds": "3.74",
+                "stake": "15.00 €",
+                "potential_win": "56.10 €",
+                "status": "⏳ PRONTA AL PIAZZAMENTO (START 11:30)",
+                "events": [
+                    "East Bengal vs Mohammedan (11:30) ➔ 1X (Doppia Chance) @ 1.22",
+                    "FC Osaka vs Ehime (12:00) ➔ 1X (Doppia Chance) @ 1.25",
+                    "Geylang vs Tanjong Pagar (13:30) ➔ Over 2.5 Gol @ 1.35",
+                    "Shan United vs Ezra (13:30) ➔ 1 (1X2) @ 1.30",
+                    "Dynamo Kyiv vs Epitsentr (14:30) ➔ 1 + Over 1.5 Gol @ 1.40"
+                ]
+            },
             "86": {
                 "ticket_id": "86",
                 "name": "Ticket #86: Sprint Mattina & Pranzo (Start Ore 12:00)",
