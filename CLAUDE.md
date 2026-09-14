@@ -219,6 +219,29 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 💻 **Integrazione Software (Gate 0.9)**:
     Implementato come `Gate 0.9` (`SourceGroundingGate`) in `StrictTicketPipeline` (`services/betting/strict_ticket_pipeline.py`). Ogni candidato deve certificare le fonti reali (`verified_standings_source`, `verified_h2h_data`, `verified_form_data`). In assenza di fonti validate, il candidato viene bocciato con `[BLOCCATO - REGOLA #55: MANCATA CONSULTAZIONE FONTI REALI OBIETTIVE]`.
 
+- **Regola #56 — BAN TOTALE SECONDE DIVISIONI, CAMPIONATI MINORI & SQUADRE RISERVE/B (Solo Prime Divisioni & Coppe Ufficiali d'Élite)**:
+  - 🛑 **Divieto Assoluto & Inviolabile (Zero Seconde Categorie)**:
+    È TASSATIVAMENTE VIETATO selezionare, proporre o inserire in schedina qualsiasi partita appartenente a:
+    1. **Seconde Divisioni e Categorie Minori Nazionali**: Serie B (Italia), Ligue 2 (Francia), LaLiga 2 (Spagna), 2. Bundesliga (Germania), Championship / League One / Two (Inghilterra), Eerste Divisie (Olanda), Primera Nacional / B (Argentina), Serie B (Brasile), Primera B (Cile/Colombia), Segunda División (Paraguay), ecc.
+    2. **Campionati Dilettantistici, Regionali e Amatori**: Isthmian League, Southern League, National League, Regionalliga, Serie C/D, ecc.
+    3. **Squadre Riserve, Seconde Squadre ("B Teams") e Formazioni Giovanili**: Tutte le squadre B/riserve indipendentemente dalla lega (Jong Ajax, Jong PSV, Jong Utrecht, Jong AZ, Barça Atlètic, Real Madrid Castilla, Celta Fortuna, Athletic B, Porto B, Benfica B, PAOK B, MLS Next Pro / Portland Timbers II, St. Louis II, U21, U23, Primavera, ecc.).
+  - 🔬 **Motivazione Scientifica & Lezione Utente 14/09/2026**:
+    Le seconde categorie e le formazioni B presentano un tasso di volatilità e imprevedibilità ingestibile:
+    - Formazioni instabili soggette a continui prestiti, convocazioni in prima squadra e turnover non annunciato;
+    - Dati statistici e di infortunio opachi, ritardati o incompleti rispetto ai massimi campionati;
+    - Motivazioni sportive asimmetriche (le seconde squadre non possono salire di categoria e sperimentano continuamente moduli e giovani acerbi, distruggendo le metriche di Poisson).
+  - 🎯 **Perimetro Esclusivo Ammesso (Solo Tier 1 d'Élite)**:
+    Sono ammesse esclusivamente:
+    1. **Le Prime Divisioni Nazionali Ufficiali (Tier 1)**:
+       - Top 5 Europee (Serie A, Premier League, La Liga, Bundesliga, Ligue 1);
+       - Altre Prime Divisioni Europee regolamentate con copertura TV/VAR (Liga Portugal, Eredivisie, Premiership scozzese, Jupiler Pro League belga, Superliga danese, Eliteserien norvegese, Allsvenskan svedese, Super League greca/turca/svizzera);
+       - Prime Divisioni Sudamericane Tier 1 regolamentate (Brasileirão Serie A, Liga Profesional Argentina).
+    2. **Grandi Coppe Ufficiali UEFA & Nazionali Maggiori**:
+       - UEFA Champions League, Europa League, Conference League;
+       - Fasi finali delle Coppe Nazionali maggiori (Coppa Italia, FA Cup, Copa del Rey, DFB Pokal) SOLO tra squadre di Prima Divisione.
+  - 💻 **Integrazione Software (Gate 0.2)**:
+    Implementato come `Gate 0.2` (`Tier1OnlyGate`) in `StrictTicketPipeline` (`services/betting/strict_ticket_pipeline.py`). Qualsiasi evento appartenente a seconde divisioni o squadre riserve viene bloccato istantaneamente con `[BLOCCATO - REGOLA #56: BAN SECONDE DIVISIONI & SQUADRE RISERVE/B]`.
+
 ---
 
 
