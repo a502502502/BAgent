@@ -128,23 +128,32 @@ class StrictTicketPipeline:
         Applica il funnel sequenziale degli Stadi Obbligatori con Hard Gates.
         """
         # =====================================================================
-        # GATE 0: DIVIETO 1 O 2 FISSO SOTTO QUOTA 1.65 (Protocollo Protezione & Anti-Varianza)
+        # GATE 0: DIVIETO 1 O 2 FISSO E COMBO RIGIDE SOTTO QUOTA 1.65 (Protocollo Protezione & Anti-Varianza)
         # =====================================================================
-        is_straight_win = (
+        m_upper = candidate.market_name.strip().upper()
+        # Rileva 1X2 secco o combo rigide che impongono la vittoria secca senza doppia chance (es. '1 + Over 1.5')
+        is_straight_win_market = (
             candidate.market_type.upper() in ["1X2", "ESITO FINALE", "WINNER"]
-            or candidate.market_name.strip().upper() in ["1", "2", "1 FISSO", "2 FISSO", "ESITO FINALE 1", "ESITO FINALE 2"]
+            or m_upper in ["1", "2", "1 FISSO", "2 FISSO", "ESITO FINALE 1", "ESITO FINALE 2"]
+            or m_upper.startswith("1 +") or m_upper.startswith("2 +")
+            or m_upper.startswith("1+") or m_upper.startswith("2+")
+            or " 1 + " in m_upper or " 2 + " in m_upper
         )
-        if is_straight_win and candidate.bookmaker_odd < 1.65:
+        # Se c'è una doppia chance (1X, X2, 12) o DNB, la selezione è protetta
+        is_protected_dc = ("1X" in m_upper or "X2" in m_upper or "12" in m_upper or "DNB" in m_upper or "DRAW NO BET" in m_upper)
+        
+        if is_straight_win_market and not is_protected_dc and candidate.bookmaker_odd < 1.65:
             return ValidationReport(
                 passed=False,
                 candidate=candidate,
                 stage_failed=0,
                 rejection_reason=(
-                    f"[BLOCCATO - PROTOCOLLO PROTEZIONE: DIVIETO 1/2 FISSO SOTTO 1.65] {candidate.market_name} @ {candidate.bookmaker_odd:.2f} su {candidate.match_name}. "
-                    f"È tassativamente vietato scommettere su 1 o 2 fisso a quota inferiore a 1.65 per l'eccessiva esposizione a pareggi ed episodi casuali (es. Athletic Bilbao 1-1). "
-                    f"Sostituire obbligatoriamente con opzioni protette: Doppia Chance (1X/X2), Combo 1X + Over 1.5, DNB o MultiGol Squadra."
+                    f"[BLOCCATO - PROTOCOLLO PROTEZIONE: DIVIETO 1/2 FISSO O COMBO RIGIDA SOTTO 1.65] {candidate.market_name} @ {candidate.bookmaker_odd:.2f} su {candidate.match_name}. "
+                    f"È tassativamente vietato scommettere su 1 o 2 fisso o su combo non protette (es. '1 + Over 1.5') a quota inferiore a 1.65 "
+                    f"per l'eccessiva esposizione a pareggi ed episodi casuali (es. Athletic Bilbao 1-1, America de Cali 1-1). "
+                    f"Sostituire obbligatoriamente con opzioni protette: Doppia Chance (1X/X2), Combo '1X + MultiGol 1-4', DNB o MultiGol Squadra."
                 ),
-                details="Quota < 1.65 su segno 1 o 2 secco non offre margine sufficiente a coprire il rischio pareggio."
+                details="Quota < 1.65 su segno 1 o 2 secco o combo rigida non offre margine sufficiente a coprire il rischio pareggio."
             )
 
         # =====================================================================
@@ -165,8 +174,11 @@ class StrictTicketPipeline:
             " FORTUNA", " U21", " U23", " U19", " PRIMAVERA", " RISERVE", " RESERVES"
         ]
         
+        # Gestione eccezioni nomi legittimi contenenti 'II' (es. Willem II in Eredivisie)
+        text_for_reserves = text_to_check.replace("WILLEM II", "WILLEM_CLUB")
+        
         is_banned_tier2 = any(kw in text_to_check for kw in banned_leagues_keywords)
-        is_banned_reserve = any(kw in text_to_check for kw in banned_reserve_keywords)
+        is_banned_reserve = any(kw in text_for_reserves for kw in banned_reserve_keywords)
         
         if is_banned_tier2 or is_banned_reserve:
             banned_reason_type = "SECONDA CATEGORIA / SERIE B" if is_banned_tier2 else "SQUADRA RISERVE / B TEAM"

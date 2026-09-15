@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAgent — Schedine Ufficiali Lunedì 14 Settembre 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass-card { background: #161b26; border: 1px solid #2d3748; }
+    .glass-card:hover { border-color: #3b82f6; }
+    .tab-active-blue { background: #1f293d; color: #60a5fa; border-color: #3b82f6; }
+    .tab-active-purple { background: #281b3d; color: #c084fc; border-color: #a855f7; }
+    .tab-active-amber { background: #332617; color: #fbbf24; border-color: #f59e0b; }
+  </style>
+</head>
+<body class="bg-[#0b0f17] text-[#e6edf3] antialiased p-3 sm:p-6 font-sans">
+  <div class="max-w-5xl mx-auto space-y-6">
+
+    <!-- Top Hero Header -->
+    <div class="bg-[#161b26] border border-[#2d3748] rounded-2xl p-5 sm:p-7 shadow-2xl relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#2d3748] pb-5 relative">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+              🟢 STRICT VALIDATOR: CERTIFICATO ED APPROVATO
+            </span>
+            <span class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30">
+              Regola #54 Protocollo Elastico
+            </span>
+            <span class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-purple-500/15 text-purple-400 border border-purple-500/30">
+              Respiro Pieni 90 Minuti
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-bold rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 animate-pulse">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Live Sentinel Pronto
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-3">
+            <span>Lunedì 14 Settembre 2026 — Master Suite Serale</span>
+          </h1>
+          <p class="text-[#8b949e] text-xs sm:text-sm mt-1 max-w-2xl">
+            Palinsesto serale d'élite calibrato sulle nuove regole di resilienza: la <b>Corazzata Elastica (@3.82)</b> a 90', le <b>Chicche d'Autore (@3.72)</b> con marcatore+sostituto, e il <b>Lenzuolo d'Assalto (@10.85)</b> con 8 micro-quote blindate.
+          </p>
+        </div>
+
+        <!-- Live Scoreboard Badge -->
+        <div class="bg-[#0b0f17] px-4 py-3 rounded-xl border border-blue-500/50 flex flex-col items-end gap-1 shadow-lg shadow-blue-500/10">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+            <span class="text-[10px] text-blue-400 font-black uppercase tracking-wider">LIVE SENTINEL AGGIORNATO</span>
+          </div>
+          <span class="text-sm font-black text-white">Como 1-0 Parma · Torino 0-1 Roma</span>
+          <span class="text-xs text-amber-400 font-bold">Midtjylland 1-0 · Bodø/Glimt 0-0 · Prime Time in arrivo!</span>
+        </div>
+      </div>
+
+      <!-- Quick Summary Stats Bar -->
+      <div class="mt-5 grid grid-cols-3 gap-3 text-center relative">
+        <div class="bg-[#0b0f17] p-3 rounded-xl border border-[#2d3748] cursor-pointer hover:border-blue-500/50 transition-all" onclick="switchTab('tab-a')">
+          <span class="text-[11px] text-[#8b949e] uppercase font-bold block">Opzione A (Corazzata)</span>
+          <span class="text-xl font-black text-blue-400">Quota @3.82×</span>
+          <span class="text-[10px] text-emerald-400 font-semibold block mt-0.5">4 Selezioni · Stake: 10.00 €</span>
+        </div>
+        <div class="bg-[#0b0f17] p-3 rounded-xl border border-[#2d3748] cursor-pointer hover:border-purple-500/50 transition-all" onclick="switchTab('tab-b')">
+          <span class="text-[11px] text-[#8b949e] uppercase font-bold block">Opzione B (Le Chicche)</span>
+          <span class="text-xl font-black text-purple-400">Quota @3.72×</span>
+          <span class="text-[10px] text-emerald-400 font-semibold block mt-0.5">3 Selezioni · Stake: 10.00 €</span>
+        </div>
+        <div class="bg-[#0b0f17] p-3 rounded-xl border border-amber-500/30 cursor-pointer hover:border-amber-500 transition-all" onclick="switchTab('tab-c')">
+          <span class="text-[11px] text-[#8b949e] uppercase font-bold block">Opzione C (Lenzuolo Quota 10+)</span>
+          <span class="text-xl font-black text-amber-400">Quota @10.85×</span>
+          <span class="text-[10px] text-emerald-400 font-semibold block mt-0.5">8 Selezioni · Stake: 5.00 €</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex flex-wrap items-center gap-2 border-b border-[#2d3748] pb-1">
+      <button onclick="switchTab('tab-a')" id="btn-tab-a" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all tab-active-blue border">
+        🛡️ Tab A: Corazzata Elastica (@3.82)
+      </button>
+      <button onclick="switchTab('tab-b')" id="btn-tab-b" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all text-[#8b949e] border border-transparent hover:text-white">
+        💎 Tab B: Le Chicche d'Autore (@3.72)
+      </button>
+      <button onclick="switchTab('tab-c')" id="btn-tab-c" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all text-[#8b949e] border border-transparent hover:text-white">
+        🎢 Tab C: Lenzuolo d'Assalto Quota 10+ (@10.85)
+      </button>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TAB A: CORAZZATA ELASTICA -->
+    <!-- ===================================================================== -->
+    <div id="tab-a" class="space-y-4">
+      <div class="bg-gradient-to-r from-blue-900/30 via-slate-900 to-emerald-900/20 border border-[#2d3748] rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2">
+          <span class="text-base">🛡️</span>
+          <span class="font-bold text-white">Architettura Regola #54:</span>
+          <span class="text-[#8b949e]">Mercati con respiro a 90 minuti pieni. Nessuna dipendenza dal gol al 45', incassa sull'1-0 come sul 2-1 o 1-1!</span>
+        </div>
+        <span class="text-blue-400 font-black bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/30 whitespace-nowrap">
+          Quota @3.82× · Stake: 10.00 € ➔ Vincita: 38.22 €
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Event 1: Inter vs Udinese -->
+        <div class="glass-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🇮🇹 Serie A · 20:45</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Edge: +16.0%</span>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white">Internazionale vs Udinese</h3>
+            <p class="text-xs text-[#8b949e] mt-1">Inter a punteggio pieno a San Siro (3-0-0). Focus totale al 100% sulla Serie A.</p>
+          </div>
+          <div class="bg-[#0b0f17] p-3 rounded-lg border border-[#2d3748] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#8b949e] uppercase block font-bold">Mercato Protetto (Regola #51)</span>
+              <span class="text-sm font-black text-blue-400">1X + MultiGol 1-4 : SI</span>
+            </div>
+            <span class="text-base font-black text-white bg-blue-600/20 border border-blue-500/40 px-3 py-1 rounded-md">@ 1.45</span>
+          </div>
+          <p class="text-[11px] text-slate-400">🛡️ <i>Copre 1-0 (corto muso), 2-0, 1-1, 2-1, 3-0, 3-1. Zero trappole.</i></p>
+        </div>
+
+        <!-- Event 2: Braga vs Estoril -->
+        <div class="glass-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🇵🇹 Liga Portugal · 21:45</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Edge: +14.5%</span>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white">Braga vs Estoril</h3>
+            <p class="text-xs text-[#8b949e] mt-1">Braga al Municipal fortino solido contro un Estoril a secco di vittorie (10 gol subiti).</p>
+          </div>
+          <div class="bg-[#0b0f17] p-3 rounded-lg border border-[#2d3748] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#8b949e] uppercase block font-bold">Mercato Protetto</span>
+              <span class="text-sm font-black text-blue-400">1X + MultiGol 1-4 : SI</span>
+            </div>
+            <span class="text-base font-black text-white bg-blue-600/20 border border-blue-500/40 px-3 py-1 rounded-md">@ 1.38</span>
+          </div>
+          <p class="text-[11px] text-slate-400">🛡️ <i>Copre 1-0, 2-0, 1-1, 2-1, 3-0, 3-1. Non muore sul risultato corto.</i></p>
+        </div>
+
+        <!-- Event 3: Leeds vs Newcastle -->
+        <div class="glass-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League · 21:00</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Edge: +5.8%</span>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white">Leeds United vs Newcastle United</h3>
+            <p class="text-xs text-[#8b949e] mt-1">Monday Night infuocato ad Elland Road. Due squadre imbattute (1-2-0) a trazione verticale.</p>
+          </div>
+          <div class="bg-[#0b0f17] p-3 rounded-lg border border-[#2d3748] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#8b949e] uppercase block font-bold">Mercato 90 Minuti</span>
+              <span class="text-sm font-black text-blue-400">Over 1.5 Partita</span>
+            </div>
+            <span class="text-base font-black text-white bg-blue-600/20 border border-blue-500/40 px-3 py-1 rounded-md">@ 1.23</span>
+          </div>
+          <p class="text-[11px] text-slate-400">🛡️ <i>100% Over 1.5 negli ultimi 5 scontri diretti.</i></p>
+        </div>
+
+        <!-- Event 4: Villarreal vs Real Betis -->
+        <div class="glass-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🇪🇸 La Liga · 21:00</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Edge: +8.5%</span>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white">Villarreal vs Real Betis</h3>
+            <p class="text-xs text-[#8b949e] mt-1">Betis in grande spolvero (3 vittorie in 4 gare). Villarreal in difficoltà a trovare i 3 punti.</p>
+          </div>
+          <div class="bg-[#0b0f17] p-3 rounded-lg border border-[#2d3748] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#8b949e] uppercase block font-bold">Mercato Benchmark Tipster</span>
+              <span class="text-sm font-black text-blue-400">X2 + MultiGol 1-5 : SI</span>
+            </div>
+            <span class="text-base font-black text-white bg-blue-600/20 border border-blue-500/40 px-3 py-1 rounded-md">@ 1.55</span>
+          </div>
+          <p class="text-[11px] text-slate-400">🛡️ <i>La formula del derby: copre 0-1, 1-1, 1-2, 0-2, 1-3, 2-2.</i></p>
+        </div>
+      </div>
+
+      <!-- Footer Action Card Tab A -->
+      <div class="bg-[#161b26] border border-blue-500/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>
+          <span class="text-xs text-[#8b949e] block font-bold">RIASSUNTO TICKET CORAZZATA ELASTICA:</span>
+          <span class="text-sm font-black text-white">4 Eventi · Quota Totale Netwin: <span class="text-blue-400 text-lg font-black">3.82×</span></span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-[10px] text-[#8b949e] block">Puntata: 10.00 €</span>
+            <span class="text-base font-black text-emerald-400">Vincita: 38.22 €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TAB B: LE CHICCHE D'AUTORE -->
+    <!-- ===================================================================== -->
+    <div id="tab-b" class="hidden space-y-4">
+      <div class="bg-gradient-to-r from-purple-900/30 via-slate-900 to-pink-900/20 border border-[#2d3748] rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2">
+          <span class="text-base">💎</span>
+          <span class="font-bold text-white">Le Chicche Special Props Netwin:</span>
+          <span class="text-[#8b949e]">Clausola "o Sostituto" (copre dal 1' al 95') + Tiri nello Specchio. La formula che ha sbancato la Champions a 3.46x!</span>
+        </div>
+        <span class="text-purple-400 font-black bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/30 whitespace-nowrap">
+          Quota @3.72× · Stake: 10.00 € ➔ Vincita: 37.20 €
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Chicca 1: Lautaro Martinez -->
+        <div class="glass-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">🇮🇹 Inter vs Udinese · 20:45</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Edge: +11.6%</span>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white">Lautaro Martínez</h3>
+            <p class="text-xs text-[#8b949e] mt-1">Capitano e rigorista dell'Inter a San Siro. Se esce al 70', il sostituto fresco continua a concorrere per il gol o il palo!</p>
+          </div>
+          <div class="bg-[#0b0f17] p-3 rounded-lg border border-[#2d3748] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#8b949e] uppercase block font-bold">Chicca Netwin</span>
+              <span class="text-xs font-black text-purple-400">Segna o Colpisce Legno con Sostituto</span>
+            </div>
+            <span class="text-base font-black text-white bg-purple-600/20 border border-purple-500/40 px-3 py-1 rounded-md">@ 1.55</span>
+          </div>
+          <p class="text-[11px] text-slate-400">🎯 <i>Pali, traverse, rigori e tiri: tutto valido fino al 95'.</i></p>
+        </div>
+
+        <!-- Chicca 2: Marcus Thuram -->
+        <div class="glass-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">🇮🇹 Inter vs Udinese · 20:45</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Edge: +12.0%</span>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white">Marcus Thuram</h3>
+            <p class="text-xs text-[#8b949e] mt-1">Media a San Siro di 3.3 tiri totali e 1.7 tiri nello specchio. Grande fisicità contro i centrali dell'Udinese.</p>
+          </div>
+          <div class="bg-[#0b0f17] p-3 rounded-lg border border-[#2d3748] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#8b949e] uppercase block font-bold">Tiri nello Specchio</span>
+              <span class="text-xs font-black text-purple-400">Over 1.5 Tiri in Porta</span>
+            </div>
+            <span class="text-base font-black text-white bg-purple-600/20 border border-purple-500/40 px-3 py-1 rounded-md">@ 1.58</span>
+          </div>
+          <p class="text-[11px] text-slate-400">🎯 <i>Basta 1 tiro in porta per tempo.</i></p>
+        </div>
+
+        <!-- Chicca 3: Amine El Ouazzani -->
+        <div class="glass-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">🇵🇹 Braga vs Estoril · 21:45</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Edge: +10.4%</span>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-white">Amine El Ouazzani</h3>
+            <p class="text-xs text-[#8b949e] mt-1">Punta di diamante del Braga contro la peggior difesa della lega (10 gol subiti dall'Estoril).</p>
+          </div>
+          <div class="bg-[#0b0f17] p-3 rounded-lg border border-[#2d3748] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#8b949e] uppercase block font-bold">Chicca Netwin</span>
+              <span class="text-xs font-black text-purple-400">Segna o Colpisce Legno con Sostituto</span>
+            </div>
+            <span class="text-base font-black text-white bg-purple-600/20 border border-purple-500/40 px-3 py-1 rounded-md">@ 1.60</span>
+          </div>
+          <p class="text-[11px] text-slate-400">🎯 <i>Assedio continuo in area piccola per 90 minuti.</i></p>
+        </div>
+      </div>
+
+      <!-- Footer Action Card Tab B -->
+      <div class="bg-[#161b26] border border-purple-500/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>
+          <span class="text-xs text-[#8b949e] block font-bold">RIASSUNTO TICKET CHICCHE D'AUTORE:</span>
+          <span class="text-sm font-black text-white">3 Selezioni Special Props · Quota Totale: <span class="text-purple-400 text-lg font-black">3.72×</span></span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-[10px] text-[#8b949e] block">Puntata: 10.00 €</span>
+            <span class="text-base font-black text-emerald-400">Vincita: 37.20 €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TAB C: LENZUOLO D'ASSALTO QUOTA 10+ -->
+    <!-- ===================================================================== -->
+    <div id="tab-c" class="hidden space-y-4">
+      <div class="bg-gradient-to-r from-amber-900/30 via-slate-900 to-orange-900/20 border border-[#2d3748] rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2">
+          <span class="text-base">🎢</span>
+          <span class="font-bold text-white">Lenzuolo Intelligente Quota 10+:</span>
+          <span class="text-[#8b949e]">8 selezioni composte solo da micro-quote blindate ad altissima probabilità reale (>82%). Moltiplicatore esplosivo a rischio minimo!</span>
+        </div>
+        <span class="text-amber-400 font-black bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30 whitespace-nowrap">
+          Quota @10.85× · Stake: 5.00 € ➔ Vincita: 54.25 €
+        </span>
+      </div>
+
+      <div class="glass-card rounded-xl overflow-hidden">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-[#0b0f17] text-[#8b949e] uppercase text-[10px] border-b border-[#2d3748]">
+            <tr>
+              <th class="p-3">Orario & Lega</th>
+              <th class="p-3">Partita</th>
+              <th class="p-3">Mercato Blindato</th>
+              <th class="p-3 text-center">Prob. Reale</th>
+              <th class="p-3 text-right">Quota</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#2d3748]">
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">20:00 🇳🇱 Ned 2</td>
+              <td class="p-3 font-bold text-white">Jong FC Utrecht vs Jong Ajax</td>
+              <td class="p-3 text-blue-400 font-semibold">MultiGol 2-5 Partita</td>
+              <td class="p-3 text-center text-emerald-400 font-black">86%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.33</td>
+            </tr>
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">20:00 🇳🇱 Ned 2</td>
+              <td class="p-3 font-bold text-white">Jong PSV vs Jong AZ Alkmaar</td>
+              <td class="p-3 text-blue-400 font-semibold">Over 1.5 Partita</td>
+              <td class="p-3 text-center text-emerald-400 font-black">88%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.20</td>
+            </tr>
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">20:45 🇮🇹 Serie A</td>
+              <td class="p-3 font-bold text-white">Internazionale vs Udinese</td>
+              <td class="p-3 text-blue-400 font-semibold">1X + MultiGol 1-5</td>
+              <td class="p-3 text-center text-emerald-400 font-black">88%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.30</td>
+            </tr>
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">21:00 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier</td>
+              <td class="p-3 font-bold text-white">Leeds United vs Newcastle United</td>
+              <td class="p-3 text-blue-400 font-semibold">Over 1.5 Partita</td>
+              <td class="p-3 text-center text-emerald-400 font-black">86%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.23</td>
+            </tr>
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">21:00 🇪🇸 La Liga</td>
+              <td class="p-3 font-bold text-white">Villarreal vs Real Betis</td>
+              <td class="p-3 text-blue-400 font-semibold">MultiGol 1-4 Partita</td>
+              <td class="p-3 text-center text-emerald-400 font-black">84%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.22</td>
+            </tr>
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">21:15 🇵🇹 Portugal</td>
+              <td class="p-3 font-bold text-white">Moreirense vs Marítimo</td>
+              <td class="p-3 text-blue-400 font-semibold">MultiGol 1-3 Partita</td>
+              <td class="p-3 text-center text-emerald-400 font-black">82%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.33</td>
+            </tr>
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">21:45 🇵🇹 Portugal</td>
+              <td class="p-3 font-bold text-white">Braga vs Estoril</td>
+              <td class="p-3 text-blue-400 font-semibold">1X + MultiGol 1-5</td>
+              <td class="p-3 text-center text-emerald-400 font-black">87%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.30</td>
+            </tr>
+            <tr class="hover:bg-[#1f293d]/40">
+              <td class="p-3 text-amber-400 font-bold">22:00 🇦🇷 Argentina</td>
+              <td class="p-3 font-bold text-white">Banfield vs Barracas Central</td>
+              <td class="p-3 text-blue-400 font-semibold">Under 3.5 Partita</td>
+              <td class="p-3 text-center text-emerald-400 font-black">92%</td>
+              <td class="p-3 text-right font-black text-white">@ 1.18</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer Action Card Tab C -->
+      <div class="bg-[#161b26] border border-amber-500/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>
+          <span class="text-xs text-[#8b949e] block font-bold">RIASSUNTO TICKET LENZUOLO QUOTA 10+:</span>
+          <span class="text-sm font-black text-white">8 Micro-Quote Blindate · Quota Complessiva: <span class="text-amber-400 text-lg font-black">10.85×</span></span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-[10px] text-[#8b949e] block">Puntata Suggerita: 5.00 €</span>
+            <span class="text-base font-black text-emerald-400">Vincita: 54.25 €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.getElementById('tab-a').classList.add('hidden');
+      document.getElementById('tab-b').classList.add('hidden');
+      document.getElementById('tab-c').classList.add('hidden');
+
+      document.getElementById('btn-tab-a').className = 'px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all text-[#8b949e] border border-transparent hover:text-white';
+      document.getElementById('btn-tab-b').className = 'px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all text-[#8b949e] border border-transparent hover:text-white';
+      document.getElementById('btn-tab-c').className = 'px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all text-[#8b949e] border border-transparent hover:text-white';
+
+      document.getElementById(tabId).classList.remove('hidden');
+
+      if (tabId === 'tab-a') {
+        document.getElementById('btn-tab-a').className = 'px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all tab-active-blue border';
+      } else if (tabId === 'tab-b') {
+        document.getElementById('btn-tab-b').className = 'px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all tab-active-purple border';
+      } else if (tabId === 'tab-c') {
+        document.getElementById('btn-tab-c').className = 'px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all tab-active-amber border';
+      }
+    }
+  </script>
+</body>
+</html>
