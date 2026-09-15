@@ -242,6 +242,25 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 💻 **Integrazione Software (Gate 0.2)**:
     Implementato come `Gate 0.2` (`Tier1OnlyGate`) in `StrictTicketPipeline` (`services/betting/strict_ticket_pipeline.py`). Qualsiasi evento appartenente a seconde divisioni o squadre riserve viene bloccato istantaneamente con `[BLOCCATO - REGOLA #56: BAN SECONDE DIVISIONI & SQUADRE RISERVE/B]`.
 
+- **Regola #57 — ANTI-FAVORITE BLIND SPOT (Divieto di Giudizio Narrativo da Posizione di Classifica & Falsa Base d'Acciaio)**:
+  - 🛑 **Divieto Assoluto**:
+    È TASSATIVAMENTE VIETATO etichettare come "base d'acciaio", "quota sicura" o "partita sbilanciata" una scommessa basandosi esclusivamente sul divario di classifica (es. "prima contro ultima"). Più la partita appare sbilanciata sulla carta, più il bookmaker comprime la quota aggiungendo margine a favore del banco, distruggendo l'Edge matematico ($\text{Edge} < 0\%$).
+  - 🔬 **Motivazione Scientifica & Lezione América de Cali - Deportivo Pasto (14/09/2026)**:
+    L'assistente ha approvato a parole `1 + Over 1.5 @ 1.45` definendola "ottima base d'acciaio" solo perché l'América era 1ª e il Pasto ultimo. L'interrogazione reale dei dati FootyStats ha invece svelato che negli ultimi 3 precedenti a Cali il match è terminato **1-1, 0-0, 1-1** (3 pareggi consecutivi, Pasto autentica bestia nera in blocco basso) e la quota 1.45 offriva un Edge negativo $(-1.4\%)$.
+  - 📌 **Direttiva di Validazione Vincolante (Gate 0 Esteso)**:
+    In ogni scontro asimmetrico:
+    1. Divieto di combo rigide con segno 1 o 2 fisso sotto quota 1.65 (`1 + Over 1.5`, `1 + Under 3.5`);
+    2. Obbligo di sostituzione con mercati elastici che assorbono il pareggio: `1X + MultiGol 1-4`, `MultiGol 1-3 Casa`;
+    3. Verifica obbligatoria dell'H2H storico negli ultimi 3 precedenti.
+
+- **Regola #58 — PROTOCOLLO "CODE-FIRST REFLEX" & ZERO CONVALIDA VERBALE SENZA CERTIFICATO ESEGUITO**:
+  - 🛑 **Divieto Assoluto di Compiacenza e Giudizi a Parole**:
+    È TASSATIVAMENTE VIETATO commentare o approvare verbalmente una quota comunicata dall'utente (es. *"Perfetto, quota eccellente!", "Base di ferro!", "Ottima intuizione!"*) prima di aver materialmente eseguito il motore di validazione in background.
+  - 📌 **Flusso Operativo Improrogabile (I 3 Passaggi Meccanici)**:
+    1. **Fase 1 (Zero Aggettivi Qualificativi)**: Vietato usare parole rassicuranti prima dell'audit.
+    2. **Fase 2 (Esecuzione Programmatica Immediata)**: Lancio istantaneo di `scripts/strict_validator.py` con dati FootyStats e H2H reali.
+    3. **Fase 3 (Verdetto Trasparente)**: Se lo script fallisce anche uno solo degli Hard Gates (Gate 0, Gate 6, ecc.), l'assistente DEVE esporre immediatamente il motivo del blocco, senza mai tentare di giustificare o promuovere la quota.
+
 ---
 
 

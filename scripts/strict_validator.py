@@ -35,6 +35,10 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+venv_py = ROOT / ".venv" / "bin" / "python"
+if venv_py.exists() and sys.executable != str(venv_py):
+    os.execv(str(venv_py), [str(venv_py)] + sys.argv)
+
 from services.betting.strict_ticket_pipeline import (
     StrictTicketPipeline,
     MarketCandidate,
