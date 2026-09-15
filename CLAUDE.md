@@ -890,7 +890,7 @@ LA Galaxy vs San Jose:          Galaxy @2.25, San Jose @2.75
     - *Spine Check*: Presenza del portiere titolare (Dibu Martínez vs Bizot), mediano di rottura (Onana/Douglas Luiz) e centrali.
     - *Youth Emergency Check*: Se la squadra schiera debuttanti U19 d'emergenza ed è decimata, scatta il BAN IMMEDIATO da mercati a favore e si punta invece A FAVORE DELL'AVVERSARIO o si evita la gara!
 17. **LA TRAPPOLA DEI CORNER NELLE GOLEADE CENTRALI (Caso Elche - Barcellona 0-5 con 1 solo corner)**:
-    - *Analisi*: Squadre con attacco verticale e penetrazioni centrali (Barcellona di Flick con Yamal/Raphinha/Lewandowski che tagliano dentro l'area, Real Madrid) segnano 4-5 gol con tiri diretti senza mai andare sul fondo a crossare. I corner di squadra crollano a 1-2 anche vincendo 0-5.
+    - *Analisi*: Squadre con attacco verticale e penetrazioni centrali (Barcellona di Flick con Yamal/Raphinha/Adeyemi che tagliano dentro l'area, Real Madrid) segnano 4-5 gol con tiri diretti senza mai andare sul fondo a crossare. I corner di squadra crollano a 1-2 anche vincendo 0-5.
     - *Regola Fondamentale*: **MAI giocare Over Corner di squadra alti (>5.5) su squadre da penetrazione centrale! Su queste formazioni giocare SEMPRE `1X2 + Over Gol` (es. `X2 + Over 2.5 @1.60` stravinta!) o `Tiri in Porta`. Riservare gli Over Corner SOLO a squadre con ali che crossano dal fondo per schema (Arsenal, Porto con 12 corner, Man City).**
 18. **L'ASIMMETRIA DEI FALLI: POSSESSO vs NON POSSESSO (Caso Torino - Milan 1-2)**:
     - *Analisi*: La squadra che domina il possesso palla (Milan 63% possesso con Fonseca) NON commette falli ma li subisce (9 falli Milan contro 16 falli Torino).
