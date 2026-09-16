@@ -194,13 +194,27 @@ class NetwinOddsDownloader:
 
     def _save_live_odds(self, matches: List[Dict[str, Any]]):
         try:
+            existing = {}
+            if LIVE_ODDS_FILE.exists():
+                try:
+                    with open(LIVE_ODDS_FILE, "r", encoding="utf-8") as f:
+                        old_data = json.load(f)
+                        for m in old_data.get("matches", []):
+                            existing[m["match_name"].lower()] = m
+                except Exception:
+                    pass
+
+            for m in matches:
+                existing[m["match_name"].lower()] = m
+
+            merged_matches = list(existing.values())
             with open(LIVE_ODDS_FILE, "w", encoding="utf-8") as f:
                 json.dump({
                     "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-                    "total_matches": len(matches),
-                    "matches": matches
+                    "total_matches": len(merged_matches),
+                    "matches": merged_matches
                 }, f, indent=2, ensure_ascii=False)
-            logger.info(f"Quote Netwin salvate in {LIVE_ODDS_FILE}")
+            logger.info(f"Quote Netwin salvate in {LIVE_ODDS_FILE} (Totale partite: {len(merged_matches)})")
         except Exception as e:
             logger.error(f"Errore salvataggio {LIVE_ODDS_FILE}: {e}")
 
