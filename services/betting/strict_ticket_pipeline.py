@@ -21,6 +21,7 @@ from typing import Dict, List, Any, Tuple, Optional
 from pathlib import Path
 
 from services.football.squad_absence_checker import SquadAbsenceChecker, PlayerAuditReport
+from services.betting.netwin_odds_checker import NetwinOddsChecker
 
 @dataclass
 class MarketCandidate:
@@ -82,8 +83,9 @@ class StrictTicketPipeline:
     MAX_SESSION_BANKROLL_PCT = 0.15 # Max 15% del capitale totale investito in una sessione
     MAX_TICKET_BANKROLL_PCT = 0.08  # Max 8% del capitale su singolo ticket
 
-    def __init__(self, checker: Optional[SquadAbsenceChecker] = None):
+    def __init__(self, checker: Optional[SquadAbsenceChecker] = None, netwin_checker: Optional[NetwinOddsChecker] = None):
         self.checker = checker or SquadAbsenceChecker()
+        self.netwin_checker = netwin_checker or NetwinOddsChecker()
 
     @staticmethod
     def calculate_poisson(lmbda: float, k: int) -> float:
@@ -466,8 +468,15 @@ class StrictTicketPipeline:
         # =====================================================================
         # GATE 6.5: NETWIN AGGIO SENTINEL (Pilastro 1)
         # =====================================================================
-        if candidate.netwin_actual_odd is not None:
-            netwin_odd = float(candidate.netwin_actual_odd)
+        netwin_odd = candidate.netwin_actual_odd
+        if netwin_odd is None:
+            # Query automatica della cache quote reali Netwin
+            cached_odd = self.netwin_checker.get_netwin_odd(candidate.match_name, candidate.market_name, fallback_odd=None)
+            if cached_odd is not None:
+                netwin_odd = float(cached_odd)
+                candidate.netwin_actual_odd = netwin_odd
+
+        if netwin_odd is not None:
             netwin_edge = (p_real * netwin_odd) - 1.0
             if netwin_edge < self.MIN_EDGE_THRESHOLD:
                 return ValidationReport(

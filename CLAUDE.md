@@ -352,6 +352,15 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 📲 **Integrazione Notifiche & Staking**:
     Implementato in `services/live/live_momentum_sniper.py` ed eseguibile con `scripts/monitor_live_sniping.py`. Notifica istantanea via `TelegramSentinel` con percorso categoria Netwin e stake micro-consigliato (max 3% bankroll).
 
+- **Regola #66 — NETWIN ODDS DOWNLOADER & REAL AGGIO SHIELD (Zero Quote Teoriche, Solo Quote Reali Netwin.it)**:
+  - 🛑 **Divieto Assoluto di Quote Teoriche o Medie di Mercato**:
+    È TASSATIVAMENTE VIETATO validare e proporre schedine basandosi su quote teoriche o stime generiche senza aver prima verificato la quota effettiva offerta da **Netwin.it**. I bookmaker italiani AAMS/ADM applicano un aggio specifico e tagli di quota che possono distruggere completamente l'Edge atteso.
+  - 📥 **Architettura di Scarico Live XSport / Netwin**:
+    Implementato in `services/betting/netwin_odds_downloader.py` ed eseguibile con `scripts/download_netwin_odds.py`.
+    Intercetta direttamente il motore sportivo XSport/Microgame di Netwin (`https://www.netwin.it/xsportapp/xsport_desktop/`), decodificando in tempo reale palinsesto, avvenimenti AAMS, 1X2, Doppie Chance, Under/Over 0.5-5.5 e Gol/NoGol, salvando i dati in `data/netwin_live_odds.json` e aggiornando la cache `data/netwin_odds_cache.json`.
+  - 🛡️ **Gate 6.5 Automatizzato (`StrictTicketPipeline`)**:
+    La pipeline interroga automaticamente la cache quote Netwin. Se la quota reale Netwin è decurtata rispetto alla quota teorica al punto da far scendere l'Edge sotto al $+4.0\%$, scatta il blocco immediato per `[BLOCCATO - GATE 6.5: NETWIN AGGIO TRAP]`, evitando a monte qualsiasi scommessa a valore atteso negativo.
+
 ---
 
 
