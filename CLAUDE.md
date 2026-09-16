@@ -275,6 +275,27 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 💻 **Integrazione Software**:
     Ogni query a DB, API-Football o FootyStats deve includere esplicitamente il vincolo `season == current_season`.
 
+- **Regola #60 — PROTOCOLLO RASSEGNA STAMPA MULTI-LEGA & KNOW-HOW SPECIALISTICO (Direct Newspaper Intelligence)**:
+  - 🛑 **Divieto Assoluto di Analisi Senza Rassegna Stampa**:
+    È TASSATIVAMENTE VIETATO formulare pronostici o convalidare selezioni basandosi unicamente su numeri freddi o metriche xG senza aver eseguito l'estrazione e lettura diretta degli articoli dei principali quotidiani sportivi specialistici (`scripts/fetch_sports_news.py`).
+  - 🔬 **Motivazione Scientifica**:
+    I numeri non conoscono liti nello spogliatoio, rotazioni concordate in conferenza stampa, contratti in scadenza, carichi di lavoro atletici o cambi di modulo all'ultimo minuto. Solo la stampa specializzata locale (*Gazzetta/Corriere* in Italia, *Marca/AS* in Spagna, *The Athletic/BBC* in UK, *Kicker* in Germania, *L'Équipe* in Francia, *A Bola* in Portogallo) fornisce il know-how tattico profondo indispensabile per il Sesto Senso.
+  - 📌 **Direttiva Operativa Obbligatoria**:
+    Per ogni match candidato a finire nei ticket, BAgent DEVE interrogare `scripts/fetch_sports_news.py --home "<Home>" --away "<Away>" --league "<League>"` ed estrarre le dichiarazioni degli allenatori, i ballottaggi e il clima ambientale pre-gara.
+
+- **Regola #61 — PARADIGMA 1X2-AGNOSTICO (Zero Bias sull'Esito & Priorità ai Mercati Indipendenti)**:
+  - 🎯 **Principio Fondamentale (Disaccoppiamento dal Risultato)**:
+    Non ci deve interessare chi vince, chi pareggia o chi perde. Scommettere su esiti 1X2 o su doppie chance espone alla varianza più distruttiva del calcio (gol casuale al 93', espulsioni, rigori). I mercati migliori sono quelli **100% indipendenti dall'esito finale**:
+    1. **MultiGol Totale Partita (`MultiGol 2-5`, `MultiGol 1-4`, `MultiGol 2-4`)**: Incassa con qualsiasi vincitore (1-1, 2-0, 0-2, 2-1, 1-2, 2-2, 3-1, 0-3...);
+    2. **Corner Totali Match (`Over 7.5 / Over 8.5 Totali`)**: Somma la produzione balistica di ambo i fronti a prescindere dal punteggio;
+    3. **Cartellini Totali Match (`Over 3.5 / Over 4.5 Totali`)**: Sfrutta la tensione agonistica e la severità arbitrale;
+    4. **Tiri Totali Partita (`Over 21.5 / Over 22.5 Tiri Totali`)**: Svincolato dalla precisione realizzativa sotto porta;
+    5. **MultiGol 2° Tempo (`MG 1-3 2° Tempo`)**: Massimizza la resa fisica ed elastica negli ultimi 45 minuti quando le difese calano.
+  - 🛑 **Divieti Vincolanti**:
+    - Ban totale di `Over 0.5 1° Tempo` a quote compresse (< 1.40) che possono morire all'intervallo;
+    - Ban totale di `Under 3.5` o `MultiGol 1-2` su squadre ad alto potenziale offensivo in casa (Ceiling Trap);
+    - Max 3 selezioni per ticket (Protocollo Continuità).
+
 ---
 
 
