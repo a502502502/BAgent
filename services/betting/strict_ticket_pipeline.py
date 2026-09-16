@@ -46,6 +46,7 @@ class MarketCandidate:
     verified_standings_delta: Optional[int] = None # Regola #55: Differenza punti reale tra le due squadre
     verified_sources_checked: bool = True  # Regola #55: Obbligo di consultazione diretta fonti reali
     verified_source_notes: str = ""        # Regola #55: Fonti reali consultate (FootyStats / Sofascore)
+    netwin_actual_odd: Optional[float] = None # Pilastro 1: Quota reale rilevata su Netwin.it
 
 
 @dataclass
@@ -461,6 +462,29 @@ class StrictTicketPipeline:
                 details=math_report,
                 sixth_sense_summary=candidate.sixth_sense_analysis
             )
+
+        # =====================================================================
+        # GATE 6.5: NETWIN AGGIO SENTINEL (Pilastro 1)
+        # =====================================================================
+        if candidate.netwin_actual_odd is not None:
+            netwin_odd = float(candidate.netwin_actual_odd)
+            netwin_edge = (p_real * netwin_odd) - 1.0
+            if netwin_edge < self.MIN_EDGE_THRESHOLD:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=6,
+                    rejection_reason=(
+                        f"[BLOCCATO - GATE 6.5: NETWIN AGGIO TRAP] Quota proposta @{candidate.bookmaker_odd:.2f} tagliata a @{netwin_odd:.2f} su Netwin. "
+                        f"L'Edge reale crolla da {edge*100:+.1f}% a {netwin_edge*100:+.1f}% (minimo richiesto: +{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
+                        f"Margine del banco eccessivo che distrugge il valore atteso."
+                    ),
+                    real_probability=p_real,
+                    fair_odds=fair_odd,
+                    mathematical_edge=netwin_edge,
+                    details=f"Quota Netwin @{netwin_odd:.2f} vs Teorica @{candidate.bookmaker_odd:.2f}.",
+                    sixth_sense_summary=candidate.sixth_sense_analysis
+                )
 
         # =====================================================================
         # FASE 7: FILTRO STRUTTURALE DI MERCATO (ANTI-SCADENZA 45')

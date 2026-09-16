@@ -15,7 +15,7 @@ root_dir = Path(__file__).resolve().parent.parent.parent
 if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
-DEFAULT_DB_PATH = root_dir / "storage" / "database" / "bagent.db"
+DEFAULT_DB_PATH = root_dir / "data" / "bagent.db"
 
 @dataclass
 class MarketMetric:
@@ -33,8 +33,10 @@ class MarketMetric:
 
 class PerformanceTracker:
     """
-    Gestore analitico del Track-Record storico e calcolo delle metriche di performance.
+    Gestore analitico del Track-Record storico, Bankroll Ledger e metriche di performance.
     """
+
+    INITIAL_DEFAULT_BANKROLL = 37.32
 
     def __init__(self, db_path: Optional[Path] = None):
         self.db_path = db_path or DEFAULT_DB_PATH
@@ -42,12 +44,42 @@ class PerformanceTracker:
         self._init_tables()
 
     def _get_connection(self):
-        return sqlite3.connect(str(self.db_path))
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+        return conn
 
     def _init_tables(self):
         with self._get_connection() as conn:
             cursor = conn.cursor()
             
+            # Tabella Storico Bankroll & Transazioni
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS bankroll_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT NOT NULL,
+                balance_eur REAL NOT NULL,
+                change_eur REAL NOT NULL,
+                reason TEXT NOT NULL,
+                ticket_id TEXT
+            )
+            """)
+
+            # Tabella Lezioni Tattiche & Post-Mortem (Pilastro 4)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS tactical_lessons (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT NOT NULL,
+                match_name TEXT NOT NULL,
+                market_name TEXT NOT NULL,
+                odds REAL,
+                outcome TEXT NOT NULL,
+                failure_category TEXT,
+                actual_stats TEXT,
+                tactical_lesson TEXT NOT NULL,
+                applied_rule TEXT
+            )
+            """)
+
             # Tabella Ticket Storici
             cursor.execute("""
             CREATE TABLE IF NOT EXISTS ticket_ledger (
@@ -218,3 +250,111 @@ class PerformanceTracker:
                 "net_profit_eur": round(profit, 2),
                 "yield_pct": round(yield_pct, 2)
             }
+
+    def get_current_bankroll(self) -> float:
+        """Restituisce il saldo attuale del bankroll, inizializzandolo al default se non presente."""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT balance_eur FROM bankroll_history ORDER BY id DESC LIMIT 1")
+            row = cursor.fetchone()
+            if row:
+                return float(row["balance_eur"])
+            
+            # Inizializza con il bankroll di partenza
+            self.set_bankroll(self.INITIAL_DEFAULT_BANKROLL, reason="INITIAL_BASE_BALANCE")
+            return self.INITIAL_DEFAULT_BANKROLL
+
+    def set_bankroll(self, amount: float, reason: str = "MANUAL_ADJUSTMENT", ticket_id: Optional[str] = None) -> float:
+        """Imposta o aggiusta forzatamente il saldo del conto."""
+        now = datetime.now().isoformat()
+        current = 0.0
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT balance_eur FROM bankroll_history ORDER BY id DESC LIMIT 1")
+            row = cursor.fetchone()
+            if row:
+                current = float(row["balance_eur"])
+            delta = amount - current
+
+            cursor.execute("""
+            INSERT INTO bankroll_history (timestamp, balance_eur, change_eur, reason, ticket_id)
+            VALUES (?, ?, ?, ?, ?)
+            """, (now, round(amount, 2), round(delta, 2), reason, ticket_id))
+            conn.commit()
+        return amount
+
+    def adjust_bankroll(self, delta: float, reason: str, ticket_id: Optional[str] = None) -> float:
+        """Applica una variazione al bankroll (+ vincita o - puntata)."""
+        current = self.get_current_bankroll()
+        new_balance = round(current + delta, 2)
+        now = datetime.now().isoformat()
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+            INSERT INTO bankroll_history (timestamp, balance_eur, change_eur, reason, ticket_id)
+            VALUES (?, ?, ?, ?, ?)
+            """, (now, new_balance, round(delta, 2), reason, ticket_id))
+            conn.commit()
+        return new_balance
+
+    def settle_ticket(self, ticket_id: str, final_status: str, payout_eur: Optional[float] = None) -> Dict[str, Any]:
+        """Chiude un ticket (WON, LOST, VOID) e aggiorna automaticamente il bankroll se necessario."""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM ticket_ledger WHERE ticket_id = ?", (ticket_id,))
+            row = cursor.fetchone()
+            if not row:
+                raise ValueError(f"Ticket {ticket_id} non trovato nel ledger.")
+            
+            prev_status = row["status"]
+            stake = float(row["stake_eur"])
+            total_odds = float(row["total_odds"])
+            payout = payout_eur if payout_eur is not None else (round(stake * total_odds, 2) if final_status == "WON" else 0.0)
+            profit_loss = round(payout - stake, 2) if final_status in ("WON", "CASHOUT") else (round(-stake, 2) if final_status == "LOST" else 0.0)
+
+            cursor.execute("""
+            UPDATE ticket_ledger
+            SET status = ?, payout_eur = ?, profit_loss_eur = ?
+            WHERE ticket_id = ?
+            """, (final_status, payout, profit_loss, ticket_id))
+            conn.commit()
+
+        # Se il ticket era PENDING ed è WON, accredita il payout sul bankroll
+        if prev_status == "PENDING" and final_status == "WON":
+            self.adjust_bankroll(payout, reason="TICKET_PAYOUT_CREDIT", ticket_id=ticket_id)
+        elif prev_status == "PENDING" and final_status == "VOID":
+            self.adjust_bankroll(stake, reason="TICKET_VOID_REFUND", ticket_id=ticket_id)
+
+        return {
+            "ticket_id": ticket_id,
+            "previous_status": prev_status,
+            "final_status": final_status,
+            "stake_eur": stake,
+            "payout_eur": payout,
+            "profit_loss_eur": profit_loss,
+            "current_bankroll": self.get_current_bankroll()
+        }
+
+    def record_tactical_lesson(
+        self,
+        match_name: str,
+        market_name: str,
+        odds: float,
+        outcome: str,
+        tactical_lesson: str,
+        failure_category: Optional[str] = None,
+        actual_stats: Optional[str] = None,
+        applied_rule: Optional[str] = None
+    ) -> int:
+        """Memorizza una lezione tattica dal Post-Mortem Engine."""
+        now = datetime.now().isoformat()
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+            INSERT INTO tactical_lessons 
+            (timestamp, match_name, market_name, odds, outcome, failure_category, actual_stats, tactical_lesson, applied_rule)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (now, match_name, market_name, odds, outcome, failure_category, actual_stats, tactical_lesson, applied_rule))
+            conn.commit()
+            return cursor.lastrowid
+

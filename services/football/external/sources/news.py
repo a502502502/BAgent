@@ -163,6 +163,69 @@ def get_league_config(league: str) -> dict | None:
 
 
 # ------------------------------------------------------------------
+# Matrice Pesi Dinamici Sesto Senso (Pilastro 5)
+# ------------------------------------------------------------------
+SOURCE_WEIGHTS_BY_CATEGORY: dict[str, dict[str, float]] = {
+    "MULTIGOL_COMBO": {
+        "mondopengwin.it": 1.40,
+        "footystats.org": 1.35,
+        "gazzetta.it": 1.15,
+        "marca.com": 1.15,
+        "kicker.de": 1.15,
+        "bbc.co.uk": 1.15,
+        "_default": 1.00
+    },
+    "CORNER": {
+        "footystats.org": 1.50,
+        "theathletic.com": 1.25,
+        "bbc.co.uk": 1.20,
+        "mondopengwin.it": 1.10,
+        "_default": 1.00
+    },
+    "CARTELLINI": {
+        "footystats.org": 1.45,
+        "marca.com": 1.35,
+        "ole.com.ar": 1.35,
+        "gazzetta.it": 1.25,
+        "mondopengwin.it": 1.20,
+        "_default": 1.00
+    },
+    "LINEUP_INJURY": {
+        "gazzetta.it": 1.50,
+        "marca.com": 1.50,
+        "kicker.de": 1.50,
+        "lequipe.fr": 1.50,
+        "theathletic.com": 1.40,
+        "mondopengwin.it": 1.30,
+        "_default": 1.00
+    }
+}
+
+def calculate_weighted_confidence(sources_cited: list[str], market_category: str) -> float:
+    """
+    Calcola l'indice di affidabilità ponderata (Weighted Source Index)
+    basato sulla matrice di specializzazione delle fonti di Sesto Senso.
+    """
+    weights = SOURCE_WEIGHTS_BY_CATEGORY.get(market_category.upper(), SOURCE_WEIGHTS_BY_CATEGORY["MULTIGOL_COMBO"])
+    if not sources_cited:
+        return 1.00
+
+    total_weight = 0.0
+    matched = 0
+    for src in sources_cited:
+        src_clean = src.lower().strip()
+        assigned_w = weights.get("_default", 1.0)
+        for domain, w in weights.items():
+            if domain != "_default" and domain in src_clean:
+                assigned_w = w
+                break
+        total_weight += assigned_w
+        matched += 1
+
+    return round(total_weight / max(1, matched), 2)
+
+
+# ------------------------------------------------------------------
 # Data model
 # ------------------------------------------------------------------
 
