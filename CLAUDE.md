@@ -327,6 +327,19 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
     4. **Dutching Asimmetrico a Paracadute (Twin-Ticket Lock Anti-Ceiling)**:
        - Neutralizzazione definitiva della Ceiling Trap (Regola #48) su attacchi dominanti: ripartizione dello stake con l'80% su `MultiGol 1-3 Squadra` e il 20% su `Over 3.5 Squadra` ad alta quota. Se la favorita segna 1, 2 o 3 gol si va alla cassa; se dilaga con 4+ reti, il paracadute copre l'intero capitale garantendo utile netto.
 
+- **Regola #64 — ARCHITETTURA TWIN-TICKET A CAPITALE PROTETTO & ZERO PERDITA**:
+  - 🎯 **Principio Fondamentale (Eliminazione Totale del Rischio Capitale)**:
+    Ogni qualvolta l'utente alloca un budget di sessione ($S_{tot}$), BAgent calcola e propone una **Schedina di Backup Paracadute** accoppiata alla Schedina Principale Core, dimensionata affinché il fallimento della principale comporti **ZERO PERDITE** sul capitale totale.
+  - 📐 **Vincolo Matematico Zero-Loss**:
+    La quota di backup ($Q_2 \ge 4.50$) e lo stake ($S_2$) sono vincolati dall'uguaglianza di copertura integrale:
+    $$S_2 \times Q_2 \ge S_{tot} \implies S_2 = \left\lceil \frac{S_{tot}}{Q_2} \right\rceil, \quad S_1 = S_{tot} - S_2$$
+  - 🛡️ **Matrice Scenari Garantiti**:
+    1. **Scenario A (Vince Principale, Perde Backup)**: Payout $S_1 \times Q_1$ con cospicuo utile netto (+80% / +200% sul budget);
+    2. **Scenario B (Perde Principale, Vince Backup)**: Payout $S_2 \times Q_2 \ge S_{tot}$, **capitale recuperato al 100% e perdita azzerata (0,00 €)**;
+    3. **Scenario C (Eventi Disgiunti ed Entrambe Vincenti)**: Incasso cumulativo di entrambi i ticket.
+  - 💻 **Integrazione Software**:
+    Implementato in `services/betting/backup_hedge_engine.py` e richiamabile con `scripts/build_backup_ticket.py --budget <EUR> --main-odd <Q1> --backup-odd <Q2>`.
+
 ---
 
 
