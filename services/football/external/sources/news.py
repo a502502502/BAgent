@@ -30,25 +30,25 @@ import requests
 # Usati come `site:url` nelle query Google News oppure come URL diretti da fetchare.
 LEAGUE_SOURCES: dict[str, dict] = {
     "serie a": {
-        "sites": ["gazzetta.it", "corrieredellosport.it", "tuttosport.com", "sport.sky.it"],
+        "sites": ["gazzetta.it", "corrieredellosport.it", "tuttosport.com", "sport.sky.it", "mondopengwin.it"],
         "language": "it",
         "country": "IT",
         "search_suffix": "probabili formazioni OR infortunio OR conferenza stampa OR turnover OR ballottaggio",
-        "note": "Quotidiani sportivi italiani primari (Gazzetta, Corriere, Tuttosport, Sky Sport).",
+        "note": "Quotidiani sportivi italiani primari (Gazzetta, Corriere, Tuttosport, Sky Sport, MondoPengwin).",
     },
     "serie b": {
-        "sites": ["gazzetta.it", "corrieredellosport.it", "pianetaserieb.it"],
+        "sites": ["gazzetta.it", "corrieredellosport.it", "pianetaserieb.it", "mondopengwin.it"],
         "language": "it",
         "country": "IT",
         "search_suffix": "formazioni OR infortunio OR convocati",
         "note": "Fonti Serie B italiana.",
     },
     "premier league": {
-        "sites": ["theathletic.com", "theguardian.com", "bbc.co.uk", "skysports.com"],
+        "sites": ["theathletic.com", "theguardian.com", "bbc.co.uk", "skysports.com", "mondopengwin.it"],
         "language": "en",
         "country": "GB",
         "search_suffix": "lineup OR injury news OR press conference OR team news OR tactical",
-        "note": "Primary UK Football journalism (The Athletic, BBC Sport, The Guardian, Sky Sports).",
+        "note": "Primary UK Football journalism (The Athletic, BBC Sport, The Guardian, Sky Sports, MondoPengwin).",
     },
     "championship": {
         "sites": ["bbc.co.uk", "skysports.com"],
@@ -65,11 +65,11 @@ LEAGUE_SOURCES: dict[str, dict] = {
         "note": "Carabao / EFL Cup team news and rotations.",
     },
     "laliga": {
-        "sites": ["marca.com", "as.com", "mundodeportivo.com", "sport.es"],
+        "sites": ["marca.com", "as.com", "mundodeportivo.com", "sport.es", "mondopengwin.it"],
         "language": "es",
         "country": "ES",
         "search_suffix": "alineacion probable OR lesion OR rueda de prensa OR rotaciones OR convocatoria",
-        "note": "Prensa deportiva española (Marca, AS, Mundo Deportivo, Sport).",
+        "note": "Prensa deportiva española (Marca, AS, Mundo Deportivo, Sport, MondoPengwin).",
     },
     "segunda division": {
         "sites": ["marca.com", "as.com"],
@@ -79,18 +79,18 @@ LEAGUE_SOURCES: dict[str, dict] = {
         "note": "Segunda División Española.",
     },
     "bundesliga": {
-        "sites": ["kicker.de", "bild.de", "sport1.de"],
+        "sites": ["kicker.de", "bild.de", "sport1.de", "mondopengwin.it"],
         "language": "de",
         "country": "DE",
         "search_suffix": "voraussichtliche aufstellung OR verletzung OR pressekonferenz OR kader",
-        "note": "Deutsche Sportmedien (Kicker, Bild, Sport1).",
+        "note": "Deutsche Sportmedien (Kicker, Bild, Sport1, MondoPengwin).",
     },
     "ligue 1": {
-        "sites": ["lequipe.fr", "footmercato.net", "maxifoot.fr"],
+        "sites": ["lequipe.fr", "footmercato.net", "maxifoot.fr", "mondopengwin.it"],
         "language": "fr",
         "country": "FR",
         "search_suffix": "composition probable OR blessure OR conference de presse OR groupe",
-        "note": "Médias sportifs français (L'Équipe, FootMercato, MaxiFoot).",
+        "note": "Médias sportifs français (L'Équipe, FootMercato, MaxiFoot, MondoPengwin).",
     },
     "primeira liga": {
         "sites": ["abola.pt", "record.pt", "ojogo.pt"],
@@ -107,21 +107,21 @@ LEAGUE_SOURCES: dict[str, dict] = {
         "note": "Türk spor medyası (Fanatik, Fotomaç).",
     },
     "champions league": {
-        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de", "lequipe.fr"],
+        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de", "lequipe.fr", "mondopengwin.it"],
         "language": "it",
         "country": "IT",
         "search_suffix": "probabili formazioni OR conferenza stampa OR infortuni OR turnover",
         "note": "UEFA Champions League Multi-Journalism Intelligence.",
     },
     "europa league": {
-        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de", "lequipe.fr"],
+        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de", "lequipe.fr", "mondopengwin.it"],
         "language": "it",
         "country": "IT",
         "search_suffix": "probabili formazioni OR conferenza stampa OR infortuni OR turnover",
         "note": "UEFA Europa League Multi-Journalism Intelligence.",
     },
     "conference league": {
-        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de"],
+        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de", "mondopengwin.it"],
         "language": "it",
         "country": "IT",
         "search_suffix": "probabili formazioni OR conferenza stampa OR infortuni OR turnover",
