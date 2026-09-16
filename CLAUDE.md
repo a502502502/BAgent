@@ -296,6 +296,23 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
     - Ban totale di `Under 3.5` o `MultiGol 1-2` su squadre ad alto potenziale offensivo in casa (Ceiling Trap);
     - Max 3 selezioni per ticket (Protocollo Continuità).
 
+- **Regola #62 — I 5 PILASTRI DI POTENZIAMENTO & INTEGRAZIONE END-TO-END (Piattaforma Professionale Unificata)**:
+  - 🎯 **Architettura Integrata**: BAgent opera attraverso 5 motori sinergici integrati nel codice:
+    1. **Netwin Live Odds Connector & Aggio Sentinel (`services/betting/netwin_odds_checker.py`)**:
+       - Verifica automatica delle quote reali di Netwin.it rispetto a quelle teoriche.
+       - Implementato come **Gate 6.5** in `StrictTicketPipeline`: se il bookmaker taglia la quota e fa crollare l'Edge sotto al $+4.0\%$, la scommessa viene **BOCCIATA AUTOMATICAMENTE** (`[BLOCCATO - GATE 6.5: NETWIN AGGIO TRAP]`) e viene proposta la linea elastica non compressa (es. MultiGol 2-4 o Over Corner).
+    2. **Bankroll Ledger & P&L Tracker in SQLite (`scripts/manage_bankroll.py`)**:
+       - Registro transazioni e storico del conto memorizzato in `data/bagent.db` (`bankroll_history`, `ticket_ledger`, `bet_leg_ledger`).
+       - Calcolo automatico di saldo corrente (base 37,32 €), volume giocato, payout incassato, profitto netto, Yield% e Win Rate per mercato.
+    3. **Push Telegram Sentinel (`services/telegram/telegram_sentinel.py`)**:
+       - Invio automatico del Master Ticket Certificato direttamente su Telegram non appena approvato con quote, motivazioni Sesto Senso e puntata consigliata;
+       - Invio immediato dell'allerta **Protocollo Assedio (Regola #50)** in tempo reale su smartphone quando la sfavorita segna contro la favorita.
+    4. **Post-Mortem Engine & Tactical Feedback Loop (`services/analysis/post_mortem_engine.py` & `scripts/run_post_mortem.py`)**:
+       - Diagnosi analitica post-partita sui ticket conclusi (gol FT/HT, corner, tiri, cartellini rossi prematuri, rigori).
+       - Classificazione della causa di fallimento (`EARLY_RED_CARD`, `LOW_SHOT_VOLUME`, `PARK_THE_BUS`, `PENALTY_VARIANCE`, `DIESEL_FIRST_HALF`) e archiviazione della lezione nella tabella `tactical_lessons` per auto-calibrare il modello.
+    5. **Weighting Dinamico delle Fonti di Sesto Senso (`services/football/external/sources/news.py`)**:
+       - Matrice `SOURCE_WEIGHTS_BY_CATEGORY` e funzione `calculate_weighted_confidence()`: ponderazione euristica che valorizza *MondoPengwin* sui MultiGol (peso 1.40), *Gazzetta/Marca* su formazioni e infortuni (1.50) e *FootyStats* su volumi balistici e corner (1.50).
+
 ---
 
 
