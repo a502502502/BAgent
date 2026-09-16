@@ -15,7 +15,7 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
 
 ## Regole di Analisi (SEMPRE in vigore)
 
-- **Sesto Senso = OBBLIGATORIO & QUOTIDIANO**: Lettura integrale dei quotidiani sportivi di riferimento (*La Gazzetta dello Sport*, *BBC Sport*, *Marca*, *Kicker*, *L'Équipe*) TUTTI I GIORNI prima di qualsiasi tabella o calcolo. L'informazione giornalistica e i retroscena di spogliatoio/mercato sono parte integrante e imprescindibile del Sesto Senso.
+- **Sesto Senso = OBBLIGATORIO & QUOTIDIANO**: Lettura integrale dei quotidiani sportivi di riferimento (*La Gazzetta dello Sport*, *BBC Sport*, *Marca*, *Kicker*, *L'Équipe*) e delle fonti specializzate di analisi e comparazione (*MondoPengwin* - https://www.mondopengwin.it/pronostici/calcio/) TUTTI I GIORNI prima di qualsiasi tabella o calcolo. L'informazione giornalistica, le dichiarazioni pre-partita, i ballottaggi e i retroscena di spogliatoio/mercato sono parte integrante e imprescindibile del Sesto Senso.
 - **FootyStats = obbligatorio**: SEMPRE consultare https://footystats.org prima di ogni analisi per estrarre avg goals, Over2.5%, BTTS%, xG, forma recente. MAI stimare probabilità senza dati reali da FootyStats.
 - **Interazione 100% via Chat (Zero Terminale per l'Utente)**: L'utente non deve digitare comandi da terminale: interagisce esclusivamente via chat in linguaggio naturale. È compito dell'assistente invocare in background tutti gli script di controllo e calcolo (`verify_squad_control.py`, `scan_omni_markets.py`, `build_verified_ticket.py`, `scan_live_matches.py`), elaborare i dati e presentare direttamente nella conversazione i risultati già filtrati, certificati e pronti all'uso.
 - **Edge formula**: `Edge = (prob × quota) - 1` — solo informativo, non decisionale
@@ -277,11 +277,11 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
 
 - **Regola #60 — PROTOCOLLO RASSEGNA STAMPA MULTI-LEGA & KNOW-HOW SPECIALISTICO (Direct Newspaper Intelligence)**:
   - 🛑 **Divieto Assoluto di Analisi Senza Rassegna Stampa**:
-    È TASSATIVAMENTE VIETATO formulare pronostici o convalidare selezioni basandosi unicamente su numeri freddi o metriche xG senza aver eseguito l'estrazione e lettura diretta degli articoli dei principali quotidiani sportivi specialistici (`scripts/fetch_sports_news.py`).
+    È TASSATIVAMENTE VIETATO formulare pronostici o convalidare selezioni basandosi unicamente su numeri freddi o metriche xG senza aver eseguito l'estrazione e lettura diretta degli articoli dei principali quotidiani sportivi specialistici (`scripts/fetch_sports_news.py`) e dei portali di analisi comparata (*MondoPengwin* — `https://www.mondopengwin.it/pronostici/calcio/`).
   - 🔬 **Motivazione Scientifica**:
-    I numeri non conoscono liti nello spogliatoio, rotazioni concordate in conferenza stampa, contratti in scadenza, carichi di lavoro atletici o cambi di modulo all'ultimo minuto. Solo la stampa specializzata locale (*Gazzetta/Corriere* in Italia, *Marca/AS* in Spagna, *The Athletic/BBC* in UK, *Kicker* in Germania, *L'Équipe* in Francia, *A Bola* in Portogallo) fornisce il know-how tattico profondo indispensabile per il Sesto Senso.
+    I numeri non conoscono liti nello spogliatoio, rotazioni concordate in conferenza stampa, contratti in scadenza, carichi di lavoro atletici o cambi di modulo all'ultimo minuto. Solo la stampa specializzata locale (*Gazzetta/Corriere* in Italia, *Marca/AS* in Spagna, *The Athletic/BBC* in UK, *Kicker* in Germania, *L'Équipe* in Francia, *A Bola* in Portogallo) e le fonti di studio tattico pre-match (*MondoPengwin*) forniscono il know-how tattico profondo indispensabile per il Sesto Senso.
   - 📌 **Direttiva Operativa Obbligatoria**:
-    Per ogni match candidato a finire nei ticket, BAgent DEVE interrogare `scripts/fetch_sports_news.py --home "<Home>" --away "<Away>" --league "<League>"` ed estrarre le dichiarazioni degli allenatori, i ballottaggi e il clima ambientale pre-gara.
+    Per ogni match candidato a finire nei ticket, BAgent DEVE interrogare `scripts/fetch_sports_news.py --home "<Home>" --away "<Away>" --league "<League>"` (e consultare le schede match di `mondopengwin.it`) ed estrarre le dichiarazioni degli allenatori, i ballottaggi e il clima ambientale pre-gara.
 
 - **Regola #61 — PARADIGMA 1X2-AGNOSTICO (Zero Bias sull'Esito & Priorità ai Mercati Indipendenti)**:
   - 🎯 **Principio Fondamentale (Disaccoppiamento dal Risultato)**:
