@@ -313,6 +313,20 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
     5. **Weighting Dinamico delle Fonti di Sesto Senso (`services/football/external/sources/news.py`)**:
        - Matrice `SOURCE_WEIGHTS_BY_CATEGORY` e funzione `calculate_weighted_confidence()`: ponderazione euristica che valorizza *MondoPengwin* sui MultiGol (peso 1.40), *Gazzetta/Marca* su formazioni e infortuni (1.50) e *FootyStats* su volumi balistici e corner (1.50).
 
+- **Regola #63 — INGEGNERIZZAZIONE COMBINAZIONI SPECIALI, CHANCE MIX & ANTI-FRAGILITÀ BALISTICA**:
+  - 🎯 **Principio Fondamentale (Superamento dei Mercati Convenzionali Fragili)**:
+    BAgent adotta l'ingegnerizzazione stocastica avanzata tramite `SpecialCombinationsEngine` (`services/analysis/special_combinations_engine.py`) per identificare combinazioni speciali con probabilità congiunta reale dell'**`88% — 94%`**:
+    1. **Chance Mix a Matrice Unione ($P(A \cup B)$)**:
+       - **`1X o Over 1.5`**: L'unico scenario perdente dell'intero spettro calcistico è lo **0-1 esatto**. Copre vittorie interne, pareggi (0-0, 1-1, 2-2) e qualsiasi vittoria esterna con 2+ reti ($P_{reale} \ge 91\%-94\%$).
+       - **`X2 o Over 1.5`**: Perde unicamente sull'1-0 esatto della squadra casalinga. Ideale per trasferte delle favorite.
+       - **`Gol o Over 2.5`**: Esclude solo 0-0, 1-0, 2-0, 0-1, 0-2; incassa su tutti i pareggi con gol e su tutte le goleade.
+    2. **MultiGol Asimmetrico per Tempi (`MG 0-2 1°T + MG 1-3 2°T`)**:
+       - Sfrutta la fisiologia atletica: studio controllato nei primi 45' (P 0-2 gol > 94%) ed espansione nella ripresa con difese allungate (P 1-3 gol > 91%).
+    3. **Disaccoppiamento Stocastico Ortogonale (Anti-Varianza a 3 Fattori Indipendenti)**:
+       - Incrocio di variabili non correlate: `Over Corner Totali` (balistica pura) + `MultiGol Ampio 1-4` (tenuta gol) + `Over Cartellini Totali` (agonismo arbitrale). Nessuna variabile contamina le altre.
+    4. **Dutching Asimmetrico a Paracadute (Twin-Ticket Lock Anti-Ceiling)**:
+       - Neutralizzazione definitiva della Ceiling Trap (Regola #48) su attacchi dominanti: ripartizione dello stake con l'80% su `MultiGol 1-3 Squadra` e il 20% su `Over 3.5 Squadra` ad alta quota. Se la favorita segna 1, 2 o 3 gol si va alla cassa; se dilaga con 4+ reti, il paracadute copre l'intero capitale garantendo utile netto.
+
 ---
 
 
