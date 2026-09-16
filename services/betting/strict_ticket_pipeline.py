@@ -170,8 +170,8 @@ class StrictTicketPipeline:
             "REGIONALLIGA", "SERIE C", "SERIE D", "AMATORI", "DILETTANTI", "NATIONAL LEAGUE"
         ]
         banned_reserve_keywords = [
-            "JONG ", "JONG-", " II", " 2", " B ", " ATLÈTIC", " ATLETIC", " CASTILLA",
-            " FORTUNA", " U21", " U23", " U19", " PRIMAVERA", " RISERVE", " RESERVES"
+            "JONG ", "JONG-", " II", " 2", " B ", "BARÇA ATLÈTIC", "BARCELONA ATLÈTIC", "BILBAO ATHLETIC",
+            "BARCA ATLETIC", " CASTILLA", " U21", " U23", " U19", " PRIMAVERA", " RISERVE", " RESERVES"
         ]
         
         # Gestione eccezioni nomi legittimi contenenti 'II' (es. Willem II in Eredivisie)
