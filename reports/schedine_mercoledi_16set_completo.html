@@ -573,11 +573,117 @@
     .tab-content.active {
       display: block;
     }
+
+    /* MOBILE RESPONSIVE TWEAKS FOR SMARTPHONES */
+    @media (max-width: 768px) {
+      body {
+        padding: 12px 10px 60px;
+      }
+      .header h1 {
+        font-size: 21px;
+        letter-spacing: -0.5px;
+      }
+      .header p {
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      .tabs-bar {
+        justify-content: flex-start;
+        padding-bottom: 10px;
+        gap: 6px;
+      }
+      .tab-btn {
+        padding: 7px 12px;
+        font-size: 11.5px;
+      }
+      .simulator-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px;
+        gap: 12px;
+      }
+      .stake-buttons {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+      }
+      .btn-stake {
+        padding: 8px 2px;
+        font-size: 11px;
+        text-align: center;
+      }
+      .ticket-card {
+        padding: 14px;
+        border-radius: 14px;
+      }
+      .ticket-title {
+        font-size: 16px;
+      }
+      .odds-number {
+        font-size: 24px;
+      }
+      .match-header-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .match-left {
+        gap: 8px;
+      }
+      .match-names {
+        font-size: 13.5px;
+      }
+      .match-pick-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 6px 10px;
+        text-align: left;
+      }
+      .match-pick {
+        margin-bottom: 0;
+        font-size: 12px;
+      }
+      .match-odd {
+        font-size: 13px;
+        color: #f59e0b;
+      }
+      .match-motivation-box {
+        font-size: 11px;
+        line-height: 1.4;
+        padding: 6px 10px;
+      }
+      .dossier-card {
+        padding: 14px;
+      }
+      .dossier-match-title {
+        font-size: 15px;
+      }
+      .table-container {
+        padding: 8px;
+      }
+      table {
+        font-size: 11px;
+      }
+      th, td {
+        padding: 7px 8px;
+      }
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
+  <!-- Mobile Switcher Banner -->
+  <div style="text-align: center; margin-bottom: 14px;">
+    <a href="schedine_mobile.html" style="background: linear-gradient(135deg, #10b981, #059669); color: #070a13; padding: 7px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+      📱 Passa alla Versione App per Smartphone
+    </a>
+  </div>
+
   <!-- Header -->
   <div class="header">
     <div class="badge-live">
