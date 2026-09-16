@@ -24,11 +24,11 @@ def check_all_tickets():
     print(f"✅ Feed scaricato con successo: {len(feed)} partite monitorate live nel mondo.\n")
 
     targets = [
-        # Pomeriggio
-        {"name": "Borneo vs Dewa United", "kw": "Borneo", "pick": "1X @ 1.34", "ticket": "Multipla 5"},
-        {"name": "Nakhon Pathom vs Kanchanaburi", "kw": "Kanchanaburi", "pick": "X2 @ 1.27", "ticket": "Multipla 5"},
-        {"name": "Gareji Sagarejo vs Gori", "kw": "Gareji", "pick": "Over 2.5 (M3) / 1 (M5)", "ticket": "Multipla 3 & 5"},
-        {"name": "Kulikiv vs Veres Rivne", "kw": "Veres-Rivne", "pick": "2 (M3) / X2 (M5)", "ticket": "Multipla 3 & 5"},
+        # Pomeriggio Reconstituito (13:30 - 14:00, chiusura entro 15:55)
+        {"name": "Nakhon Pathom vs Kanchanaburi", "kw": "Kanchanaburi", "pick": "X2 @ 1.27", "ticket": "Booster Pomeriggio"},
+        {"name": "Gareji Sagarejo vs Gori", "kw": "Gareji", "pick": "1 @ 1.72 (o 1X @ 1.18)", "ticket": "Booster Pomeriggio"},
+        {"name": "Kulikiv vs Veres Rivne", "kw": "Veres-Rivne", "pick": "2 @ 1.63 (o X2 @ 1.19)", "ticket": "Booster Pomeriggio"},
+        {"name": "Merani Martvili vs Sioni", "kw": "Merani", "pick": "1X @ 1.28 (Opzionale 4ª)", "ticket": "Booster Pomeriggio"},
         # Sera (18:45 - 21:30)
         {"name": "Omonia vs Celta Vigo", "kw": "Celta", "pick": "X2 + MG 1-5 @ 1.42", "ticket": "Ticket 3"},
         {"name": "Ararat-Armenia vs Sparta Praga", "kw": "Ararat", "pick": "Sparta X2 @ 1.17", "ticket": "Europa League"},
