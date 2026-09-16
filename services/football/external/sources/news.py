@@ -29,27 +29,119 @@ import requests
 # Mappa: keyword lega → lista di siti da includere nelle ricerche Sesto Senso
 # Usati come `site:url` nelle query Google News oppure come URL diretti da fetchare.
 LEAGUE_SOURCES: dict[str, dict] = {
+    "serie a": {
+        "sites": ["gazzetta.it", "corrieredellosport.it", "tuttosport.com", "sport.sky.it"],
+        "language": "it",
+        "country": "IT",
+        "search_suffix": "probabili formazioni OR infortunio OR conferenza stampa OR turnover OR ballottaggio",
+        "note": "Quotidiani sportivi italiani primari (Gazzetta, Corriere, Tuttosport, Sky Sport).",
+    },
+    "serie b": {
+        "sites": ["gazzetta.it", "corrieredellosport.it", "pianetaserieb.it"],
+        "language": "it",
+        "country": "IT",
+        "search_suffix": "formazioni OR infortunio OR convocati",
+        "note": "Fonti Serie B italiana.",
+    },
+    "premier league": {
+        "sites": ["theathletic.com", "theguardian.com", "bbc.co.uk", "skysports.com"],
+        "language": "en",
+        "country": "GB",
+        "search_suffix": "lineup OR injury news OR press conference OR team news OR tactical",
+        "note": "Primary UK Football journalism (The Athletic, BBC Sport, The Guardian, Sky Sports).",
+    },
+    "championship": {
+        "sites": ["bbc.co.uk", "skysports.com"],
+        "language": "en",
+        "country": "GB",
+        "search_suffix": "team news OR injury OR lineup",
+        "note": "English Championship news.",
+    },
+    "efl cup": {
+        "sites": ["theathletic.com", "bbc.co.uk", "skysports.com"],
+        "language": "en",
+        "country": "GB",
+        "search_suffix": "rotation OR team news OR lineup OR injury",
+        "note": "Carabao / EFL Cup team news and rotations.",
+    },
+    "laliga": {
+        "sites": ["marca.com", "as.com", "mundodeportivo.com", "sport.es"],
+        "language": "es",
+        "country": "ES",
+        "search_suffix": "alineacion probable OR lesion OR rueda de prensa OR rotaciones OR convocatoria",
+        "note": "Prensa deportiva española (Marca, AS, Mundo Deportivo, Sport).",
+    },
+    "segunda division": {
+        "sites": ["marca.com", "as.com"],
+        "language": "es",
+        "country": "ES",
+        "search_suffix": "alineacion OR lesion OR previa",
+        "note": "Segunda División Española.",
+    },
+    "bundesliga": {
+        "sites": ["kicker.de", "bild.de", "sport1.de"],
+        "language": "de",
+        "country": "DE",
+        "search_suffix": "voraussichtliche aufstellung OR verletzung OR pressekonferenz OR kader",
+        "note": "Deutsche Sportmedien (Kicker, Bild, Sport1).",
+    },
+    "ligue 1": {
+        "sites": ["lequipe.fr", "footmercato.net", "maxifoot.fr"],
+        "language": "fr",
+        "country": "FR",
+        "search_suffix": "composition probable OR blessure OR conference de presse OR groupe",
+        "note": "Médias sportifs français (L'Équipe, FootMercato, MaxiFoot).",
+    },
+    "primeira liga": {
+        "sites": ["abola.pt", "record.pt", "ojogo.pt"],
+        "language": "pt",
+        "country": "PT",
+        "search_suffix": "onze provavel OR lesao OR conferencia de imprensa OR convocados",
+        "note": "Jornais desportivos portugueses (A Bola, Record, O Jogo).",
+    },
+    "super lig": {
+        "sites": ["fanatik.com.tr", "fotomac.com.tr", "ntvspor.net"],
+        "language": "tr",
+        "country": "TR",
+        "search_suffix": "muhtemel 11 OR sakatlik OR basin toplantisi OR kadro",
+        "note": "Türk spor medyası (Fanatik, Fotomaç).",
+    },
+    "champions league": {
+        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de", "lequipe.fr"],
+        "language": "it",
+        "country": "IT",
+        "search_suffix": "probabili formazioni OR conferenza stampa OR infortuni OR turnover",
+        "note": "UEFA Champions League Multi-Journalism Intelligence.",
+    },
+    "europa league": {
+        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de", "lequipe.fr"],
+        "language": "it",
+        "country": "IT",
+        "search_suffix": "probabili formazioni OR conferenza stampa OR infortuni OR turnover",
+        "note": "UEFA Europa League Multi-Journalism Intelligence.",
+    },
+    "conference league": {
+        "sites": ["uefa.com", "gazzetta.it", "marca.com", "theguardian.com", "kicker.de"],
+        "language": "it",
+        "country": "IT",
+        "search_suffix": "probabili formazioni OR conferenza stampa OR infortuni OR turnover",
+        "note": "UEFA Europa Conference League Multi-Journalism Intelligence.",
+    },
     "eredivisie": {
-        "sites": ["eredivisie.com"],
+        "sites": ["vi.nl", "telegraaf.nl", "eredivisie.com"],
         "language": "nl",
         "country": "NL",
-        "search_suffix": "blessure OR opstelling OR nieuws OR schorsing",
+        "search_suffix": "blessure OR opstelling OR persconferentie OR nieuws",
         "base_url": "https://eredivisie.com",
-        # Slug normalizzazione: team_name → slug per URL club page
-        # es. "Sparta Rotterdam" → "sparta-rotterdam"
         "club_url_template": "https://eredivisie.com/clubs/{slug}/",
-        "note": (
-            "Fonte ufficiale Eredivisie. Contiene notizie su blessures (infortuni), "
-            "opstellingen (formazioni), scouting e trasferimenti. "
-            "Il sito è JavaScript-rendered: usare ricerca Google con site:eredivisie.com."
-        ),
+        "note": "Nederlandse voetbalmedia (Voetbal International, De Telegraaf, Eredivisie).",
     },
     "brazil serie a": {
-        "sites": ["ge.globo.com", "transfermarkt.com.br"],
+        "sites": ["ge.globo.com", "transfermarkt.com.br", "uol.com.br"],
         "language": "pt",
         "country": "BR",
-        "search_suffix": "lesão OR escalação OR notícias",
-        "note": "Fonti principali per il Brasileirão.",
+        "search_suffix": "lesão OR escalação OR coletiva OR notícias",
+        "note": "Fonti principali per il Brasileirão (Globo Esporte, UOL).",
     },
 }
 
