@@ -261,6 +261,20 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
     2. **Fase 2 (Esecuzione Programmatica Immediata)**: Lancio istantaneo di `scripts/strict_validator.py` con dati FootyStats e H2H reali.
     3. **Fase 3 (Verdetto Trasparente)**: Se lo script fallisce anche uno solo degli Hard Gates (Gate 0, Gate 6, ecc.), l'assistente DEVE esporre immediatamente il motivo del blocco, senza mai tentare di giustificare o promuovere la quota.
 
+- **Regola #59 — REGOLA FERREA DEL TORNEO IN ESSERE (Divieto Assoluto di Statistiche Storiche degli Anni Passati)**:
+  - 🛑 **Divieto Assoluto & Inviolabile**:
+    È TASSATIVAMENTE VIETATO calcolare o basare statistiche, rendimento casa/trasferta, medie gol, xG, percentuali di vittoria o giudizi di affidabilità sullo storico degli anni/stagioni passate, A MENO CHE l'utente non lo richieda esplicitamente (es. *"confronta con l'anno scorso"*, *"mostrami lo storico decennale"*).
+  - 🔬 **Motivazione Scientifica & Lezione Kalimantan Borneo (16/09/2026)**:
+    L'affidarsi alla presunta reputazione storica passata (*"il Borneo a Samarinda è storicamente un fortino inespugnabile da anni"*, o vecchi precedenti come il 4-0 del 2025) ha accecato l'analisi, ignorando che nel **torneo in corso (stagione 2026/27)** il Borneo ha perso 2 delle ultime 3 partite casalinghe (compreso lo 0-1 con il Persija). Le squadre di calcio cambiano allenatori, interpreti, condizione atletica e chimica di squadra a ogni stagione: lo storico remoto degli anni passati è rumore distorsivo che nasconde le fragilità attuali.
+  - 📌 **Direttiva di Calcolo Obbligatoria (Current Season Only)**:
+    Tutte le valutazioni statistiche devono basarsi ESCLUSIVAMENTE sui dati del torneo in corso:
+    1. **Classifica & Dati della Stagione Attuale**: Punti, partite giocate, vittorie, pareggi e sconfitte unicamente del campionato o della coppa in corso;
+    2. **Rendimento Casa/Trasferta Attuale**: Gol fatti e subiti in casa/trasferta solo della stagione corrente;
+    3. **Forma Recente (Ultime 3-5 Gare della Stagione Corrente)**: Verifica obbligatoria del trend immediato (`W-D-L` recente con la rosa attuale);
+    4. **Scontri Diretti (H2H)**: Considerare solo gli scontri diretti disputati nell'anno in corso; quelli degli anni passati sono vietati come base previsionale salvo specifica richiesta dell'utente.
+  - 💻 **Integrazione Software**:
+    Ogni query a DB, API-Football o FootyStats deve includere esplicitamente il vincolo `season == current_season`.
+
 ---
 
 
