@@ -340,6 +340,18 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 💻 **Integrazione Software**:
     Implementato in `services/betting/backup_hedge_engine.py` e richiamabile con `scripts/build_backup_ticket.py --budget <EUR> --main-odd <Q1> --backup-odd <Q2>`.
 
+- **Regola #65 — IN-PLAY REAL-TIME MOMENTUM ENGINE & SNIPING SENTINEL (Allerte Live a Picco Probabilistico)**:
+  - 🎯 **Principio Fondamentale (Sniping di Valore in Tempo Reale)**:
+    Durante le partite in corso, BAgent monitora minuto per minuto il flusso balistico, il punteggio, le espulsioni e la pressione territoriale per individuare anomalie tattiche e picchi probabilistici ($\ge 75\%-85\%$), segnalando all'utente l'esatto mercato da prendere immediatamente su Netwin.
+  - ⚡ **I 5 Trigger In-Play Obbligatori**:
+    1. **`LATE_PRESSURE_COOKER` (Minuti 68' – 85')**: Parità o scarto 1 gol con volume $\ge 15$ tiri ➔ `Over Corner Totali Live` o `MultiGol Elastico Live` ($P \ge 83.5\%$);
+    2. **`ASYMMETRIC_SIEGE_LIVE` (Minuti 25' – 75')**: Sfavorita in vantaggio o espulsione a favore della big ➔ `Over Corner Favorita Live` o `Doppia Chance Rimonta Live (1X/X2)` ($P \ge 81.5\%$);
+    3. **`HALFTIME_TACTICAL_UNLOCK` (Minuti 46' – 55')**: 0-0 all'intervallo con alto xG/tiri ➔ `MultiGol 1-3 2° Tempo` ($P \ge 84.0\%$);
+    4. **`FAST_BREAKOUT` (Minuti 15' – 30')**: Gol lampo precoce e transizioni ad alto ritmo ➔ `Over 2.5 Totali Live` ($P \ge 76.5\%$);
+    5. **`DISCIPLINE_ESCALATION` (Minuti 55' – 78')**: Tensione agonistica alta con $\ge 4$ cartellini già estratti e scarto minimo ➔ `Over Cartellini Totali Live` ($P \ge 79.0\%$).
+  - 📲 **Integrazione Notifiche & Staking**:
+    Implementato in `services/live/live_momentum_sniper.py` ed eseguibile con `scripts/monitor_live_sniping.py`. Notifica istantanea via `TelegramSentinel` con percorso categoria Netwin e stake micro-consigliato (max 3% bankroll).
+
 ---
 
 
