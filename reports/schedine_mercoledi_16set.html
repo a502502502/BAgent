@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BAgent — Schedine Validate Mercoledì 16 Settembre 2026 (Deep Sesto Senso)</title>
+  <title>BAgent — 4 Schedine Validate Mercoledì 16 Settembre 2026 (con Chicche Nascoste)</title>
   <style>
     :root {
       --bg-dark: #090d16;
@@ -26,7 +26,7 @@
       -webkit-font-smoothing: antialiased;
     }
     .container {
-      max-width: 920px;
+      max-width: 960px;
       margin: 0 auto;
     }
     .header {
@@ -124,6 +124,11 @@
       grid-template-columns: 1fr;
       gap: 24px;
     }
+    @media (min-width: 820px) {
+      .tickets-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
     
     .ticket-card {
       background: var(--card-bg);
@@ -136,9 +141,13 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
       transition: transform 0.2s, border-color 0.2s;
     }
+    .ticket-card:hover {
+      transform: translateY(-2px);
+    }
     .ticket-card.blue { border-top: 4px solid var(--accent-blue); }
     .ticket-card.green { border-top: 4px solid var(--accent-green); }
     .ticket-card.purple { border-top: 4px solid var(--accent-purple); }
+    .ticket-card.amber { border-top: 4px solid var(--accent-amber); }
     
     .ticket-top {
       display: flex;
@@ -152,7 +161,7 @@
       gap: 4px;
     }
     .ticket-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       margin: 0;
       color: #fff;
@@ -175,7 +184,7 @@
       text-align: right;
     }
     .odds-number {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 900;
       line-height: 1;
       font-family: monospace;
@@ -183,6 +192,7 @@
     .ticket-card.blue .odds-number { color: var(--accent-blue); }
     .ticket-card.green .odds-number { color: var(--accent-green); }
     .ticket-card.purple .odds-number { color: var(--accent-purple); }
+    .ticket-card.amber .odds-number { color: var(--accent-amber); }
     .odds-label {
       font-size: 10px;
       color: var(--text-muted);
@@ -193,17 +203,17 @@
     .matches-list {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       margin-bottom: 18px;
     }
     .match-item {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 10px;
-      padding: 14px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
     .match-header-row {
       display: flex;
@@ -213,22 +223,23 @@
     .match-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .match-time-badge {
       background: #1e293b;
       color: #38bdf8;
       border: 1px solid #334155;
       font-family: monospace;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
-      padding: 6px 8px;
-      border-radius: 8px;
+      padding: 4px 6px;
+      border-radius: 6px;
       text-align: center;
-      min-width: 52px;
+      min-width: 48px;
     }
     .ticket-card.green .match-time-badge { color: #34d399; }
     .ticket-card.purple .match-time-badge { color: #c084fc; }
+    .ticket-card.amber .match-time-badge { color: #fbbf24; }
     
     .match-info {
       display: flex;
@@ -236,13 +247,13 @@
       gap: 2px;
     }
     .match-league {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 600;
     }
     .match-names {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: #f1f5f9;
     }
@@ -251,57 +262,44 @@
       flex-shrink: 0;
     }
     .match-pick {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 800;
       color: #38bdf8;
       background: rgba(56, 189, 248, 0.12);
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 6px;
       display: inline-block;
       margin-bottom: 2px;
     }
     .ticket-card.green .match-pick { color: #34d399; background: rgba(16, 185, 129, 0.12); }
     .ticket-card.purple .match-pick { color: #c084fc; background: rgba(168, 85, 247, 0.12); }
+    .ticket-card.amber .match-pick { color: #fbbf24; background: rgba(245, 158, 11, 0.12); }
     .match-odd {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #94a3b8;
       font-family: monospace;
       font-weight: 700;
     }
     
-    /* Extended Sesto Senso Box */
     .match-motivation-box {
       background: rgba(0,0,0,0.28);
       border-left: 3px solid #3b82f6;
-      border-radius: 0 8px 8px 0;
-      padding: 10px 14px;
-      font-size: 12.5px;
-      line-height: 1.5;
+      border-radius: 0 6px 6px 0;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      line-height: 1.45;
       color: #cbd5e1;
     }
     .ticket-card.green .match-motivation-box { border-left-color: #10b981; }
     .ticket-card.purple .match-motivation-box { border-left-color: #a855f7; }
-    .motivation-title {
-      font-weight: 800;
-      color: #f8fafc;
-      display: block;
-      margin-bottom: 4px;
-      font-size: 11.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .intel-point {
-      margin-bottom: 4px;
-    }
-    .intel-point:last-child {
-      margin-bottom: 0;
-    }
+    .ticket-card.amber .match-motivation-box { border-left-color: #f59e0b; }
     .tag-highlight {
       color: #38bdf8;
       font-weight: 700;
     }
     .ticket-card.green .tag-highlight { color: #34d399; }
     .ticket-card.purple .tag-highlight { color: #c084fc; }
+    .ticket-card.amber .tag-highlight { color: #fbbf24; }
     
     .ticket-footer {
       border-top: 1px solid var(--card-border);
@@ -329,9 +327,9 @@
       background: #1e293b;
       color: #f8fafc;
       border: 1px solid #334155;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -373,19 +371,19 @@
   <div class="header">
     <div class="badge-live">
       <div class="pulse-dot"></div>
-      BAgent Quant Ecosystem • Dossier Sesto Senso Avanzato
+      BAgent Quant Ecosystem • Scansione Onnimercato & Chicche Nascoste
     </div>
-    <h1>3 Schedine Validate Mercoledì 16 Settembre 2026</h1>
-    <p>Conferenze Stampa, Notizie di Spogliatoio, Assenze Ufficiali & Validazione Rigorosa</p>
+    <h1>4 Schedine Validate Mercoledì 16 Settembre 2026</h1>
+    <p>LaLiga, Europa League, EFL Cup & Mercati Speciali • Certificate da StrictTicketPipeline</p>
   </div>
 
   <div class="stake-control-panel">
     <span class="stake-title">Simulazione Puntata Singola Schedina:</span>
     <div class="stake-buttons">
       <button class="btn-stake" onclick="setStake(10)">10 €</button>
+      <button class="btn-stake" onclick="setStake(15)">15 € (5%)</button>
       <button class="btn-stake active" onclick="setStake(18)">18 € (6%)</button>
       <button class="btn-stake" onclick="setStake(21)">21 € (7%)</button>
-      <button class="btn-stake" onclick="setStake(30)">30 €</button>
     </div>
   </div>
 
@@ -397,7 +395,7 @@
         <div class="ticket-top">
           <div class="ticket-meta">
             <h2 class="ticket-title">Ticket 1 — Elite Mix</h2>
-            <div class="ticket-kickoff-badge">⏰ Primo Calcio d'Inizio: 19:00 CEST • Stake: 7%</div>
+            <div class="ticket-kickoff-badge">⏰ Inizio: 19:00 CEST • Stake: 7%</div>
           </div>
           <div class="ticket-odds-badge">
             <div class="odds-number">2.66×</div>
@@ -421,10 +419,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">🚨 <span class="tag-highlight">Assenze Pesantissime in Attacco:</span> Ufficialmente fuori per problemi fisici <b>Julián Álvarez</b> (sovraccarico muscolare), <b>Alexander Sørloth</b> e il metronomo <b>Pablo Barrios</b>. Simeone schiera Jonathan David e Lookman senza i consueti centimetri e peso d'area.</div>
-              <div class="intel-point">🎙️ <span class="tag-highlight">Dichiarazioni Simeone:</span> In conferenza il Cholo ha frenato gli entusiasmi: <i>"Siamo una squadra in costruzione, serve tempo e solidità prima di tutto; l'Osasuna è un rivale bisognoso e pericoloso"</i>.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché 1X + MG 1-4 è blindato:</span> Senza Sørloth e Alvarez l'Atletico non ha il potenziale per fare 5 gol, ma la cerniera Le Normand-Cuti Romero-Hancko-Koke garantisce zero sbavature. Risultati coperti: 1-0, 2-0, 1-1, 2-1, 3-0, 3-1.</div>
+              🚨 <span class="tag-highlight">Assenze Álvarez & Sørloth:</span> Atlético senza i due bomber principe. Simeone frena in conferenza: priorità assoluta alla tenuta difensiva contro un Osasuna a blocco basso.
             </div>
           </div>
 
@@ -443,10 +438,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">🔴 <span class="tag-highlight">Amorim & Rotazioni:</span> Il tecnico rossonero gestisce le energie dei senatori (Modric e Rabiot partono dalla panchina per fare staffetta), inserendo Musah e Jashari con Gonçalo Ramos titolare al centro dell'attacco (partita speciale da ex contro il Benfica).</div>
-              <div class="intel-point">🦅 <span class="tag-highlight">Fragilità Benfica in Trasferta:</span> La squadra di Marco Silva è priva del terzino Alexander Bah. In avanti Pavlidis e Prestianni garantiscono brio, ma il baricentro alto concede contropiedi micidiali.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché 1X + MG 1-5 è blindato:</span> San Siro pieno dà una spinta psicologica enorme; il range elastico fino a 5 gol neutralizza sia la vittoria di misura (1-0, 2-1) sia i pareggi spettacolari europei (1-1, 2-2) senza il rischio di un 1 fisso compresso.</div>
+              🔴 <span class="tag-highlight">Fattore Ex Ramos & San Siro:</span> Amorim gestisce Modric/Rabiot; Gonçalo Ramos titolare iper-motivato. Range elastico 1-5 che assorbe vittorie rossonere e pareggi europei.
             </div>
           </div>
 
@@ -465,10 +457,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">🔵 <span class="tag-highlight">Conferenza Flick & Gestione Minuti:</span> Hansi Flick ha dichiarato apertamente l'intenzione di effettuare rotazioni preventive in vista del big match imminente contro il Siviglia, rilanciando Dani Olmo e Cancelo ma senza sfinire i titolari a risultato acquisito.</div>
-              <div class="intel-point">⚽ <span class="tag-highlight">Volume Offensivo vs Resistenza:</span> Al Montjuïc il Barça viaggia su un xG medio casalingo di 2.75. Il Racing difenderà a oltranza per limitare il passivo.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché MultiGol 2-5 è la scelta d'oro:</span> Elimina sia il rischio del tirchio 1-0 sia l'anti-ceiling trap: la vittoria blaugrana arriverà con 2, 3 o 4 reti (2-0, 3-0, 3-1, 4-1), perfettamente all'interno del nostro sbarramento.</div>
+              🔵 <span class="tag-highlight">Rotazioni Flick:</span> Gestione energie a risultato acquisito in vista del Siviglia. Vittoria blaugrana nel range 2-4 reti (2-0, 3-0, 3-1, 4-1).
             </div>
           </div>
         </div>
@@ -479,7 +468,7 @@
           <span class="payout-label">Vincita Potenziale</span>
           <span class="payout-value" id="payout-1">47.88 €</span>
         </div>
-        <button class="btn-copy" onclick="copyTicket('ELITE MIX', '⏰ 19:00 - Atlético Madrid vs Osasuna: 1X+MultiGol 1-4 @ 1.40\n⏰ 21:00 - AC Milan vs Benfica: 1X+MultiGol 1-5 @ 1.42\n⏰ 21:30 - Barcelona vs Racing: MultiGol 2-5 @ 1.34\nQuota: 2.66x (Stake 7%)')">
+        <button class="btn-copy" onclick="copyTicket('ELITE MIX', '⏰ 19:00 - Atlético Madrid vs Osasuna: 1X+MG 1-4 @ 1.40\n⏰ 21:00 - AC Milan vs Benfica: 1X+MG 1-5 @ 1.42\n⏰ 21:30 - Barcelona vs Racing: MG 2-5 @ 1.34\nQuota: 2.66x (Stake 7%)')">
           📋 Copia
         </button>
       </div>
@@ -491,7 +480,7 @@
         <div class="ticket-top">
           <div class="ticket-meta">
             <h2 class="ticket-title">Ticket 2 — High Resiliency</h2>
-            <div class="ticket-kickoff-badge">⏰ Primo Calcio d'Inizio: 19:00 CEST • Stake: 6%</div>
+            <div class="ticket-kickoff-badge">⏰ Inizio: 19:00 CEST • Stake: 6%</div>
           </div>
           <div class="ticket-odds-badge">
             <div class="odds-number">2.53×</div>
@@ -515,10 +504,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">🏰 <span class="tag-highlight">Dépor Imbattuto & Riazor Elettrico:</span> Rosa interamente a disposizione per Antonio Hidalgo. Aubameyang è il capocannoniere del torneo avendo timbrato il cartellino in tutte le prime 5 giornate.</div>
-              <div class="intel-point">⚠️ <span class="tag-highlight">Allarme García Plaza (Siviglia):</span> Il tecnico sevillista ha ammesso: <i>"Il Dépor è un'avversaria atipica con una difesa granitica e Aubameyang in fiducia totale; fare punti al Riazor sarà durissima"</i>. Rubén Vargas è out per problemi al ginocchio.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché 1X + MG 1-4 è blindato:</span> Il Siviglia fuori casa è timido e privo di continuità; il Deportivo difende ordinato. Risultati esatti attesi: 1-0, 1-1, 2-1.</div>
+              🏰 <span class="tag-highlight">Aubameyang On Fire:</span> Dépor imbattuto al Riazor; Siviglia privo di Vargas con García Plaza preoccupato per la solidità galiziana.
             </div>
           </div>
 
@@ -537,10 +523,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">🇩🇪 <span class="tag-highlight">Macchina Balistica Leverkusen:</span> Alla BayArena il Bayer viaggia a oltre 18.5 conclusioni a partita e una percentuale di possesso nell'ultimo terzo superiore al 68%.</div>
-              <div class="intel-point">🇸🇮 <span class="tag-highlight">Esordio Storico Celje:</span> Gli sloveni debuttano nella fase a girone unico di Europa League: squadra generosa ma abituata ai ritmi bassi del campionato sloveno, vulnerabile sui cambi di gioco tedeschi.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché MultiGol 2-5 è blindato:</span> Con il match di campionato nel weekend, il Leverkusen andrà sul 2-0 / 3-0 e poi gestirà le energie abbassando i giri del motore.</div>
+              🇩🇪 <span class="tag-highlight">Pressione BayArena:</span> Leverkusen straripante contro gli sloveni; gestione ritmi dopo il doppio vantaggio per la Bundesliga nel weekend.
             </div>
           </div>
 
@@ -559,10 +542,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">⚔️ <span class="tag-highlight">Fattore NO VAR & Arbitraggio Diretto:</span> In questo turno di Carabao Cup NON c'è il VAR. Il gioco scorrerà rapido senza interruzioni e con contropiedi non frenati da centimetri di fuorigioco.</div>
-              <div class="intel-point">🚑 <span class="tag-highlight">Assenze Difensive & Reazione:</span> Carrick deve rinunciare a Matthijs de Ligt e Amad Diallo (ancora a Carrington) e a Carlos Baleba. Lo United deve riscattare il KO nel derby, mentre il Brighton di Hürzeler non modifica mai la sua filosofia offensiva.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché MultiGol 2-5 è blindato:</span> Match da transizioni repentine a tutto campo. Scenari più probabili: 1-1, 2-1, 1-2, 2-2, 3-1.</div>
+              ⚔️ <span class="tag-highlight">Fattore NO VAR:</span> Ritmo rapido e contropiedi liberi; De Ligt out nello United e Brighton spregiudicato. Match da 2 a 4 reti.
             </div>
           </div>
         </div>
@@ -573,7 +553,7 @@
           <span class="payout-label">Vincita Potenziale</span>
           <span class="payout-value" id="payout-2">45.54 €</span>
         </div>
-        <button class="btn-copy" onclick="copyTicket('HIGH RESILIENCY', '⏰ 19:00 - Deportivo vs Sevilla: 1X+MultiGol 1-4 @ 1.40\n⏰ 21:00 - Leverkusen vs Celje: MultiGol 2-5 @ 1.33\n⏰ 21:00 - Man United vs Brighton: MultiGol 2-5 @ 1.36\nQuota: 2.53x (Stake 6%)')">
+        <button class="btn-copy" onclick="copyTicket('HIGH RESILIENCY', '⏰ 19:00 - Deportivo vs Sevilla: 1X+MG 1-4 @ 1.40\n⏰ 21:00 - Leverkusen vs Celje: MG 2-5 @ 1.33\n⏰ 21:00 - Man United vs Brighton: MG 2-5 @ 1.36\nQuota: 2.53x (Stake 6%)')">
           📋 Copia
         </button>
       </div>
@@ -584,8 +564,8 @@
       <div>
         <div class="ticket-top">
           <div class="ticket-meta">
-            <h2 class="ticket-title">Ticket 3 — Conference & Europa League Special</h2>
-            <div class="ticket-kickoff-badge">⏰ Primo Calcio d'Inizio: 18:45 CEST • Stake: 6%</div>
+            <h2 class="ticket-title">Ticket 3 — Europa League Special</h2>
+            <div class="ticket-kickoff-badge">⏰ Inizio: 18:45 CEST • Stake: 6%</div>
           </div>
           <div class="ticket-odds-badge">
             <div class="odds-number">2.63×</div>
@@ -609,10 +589,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">🚨 <span class="tag-highlight">Iago Aspas Infortunato:</span> Il capitano e totem del Celta non è salito sul volo per Cipro. Borja Iglesias e Febas sono arrivati a Nicosia in condizioni fisiche precarie ("muy justitos").</div>
-              <div class="intel-point">🎙️ <span class="tag-highlight">Giráldez Avverte:</span> <i>"La testa dovrà compensare ciò che mancherà nelle gambe per il lungo viaggio; l'Omonia è una squadra ordinata che sa fare male nei ribaltamenti di fronte"</i>.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché X2 + MG 1-5 evita la trappola:</span> Puntare il 2 secco senza Aspas sarebbe stato un suicidio statistico. Con la doppia chance X2 e margine fino a 5 gol, l'1-1, lo 0-1, lo 0-2 e l'1-2 sono tutti a cassa piena.</div>
+              🚨 <span class="tag-highlight">Iago Aspas Out:</span> Celta senza il capitano e con Iglesias non al 100%. La doppia chance X2 evita la trappola del 2 fisso a Cipro.
             </div>
           </div>
 
@@ -631,10 +608,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">🇬🇷 <span class="tag-highlight">Cambio Panchina Olympiakos:</span> Dopo l'inattesa sconfitta con l'OFI Creta, i greci hanno ingaggiato <b>Imanol Alguacil</b> il 10 settembre. Il tecnico basco impone prima di tutto equilibrio posizionale, pressing selettivo e zero concessioni difensive.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Catenaccio Polacco Inviolato:</span> Lo Jagiellonia schiera il muro 4-1-4-1 con Abramowicz ed è imbattuto in trasferta europea dallo scorso anno grazie alla capacità di addormentare le gare.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché 1X + MG 1-4 è blindato:</span> Alguacil non cercherà il festival del gol ma i 3 punti con ordine. Risultati ideali: 1-0, 2-0, 1-1, 2-1.</div>
+              🇬🇷 <span class="tag-highlight">Alguacil & Muro Polacco:</span> Nuovo mister basco punta sull'ordine; Jagiellonia catenacciaro in 4-1-4-1. Successo corto greco o 1-1.
             </div>
           </div>
 
@@ -653,10 +627,7 @@
               </div>
             </div>
             <div class="match-motivation-box">
-              <span class="motivation-title">🔍 Dossier Sesto Senso, Spogliatoio & Rassegna Stampa:</span>
-              <div class="intel-point">⚔️ <span class="tag-highlight">Filosofie a Viso Aperto:</span> Vítor Bruno (Anderlecht) e Paulo Fonseca (Lione) condividono una mentalità di aggressione alta. Il Lione schiera il tridente esplosivo Openda-Nuamah-Sulc con Tolisso in cabina di regia.</div>
-              <div class="intel-point">🏟️ <span class="tag-highlight">Fattore Lotto Park:</span> Nelle ultime 10 gare europee a Bruxelles la media gol è stata di 3.10 a partita, con entrambe le squadre a segno nell'80% dei casi.</div>
-              <div class="intel-point">🛡️ <span class="tag-highlight">Perché MultiGol 2-5 è blindato:</span> È la giocata che assorbe sia una vittoria corsara francese sia la reazione belga, eliminando l'ipotesi irrealistica di uno 0-0.</div>
+              ⚔️ <span class="tag-highlight">Tridente Openda & Lotto Park:</span> Fonseca gioca all'attacco puro; Anderlecht spinto dal pubblico. Media 3.10 gol storici al Lotto Park.
             </div>
           </div>
         </div>
@@ -667,7 +638,92 @@
           <span class="payout-label">Vincita Potenziale</span>
           <span class="payout-value" id="payout-3">47.34 €</span>
         </div>
-        <button class="btn-copy" onclick="copyTicket('EUROPA LEAGUE SPECIAL', '⏰ 18:45 - Omonia vs Celta Vigo: X2+MultiGol 1-5 @ 1.42\n⏰ 21:00 - Olympiakos vs Jagiellonia: 1X+MultiGol 1-4 @ 1.38\n⏰ 21:00 - Anderlecht vs Lyon: MultiGol 2-5 @ 1.34\nQuota: 2.63x (Stake 6%)')">
+        <button class="btn-copy" onclick="copyTicket('EUROPA LEAGUE SPECIAL', '⏰ 18:45 - Omonia vs Celta Vigo: X2+MG 1-5 @ 1.42\n⏰ 21:00 - Olympiakos vs Jagiellonia: 1X+MG 1-4 @ 1.38\n⏰ 21:00 - Anderlecht vs Lyon: MG 2-5 @ 1.34\nQuota: 2.63x (Stake 6%)')">
+          📋 Copia
+        </button>
+      </div>
+    </div>
+
+    <!-- TICKET 4 (CHICCHE NASCOSTE) -->
+    <div class="ticket-card amber" id="ticket-4">
+      <div>
+        <div class="ticket-top">
+          <div class="ticket-meta">
+            <h2 class="ticket-title">Ticket 4 — Specialist & Hidden Gems</h2>
+            <div class="ticket-kickoff-badge">⏰ Inizio: 21:00 CEST • Stake: 5%</div>
+          </div>
+          <div class="ticket-odds-badge">
+            <div class="odds-number">3.26×</div>
+            <div class="odds-label">Quota Totale</div>
+          </div>
+        </div>
+
+        <div class="matches-list">
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:00</div>
+                <div class="match-info">
+                  <div class="match-league">🇪🇺 Europa League</div>
+                  <div class="match-names">Leverkusen vs NK Celje</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">Leverkusen Over 6.5 Corner</div>
+                <div class="match-odd">@ 1.52</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              🚩 <span class="tag-highlight">Regola #45 Volume Balistico:</span> Il Bayer viaggia a <b>18.8 tiri a partita</b>. Il Celje si schiaccerà nei 16 metri: pioggia di conclusioni deviate e traversoni sul fondo. Edge: <b>+15.5%</b>.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:00</div>
+                <div class="match-info">
+                  <div class="match-league">🇪🇺 Europa League</div>
+                  <div class="match-names">Olympiakos vs Jagiellonia</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">Over 3.5 Cartellini Totali</div>
+                <div class="match-odd">@ 1.45</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              🟨 <span class="tag-highlight">Polveriera Pireo:</span> Clima incandescente al Karaiskakis. Jagiellonia costretto a falli tattici continui per frenare la pressione greca. Media cartellini UEFA in Grecia > 4.8. Edge: <b>+17.5%</b>.
+            </div>
+          </div>
+
+          <div class="match-item">
+            <div class="match-header-row">
+              <div class="match-left">
+                <div class="match-time-badge">21:30</div>
+                <div class="match-info">
+                  <div class="match-league">🇪🇸 La Liga</div>
+                  <div class="match-names">FC Barcelona vs Racing</div>
+                </div>
+              </div>
+              <div class="match-pick-box">
+                <div class="match-pick">Barcellona MultiGol 2-4 Casa</div>
+                <div class="match-odd">@ 1.48</div>
+              </div>
+            </div>
+            <div class="match-motivation-box">
+              🎯 <span class="tag-highlight">Asimmetria Totale:</span> Non dipende dall'avversario. Incassa su 2-0, 3-0, 4-0, 2-1, 3-1, 4-1. Flick gestirà i titolari nel finale evitando la goleada oltre quota 4. Edge: <b>+16.9%</b>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-footer">
+        <div class="payout-box">
+          <span class="payout-label">Vincita Potenziale</span>
+          <span class="payout-value" id="payout-4">48.90 €</span>
+        </div>
+        <button class="btn-copy" onclick="copyTicket('SPECIALIST & GEMS', '⏰ 21:00 - Leverkusen vs Celje: Lev Over 6.5 Corner @ 1.52\n⏰ 21:00 - Olympiakos vs Jagiellonia: Over 3.5 Cartellini @ 1.45\n⏰ 21:30 - Barcelona vs Racing: Barça MultiGol 2-4 Casa @ 1.48\nQuota: 3.26x (Stake 5%)')">
           📋 Copia
         </button>
       </div>
@@ -679,7 +735,7 @@
 <div class="toast" id="toast">Schedina copiata negli appunti!</div>
 
 <script>
-  const odds = [2.66, 2.53, 2.63];
+  const odds = [2.66, 2.53, 2.63, 3.26];
   let currentStake = 18;
 
   function setStake(amount) {
