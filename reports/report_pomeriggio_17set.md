@@ -1,20 +1,29 @@
 # 📋 SESSIONE POMERIDIANA — GIOVEDÌ 17 SETTEMBRE 2026
 
-## 🏆 TICKET #90 — Il Raddoppio Diretto Pomeridiano (GIOCATO / IN CORSO)
+## 🏆 TICKET #90-A & #90-B — Il Raddoppio a Capitale Protetto (BUDGET 55,00 €)
 * **Piattaforma**: Netwin.it
 * **Kickoff 1° Match**: ⏰ **15:15 CEST** (Chiusura stimata ore 19:20)
-* **Importo Puntato**: **35.00 €**
-* **Quota Totale**: **2.07×**
-* **Vincita Potenziale**: **72.45 €** *(Utile Netto: +37.45 € | ROI: +107%)*
-* **Audit**: 🟢 CERTIFICATO ED APPROVATO DA STRICT VALIDATOR (Regole #41, #49, #56, #59, #67)
+* **Budget Totale Allocato**: **55.00 €**
+* **Architettura**: Twin-Ticket Ermetico Regola #67 (Base Comune 15:15 + Pivot Coniugato 17:30)
 
-### Selezioni Ufficiali:
-1. ⏰ **15:15** | **Orenburg vs Krasnodar** (Pal. 36382 - Avv. 50621 - Russia Premier):
-   * **Pronostico**: **X2 + Under 4.5 @ 1.38**
-   * *Tattica*: Krasnodar 2° e miglior difesa di Russia (5 subiti). Orenburg sterile al 14° posto. Copre 0-0, 0-1, 0-2, 0-3, 1-1, 1-2, 2-2.
-2. ⏰ **17:30** | **Rostov vs Dinamo Mosca** (Pal. 36382 - Avv. 56986 - Russia Premier):
-   * **Pronostico**: **Dinamo Mosca X2 + Under 4.5 @ 1.50**
-   * *Tattica*: Dinamo 3ª in vetta e in forma (WWWLW), Rostov 9° e in crisi (WLLDD). Copre 0-1, 0-2, 1-2, 0-0, 1-1.
+### 🅰️ TICKET 90-A — PRINCIPALE (Puntata: 36,00 €)
+1. ⏰ **15:15** | **Orenburg vs Krasnodar** (Pal. 36382 - Avv. 50621): **X2 + Under 4.5 @ 1.38**
+2. ⏰ **17:30** | **Rostov vs Dinamo Mosca** (Pal. 36382 - Avv. 56986): **Dinamo Mosca X2 + Under 4.5 @ 1.50**
+* **Quota Totale**: **2.07×**
+* **Importo Puntato**: **36.00 €**
+* **Vincita Potenziale**: **74.52 €** *(Utile netto: +19.52 €)*
+
+### 🛡️ TICKET 90-B — PARACADUTE ROSTOV SHIELD (Puntata: 19,00 €)
+1. ⏰ **15:15** | **Orenburg vs Krasnodar**: **X2 + Under 4.5 @ 1.38** *(Base identica)*
+2. ⏰ **17:30** | **Rostov vs Dinamo Mosca**: **Rostov 1X + Under 3.5 @ 2.15**
+* **Quota Totale**: **2.97×**
+* **Importo Puntato**: **19.00 €**
+* **Vincita Potenziale**: **56.43 €** *(Rimborso 100% budget + 1.43 € netto | Perdita 0,00 €)*
+
+### 📊 Matrice Scenari Economici (sui 55,00 € investiti):
+1. **Dinamo Mosca vince o pareggia (U4.5)**: Vince Ticket 90-A ➔ **74.52 €** incassati (+19.52 € netto).
+2. **Rostov vince (U3.5)**: Vince Ticket 90-B Paracadute ➔ **56.43 €** incassati (Capitale recuperato al 100%).
+3. **Pareggio 0-0 o 1-1**: **DOPPIA CASSA ENTRAMBE!** ➔ 74.52 € + 56.43 € = **130.95 € INCASSATI!** *(Utile netto: +75.95 €, ROI +138%)*.
 
 ---
 
