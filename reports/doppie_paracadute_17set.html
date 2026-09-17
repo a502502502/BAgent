@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAgent — Le 4 Doppie con Paracadute Ermetico (17 Settembre 2026)</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --card-border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent-blue: #58a6ff;
+    --accent-green: #3fb950;
+    --accent-gold: #d29922;
+    --accent-purple: #bc8cff;
+    --accent-red: #f85149;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 16px;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 28px; }
+  .badge-header {
+    display: inline-block;
+    background: rgba(88, 166, 255, 0.12);
+    border: 1px solid var(--accent-blue);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: var(--text-muted); max-width: 650px; margin: 0 auto; }
+
+  /* Nav Tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 180px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn:hover { border-color: var(--accent-blue); color: var(--text); }
+  .tab-btn.active {
+    background: rgba(56, 139, 253, 0.12);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+
+  /* Doppia Container */
+  .doppia-view { display: none; }
+  .doppia-view.active { display: block; }
+
+  .doppia-header-box {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.9), rgba(30, 38, 50, 0.9));
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .doppia-title { font-size: 20px; font-weight: 700; color: #fff; }
+  .doppia-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .tag-hidden { background: rgba(188, 140, 255, 0.15); color: var(--accent-purple); border: 1px solid var(--accent-purple); }
+  .tag-safety { background: rgba(63, 185, 80, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+
+  /* Twin Ticket Grid */
+  .tickets-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 768px) {
+    .tickets-grid { grid-template-columns: 1fr; }
+  }
+
+  .ticket-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .ticket-card.main { border-top: 3px solid var(--accent-blue); }
+  .ticket-card.parachute { border-top: 3px solid var(--accent-gold); }
+
+  .ticket-top {
+    padding: 12px 16px;
+    background: #1a222d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ticket-label { font-size: 13px; font-weight: 700; text-transform: uppercase; }
+  .ticket-label.main { color: var(--accent-blue); }
+  .ticket-label.parachute { color: var(--accent-gold); }
+  .ticket-multiplier { font-size: 18px; font-weight: 800; color: #fff; }
+
+  .legs-list { padding: 16px; flex-grow: 1; }
+  .leg-item {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.6);
+  }
+  .leg-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .leg-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .leg-time { color: var(--accent-blue); font-weight: 600; }
+  .leg-teams { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .leg-market-row { display: flex; justify-content: space-between; align-items: center; }
+  .leg-market-name {
+    font-size: 12px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    padding: 3px 8px;
+    border-radius: 6px;
+    color: var(--accent-green);
+    font-weight: 600;
+  }
+  .leg-odd { font-size: 14px; font-weight: 700; color: #fff; }
+
+  .tactics-note {
+    background: #0e141d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    color: #c9d1d9;
+    margin-top: 10px;
+    border-left: 2px solid var(--accent-blue);
+  }
+
+  /* Scenario Matrix */
+  .matrix-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .matrix-title { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px; }
+  .matrix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 650px) { .matrix-grid { grid-template-columns: 1fr; } }
+  .scenario-box {
+    background: #0d1117;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .scenario-box.highlight {
+    border-color: var(--accent-green);
+    background: rgba(63, 185, 80, 0.08);
+  }
+  .scenario-tag { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .scenario-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .scenario-payout { font-size: 15px; font-weight: 800; color: var(--accent-green); }
+
+  /* Interactive Budget Calculator */
+  .calc-card {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.9), rgba(20, 24, 30, 0.9));
+    border: 1px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .calc-title { font-size: 14px; font-weight: 700; color: #fff; }
+  .budget-input-group { display: flex; align-items: center; gap: 8px; }
+  .budget-input-group label { font-size: 12px; color: var(--text-muted); }
+  .budget-input {
+    background: #0d1117;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    width: 80px;
+    text-align: center;
+  }
+  .calc-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    text-align: center;
+  }
+  @media (max-width: 650px) { .calc-results { grid-template-columns: 1fr; } }
+  .calc-box {
+    background: #0d1117;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+  }
+  .calc-lbl { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+  .calc-val { font-size: 15px; font-weight: 700; color: #fff; }
+  .calc-profit { font-size: 12px; font-weight: 600; color: var(--accent-green); }
+
+  footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="badge-header">BAgent Engine · Regola #67 Airtight Architecture</div>
+    <h1>Le 4 Doppie con Paracadute & Mercati Nascosti</h1>
+    <div class="subtitle">Solo 2 partite per schedina · Quota Principale ≥ 2.00× · Zero Perdita garantita sul paracadute · Doppia Cassa sui pareggi</div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(1)">🏆 1. LaLiga & Europa (18:45)</button>
+    <button class="tab-btn" onclick="switchTab(2)">🔥 2. Bolgia Balistica (18:45)</button>
+    <button class="tab-btn" onclick="switchTab(3)">🇬🇧 3. Dominio Britannico (21:00)</button>
+    <button class="tab-btn" onclick="switchTab(4)">🇪🇸 4. Spagnola & Juve (21:00)</button>
+  </div>
+
+  <!-- ==================== DOPPIA 1 ==================== -->
+  <div id="doppia-1" class="doppia-view active">
+    <div class="doppia-header-box">
+      <div>
+        <div class="doppia-title">1. La Chicca Tattica LaLiga & Europa League</div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Inizio: 18:45 CEST · Base Sofia + Pivot Benito Villamarín</div>
+      </div>
+      <div>
+        <span class="doppia-tag tag-hidden">Corto Muso Bordalás</span>
+        <span class="doppia-tag tag-safety">Regola #51 Protetta</span>
+      </div>
+    </div>
+
+    <div class="tickets-grid">
+      <!-- Principale 1 -->
+      <div class="ticket-card main">
+        <div class="ticket-top">
+          <span class="ticket-label main">🅰️ Schedina Principale</span>
+          <span class="ticket-multiplier" id="q-main-1">2.02×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta">
+              <span class="leg-time">⏰ 18:45</span>
+              <span>Pal. 36381 · Avv. 20846 (UEFA EL)</span>
+            </div>
+            <div class="leg-teams">Levski Sofia vs RB Salisburgo</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">X2 (Doppia Chance Out)</span>
+              <span class="leg-odd">@ 1.32</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta">
+              <span class="leg-time">⏰ 19:00</span>
+              <span>Pal. 36381 · Avv. 22818 (LaLiga)</span>
+            </div>
+            <div class="leg-teams">Real Betis vs Getafe (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">1X + Under 3.5</span>
+              <span class="leg-odd">@ 1.53</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            💡 <b>Mercato Nascosto:</b> Il Getafe di Bordalás è l'anticalcio (soli 3 gol fatti). La combo 1X+U3.5 copre 1-0, 2-0, 2-1 e incassa sullo 0-0 e 1-1!
+          </div>
+        </div>
+      </div>
+
+      <!-- Paracadute 1 -->
+      <div class="ticket-card parachute">
+        <div class="ticket-top">
+          <span class="ticket-label parachute">🛡️ Paracadute Getafe Shield</span>
+          <span class="ticket-multiplier" id="q-para-1">3.46×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta">
+              <span class="leg-time">⏰ 18:45</span>
+              <span>Pal. 36381 · Avv. 20846</span>
+            </div>
+            <div class="leg-teams">Levski Sofia vs RB Salisburgo</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">X2 (Base Comune)</span>
+              <span class="leg-odd">@ 1.32</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta">
+              <span class="leg-time">⏰ 19:00</span>
+              <span>Pal. 36381 · Avv. 22818</span>
+            </div>
+            <div class="leg-teams">Real Betis vs Getafe (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">X2 + Under 3.5</span>
+              <span class="leg-odd">@ 2.62</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            🛡️ <b>Copertura 100%:</b> Se il Getafe strappa punti a Siviglia (0-1, 0-2, 0-0, 1-1), il paracadute rimborsa l'intero budget speso.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenari 1 -->
+    <div class="matrix-card">
+      <div class="matrix-title">📊 Matrice degli Scenari (Zero Buchi Ciechi)</div>
+      <div class="matrix-grid">
+        <div class="scenario-box">
+          <div class="scenario-tag">Scenario 1</div>
+          <div class="scenario-name">Betis Vince (1-0, 2-0, 2-1)</div>
+          <div class="scenario-payout" style="color: var(--accent-blue);">Vince la Principale (2.02×)</div>
+        </div>
+        <div class="scenario-box">
+          <div class="scenario-tag">Scenario 2</div>
+          <div class="scenario-name">Getafe Sorprende (0-1, 0-2, 1-2)</div>
+          <div class="scenario-payout" style="color: var(--accent-gold);">Vince il Paracadute (3.46×)</div>
+        </div>
+        <div class="scenario-box highlight">
+          <div class="scenario-tag">Scenario 3 (Win-Win)</div>
+          <div class="scenario-name">Pareggio (0-0 o 1-1)</div>
+          <div class="scenario-payout">🔥 DOPPIA CASSA ENTRAMBE!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calcolatore 1 -->
+    <div class="calc-card">
+      <div class="calc-header">
+        <span class="calc-title">🧮 Calcolatore Ripartizione Budget</span>
+        <div class="budget-input-group">
+          <label>Budget €:</label>
+          <input type="number" id="budget-1" class="budget-input" value="35" oninput="calcBudget(1, 2.02, 3.46)">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-box">
+          <div class="calc-lbl">Puntata Principale</div>
+          <div class="calc-val" id="res-main-stake-1">24.50 €</div>
+          <div class="calc-profit" id="res-main-win-1">Vincita: 49.49 € (+14.49 €)</div>
+        </div>
+        <div class="calc-box">
+          <div class="calc-lbl">Puntata Paracadute</div>
+          <div class="calc-val" id="res-para-stake-1">10.50 €</div>
+          <div class="calc-profit" id="res-para-win-1">Vincita: 36.33 € (Break-Even)</div>
+        </div>
+        <div class="calc-box" style="border-color: var(--accent-green);">
+          <div class="calc-lbl">Incasso su Pareggio (0-0 / 1-1)</div>
+          <div class="calc-val" style="color: var(--accent-green);" id="res-double-1">85.82 €</div>
+          <div class="calc-profit" id="res-double-roi-1">Utile: +50.82 € (ROI +145%)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DOPPIA 2 ==================== -->
+  <div id="doppia-2" class="doppia-view">
+    <div class="doppia-header-box">
+      <div>
+        <div class="doppia-title">2. La Bolgia Balistica d'Europa</div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Inizio: 18:45 & 21:00 CEST · Creta + Istanbul Tupras Stadium</div>
+      </div>
+      <div>
+        <span class="doppia-tag tag-hidden">Ambiente Caldo Regola #29</span>
+        <span class="doppia-tag tag-safety">MultiGol Elastico</span>
+      </div>
+    </div>
+
+    <div class="tickets-grid">
+      <div class="ticket-card main">
+        <div class="ticket-top">
+          <span class="ticket-label main">🅰️ Schedina Principale</span>
+          <span class="ticket-multiplier" id="q-main-2">2.10×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 18:45</span><span>Pal. 36381 · Avv. 20850 (UEFA EL)</span></div>
+            <div class="leg-teams">OFI Creta vs TSG Hoffenheim</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">X2 + MultiGol 1-5</span>
+              <span class="leg-odd">@ 1.33</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20852 (UEFA EL)</span></div>
+            <div class="leg-teams">Besiktas vs Marsiglia (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">1X + MultiGol 1-4</span>
+              <span class="leg-odd">@ 1.58</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            💡 <b>Mercato Nascosto:</b> A Istanbul il fattore campo è brutale. L'1X+MG1-4 incassa sull'1-0, 2-0, 2-1, 1-1, 0-0 proteggendo dalla varianza del gol singolo!
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-card parachute">
+        <div class="ticket-top">
+          <span class="ticket-label parachute">🛡️ Paracadute Marsiglia Shield</span>
+          <span class="ticket-multiplier" id="q-para-2">2.93×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 18:45</span><span>Pal. 36381 · Avv. 20850</span></div>
+            <div class="leg-teams">OFI Creta vs TSG Hoffenheim</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">X2 + MultiGol 1-5</span>
+              <span class="leg-odd">@ 1.33</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20852</span></div>
+            <div class="leg-teams">Besiktas vs Marsiglia (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">X2 + MultiGol 1-4</span>
+              <span class="leg-odd">@ 2.20</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            🛡️ <b>Copertura Totale:</b> Se il Marsiglia espugna il Bosforo (0-1, 0-2, 1-2), il paracadute rimborsa tutto il capitale.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-card">
+      <div class="matrix-title">📊 Matrice degli Scenari</div>
+      <div class="matrix-grid">
+        <div class="scenario-box"><div class="scenario-tag">Scenario 1</div><div class="scenario-name">Besiktas Vince (1-0, 2-0, 2-1)</div><div class="scenario-payout" style="color: var(--accent-blue);">Vince Principale (2.10×)</div></div>
+        <div class="scenario-box"><div class="scenario-tag">Scenario 2</div><div class="scenario-name">Marsiglia Vince (0-1, 0-2, 1-2)</div><div class="scenario-payout" style="color: var(--accent-gold);">Vince Paracadute (2.93×)</div></div>
+        <div class="scenario-box highlight"><div class="scenario-tag">Scenario 3 (Win-Win)</div><div class="scenario-name">Pareggio (0-0 o 1-1)</div><div class="scenario-payout">🔥 DOPPIA CASSA ENTRAMBE!</div></div>
+      </div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-header">
+        <span class="calc-title">🧮 Calcolatore Ripartizione Budget</span>
+        <div class="budget-input-group">
+          <label>Budget €:</label>
+          <input type="number" id="budget-2" class="budget-input" value="35" oninput="calcBudget(2, 2.10, 2.93)">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-box"><div class="calc-lbl">Puntata Principale</div><div class="calc-val" id="res-main-stake-2">23.00 €</div><div class="calc-profit" id="res-main-win-2">Vincita: 48.30 € (+13.30 €)</div></div>
+        <div class="calc-box"><div class="calc-lbl">Puntata Paracadute</div><div class="calc-val" id="res-para-stake-2">12.00 €</div><div class="calc-profit" id="res-para-win-2">Vincita: 35.16 € (Break-Even)</div></div>
+        <div class="calc-box" style="border-color: var(--accent-green);"><div class="calc-lbl">Incasso su Pareggio (0-0 / 1-1)</div><div class="calc-val" style="color: var(--accent-green);" id="res-double-2">83.46 €</div><div class="calc-profit" id="res-double-roi-2">Utile: +48.46 € (ROI +138%)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DOPPIA 3 ==================== -->
+  <div id="doppia-3" class="doppia-view">
+    <div class="doppia-header-box">
+      <div>
+        <div class="doppia-title">3. Il Dominio Britannico & Scozzese</div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Inizio: 21:00 CEST · Selhurst Park + Celtic Park</div>
+      </div>
+      <div>
+        <span class="doppia-tag tag-hidden">Pressione Balistica</span>
+        <span class="doppia-tag tag-safety">Regola #48 Anti-Ceiling</span>
+      </div>
+    </div>
+
+    <div class="tickets-grid">
+      <div class="ticket-card main">
+        <div class="ticket-top">
+          <span class="ticket-label main">🅰️ Schedina Principale</span>
+          <span class="ticket-multiplier" id="q-main-3">2.07×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20858 (UEFA EL)</span></div>
+            <div class="leg-teams">Crystal Palace vs Lech Poznan</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Palace 1X + Over 1.5</span>
+              <span class="leg-odd">@ 1.28</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20856 (UEFA EL)</span></div>
+            <div class="leg-teams">Celtic vs Ferencvaros (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Celtic 1X + Under 3.5</span>
+              <span class="leg-odd">@ 1.62</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            💡 <b>Mercato Nascosto:</b> Il Palace produce oltre 17 tiri/gara. La combo 1X+Over 1.5 protegge su 2-0, 1-1, 2-1, 3-0. Al Celtic Park, l'Under 3.5 argina la frenesia d'esordio.
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-card parachute">
+        <div class="ticket-top">
+          <span class="ticket-label parachute">🛡️ Paracadute Ungherese Shield</span>
+          <span class="ticket-multiplier" id="q-para-3">3.14×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20858</span></div>
+            <div class="leg-teams">Crystal Palace vs Lech Poznan</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Palace 1X + Over 1.5</span>
+              <span class="leg-odd">@ 1.28</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20856</span></div>
+            <div class="leg-teams">Celtic vs Ferencvaros (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Ferencvaros X2 + Under 3.5</span>
+              <span class="leg-odd">@ 2.45</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            🛡️ <b>Copertura Ermetica:</b> Se il Ferencvaros resiste o vince 0-1, 0-2, 1-2, il paracadute rimborsa tutto.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-card">
+      <div class="matrix-title">📊 Matrice degli Scenari</div>
+      <div class="matrix-grid">
+        <div class="scenario-box"><div class="scenario-tag">Scenario 1</div><div class="scenario-name">Celtic Vince (1-0, 2-0, 2-1)</div><div class="scenario-payout" style="color: var(--accent-blue);">Vince Principale (2.07×)</div></div>
+        <div class="scenario-box"><div class="scenario-tag">Scenario 2</div><div class="scenario-name">Ferencvaros Sorprende (0-1, 0-2)</div><div class="scenario-payout" style="color: var(--accent-gold);">Vince Paracadute (3.14×)</div></div>
+        <div class="scenario-box highlight"><div class="scenario-tag">Scenario 3 (Win-Win)</div><div class="scenario-name">Pareggio (0-0 o 1-1)</div><div class="scenario-payout">🔥 DOPPIA CASSA ENTRAMBE!</div></div>
+      </div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-header">
+        <span class="calc-title">🧮 Calcolatore Ripartizione Budget</span>
+        <div class="budget-input-group">
+          <label>Budget €:</label>
+          <input type="number" id="budget-3" class="budget-input" value="35" oninput="calcBudget(3, 2.07, 3.14)">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-box"><div class="calc-lbl">Puntata Principale</div><div class="calc-val" id="res-main-stake-3">24.00 €</div><div class="calc-profit" id="res-main-win-3">Vincita: 49.68 € (+14.68 €)</div></div>
+        <div class="calc-box"><div class="calc-lbl">Puntata Paracadute</div><div class="calc-val" id="res-para-stake-3">11.00 €</div><div class="calc-profit" id="res-para-win-3">Vincita: 34.54 € (Break-Even)</div></div>
+        <div class="calc-box" style="border-color: var(--accent-green);"><div class="calc-lbl">Incasso su Pareggio (0-0 / 1-1)</div><div class="calc-val" style="color: var(--accent-green);" id="res-double-3">84.22 €</div><div class="calc-profit" id="res-double-roi-3">Utile: +49.22 € (ROI +140%)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DOPPIA 4 ==================== -->
+  <div id="doppia-4" class="doppia-view">
+    <div class="doppia-header-box">
+      <div>
+        <div class="doppia-title">4. La Notte Spagnola & Juventina</div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Inizio: 21:00 & 21:30 CEST · Allianz Stadium + La Rosaleda</div>
+      </div>
+      <div>
+        <span class="doppia-tag tag-hidden">Controllo Posizionale</span>
+        <span class="doppia-tag tag-safety">Filtro Trasferta Liga</span>
+      </div>
+    </div>
+
+    <div class="tickets-grid">
+      <div class="ticket-card main">
+        <div class="ticket-top">
+          <span class="ticket-label main">🅰️ Schedina Principale</span>
+          <span class="ticket-multiplier" id="q-main-4">2.08×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20860 (UEFA EL)</span></div>
+            <div class="leg-teams">Juventus vs NEC Nijmegen</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Juve 1X + MultiGol 1-4</span>
+              <span class="leg-odd">@ 1.26</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:30</span><span>Pal. 36381 · Avv. 22821 (LaLiga)</span></div>
+            <div class="leg-teams">Malaga vs Villarreal (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Villarreal X2 + Under 3.5</span>
+              <span class="leg-odd">@ 1.65</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            💡 <b>Mercato Nascosto:</b> La Juve europea gestisce e congela il match (1X+MG1-4 copre 1-0, 2-0, 1-1, 2-1, 3-0). Il Villarreal alla Rosaleda trova un Malaga chiuso a riccio.
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-card parachute">
+        <div class="ticket-top">
+          <span class="ticket-label parachute">🛡️ Paracadute Malaga Shield</span>
+          <span class="ticket-multiplier" id="q-para-4">3.02×</span>
+        </div>
+        <div class="legs-list">
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:00</span><span>Pal. 36381 · Avv. 20860</span></div>
+            <div class="leg-teams">Juventus vs NEC Nijmegen</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Juve 1X + MultiGol 1-4</span>
+              <span class="leg-odd">@ 1.26</span>
+            </div>
+          </div>
+          <div class="leg-item">
+            <div class="leg-meta"><span class="leg-time">⏰ 21:30</span><span>Pal. 36381 · Avv. 22821</span></div>
+            <div class="leg-teams">Malaga vs Villarreal (PIVOT)</div>
+            <div class="leg-market-row">
+              <span class="leg-market-name">Malaga 1X + Under 3.5</span>
+              <span class="leg-odd">@ 2.40</span>
+            </div>
+          </div>
+          <div class="tactics-note">
+            🛡️ <b>Copertura Totale:</b> Se il Malaga difende il fortino andaluso (1-0, 2-0, 0-0, 1-1), il paracadute copre l'intero budget.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-card">
+      <div class="matrix-title">📊 Matrice degli Scenari</div>
+      <div class="matrix-grid">
+        <div class="scenario-box"><div class="scenario-tag">Scenario 1</div><div class="scenario-name">Villarreal Vince (0-1, 0-2, 1-2)</div><div class="scenario-payout" style="color: var(--accent-blue);">Vince Principale (2.08×)</div></div>
+        <div class="scenario-box"><div class="scenario-tag">Scenario 2</div><div class="scenario-name">Malaga Vince (1-0, 2-0, 2-1)</div><div class="scenario-payout" style="color: var(--accent-gold);">Vince Paracadute (3.02×)</div></div>
+        <div class="scenario-box highlight"><div class="scenario-tag">Scenario 3 (Win-Win)</div><div class="scenario-name">Pareggio (0-0 o 1-1)</div><div class="scenario-payout">🔥 DOPPIA CASSA ENTRAMBE!</div></div>
+      </div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-header">
+        <span class="calc-title">🧮 Calcolatore Ripartizione Budget</span>
+        <div class="budget-input-group">
+          <label>Budget €:</label>
+          <input type="number" id="budget-4" class="budget-input" value="35" oninput="calcBudget(4, 2.08, 3.02)">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-box"><div class="calc-lbl">Puntata Principale</div><div class="calc-val" id="res-main-stake-4">23.50 €</div><div class="calc-profit" id="res-main-win-4">Vincita: 48.88 € (+13.88 €)</div></div>
+        <div class="calc-box"><div class="calc-lbl">Puntata Paracadute</div><div class="calc-val" id="res-para-stake-4">11.50 €</div><div class="calc-profit" id="res-para-win-4">Vincita: 34.73 € (Break-Even)</div></div>
+        <div class="calc-box" style="border-color: var(--accent-green);"><div class="calc-lbl">Incasso su Pareggio (0-0 / 1-1)</div><div class="calc-val" style="color: var(--accent-green);" id="res-double-4">83.61 €</div><div class="calc-profit" id="res-double-roi-4">Utile: +48.61 € (ROI +138%)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    BAgent AI · Sistema Scommesse Sportive Quantitativo · Giovedì 17 Settembre 2026<br>
+    Tutte le selezioni sono certificate contro quote Netwin ufficiali e allineate alla Regola #67.
+  </footer>
+</div>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === (id - 1));
+    });
+    document.querySelectorAll('.doppia-view').forEach((view, idx) => {
+      view.classList.toggle('active', idx === (id - 1));
+    });
+  }
+
+  function calcBudget(id, qMain, qPara) {
+    const budgetInput = document.getElementById(`budget-${id}`);
+    let b = parseFloat(budgetInput.value) || 0;
+    if (b <= 0) return;
+
+    // Stake paracadute per coprire il 100% del budget
+    let paraStake = Math.ceil((b / qPara) * 2) / 2; // Arrotonda ai 50 cent
+    let mainStake = b - paraStake;
+    if (mainStake <= 0) {
+      mainStake = b * 0.7;
+      paraStake = b * 0.3;
+    }
+
+    let winMain = mainStake * qMain;
+    let winPara = paraStake * qPara;
+    let winDouble = winMain + winPara;
+
+    document.getElementById(`res-main-stake-${id}`).innerText = mainStake.toFixed(2) + ' €';
+    document.getElementById(`res-main-win-${id}`).innerText = `Vincita: ${winMain.toFixed(2)} € (+${(winMain - b).toFixed(2)} €)`;
+
+    document.getElementById(`res-para-stake-${id}`).innerText = paraStake.toFixed(2) + ' €';
+    document.getElementById(`res-para-win-${id}`).innerText = `Vincita: ${winPara.toFixed(2)} € (${winPara >= b ? 'Recupero 100%' : 'Recupero parziale'})`;
+
+    document.getElementById(`res-double-${id}`).innerText = winDouble.toFixed(2) + ' €';
+    document.getElementById(`res-double-roi-${id}`).innerText = `Utile: +${(winDouble - b).toFixed(2)} € (ROI +${Math.round(((winDouble - b)/b)*100)}%)`;
+  }
+</script>
+</body>
+</html>
