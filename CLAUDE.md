@@ -361,7 +361,20 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 🛡️ **Gate 6.5 Automatizzato (`StrictTicketPipeline`)**:
     La pipeline interroga automaticamente la cache quote Netwin. Se la quota reale Netwin è decurtata rispetto alla quota teorica al punto da far scendere l'Edge sotto al $+4.0\%$, scatta il blocco immediato per `[BLOCCATO - GATE 6.5: NETWIN AGGIO TRAP]`, evitando a monte qualsiasi scommessa a valore atteso negativo.
 
+- **Regola #67 — PROTOCOLLO PARACADUTE ERMETICO & BLINDO-DIPENDENZA DEI TICKET (Anti-Decoupling & Zero Cross-Leg Vulnerability)**:
+  - 🛑 **Divieto Assoluto di Paracadute Disaccoppiato o con Buchi Ciechi**:
+    È TASSATIVAMENTE VIETATO proporre una coppia Schedina Principale + Paracadute in cui:
+    1. Il Paracadute copre una selezione che risolve per prima o muore lasciando scoperte altre selezioni ad alta varianza nella Principale (Lezione Adelaide 3-0 e Machida 2-0 del 17/09/2026);
+    2. Esistono "buchi ciechi" nello spazio degli esiti del match Pivot (es. Principale con X2+Over 1.5 e Paracadute con 1X: se il match finisce 0-1, entrambe le schedine muoiono!);
+    3. Le selezioni in comune (Basi Anchor) contengono condizioni di Over/Gol fragili (Over 1.5 o Over 2.5) che, in caso di risultato corto (0-1 o 1-0), distruggono contemporaneamente sia la Principale che il Paracadute.
+  - 🔬 **I 4 Comandamenti dell'Architettura Paracadute Ermetico**:
+    1. **Asse Pivotale Unico & Spazio Esiti Coniugato al 100%**: Può variare UN SOLO evento tra Principale e Paracadute (il Match Pivot). Le due scommesse su questo match devono coprire tassativamente il 100% dei risultati verosimili (es. 1X + Under 3.5 vs X2 + Under 3.5; oppure 1X vs X2). Sul pareggio scatta la **Doppia Cassa**;
+    2. **Basi Comuni (Anchor) Ultra-Resilienti ($P \ge 82\%-85\%$)**: Le selezioni condivise devono essere ESCLUSIVAMENTE Doppie Chance protette (`X2 + Under 4.5`, `1X + Under 4.5`, `X2` secca su big superiore). MAI Over o mercati binari come base comune;
+    3. **Cronologia Protetta**: Il match Pivot deve preferibilmente disputarsi CONCURRENTEMENTE o DOPO le basi comuni, così che l'intera esposizione finanziaria sia governata dalla copertura ermetica;
+    4. **Soglia di Recupero Integrale**: La quota del Paracadute $Q_2$ e il suo stake $S_2$ devono sempre soddisfare la condizione di Zero Perdita: $S_2 \times Q_2 \ge S_{tot}$.
+
 ---
+
 
 
 ## Struttura Cartelle

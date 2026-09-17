@@ -1,5 +1,23 @@
 # 📋 SESSIONE POMERIDIANA — GIOVEDÌ 17 SETTEMBRE 2026
 
+## 🏆 TICKET #90 — Il Raddoppio Diretto Pomeridiano (GIOCATO / IN CORSO)
+* **Piattaforma**: Netwin.it
+* **Kickoff 1° Match**: ⏰ **15:15 CEST** (Chiusura stimata ore 19:20)
+* **Importo Puntato**: **35.00 €**
+* **Quota Totale**: **2.07×**
+* **Vincita Potenziale**: **72.45 €** *(Utile Netto: +37.45 € | ROI: +107%)*
+* **Audit**: 🟢 CERTIFICATO ED APPROVATO DA STRICT VALIDATOR (Regole #41, #49, #56, #59, #67)
+
+### Selezioni Ufficiali:
+1. ⏰ **15:15** | **Orenburg vs Krasnodar** (Pal. 36382 - Avv. 50621 - Russia Premier):
+   * **Pronostico**: **X2 + Under 4.5 @ 1.38**
+   * *Tattica*: Krasnodar 2° e miglior difesa di Russia (5 subiti). Orenburg sterile al 14° posto. Copre 0-0, 0-1, 0-2, 0-3, 1-1, 1-2, 2-2.
+2. ⏰ **17:30** | **Rostov vs Dinamo Mosca** (Pal. 36382 - Avv. 56986 - Russia Premier):
+   * **Pronostico**: **Dinamo Mosca X2 + Under 4.5 @ 1.50**
+   * *Tattica*: Dinamo 3ª in vetta e in forma (WWWLW), Rostov 9° e in crisi (WLLDD). Copre 0-1, 0-2, 1-2, 0-0, 1-1.
+
+---
+
 Riepilogo della Schedina 1 Pomeridiana con architettura Twin-Ticket (Principale Core + Paracadute Shield).
 
 ---
