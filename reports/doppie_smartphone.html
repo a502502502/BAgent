@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>BAgent Mobile — Le 4 Doppie con Paracadute</title>
+<style>
+  :root {
+    --bg: #090b0e;
+    --card-bg: #14181f;
+    --card-surface: #1b212b;
+    --border: #262e3b;
+    --text: #f0f3f6;
+    --muted: #8c97a5;
+    --blue: #388bfd;
+    --green: #3fb950;
+    --gold: #d29922;
+    --purple: #a371f7;
+    --red: #f85149;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 16px 12px 90px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Header Mobile */
+  .mobile-header {
+    text-align: center;
+    padding: 8px 0 16px;
+    position: relative;
+  }
+  .app-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(56, 139, 253, 0.12);
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .mobile-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* Quick Pills Carousel */
+  .pills-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 2px 14px;
+    margin-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .pills-scroll::-webkit-scrollbar { display: none; }
+  .pill-btn {
+    flex: 0 0 auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    transition: all 0.2s;
+  }
+  .pill-btn.active {
+    background: #192333;
+    border-color: var(--blue);
+    color: var(--blue);
+    box-shadow: 0 0 12px rgba(56, 139, 253, 0.2);
+  }
+  .pill-time { font-size: 10px; font-weight: normal; opacity: 0.8; }
+
+  /* Active Doppia Container */
+  .doppia-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .d-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .d-title { font-size: 16px; font-weight: 800; color: #fff; }
+  .d-tag {
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(163, 113, 247, 0.15);
+    color: var(--purple);
+    border: 1px solid var(--purple);
+    padding: 2px 8px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
+
+  /* Compact Ticket Block */
+  .t-block {
+    background: var(--card-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .t-block.main { border-left: 4px solid var(--blue); }
+  .t-block.para { border-left: 4px solid var(--gold); }
+
+  .t-bar {
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .t-name { font-size: 12px; font-weight: 800; text-transform: uppercase; }
+  .t-name.main { color: var(--blue); }
+  .t-name.para { color: var(--gold); }
+  .t-mult { font-size: 16px; font-weight: 900; color: #fff; }
+
+  .match-row {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(38, 46, 59, 0.5);
+  }
+  .match-row:last-child { border-bottom: none; }
+  .m-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .m-time { color: var(--blue); font-weight: 700; }
+  .m-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .m-market-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .m-pick {
+    font-size: 12px;
+    background: #090b0e;
+    padding: 3px 8px;
+    border-radius: 6px;
+    color: var(--green);
+    font-weight: 700;
+    border: 1px solid #242c38;
+  }
+  .m-quota { font-size: 13px; font-weight: 800; color: #fff; }
+
+  /* Copy Buttons for Netwin */
+  .copy-row {
+    padding: 6px 12px 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .copy-btn {
+    background: #090b0e;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .copy-btn:active { background: var(--blue); color: #fff; }
+
+  /* Scenario Pills */
+  .scenario-banner {
+    background: #090b0e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 14px;
+    font-size: 12px;
+  }
+  .sc-item { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .sc-item:last-child { margin-bottom: 0; }
+  .sc-win { color: var(--green); font-weight: 700; }
+
+  /* Budget Preset Chips */
+  .budget-section {
+    background: #10151d;
+    border: 1px solid var(--blue);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .b-label { font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+  .chips-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .chip {
+    flex: 1;
+    background: var(--card-surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+  }
+  .chip.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
+  .calc-payout-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .p-box {
+    background: #090b0e;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  .p-lbl { font-size: 10px; color: var(--muted); }
+  .p-stake { font-size: 14px; font-weight: 800; color: #fff; margin: 2px 0; }
+  .p-return { font-size: 11px; font-weight: 700; color: var(--green); }
+
+  .double-cash-banner {
+    grid-column: span 2;
+    background: rgba(63, 185, 80, 0.1);
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+  }
+  .dc-title { font-size: 11px; font-weight: 800; color: var(--green); text-transform: uppercase; }
+  .dc-sum { font-size: 16px; font-weight: 900; color: #fff; }
+
+  /* Toast Notification */
+  #toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #388bfd;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    pointer-events: none;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="mobile-header">
+  <div class="app-badge">⚡ BAgent Mobile 2026</div>
+  <h1>Le 4 Doppie con Paracadute</h1>
+  <div class="mobile-sub">Architettura Regola #67 · Solo 2 Partite · Zero Perdita</div>
+</div>
+
+<!-- Pills Carousel -->
+<div class="pills-scroll">
+  <button class="pill-btn active" onclick="setDoppia(1)">
+    <span>1. LaLiga & EL</span>
+    <span class="pill-time">⏰ 18:45</span>
+  </button>
+  <button class="pill-btn" onclick="setDoppia(2)">
+    <span>2. Bolgia Europa</span>
+    <span class="pill-time">⏰ 18:45/21:00</span>
+  </button>
+  <button class="pill-btn" onclick="setDoppia(3)">
+    <span>3. Regno Unito</span>
+    <span class="pill-time">⏰ 21:00</span>
+  </button>
+  <button class="pill-btn" onclick="setDoppia(4)">
+    <span>4. Spagna & Juve</span>
+    <span class="pill-time">⏰ 21:00/21:30</span>
+  </button>
+</div>
+
+<!-- CONTAINER DOPPIA (Dinamico) -->
+<div class="doppia-card" id="doppia-content">
+  <!-- Iniettato via JS -->
+</div>
+
+<!-- SEZIONE BUDGET CON CHIPS -->
+<div class="budget-section">
+  <div class="b-label">Seleziona Budget Totale (€):</div>
+  <div class="chips-row">
+    <div class="chip" onclick="setBudget(20)">20 €</div>
+    <div class="chip active" onclick="setBudget(35)">35 €</div>
+    <div class="chip" onclick="setBudget(50)">50 €</div>
+    <div class="chip" onclick="setBudget(70)">70 €</div>
+  </div>
+
+  <div class="calc-payout-box" id="calc-output">
+    <!-- Ricalcolato via JS -->
+  </div>
+</div>
+
+<div id="toast">Copiato negli appunti!</div>
+
+<script>
+const DOPPIE = {
+  1: {
+    title: "1. LaLiga & Europa League",
+    tag: "Corto Muso Bordalás",
+    qMain: 2.02,
+    qPara: 3.46,
+    mainLegs: [
+      { time: "18:45", id: "Pal. 36381 · Avv. 20846", match: "Levski Sofia vs Salisburgo", pick: "X2 (Doppia Chance)", odd: "1.32" },
+      { time: "19:00", id: "Pal. 36381 · Avv. 22818", match: "Real Betis vs Getafe (PIVOT)", pick: "1X + Under 3.5", odd: "1.53" }
+    ],
+    paraLegs: [
+      { time: "18:45", id: "Pal. 36381 · Avv. 20846", match: "Levski Sofia vs Salisburgo", pick: "X2 (Base Comune)", odd: "1.32" },
+      { time: "19:00", id: "Pal. 36381 · Avv. 22818", match: "Real Betis vs Getafe (PIVOT)", pick: "X2 + Under 3.5", odd: "2.62" }
+    ],
+    note: "Copre l'anticalcio del Getafe (3 gol in 5 gare). Copre 1-0, 0-1, 2-0 e fa Doppia Cassa su 0-0 e 1-1!"
+  },
+  2: {
+    title: "2. La Bolgia Balistica d'Europa",
+    tag: "Ambiente Caldo Bosforo",
+    qMain: 2.10,
+    qPara: 2.93,
+    mainLegs: [
+      { time: "18:45", id: "Pal. 36381 · Avv. 20850", match: "OFI Creta vs Hoffenheim", pick: "X2 + MultiGol 1-5", odd: "1.33" },
+      { time: "21:00", id: "Pal. 36381 · Avv. 20852", match: "Besiktas vs Marsiglia (PIVOT)", pick: "1X + MultiGol 1-4", odd: "1.58" }
+    ],
+    paraLegs: [
+      { time: "18:45", id: "Pal. 36381 · Avv. 20850", match: "OFI Creta vs Hoffenheim", pick: "X2 + MultiGol 1-5", odd: "1.33" },
+      { time: "21:00", id: "Pal. 36381 · Avv. 20852", match: "Besiktas vs Marsiglia (PIVOT)", pick: "X2 + MultiGol 1-4", odd: "2.20" }
+    ],
+    note: "Derby infuocato a Istanbul. Il MultiGol 1-4 protegge dalla tensione delle sanzioni e assorbe l'1-0, 0-1 e 1-1."
+  },
+  3: {
+    title: "3. Il Dominio Britannico & Scozzese",
+    tag: "Volume Balistico >17 Tiri",
+    qMain: 2.07,
+    qPara: 3.14,
+    mainLegs: [
+      { time: "21:00", id: "Pal. 36381 · Avv. 20858", match: "Crystal Palace vs Lech Poznan", pick: "Palace 1X + Over 1.5", odd: "1.28" },
+      { time: "21:00", id: "Pal. 36381 · Avv. 20856", match: "Celtic vs Ferencvaros (PIVOT)", pick: "Celtic 1X + Under 3.5", odd: "1.62" }
+    ],
+    paraLegs: [
+      { time: "21:00", id: "Pal. 36381 · Avv. 20858", match: "Crystal Palace vs Lech Poznan", pick: "Palace 1X + Over 1.5", odd: "1.28" },
+      { time: "21:00", id: "Pal. 36381 · Avv. 20856", match: "Celtic vs Ferencvaros (PIVOT)", pick: "Ferencvaros X2 + Under 3.5", odd: "2.45" }
+    ],
+    note: "Pressione territoriale a Selhurst Park. A Celtic Park la barriera Under 3.5 spegne la frenesia europea."
+  },
+  4: {
+    title: "4. La Notte Spagnola & Juventina",
+    tag: "Controllo Posizionale",
+    qMain: 2.08,
+    qPara: 3.02,
+    mainLegs: [
+      { time: "21:00", id: "Pal. 36381 · Avv. 20860", match: "Juventus vs NEC Nijmegen", pick: "Juve 1X + MultiGol 1-4", odd: "1.26" },
+      { time: "21:30", id: "Pal. 36381 · Avv. 22821", match: "Malaga vs Villarreal (PIVOT)", pick: "Villarreal X2 + Under 3.5", odd: "1.65" }
+    ],
+    paraLegs: [
+      { time: "21:00", id: "Pal. 36381 · Avv. 20860", match: "Juventus vs NEC Nijmegen", pick: "Juve 1X + MultiGol 1-4", odd: "1.26" },
+      { time: "21:30", id: "Pal. 36381 · Avv. 22821", match: "Malaga vs Villarreal (PIVOT)", pick: "Malaga 1X + Under 3.5", odd: "2.40" }
+    ],
+    note: "La Juve congela il possesso (1-0, 2-0, 1-1). Alla Rosaleda match bloccato da corto muso spagnolo."
+  }
+};
+
+let currentDoppiaId = 1;
+let currentBudget = 35;
+
+function setDoppia(id) {
+  currentDoppiaId = id;
+  document.querySelectorAll('.pill-btn').forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === (id - 1));
+  });
+  renderDoppia();
+  renderCalc();
+}
+
+function setBudget(b) {
+  currentBudget = b;
+  document.querySelectorAll('.chip').forEach(c => {
+    c.classList.toggle('active', parseInt(c.innerText) === b);
+  });
+  renderCalc();
+}
+
+function renderDoppia() {
+  const d = DOPPIE[currentDoppiaId];
+  let html = `
+    <div class="d-header">
+      <div>
+        <div class="d-title">${d.title}</div>
+        <div style="font-size:11px; color:var(--muted);">Quota: ${d.qMain}× / ${d.qPara}×</div>
+      </div>
+      <span class="d-tag">${d.tag}</span>
+    </div>
+
+    <!-- TICKET PRINCIPALE -->
+    <div class="t-block main">
+      <div class="t-bar">
+        <span class="t-name main">🅰️ Schedina Principale</span>
+        <span class="t-mult">${d.qMain}×</span>
+      </div>
+      ${d.mainLegs.map(l => `
+        <div class="match-row">
+          <div class="m-top"><span class="m-time">⏰ ${l.time}</span><span>${l.id}</span></div>
+          <div class="m-title">${l.match}</div>
+          <div class="m-market-wrap">
+            <span class="m-pick">${l.pick}</span>
+            <span class="m-quota">@ ${l.odd}</span>
+          </div>
+        </div>
+      `).join('')}
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyText('SCHEDINA PRINCIPALE: ${d.mainLegs.map(l => l.match + ' -> ' + l.pick + ' (' + l.id + ')').join(' | ')}')">📋 Copia Match Netwin</button>
+      </div>
+    </div>
+
+    <!-- TICKET PARACADUTE -->
+    <div class="t-block para">
+      <div class="t-bar">
+        <span class="t-name para">🛡️ Paracadute Ermetico</span>
+        <span class="t-mult">${d.qPara}×</span>
+      </div>
+      ${d.paraLegs.map(l => `
+        <div class="match-row">
+          <div class="m-top"><span class="m-time">⏰ ${l.time}</span><span>${l.id}</span></div>
+          <div class="m-title">${l.match}</div>
+          <div class="m-market-wrap">
+            <span class="m-pick">${l.pick}</span>
+            <span class="m-quota">@ ${l.odd}</span>
+          </div>
+        </div>
+      `).join('')}
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyText('PARACADUTE: ${d.paraLegs.map(l => l.match + ' -> ' + l.pick + ' (' + l.id + ')').join(' | ')}')">📋 Copia Paracadute</button>
+      </div>
+    </div>
+
+    <div class="scenario-banner">
+      <div class="sc-item"><span>• Favorita / Principale vince:</span><span class="sc-win">Cassa Principale (${d.qMain}×)</span></div>
+      <div class="sc-item"><span>• Sorpresa / Pivot opposto:</span><span class="sc-win">Cassa Paracadute (${d.qPara}×) ➔ 100% Rimborso</span></div>
+      <div class="sc-item" style="border-top:1px solid #222; padding-top:4px; margin-top:4px;">
+        <span style="color:var(--green); font-weight:800;">• Pareggio Pivot (0-0 / 1-1):</span>
+        <span style="color:var(--green); font-weight:800;">🔥 DOPPIA CASSA ENTRAMBE!</span>
+      </div>
+    </div>
+  `;
+  document.getElementById('doppia-content').innerHTML = html;
+}
+
+function renderCalc() {
+  const d = DOPPIE[currentDoppiaId];
+  let b = currentBudget;
+  let paraStake = Math.ceil((b / d.qPara) * 2) / 2;
+  let mainStake = b - paraStake;
+
+  let winMain = mainStake * d.qMain;
+  let winPara = paraStake * d.qPara;
+  let winDouble = winMain + winPara;
+  let profitMain = winMain - b;
+  let profitDouble = winDouble - b;
+
+  let html = `
+    <div class="p-box">
+      <div class="p-lbl">Punta Principale</div>
+      <div class="p-stake" style="color:var(--blue);">${mainStake.toFixed(2)} €</div>
+      <div class="p-return">Vincita: ${winMain.toFixed(2)} €<br><span style="font-size:10px;">(+${profitMain.toFixed(2)} € netto)</span></div>
+    </div>
+    <div class="p-box">
+      <div class="p-lbl">Punta Paracadute</div>
+      <div class="p-stake" style="color:var(--gold);">${paraStake.toFixed(2)} €</div>
+      <div class="p-return">Vincita: ${winPara.toFixed(2)} €<br><span style="font-size:10px;">(Recupero 100% Spesa)</span></div>
+    </div>
+    <div class="double-cash-banner">
+      <div class="dc-title">🔥 Vincita Cumulata su Pareggio (Doppia Cassa)</div>
+      <div class="dc-sum">${winDouble.toFixed(2)} €</div>
+      <div style="font-size:11px; color:var(--green); font-weight:700;">Utile Netto: +${profitDouble.toFixed(2)} € (ROI +${Math.round((profitDouble/b)*100)}%)</div>
+    </div>
+  `;
+  document.getElementById('calc-output').innerHTML = html;
+}
+
+function copyText(txt) {
+  navigator.clipboard.writeText(txt).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  });
+}
+
+// Inizializza
+setDoppia(1);
+</script>
+</body>
+</html>
