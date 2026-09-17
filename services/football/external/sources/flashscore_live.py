@@ -83,11 +83,13 @@ class FlashscoreLiveEngine:
             minute_val = fields.get("AC", "")
             start_ts = int(fields.get("AD", 0) or 0)
 
+            match_id = b.split("¬")[0].strip()
+
             # Calcolo del minuto reale di gioco
             real_minute, minute_label = self._calculate_minute(status_raw, minute_val, start_ts)
 
             matches.append({
-                "match_id": fields.get("AA", ""),
+                "match_id": match_id,
                 "home": home,
                 "away": away,
                 "score": score_str,
@@ -103,6 +105,51 @@ class FlashscoreLiveEngine:
             })
 
         return matches
+
+    def fetch_match_stats(self, match_id: str) -> Dict[str, int]:
+        """Estrae statistiche live in tempo reale (tiri, corner, cartellini) per un dato match."""
+        if not match_id:
+            return {"home_corners": 0, "away_corners": 0, "home_shots": 0, "away_shots": 0}
+        url = f"https://local-it.flashscore.ninja/2/x/feed/df_st_1_{match_id}"
+        stats = {
+            "home_corners": 0, "away_corners": 0,
+            "home_shots": 0, "away_shots": 0,
+            "home_shots_on_target": 0, "away_shots_on_target": 0,
+            "home_yellow_cards": 0, "away_yellow_cards": 0,
+        }
+        def _to_int(v: Any) -> int:
+            try:
+                s = str(v).split()[0].replace("%", "").strip()
+                return int(float(s))
+            except Exception:
+                return 0
+
+        try:
+            req = urllib.request.Request(url, headers=self.HEADERS)
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                raw_text = resp.read().decode("utf-8", errors="ignore")
+                for block in raw_text.split("~"):
+                    if "SG÷" not in block:
+                        continue
+                    parts = dict([p.split("÷", 1) for p in block.split("¬") if "÷" in p])
+                    name = parts.get("SG", "").lower()
+                    sh = _to_int(parts.get("SH", 0))
+                    si = _to_int(parts.get("SI", 0))
+                    if "corner" in name or "calci d'angolo" in name:
+                        stats["home_corners"] = sh
+                        stats["away_corners"] = si
+                    elif "total shots" in name or "tiri totali" in name:
+                        stats["home_shots"] = sh
+                        stats["away_shots"] = si
+                    elif "shots on target" in name or "tiri in porta" in name:
+                        stats["home_shots_on_target"] = sh
+                        stats["away_shots_on_target"] = si
+                    elif "yellow cards" in name or "cartellini gialli" in name:
+                        stats["home_yellow_cards"] = sh
+                        stats["away_yellow_cards"] = si
+        except Exception:
+            pass
+        return stats
 
     @staticmethod
     def _calculate_minute(status_code: str, period_code: str, start_timestamp: int) -> tuple[int, str]:
