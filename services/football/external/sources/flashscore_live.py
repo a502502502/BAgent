@@ -81,6 +81,10 @@ class FlashscoreLiveEngine:
             s1_home = fields.get("BC", "")
             s1_away = fields.get("BD", "")
             minute_val = fields.get("AC", "")
+            start_ts = int(fields.get("AD", 0) or 0)
+
+            # Calcolo del minuto reale di gioco
+            real_minute, minute_label = self._calculate_minute(status_raw, minute_val, start_ts)
 
             matches.append({
                 "match_id": fields.get("AA", ""),
@@ -92,10 +96,51 @@ class FlashscoreLiveEngine:
                 "status_code": status_raw,
                 "status": status_desc,
                 "period": minute_val,
+                "minute": real_minute,
+                "minute_label": minute_label,
+                "start_timestamp": start_ts,
                 "ht_score": f"{s1_home}-{s1_away}" if s1_home else "",
             })
 
         return matches
+
+    @staticmethod
+    def _calculate_minute(status_code: str, period_code: str, start_timestamp: int) -> tuple[int, str]:
+        """Calcola il minuto esatto in base a start_timestamp e status."""
+        import time
+        if not start_timestamp or status_code not in ["2", "11", "12", "13"]:
+            if status_code == "3":
+                return 90, "Finale"
+            return 0, "Pre-Match"
+
+        if status_code == "11" or period_code == "11":
+            return 45, "Intervallo"
+
+        now_ts = int(time.time())
+        diff_sec = now_ts - start_timestamp
+        if diff_sec < 0:
+            return 1, "1'"
+
+        diff_min = diff_sec // 60
+
+        # 1° Tempo
+        if period_code == "12" or (diff_min <= 48 and period_code != "13"):
+            m = min(45, max(1, diff_min))
+            if diff_min > 45:
+                return 45, f"45+{diff_min-45}'"
+            return m, f"{m}'"
+
+        # Intervallo
+        if 48 < diff_min < 62 and period_code != "13":
+            return 45, "Intervallo"
+
+        # 2° Tempo (period 13 o dopo 60 min dall'avvio)
+        # Sottrae 60 minuti (45' primo tempo + 15' intervallo)
+        m2 = 45 + max(1, diff_min - 60)
+        if m2 > 90:
+            recup = m2 - 90
+            return 90, f"90+{recup}'"
+        return m2, f"{m2}'"
 
     def find_match(self, team_keyword: str) -> List[Dict[str, Any]]:
         """Cerca match per parola chiave (case-insensitive)."""

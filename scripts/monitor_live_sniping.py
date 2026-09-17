@@ -155,13 +155,9 @@ def run_live_daemon(interval_sec: int = 45, send_telegram: bool = True):
                 h_goals = int(m.get("home_score", 0) or 0)
                 a_goals = int(m.get("away_score", 0) or 0)
                 
-                # Stima minuto indicativo dal period/status
-                if status_raw == "11":
-                    minute = 45
-                elif status_raw == "13":
-                    minute = 72
-                else:
-                    minute = 25
+                # Minuto reale calcolato dal feed Flashscore
+                minute = m.get("minute", 0)
+                minute_label = m.get("minute_label", f"{minute}'")
 
                 # Stima squadra favorita pre-match in base ai club
                 fav = "HOME"
