@@ -48,6 +48,8 @@ class MarketCandidate:
     verified_sources_checked: bool = True  # Regola #55: Obbligo di consultazione diretta fonti reali
     verified_source_notes: str = ""        # Regola #55: Fonti reali consultate (FootyStats / Sofascore)
     netwin_actual_odd: Optional[float] = None # Pilastro 1: Quota reale rilevata su Netwin.it
+    pre_match_odd_favorite: Optional[float] = None # Quota 1X2 pre-match della favorita
+    is_parachute_market: bool = False      # Regola #66: Mercato inteso come paracadute/copertura difensiva
 
 
 @dataclass
@@ -199,6 +201,40 @@ class StrictTicketPipeline:
             )
 
         # =====================================================================
+        # GATE 0.3: REGOLA #67 - FATTORE AMBIENTALE AD ALTA TOSSICITÀ NELLE COPPE EUROPEE
+        # =====================================================================
+        # Divieto assoluto di scommettere su esiti favorevoli alla squadra in trasferta (2, X2, X2+MG)
+        # contro squadre turche, greche o balcaniche in casa nelle coppe europee UEFA (Champions, EL, Conference).
+        tournament_upper = (candidate.tournament or "").upper()
+        is_uefa_cup = any(c in tournament_upper for c in ["CHAMPIONS", "EUROPA LEAGUE", "CONFERENCE", "UEFA", "INTERNAZIONALI"])
+        hostile_home_teams = [
+            "BESIKTAS", "GALATASARAY", "FENERBAHCE", "TRABZONSPOR",
+            "OLYMPIACOS", "OLYMPIAKOS", "PANATHINAIKOS", "PAOK", "AEK",
+            "CRVENA ZVEZDA", "STELLA ROSSA", "PARTIZAN"
+        ]
+        home_team_name = (
+            candidate.team_name if candidate.team_name
+            else candidate.match_name.split(" vs ")[0] if " vs " in candidate.match_name
+            else candidate.match_name.split(" - ")[0]
+        ).upper()
+        is_hostile_home = any(t in home_team_name for t in hostile_home_teams)
+        is_away_favoring_pick = ("X2" in m_upper or " 2" in m_upper or m_upper.startswith("2") or "OSPITE" in m_upper)
+
+        if is_uefa_cup and is_hostile_home and is_away_favoring_pick:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #67: BAN ESITO ESTERNO IN AMBIENTE AD ALTA TOSSICITÀ] {candidate.market_name} su {candidate.match_name}. "
+                    f"Nelle notti di coppa europea è tassativamente vietato scommettere su esiti a favore della squadra in trasferta "
+                    f"(2 fisso, X2, X2 + MultiGol) nei campi caldi di Turchia, Grecia o Balcani (Lezione Besiktas 4-1 Marsiglia). "
+                    f"La pressione acustica e l'intensità ambientale azzerano i modelli convenzionali di xG generando crolli ad alta varianza."
+                ),
+                details=f"Ambiente ostile rilevato ({home_team_name}) in competizione UEFA."
+            )
+
+        # =====================================================================
         # GATE 0.5: REGOLA #45 - FILTRO VOLUME OFFENSIVO SUI CORNER
         # =====================================================================
         is_corner_market = (
@@ -218,6 +254,37 @@ class StrictTicketPipeline:
                         f"Squadre con possesso orizzontale o basso volume di conclusioni sono vietate per i corner (Lezione Liverpool-Fulham 4-8 corners)."
                     ),
                     details=f"Tiri squadra: {candidate.team_avg_shots:.1f}/partita < 18.0 soglia minima."
+                )
+
+        # =====================================================================
+        # GATE 0.6: REGOLA #66 - GAME-STATE BIAS SUI CORNER (Anti-Blowout Corner Trap)
+        # =====================================================================
+        # Se la favorita è schiacciante (quota pre-match <= 1.35 con alto rischio di 3-0 / 4-0 rapido),
+        # vietare linee Over Corner di squadra elevate (Over >= 6.5 Corner)
+        # perché quando la gara va in ghiaccio nel 1° tempo, l'intensità balistica del 2° tempo crolla.
+        is_team_corner_high_line = (
+            is_corner_market
+            and any(w in m_upper for w in ["SQUADRA", "CASA", "OSPITE", "TEAM"])
+            and any(line in m_upper for line in ["6.5", "7.5", "8.5", "9.5"])
+            and "OVER" in m_upper
+        )
+        if is_team_corner_high_line:
+            is_blowout_risk = (
+                candidate.bookmaker_odd < 1.35
+                or (candidate.pre_match_odd_favorite is not None and candidate.pre_match_odd_favorite <= 1.35)
+            )
+            if is_blowout_risk:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #66: GAME-STATE BIAS SUI CORNER] {candidate.market_name} su {candidate.match_name}. "
+                        f"Le linee Over Corner elevate di squadra (Over >= 6.5) sono vietate per favorite da possibile goleada rapida "
+                        f"(Lezione Crystal Palace 4-0 Lech Poznan: 4 corner nel 1°T, solo 2 nella ripresa sul match già chiuso, fermandosi a 6). "
+                        f"Sostituire con linee conservative (max Over 4.5/5.5) o mercati aperti sui gol."
+                    ),
+                    details="Rischio crollo produzione corner nella ripresa per partita già decisa nel primo tempo."
                 )
 
         # =====================================================================
@@ -582,6 +649,24 @@ class StrictTicketPipeline:
             rejection_reasons.append(
                 f"[BLOCCATO - MONEY MANAGEMENT] Stake proposto di €{chosen_stake:.2f} ({stake_pct:.1f}%) "
                 f"supera il limite massimo consentito dell'8% (€{current_bankroll * self.MAX_TICKET_BANKROLL_PCT:.2f})."
+            )
+
+        # =====================================================================
+        # GATE 8.5: REGOLA #66 - DIVIETO PARACADUTE IN MULTIPLA (Solo Singola Diretta)
+        # =====================================================================
+        # Un paracadute di copertura non può mai essere una multipla dipendente da 2 o più eventi:
+        # se uno solo salta, la copertura fallisce vanificando l'hedging.
+        # Deve essere giocato esclusivamente come Singola Secca ad alto moltiplicatore (@ 1.85 - 2.40).
+        is_multi_parachute = len(candidates) > 1 and (
+            any(c.is_parachute_market for c in candidates)
+            or (len(candidates) == 2 and all(("CORNER" in c.market_name.upper() and ("6.5" in c.market_name or "7.5" in c.market_name)) for c in candidates))
+        )
+        if is_multi_parachute:
+            rejection_reasons.append(
+                f"[BLOCCATO - REGOLA #66: PARACADUTE IN MULTIPLA VIETATO] Proposto paracadute di copertura composto da {len(candidates)} eventi (@ {total_odds:.2f}). "
+                f"Il Paracadute per definizione matematica NON può essere una multipla: combinare due linee (es. due Over 6.5 Corner) espone al rischio "
+                f"che un singolo evento manchi di poco (es. Crystal Palace fermatosi a 6 sul 4-0), distruggendo l'intera protezione. "
+                f"Il Paracadute DEVE essere giocato come SINGOLA DIRETTA (@ 1.85 - 2.40) calibrata per coprire con la vincita l'importo del ticket principale."
             )
 
         ticket_passed = (len(rejection_reasons) == 0)
