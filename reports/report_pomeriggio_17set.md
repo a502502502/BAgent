@@ -38,3 +38,41 @@ Riepilogo della Schedina 1 Pomeridiana con architettura Twin-Ticket (Principale 
 3. **Scenario C (Pareggio 0-0 o 1-1)**: Vincono ENTRAMBI i ticket ➔ Doppia Cassa (+220% ROI totale!).
 
 *Archiviato nel sistema BAgent alle ore 13:05 del 17/09/2026.*
+
+
+---
+
+## 🅱️ TICKET 2 POMERIGGIO — Il Blitz d'Europa & Danimarca (Tardo Pomeriggio)
+* **Piattaforma**: Netwin.it
+* **Audit**: 🟢 CERTIFICATO ED APPROVATO DA STRICT VALIDATOR
+* **Quota Totale Netwin**: **2.75×**
+* **Edge Matematico Medio**: **+14.8%**
+
+### Selezioni:
+1. ⏰ **17:30** | **Rostov vs Dinamo Mosca** *(Pal. 36382, Avv. 56986 - Russia Premier)*: **Dinamo Mosca X2 + Under 4.5 @ 1.50**
+   - *Tattica & Sesto Senso*: Dinamo Mosca 3ª in classifica in forma (WWWLW), 53 gol fatti. Rostov 9° in crisi (WLLDD) con 51 gol subiti. Dinamo imbattuta in 4 degli ultimi 5 precedenti. L'X2+Under 4.5 copre tutti i successi esterni (0-1, 0-2, 1-2, 0-3) e i pareggi controllati (0-0, 1-1).
+2. ⏰ **18:30** | **Vejle vs Brøndby** *(Pal. 36382, Avv. 59159 - DBU Pokalen Danimarca)*: **Brøndby X2 + Over 1.5 @ 1.50**
+   - *Tattica & Sesto Senso*: Scontro tra compagini di Superligaen. Brøndby trazione anteriore (2.1 gol/gara). Vejle in piena crisi difensiva con 22 gol subiti in campionato. Regola #27 applicata: l'X2+Over 1.5 incassa su 0-2, 1-2, 0-3 e 1-1.
+3. ⏰ **18:45** | **OFI Creta vs TSG Hoffenheim** *(Pal. 36381, Avv. 20850 - UEFA Europa League)*: **Hoffenheim X2 + Over 1.5 @ 1.22**
+   - *Tattica & Sesto Senso*: L'Hoffenheim porta a Creta l'intensità della Bundesliga (media 2.3 gol/gara). OFI torna in Europa dopo 25 anni: entusiasmo ma netto gap tecnico e difensivo. La combo protegge dal pareggio con gol (1-1, 2-2) e incassa sul blitz tedesco.
+
+---
+
+## 🛡️ TICKET 2-B — Il Paracadute Vejle Shield (Copertura Twin-Ticket 100%)
+* **Piattaforma**: Netwin.it
+* **Quota Totale Netwin**: **4.60×**
+* **Obiettivo**: Zero perdita garantita (Break-Even) in caso di sorpresa casalinga del Vejle in coppa.
+
+### Selezioni:
+1. ⏰ **17:30** | **Rostov vs Dinamo Mosca** *(Pal. 36382, Avv. 56986)*: **Dinamo Mosca X2 + Under 4.5 @ 1.50**
+2. ⏰ **18:30** | **Vejle vs Brøndby** *(Pal. 36382, Avv. 59159)*: **Vejle 1X (Doppia Chance In) @ 1.82**
+3. ⏰ **18:45** | **OFI Creta vs TSG Hoffenheim** *(Pal. 36381, Avv. 20850)*: **Hoffenheim X2 + Over 1.5 @ 1.22**
+
+---
+
+### 📊 Matrice Scenari Economici Ticket 2:
+1. **Scenario A (Brøndby vince o pareggia con Over 1.5)**: Vince Ticket 2 ➔ Utile netto +120% sul budget allocato.
+2. **Scenario B (Vejle fa il colpaccio interno 1-0 o 2-1)**: Vince Ticket 2-B Paracadute ➔ 100% capitale recuperato (Perdita 0,00 €).
+3. **Scenario C (Pareggio con gol 1-1)**: Vincono ENTRAMBI i ticket contemporaneamente (Doppia Cassa!).
+
+*Aggiornato e certificato nel sistema BAgent alle ore 13:21 del 17/09/2026.*
