@@ -373,6 +373,16 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
     3. **Cronologia Protetta**: Il match Pivot deve preferibilmente disputarsi CONCURRENTEMENTE o DOPO le basi comuni, così che l'intera esposizione finanziaria sia governata dalla copertura ermetica;
     4. **Soglia di Recupero Integrale**: La quota del Paracadute $Q_2$ e il suo stake $S_2$ devono sempre soddisfare la condizione di Zero Perdita: $S_2 \times Q_2 \ge S_{tot}$.
 
+- **Regola #68 — PROTOCOLLO BLACKOUT NOTIFICHE SU TICKET PERSO (Zero Spam & Immediate Silence Gate)**:
+  - 🛑 **Divieto Assoluto di Notifiche su Giocate Compromesse**:
+    È TASSATIVAMENTE VIETATO inviare notifiche Telegram, alert sonori o aggiornamenti live sulle partite successive di una schedina quando la schedina (o tutti i ticket attivi della sessione) è GIÀ MATEMATICAMENTE PERSA.
+  - 🔬 **Motivazione & Psicologia Operativa**:
+    Ricevere notifiche sul fischio d'inizio, gol segnati o parziali di un match (come Shanghai Shenhua alle 14:15) dopo che il ticket è già saltato per un evento precedente (Machida 2-0 o Adelaide) è inutile rumore, disturbo e frustrazione per l'utente. Se il biglietto è morto, la partita non ha più alcun valore economico né operativo.
+  - 📌 **Direttiva di Disattivazione Automatica nel Codice (`LiveSentinelDaemon`)**:
+    1. **Check di Vitalità Pre-Notifica (`is_ticket_alive`)**: Prima di inviare qualsiasi messaggio Telegram relativo a un match, il demone DEVE verificare lo stato complessivo del ticket in `ticket_ledger`. Se il ticket ha fallito una selezione ed è contrassegnato come `LOST` (o se non ci sono ticket attivi in corso che dipendono da quel match), l'invio della notifica è **BLOCCATO ALLA RADICE (MUTE TOTALE)**.
+    2. **Notifica Unica di Chiusura / Post-Mortem**: L'unica notifica concessa è il messaggio formale di chiusura al momento del verdetto negativo definitivo (`❌ TICKET PERSO: [motivo]`). Dopodiché, il demone entra in modalità **SILENZIO ASSOLUTO** e termina il thread di monitoraggio per le restanti partite di quel ticket.
+    3. **Ripristino Allerte solo su Nuovi Ticket Attivi**: Il flusso delle notifiche si riattiva esclusivamente quando l'utente conferma e registra una nuova giocata con status `PENDING` (es. Ticket #90 del pomeriggio).
+
 ---
 
 
