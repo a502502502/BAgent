@@ -1946,13 +1946,29 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 *Ultimo aggiornamento: 14 settembre 2026 ore 14:20 — BAgent (Ticket #89 registrato e notifiche push attive)*
 
+---
 
+## Sessione 17 Settembre 2026 — Europa League, Post-Mortem Chirurgico & Nuovi Hard Gates
 
+### Risultati Serata & Bilancio
+* 🟢 **Ticket 3 (€25.00 @ 1.98 ➔ €49.50) VINTO E INCASSATO**: Levski Sofia 0-1 Salzburg (`X2`) ✅ + Real Betis 1-0 Getafe (`1X + Under 3.5`) ✅.
+* 🔴 **Ticket 2 (€10.00 @ 3.25)**: OFI Creta 2-0 Hoffenheim (`MG 1-4`) ✅ + Besiktas 4-1 Marsiglia (`X2 + MG 1-4`) ❌ (Marsiglia travolto a Istanbul).
+* 🔴 **Ticket Principale 21:00 (€30.00 @ 2.15)**: Crystal Palace 4-0 Lech Poznan (`1X + MG 1-4`) ✅ + Celtic 1-3 Ferencvaros (`1X + MG 1-4`) ❌ (Celtic disastroso in difesa).
+* 🔴 **Ticket Paracadute Corner (€5.00 @ 4.93)**: Celtic Over 6.5 Corner Squadra 1 (11 corner battuti!) ✅ + Crystal Palace Over 6.5 Corner Squadra 1 (si è fermato a 6 corner sul 4-0) ❌.
 
+---
 
+### Nuove Regole Codificate nel Codice (`services/betting/strict_ticket_pipeline.py`)
 
+- **Regola #66 — PROTOCOLLO ASIMMETRICO GAME-STATE SUI CORNER & PARACADUTE IN SINGOLA DIRETTA**:
+  1. **Game-State Bias sui Corner (Gate 0.6)**:
+     - Quando una favorita schiacciante (quota pre-match $\le 1.35$) dilaga subito nel 1° tempo (es. Crystal Palace 3-0 Lech Poznan al 45'), la produzione di corner del 2° tempo crolla fisiologicamente (ritmi bassi, cambi conservativi, possesso orizzontale di congelamento). Palace ha battuto 4 corner nel 1°T e solo 2 nella ripresa, chiudendo a 6 e facendo saltare la linea Over 6.5 per 1 solo corner!
+     - Al contrario, le linee Over Corner alte ($\ge 6.5$) sono micidiali **quando la favorita è sotto o bloccata** (Celtic sotto 1-2 ha scatenato l'inferno battendo **11 corner**!).
+     - *Hard Gate*: Divieto assoluto di linee Over Corner di squadra elevate ($\ge 6.5$) per favorite da possibile goleada rapida (quota $\le 1.35$). Sostituire con linee conservative (Over 4.5/5.5) o mercati aperti sui gol.
+  2. **Paracadute Exclusively in Singola Diretta (Gate 8.5)**:
+     - Un paracadute di copertura difensiva **NON PUÒ MAI ESSERE UNA MULTIPLA** (es. due corner insieme a quota 5.00): se una sola gamba manca per un soffio, l'intera copertura muore.
+     - Il Paracadute DEVE essere giocato come **SINGOLA SECCA** ad alto moltiplicatore (@ 1.85 - 2.40) calibrata per coprire con il payout l'importo esatto del ticket principale.
 
-
-
-
-
+- **Regola #67 — FATTORE AMBIENTALE AD ALTA TOSSICITÀ NELLE COPPE EUROPEE (Ban Doppie Chance Esterne nei Campi Caldi - Gate 0.3)**:
+  - Nelle notti di coppe europee UEFA (Champions, Europa League, Conference), è TASSATIVAMENTE VIETATO scommettere su esiti a favore della squadra in trasferta (`2 fisso`, `X2`, `X2 + MultiGol`) contro club di Turchia (Besiktas, Galatasaray, Fenerbahce, Trabzonspor), Grecia (Olympiakos, Panathinaikos, PAOK, AEK) e Balcani (Stella Rossa, Partizan).
+  - *Motivazione*: L'aggressività ambientale, la pressione del tifo e la carica agonistica azzerano il gap teorico di xG/rosa e producono disastri ad alta varianza (Lezione Besiktas 4-1 Marsiglia). Nelle trasferte in questi stadi caldi, giocare solo mercati neutri o Under/Over gol/cartellini.
