@@ -103,3 +103,42 @@ Riepilogo della Schedina 1 Pomeridiana con architettura Twin-Ticket (Principale 
 3. **Scenario C (Pareggio con gol 1-1)**: Vincono ENTRAMBI i ticket contemporaneamente (Doppia Cassa!).
 
 *Aggiornato e certificato nel sistema BAgent alle ore 13:21 del 17/09/2026.*
+
+
+---
+
+## 🇪🇸 TICKET SISTEMA PRESERALE (Spagna & Europa League) — Confermati su Netwin
+* **Budget Allocato**: **31,00 €**
+* **Base Comune (18:45)**: Levski Sofia vs RB Salisburgo -> **X2 @ 1.32**
+* **Pivot Coniugato (19:00)**: Real Betis vs Getafe -> **Under 3.5**
+
+### 1. Schedina Principale (Puntata: 25,00 €)
+* **Selezioni**: Levski Sofia X2 @ 1.32 + Real Betis 1X + Under 3.5 @ 1.50
+* **Quota Totale**: **1.98×**
+* **Vincita Potenziale**: **49,50 €** (Utile netto: +18,50 € su 31€)
+
+### 2. Schedina Paracadute / Valore (Puntata: 6,00 €)
+* **Selezioni**: Levski Sofia X2 @ 1.32 + Getafe X2 + Under 3.5 @ 2.90
+* **Quota Totale**: **3.83×**
+* **Vincita Potenziale**: **22,96 €** (Copertura paracadute salvataggio capitale)
+
+* **Scenario Pareggio (0-0 o 1-1)**: **DOPPIA CASSA -> 72,46 € (+41,46 € netti)**
+
+---
+
+## 🏆 TICKET SISTEMA SERALE (Europa League) — Confermati su Netwin
+* **Budget Allocato**: **35,00 €**
+* **Base Comune (18:45)**: OFI Creta vs TSG Hoffenheim -> **MultiGol 1-4**
+* **Pivot Coniugato (21:00)**: Besiktas vs Marsiglia -> **MultiGol 1-4**
+
+### 1. Schedina Principale (Puntata: 25,00 €)
+* **Selezioni**: OFI Creta vs Hoffenheim X2 + MG 1-4 @ 1.43 + Besiktas 1X + MG 1-4 @ 1.57
+* **Quota Totale**: **2.25×**
+* **Vincita Potenziale**: **56,12 €** (Utile netto: +21,12 € su 35€)
+
+### 2. Schedina Paracadute / Valore (Puntata: 10,00 €)
+* **Selezioni**: OFI Creta vs Hoffenheim MG 1-4 @ 1.28 + Marsiglia X2 + MG 1-4 @ 2.54
+* **Quota Totale**: **3.25×**
+* **Vincita Potenziale**: **32,51 €** (Copertura paracadute recupero capitale quasi totale 93%)
+
+* **Scenario Pareggio (1-1 o 2-2)**: **DOPPIA CASSA -> 88,63 € (+53,63 € netti)**
