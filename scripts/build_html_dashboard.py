@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+Genera la dashboard HTML completa con la nuova colonna Classifiche & Forma
+"""
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+html_content = """<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -938,3 +947,20 @@ function copyText(text) {
 
 </body>
 </html>
+"""
+
+# Scrittura su report repository
+out_rep = ROOT / "reports" / "palinsesto_minori_18set.html"
+with open(out_rep, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+# Scrittura su Desktop
+desk_1 = Path(r"C:\Users\demarj\Desktop\palinsesto_minori_18set.html")
+with open(desk_1, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+desk_2 = Path(r"C:\Users\demarj\Desktop\doppie_smartphone.html")
+with open(desk_2, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("SUCCESS: File HTML generati e salvati correttamente su Desktop e reports!")
