@@ -1969,6 +1969,30 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 *Ultimo aggiornamento: 14 settembre 2026 ore 14:20 — BAgent (Ticket #89 registrato e notifiche push attive)*
 
+---
+
+## 🛑 PROTOCOLLI OPERATIVI CRITICI — 17 & 18 SETTEMBRE 2026
+
+### 🛡️ REGOLA #67 — PROTOCOLLO PARACADUTE ERMETICO & BLINDO-DIPENDENZA DEI TICKET
+1. **Due Partite per Volta ("2 partite alla volta")**: Nessun sistema multi-ticket può eccedere 2 match per blocco operativo.
+2. **Anti-Decoupling & Zero Over Fragili**: È tassativamente vietato inserire Over fragili o mercati ad alta varianza nella gamba di base comune (es. Leg 1). La base comune deve essere una roccia difensiva (es. X2, Under 4.5, Under 3.5 o MultiGol resiliente).
+3. **Pivot Coniugato e Complementare (Leg 2)**:
+   - Schedina Principale: copre l'esito a maggiore probabilità (es. 1X + Under/Over).
+   - Schedina Paracadute: copre specularmente l'esito opposto (es. X2 + Under/Over) con stake calcolato per garantire il rimborso 100% (Break-Even) o piccolo utile.
+   - **Doppia Cassa su Pareggio**: La combinazione dei due mercati DEVE SEMPRE incassare entrambi i ticket in caso di pareggio (0-0, 1-1, 2-2).
+4. **Quota Minima**: La quota complessiva della Principale deve essere sempre `>= 2.00×`.
+
+### 🔕 REGOLA #68 — PROTOCOLLO BLACKOUT NOTIFICHE SU TICKET PERSO (Zero Spam Gate)
+1. **Cessazione Immediata**: Nel momento in cui un ticket risulta matematicamente perso (es. 1° evento fallito o condizione invalidata), scatta il **blackout assoluto delle notifiche** su quel ticket e sulle partite successive ad esso collegate.
+2. **Zero Disturbo Utente**: È severamente vietato inviare aggiornamenti live, alert gol o resoconti intermedi su selezioni orfane o irrilevanti per la cassa.
+3. **Aggiornamento Silenzioso a Fine Sessione**: Il bilancio economico viene sincronizzato nel database in background senza disturbare l'utente.
+
+### 🚫 REGOLA #69 — PROTOCOLLO BLOCCO TASSATIVO PER MANCANZA DATI CERTIFICATI & DIVIETO RICOSTRUZIONI FRAMMENTATE
+1. **Hard-Gate Dati Ufficiali**: Se una competizione o una partita non è presente nei feed ufficiali e certificati di BAgent (es. FootyStats API, Sofascore/Flashscore verificati con coperture complete di classifiche, rose e orari), **DEVE ESSERE BLOCCATA AUTOMATICAMENTE DAL VALIDATORE (HARD REJECT)**.
+2. **Ban Leghe Non Coperte (es. Liga Alef, 3ª divisione israeliana o leghe amatoriali/minori)**: È tassativamente vietato proporre scommesse su campionati minori o amatoriali privi di telemetria ufficiale.
+3. **Divieto Assoluto di Fabbricazione / Fonti Frammentate**: È severamente vietato all'agente tentare di dedurre o ricostruire classifiche, punti, forma o rose da snippet di motori di ricerca o fonti non omogenee. In assenza di dati certificati, la risposta obbligatoria deve essere: *"Dati non certificati nel feed ufficiale: partita scartata dal validatore"*.
+4. **Verifica Orario Kickoff Obbligatoria**: Prima di proporre qualsiasi selezione, verificare che il kickoff sia strettamente nel futuro rispetto all'ora corrente (`kickoff_is_future == True`). Qualsiasi match già avviato o in corso deve essere respinto a monte.
+
 
 
 

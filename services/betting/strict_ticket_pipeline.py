@@ -48,6 +48,8 @@ class MarketCandidate:
     verified_sources_checked: bool = True  # Regola #55: Obbligo di consultazione diretta fonti reali
     verified_source_notes: str = ""        # Regola #55: Fonti reali consultate (FootyStats / Sofascore)
     netwin_actual_odd: Optional[float] = None # Pilastro 1: Quota reale rilevata su Netwin.it
+    data_certified: bool = True            # Regola #69: Dati ufficiali verificati da feed primari (classifica, forma)
+    kickoff_is_future: bool = True         # Regola #69: Verifica che la partita non sia già iniziata o passata
 
 
 @dataclass
@@ -342,6 +344,46 @@ class StrictTicketPipeline:
                     ),
                     details=f"Δ Punti = {abs(candidate.verified_standings_delta)} <= 3. Scontro equilibrato ad alta volatilità."
                 )
+
+        # =====================================================================
+        # GATE 0.98: REGOLA #69 - BLOCCO TASSATIVO PER MANCANZA DATI CERTIFICATI & MATCH IN CORSO
+        # =====================================================================
+        # 1. Verifica orario: se la partita risulta già iniziata o non futura
+        if not getattr(candidate, "kickoff_is_future", True):
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #69: MATCH GIÀ INIZIATO O IN CORSO] '{candidate.match_name}' ({candidate.tournament}). "
+                    f"La partita risulta già iniziata o con orario di kickoff superato. "
+                    f"È tassativamente vietato inserire selezioni su eventi in corso o con orari non conformi."
+                ),
+                details="Kickoff superato o partita già avviata."
+            )
+
+        # 2. Controllo campionati privi di feed ufficiale certificato (es. Liga Alef o leghe amatoriali/regionali)
+        banned_uncertified_keywords = [
+            "LIGA ALEF", "ISRAELE 3", "ALEF SOUTH", "ALEF NORTH", "TERZA DIVISIONE",
+            "ECCELLENZA", "PROMOTION LEAGUE", "REGIONAL DIVISION", "DILETTANTI"
+        ]
+        combined_meta = f"{candidate.tournament or ''} {candidate.match_name or ''}".upper()
+        is_uncertified_comp = any(kw in combined_meta for kw in banned_uncertified_keywords)
+        data_certified_flag = getattr(candidate, "data_certified", True)
+
+        if is_uncertified_comp or not data_certified_flag:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #69: DATI NON CERTIFICATI & DIVIETO FONTI FRAMMENTATE] '{candidate.tournament}' / '{candidate.match_name}'. "
+                    f"La competizione (es. Liga Alef 3ª divisione israeliana o leghe amatoriali/minori) non è presente nei nostri feed ufficiali di campionato. "
+                    f"È tassativamente vietato tentare di ricostruire classifiche o forme da fonti frammentate o approssimative. "
+                    f"Qualsiasi evento privo di dati statistici e orari ufficiali certificati al 100% deve essere BLOCCATO AUTOMATICAMENTE."
+                ),
+                details="Mancanza di feed statistico ufficiale certificato per la competizione."
+            )
 
         # =====================================================================
         # FASE 1, 2, 3: CONTROLLO ANAGRAFICO, SANITARIO & FORMAZIONI
