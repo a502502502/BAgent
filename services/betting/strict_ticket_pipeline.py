@@ -362,18 +362,36 @@ class StrictTicketPipeline:
                 )
 
         # =====================================================================
-        # GATE 0.9: REGOLA #52 - SPECIALIZZAZIONE NEI 4 CIRCUITI SATELLITE (BRASILE, ARGENTINA, OLANDA, NORVEGIA)
+        # GATE 0.9: REGOLA #71 - CHECK SUL MERCATO PIÙ ADATTO IN BASE AL CAMPIONATO E ALLA SQUADRA
         # =====================================================================
-        from services.leagues.specialized_leagues_profile import SpecializedLeagueEngine
-        league_target = candidate.tournament or candidate.match_name
-        is_coherent, audit_msg = SpecializedLeagueEngine.audit_market_for_league(league_target, candidate.market_name)
-        if not is_coherent:
+        from services.analysis.league_dna_market_matcher import LeagueDNAMarketMatcher
+        dna_matcher = LeagueDNAMarketMatcher()
+        league_target = candidate.tournament or candidate.match_name or ""
+        
+        # Estrai home e away da match_name
+        parts = candidate.match_name.split(" vs ") if " vs " in candidate.match_name else candidate.match_name.split(" - ")
+        h_team = parts[0].strip() if len(parts) >= 1 else candidate.team_name or ""
+        a_team = parts[1].strip() if len(parts) >= 2 else ""
+
+        dna_res = dna_matcher.check_market_suitability(
+            league=league_target,
+            home_team=h_team,
+            away_team=a_team,
+            market_name=candidate.market_name,
+            market_category=candidate.market_type,
+            bookmaker_odd=candidate.bookmaker_odd
+        )
+        if dna_res.is_prohibited:
+            alts = ", ".join(dna_res.recommended_alternatives) if dna_res.recommended_alternatives else "Consultare matrice DNA"
             return ValidationReport(
                 passed=False,
                 candidate=candidate,
                 stage_failed=0,
-                rejection_reason=audit_msg,
-                details=f"Incompatibilità tra mercato e DNA tattico della lega ({league_target})."
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #71: INCOMPATIBILITÀ CON DNA CAMPIONATO & SQUADRA] {dna_res.tactical_rationale} "
+                    f"Rifiuto: {dna_res.rejection_reason}. Alternative raccomandate da DNA Tattico: ⭐ {alts}."
+                ),
+                details=f"Incompatibilità tra mercato '{candidate.market_name}' e DNA tattico ({dna_res.league_cluster} / {dna_res.team_archetype})."
             )
 
         # =====================================================================
