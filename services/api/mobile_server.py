@@ -40,7 +40,7 @@ app.add_middleware(
 # Cache in-memory per live scores (TTL 20s per evitare rate-limit)
 LIVE_CACHE: Dict[str, Any] = {"timestamp": 0, "scores": {}}
 
-LEAGUES_TO_CHECK = ["esp.1", "por.1", "arg.1", "ita.1", "eng.1", "ger.1"]
+LEAGUES_TO_CHECK = ["esp.1", "por.1", "arg.1", "usa.1", "ita.1", "eng.1", "ger.1"]
 HEADERS_ESPN = {"User-Agent": "ESPN/6.0.0 (iPhone; iOS 17.0; Scale/3.00)", "Accept": "*/*"}
 
 
@@ -183,6 +183,8 @@ def get_active_tickets():
                         live_status = "SAFE_GREEN"
                     else:
                         live_status = "DANGER_RED"
+                elif "corner" in sel:
+                    live_status = "SAFE_GREEN"
 
             legs.append({
                 "id": leg["id"],
