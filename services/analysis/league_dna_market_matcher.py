@@ -127,7 +127,9 @@ class LeagueDNAMarketMatcher:
         "manchester city", "barcelona", "barcellona", "real madrid",
         "bayern munich", "bayern monaco", "sporting cp", "sporting lisbona",
         "inter", "milan", "villarreal", "paris saint germain", "psg", "arsenal", "liverpool",
-        "flamengo", "palmeiras", "river plate", "boca juniors"
+        "flamengo", "palmeiras", "river plate", "boca juniors",
+        "porto", "fc porto", "benfica", "sl benfica", "ajax", "psv", "feyenoord",
+        "celtic", "rangers"
     }
 
     HIGH_WING_CORNER_CLUBS = {
@@ -508,6 +510,29 @@ class LeagueDNAMarketMatcher:
         # -------------------------------------------------------------
         # 1. VERIFICA DIVIETI TASSATIVI (SEMAFORO ROSSO)
         # -------------------------------------------------------------
+        # 0) REGOLA #74: SCONTRO TRA GIGANTI OFFENSIVI (Two Dominant Attacking Clubs Clash)
+        h_arch = self.identify_team_archetype(home_team, league)
+        a_arch = self.identify_team_archetype(away_team, league)
+        if h_arch == "ASYMMETRIC_DOMINANCE" and a_arch == "ASYMMETRIC_DOMINANCE":
+            is_under_clash = "under" in m_norm and any(x in m_norm for x in ["2.5", "3.5", "3.0", "under 3"])
+            if is_under_clash:
+                return MarketSuitabilityResult(
+                    market_name=market_name,
+                    is_recommended=False,
+                    is_prohibited=True,
+                    suitability_score=0.0,
+                    status="RED",
+                    tactical_rationale=(
+                        f"VIETATO TASSATIVAMENTE DA REGOLA #74 (Scontro tra Giganti Offensivi): {home_team} e {away_team} "
+                        f"hanno entrambi potenziale offensivo d'élite (> 2.3 gol/gara). In uno scontro diretto, falli ed espulsioni "
+                        f"spaccano la gara in goleada (es. 3-1, 4-1, 5-0). Gli Under < 4.5 sono vietati per sempre."
+                    ),
+                    league_cluster=recs.league_cluster,
+                    team_archetype="SUPER_CLASH_DOMINANT",
+                    rejection_reason="Divieto assoluto di Under stretti/medi tra due superpotenze offensive.",
+                    recommended_alternatives=["Over 1.5 Gol Totali", "Gol / Gol (BTTS)", "Chance Mix 1X o Over 1.5"]
+                )
+
         # A) Over 0.5 in campionati a logoramento difensivo (Argentina, Brasile, ecc.)
         if recs.league_cluster == "DEFENSIVE_ATTRITION":
             is_over_05 = (
