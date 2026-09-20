@@ -1972,3 +1972,84 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 - **Regola #67 — FATTORE AMBIENTALE AD ALTA TOSSICITÀ NELLE COPPE EUROPEE (Ban Doppie Chance Esterne nei Campi Caldi - Gate 0.3)**:
   - Nelle notti di coppe europee UEFA (Champions, Europa League, Conference), è TASSATIVAMENTE VIETATO scommettere su esiti a favore della squadra in trasferta (`2 fisso`, `X2`, `X2 + MultiGol`) contro club di Turchia (Besiktas, Galatasaray, Fenerbahce, Trabzonspor), Grecia (Olympiakos, Panathinaikos, PAOK, AEK) e Balcani (Stella Rossa, Partizan).
   - *Motivazione*: L'aggressività ambientale, la pressione del tifo e la carica agonistica azzerano il gap teorico di xG/rosa e producono disastri ad alta varianza (Lezione Besiktas 4-1 Marsiglia). Nelle trasferte in questi stadi caldi, giocare solo mercati neutri o Under/Over gol/cartellini.
+
+
+
+## Sessione 19 Settembre 2026 — Retrospettiva Critica del Sabato Nero & Nascita del Floor-Level Compounding Engine
+
+### Risultati Sessione & Post-Mortem Spietato
+* 🔴 **Ticket 50€ Chicche**: Perso su Udinese-Cagliari (Udinese 0-1 Cagliari). Nonostante il dominio territoriale friulano, l'Udinese non segna e Maldini punisce in contropiede.
+* 🔴 **Ticket 50€ Nottingham**: Perso su Nottingham-Coventry (Nottingham 0-1 Coventry). Coventry a 0 punti e 0 gol vince al City Ground.
+* 🟢 **Analisi Esatta dell'Agnosticismo (Lezione del Tipster)**: Le selezioni del tipster agnostiche (`MultiGol 0-2 1°T + 1-3 2°T` a Udine, `X2` del Friburgo finita 2-2, `1X+OV1.5` del Werder finita 3-2) hanno trionfato proprio perché NON dipendevano dal gol o dalla vittoria di una specifica favorita, ma assorbivano l'imprevisto dell'underdog.
+
+---
+
+### Nuove Regole Codificate nel Codice (`services/analysis/floor_compounding_scanner.py` & `scripts/scan_floor_markets.py`)
+
+- **Regola #70 — PROTOCOLLO PAVIMENTO DI SICUREZZA & FLOOR-LEVEL COMPOUNDING (La Strategia del 90%+ di Realizzazione)**:
+  1. **Principio Fondamentale (Abbattimento Totale del Rischio Dogmatico)**:
+     - Stop all'inseguimento di quote speculative a varianza ingestibile (1.60 - 2.00) che impongono a una specifica favorita di vincere o segnare.
+     - L'investimento scientifico si sposta sui **Mercati Pavimento (Floor Markets)**: soglie minime di volume fisiologico che si verificano nel **90.0% – 96.0%** delle partite professionistiche in qualsiasi campionato del mondo.
+  2. **I 4 Mercati Pavimento Ammessi (Floor Categories)**:
+     - **Corner Floor**: `Over 3.5 / Over 4.5 Corner Totali` (P reale: 92% - 99%). In 90 minuti di qualsiasi campionato, 4-5 deviazioni sul fondo o cross ribattuti arrivano per mera fisica di gioco.
+     - **Gol Floor**: `Over 0.5 Totale Partita / MultiGol 1-5 Totale` (P reale: 92% - 96%). Lo 0-0 si verifica solo nel 5-8% dei casi; MultiGol 1-5 assorbe tutti i punteggi reali (1-0, 0-1, 2-0, 1-1, 2-1, 2-2, 3-1).
+     - **Tiri Floor**: `Over 15.5 / Over 16.5 Tiri Totali Partita` (P reale: 92% - 98%). Volume combinato che non dipende dall'esito o dalla precisione balistica.
+     - **Cartellini Ceiling Floor**: `Under 6.5 / Under 7.5 Cartellini Totali` (P reale: 90% - 95%) in campionati a basso attrito.
+  3. **Le Due Strutture di Compounding Matematico**:
+     - **La Doppia d'Acciaio**: Combina 2 selezioni floor a quota `1.13 — 1.18` ciascuna.
+       - Quota finale combinata: **`@ 1.28 — 1.38`**
+       - Probabilità reale congiunta: **`86.0% — 91.0%`**
+       - Resa netta sul capitale: **`+28.0% — +38.0% netto`** per singolo ciclo!
+     - **La Tripla Blindata**: Combina 3 selezioni floor.
+       - Quota finale combinata: **`@ 1.45 — 1.60`**
+       - Probabilità reale congiunta: **`80.0% — 85.0%`**
+       - Resa netta sul capitale: **`+45.0% — +60.0% netto`**!
+  4. **I 3 Divieti Assoluti (Hard Floor Gates)**:
+     - 🚫 **Divieto 1X2 / Vincente Secca**: Anche a quota 1.10, vietato scommettere sulla vittoria secca (Lezione Udinese 0-1, Nottingham 0-1).
+     - 🚫 **Divieto Mercati Monosquadra**: La giocata non deve mai dipendere dal fatto che una specifica squadra riesca a segnare.
+     - 🚫 **Divieto Scadenza Intermedia 45'**: Consentiti solo mercati con 90 minuti pieni di vita.
+  5. **Filtro Anti-Chasing & Hard Stop-Loss Giornaliero (Gate 8.8)**:
+     - Se un ticket pomeridiano fallisce, la sessione di quel turno è **IMMEDIATAMENTE CONGELATA**. È tassativamente vietato piazzare ticket di "recupero" serali emotivi a quote compresse. Il capitale si protegge fermandosi e ripartendo a mente lucida.
+
+- **Regola #71 — PROFILAZIONE TATTICA DNA CAMPIONATO & SQUADRE (League & Team Tactical DNA Matching)**:
+  - 🛑 **Divieto Assoluto di Mercati Generici Ciechi**:
+    È TASSATIVAMENTE VIETATO proporre lo stesso mercato floor o standard per qualsiasi campionato o squadra senza averne prima controllato l'incompatibilità con il DNA statistico e tattico.
+  - 🔬 **I 4 Grandi Cluster Tattici Codificati (`services/analysis/league_dna_market_matcher.py`)**:
+    1. **Cluster 1: DEFENSIVE_ATTRITION (Argentina, Brasileirão, Serie B, Colombia, Uruguay)**:
+       - *DNA*: Ritmi spezzettati da falli continui, baricentri bassi, xG medio $\le 2.15$, 0-0 frequente nel 18.2% dei casi, media corner ridotta a ~8.5.
+       - *Semaforo Verde (Consigliati P $\ge$ 88%-96%)*:
+         - **`Under 3.0 Asiatico (o Under 3.25)`**: Incassa con 0, 1, 2 gol; con esattamente 3 gol scatta il RIMBORSO TOTALE 100% (Push @ 1.00). $P(\text{No Loss}) = 88.31\%$.
+         - `Under 3.5 Gol Totali` / `GG in Entrambi i Tempi: NO` ($P = 98.2\%$).
+         - `Draw No Bet (DNB / AH 0.0)` su favorita per neutralizzare l'alta frequenza di pareggi.
+         - `Over 4.5 / 5.5 Cartellini Totali`.
+       - *Semaforo Rosso (VIETATI TASSATIVAMENTE)*:
+         - ❌ **`Over 0.5 Gol Totali`**: TRAPPOLA MORTALE DELLO 0-0! Giocare Over 0.5 a quota 1.06-1.10 in Argentina distrugge il bankroll (Edge -15%).
+         - ❌ `Over Corner Totali > 7.5`: I falli a centrocampo spezzano le manovre offensive prima della linea di fondo.
+         - ❌ `Over 2.5 Gol`.
+    2. **Cluster 2: OPEN_BALLISTIC_TRANSITION (MLS USA, Bundesliga, Eredivisie, Scandinavia, Austria)**:
+       - *DNA*: Campi larghi, difese alte e allegre, transizioni rapide coast-to-coast, xG medio $\ge 3.18$, frequenza 0-0 inferiore al 6%, produzione balistica e corner elevatissima (media 10.8 corner/partita).
+       - *Semaforo Verde (Consigliati P $\ge$ 88%-96%)*:
+         - **`Over 6.5 / Over 7.5 Corner Totali Incontro`**: Il mercato d'elezione per la MLS ($P \ge 91\%$).
+         - **`Chance Mix: X2 o Over 1.5`** (o `1X o Over 1.5`): $P \ge 94\%-96\%$.
+         - **`Draw No Bet (DNB / AH 0.0)`** su favorita in trasferta: Rimborsa il pareggio ad alto punteggio (2-2) a quote remunerative (@ 1.55 - 1.68).
+         - `Over 1.5 Gol Totali Partita` ($P \ge 84.5\%$).
+       - *Semaforo Rosso (VIETATI TASSATIVAMENTE)*:
+         - ❌ `Under Stretti (Under 2.5 / 3.0)`: Altissimo rischio di 2-2, 3-1.
+         - ❌ `1X2 Secco in Trasferta a quota compressa`: Viaggi lunghi e fattore campo rendono i pareggi frequenti.
+         - ❌ `No Gol (BTTS No)`.
+    3. **Cluster 3: ASYMMETRIC_DOMINANCE (City, Barca, Real, Sporting CP, Bayern, PSG vs Blocco Basso)**:
+       - *DNA*: Possesso palla $> 65\%$, 18-22 tiri verso lo specchio, avversario rintanato nella propria area.
+       - *Semaforo Verde*:
+         - **`Corner Squadra Favorita Over 3.5 / 4.5`** ($P \ge 93\%$).
+         - **`Chance Mix: 1X o Over 1.5`** ($P \ge 97\%$).
+         - **`Parate Portiere Sfavorita Over 2.5 / 3.5`** (7-10 tiri nello specchio subiti).
+         - **`Over Fuorigioco Sfavorita`** (contro la linea alta di Flick al Barça o Aston Villa).
+       - *Semaforo Rosso*:
+         - ❌ `1 Fisso a Quota Compressa (< 1.65)` (Gate 0).
+         - ❌ `MultiGol 1-3 Squadra` (Gate 0.75 Anti-Ceiling: rischio goleada 4-0, 5-0).
+    4. **Cluster 4: PRAGMATIC_MANAGEMENT / CORTO MUSO (Napoli con Allegri, Atletico Madrid con Simeone, Huracán, Corinthians)**:
+       - *DNA*: Gestione del minimo scarto, baricentro basso dopo il vantaggio, clean sheet prioritario (frequenza 1-0/0-1 $> 25\%$).
+       - *Semaforo Verde*: `1X + MultiGol 1-5`, `Under 3.5`, `Draw No Bet (DNB)`, `MultiGol 1-3 Squadra`.
+       - *Semaforo Rosso*: ❌ Combo rigide con Over 1.5 (`1X + Over 1.5`, `1 + Over 1.5`).
+  - 📌 **Integrazione Obbligatoria (Gate 0.90 di `StrictTicketPipeline`)**:
+    Ogni selezione pre-schedina DEVE essere verificata con `LeagueDNAMarketMatcher.check_market_suitability()` (`scripts/audit_match_dna.py`). Se il mercato proposto appartiene al Semaforo Rosso per il DNA di quella specifica sfida, il ticket viene **BOCCIATO AUTOMATICAMENTE**.

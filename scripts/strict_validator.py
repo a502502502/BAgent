@@ -187,6 +187,7 @@ def main():
     parser.add_argument("--bankroll", type=float, default=100.0, help="Bankroll liquido attuale in euro")
     parser.add_argument("--stake", type=float, default=None, help="Stake proposto in euro")
     parser.add_argument("--match", type=str, help="Nome della partita")
+    parser.add_argument("--tournament", "--league", dest="tournament", type=str, default="", help="Campionato o torneo")
     parser.add_argument("--market", type=str, help="Nome del mercato proposto")
     parser.add_argument("--odd", type=float, help="Quota bookmaker")
     parser.add_argument("--type", type=str, default="", help="Tipologia mercato (1X2, CORNER, FIRST_HALF, COMBO, GOALS)")
@@ -240,7 +241,7 @@ def main():
     if args.match and args.market and args.odd:
         c = MarketCandidate(
             match_name=args.match,
-            tournament="",
+            tournament=args.tournament,
             market_name=args.market,
             bookmaker_odd=args.odd,
             market_type=args.type,
