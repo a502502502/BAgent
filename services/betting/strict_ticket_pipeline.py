@@ -171,7 +171,7 @@ class StrictTicketPipeline:
         banned_leagues_keywords = [
             "SERIE B", "LIGUE 2", "LALIGA 2", "LA LIGA 2", "2. BUNDESLIGA", "2.BUNDESLIGA",
             "CHAMPIONSHIP", "LEAGUE ONE", "LEAGUE TWO", "EERSTE DIVISIE", "PRIMERA NACIONAL",
-            "PRIMERA B", "SEGUNDA", "SECOND DIVISION", "MLS NEXT PRO", "ISTHMIAN", "SOUTHERN LEAGUE",
+            "PRIMERA B", "PRIMERA C", "PRIMERA D", "METROPOLITANA", "TORNEO FEDERAL", "SEGUNDA", "SECOND DIVISION", "MLS NEXT PRO", "ISTHMIAN", "SOUTHERN LEAGUE",
             "REGIONALLIGA", "SERIE C", "SERIE D", "AMATORI", "DILETTANTI", "NATIONAL LEAGUE"
         ]
         banned_reserve_keywords = [
