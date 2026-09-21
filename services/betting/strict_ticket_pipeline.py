@@ -484,6 +484,17 @@ class StrictTicketPipeline:
                 details="Manca la colonna motivazione tattica e Sesto Senso."
             )
 
+        # Audit Semantico Automatico via Hugging Face SportsBERT RAG
+        try:
+            from services.nlp.sports_semantic_rag import get_sports_semantic_rag
+            rag = get_sports_semantic_rag()
+            sem_report = rag.audit_text_semantics(candidate.sixth_sense_analysis)
+            for sem_flag in sem_report.get("flags", []):
+                if sem_flag not in candidate.sixth_sense_risk_flags:
+                    candidate.sixth_sense_risk_flags.append(sem_flag)
+        except Exception:
+            pass
+
         # Controllo coppe infrasettimanali
         risk_flags_upper = [f.upper() for f in candidate.sixth_sense_risk_flags]
         has_cup = candidate.has_upcoming_midweek_cup or "MIDWEEK_CUP" in risk_flags_upper
