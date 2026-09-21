@@ -20,9 +20,9 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-DB_PATH = ROOT / "storage" / "database" / "bagent.db"
+DB_PATH = ROOT / "data" / "bagent.db"
 if not DB_PATH.exists():
-    DB_PATH = ROOT / "data" / "bagent.db"
+    DB_PATH = ROOT / "storage" / "database" / "bagent.db"
 
 # Caricamento credenziali da .env
 env_path = ROOT / ".env"

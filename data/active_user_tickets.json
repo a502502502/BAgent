@@ -1,0 +1,31 @@
+[
+  {
+    "match": "Celtic vs Ferencvaros",
+    "keywords": ["celtic", "ferencvaros"],
+    "favorite": "HOME",
+    "active_bets": [
+      "1X + MultiGol 1-4 (@ 1.49)",
+      "Over 6.5 Corner Squadra 1 - Celtic (@ 2.22)"
+    ],
+    "ticket_summary": "Ticket Principale (1X + MG 1-4) & Paracadute Corner (Over 6.5 Corner Celtic)"
+  },
+  {
+    "match": "Crystal Palace vs Lech Poznan",
+    "keywords": ["crystal palace", "palace", "lech"],
+    "favorite": "HOME",
+    "active_bets": [
+      "1X + MultiGol 1-4 (@ 1.44)",
+      "Over 6.5 Corner Squadra 1 - Palace (@ 2.22)"
+    ],
+    "ticket_summary": "Ticket Principale (1X + MG 1-4) & Paracadute Corner (Over 6.5 Corner Palace)"
+  },
+  {
+    "match": "Besiktas vs Marseille",
+    "keywords": ["besiktas", "marseille", "marsiglia"],
+    "favorite": "AWAY",
+    "active_bets": [
+      "X2 + MultiGol 1-4 (@ 2.12)"
+    ],
+    "ticket_summary": "Ticket 2 (X2 + MG 1-4 Marsiglia, OFI 2-0 già VINTA)"
+  }
+]

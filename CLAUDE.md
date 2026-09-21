@@ -361,30 +361,7 @@ Sistema di analisi scommesse sportive (calcio + tennis) con:
   - 🛡️ **Gate 6.5 Automatizzato (`StrictTicketPipeline`)**:
     La pipeline interroga automaticamente la cache quote Netwin. Se la quota reale Netwin è decurtata rispetto alla quota teorica al punto da far scendere l'Edge sotto al $+4.0\%$, scatta il blocco immediato per `[BLOCCATO - GATE 6.5: NETWIN AGGIO TRAP]`, evitando a monte qualsiasi scommessa a valore atteso negativo.
 
-- **Regola #67 — PROTOCOLLO PARACADUTE ERMETICO & BLINDO-DIPENDENZA DEI TICKET (Anti-Decoupling & Zero Cross-Leg Vulnerability)**:
-  - 🛑 **Divieto Assoluto di Paracadute Disaccoppiato o con Buchi Ciechi**:
-    È TASSATIVAMENTE VIETATO proporre una coppia Schedina Principale + Paracadute in cui:
-    1. Il Paracadute copre una selezione che risolve per prima o muore lasciando scoperte altre selezioni ad alta varianza nella Principale (Lezione Adelaide 3-0 e Machida 2-0 del 17/09/2026);
-    2. Esistono "buchi ciechi" nello spazio degli esiti del match Pivot (es. Principale con X2+Over 1.5 e Paracadute con 1X: se il match finisce 0-1, entrambe le schedine muoiono!);
-    3. Le selezioni in comune (Basi Anchor) contengono condizioni di Over/Gol fragili (Over 1.5 o Over 2.5) che, in caso di risultato corto (0-1 o 1-0), distruggono contemporaneamente sia la Principale che il Paracadute.
-  - 🔬 **I 4 Comandamenti dell'Architettura Paracadute Ermetico**:
-    1. **Asse Pivotale Unico & Spazio Esiti Coniugato al 100%**: Può variare UN SOLO evento tra Principale e Paracadute (il Match Pivot). Le due scommesse su questo match devono coprire tassativamente il 100% dei risultati verosimili (es. 1X + Under 3.5 vs X2 + Under 3.5; oppure 1X vs X2). Sul pareggio scatta la **Doppia Cassa**;
-    2. **Basi Comuni (Anchor) Ultra-Resilienti ($P \ge 82\%-85\%$)**: Le selezioni condivise devono essere ESCLUSIVAMENTE Doppie Chance protette (`X2 + Under 4.5`, `1X + Under 4.5`, `X2` secca su big superiore). MAI Over o mercati binari come base comune;
-    3. **Cronologia Protetta**: Il match Pivot deve preferibilmente disputarsi CONCURRENTEMENTE o DOPO le basi comuni, così che l'intera esposizione finanziaria sia governata dalla copertura ermetica;
-    4. **Soglia di Recupero Integrale**: La quota del Paracadute $Q_2$ e il suo stake $S_2$ devono sempre soddisfare la condizione di Zero Perdita: $S_2 \times Q_2 \ge S_{tot}$.
-
-- **Regola #68 — PROTOCOLLO BLACKOUT NOTIFICHE SU TICKET PERSO (Zero Spam & Immediate Silence Gate)**:
-  - 🛑 **Divieto Assoluto di Notifiche su Giocate Compromesse**:
-    È TASSATIVAMENTE VIETATO inviare notifiche Telegram, alert sonori o aggiornamenti live sulle partite successive di una schedina quando la schedina (o tutti i ticket attivi della sessione) è GIÀ MATEMATICAMENTE PERSA.
-  - 🔬 **Motivazione & Psicologia Operativa**:
-    Ricevere notifiche sul fischio d'inizio, gol segnati o parziali di un match (come Shanghai Shenhua alle 14:15) dopo che il ticket è già saltato per un evento precedente (Machida 2-0 o Adelaide) è inutile rumore, disturbo e frustrazione per l'utente. Se il biglietto è morto, la partita non ha più alcun valore economico né operativo.
-  - 📌 **Direttiva di Disattivazione Automatica nel Codice (`LiveSentinelDaemon`)**:
-    1. **Check di Vitalità Pre-Notifica (`is_ticket_alive`)**: Prima di inviare qualsiasi messaggio Telegram relativo a un match, il demone DEVE verificare lo stato complessivo del ticket in `ticket_ledger`. Se il ticket ha fallito una selezione ed è contrassegnato come `LOST` (o se non ci sono ticket attivi in corso che dipendono da quel match), l'invio della notifica è **BLOCCATO ALLA RADICE (MUTE TOTALE)**.
-    2. **Notifica Unica di Chiusura / Post-Mortem**: L'unica notifica concessa è il messaggio formale di chiusura al momento del verdetto negativo definitivo (`❌ TICKET PERSO: [motivo]`). Dopodiché, il demone entra in modalità **SILENZIO ASSOLUTO** e termina il thread di monitoraggio per le restanti partite di quel ticket.
-    3. **Ripristino Allerte solo su Nuovi Ticket Attivi**: Il flusso delle notifiche si riattiva esclusivamente quando l'utente conferma e registra una nuova giocata con status `PENDING` (es. Ticket #90 del pomeriggio).
-
 ---
-
 
 
 ## Struttura Cartelle
@@ -1971,27 +1948,111 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 ---
 
-## 🛑 PROTOCOLLI OPERATIVI CRITICI — 17 & 18 SETTEMBRE 2026
+## Sessione 17 Settembre 2026 — Europa League, Post-Mortem Chirurgico & Nuovi Hard Gates
 
-### 🛡️ REGOLA #67 — PROTOCOLLO PARACADUTE ERMETICO & BLINDO-DIPENDENZA DEI TICKET
-1. **Due Partite per Volta ("2 partite alla volta")**: Nessun sistema multi-ticket può eccedere 2 match per blocco operativo.
-2. **Anti-Decoupling & Zero Over Fragili**: È tassativamente vietato inserire Over fragili o mercati ad alta varianza nella gamba di base comune (es. Leg 1). La base comune deve essere una roccia difensiva (es. X2, Under 4.5, Under 3.5 o MultiGol resiliente).
-3. **Pivot Coniugato e Complementare (Leg 2)**:
-   - Schedina Principale: copre l'esito a maggiore probabilità (es. 1X + Under/Over).
-   - Schedina Paracadute: copre specularmente l'esito opposto (es. X2 + Under/Over) con stake calcolato per garantire il rimborso 100% (Break-Even) o piccolo utile.
-   - **Doppia Cassa su Pareggio**: La combinazione dei due mercati DEVE SEMPRE incassare entrambi i ticket in caso di pareggio (0-0, 1-1, 2-2).
-4. **Quota Minima**: La quota complessiva della Principale deve essere sempre `>= 2.00×`.
+### Risultati Serata & Bilancio
+* 🟢 **Ticket 3 (€25.00 @ 1.98 ➔ €49.50) VINTO E INCASSATO**: Levski Sofia 0-1 Salzburg (`X2`) ✅ + Real Betis 1-0 Getafe (`1X + Under 3.5`) ✅.
+* 🔴 **Ticket 2 (€10.00 @ 3.25)**: OFI Creta 2-0 Hoffenheim (`MG 1-4`) ✅ + Besiktas 4-1 Marsiglia (`X2 + MG 1-4`) ❌ (Marsiglia travolto a Istanbul).
+* 🔴 **Ticket Principale 21:00 (€30.00 @ 2.15)**: Crystal Palace 4-0 Lech Poznan (`1X + MG 1-4`) ✅ + Celtic 1-3 Ferencvaros (`1X + MG 1-4`) ❌ (Celtic disastroso in difesa).
+* 🔴 **Ticket Paracadute Corner (€5.00 @ 4.93)**: Celtic Over 6.5 Corner Squadra 1 (11 corner battuti!) ✅ + Crystal Palace Over 6.5 Corner Squadra 1 (si è fermato a 6 corner sul 4-0) ❌.
 
-### 🔕 REGOLA #68 — PROTOCOLLO BLACKOUT NOTIFICHE SU TICKET PERSO (Zero Spam Gate)
-1. **Cessazione Immediata**: Nel momento in cui un ticket risulta matematicamente perso (es. 1° evento fallito o condizione invalidata), scatta il **blackout assoluto delle notifiche** su quel ticket e sulle partite successive ad esso collegate.
-2. **Zero Disturbo Utente**: È severamente vietato inviare aggiornamenti live, alert gol o resoconti intermedi su selezioni orfane o irrilevanti per la cassa.
-3. **Aggiornamento Silenzioso a Fine Sessione**: Il bilancio economico viene sincronizzato nel database in background senza disturbare l'utente.
+---
 
-### 🚫 REGOLA #69 — PROTOCOLLO BLOCCO TASSATIVO PER MANCANZA DATI CERTIFICATI & DIVIETO RICOSTRUZIONI FRAMMENTATE
-1. **Hard-Gate Dati Ufficiali**: Se una competizione o una partita non è presente nei feed ufficiali e certificati di BAgent (es. FootyStats API, Sofascore/Flashscore verificati con coperture complete di classifiche, rose e orari), **DEVE ESSERE BLOCCATA AUTOMATICAMENTE DAL VALIDATORE (HARD REJECT)**.
-2. **Ban Leghe Non Coperte (es. Liga Alef, 3ª divisione israeliana o leghe amatoriali/minori)**: È tassativamente vietato proporre scommesse su campionati minori o amatoriali privi di telemetria ufficiale.
-3. **Divieto Assoluto di Fabbricazione / Fonti Frammentate**: È severamente vietato all'agente tentare di dedurre o ricostruire classifiche, punti, forma o rose da snippet di motori di ricerca o fonti non omogenee. In assenza di dati certificati, la risposta obbligatoria deve essere: *"Dati non certificati nel feed ufficiale: partita scartata dal validatore"*.
-4. **Verifica Orario Kickoff Obbligatoria**: Prima di proporre qualsiasi selezione, verificare che il kickoff sia strettamente nel futuro rispetto all'ora corrente (`kickoff_is_future == True`). Qualsiasi match già avviato o in corso deve essere respinto a monte.
+### Nuove Regole Codificate nel Codice (`services/betting/strict_ticket_pipeline.py`)
+
+- **Regola #66 — PROTOCOLLO ASIMMETRICO GAME-STATE SUI CORNER & PARACADUTE IN SINGOLA DIRETTA**:
+  1. **Game-State Bias sui Corner (Gate 0.6)**:
+     - Quando una favorita schiacciante (quota pre-match $\le 1.35$) dilaga subito nel 1° tempo (es. Crystal Palace 3-0 Lech Poznan al 45'), la produzione di corner del 2° tempo crolla fisiologicamente (ritmi bassi, cambi conservativi, possesso orizzontale di congelamento). Palace ha battuto 4 corner nel 1°T e solo 2 nella ripresa, chiudendo a 6 e facendo saltare la linea Over 6.5 per 1 solo corner!
+     - Al contrario, le linee Over Corner alte ($\ge 6.5$) sono micidiali **quando la favorita è sotto o bloccata** (Celtic sotto 1-2 ha scatenato l'inferno battendo **11 corner**!).
+     - *Hard Gate*: Divieto assoluto di linee Over Corner di squadra elevate ($\ge 6.5$) per favorite da possibile goleada rapida (quota $\le 1.35$). Sostituire con linee conservative (Over 4.5/5.5) o mercati aperti sui gol.
+  2. **Paracadute Exclusively in Singola Diretta (Gate 8.5)**:
+     - Un paracadute di copertura difensiva **NON PUÒ MAI ESSERE UNA MULTIPLA** (es. due corner insieme a quota 5.00): se una sola gamba manca per un soffio, l'intera copertura muore.
+     - Il Paracadute DEVE essere giocato come **SINGOLA SECCA** ad alto moltiplicatore (@ 1.85 - 2.40) calibrata per coprire con il payout l'importo esatto del ticket principale.
+
+- **Regola #67 — FATTORE AMBIENTALE AD ALTA TOSSICITÀ NELLE COPPE EUROPEE (Ban Doppie Chance Esterne nei Campi Caldi - Gate 0.3)**:
+  - Nelle notti di coppe europee UEFA (Champions, Europa League, Conference), è TASSATIVAMENTE VIETATO scommettere su esiti a favore della squadra in trasferta (`2 fisso`, `X2`, `X2 + MultiGol`) contro club di Turchia (Besiktas, Galatasaray, Fenerbahce, Trabzonspor), Grecia (Olympiakos, Panathinaikos, PAOK, AEK) e Balcani (Stella Rossa, Partizan).
+  - *Motivazione*: L'aggressività ambientale, la pressione del tifo e la carica agonistica azzerano il gap teorico di xG/rosa e producono disastri ad alta varianza (Lezione Besiktas 4-1 Marsiglia). Nelle trasferte in questi stadi caldi, giocare solo mercati neutri o Under/Over gol/cartellini.
+
+
+
+## Sessione 19 Settembre 2026 — Retrospettiva Critica del Sabato Nero & Nascita del Floor-Level Compounding Engine
+
+### Risultati Sessione & Post-Mortem Spietato
+* 🔴 **Ticket 50€ Chicche**: Perso su Udinese-Cagliari (Udinese 0-1 Cagliari). Nonostante il dominio territoriale friulano, l'Udinese non segna e Maldini punisce in contropiede.
+* 🔴 **Ticket 50€ Nottingham**: Perso su Nottingham-Coventry (Nottingham 0-1 Coventry). Coventry a 0 punti e 0 gol vince al City Ground.
+* 🟢 **Analisi Esatta dell'Agnosticismo (Lezione del Tipster)**: Le selezioni del tipster agnostiche (`MultiGol 0-2 1°T + 1-3 2°T` a Udine, `X2` del Friburgo finita 2-2, `1X+OV1.5` del Werder finita 3-2) hanno trionfato proprio perché NON dipendevano dal gol o dalla vittoria di una specifica favorita, ma assorbivano l'imprevisto dell'underdog.
+
+---
+
+### Nuove Regole Codificate nel Codice (`services/analysis/floor_compounding_scanner.py` & `scripts/scan_floor_markets.py`)
+
+- **Regola #70 — PROTOCOLLO PAVIMENTO DI SICUREZZA & FLOOR-LEVEL COMPOUNDING (La Strategia del 90%+ di Realizzazione)**:
+  1. **Principio Fondamentale (Abbattimento Totale del Rischio Dogmatico)**:
+     - Stop all'inseguimento di quote speculative a varianza ingestibile (1.60 - 2.00) che impongono a una specifica favorita di vincere o segnare.
+     - L'investimento scientifico si sposta sui **Mercati Pavimento (Floor Markets)**: soglie minime di volume fisiologico che si verificano nel **90.0% – 96.0%** delle partite professionistiche in qualsiasi campionato del mondo.
+  2. **I 4 Mercati Pavimento Ammessi (Floor Categories)**:
+     - **Corner Floor**: `Over 3.5 / Over 4.5 Corner Totali` (P reale: 92% - 99%). In 90 minuti di qualsiasi campionato, 4-5 deviazioni sul fondo o cross ribattuti arrivano per mera fisica di gioco.
+     - **Gol Floor**: `Over 0.5 Totale Partita / MultiGol 1-5 Totale` (P reale: 92% - 96%). Lo 0-0 si verifica solo nel 5-8% dei casi; MultiGol 1-5 assorbe tutti i punteggi reali (1-0, 0-1, 2-0, 1-1, 2-1, 2-2, 3-1).
+     - **Tiri Floor**: `Over 15.5 / Over 16.5 Tiri Totali Partita` (P reale: 92% - 98%). Volume combinato che non dipende dall'esito o dalla precisione balistica.
+     - **Cartellini Ceiling Floor**: `Under 6.5 / Under 7.5 Cartellini Totali` (P reale: 90% - 95%) in campionati a basso attrito.
+  3. **Le Due Strutture di Compounding Matematico**:
+     - **La Doppia d'Acciaio**: Combina 2 selezioni floor a quota `1.13 — 1.18` ciascuna.
+       - Quota finale combinata: **`@ 1.28 — 1.38`**
+       - Probabilità reale congiunta: **`86.0% — 91.0%`**
+       - Resa netta sul capitale: **`+28.0% — +38.0% netto`** per singolo ciclo!
+     - **La Tripla Blindata**: Combina 3 selezioni floor.
+       - Quota finale combinata: **`@ 1.45 — 1.60`**
+       - Probabilità reale congiunta: **`80.0% — 85.0%`**
+       - Resa netta sul capitale: **`+45.0% — +60.0% netto`**!
+  4. **I 3 Divieti Assoluti (Hard Floor Gates)**:
+     - 🚫 **Divieto 1X2 / Vincente Secca**: Anche a quota 1.10, vietato scommettere sulla vittoria secca (Lezione Udinese 0-1, Nottingham 0-1).
+     - 🚫 **Divieto Mercati Monosquadra**: La giocata non deve mai dipendere dal fatto che una specifica squadra riesca a segnare.
+     - 🚫 **Divieto Scadenza Intermedia 45'**: Consentiti solo mercati con 90 minuti pieni di vita.
+  5. **Filtro Anti-Chasing & Hard Stop-Loss Giornaliero (Gate 8.8)**:
+     - Se un ticket pomeridiano fallisce, la sessione di quel turno è **IMMEDIATAMENTE CONGELATA**. È tassativamente vietato piazzare ticket di "recupero" serali emotivi a quote compresse. Il capitale si protegge fermandosi e ripartendo a mente lucida.
+
+- **Regola #71 — PROFILAZIONE TATTICA DNA CAMPIONATO & SQUADRE (League & Team Tactical DNA Matching)**:
+  - 🛑 **Divieto Assoluto di Mercati Generici Ciechi**:
+    È TASSATIVAMENTE VIETATO proporre lo stesso mercato floor o standard per qualsiasi campionato o squadra senza averne prima controllato l'incompatibilità con il DNA statistico e tattico.
+  - 🔬 **I 4 Grandi Cluster Tattici Codificati (`services/analysis/league_dna_market_matcher.py`)**:
+    1. **Cluster 1: DEFENSIVE_ATTRITION (Argentina, Brasileirão, Serie B, Colombia, Uruguay)**:
+       - *DNA*: Ritmi spezzettati da falli continui, baricentri bassi, xG medio $\le 2.15$, 0-0 frequente nel 18.2% dei casi, media corner ridotta a ~8.5.
+       - *Semaforo Verde (Consigliati P $\ge$ 88%-96%)*:
+         - **`Under 3.0 Asiatico (o Under 3.25)`**: Incassa con 0, 1, 2 gol; con esattamente 3 gol scatta il RIMBORSO TOTALE 100% (Push @ 1.00). $P(\text{No Loss}) = 88.31\%$.
+         - `Under 3.5 Gol Totali` / `GG in Entrambi i Tempi: NO` ($P = 98.2\%$).
+         - `Draw No Bet (DNB / AH 0.0)` su favorita per neutralizzare l'alta frequenza di pareggi.
+         - `Over 4.5 / 5.5 Cartellini Totali`.
+       - *Semaforo Rosso (VIETATI TASSATIVAMENTE)*:
+         - ❌ **`Over 0.5 Gol Totali`**: TRAPPOLA MORTALE DELLO 0-0! Giocare Over 0.5 a quota 1.06-1.10 in Argentina distrugge il bankroll (Edge -15%).
+         - ❌ `Over Corner Totali > 7.5`: I falli a centrocampo spezzano le manovre offensive prima della linea di fondo.
+         - ❌ `Over 2.5 Gol`.
+    2. **Cluster 2: OPEN_BALLISTIC_TRANSITION (MLS USA, Bundesliga, Eredivisie, Scandinavia, Austria)**:
+       - *DNA*: Campi larghi, difese alte e allegre, transizioni rapide coast-to-coast, xG medio $\ge 3.18$, frequenza 0-0 inferiore al 6%, produzione balistica e corner elevatissima (media 10.8 corner/partita).
+       - *Semaforo Verde (Consigliati P $\ge$ 88%-96%)*:
+         - **`Over 6.5 / Over 7.5 Corner Totali Incontro`**: Il mercato d'elezione per la MLS ($P \ge 91\%$).
+         - **`Chance Mix: X2 o Over 1.5`** (o `1X o Over 1.5`): $P \ge 94\%-96\%$.
+         - **`Draw No Bet (DNB / AH 0.0)`** su favorita in trasferta: Rimborsa il pareggio ad alto punteggio (2-2) a quote remunerative (@ 1.55 - 1.68).
+         - `Over 1.5 Gol Totali Partita` ($P \ge 84.5\%$).
+       - *Semaforo Rosso (VIETATI TASSATIVAMENTE)*:
+         - ❌ `Under Stretti (Under 2.5 / 3.0)`: Altissimo rischio di 2-2, 3-1.
+         - ❌ `1X2 Secco in Trasferta a quota compressa`: Viaggi lunghi e fattore campo rendono i pareggi frequenti.
+         - ❌ `No Gol (BTTS No)`.
+    3. **Cluster 3: ASYMMETRIC_DOMINANCE (City, Barca, Real, Sporting CP, Bayern, PSG vs Blocco Basso)**:
+       - *DNA*: Possesso palla $> 65\%$, 18-22 tiri verso lo specchio, avversario rintanato nella propria area.
+       - *Semaforo Verde*:
+         - **`Corner Squadra Favorita Over 3.5 / 4.5`** ($P \ge 93\%$).
+         - **`Chance Mix: 1X o Over 1.5`** ($P \ge 97\%$).
+         - **`Parate Portiere Sfavorita Over 2.5 / 3.5`** (7-10 tiri nello specchio subiti).
+         - **`Over Fuorigioco Sfavorita`** (contro la linea alta di Flick al Barça o Aston Villa).
+       - *Semaforo Rosso*:
+         - ❌ `1 Fisso a Quota Compressa (< 1.65)` (Gate 0).
+         - ❌ `MultiGol 1-3 Squadra` (Gate 0.75 Anti-Ceiling: rischio goleada 4-0, 5-0).
+    4. **Cluster 4: PRAGMATIC_MANAGEMENT / CORTO MUSO (Napoli con Allegri, Atletico Madrid con Simeone, Huracán, Corinthians)**:
+       - *DNA*: Gestione del minimo scarto, baricentro basso dopo il vantaggio, clean sheet prioritario (frequenza 1-0/0-1 $> 25\%$).
+       - *Semaforo Verde*: `1X + MultiGol 1-5`, `Under 3.5`, `Draw No Bet (DNB)`, `MultiGol 1-3 Squadra`.
+       - *Semaforo Rosso*: ❌ Combo rigide con Over 1.5 (`1X + Over 1.5`, `1 + Over 1.5`).
+  - 📌 **Integrazione Obbligatoria (Gate 0.90 di `StrictTicketPipeline`)**:
+    Ogni selezione pre-schedina DEVE essere verificata con `LeagueDNAMarketMatcher.check_market_suitability()` (`scripts/audit_match_dna.py`). Se il mercato proposto appartiene al Semaforo Rosso per il DNA di quella specifica sfida, il ticket viene **BOCCIATO AUTOMATICAMENTE**.
 
 ---
 
@@ -1999,7 +2060,7 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 * **Piattaforma**: Netwin | **Stato**: 🏆 **VINTA AL 100% (EN PLEIN 7 SU 7)**
 * **Identificativo Ticket**: `TICKET_CASSAFORTE_23EUR_18SET`
 * **Importo Puntato**: **`23.00 €`** | **Quota Totale**: **`7.79×`** | **Bonus Multipla**: **`+10.74 €`** | **Vincita Incassata**: **`189.86 €`**
-* **Profitto Netto**: **`+166.86 €`** | **Nuovo Bankroll**: **`204.18 €`** (da 37.32 € iniziali)
+* **Profitto Netto**: **`+166.86 €`** | **Bankroll Salito a**: **`204.18 €`** (da 37.32 € iniziali)
 
 | # | Evento & Torneo | Mercato | Quota | Risultato Finale | Esito |
 |---|---|:---:|:---:|:---:|:---:|
@@ -2013,6 +2074,14 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 ---
 
+### 🚫 REGOLA #69 — PROTOCOLLO BLOCCO TASSATIVO PER MANCANZA DATI CERTIFICATI & DIVIETO RICOSTRUZIONI FRAMMENTATE
+1. **Hard-Gate Dati Ufficiali**: Se una competizione o una partita non è presente nei feed ufficiali e certificati di BAgent (es. FootyStats API, Sofascore/Flashscore verificati con coperture complete di classifiche, rose e orari), **DEVE ESSERE BLOCCATA AUTOMATICAMENTE DAL VALIDATORE (HARD REJECT)**.
+2. **Ban Leghe Non Coperte (es. Liga Alef, 3ª divisione israeliana o leghe amatoriali/minori)**: È tassativamente vietato proporre scommesse su campionati minori o amatoriali privi di telemetria ufficiale.
+3. **Divieto Assoluto di Fabbricazione / Fonti Frammentate**: È severamente vietato all'agente tentare di dedurre o ricostruire classifiche, punti, forma o rose da snippet di motori di ricerca o fonti non omogenee. In assenza di dati certificati, la risposta obbligatoria deve essere: *"Dati non certificati nel feed ufficiale: partita scartata dal validatore"*.
+4. **Verifica Orario Kickoff Obbligatoria**: Prima di proporre qualsiasi selezione, verificare che il kickoff sia strettamente nel futuro rispetto all'ora corrente (`kickoff_is_future == True`). Qualsiasi match già avviato o in corso deve essere respinto a monte.
+
+---
+
 ### 📡 REGOLA #70 — PROTOCOLLO TELEMETRIA LIVE BASATA SU FLASHSCORE / DIRETTA (Zero Stime & Zero Timer Locali)
 1. **Divieto di Timer di Sistema per i Minuti di Gioco**: È severamente vietato stimare il minuto di gara calcolando la differenza tra l'orologio locale e il kickoff (`now - kickoff`).
 2. **Obbligo Motore Delta Feed Ufficiale**: Qualsiasi monitoraggio live o file HTML desktop DEVE attingere esclusivamente dal feed raw di Flashscore/Diretta.it (`local-it.flashscore.ninja/2/x/feed/f_1_0_1_it_1`) tramite `FlashscoreLiveEngine` (`services/football/external/sources/flashscore_live.py`).
@@ -2021,15 +2090,4 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 ---
 
-*Ultimo aggiornamento: 18 settembre 2026 ore 18:15 — BAgent (Bankroll Ufficiale: 204.18 € | Ticket #91 incassato)*
-
-
-
-
-
-
-
-
-
-
-
+*Ultimo aggiornamento: 21 settembre 2026 ore 09:30 — BAgent (Bankroll Ufficiale: 164.18 € | Riconciliato con Mac: Ticket 90/91 e Telegram Mini App)*

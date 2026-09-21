@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>BAgent Mobile — Sports Sentinel</title>
+  
+  <!-- PWA Settings -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/png" href="/static/icons/icon-192.png">
+
+  <!-- Telegram WebApp SDK per Android Mini App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#0a0e17',
+              card: '#121826',
+              border: '#1e293b',
+              accent: '#10b981',
+              warning: '#f59e0b',
+              danger: '#ef4444',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0a0e17;
+      color: #f1f5f9;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom, 16px);
+    }
+    .pulse-dot {
+      box-shadow: 0 0 10px #10b981;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen font-sans antialiased bg-brand-dark text-slate-100 pb-20">
+
+  <!-- TOP APP BAR -->
+  <header class="sticky top-0 z-50 bg-brand-card/90 backdrop-blur-md border-b border-brand-border px-4 py-3 flex items-center justify-between shadow-lg">
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-bold text-white shadow-md">
+        B
+      </div>
+      <div>
+        <h1 class="text-base font-extrabold tracking-tight flex items-center gap-1.5">
+          BAgent <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">ANDROID</span>
+        </h1>
+        <p class="text-[11px] text-slate-400 flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot animate-ping"></span>
+          Live Sentinel Attivo
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <button onclick="refreshData()" class="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 active:scale-95 transition">
+        <svg id="refresh-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- PULL STATUS / BANNER -->
+  <div id="status-bar" class="bg-slate-900/80 px-4 py-1.5 border-b border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+    <span>Ultimo sync: <strong id="last-update" class="text-slate-300">--:--:--</strong></span>
+    <span class="text-emerald-400 font-medium">Auto-refresh 15s</span>
+  </div>
+
+  <!-- MAIN SCROLLABLE CONTAINER -->
+  <main class="flex-1 p-4 max-w-md mx-auto w-full space-y-4">
+
+    <!-- VIEW 1: SCHEDINE IN CORSO (ACTIVE TICKETS) -->
+    <div id="view-active" class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          Schedine In Corso (<span id="active-count">0</span>)
+        </h2>
+      </div>
+
+      <div id="active-container" class="space-y-4">
+        <!-- Scheda dinamica generata via JS -->
+        <div class="p-6 text-center text-slate-500 bg-brand-card rounded-2xl border border-brand-border animate-pulse">
+          Caricamento schedine in corso...
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: SCHEDINE IN ARRIVO (UPCOMING TICKETS) -->
+    <div id="view-upcoming" class="space-y-4 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          Schedine in Arrivo (<span id="upcoming-count">0</span>)
+        </h2>
+      </div>
+
+      <div id="upcoming-container" class="space-y-4">
+        <!-- Schede dinamiche caricate via JS -->
+      </div>
+    </div>
+
+    <!-- VIEW 3: BANKROLL & PERFORMANCE -->
+    <div id="view-bankroll" class="space-y-4 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+          Stato Cassa & Rendimento
+        </h2>
+      </div>
+
+      <div class="bg-brand-card p-5 rounded-2xl border border-brand-border shadow-md space-y-4">
+        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+          <span class="text-xs text-slate-400 font-medium">Bankroll Disponibile</span>
+          <span id="stat-bankroll" class="text-xl font-extrabold text-emerald-400 font-mono">€250.00</span>
+        </div>
+        <div class="grid grid-cols-2 gap-3 pt-1">
+          <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-slate-400 block mb-1">Win Rate Stimato</span>
+            <span id="stat-winrate" class="text-lg font-bold text-white font-mono">75.0%</span>
+          </div>
+          <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-slate-400 block mb-1">Strategia Attiva</span>
+            <span class="text-xs font-semibold text-emerald-300">Strict Pipeline #40</span>
+          </div>
+        </div>
+        <div class="text-[11px] text-slate-400 bg-slate-900/40 p-3 rounded-xl border border-slate-800/80 leading-relaxed">
+          🛡️ <strong>Regole Inviolabili in Vigore:</strong> Max 3-4 selezioni per ticket, zero trappole da 1.20 a 45', quota media target 1.30-1.65 con paracadute Draw No Bet o Under Asiatico.
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION DOCK -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-brand-card/95 backdrop-blur-lg border-t border-brand-border safe-bottom shadow-2xl">
+    <div class="max-w-md mx-auto grid grid-cols-3 h-14">
+      <button onclick="switchTab('active')" id="tab-active" class="flex flex-col items-center justify-center text-emerald-400 transition">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        <span class="text-[10px] font-bold tracking-tight">In Corso</span>
+      </button>
+
+      <button onclick="switchTab('upcoming')" id="tab-upcoming" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-200 transition">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+        </svg>
+        <span class="text-[10px] font-bold tracking-tight">In Arrivo</span>
+      </button>
+
+      <button onclick="switchTab('bankroll')" id="tab-bankroll" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-200 transition">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span class="text-[10px] font-bold tracking-tight">Bankroll</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    let currentTab = 'active';
+
+    // Inizializzazione Telegram WebApp per Android
+    if (window.Telegram && window.Telegram.WebApp) {
+      try {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+        if (window.Telegram.WebApp.setHeaderColor) {
+          window.Telegram.WebApp.setHeaderColor('#0a0e17');
+        }
+        if (window.Telegram.WebApp.setBackgroundColor) {
+          window.Telegram.WebApp.setBackgroundColor('#0a0e17');
+        }
+      } catch (e) {
+        console.log('Telegram WebApp init:', e);
+      }
+    }
+
+    function triggerHaptic(type = 'light') {
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+        try {
+          window.Telegram.WebApp.HapticFeedback.impactOccurred(type);
+        } catch (e) {}
+      }
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      ['active', 'upcoming', 'bankroll'].forEach(t => {
+        const view = document.getElementById(`view-${t}`);
+        const btn = document.getElementById(`tab-${t}`);
+        if (t === tab) {
+          view.classList.remove('hidden');
+          btn.className = 'flex flex-col items-center justify-center text-emerald-400 transition';
+        } else {
+          view.classList.add('hidden');
+          btn.className = 'flex flex-col items-center justify-center text-slate-400 hover:text-slate-200 transition';
+        }
+      });
+    }
+
+    async function fetchData() {
+      try {
+        const [resActive, resUpcoming, resBankroll] = await Promise.all([
+          fetch('/api/tickets/active'),
+          fetch('/api/tickets/upcoming'),
+          fetch('/api/bankroll')
+        ]);
+
+        if (resActive.ok) {
+          const dataActive = await resActive.json();
+          renderActive(dataActive);
+        }
+
+        if (resUpcoming.ok) {
+          const dataUpcoming = await resUpcoming.json();
+          renderUpcoming(dataUpcoming);
+        }
+
+        if (resBankroll.ok) {
+          const dataBankroll = await resBankroll.json();
+          renderBankroll(dataBankroll);
+        }
+
+        const now = new Date();
+        document.getElementById('last-update').innerText = now.toLocaleTimeString();
+      } catch (err) {
+        console.error('Fetch error:', err);
+      }
+    }
+
+    function renderActive(data) {
+      const container = document.getElementById('active-container');
+      document.getElementById('active-count').innerText = data.count || 0;
+
+      if (!data.tickets || data.tickets.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-500 bg-brand-card rounded-2xl border border-brand-border">
+            <p class="text-sm font-medium">Nessuna schedina attiva in questo momento.</p>
+            <p class="text-xs text-slate-600 mt-1">Controlla la sezione "In Arrivo" per le prossime proposte.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = data.tickets.map(t => {
+        return `
+          <div class="bg-brand-card rounded-2xl border border-brand-border overflow-hidden shadow-xl">
+            <!-- Header Ticket -->
+            <div class="p-4 bg-gradient-to-r from-slate-900 to-slate-800/80 border-b border-brand-border flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono text-emerald-400 uppercase tracking-wider font-bold">● ${t.ticket_id}</span>
+                <h3 class="text-sm font-bold text-white mt-0.5">${t.description}</h3>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-slate-400 block">Quota Tot.</span>
+                <span class="text-base font-extrabold text-amber-400 font-mono">@ ${t.total_odds.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <!-- Financial Summary -->
+            <div class="px-4 py-2 bg-slate-950/40 flex justify-between text-[11px] font-mono text-slate-400 border-b border-slate-800/60">
+              <span>Puntata: <strong class="text-slate-200">€${t.stake_eur.toFixed(2)}</strong></span>
+              <span>Potenziale Vincita: <strong class="text-emerald-400">€${t.payout_eur.toFixed(2)}</strong></span>
+            </div>
+
+            <!-- Legs List -->
+            <div class="p-3 space-y-2.5">
+              ${t.legs.map((leg, idx) => {
+                let badgeColor = 'bg-slate-800 text-slate-300 border-slate-700';
+                let indicatorText = 'In Attesa';
+
+                if (leg.live_indicator === 'SAFE_GREEN') {
+                  badgeColor = 'bg-emerald-950/60 text-emerald-300 border-emerald-800/60';
+                  indicatorText = 'In Controllo 🟢';
+                } else if (leg.live_indicator === 'LIVE_TENSE') {
+                  badgeColor = 'bg-amber-950/60 text-amber-300 border-amber-800/60 animate-pulse';
+                  indicatorText = 'Difesa Linea (3/3.5) 🟡';
+                } else if (leg.live_indicator === 'PUSH_REFUND') {
+                  badgeColor = 'bg-cyan-950/60 text-cyan-300 border-cyan-800/60';
+                  indicatorText = 'Rimborso Push 🛡️';
+                } else if (leg.live_indicator === 'DANGER_RED') {
+                  badgeColor = 'bg-rose-950/60 text-rose-300 border-rose-800/60';
+                  indicatorText = 'Attenzione 🔴';
+                }
+
+                return `
+                  <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800/90 flex flex-col space-y-2">
+                    <div class="flex items-center justify-between text-xs">
+                      <div class="flex items-center gap-1.5 font-bold text-slate-100">
+                        <span class="text-slate-500 font-mono">${idx + 1}.</span>
+                        <span>${leg.match_name}</span>
+                      </div>
+                      <span class="font-mono font-bold text-amber-300">@ ${leg.odds.toFixed(2)}</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-[11px]">
+                      <span class="text-slate-300 font-medium">${leg.market}</span>
+                      <span class="px-2 py-0.5 rounded text-[10px] font-semibold border ${badgeColor}">
+                        ${indicatorText}
+                      </span>
+                    </div>
+
+                    <!-- Live Clock & Score Bar -->
+                    <div class="pt-1 flex items-center justify-between text-[11px] font-mono text-slate-400 border-t border-slate-800/50">
+                      <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        ${leg.clock}
+                      </span>
+                      <span class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded">
+                        ${leg.live_score}
+                      </span>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderUpcoming(data) {
+      const container = document.getElementById('upcoming-container');
+      document.getElementById('upcoming-count').innerText = data.count || 0;
+
+      if (!data.upcoming_tickets || data.upcoming_tickets.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-500 bg-brand-card rounded-2xl border border-brand-border">
+            <p class="text-sm font-medium">Nessuna schedina certificata in coda.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = data.upcoming_tickets.map(t => {
+        return `
+          <div class="bg-brand-card rounded-2xl border border-brand-border overflow-hidden shadow-lg space-y-3 p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">CERTIFICATA</span>
+                <h3 class="text-sm font-bold text-white mt-1">${t.title}</h3>
+              </div>
+              <div class="text-right">
+                <span class="text-[10px] text-slate-400 block">Quota Stimata</span>
+                <span class="text-base font-extrabold text-amber-400 font-mono">@ ${t.total_odds.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <div class="text-[11px] text-slate-300 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+              💡 ${t.reasoning}
+            </div>
+
+            <div class="space-y-2 pt-1">
+              ${t.legs.map(l => {
+                return `
+                  <div class="p-2.5 rounded-xl bg-slate-900/40 border border-slate-800/80 flex flex-col space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-bold text-slate-200">
+                      <span>${l.match}</span>
+                      <span class="text-amber-300 font-mono">@ ${l.odds.toFixed(2)}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px] text-slate-400">
+                      <span class="text-emerald-400 font-medium">${l.market}</span>
+                      <span>Edge: <strong class="text-white">${l.edge}</strong></span>
+                    </div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-800/50">
+                      <span>Netwin Pal: <strong class="text-slate-200">${l.palinsesto}</strong> Avv: <strong class="text-slate-200">${l.avvenimento}</strong></span>
+                      <button onclick="copyToClipboard('${l.palinsesto} / ${l.avvenimento}')" class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-white border border-slate-700 active:scale-95">
+                        Copia Codici
+                      </button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderBankroll(data) {
+      document.getElementById('stat-bankroll').innerText = `€${data.current_bankroll_eur.toFixed(2)}`;
+      document.getElementById('stat-winrate').innerText = `${data.win_rate_pct.toFixed(1)}%`;
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      alert(`Codici AAMS copiati negli appunti: ${text}`);
+    }
+
+    function refreshData() {
+      const icon = document.getElementById('refresh-icon');
+      icon.classList.add('animate-spin');
+      fetchData().finally(() => {
+        setTimeout(() => icon.classList.remove('animate-spin'), 500);
+      });
+    }
+
+    // Auto-polling ogni 15 secondi per aggiornamenti in tempo reale
+    setInterval(fetchData, 15000);
+    window.addEventListener('DOMContentLoaded', fetchData);
+
+    // Registra Service Worker per renderla PWA installabile su Android
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').then(() => {
+        console.log('BAgent Service Worker Registrato');
+      });
+    }
+  </script>
+</body>
+</html>

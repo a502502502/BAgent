@@ -48,8 +48,8 @@ class MarketCandidate:
     verified_sources_checked: bool = True  # Regola #55: Obbligo di consultazione diretta fonti reali
     verified_source_notes: str = ""        # Regola #55: Fonti reali consultate (FootyStats / Sofascore)
     netwin_actual_odd: Optional[float] = None # Pilastro 1: Quota reale rilevata su Netwin.it
-    data_certified: bool = True            # Regola #69: Dati ufficiali verificati da feed primari (classifica, forma)
-    kickoff_is_future: bool = True         # Regola #69: Verifica che la partita non sia già iniziata o passata
+    pre_match_odd_favorite: Optional[float] = None # Quota 1X2 pre-match della favorita
+    is_parachute_market: bool = False      # Regola #66: Mercato inteso come paracadute/copertura difensiva
 
 
 @dataclass
@@ -201,6 +201,40 @@ class StrictTicketPipeline:
             )
 
         # =====================================================================
+        # GATE 0.3: REGOLA #67 - FATTORE AMBIENTALE AD ALTA TOSSICITÀ NELLE COPPE EUROPEE
+        # =====================================================================
+        # Divieto assoluto di scommettere su esiti favorevoli alla squadra in trasferta (2, X2, X2+MG)
+        # contro squadre turche, greche o balcaniche in casa nelle coppe europee UEFA (Champions, EL, Conference).
+        tournament_upper = (candidate.tournament or "").upper()
+        is_uefa_cup = any(c in tournament_upper for c in ["CHAMPIONS", "EUROPA LEAGUE", "CONFERENCE", "UEFA", "INTERNAZIONALI"])
+        hostile_home_teams = [
+            "BESIKTAS", "GALATASARAY", "FENERBAHCE", "TRABZONSPOR",
+            "OLYMPIACOS", "OLYMPIAKOS", "PANATHINAIKOS", "PAOK", "AEK",
+            "CRVENA ZVEZDA", "STELLA ROSSA", "PARTIZAN"
+        ]
+        home_team_name = (
+            candidate.team_name if candidate.team_name
+            else candidate.match_name.split(" vs ")[0] if " vs " in candidate.match_name
+            else candidate.match_name.split(" - ")[0]
+        ).upper()
+        is_hostile_home = any(t in home_team_name for t in hostile_home_teams)
+        is_away_favoring_pick = ("X2" in m_upper or " 2" in m_upper or m_upper.startswith("2") or "OSPITE" in m_upper)
+
+        if is_uefa_cup and is_hostile_home and is_away_favoring_pick:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #67: BAN ESITO ESTERNO IN AMBIENTE AD ALTA TOSSICITÀ] {candidate.market_name} su {candidate.match_name}. "
+                    f"Nelle notti di coppa europea è tassativamente vietato scommettere su esiti a favore della squadra in trasferta "
+                    f"(2 fisso, X2, X2 + MultiGol) nei campi caldi di Turchia, Grecia o Balcani (Lezione Besiktas 4-1 Marsiglia). "
+                    f"La pressione acustica e l'intensità ambientale azzerano i modelli convenzionali di xG generando crolli ad alta varianza."
+                ),
+                details=f"Ambiente ostile rilevato ({home_team_name}) in competizione UEFA."
+            )
+
+        # =====================================================================
         # GATE 0.5: REGOLA #45 - FILTRO VOLUME OFFENSIVO SUI CORNER
         # =====================================================================
         is_corner_market = (
@@ -220,6 +254,37 @@ class StrictTicketPipeline:
                         f"Squadre con possesso orizzontale o basso volume di conclusioni sono vietate per i corner (Lezione Liverpool-Fulham 4-8 corners)."
                     ),
                     details=f"Tiri squadra: {candidate.team_avg_shots:.1f}/partita < 18.0 soglia minima."
+                )
+
+        # =====================================================================
+        # GATE 0.6: REGOLA #66 - GAME-STATE BIAS SUI CORNER (Anti-Blowout Corner Trap)
+        # =====================================================================
+        # Se la favorita è schiacciante (quota pre-match <= 1.35 con alto rischio di 3-0 / 4-0 rapido),
+        # vietare linee Over Corner di squadra elevate (Over >= 6.5 Corner)
+        # perché quando la gara va in ghiaccio nel 1° tempo, l'intensità balistica del 2° tempo crolla.
+        is_team_corner_high_line = (
+            is_corner_market
+            and any(w in m_upper for w in ["SQUADRA", "CASA", "OSPITE", "TEAM"])
+            and any(line in m_upper for line in ["6.5", "7.5", "8.5", "9.5"])
+            and "OVER" in m_upper
+        )
+        if is_team_corner_high_line:
+            is_blowout_risk = (
+                candidate.bookmaker_odd < 1.35
+                or (candidate.pre_match_odd_favorite is not None and candidate.pre_match_odd_favorite <= 1.35)
+            )
+            if is_blowout_risk:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #66: GAME-STATE BIAS SUI CORNER] {candidate.market_name} su {candidate.match_name}. "
+                        f"Le linee Over Corner elevate di squadra (Over >= 6.5) sono vietate per favorite da possibile goleada rapida "
+                        f"(Lezione Crystal Palace 4-0 Lech Poznan: 4 corner nel 1°T, solo 2 nella ripresa sul match già chiuso, fermandosi a 6). "
+                        f"Sostituire con linee conservative (max Over 4.5/5.5) o mercati aperti sui gol."
+                    ),
+                    details="Rischio crollo produzione corner nella ripresa per partita già decisa nel primo tempo."
                 )
 
         # =====================================================================
@@ -297,18 +362,36 @@ class StrictTicketPipeline:
                 )
 
         # =====================================================================
-        # GATE 0.9: REGOLA #52 - SPECIALIZZAZIONE NEI 4 CIRCUITI SATELLITE (BRASILE, ARGENTINA, OLANDA, NORVEGIA)
+        # GATE 0.9: REGOLA #71 - CHECK SUL MERCATO PIÙ ADATTO IN BASE AL CAMPIONATO E ALLA SQUADRA
         # =====================================================================
-        from services.leagues.specialized_leagues_profile import SpecializedLeagueEngine
-        league_target = candidate.tournament or candidate.match_name
-        is_coherent, audit_msg = SpecializedLeagueEngine.audit_market_for_league(league_target, candidate.market_name)
-        if not is_coherent:
+        from services.analysis.league_dna_market_matcher import LeagueDNAMarketMatcher
+        dna_matcher = LeagueDNAMarketMatcher()
+        league_target = candidate.tournament or candidate.match_name or ""
+        
+        # Estrai home e away da match_name
+        parts = candidate.match_name.split(" vs ") if " vs " in candidate.match_name else candidate.match_name.split(" - ")
+        h_team = parts[0].strip() if len(parts) >= 1 else candidate.team_name or ""
+        a_team = parts[1].strip() if len(parts) >= 2 else ""
+
+        dna_res = dna_matcher.check_market_suitability(
+            league=league_target,
+            home_team=h_team,
+            away_team=a_team,
+            market_name=candidate.market_name,
+            market_category=candidate.market_type,
+            bookmaker_odd=candidate.bookmaker_odd
+        )
+        if dna_res.is_prohibited:
+            alts = ", ".join(dna_res.recommended_alternatives) if dna_res.recommended_alternatives else "Consultare matrice DNA"
             return ValidationReport(
                 passed=False,
                 candidate=candidate,
                 stage_failed=0,
-                rejection_reason=audit_msg,
-                details=f"Incompatibilità tra mercato e DNA tattico della lega ({league_target})."
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #71: INCOMPATIBILITÀ CON DNA CAMPIONATO & SQUADRA] {dna_res.tactical_rationale} "
+                    f"Rifiuto: {dna_res.rejection_reason}. Alternative raccomandate da DNA Tattico: ⭐ {alts}."
+                ),
+                details=f"Incompatibilità tra mercato '{candidate.market_name}' e DNA tattico ({dna_res.league_cluster} / {dna_res.team_archetype})."
             )
 
         # =====================================================================
@@ -344,46 +427,6 @@ class StrictTicketPipeline:
                     ),
                     details=f"Δ Punti = {abs(candidate.verified_standings_delta)} <= 3. Scontro equilibrato ad alta volatilità."
                 )
-
-        # =====================================================================
-        # GATE 0.98: REGOLA #69 - BLOCCO TASSATIVO PER MANCANZA DATI CERTIFICATI & MATCH IN CORSO
-        # =====================================================================
-        # 1. Verifica orario: se la partita risulta già iniziata o non futura
-        if not getattr(candidate, "kickoff_is_future", True):
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=0,
-                rejection_reason=(
-                    f"[BLOCCATO - REGOLA #69: MATCH GIÀ INIZIATO O IN CORSO] '{candidate.match_name}' ({candidate.tournament}). "
-                    f"La partita risulta già iniziata o con orario di kickoff superato. "
-                    f"È tassativamente vietato inserire selezioni su eventi in corso o con orari non conformi."
-                ),
-                details="Kickoff superato o partita già avviata."
-            )
-
-        # 2. Controllo campionati privi di feed ufficiale certificato (es. Liga Alef o leghe amatoriali/regionali)
-        banned_uncertified_keywords = [
-            "LIGA ALEF", "ISRAELE 3", "ALEF SOUTH", "ALEF NORTH", "TERZA DIVISIONE",
-            "ECCELLENZA", "PROMOTION LEAGUE", "REGIONAL DIVISION", "DILETTANTI"
-        ]
-        combined_meta = f"{candidate.tournament or ''} {candidate.match_name or ''}".upper()
-        is_uncertified_comp = any(kw in combined_meta for kw in banned_uncertified_keywords)
-        data_certified_flag = getattr(candidate, "data_certified", True)
-
-        if is_uncertified_comp or not data_certified_flag:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=0,
-                rejection_reason=(
-                    f"[BLOCCATO - REGOLA #69: DATI NON CERTIFICATI & DIVIETO FONTI FRAMMENTATE] '{candidate.tournament}' / '{candidate.match_name}'. "
-                    f"La competizione (es. Liga Alef 3ª divisione israeliana o leghe amatoriali/minori) non è presente nei nostri feed ufficiali di campionato. "
-                    f"È tassativamente vietato tentare di ricostruire classifiche o forme da fonti frammentate o approssimative. "
-                    f"Qualsiasi evento privo di dati statistici e orari ufficiali certificati al 100% deve essere BLOCCATO AUTOMATICAMENTE."
-                ),
-                details="Mancanza di feed statistico ufficiale certificato per la competizione."
-            )
 
         # =====================================================================
         # FASE 1, 2, 3: CONTROLLO ANAGRAFICO, SANITARIO & FORMAZIONI
@@ -624,6 +667,24 @@ class StrictTicketPipeline:
             rejection_reasons.append(
                 f"[BLOCCATO - MONEY MANAGEMENT] Stake proposto di €{chosen_stake:.2f} ({stake_pct:.1f}%) "
                 f"supera il limite massimo consentito dell'8% (€{current_bankroll * self.MAX_TICKET_BANKROLL_PCT:.2f})."
+            )
+
+        # =====================================================================
+        # GATE 8.5: REGOLA #66 - DIVIETO PARACADUTE IN MULTIPLA (Solo Singola Diretta)
+        # =====================================================================
+        # Un paracadute di copertura non può mai essere una multipla dipendente da 2 o più eventi:
+        # se uno solo salta, la copertura fallisce vanificando l'hedging.
+        # Deve essere giocato esclusivamente come Singola Secca ad alto moltiplicatore (@ 1.85 - 2.40).
+        is_multi_parachute = len(candidates) > 1 and (
+            any(c.is_parachute_market for c in candidates)
+            or (len(candidates) == 2 and all(("CORNER" in c.market_name.upper() and ("6.5" in c.market_name or "7.5" in c.market_name)) for c in candidates))
+        )
+        if is_multi_parachute:
+            rejection_reasons.append(
+                f"[BLOCCATO - REGOLA #66: PARACADUTE IN MULTIPLA VIETATO] Proposto paracadute di copertura composto da {len(candidates)} eventi (@ {total_odds:.2f}). "
+                f"Il Paracadute per definizione matematica NON può essere una multipla: combinare due linee (es. due Over 6.5 Corner) espone al rischio "
+                f"che un singolo evento manchi di poco (es. Crystal Palace fermatosi a 6 sul 4-0), distruggendo l'intera protezione. "
+                f"Il Paracadute DEVE essere giocato come SINGOLA DIRETTA (@ 1.85 - 2.40) calibrata per coprire con la vincita l'importo del ticket principale."
             )
 
         ticket_passed = (len(rejection_reasons) == 0)
