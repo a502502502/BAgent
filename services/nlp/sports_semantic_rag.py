@@ -51,8 +51,9 @@ class SportsSemanticRAG:
             "primo tempo privo di occasioni e senza tiri nello specchio, grande prudenza tattica"
         ),
         "LOW_MOTIVATION": (
-            "squadra già aritmeticamente qualificata, salvezza raggiunta con largo anticipo, nessun obiettivo di classifica, "
-            "match senza stimoli agonistici, clima amichevole di fine stagione, deconcentrazione"
+            "squadra totalmente priva di motivazioni, match privo di qualsiasi interesse di classifica, "
+            "squadra svogliata deconcentrata e scarica, disinteresse totale, pancia piena ed appagata, "
+            "salvezza già acquisita con giocatori con la testa in vacanza, clima amichevole di disarmo"
         ),
         "INJURY_ALARM": (
             "infortunio muscolare, risentimento fisico, assente alla rifinitura, non convocato, "
@@ -125,7 +126,7 @@ class SportsSemanticRAG:
     def audit_text_semantics(
         self,
         text: str,
-        threshold: float = 0.55
+        threshold: float = 0.65
     ) -> Dict[str, Any]:
         """
         Audita una motivazione di Sesto Senso o un testo giornalistico:

@@ -488,9 +488,10 @@ class StrictTicketPipeline:
         try:
             from services.nlp.sports_semantic_rag import get_sports_semantic_rag
             rag = get_sports_semantic_rag()
-            sem_report = rag.audit_text_semantics(candidate.sixth_sense_analysis)
+            sem_report = rag.audit_text_semantics(candidate.sixth_sense_analysis, threshold=0.65)
+            known_risk_keys = {"ROTATION_RISK", "SLOW_START", "LOW_MOTIVATION", "INJURY_ALARM"}
             for sem_flag in sem_report.get("flags", []):
-                if sem_flag not in candidate.sixth_sense_risk_flags:
+                if sem_flag in known_risk_keys and sem_flag not in candidate.sixth_sense_risk_flags:
                     candidate.sixth_sense_risk_flags.append(sem_flag)
         except Exception:
             pass
@@ -513,7 +514,7 @@ class StrictTicketPipeline:
         # Controllo bandiere rosse Sesto Senso
         for flag in candidate.sixth_sense_risk_flags:
             flag_upper = flag.upper()
-            if flag_upper == "ROTATION_RISK" and (candidate.player_name or candidate.is_compound_time_market or is_straight_win):
+            if flag_upper == "ROTATION_RISK" and (candidate.player_name or candidate.is_compound_time_market or is_straight_win_market):
                 return ValidationReport(
                     passed=False,
                     candidate=candidate,
