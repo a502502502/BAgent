@@ -2090,4 +2090,25 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 ---
 
-*Ultimo aggiornamento: 21 settembre 2026 ore 09:30 — BAgent (Bankroll Ufficiale: 164.18 € | Riconciliato con Mac: Ticket 90/91 e Telegram Mini App)*
+### 🚀 SESSIONE SERALE 21 SETTEMBRE 2026 — RIEPILOGO OPERATIVO & BENCHMARK 72H
+1. **Integrazione Hugging Face NLP (Sesto Senso Semantico)**:
+   - Scaricato e integrato `NeuML/sportsbert-small-embeddings` (384-dim, ~86MB).
+   - Realizzato `services/nlp/sports_semantic_rag.py` con calcolo cosine similarity contro ancore di rischio (`ROTATION_RISK`, `SLOW_START`, `LOW_MOTIVATION`, `INJURY_ALARM`, `DEFENSIVE_WALL`).
+   - Cablato direttamente nella Fase 4 di `StrictTicketPipeline` (`services/betting/strict_ticket_pipeline.py`) per audit automatico anti-allucinazione e rilevazione insidie giornalistiche pre-gara.
+2. **UEFA Nations League 2026/27 (Calendario & Vere Gemme)**:
+   - Estratti i gironi di League A e generato il calendario ufficiale in SQLite (`storage/database/bagent.db` - tabella `nations_league_fixtures`).
+   - Redatto report strategico `nations_league_calendar_2026.md`.
+   - Mappate le **Vere Gemme Nascoste** (sottomercati ad alta quota `@ 1.85 - 2.15` con Edge matematico $> +17\%$).
+3. **Paper Trading Benchmark 72h (Zero Real Money - Sfida di Validazione)**:
+   - Registrati nel ledger SQLite (`ticket_ledger` e `bet_leg_ledger`) 3 ticket di benchmark:
+     * `BENCHMARK_DAY1_22SET` (@ 2.12): Lanús U3.0 + Arsenal W MG 2-4 + Juve W 1X+MG1-5.
+     * `BENCHMARK_DAY2_23SET` (@ 2.05): Lione W 2+OV1.5 + Barça W 1+MG2-5 + Chelsea W 1X+OV1.5.
+     * `BENCHMARK_DAY3_24SET_NATIONS` (@ 2.16): Olanda-Germania OV1.5 + Portogallo 1X+MG1-5 + Norvegia Chance Mix.
+   - Report completo inviato istantaneamente su Telegram (**@A502502_bot**, Chat ID: 466378357, Msg ID: 895).
+4. **Ticket Reale Notturno in Corso**:
+   - `TICKET_92_CORAZZATO_SERALE_21SET`: Leg 1 Petrolul Ploiești vinta 2-0 🟢, in attesa di Barracas Central (00:00) e Lanús (02:15).
+
+---
+
+*Ultimo aggiornamento: 21 settembre 2026 ore 22:58 — BAgent (Bankroll Ufficiale: 164.18 € | Benchmark 72h Registrato | SportsBERT Attivo | Telegram Sincronizzato)*
+
