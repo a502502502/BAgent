@@ -1,0 +1,43 @@
+{
+    "ticket_id": "TICKET_SERALE_ELITE_21SET",
+    "name": "Tripla Serale Vere Gemme (21 Settembre)",
+    "created_at": "2026-09-21 17:40:00",
+    "total_odds": 4.6,
+    "stake": 10.0,
+    "potential_win": 46.0,
+    "legs": [
+        {
+            "match": "David Goffin vs Mark Lajal",
+            "tournament": "Challenger Orleans",
+            "time": "18:00",
+            "sport": "tennis",
+            "market": "Testa a Testa",
+            "pick": "1 (David Goffin)",
+            "netwin_odds": 1.62,
+            "fair_sharp_odds": 1.48,
+            "edge_pct": 9.5
+        },
+        {
+            "match": "Jonkoping vs Skovde AIK",
+            "tournament": "Svezia Superettan",
+            "time": "19:00",
+            "sport": "calcio",
+            "market": "Combo Doppia Chance + O/U",
+            "pick": "1X + Over 1.5",
+            "netwin_odds": 1.72,
+            "fair_sharp_odds": 1.55,
+            "edge_pct": 11.0
+        },
+        {
+            "match": "Trento vs Pro Vercelli",
+            "tournament": "Serie C Girone A",
+            "time": "20:30",
+            "sport": "calcio",
+            "market": "MultiGol Squadra Casa",
+            "pick": "MultiGol 1-2 Casa",
+            "netwin_odds": 1.65,
+            "fair_sharp_odds": 1.48,
+            "edge_pct": 11.5
+        }
+    ]
+}
