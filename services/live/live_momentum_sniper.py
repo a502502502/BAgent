@@ -57,6 +57,8 @@ class LiveSnipeSignal:
     tactical_rationale: str
     netwin_category_path: str
     recommended_stake_pct: float = 0.03 # 3% del bankroll per sniping in-play
+    exact_selection: str = ""        # Es: "OVER 7.5 CORNER SQUADRA 1"
+    ticket_context: str = ""         # Contesto ticket utente
 
 class LiveMomentumSniper:
     """
@@ -68,7 +70,7 @@ class LiveMomentumSniper:
     def __init__(self):
         pass
 
-    def evaluate_live_match(self, s: LiveMatchSnapshot) -> Optional[LiveSnipeSignal]:
+    def evaluate_live_match(self, s: LiveMatchSnapshot, ticket_info: str = "") -> Optional[LiveSnipeSignal]:
         """
         Valuta lo snapshot del match in-play e restituisce il segnale a più alto valore.
         """
@@ -96,7 +98,9 @@ class LiveMomentumSniper:
                     trigger_type="LATE_PRESSURE_COOKER_CORNERS",
                     minute=s.minute,
                     current_score=score_str,
-                    market_to_bet_now=f"Over {target_corners - 0.5} Corner Totali Live (Servono {target_corners - tot_corners} corner)",
+                    market_to_bet_now=f"Over {target_corners - 0.5} Corner Totali Live",
+                    exact_selection=f"OVER {target_corners - 0.5} CORNER TOTALI",
+                    ticket_context=ticket_info,
                     urgency_level="🚨 ENTRA ORA (SUBITO)",
                     real_probability_pct=83.5,
                     target_odds_range="@ 1.50 – 1.75",
@@ -118,6 +122,8 @@ class LiveMomentumSniper:
                     minute=s.minute,
                     current_score=score_str,
                     market_to_bet_now=f"MultiGol {mg_min}-{mg_max} Partita Live",
+                    exact_selection=f"MULTIGOL {mg_min}-{mg_max} PARTITA",
+                    ticket_context=ticket_info,
                     urgency_level="🚨 ENTRA ORA (SUBITO)",
                     real_probability_pct=85.0,
                     target_odds_range="@ 1.35 – 1.55",
@@ -139,6 +145,7 @@ class LiveMomentumSniper:
 
         if (25 <= s.minute <= 75) and (underdog_leading_home or underdog_leading_away or red_card_underdog):
             fav_team = s.home_team if s.pre_match_favorite == "HOME" else s.away_team
+            fav_side = "Squadra 1 (Casa)" if s.pre_match_favorite == "HOME" else "Squadra 2 (Ospite)"
             current_fav_corners = s.home_corners if s.pre_match_favorite == "HOME" else s.away_corners
             target_line = current_fav_corners + max(2, int((min_rem / 10.0) * 1.25))
 
@@ -148,7 +155,9 @@ class LiveMomentumSniper:
                 trigger_type="ASYMMETRIC_SIEGE_LIVE",
                 minute=s.minute,
                 current_score=score_str,
-                market_to_bet_now=f"Over {target_line - 0.5} Corner {fav_team} Live (o Doppia Chance Rimonta)",
+                market_to_bet_now=f"Over {target_line - 0.5} Corner {fav_team} Live",
+                exact_selection=f"OVER {target_line - 0.5} CORNER {fav_side.upper()}",
+                ticket_context=ticket_info,
                 urgency_level="🚨 ENTRA ORA (SUBITO)",
                 real_probability_pct=81.5,
                 target_odds_range="@ 1.65 – 2.05",
@@ -156,7 +165,7 @@ class LiveMomentumSniper:
                     f"Minuto {s.minute}': Attivato Protocollo Assedio (Regola #50). La favorita {fav_team} spinge con 8 uomini "
                     f"nella metà campo avversaria, generando respinte e deviazioni sul fondo a ripetizione."
                 ),
-                netwin_category_path=f"Live > Corner > Corner Squadra {fav_team}",
+                netwin_category_path=f"Live > Corner > Corner {fav_side}",
                 recommended_stake_pct=0.04
             )
 
@@ -171,7 +180,9 @@ class LiveMomentumSniper:
                 trigger_type="HALFTIME_TACTICAL_UNLOCK",
                 minute=s.minute,
                 current_score=score_str,
-                market_to_bet_now="MultiGol 1-3 2° Tempo (o Over 0.5 2° Tempo)",
+                market_to_bet_now="MultiGol 1-3 2° Tempo",
+                exact_selection="MULTIGOL 1-3 2° TEMPO",
+                ticket_context=ticket_info,
                 urgency_level="⚡ FINESTRA 3 MIN",
                 real_probability_pct=84.0,
                 target_odds_range="@ 1.40 – 1.60",
@@ -195,6 +206,8 @@ class LiveMomentumSniper:
                 minute=s.minute,
                 current_score=score_str,
                 market_to_bet_now="Over 2.5 Totali Live",
+                exact_selection="OVER 2.5 GOL TOTALI",
+                ticket_context=ticket_info,
                 urgency_level="⚡ FINESTRA 3 MIN",
                 real_probability_pct=76.5,
                 target_odds_range="@ 1.50 – 1.70",
@@ -219,6 +232,8 @@ class LiveMomentumSniper:
                 minute=s.minute,
                 current_score=score_str,
                 market_to_bet_now=f"Over {target_cards_line - 0.5} Cartellini Totali Live",
+                exact_selection=f"OVER {target_cards_line - 0.5} CARTELLINI",
+                ticket_context=ticket_info,
                 urgency_level="⚡ FINESTRA 3 MIN",
                 real_probability_pct=79.0,
                 target_odds_range="@ 1.60 – 1.85",

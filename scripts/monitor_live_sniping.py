@@ -36,36 +36,153 @@ def print_banner(title: str):
     print(f"{line}")
 
 def dispatch_snipe_signal(sig: LiveSnipeSignal, send_telegram: bool = True):
-    print_banner(f"🎯 ALLERTA IN-PLAY SNIPER: {sig.match_name}")
+    print_banner(f"🎯 ALLERTA IN-PLAY: {sig.match_name}")
     print(f"⏱️ Minuto: {sig.minute}' | Risultato: {sig.current_score} | Trigger: {sig.trigger_type}")
-    print(f"🔥 {sig.urgency_level}")
     print(f"👉 MERCATO DA PRENDERE SUBITO: {sig.market_to_bet_now}")
+    print(f"🔘 Tasto su Netwin:             {sig.exact_selection}")
     print(f"📊 Probabilità Reale Stimata:   {sig.real_probability_pct:.1f}%")
     print(f"💰 Range Quota Target:         {sig.target_odds_range}")
     print(f"📍 Percorso su Netwin:         {sig.netwin_category_path}")
+    print(f"📋 Schedina in Corso:          {sig.ticket_context}")
     print(f"🧠 Rationale Tattico:          {sig.tactical_rationale}")
     print("=" * 80)
 
     if send_telegram:
         sentinel = TelegramSentinel()
+        ticket_block = ""
+        if sig.ticket_context:
+            ticket_block = (
+                f"📋 <b>Tua Schedina Aperta:</b>\n"
+                f"<i>{sig.ticket_context}</i>\n"
+                f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            )
+
         text = (
-            f"⚡ <b>BAGENT — ALLERTA MERCATO LIVE (PRENDI ORA!)</b>\n"
+            f"⚡ <b>BAGENT — RADAR TUA SCOMMESSA LIVE</b>\n"
             f"🏟️ <b>{sig.match_name}</b>\n"
             f"⏱️ Minuto: <b>{sig.minute}'</b> | Risultato: <b>{sig.current_score}</b>\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"{sig.urgency_level}\n"
-            f"🎯 <b>MERCATO:</b> <code>{sig.market_to_bet_now}</code>\n"
-            f"📊 <b>Probabilità Reale:</b> <b>{sig.real_probability_pct:.1f}%</b>\n"
-            f"💵 <b>Quota Target Netwin:</b> <code>{sig.target_odds_range}</code>\n"
-            f"📍 <i>{sig.netwin_category_path}</i>\n"
+            f"🎯 <b>COSA SCOMMETTERE (SUBITO):</b>\n"
+            f"👉 <b>{sig.market_to_bet_now}</b>\n\n"
+            f"🔘 <b>Selezione su Netwin:</b> <code>{sig.exact_selection}</code>\n"
+            f"💵 <b>Quota indicativa:</b> <code>{sig.target_odds_range}</code> (Prob: <b>{sig.real_probability_pct:.1f}%</b>)\n"
+            f"📍 <b>Dove trovarlo:</b> <i>{sig.netwin_category_path}</i>\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"💡 <i>{sig.tactical_rationale}</i>"
+            f"{ticket_block}"
+            f"💡 <b>Tattica Live:</b> <i>{sig.tactical_rationale}</i>"
         )
         sentinel.send_message(text)
+
+def load_active_user_targets() -> List[Dict[str, Any]]:
+    """Carica l'elenco delle partite e delle giocate attive dell'utente."""
+    import json
+    p = ROOT / "data" / "active_user_tickets.json"
+    if p.exists():
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Errore lettura active_user_tickets.json: {e}")
+    return []
+
+def run_live_daemon(interval_sec: int = 45, send_telegram: bool = True):
+    from services.football.external.sources.flashscore_live import FlashscoreLiveEngine
+    feed_engine = FlashscoreLiveEngine()
+    sniper = LiveMomentumSniper()
+    alerted_signals: Dict[str, float] = {}
+
+    print_banner("📡 BAGENT LIVE MOMENTUM SNIPER DAEMON AVVIATO (FILTRO GIOCATE UTENTE ATTIVO)")
+    print(f"Monitoraggio continuo in background attivo (polling ogni {interval_sec}s)...")
+    print("🚨 FILTRO ATTIVO: Vengono monitorate ESCLUSIVAMENTE le partite dove l'utente ha scommesso!")
+
+    while True:
+        try:
+            feed = feed_engine.fetch_feed()
+            now = time.time()
+            user_targets = load_active_user_targets()
+
+            for m in feed:
+                h = m.get("home", "").strip()
+                a = m.get("away", "").strip()
+                match_name = f"{h} vs {a}"
+                match_text = f"{h} {a}".lower()
+                status_raw = m.get("status_code", "")
+                mid = m.get("match_id", "")
+
+                # Considera solo match in corso o all'intervallo
+                if status_raw not in ["2", "11", "12", "13"]:
+                    continue
+
+                # FILTRO RIGIDO: Cerca corrispondenza tra i match scommessi dall'utente
+                matched_target = None
+                for target in user_targets:
+                    keywords = target.get("keywords", [])
+                    if any(k.lower() in match_text for k in keywords):
+                        matched_target = target
+                        break
+
+                # Se la partita NON è tra quelle scommesse dall'utente, SCARTA AUTOMATICAMENTE
+                if not matched_target:
+                    continue
+
+                h_goals = int(m.get("home_score", 0) or 0)
+                a_goals = int(m.get("away_score", 0) or 0)
+                minute = m.get("minute", 0)
+
+                # Estrazione statistiche live reali (tiri, corner, cartellini)
+                stats = feed_engine.fetch_match_stats(mid)
+                h_corners = stats.get("home_corners", 0)
+                a_corners = stats.get("away_corners", 0)
+                h_shots = stats.get("home_shots", 0)
+                a_shots = stats.get("away_shots", 0)
+                h_shots_ot = stats.get("home_shots_on_target", 0)
+                a_shots_ot = stats.get("away_shots_on_target", 0)
+                h_yellow = stats.get("home_yellow_cards", 0)
+                a_yellow = stats.get("away_yellow_cards", 0)
+
+                fav = matched_target.get("favorite", "HOME")
+                ticket_info = matched_target.get("ticket_summary", "")
+                active_bets_list = matched_target.get("active_bets", [])
+                if active_bets_list and not ticket_info:
+                    ticket_info = " · ".join(active_bets_list)
+
+                snap = LiveMatchSnapshot(
+                    fixture_id=f"LIVE-{mid}",
+                    match_name=match_name,
+                    minute=minute,
+                    home_team=h,
+                    away_team=a,
+                    home_goals=h_goals,
+                    away_goals=a_goals,
+                    home_shots=h_shots,
+                    away_shots=a_shots,
+                    home_shots_on_target=h_shots_ot,
+                    away_shots_on_target=a_shots_ot,
+                    home_corners=h_corners,
+                    away_corners=a_corners,
+                    home_yellow_cards=h_yellow,
+                    away_yellow_cards=a_yellow,
+                    pre_match_favorite=fav
+                )
+
+                sig = sniper.evaluate_live_match(snap, ticket_info=ticket_info)
+                if sig:
+                    sig_key = f"{match_name}::{sig.trigger_type}::{sig.market_to_bet_now}"
+                    # Anti-spam: max 1 alert ogni 15 minuti per stesso match e mercato
+                    if sig_key not in alerted_signals or (now - alerted_signals[sig_key]) > 900:
+                        alerted_signals[sig_key] = now
+                        dispatch_snipe_signal(sig, send_telegram=send_telegram)
+
+        except Exception as e:
+            logger.error(f"Errore ciclo live sniper daemon: {e}")
+
+        time.sleep(interval_sec)
 
 def main():
     parser = argparse.ArgumentParser(description="BAgent In-Play Live Momentum Sniper CLI")
     parser.add_argument("--demo", action="store_true", help="Esegue la simulazione dei 5 scenari in-play")
+    parser.add_argument("--daemon", action="store_true", help="Avvia il demone continuo di monitoraggio in background")
+    parser.add_argument("--interval", type=int, default=45, help="Intervallo di polling in secondi (default: 45s)")
     parser.add_argument("--match", type=str, default="Match In-Play", help="Nome partita")
     parser.add_argument("--min", type=int, default=75, help="Minuto di gioco")
     parser.add_argument("--score", type=str, default="1-1", help="Risultato attuale (es. '1-1')")
@@ -73,9 +190,14 @@ def main():
     parser.add_argument("--corners", type=int, default=8, help="Corner totali")
     parser.add_argument("--cards", type=int, default=3, help="Cartellini totali")
     parser.add_argument("--favorite", type=str, default="HOME", choices=["HOME", "AWAY", "EQUAL"], help="Squadra favorita pre-match")
-    parser.add_argument("--telegram", action="store_true", help="Invia anche notifica reale su Telegram")
+    parser.add_argument("--telegram", action="store_true", default=True, help="Invia notifica reale su Telegram")
 
     args = parser.parse_args()
+
+    if args.daemon:
+        run_live_daemon(interval_sec=args.interval, send_telegram=args.telegram)
+        return
+
     sniper = LiveMomentumSniper()
 
     if args.demo:
@@ -145,3 +267,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
