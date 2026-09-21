@@ -65,6 +65,9 @@ class TennisAnalysisResult:
     # Sesto Senso
     sixth_sense: Optional[TennisSixthSenseResult] = None
 
+    # Modello Calibrato Hugging Face
+    hf_prediction: Optional[dict] = None
+
     # Value bets
     value_signals: list[dict] = field(default_factory=list)
     market_odds: dict = field(default_factory=dict)
@@ -117,6 +120,17 @@ class TennisAnalysisResult:
             lines.append("")
         elif ss and ss.status == "NO_NEWS":
             lines += ["── SESTO SENSO: nessuna notizia trovata ───────────────", ""]
+
+        # Modello Calibrato Hugging Face (AI ML)
+        if self.hf_prediction:
+            hf = self.hf_prediction
+            lines += [
+                "── MODELLO CALIBRATO HUGGING FACE (AI ML) ─────────────",
+                f"  Probabilità Calibrata: {p1} {hf.get('prob_p1', 0):.1%} (Fair: {hf.get('fair_odds_p1', 'N/A')}) | {p2} {hf.get('prob_p2', 0):.1%} (Fair: {hf.get('fair_odds_p2', 'N/A')})",
+            ]
+            if "edge_p1_pct" in hf or "edge_p2_pct" in hf:
+                lines.append(f"  Edge Bookmaker: {p1} {hf.get('edge_p1_pct', 0):+.1f}% | {p2} {hf.get('edge_p2_pct', 0):+.1f}%")
+            lines.append("")
 
         # Mercati set
         sm = self.set_markets
@@ -214,6 +228,7 @@ class TennisEngine:
             newsapi_key=newsapi_key or os.getenv("NEWSAPI_KEY"),
             llm_model=llm_model,
         )
+        self._hf_predictor = None
 
     def analyze(
         self,
@@ -230,6 +245,7 @@ class TennisEngine:
         p2_surface_factor: float = 1.0,
         market_odds: Optional[dict] = None,
         include_sixth_sense: bool = True,
+        use_hf_model: bool = True,
         verbose: bool = False,
     ) -> TennisAnalysisResult:
         """
@@ -237,6 +253,7 @@ class TennisEngine:
 
         h2h: (vittorie p1, vittorie p2) — opzionale
         p1_surface_factor: moltiplicatore superficie (1.0 = neutro)
+        use_hf_model: include il modello GradientBoosting calibrato da Hugging Face
         """
         analyzed_at = datetime.now(timezone.utc).isoformat()
 
@@ -260,7 +277,7 @@ class TennisEngine:
                 p1_surface_factor *= ss_result.p1_factor
                 p2_surface_factor *= ss_result.p2_factor
 
-        # Modello vittoria
+        # Modello vittoria base (Bradley-Terry)
         win_model = TennisWinModel(
             player1_rank=player1_rank,
             player2_rank=player2_rank,
@@ -270,6 +287,28 @@ class TennisEngine:
             p2_surface_factor=p2_surface_factor,
         )
         win_probs = win_model.win_probs()
+
+        # Modello calibrato Hugging Face (AI ML)
+        hf_prediction: Optional[dict] = None
+        if use_hf_model:
+            try:
+                if self._hf_predictor is None:
+                    from services.ml.hf_sports_predictor import HFSportsPredictor
+                    self._hf_predictor = HFSportsPredictor()
+                h2h_p1 = h2h[0] if h2h else 0
+                h2h_p2 = h2h[1] if h2h else 0
+                hf_prediction = self._hf_predictor.predict_tennis(
+                    player1=player1,
+                    player2=player2,
+                    player1_rank=player1_rank,
+                    player2_rank=player2_rank,
+                    h2h_p1_wins=h2h_p1,
+                    h2h_p2_wins=h2h_p2,
+                    market_odds=market_odds,
+                )
+            except Exception as e:
+                if verbose:
+                    print(f"[TennisEngine] HF predictor non disponibile: {e}")
 
         if verbose:
             print(f"[TennisEngine] P1={win_probs['player1']:.1%}  P2={win_probs['player2']:.1%}")
@@ -299,6 +338,7 @@ class TennisEngine:
             win_probs=win_probs,
             set_markets=set_markets,
             sixth_sense=ss_result,
+            hf_prediction=hf_prediction,
             value_signals=value_signals,
             market_odds=market_odds or {},
             player1_rank=player1_rank,
