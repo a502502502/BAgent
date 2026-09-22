@@ -13,6 +13,7 @@ import os
 import time
 import uuid
 import json
+import re
 import logging
 import threading
 from typing import List, Dict, Any, Optional
@@ -541,6 +542,12 @@ class TelegramSentinel:
     def start_listening(self):
         """Avvia il polling dei messaggi e callback Telegram (bloccante, eseguibile in thread)."""
         logger.info("🤖 Avvio Telegram Sentinel Listener (HTTP Long-Polling)...")
+        # Elimina eventuali webhook pregressi per evitare errori 409 Conflict
+        try:
+            requests.post(f"{self.api_url}/deleteWebhook", json={"drop_pending_updates": False}, timeout=10)
+        except Exception as e:
+            logger.warning(f"Errore deleteWebhook: {e}")
+
         self._is_listening = True
         offset = 0
 
@@ -553,13 +560,17 @@ class TelegramSentinel:
                     for u in updates:
                         offset = u["update_id"] + 1
                         if "callback_query" in u:
+                            logger.info(f"Ricevuta callback query: {u['callback_query'].get('data')}")
                             self._process_callback_query(u["callback_query"])
                         elif "message" in u:
+                            logger.info(f"Ricevuto messaggio utente: {u['message'].get('text')}")
                             self._process_message(u["message"])
-                time.sleep(1)
+                else:
+                    logger.warning(f"getUpdates status {resp.status_code}: {resp.text}")
+                time.sleep(0.5)
             except Exception as e:
                 logger.debug(f"Errore durante polling Telegram: {e}")
-                time.sleep(3)
+                time.sleep(2)
 
     def stop_listening(self):
         """Ferma il listener di polling."""
