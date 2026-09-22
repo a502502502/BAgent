@@ -10,6 +10,11 @@ Live Sentinel Domenicale con integrazione di:
 """
 
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import sys
 import time
 import sqlite3
@@ -32,8 +37,8 @@ if env_path.exists():
             if k.strip() and v.strip():
                 os.environ.setdefault(k.strip(), v.strip())
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 HEADERS_ESPN = {"User-Agent": "ESPN/6.0.0 (iPhone; iOS 17.0; Scale/3.00)", "Accept": "*/*"}
 
 TICKET_PENTA = "CONFIRMED_SUNDAY_10EUR_MASTER_PENTA"

@@ -9,15 +9,19 @@ import time
 import requests
 import json
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import sys
 from datetime import datetime
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-TELEGRAM_TOKEN = "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg"
-TELEGRAM_CHAT_ID = "466378357"
-
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 PRESS_SOURCES = [
     {"league": "Serie A (Italia)", "source": "La Gazzetta dello Sport", "url": "https://www.gazzetta.it/Calcio/Serie-A/"},
     {"league": "Premier League (Inghilterra)", "source": "BBC Sport Football", "url": "https://www.bbc.com/sport/football"},

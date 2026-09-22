@@ -15,6 +15,11 @@ Traccia:
 
 from __future__ import annotations
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import sys
 import time
 import requests
@@ -37,9 +42,8 @@ API_KEY = os.getenv("API_FOOTBALL_KEY", "")
 API_HOST = "v3.football.api-sports.io"
 HEADERS = {"x-apisports-key": API_KEY}
 
-TELEGRAM_TOKEN = "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg"
-TELEGRAM_CHAT_ID = "466378357"
-
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 # Fixtures ID
 FID_PSV = 1635708
 FID_FENER = 1635659

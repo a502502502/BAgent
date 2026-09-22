@@ -1,3 +1,4 @@
+# DEPRECATED: prefer NetwinAutomator.build_ticket_and_book (services/betting/netwin_automator.py). Booking codes only.
 import sys
 import time
 from pathlib import Path

@@ -5,22 +5,19 @@ in tempo reale, restituendo ricevute e codici di prenotazione.
 """
 
 from __future__ import annotations
-import os
-import time
-import requests
+
 import logging
 import threading
-from typing import Optional, Callable, Any
-from pathlib import Path
+import time
+from typing import Any, Optional
+
+import requests
 
 from services.betting.netwin_automator import NetwinAutomator
+from services.telegram.credentials import get_telegram_credentials
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("TelegramInteractiveBot")
-
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
-TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
 
 class TelegramInteractiveBot:
@@ -29,13 +26,11 @@ class TelegramInteractiveBot:
     """
 
     def __init__(self, token: Optional[str] = None, chat_id: Optional[str] = None):
-        self.token = token or TELEGRAM_TOKEN
-        self.chat_id = chat_id or TELEGRAM_CHAT_ID
+        self.token, self.chat_id = get_telegram_credentials(token, chat_id)
         self.base_url = f"https://api.telegram.org/bot{self.token}"
         self.running = False
         self._last_update_id = 0
         self.ticket_registry: dict[str, dict] = {}
-        self.automator = NetwinAutomator(headless=True)
 
     def register_ticket(self, ticket_id: str, selections: list[dict], stake: float, bet_mode: str = "MULTIPLE"):
         """Registra un ticket in memoria per l'esecuzione tramite callback."""
@@ -148,12 +143,16 @@ class TelegramInteractiveBot:
 
         if data.startswith("place_"):
             ticket_id = data.replace("place_", "")
-            self.answer_callback(query_id, text="🚀 Avvio inserimento scommessa su Netwin...")
-            self.edit_message(message_id, f"{orig_text}\n\n⏳ <b>INSERIMENTO SU NETWIN IN CORSO...</b>")
-            
-            # Esegui piazzamento in thread separato
+            self.answer_callback(
+                query_id,
+                text="📋 Prenotazione (niente soldi): genero il codice a 6 cifre...",
+            )
+            self.edit_message(
+                message_id,
+                f"{orig_text}\n\n⏳ <b>GENERAZIONE CODICE PRENOTAZIONE IN CORSO...</b>",
+            )
             threading.Thread(
-                target=self._execute_place_bet,
+                target=self._execute_booking,
                 args=(ticket_id, message_id, orig_text),
                 daemon=True,
             ).start()
@@ -173,68 +172,32 @@ class TelegramInteractiveBot:
             self.answer_callback(query_id, text="❌ Operazione annullata.")
             self.edit_message(message_id, f"{orig_text}\n\n❌ <i>Piazzamento annullato dall'utente.</i>")
 
-    def _execute_place_bet(self, ticket_id: str, message_id: int, orig_text: str):
-        """Worker per piazzare la scommessa reale con Playwright."""
-        ticket = self.ticket_registry.get(ticket_id)
-        if not ticket:
-            self.edit_message(message_id, f"{orig_text}\n\n⚠️ <i>Errore: Dati ticket non trovati in memoria.</i>")
-            return
-
-        try:
-            # 1. Popola carrello
-            summary = self.automator.build_ticket(
-                selections=ticket["selections"],
-                bet_mode=ticket["bet_mode"],
-                stake=ticket["stake"],
-            )
-
-            # 2. Piazza scommessa
-            res = self.automator.place_bet()
-            if res["success"]:
-                receipt_msg = (
-                    f"{orig_text}\n\n"
-                    f"✅ <b>SCOMMESSA PIAZZATA CON SUCCESSO SU NETWIN!</b>\n"
-                    f"🎫 <b>Ricevuta</b>: <code>{res['receipt_id']}</code>\n"
-                    f"💰 <b>Stake</b>: {ticket['stake']:.2f} €\n"
-                    f"📸 <i>Ricevuta convalidata allegata qui sotto.</i>"
-                )
-                self.edit_message(message_id, receipt_msg)
-                if res.get("screenshot_path") and os.path.exists(res["screenshot_path"]):
-                    self.send_photo(
-                        res["screenshot_path"],
-                        caption=f"🧾 Ricevuta Ufficiale Netwin — Ticket #{ticket_id}",
-                    )
-            else:
-                self.edit_message(
-                    message_id,
-                    f"{orig_text}\n\n⚠️ <b>ATTENZIONE:</b> {res.get('error', 'Impossibile completare il piazzamento.')}\n<i>Controlla la sessione su Netwin.</i>",
-                )
-        except Exception as e:
-            logger.error(f"Errore durante piazzamento ticket #{ticket_id}: {e}")
-            self.edit_message(message_id, f"{orig_text}\n\n❌ <b>Errore imprevisto:</b> {e}")
-        finally:
-            self.automator.close()
-
     def _execute_booking(self, ticket_id: str, message_id: int, orig_text: str):
-        """Worker per generare il codice di prenotazione."""
+        """Worker: carrello completo + codice prenotazione a 6 cifre (niente soldi)."""
         ticket = self.ticket_registry.get(ticket_id)
         if not ticket:
             self.edit_message(message_id, f"{orig_text}\n\n⚠️ <i>Errore: Ticket scaduto o non trovato.</i>")
             return
 
+        automator = NetwinAutomator(headless=True)
         try:
-            self.automator.build_ticket(
+            res = automator.build_ticket_and_book(
                 selections=ticket["selections"],
-                bet_mode=ticket["bet_mode"],
                 stake=ticket["stake"],
             )
-            res = self.automator.generate_booking_code()
-            if res["success"]:
+            code = res.get("booking_code")
+            complete = (
+                res.get("success")
+                and code
+                and res.get("events_added") == res.get("total_events")
+            )
+            if complete:
                 code_msg = (
                     f"{orig_text}\n\n"
                     f"📋 <b>CODICE PRENOTAZIONE NETWIN GENERATO!</b>\n"
-                    f"🔑 <b>Codice</b>: <code>{res['booking_code']}</code>\n\n"
-                    f"💡 <i>Puoi caricarlo su Netwin.it nella sezione 'Carica Prenotazione' per scommettere con un click!</i>"
+                    f"🔑 <b>Codice</b>: <code>{code}</code>\n"
+                    f"📊 Eventi: <b>{res.get('events_added')}/{res.get('total_events')}</b>\n\n"
+                    f"💡 <i>Caricalo su Netwin → Schedina → Codice → Carica. Nessun importo è stato giocato.</i>"
                 )
                 self.edit_message(message_id, code_msg)
             else:
@@ -243,10 +206,8 @@ class TelegramInteractiveBot:
                     f"{orig_text}\n\n⚠️ <i>Impossibile estrarre il codice: {res.get('error')}</i>",
                 )
         except Exception as e:
-            logger.error(f"Errore generazione codice: {e}")
+            logger.error("Errore generazione codice: %s", e)
             self.edit_message(message_id, f"{orig_text}\n\n❌ <i>Errore: {e}</i>")
-        finally:
-            self.automator.close()
 
     def start_polling(self):
         """Avvia il loop di ascolto continuo per i pulsanti Telegram."""

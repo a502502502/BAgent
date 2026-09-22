@@ -2,6 +2,10 @@
 Analisi semifinali Montreal National Bank Open 2026
 Hard Court (outdoor) — Best of 3
 """
+
+raise SystemExit(
+    "TENNIS BAN (22/09/2026): script disabilitato. BAgent opera solo sul calcio."
+)
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 

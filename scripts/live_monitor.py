@@ -10,6 +10,11 @@ Uso: python3 scripts/live_monitor.py
 import time
 import math
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import requests
 import subprocess
 import sys
@@ -34,8 +39,7 @@ if env_path.exists():
             continue
 
 TELEGRAM_TOKEN   = os.getenv("TELEGRAM_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
-
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 MATCHES = [
     {
         "id": 9992,

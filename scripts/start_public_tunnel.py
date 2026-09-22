@@ -5,6 +5,11 @@ su Internet (accessibile ovunque da rete 4G/5G) e registra la Mini App su Telegr
 """
 
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import sys
 import re
 import time
@@ -16,8 +21,9 @@ ROOT = Path(__file__).resolve().parent.parent
 URL_FILE = ROOT / "data" / "public_tunnel_url.txt"
 os.makedirs(ROOT / "data", exist_ok=True)
 
-TELEGRAM_TOKEN = "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg"
-TELEGRAM_CHAT_ID = "466378357"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+
 
 def start_tunnel():
     print("Avvio Cloudflare Tunnel per la porta 8088...")

@@ -6,6 +6,11 @@ sending instant real-time Telegram alerts to the user.
 
 import sys
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import time
 import requests
 from datetime import datetime
@@ -18,8 +23,9 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-TELEGRAM_TOKEN = "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg"
-TELEGRAM_CHAT_ID = "466378357"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+
 
 def send_telegram_msg(msg: str) -> bool:
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"

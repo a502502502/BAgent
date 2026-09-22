@@ -6,6 +6,11 @@ aggiorna il Menu Button di Telegram e invia il link pronto per l'apertura su sma
 """
 
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import sys
 import re
 import time
@@ -28,8 +33,9 @@ DOCS_DIR = ROOT / "docs"
 PORT = 8088
 
 # Token aggiornato
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAFwuMzlNXDBkMbbMhE3HsxfudIbrGQQ0co")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+
 
 def run_local_server():
     """Server locale che espone docs/ su porta 8088."""

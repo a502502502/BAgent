@@ -32,7 +32,7 @@ from services.football.external.sources.flashscore import FlashscoreSource
 
 TRACKED_FILE = ROOT / "data" / "tracked_fixtures.json"
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 
 
 def notify_telegram(message: str) -> None:

@@ -23,6 +23,10 @@ Mercati disponibili:
     U4.5S  = under 4.5 set (best of 5)
 """
 
+
+raise SystemExit(
+    "TENNIS BAN (22/09/2026): script disabilitato. BAgent opera solo sul calcio."
+)
 from __future__ import annotations
 
 import sys

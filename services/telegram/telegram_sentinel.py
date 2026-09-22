@@ -20,10 +20,9 @@ from typing import List, Dict, Any, Optional
 from pathlib import Path
 import requests
 
-logger = logging.getLogger("TelegramSentinel")
+from services.telegram.credentials import get_telegram_credentials
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAFwuMzlNXDBkMbbMhE3HsxfudIbrGQQ0co")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
+logger = logging.getLogger("TelegramSentinel")
 
 
 class TelegramSentinel:
@@ -32,8 +31,7 @@ class TelegramSentinel:
     """
 
     def __init__(self, token: Optional[str] = None, chat_id: Optional[str] = None):
-        self.token = token or TELEGRAM_TOKEN
-        self.chat_id = chat_id or TELEGRAM_CHAT_ID
+        self.token, self.chat_id = get_telegram_credentials(token, chat_id)
         self.api_url = f"https://api.telegram.org/bot{self.token}"
         self.session = requests.Session()
         
@@ -672,12 +670,17 @@ class TelegramSentinel:
 
             res = self._execute_netwin_booking_sync(ticket_data)
 
-            if res.get("success") and res.get("booking_code"):
+            complete = (
+                res.get("success")
+                and res.get("booking_code")
+                and res.get("events_added") == res.get("total_events")
+            )
+            if complete:
                 code = res["booking_code"]
                 confirm_text = (
                     f"🎯 <b>CODICE PRENOTAZIONE NETWIN GENERATO!</b>\n\n"
                     f"🎟️ <b>CODICE:</b> <code>{code}</code>\n"
-                    f"📊 Eventi Inseriti: <b>{res.get('events_added', 6)} / 6</b>\n"
+                    f"📊 Eventi Inseriti: <b>{res.get('events_added')} / {res.get('total_events')}</b>\n"
                     f"💰 Stake Consigliato: <b>€ {res.get('stake', 25.0):.2f}</b>\n\n"
                     f"👇 <b>COME CARICARE LA SCHEDINA IN 1 SECONDO:</b>\n"
                     f"1️⃣ Apri <b>Netwin.it</b> (o la tua app Netwin)\n"
@@ -731,12 +734,17 @@ class TelegramSentinel:
             # Esecuzione Playwright in background
             res = self._execute_netwin_booking_sync(ticket_data)
 
-            if res.get("success") and res.get("booking_code"):
+            complete = (
+                res.get("success")
+                and res.get("booking_code")
+                and res.get("events_added") == res.get("total_events")
+            )
+            if complete:
                 code = res["booking_code"]
                 confirm_text = (
                     f"🎯 <b>CODICE PRENOTAZIONE NETWIN GENERATO!</b>\n\n"
                     f"🎟️ <b>CODICE:</b> <code>{code}</code>\n"
-                    f"📊 Eventi Inseriti: <b>{res.get('events_added', len(ticket_data.get('legs', [])))} / {len(ticket_data.get('legs', []))}</b>\n"
+                    f"📊 Eventi Inseriti: <b>{res.get('events_added')} / {res.get('total_events')}</b>\n"
                     f"💰 Stake Applicato: <b>€ {res.get('stake', ticket_data.get('stake', 25.0)):.2f}</b>\n\n"
                     f"👇 <b>COME CARICARE LA SCHEDINA IN 1 SECONDO:</b>\n"
                     f"1️⃣ Apri <b>Netwin.it</b> (o la tua app Netwin)\n"
