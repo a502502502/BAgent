@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prenotata 686305 — BAgent Quota 70</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f1a; color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; }
+  .slip { max-width: 680px; margin: 0 auto; background: #1a1a2e; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+
+  .header { background: linear-gradient(135deg, #1a2a3a, #0f2040); padding: 24px; text-align: center; border-bottom: 3px solid #45aaf2; }
+  .header .logo { font-size: 11px; letter-spacing: 4px; color: #45aaf2; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+  .header h1 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .header .subtitle { font-size: 13px; color: #a0b0c0; }
+  .codice-badge { display: inline-block; margin-top: 12px; background: #45aaf2; color: #0f1a2a; font-size: 18px; font-weight: 800; letter-spacing: 3px; padding: 6px 20px; border-radius: 8px; }
+
+  .change-banner { background: #1a2a3a; border-left: 4px solid #45aaf2; padding: 12px 20px; font-size: 12px; color: #45aaf2; line-height: 1.8; }
+  .change-banner strong { color: #7dd3fc; }
+
+  .day-block { margin: 0; }
+  .day-header { background: #16213e; padding: 10px 20px; font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #a0a0c0; text-transform: uppercase; border-left: 4px solid #e94560; }
+  .day-header.d1 { border-color: #4ecca3; }
+  .day-header.d2 { border-color: #f7b731; }
+  .day-header.d3 { border-color: #45aaf2; }
+  .day-header.d4 { border-color: #e94560; }
+
+  .pick { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 14px 20px; border-bottom: 1px solid #252545; }
+  .pick:hover { background: #1e1e38; }
+  .pick.changed { background: #1a2a3a; border-left: 3px solid #45aaf2; }
+  .pick-left { }
+  .pick-league { font-size: 10px; color: #7070a0; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+  .pick-match { font-size: 14px; font-weight: 600; color: #e0e0f0; margin-bottom: 4px; }
+  .pick-market { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .market-over { background: #1a3a2a; color: #4ecca3; }
+  .market-1x2 { background: #1a2a3a; color: #45aaf2; }
+  .market-dc { background: #2a2a1a; color: #f7b731; }
+  .market-dc.blue { background: #1a2a3a; color: #45aaf2; }
+  .market-dc.green { background: #1a3a2a; color: #4ecca3; }
+  .market-gng { background: #2a1a3a; color: #c77dff; }
+  .changed-tag { display: inline-block; margin-left: 6px; font-size: 10px; background: #45aaf2; color: #0f1a2a; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
+  .pick-right { text-align: right; }
+  .pick-odds { font-size: 22px; font-weight: 800; color: #f7b731; }
+  .pick-running { font-size: 10px; color: #606080; margin-top: 2px; }
+
+  .compare-box { background: #0f1520; border: 1px solid #253545; border-radius: 8px; margin: 16px 20px; padding: 14px; }
+  .compare-title { font-size: 11px; color: #607080; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .compare-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; padding: 4px 0; }
+  .compare-from { color: #806060; text-decoration: line-through; }
+  .compare-arrow { color: #45aaf2; font-weight: 700; }
+  .compare-to { color: #4ecca3; font-weight: 700; }
+
+  .summary { background: #0f0f1a; padding: 20px; }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1a1a2e; }
+  .summary-row:last-child { border: none; }
+  .summary-label { font-size: 12px; color: #7070a0; }
+  .summary-value { font-size: 14px; font-weight: 700; color: #e0e0f0; }
+  .summary-value.big { font-size: 28px; color: #f7b731; }
+  .summary-value.bonus { color: #4ecca3; }
+  .summary-value.total { font-size: 22px; color: #45aaf2; }
+
+  .footer { background: #0a0a15; padding: 16px 20px; text-align: center; }
+  .footer-note { font-size: 11px; color: #404060; line-height: 1.6; }
+  .footer-note strong { color: #606080; }
+
+  .risk-badge { display: flex; justify-content: center; gap: 8px; margin: 16px 20px 0; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+  .badge-risk { background: #1a2a3a; color: #45aaf2; }
+  .badge-picks { background: #1a2a3a; color: #45aaf2; }
+  .badge-days { background: #1a3a1a; color: #4ecca3; }
+</style>
+</head>
+<body>
+<div class="slip">
+  <div class="header">
+    <div class="logo">BAgent · Multipla 4 Giorni</div>
+    <h1>QUOTA 70</h1>
+    <div class="subtitle">17 – 20 Agosto 2026 · Versione Conservativa</div>
+    <div class="codice-badge">📋 686305</div>
+  </div>
+
+  <div class="change-banner">
+    🔒 <strong>2 rafforzamenti vs Prenotata 1:</strong><br>
+    AEK 2 @2.48 → <strong>DC X2 @1.37</strong> (AEK non perde vs Levski)<br>
+    Anderlecht 2 @2.10 → <strong>DC X2 @1.31</strong> (Anderlecht non perde vs Kairat)
+  </div>
+
+  <div class="compare-box">
+    <div class="compare-title">📊 Confronto rafforzamenti</div>
+    <div class="compare-row">
+      <span class="compare-from">AEK vince @2.48</span>
+      <span class="compare-arrow">→</span>
+      <span class="compare-to">AEK non perde @1.37</span>
+    </div>
+    <div class="compare-row">
+      <span class="compare-from">Anderlecht vince @2.10</span>
+      <span class="compare-arrow">→</span>
+      <span class="compare-to">Anderlecht non perde @1.31</span>
+    </div>
+  </div>
+
+  <div class="risk-badge">
+    <span class="badge badge-risk">🔵 BASSO RISCHIO</span>
+    <span class="badge badge-picks">10 SELEZIONI</span>
+    <span class="badge badge-days">4 GIORNI</span>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-block">
+    <div class="day-header d1">📅 Domenica 17 Agosto — Leghe Nazionali</div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🇺🇦 Premier League Ucraina</div>
+        <div class="pick-match">Polissya Zhytomyr vs Zorya</div>
+        <span class="pick-market market-over">Over 2.5</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.70</div>
+        <div class="pick-running">running: ×1.70</div>
+      </div>
+    </div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🇳🇴 3ª Divisione Norvegia</div>
+        <div class="pick-match">Sk Brann 2 vs Os</div>
+        <span class="pick-market market-over">Over 2.5</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.13</div>
+        <div class="pick-running">running: ×1.92</div>
+      </div>
+    </div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🇭🇺 NB I Ungheria</div>
+        <div class="pick-match">Zalaegerszeg Te vs Ferencvaros</div>
+        <span class="pick-market market-over">Over 2.5</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.54</div>
+        <div class="pick-running">running: ×2.96</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-block">
+    <div class="day-header d2">📅 Lunedì 18 Agosto — UCL Play-offs (1ª leg)</div>
+    <div class="pick changed">
+      <div class="pick-left">
+        <div class="pick-league">🏆 Champions League</div>
+        <div class="pick-match">Levski Sofia vs AEK Atene <span class="changed-tag">DC</span></div>
+        <span class="pick-market market-dc green">DC X2 (AEK non perde)</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.37</div>
+        <div class="pick-running">running: ×4.05</div>
+      </div>
+    </div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🏆 Champions League</div>
+        <div class="pick-match">Dinamo Zagabria vs Viking FK</div>
+        <span class="pick-market market-1x2">1X2: 1 (Dinamo vince)</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.76</div>
+        <div class="pick-running">running: ×7.13</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-block">
+    <div class="day-header d3">📅 Martedì 19 Agosto — UCL Play-offs (1ª leg)</div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🏆 Champions League</div>
+        <div class="pick-match">Celtic vs LASK Linz</div>
+        <span class="pick-market market-1x2">1X2: 1 (Celtic vince)</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.61</div>
+        <div class="pick-running">running: ×11.48</div>
+      </div>
+    </div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🏆 Champions League</div>
+        <div class="pick-match">Slovan Bratislava vs NK Celje</div>
+        <span class="pick-market market-1x2">1X2: 1 (Slovan vince)</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.75</div>
+        <div class="pick-running">running: ×20.09</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-block">
+    <div class="day-header d4">📅 Mercoledì 20 Agosto — EL Play-offs (1ª leg)</div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🏆 Europa League</div>
+        <div class="pick-match">Lech Poznan vs FC Thun</div>
+        <span class="pick-market market-1x2">1X2: 1 (Lech vince)</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.58</div>
+        <div class="pick-running">running: ×31.74</div>
+      </div>
+    </div>
+    <div class="pick changed">
+      <div class="pick-left">
+        <div class="pick-league">🏆 Europa League</div>
+        <div class="pick-match">Kairat Almaty vs Anderlecht <span class="changed-tag">DC</span></div>
+        <span class="pick-market market-dc blue">DC X2 (Anderlecht non perde)</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.31</div>
+        <div class="pick-running">running: ×41.58</div>
+      </div>
+    </div>
+    <div class="pick">
+      <div class="pick-left">
+        <div class="pick-league">🏆 Europa League</div>
+        <div class="pick-match">Egnatia Rrogozhine vs Lillestrom</div>
+        <span class="pick-market market-gng">GOL (entrambe segnano)</span>
+      </div>
+      <div class="pick-right">
+        <div class="pick-odds">1.68</div>
+        <div class="pick-running">running: ×69.85</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="summary-row">
+      <span class="summary-label">SELEZIONI</span>
+      <span class="summary-value">10 pick · 4 giorni</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">QUOTA TOTALE</span>
+      <span class="summary-value big">69.85</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">BONUS NETWIN +25%</span>
+      <span class="summary-value bonus">+ 17.46 per €1</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">VINCITA POTENZIALE / €1</span>
+      <span class="summary-value total">~ €87.31</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-note">
+      <strong>Codice prenotata:</strong> 686305 · Netwin → Schedina → Inserisci codice → Carica<br>
+      Valida 7 giorni · Quote al momento della prenotazione · 17/08/2026 16:18<br>
+      Il gioco è vietato ai minori. Gioca responsabilmente.
+    </div>
+  </div>
+</div>
+</body>
+</html>

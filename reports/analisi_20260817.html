@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAgent — Analisi 17 Agosto 2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3e;
+    --green: #00d084;
+    --yellow: #f5c518;
+    --red: #e05252;
+    --blue: #4a9eff;
+    --purple: #b07cff;
+    --teal: #00c4cc;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --header-bg: #141622;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; line-height: 1.5; }
+
+  .header { background: var(--header-bg); border-bottom: 1px solid var(--border); padding: 16px 28px; display: flex; align-items: center; gap: 16px; }
+  .header .logo { font-size: 20px; font-weight: 700; color: var(--green); letter-spacing: 1px; }
+  .header .date { color: var(--muted); font-size: 12px; }
+  .header .badge { margin-left: auto; background: var(--green); color: #000; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+  .header .badge2 { background: var(--purple); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+
+  .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; border-left: 3px solid var(--green); padding-left: 10px; }
+
+  /* STATS ROW */
+  .stats-row { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; flex: 1; min-width: 120px; }
+  .stat-card .val { font-size: 24px; font-weight: 700; color: var(--green); }
+  .stat-card .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 28px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; min-width: 1300px; }
+  thead tr { background: #1f2237; }
+  th { padding: 9px 10px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.8px; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
+  th.group-main { color: var(--blue); border-bottom: 2px solid var(--blue); }
+  th.group-btts { color: var(--purple); border-bottom: 2px solid var(--purple); }
+  th.group-pt { color: var(--teal); border-bottom: 2px solid var(--teal); }
+  td { padding: 8px 10px; border-top: 1px solid var(--border); vertical-align: middle; white-space: nowrap; }
+  tr:hover td { background: rgba(255,255,255,0.025); }
+
+  .time { color: var(--muted); font-size: 11px; }
+  .league { font-size: 10px; color: var(--muted); max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
+  .teams { font-weight: 600; font-size: 12px; }
+  .teams .vs { color: var(--muted); font-weight: 400; margin: 0 3px; }
+
+  .pct-high { color: var(--green); font-weight: 600; }
+  .pct-mid  { color: var(--yellow); }
+  .pct-low  { color: var(--muted); }
+  .pct-none { color: #444; font-size: 11px; }
+
+  .pick { background: #1a2535; border: 1px solid #2a3a55; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 600; color: var(--blue); }
+  .pick-btts { background: #251a35; border: 1px solid #3a2a55; color: var(--purple); border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 600; }
+  .pick-pt { background: #1a2b2b; border: 1px solid #2a4545; color: var(--teal); border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 600; }
+
+  .quota { font-weight: 700; }
+  .prob  { font-size: 11px; color: var(--muted); }
+  .edge-star2 { color: var(--green); font-weight: 700; }
+  .edge-star1 { color: #7ecfab; font-weight: 600; }
+  .edge-eye   { color: var(--yellow); }
+  .edge-neg   { color: var(--muted); font-size: 11px; }
+  .edge-no    { color: #444; font-size: 11px; }
+
+  /* BTTS cell */
+  .btts-cell { font-size: 11px; }
+  .btts-q { font-weight: 600; }
+  .btts-e { font-size: 10px; margin-left: 3px; }
+  .btts-na { color: #333; font-size: 11px; font-style: italic; }
+  /* note: btts prob column */
+  .prob-btts { font-size: 10px; color: var(--purple); }
+  .prob-pt { font-size: 10px; color: var(--teal); }
+
+  /* verdict */
+  .v-star2 { color: var(--green); font-size: 15px; }
+  .v-star1 { color: #7ecfab; font-size: 13px; }
+  .v-eye   { color: var(--yellow); font-size: 13px; }
+  .v-no    { color: var(--red); font-size: 13px; }
+  .v-skip  { color: #444; font-size: 12px; }
+
+  tr.best td { background: rgba(0,208,132,0.04); }
+  tr.best td:first-child { border-left: 3px solid var(--green); }
+  tr.alert-btts td { background: rgba(176,124,255,0.04); }
+  tr.alert-btts td:first-child { border-left: 3px solid var(--purple); }
+
+  /* MULTIPLA */
+  .multipla-card { background: var(--card); border: 1px solid var(--green); border-radius: 10px; padding: 18px 22px; margin-bottom: 28px; }
+  .multipla-card h3 { font-size: 13px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+  .m-table { width: 100%; border-collapse: collapse; }
+  .m-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .m-table td:last-child { text-align: right; font-weight: 600; }
+  .m-table tr:last-child td { border-bottom: none; }
+  .m-footer { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; gap: 20px; flex-wrap: wrap; }
+  .mf-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+  .mf-val { font-size: 20px; font-weight: 700; color: var(--green); }
+
+  /* ALERTS */
+  .alert-card { background: var(--card); border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+  .alert-card.btts-alert { border: 1px solid var(--purple); }
+  .alert-card.pt-alert { border: 1px solid var(--teal); }
+  .alert-card.norway-alert { border: 1px solid var(--yellow); }
+  .alert-card h4 { font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+  .alert-card.btts-alert h4 { color: var(--purple); }
+  .alert-card.pt-alert h4 { color: var(--teal); }
+  .alert-card.norway-alert h4 { color: var(--yellow); }
+  .alert-card p { font-size: 11px; color: var(--muted); }
+  .alert-card .highlight { font-weight: 600; }
+
+  .note-box { background: #1a1d27; border: 1px solid #2a2d3e; border-left: 3px solid var(--yellow); border-radius: 5px; padding: 10px 14px; margin-bottom: 10px; font-size: 11px; color: var(--muted); }
+  .note-box strong { color: var(--yellow); }
+
+  .nodata { color: #333; font-size: 11px; font-style: italic; }
+  .section-wrap { margin-bottom: 28px; }
+  .footer { text-align: center; color: #333; font-size: 11px; padding: 18px; border-top: 1px solid var(--border); margin-top: 16px; }
+
+  /* LEGEND */
+  .legend { display: flex; gap: 16px; margin-bottom: 10px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">⚽ BAgent</div>
+  <div class="date">Analisi Scommesse — Lunedì 17 Agosto 2026</div>
+  <div class="badge">FootyStats + Netwin</div>
+  <div class="badge2">BTTS + 1° Tempo (new)</div>
+</div>
+
+<div class="container">
+
+  <!-- KPI -->
+  <div class="stats-row">
+    <div class="stat-card"><div class="val">25</div><div class="lbl">Partite analizzate</div></div>
+    <div class="stat-card"><div class="val" style="color:var(--green)">8</div><div class="lbl">Edge positivo ⭐</div></div>
+    <div class="stat-card"><div class="val" style="color:var(--yellow)">5</div><div class="lbl">Borderline 👀</div></div>
+    <div class="stat-card"><div class="val" style="color:var(--red)">5</div><div class="lbl">Edge negativo ❌</div></div>
+    <div class="stat-card"><div class="val" style="color:var(--muted)">7</div><div class="lbl">No dati / skip ⛔</div></div>
+    <div class="stat-card" style="border-color:var(--purple)"><div class="val" style="color:var(--purple)">2</div><div class="lbl">Pick BTTS ⭐ (prob est.)</div></div>
+    <div class="stat-card" style="border-color:var(--teal)"><div class="val" style="color:var(--teal)">1</div><div class="lbl">Pick O0.5 1°T ⭐</div></div>
+  </div>
+
+  <!-- MULTIPLA -->
+  <div class="section-wrap">
+    <div class="section-title">🎯 Multipla Suggerita — Quota Target ≥ 30</div>
+    <div class="multipla-card">
+      <h3>Accumulator 7 Selezioni — Solo pick con prob > 79%</h3>
+      <table class="m-table">
+        <tr>
+          <td><span class="time">12:15</span></td>
+          <td class="teams">Melbourne Victory II <span class="vs">vs</span> Northcote</td>
+          <td>NPL 2 Victoria</td>
+          <td><span class="pick">Over 2.5</span></td>
+          <td class="prob">Prob 70% ⚠</td>
+          <td class="quota" style="color:var(--green)">@1.45</td>
+        </tr>
+        <tr>
+          <td><span class="time">17:00</span></td>
+          <td class="teams">Polissya Zhytomyr <span class="vs">vs</span> Zorya</td>
+          <td>Ucraina Premier League</td>
+          <td><span class="pick">Over 2.5</span></td>
+          <td class="prob">Prob 80% ✓</td>
+          <td class="quota" style="color:var(--green)">@1.76</td>
+        </tr>
+        <tr>
+          <td><span class="time">18:00</span></td>
+          <td class="teams">Brann II <span class="vs">vs</span> Os</td>
+          <td>Norvegia D3 Gruppo 3</td>
+          <td><span class="pick">Over 2.5</span></td>
+          <td class="prob">Prob 84% ✓</td>
+          <td class="quota" style="color:var(--green)">@1.68</td>
+        </tr>
+        <tr>
+          <td><span class="time">18:00</span></td>
+          <td class="teams">Ferencvaros <span class="vs">vs</span> Zalaegerszeg</td>
+          <td>Ungheria NB I</td>
+          <td><span class="pick">Over 2.5</span></td>
+          <td class="prob">Prob 80% ✓ ⚠ verif.</td>
+          <td class="quota" style="color:var(--green)">@1.56</td>
+        </tr>
+        <tr>
+          <td><span class="time">18:00</span></td>
+          <td class="teams">Staal Jørpeland <span class="vs">vs</span> Haugesund II</td>
+          <td>Norvegia D3 Gruppo 3</td>
+          <td><span class="pick">Over 2.5</span></td>
+          <td class="prob">Prob 75% ⚠</td>
+          <td class="quota" style="color:var(--green)">@1.57</td>
+        </tr>
+        <tr>
+          <td><span class="time">18:00</span></td>
+          <td class="teams">Fram <span class="vs">vs</span> Sarpsborg 08 II</td>
+          <td>Norvegia D3 Gruppo 1</td>
+          <td><span class="pick">Over 2.5</span></td>
+          <td class="prob">Prob 78% ⚠</td>
+          <td class="quota" style="color:var(--green)">@1.68</td>
+        </tr>
+        <tr>
+          <td><span class="time">22:00</span></td>
+          <td class="teams">Lanús <span class="vs">vs</span> Independiente</td>
+          <td>Argentina Primera División</td>
+          <td><span class="pick-btts">BTTS Gol</span></td>
+          <td class="prob" style="color:var(--purple)">Prob 57.9% ⚠ (singola consigliata)</td>
+          <td class="quota" style="color:var(--purple)">@2.20</td>
+        </tr>
+      </table>
+      <div class="m-footer">
+        <div class="mf"><div class="mf-lbl">Quota Combinata</div><div class="mf-val">~29.1</div></div>
+        <div class="mf"><div class="mf-lbl">Prob. stimata</div><div class="mf-val" style="color:var(--yellow)">~5%</div></div>
+        <div class="mf"><div class="mf-lbl">Selezioni</div><div class="mf-val" style="font-size:18px; color:var(--text)">7</div></div>
+        <div class="mf" style="margin-left:auto"><div class="mf-lbl">⚠ Note</div><div style="font-size:10px; color:var(--muted); max-width:320px; margin-top:4px">Melbourne e Staal sotto soglia 79%. Lanús BTTS (prob 57.9%) — da usare come singola +27.4% edge. Ferencvaros: quota non verificata su Netwin. Per multipla pulita usare solo Polissya + Brann II + Ferencvaros.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERTS MERCATI AGGIUNTIVI -->
+  <div class="section-wrap">
+    <div class="section-title">🔔 Segnalazioni Mercati Aggiuntivi</div>
+
+    <div class="alert-card btts-alert">
+      <h4>💜 BTTS (Gol/NoGol) — Pick con Edge Positivo</h4>
+      <p>
+        <span class="highlight" style="color:var(--purple)">Polissya vs Zorya · Gol @2.00 · Edge +34.6% (prob Poisson 67.3%)</span><br>
+        <span class="highlight" style="color:var(--purple)">Lanús vs Independiente · Gol @2.20 · Edge +27.4% (prob Poisson 57.9%)</span><br>
+        <br>
+        Entrambi mostrano edge elevato ma prob sotto soglia 79% — ideali come singole. Formula usata: P(BTTS) = P(Home≥1) × P(Away≥1) via Poisson con λ da FootyStats.
+        <br><br>
+        <span style="color:#555">Pick BTTS con edge negativo (da evitare): Athens Kallithea Gol @1.81 (edge -31.1%) · Estudiantes Gol @2.27 (edge -49.6%)</span>
+      </p>
+    </div>
+
+    <div class="alert-card pt-alert">
+      <h4>🩵 Over 0.5 Primo Tempo — Pick Verificato su Netwin</h4>
+      <p>
+        <span class="highlight" style="color:var(--teal)">Polissya vs Zorya · O0.5 1°T @1.31 · Edge +11.2% (prob Poisson 84.9%)</span>
+        <span style="font-size:10px; color:var(--muted)"> — λ totale 4.5 → λ 1H ≈ 1.89 → P(O0.5 PT) = 1-e⁻¹·⁸⁹ = 84.9%</span><br>
+        <br>
+        <span style="color:#555">Edge negativo (evitare): Athens Kallithea O0.5 PT @1.42 (edge -20.7%)</span>
+      </p>
+    </div>
+
+    <div class="alert-card norway-alert">
+      <h4>⚠ Norvegia D3 — BTTS ad Alta Probabilità (Quote Non Disponibili)</h4>
+      <p>
+        La lega Norvegia D3 non è caricata nel palinsesto In Evidenza di Netwin in questa sessione.
+        Le probabilità BTTS stimate via Poisson sono molto elevate — verificare manualmente le quote Gol/NoGol:<br><br>
+        <span class="highlight">Brann II vs Os: P(BTTS) 88.4%</span> · avg gol 3.10 + 2.60<br>
+        <span class="highlight">Fram vs Sarpsborg 08 II: P(BTTS) 85.9%</span> · avg gol 2.90 + 2.40<br>
+        <span class="highlight">Staal Jørpeland vs Haugesund II: P(BTTS) 83.0%</span> · avg gol 2.70 + 2.20<br>
+        Molde2 vs Rosenborg2: P(BTTS) 81.8% · Varhaug vs Stabæk II: P(BTTS) 81.2%<br>
+        <br>
+        Se Netwin offre Gol @1.25+ su queste partite → edge positivo quasi certo.
+      </p>
+    </div>
+  </div>
+
+  <!-- TABELLA COMPLETA -->
+  <div class="section-wrap">
+    <div class="section-title">📋 Analisi Completa — Tutti i Mercati</div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Mercati principali (1X2, DC, O/U)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>BTTS / Gol-NoGol</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Over 0.5 Primo Tempo</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>Quote non verificate / stimate</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ora</th>
+            <th>Partita</th>
+            <th>Campionato</th>
+            <th>O2.5%<br>Casa</th>
+            <th>O2.5%<br>Trasf.</th>
+            <th>λH</th>
+            <th>λA</th>
+            <!-- MERCATI PRINCIPALI -->
+            <th class="group-main">Pick</th>
+            <th class="group-main">Quota</th>
+            <th class="group-main">Prob</th>
+            <th class="group-main">Edge</th>
+            <!-- BTTS -->
+            <th class="group-btts">P(BTTS)<br>Poisson</th>
+            <th class="group-btts">Gol<br>@quota</th>
+            <th class="group-btts">Edge<br>BTTS</th>
+            <!-- PRIMO TEMPO -->
+            <th class="group-pt">P(O0.5<br>1°T)</th>
+            <th class="group-pt">O0.5 PT<br>@quota</th>
+            <th class="group-pt">Edge<br>1°T</th>
+            <!-- VERDETTO -->
+            <th>Verdetto</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- AUSTRALIA -->
+          <tr class="best">
+            <td class="time">12:15</td>
+            <td class="teams">Melbourne Victory II <span class="vs">vs</span> Northcote</td>
+            <td class="league">NPL 2 Victoria</td>
+            <td class="pct-high">70%</td>
+            <td class="pct-mid">60%</td>
+            <td>1.93</td><td>1.42</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.45</td>
+            <td class="prob">70%</td>
+            <td class="edge-star1">+1.5%</td>
+            <td class="prob-btts">64.8%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="prob-pt">75.6%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star1">⭐</td>
+          </tr>
+          <tr>
+            <td class="time">12:07</td>
+            <td class="teams">FC Bulleen Lions <span class="vs">vs</span> N. Sunshine</td>
+            <td class="league">NPL 2 Victoria</td>
+            <td class="pct-mid">63%</td>
+            <td class="pct-low">50%</td>
+            <td>1.71</td><td>1.29</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.42</td>
+            <td class="prob">58%</td>
+            <td class="edge-no">-17.6%</td>
+            <td class="prob-btts">59.4%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-no">❌</td>
+          </tr>
+
+          <!-- INDIA -->
+          <tr class="best">
+            <td class="time">15:30</td>
+            <td class="teams">Mohun Bagan <span class="vs">vs</span> Jamshedpur</td>
+            <td class="league">India Durand Cup</td>
+            <td class="pct-high">75%</td>
+            <td class="pct-high">67%</td>
+            <td>2.10</td><td>1.50</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.94</td>
+            <td class="prob">~68%</td>
+            <td class="edge-star2">+32%</td>
+            <td class="prob-btts">68.2%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+
+          <!-- INGHILTERRA U21 -->
+          <tr>
+            <td class="time">14:00</td>
+            <td class="teams">Swansea U21 <span class="vs">vs</span> Sheffield Utd U21</td>
+            <td class="league">Inghilterra Dev. League</td>
+            <td class="pct-none">—</td>
+            <td class="pct-none">—</td>
+            <td class="pct-none">—</td><td class="pct-none">—</td>
+            <td class="nodata">no dati</td>
+            <td class="quota">2.65</td>
+            <td class="nodata">—</td>
+            <td class="nodata">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-skip">⛔</td>
+          </tr>
+
+          <!-- GRECIA -->
+          <tr>
+            <td class="time">16:00</td>
+            <td class="teams">Athens Kallithea <span class="vs">vs</span> AE Larissa</td>
+            <td class="league">Grecia Coppa</td>
+            <td class="pct-low">0%</td>
+            <td class="pct-low">0%</td>
+            <td>0.86</td><td>1.08</td>
+            <td><span class="pick">DC X2</span></td>
+            <td class="quota">1.32</td>
+            <td class="prob">75%</td>
+            <td class="edge-eye">-1%</td>
+            <td class="prob-btts">38.1%</td>
+            <td><span style="font-size:11px">1.81</span></td>
+            <td class="edge-no">-31.1% ❌</td>
+            <td class="prob-pt">55.8%</td>
+            <td><span style="font-size:11px">1.42</span></td>
+            <td class="edge-no">-20.7% ❌</td>
+            <td class="v-eye">👀</td>
+          </tr>
+          <tr>
+            <td class="time">17:00</td>
+            <td class="teams">Anagennisi Karditsas <span class="vs">vs</span> Aris</td>
+            <td class="league">Grecia Coppa</td>
+            <td class="pct-low">0%</td>
+            <td class="pct-low">0%</td>
+            <td class="pct-none">—</td><td class="pct-none">—</td>
+            <td class="nodata">quota &lt;1.20</td>
+            <td class="quota" style="color:#555">1.01</td>
+            <td class="nodata">—</td>
+            <td class="nodata">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">O0.5 PT</td>
+            <td><span style="font-size:11px">1.18</span></td>
+            <td class="btts-na">no dati λ</td>
+            <td class="v-skip">⛔</td>
+          </tr>
+
+          <!-- UCRAINA ⭐⭐ BEST MATCH -->
+          <tr class="best">
+            <td class="time">17:00</td>
+            <td class="teams">Polissya Zhytomyr <span class="vs">vs</span> Zorya</td>
+            <td class="league">Ucraina Premier League</td>
+            <td class="pct-high">90%</td>
+            <td class="pct-high">70%</td>
+            <td>3.30</td><td>1.20</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.76</td>
+            <td class="prob">80%</td>
+            <td class="edge-star2">+40.8%</td>
+            <td class="prob-btts">67.3%</td>
+            <td><span class="pick-btts">Gol @2.00</span></td>
+            <td class="edge-star2">+34.6% ⭐⭐</td>
+            <td class="prob-pt">84.9%</td>
+            <td><span class="pick-pt">O0.5 @1.31</span></td>
+            <td class="edge-star1">+11.2% ⭐</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+
+          <!-- AZERBAIGIAN -->
+          <tr>
+            <td class="time">15:00</td>
+            <td class="teams">Qarabag <span class="vs">vs</span> Shamakhi FK</td>
+            <td class="league">Azerbaigian Premier League</td>
+            <td class="pct-mid">60%</td>
+            <td class="pct-low">50%</td>
+            <td>2.00</td><td>1.10</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.51</td>
+            <td class="prob">65%</td>
+            <td class="edge-eye">-1.5%</td>
+            <td class="prob-btts">57.7%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="prob-pt">72.8%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-eye">👀</td>
+          </tr>
+
+          <!-- ARMENIA -->
+          <tr>
+            <td class="time">15:00</td>
+            <td class="teams">Noah <span class="vs">vs</span> Alashkert</td>
+            <td class="league">Armenia Premier League</td>
+            <td class="pct-mid">50%</td>
+            <td class="pct-low">25%</td>
+            <td>1.80</td><td>0.90</td>
+            <td><span class="pick">Noah 1</span></td>
+            <td class="quota">1.44</td>
+            <td class="prob">67%</td>
+            <td class="edge-eye">-3.5%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-eye">👀</td>
+          </tr>
+
+          <!-- UNGHERIA ⭐⭐ (quota da verificare) -->
+          <tr class="best">
+            <td class="time">18:00</td>
+            <td class="teams">Ferencvaros <span class="vs">vs</span> Zalaegerszeg</td>
+            <td class="league">Ungheria NB I</td>
+            <td class="pct-high">84%</td>
+            <td class="pct-high">75%</td>
+            <td>2.70</td><td>1.20</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota" style="color:var(--yellow)">1.56 ⚠</td>
+            <td class="prob">80%</td>
+            <td class="edge-star2">+24.8%</td>
+            <td class="prob-btts">65.2%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="prob-pt">80.6%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+
+          <!-- FINLANDIA -->
+          <tr>
+            <td class="time">17:00</td>
+            <td class="teams">Gnistan <span class="vs">vs</span> Ilves</td>
+            <td class="league">Finlandia Veikkausliiga</td>
+            <td class="pct-mid">63%</td>
+            <td class="pct-mid">60%</td>
+            <td>1.63</td><td>1.90</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.55</td>
+            <td class="prob">65%</td>
+            <td class="edge-star1">+0.75%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star1">⭐</td>
+          </tr>
+
+          <!-- COPPA ITALIA -->
+          <tr>
+            <td class="time">18:00</td>
+            <td class="teams">Pisa <span class="vs">vs</span> Empoli</td>
+            <td class="league">Coppa Italia</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">—</td><td class="pct-none">—</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">2.00</td>
+            <td class="prob">45%</td>
+            <td class="edge-no">-10%</td>
+            <td class="pct-none">—</td>
+            <td><span style="font-size:11px; color:#555">Gol 1.88</span></td>
+            <td class="btts-na">no λ</td>
+            <td class="pct-none">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-no">❌</td>
+          </tr>
+          <tr>
+            <td class="time">18:30</td>
+            <td class="teams">Sassuolo <span class="vs">vs</span> Cesena</td>
+            <td class="league">Coppa Italia</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">—</td><td class="pct-none">—</td>
+            <td><span class="pick">DC 1X</span></td>
+            <td class="quota">1.13</td>
+            <td class="prob">87%</td>
+            <td class="edge-eye">-1.7%</td>
+            <td class="pct-none">—</td>
+            <td><span style="font-size:11px; color:#555">Gol 1.67</span></td>
+            <td class="btts-na">no λ</td>
+            <td class="pct-none">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-eye">👀</td>
+          </tr>
+
+          <!-- NORVEGIA D3 -->
+          <tr class="best">
+            <td class="time">15:00</td>
+            <td class="teams">Molde FK 2 <span class="vs">vs</span> Rosenborg BK 2</td>
+            <td class="league">Norvegia D3 Gr. 2</td>
+            <td class="pct-high">75%</td>
+            <td class="pct-high">70%</td>
+            <td>2.40</td><td>2.30</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.57</td>
+            <td class="prob">73%</td>
+            <td class="edge-star1">+14.6%</td>
+            <td class="prob-btts">81.8%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="prob-pt">86.1%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+          <tr class="best">
+            <td class="time">18:00</td>
+            <td class="teams">Varhaug <span class="vs">vs</span> Stabæk II</td>
+            <td class="league">Norvegia D3 Gr. 3</td>
+            <td class="pct-high">80%</td>
+            <td class="pct-high">73%</td>
+            <td>2.80</td><td>2.00</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.68</td>
+            <td class="prob">74%</td>
+            <td class="edge-star2">+24.3%</td>
+            <td class="prob-btts">81.2%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+          <tr class="best">
+            <td class="time">18:00</td>
+            <td class="teams">Staal Jørpeland <span class="vs">vs</span> Haugesund II</td>
+            <td class="league">Norvegia D3 Gr. 3</td>
+            <td class="pct-high">80%</td>
+            <td class="pct-high">73%</td>
+            <td>2.70</td><td>2.20</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.57</td>
+            <td class="prob">75%</td>
+            <td class="edge-star1">+17.8%</td>
+            <td class="prob-btts">83.0%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="time">18:00</td>
+            <td class="teams">Stord <span class="vs">vs</span> Åsane II</td>
+            <td class="league">Norvegia D3 Gr. 3</td>
+            <td class="pct-mid">73%</td>
+            <td class="pct-mid">67%</td>
+            <td>2.20</td><td>1.90</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.42</td>
+            <td class="prob">67%</td>
+            <td class="edge-eye">-4.9%</td>
+            <td class="prob-btts">75.5%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-eye">👀</td>
+          </tr>
+          <tr class="best">
+            <td class="time">18:00</td>
+            <td class="teams">Brann II <span class="vs">vs</span> Os</td>
+            <td class="league">Norvegia D3 Gr. 3</td>
+            <td class="pct-high">84%</td>
+            <td class="pct-high">84%</td>
+            <td>3.10</td><td>2.60</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.68</td>
+            <td class="prob">84%</td>
+            <td class="edge-star2">+41.1%</td>
+            <td class="prob-btts" style="color:var(--green)">88.4% 🔥</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="time">18:00</td>
+            <td class="teams">Lillehammer <span class="vs">vs</span> Lyn II</td>
+            <td class="league">Norvegia D3 Gr. 1</td>
+            <td class="pct-high">73%</td>
+            <td class="pct-mid">67%</td>
+            <td>2.30</td><td>2.10</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.40</td>
+            <td class="prob">73%</td>
+            <td class="edge-star1">+2.2%</td>
+            <td class="prob-btts">79.0%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star1">⭐</td>
+          </tr>
+          <tr class="best">
+            <td class="time">18:00</td>
+            <td class="teams">Fram <span class="vs">vs</span> Sarpsborg 08 II</td>
+            <td class="league">Norvegia D3 Gr. 1</td>
+            <td class="pct-high">82%</td>
+            <td class="pct-high">75%</td>
+            <td>2.90</td><td>2.40</td>
+            <td><span class="pick">Over 2.5</span></td>
+            <td class="quota">1.68</td>
+            <td class="prob">78%</td>
+            <td class="edge-star2">+31.1%</td>
+            <td class="prob-btts">85.9%</td>
+            <td class="btts-na" style="color:var(--yellow)">† ver.</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star2">⭐⭐</td>
+          </tr>
+
+          <!-- TURCHIA -->
+          <tr>
+            <td class="time">20:30</td>
+            <td class="teams">Samsunspor <span class="vs">vs</span> Göztepe</td>
+            <td class="league">Turchia Süper Lig</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">—</td><td class="pct-none">—</td>
+            <td class="nodata">nuova stagione</td>
+            <td class="quota" style="color:#555">—</td>
+            <td class="nodata">—</td>
+            <td class="nodata">—</td>
+            <td class="pct-none">—</td>
+            <td><span style="font-size:11px; color:#555">Gol 1.73</span></td>
+            <td class="btts-na">no λ</td>
+            <td class="pct-none">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-skip">⛔</td>
+          </tr>
+
+          <!-- SPAGNA -->
+          <tr>
+            <td class="time">21:00</td>
+            <td class="teams">Deportivo La Coruña <span class="vs">vs</span> Elche</td>
+            <td class="league">Spagna LaLiga 2</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">—</td><td class="pct-none">—</td>
+            <td><span class="pick">DC 1X</span></td>
+            <td class="quota">1.27</td>
+            <td class="prob">67%</td>
+            <td class="edge-no">-15%</td>
+            <td class="pct-none">—</td>
+            <td><span style="font-size:11px; color:#555">Gol 1.92</span></td>
+            <td class="btts-na">no λ</td>
+            <td class="pct-none">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-no">❌</td>
+          </tr>
+
+          <!-- PORTOGALLO -->
+          <tr>
+            <td class="time">21:15</td>
+            <td class="teams">Casa Pia <span class="vs">vs</span> Benfica</td>
+            <td class="league">Portogallo Liga</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">0%*</td>
+            <td class="pct-none">—</td><td class="pct-none">—</td>
+            <td><span class="pick">Benfica 2</span></td>
+            <td class="quota">1.21</td>
+            <td class="prob">77%</td>
+            <td class="edge-no">-6.5%</td>
+            <td class="pct-none">—</td>
+            <td><span style="font-size:11px; color:#555">Gol 2.18</span></td>
+            <td class="btts-na">no λ</td>
+            <td class="pct-none">—</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-no">❌</td>
+          </tr>
+
+          <!-- ARGENTINA -->
+          <tr>
+            <td class="time">19:45</td>
+            <td class="teams">Estudiantes RC <span class="vs">vs</span> Atlético Tucumán</td>
+            <td class="league">Argentina Primera Div.</td>
+            <td class="pct-low">38%</td>
+            <td class="pct-low">35%</td>
+            <td>0.45</td><td>0.95</td>
+            <td><span class="pick">Over 1.5</span></td>
+            <td class="quota">1.60</td>
+            <td class="prob">63%</td>
+            <td class="edge-eye">+0.8%</td>
+            <td class="prob-btts">22.2%</td>
+            <td><span style="font-size:11px">2.27</span></td>
+            <td class="edge-no">-49.6% ❌</td>
+            <td class="prob-pt">44.4%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-eye">👀</td>
+          </tr>
+
+          <!-- ARGENTINA BTTS ALERT -->
+          <tr class="alert-btts">
+            <td class="time">22:00</td>
+            <td class="teams">Lanús <span class="vs">vs</span> Independiente</td>
+            <td class="league">Argentina Primera Div.</td>
+            <td class="pct-low">36%</td>
+            <td class="pct-mid">45%</td>
+            <td>1.43</td><td>1.43</td>
+            <td><span class="pick">Over 1.5</span></td>
+            <td class="quota">1.54</td>
+            <td class="prob">68%</td>
+            <td class="edge-star1">+4.7%</td>
+            <td class="prob-btts" style="font-weight:600">57.9%</td>
+            <td><span class="pick-btts">Gol @2.20</span></td>
+            <td class="edge-star2" style="font-size:12px">+27.4% ⭐⭐</td>
+            <td class="prob-pt">69.9%</td>
+            <td class="btts-na">—</td>
+            <td class="btts-na">—</td>
+            <td class="v-star1">⭐</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOTE -->
+  <div class="section-wrap">
+    <div class="section-title">⚠ Note Metodologiche</div>
+    <div class="note-box">
+      <strong>Colonne BTTS e 1°T:</strong> P(BTTS) calcolata via Poisson: P(H≥1)×P(A≥1) = (1−e^−λH)×(1−e^−λA). P(O0.5 1°T) via λ_1H = λ_totale × 0.42 (split empirico gol primo/secondo tempo). Quote BTTS e O0.5 PT da Netwin tab G/NG e U/O Tempo — disponibili solo per partite nel palinsesto In Evidenza.
+    </div>
+    <div class="note-box">
+      <strong>† Quota da verificare (Netwin):</strong> Le partite Ferencvaros (NB I) e Norvegia D3 non sono state caricate tramite Netwin in questa sessione (lega non nel palinsesto In Evidenza attivo). Le quote indicate con "† ver." vanno controllate manualmente navigando in Calcio → Ungheria → NB I / Norvegia → D3.
+    </div>
+    <div class="note-box">
+      <strong>0%* FootyStats:</strong> Le partite di Coppa Italia, Süper Lig, LaLiga 2 e Liga Portugal mostrano 0% perché i CSV FootyStats per la stagione 2025/26 non sono ancora disponibili (partite inaugurali). Il modello Poisson non è applicabile senza dati storici stagionali.
+    </div>
+    <div class="note-box">
+      <strong>Norvegia D3 — Volatilità:</strong> Edge elevati (24–41%) in campionati di terza divisione di riserve. Difese meno organizzate. Volatilità superiore alla media — puntare importi contenuti su questi mercati.
+    </div>
+    <div class="note-box">
+      <strong>Lanús BTTS Gol @2.20 — Best Pick della Giornata (singola):</strong> Edge +27.4% con prob Poisson 57.9%. Non incluso in multipla per prob sotto soglia 79%. Come singola è il pick con il miglior rapporto edge/volatilità disponibile su mercati verificati Netwin.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">BAgent v2 — analisi 17/08/2026 · FootyStats + Netwin (BTTS+1°T) + TotalCorner (beta) · Mercati: 1X2, DC, O/U, BTTS Gol/NoGol, O0.5 Primo Tempo</div>
+
+</body>
+</html>

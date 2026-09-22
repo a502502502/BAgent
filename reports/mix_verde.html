@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mix Verde — BAgent Quota ~71</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f1a; color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; }
+  .slip { max-width: 700px; margin: 0 auto; background: #1a1a2e; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+
+  .header { background: linear-gradient(135deg, #0a2a0a, #104020); padding: 24px; text-align: center; border-bottom: 3px solid #4ecca3; }
+  .header .logo { font-size: 11px; letter-spacing: 4px; color: #4ecca3; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+  .header h1 { font-size: 28px; font-weight: 800; color: #fff; }
+  .header .subtitle { font-size: 13px; color: #90c0a0; margin-top: 4px; }
+  .codice-badge { display: inline-block; margin-top: 14px; background: #4ecca3; color: #0a1a0f; font-size: 16px; font-weight: 800; letter-spacing: 2px; padding: 6px 20px; border-radius: 8px; }
+
+  .matrix-bar { display: flex; gap: 6px; padding: 12px 20px; background: #080f08; justify-content: center; flex-wrap: wrap; }
+  .m-tag { padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+  .m-exclusive { background: #0a2a10; color: #4ecca3; border: 1px solid #2a6a3a; }
+  .m-shared { background: #1a1a1a; color: #606060; }
+
+  .day-header { background: #080e08; padding: 9px 20px; font-size: 10px; font-weight: 700; letter-spacing: 3px; color: #70a070; text-transform: uppercase; border-left: 4px solid #4ecca3; }
+  .day-header.d1 { border-color: #4ecca3; color: #70a090; }
+  .day-header.d2 { border-color: #f7b731; color: #a09070; }
+  .day-header.d3 { border-color: #45aaf2; color: #7090a0; }
+  .day-header.d4 { border-color: #e94560; color: #a07070; }
+
+  .pick { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 13px 20px; border-bottom: 1px solid #1f1f35; }
+  .pick:hover { background: #101a10; }
+  .pick-league { font-size: 10px; color: #507060; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+  .pick-match { font-size: 14px; font-weight: 600; color: #d0e0d0; margin-bottom: 4px; }
+  .pick-market { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .market-over { background: #1a3a2a; color: #4ecca3; }
+  .market-1x2 { background: #1a2a3a; color: #45aaf2; }
+  .market-dc { background: #0a3a20; color: #4ecca3; }
+  .new-tag { display: inline-block; margin-left: 6px; font-size: 10px; background: #4ecca3; color: #0a1a0f; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
+  .only-tag { display: inline-block; margin-left: 6px; font-size: 10px; background: #2a6a40; color: #d0ffd0; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
+  .pick-odds { font-size: 22px; font-weight: 800; color: #f7b731; text-align: right; }
+  .pick-running { font-size: 10px; color: #305030; margin-top: 2px; text-align: right; }
+
+  .survival-box { background: #080f08; border: 1px solid #1a3a20; border-radius: 8px; margin: 14px 20px; padding: 13px 16px; }
+  .survival-title { font-size: 10px; color: #406040; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .survival-row { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 4px; }
+  .s-match { flex: 1; color: #80c080; }
+  .s-icon { font-size: 14px; }
+  .s-outcome { font-size: 11px; color: #606060; }
+
+  .summary { background: #080e08; padding: 20px; }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #101810; }
+  .summary-row:last-child { border: none; }
+  .summary-label { font-size: 12px; color: #507050; }
+  .summary-value { font-size: 14px; font-weight: 700; color: #d0e0d0; }
+  .summary-value.big { font-size: 30px; color: #f7b731; }
+  .summary-value.bonus { color: #4ecca3; }
+  .summary-value.total { font-size: 22px; color: #4ecca3; }
+
+  .footer { background: #050c05; padding: 14px 20px; text-align: center; }
+  .footer-note { font-size: 11px; color: #304030; line-height: 1.6; }
+  .footer-note strong { color: #506050; }
+
+  .risk-badges { display: flex; justify-content: center; gap: 8px; margin: 12px 20px 0; }
+  .badge { padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .b-risk { background: #0a2a10; color: #4ecca3; }
+  .b-info { background: #1a1a2e; color: #7090c0; }
+
+  .shield-note { background: #0a1a0a; border: 1px solid #1a4a20; border-radius: 8px; margin: 14px 20px 0; padding: 10px 16px; font-size: 12px; color: #608060; text-align: center; }
+</style>
+</head>
+<body>
+<div class="slip">
+  <div class="header">
+    <div class="logo">BAgent · Mix Diversificato</div>
+    <h1>🟢 SCHEDINA VERDE</h1>
+    <div class="subtitle">Conservativa · 17–20 Agosto 2026</div>
+    <div class="codice-badge">DA PRENOTARE</div>
+  </div>
+
+  <div class="risk-badges">
+    <span class="badge b-risk">🟢 RISCHIO BASSO</span>
+    <span class="badge b-info">10 PICK · QUOTA ~71</span>
+  </div>
+
+  <div class="matrix-bar">
+    <span class="m-tag m-exclusive">No Celtic (solo Rossa+Gialla)</span>
+    <span class="m-tag m-exclusive">Trabzonspor solo qui</span>
+    <span class="m-tag m-shared">Dinamo ✓ Rossa</span>
+    <span class="m-tag m-shared">Slovan ✓ Rossa</span>
+    <span class="m-tag m-shared">Stella Rossa ✓ Gialla</span>
+    <span class="m-tag m-shared">AEK DC ✓ Gialla</span>
+  </div>
+
+  <div class="day-header d1">📅 Dom 17 Ago — Leghe Nazionali (condivise)</div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🇺🇦 Premier League Ucraina</div>
+      <div class="pick-match">Polissya Zhytomyr vs Zorya</div>
+      <span class="pick-market market-over">Over 2.5</span>
+    </div>
+    <div><div class="pick-odds">1.70</div><div class="pick-running">×1.70</div></div>
+  </div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🇳🇴 3ª Divisione Norvegia</div>
+      <div class="pick-match">Sk Brann 2 vs Os</div>
+      <span class="pick-market market-over">Over 2.5</span>
+    </div>
+    <div><div class="pick-odds">1.13</div><div class="pick-running">×1.92</div></div>
+  </div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🇭🇺 NB I Ungheria</div>
+      <div class="pick-match">Zalaegerszeg vs Ferencvaros</div>
+      <span class="pick-market market-over">Over 2.5</span>
+    </div>
+    <div><div class="pick-odds">1.54</div><div class="pick-running">×2.96</div></div>
+  </div>
+
+  <div class="day-header d2">📅 Lun 18 Ago — UCL Play-offs</div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League</div>
+      <div class="pick-match">Levski Sofia vs AEK Atene</div>
+      <span class="pick-market market-dc">DC X2 — AEK non perde</span>
+    </div>
+    <div><div class="pick-odds">1.37</div><div class="pick-running">×4.05</div></div>
+  </div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League</div>
+      <div class="pick-match">Dinamo Zagabria vs Viking FK</div>
+      <span class="pick-market market-1x2">1X2: 1 — Dinamo vince in casa</span>
+    </div>
+    <div><div class="pick-odds">1.76</div><div class="pick-running">×7.13</div></div>
+  </div>
+
+  <div class="day-header d3">📅 Mar 19 Ago — UCL Play-offs</div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League</div>
+      <div class="pick-match">Slovan Bratislava vs NK Celje</div>
+      <span class="pick-market market-1x2">1X2: 1 — Slovan vince in casa</span>
+    </div>
+    <div><div class="pick-odds">1.75</div><div class="pick-running">×12.48</div></div>
+  </div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League</div>
+      <div class="pick-match">Trabzonspor vs Ferencvaros <span class="new-tag">NUOVO</span> <span class="only-tag">SOLO QUI</span></div>
+      <span class="pick-market market-1x2">1X2: 1 — Trabzonspor vince in casa</span>
+    </div>
+    <div><div class="pick-odds">1.63</div><div class="pick-running">×20.35</div></div>
+  </div>
+
+  <div class="day-header d4">📅 Mer 20 Ago — EL Play-offs</div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League</div>
+      <div class="pick-match">Lech Poznan vs FC Thun</div>
+      <span class="pick-market market-1x2">1X2: 1 — Lech vince in casa</span>
+    </div>
+    <div><div class="pick-odds">1.58</div><div class="pick-running">×32.15</div></div>
+  </div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League</div>
+      <div class="pick-match">Kairat Almaty vs Anderlecht</div>
+      <span class="pick-market market-dc">DC X2 — Anderlecht non perde</span>
+    </div>
+    <div><div class="pick-odds">1.31</div><div class="pick-running">×42.12</div></div>
+  </div>
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League</div>
+      <div class="pick-match">Stella Rossa vs Viktoria Plzen <span class="new-tag">NUOVO</span></div>
+      <span class="pick-market market-1x2">1X2: 1 — Stella Rossa vince in casa</span>
+    </div>
+    <div><div class="pick-odds">1.68</div><div class="pick-running">×70.76</div></div>
+  </div>
+
+  <div class="shield-note">
+    🛡️ <strong>Assenza strategica:</strong> Celtic e Fenerbahce non sono in questa schedina — se perdono, sopravvivi!
+  </div>
+
+  <div class="survival-box">
+    <div class="survival-title">🛡️ Se una partita va storta...</div>
+    <div class="survival-row"><span class="s-match">Celtic non vince</span><span class="s-icon">✅</span><span class="s-outcome">Verde NON è colpita — Celtic non è in questa schedina!</span></div>
+    <div class="survival-row"><span class="s-match">Fenerbahce non vince</span><span class="s-icon">✅</span><span class="s-outcome">Verde NON è colpita — Fenerbahce non è in questa schedina!</span></div>
+    <div class="survival-row"><span class="s-match">Trabzonspor non vince</span><span class="s-icon">💀</span><span class="s-outcome">Solo Verde muore — Rossa/Gialla non ce l'hanno</span></div>
+    <div class="survival-row"><span class="s-match">Dinamo non vince</span><span class="s-icon">⚠️</span><span class="s-outcome">Rossa + Verde muoiono — Gialla sopravvive (ha Fenerbahce)</span></div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-row"><span class="summary-label">PICK</span><span class="summary-value">10 selezioni · 4 giorni</span></div>
+    <div class="summary-row"><span class="summary-label">QUOTA TOTALE</span><span class="summary-value big">~71</span></div>
+    <div class="summary-row"><span class="summary-label">BONUS NETWIN +25%</span><span class="summary-value bonus">+ ~18 per €1</span></div>
+    <div class="summary-row"><span class="summary-label">VINCITA / €1</span><span class="summary-value total">~€89</span></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-note">
+      <strong>BAgent Mix Diversificato</strong> — Versione Verde · Da prenotare su Netwin<br>
+      Quote indicative · Verifica sempre le quote live prima di giocare · 17/08/2026
+    </div>
+  </div>
+</div>
+</body>
+</html>

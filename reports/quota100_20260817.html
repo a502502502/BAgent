@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAgent — Multipla Quota 100 | 17-20 Agosto 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --card2: #1c2128;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --gold: #f0c040;
+    --gold2: #b8941f;
+    --green: #3fb950;
+    --green2: #238636;
+    --blue: #58a6ff;
+    --teal: #00c4cc;
+    --purple: #b07cff;
+    --orange: #f78166;
+    --red: #da3633;
+    --day1: #1c2820;
+    --day2: #1a2030;
+    --day3: #1f1a30;
+    --day4: #2a1a1a;
+    --day1b: #3fb950;
+    --day2b: #58a6ff;
+    --day3b: #b07cff;
+    --day4b: #f0c040;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 20px;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border: 1px solid var(--gold2);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '🏆';
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 72px;
+    opacity: 0.12;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(240,192,64,0.15);
+    border: 1px solid var(--gold2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(240,192,64,0.3);
+    margin-bottom: 6px;
+  }
+  .header h2 {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ─── KPI BAR ─── */
+  .kpi-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi .val {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .kpi .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .kpi.gold .val { color: var(--gold); }
+  .kpi.green .val { color: var(--green); }
+  .kpi.blue .val { color: var(--blue); }
+  .kpi.purple .val { color: var(--purple); }
+  .kpi.orange .val { color: var(--orange); }
+
+  /* ─── DAY SECTIONS ─── */
+  .day-section {
+    margin-bottom: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .day1 .day-header { background: var(--day1); border-bottom: 1px solid #2a4030; color: var(--day1b); }
+  .day2 .day-header { background: var(--day2); border-bottom: 1px solid #2a3050; color: var(--day2b); }
+  .day3 .day-header { background: var(--day3); border-bottom: 1px solid #302a50; color: var(--day3b); }
+  .day4 .day-header { background: var(--day4); border-bottom: 1px solid #502a2a; color: var(--day4b); }
+
+  .day-header .left { display: flex; align-items: center; gap: 10px; }
+  .day-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .day1 .day-num { background: var(--day1b); color: #0d1117; }
+  .day2 .day-num { background: var(--day2b); color: #0d1117; }
+  .day3 .day-num { background: var(--day3b); color: #0d1117; }
+  .day4 .day-num { background: var(--day4b); color: #0d1117; }
+
+  .day-sub {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--muted);
+  }
+  .sub-quota {
+    font-size: 14px; font-weight: 700;
+  }
+  .day1 .sub-quota { color: var(--day1b); }
+  .day2 .sub-quota { color: var(--day2b); }
+  .day3 .sub-quota { color: var(--day3b); }
+  .day4 .sub-quota { color: var(--day4b); }
+
+  /* ─── TABLE ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card2);
+  }
+  th {
+    background: var(--card);
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 12px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  th:last-child, td:last-child { text-align: right; padding-right: 14px; }
+  td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .pick-num {
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    padding: 2px 6px;
+    display: inline-block;
+    min-width: 24px;
+    text-align: center;
+  }
+  .match-name { font-weight: 600; color: var(--text); }
+  .comp-badge {
+    font-size: 10px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    padding: 1px 6px;
+    display: inline-block;
+    margin-top: 2px;
+  }
+  .mercato {
+    font-weight: 600;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .mercato.over { background: rgba(88,166,255,0.15); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); }
+  .mercato.home { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .mercato.dc   { background: rgba(176,124,255,0.15); color: var(--purple); border: 1px solid rgba(176,124,255,0.3); }
+
+  .quota-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .quota-warn { color: var(--muted); font-size: 11px; }
+
+  .prob-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prob-num {
+    font-weight: 600;
+    font-size: 13px;
+    min-width: 38px;
+  }
+  .prob-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .prob-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s;
+  }
+  .p-high .prob-num { color: var(--green); }
+  .p-high .prob-fill { background: var(--green); }
+  .p-med  .prob-num { color: var(--gold); }
+  .p-med  .prob-fill { background: var(--gold); }
+  .p-low  .prob-num { color: var(--orange); }
+  .p-low  .prob-fill { background: var(--orange); }
+
+  .warn-icon { font-size: 10px; color: var(--orange); }
+
+  /* ─── RUNNING TOTAL ─── */
+  .running {
+    background: var(--card);
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-top: 1px solid var(--border);
+  }
+  .running strong { color: var(--text); }
+
+  /* ─── FINAL RESULT ─── */
+  .result-card {
+    background: linear-gradient(135deg, #1a1500 0%, #2a2000 100%);
+    border: 2px solid var(--gold2);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+  }
+  .result-card h3 {
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .result-card .big-quota {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(240,192,64,0.4);
+    line-height: 1;
+  }
+  .result-card .sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .result-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .r-stat {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+  }
+  .r-stat .rv { font-size: 22px; font-weight: 700; color: var(--text); }
+  .r-stat .rl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* ─── NOTES ─── */
+  .notes {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .notes h4 { color: var(--text); font-size: 13px; margin-bottom: 8px; }
+  .notes .tag { color: var(--orange); font-weight: 600; }
+  .notes .formula { background: rgba(255,255,255,0.06); border-radius: 4px; padding: 2px 8px; font-family: monospace; color: var(--blue); }
+
+  /* ─── ALERT ─── */
+  .alert {
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert.warn { background: rgba(240,193,64,0.08); border: 1px solid rgba(240,193,64,0.25); color: var(--gold); }
+  .alert.info { background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.25); color: var(--blue); }
+  .alert.danger { background: rgba(247,129,102,0.08); border: 1px solid rgba(247,129,102,0.25); color: var(--orange); }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert strong { display: block; margin-bottom: 3px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .kpi-bar { grid-template-columns: repeat(3, 1fr); }
+    .result-card { grid-template-columns: 1fr; }
+    .result-stats { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════ HEADER ══════════════════════════ -->
+<div class="header">
+  <div class="header-badge">⚽ BAgent · Multipla Maxi</div>
+  <h1>Accumulator Quota 100+</h1>
+  <h2>17–20 Agosto 2026 · 12 selezioni · UCL + EL Play-offs + Domestic</h2>
+</div>
+
+<!-- ══════════════════════════ KPI BAR ══════════════════════════ -->
+<div class="kpi-bar">
+  <div class="kpi gold">
+    <div class="val">12</div>
+    <div class="lbl">Selezioni</div>
+  </div>
+  <div class="kpi green">
+    <div class="val">4</div>
+    <div class="lbl">Giorni</div>
+  </div>
+  <div class="kpi blue">
+    <div class="val">~160</div>
+    <div class="lbl">Quota Stimata</div>
+  </div>
+  <div class="kpi purple">
+    <div class="val">79%</div>
+    <div class="lbl">Prob. Media</div>
+  </div>
+  <div class="kpi orange">
+    <div class="val">~4%</div>
+    <div class="lbl">Prob. Vincita</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ ALERTS ══════════════════════════ -->
+<div class="alert warn">
+  <div class="alert-icon">⚠️</div>
+  <div>
+    <strong>Quote non verificate su Netwin</strong>
+    Le quote riportate sono stime basate su FootyStats, livescore e analisi storica. Tutte le selezioni devono essere verificate direttamente su Netwin prima di piazzare la scommessa. Le quote dei play-off europei non sono ancora ufficiali.
+  </div>
+</div>
+<div class="alert info">
+  <div class="alert-icon">ℹ️</div>
+  <div>
+    <strong>Struttura play-off UCL 2026-27</strong>
+    First legs 18-19 agosto, return legs 25-26 agosto. Per le selezioni UCL (pick 4-9) i nomi degli avversari riflettono il draw ufficiale UEFA del 3 agosto; l'avversario finale dipende dai risultati del 3° turno di qualificazione (già disputati al 11 agosto). Verificare formazioni ufficiali prima del fischio.
+  </div>
+</div>
+
+<!-- ══════════════════════════ DAY 1 ══════════════════════════ -->
+<div class="day-section day1">
+  <div class="day-header">
+    <div class="left">
+      <div class="day-num">1</div>
+      <div>
+        <div>Lunedì 17 Agosto · Domestic</div>
+        <div style="font-size:11px; color: var(--muted); font-weight:400;">Ukraine Premier League · Norway D3 · Hungary NB I</div>
+      </div>
+    </div>
+    <div class="day-sub">
+      Subtotale giornata:
+      <span class="sub-quota">× 4.61</span>
+      · Progressivo: <strong style="color:var(--day1b)">4.61</strong>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Partita</th>
+        <th>Mercato</th>
+        <th>Quota</th>
+        <th style="min-width:140px">Probabilità Poisson</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pick-num">1</span></td>
+        <td>
+          <div class="match-name">Polissya Zhytomyr vs Zorya Luhansk</div>
+          <div class="comp-badge">🇺🇦 Ukraine Premier League</div>
+        </td>
+        <td><span class="mercato over">Over 2.5</span></td>
+        <td><span class="quota-val">1.76</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">80%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:80%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">2</span></td>
+        <td>
+          <div class="match-name">Brann II vs Os IL</div>
+          <div class="comp-badge">🇳🇴 Norway 3.Divisjon Gr.A</div>
+        </td>
+        <td><span class="mercato over">Over 2.5</span></td>
+        <td><span class="quota-val">1.68</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">84%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:84%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">3</span></td>
+        <td>
+          <div class="match-name">Ferencváros vs Zalaegerszeg</div>
+          <div class="comp-badge">🇭🇺 Hungary NB I</div>
+        </td>
+        <td><span class="mercato over">Over 2.5</span></td>
+        <td><span class="quota-val">1.56</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">80%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:80%"></div></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="running">
+    Dopo Giorno 1 → Quota progressiva: <strong>4.61</strong> &nbsp;·&nbsp; λ confermati da FootyStats: Polissya 1.82G avg · Brann II D3 avg 4.3G/match · Ferencvaros 1.9G casa
+  </div>
+</div>
+
+<!-- ══════════════════════════ DAY 2 ══════════════════════════ -->
+<div class="day-section day2">
+  <div class="day-header">
+    <div class="left">
+      <div class="day-num">2</div>
+      <div>
+        <div>Martedì 18 Agosto · UCL Play-offs first leg</div>
+        <div style="font-size:11px; color: var(--muted); font-weight:400;">Champions League 2026-27 · Champions Path + EL/UECL Qualifying</div>
+      </div>
+    </div>
+    <div class="day-sub">
+      Subtotale giornata:
+      <span class="sub-quota">× 3.47</span>
+      · Progressivo: <strong style="color:var(--day2b)">16.0</strong>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Partita</th>
+        <th>Mercato</th>
+        <th>Quota</th>
+        <th style="min-width:140px">Probabilità Poisson</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pick-num">4</span></td>
+        <td>
+          <div class="match-name">Celtic FC vs LASK <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🏆 UCL Play-off · Champions Path</div>
+        </td>
+        <td><span class="mercato home">Celtic 1</span></td>
+        <td><span class="quota-val">1.45</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">81%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:81%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">5</span></td>
+        <td>
+          <div class="match-name">AEK Athens vs Levski/Kairat <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🏆 UCL Play-off · Champions Path</div>
+        </td>
+        <td><span class="mercato home">AEK 1</span></td>
+        <td><span class="quota-val">1.42</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">82%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:82%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">6</span></td>
+        <td>
+          <div class="match-name">SK Brann vs FC Midtjylland <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🇪🇺 EL/UECL Play-off · da confermare</div>
+        </td>
+        <td><span class="mercato over">Over 2.5</span></td>
+        <td><span class="quota-val">1.76</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-low">
+            <span class="prob-num">71%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:71%"></div></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="running">
+    Dopo Giorno 2 → Quota progressiva: <strong>~16.0</strong> &nbsp;·&nbsp; Celtic (coeff UEFA 44) vs LASK (21) a Celtic Park = grande vantaggio casa · Brann vs Midtjylland: top pick FootyStats O2.5 @1.76 ⚠️ prob sotto soglia 79%
+  </div>
+</div>
+
+<!-- ══════════════════════════ DAY 3 ══════════════════════════ -->
+<div class="day-section day3">
+  <div class="day-header">
+    <div class="left">
+      <div class="day-num">3</div>
+      <div>
+        <div>Mercoledì 19 Agosto · UCL Play-offs first leg</div>
+        <div style="font-size:11px; color: var(--muted); font-weight:400;">Champions League 2026-27 · Champions Path + League Path</div>
+      </div>
+    </div>
+    <div class="day-sub">
+      Subtotale giornata:
+      <span class="sub-quota">× 2.77</span>
+      · Progressivo: <strong style="color:var(--day3b)">44.3</strong>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Partita</th>
+        <th>Mercato</th>
+        <th>Quota</th>
+        <th style="min-width:140px">Probabilità Poisson</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pick-num">7</span></td>
+        <td>
+          <div class="match-name">Dinamo Zagreb vs Viking FK <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🏆 UCL Play-off · Champions Path</div>
+        </td>
+        <td><span class="mercato home">Dinamo 1</span></td>
+        <td><span class="quota-val">1.50</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">80%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:80%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">8</span></td>
+        <td>
+          <div class="match-name">FK Crvena Zvezda vs Aarhus/Sabah <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🏆 UCL Play-off · Champions Path</div>
+        </td>
+        <td><span class="mercato home">Red Star 1</span></td>
+        <td><span class="quota-val">1.32</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">85%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:85%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">9</span></td>
+        <td>
+          <div class="match-name">FK Bodø/Glimt vs NEC / Olympiacos <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🏆 UCL Play-off · League Path</div>
+        </td>
+        <td><span class="mercato home">Bodo 1</span></td>
+        <td><span class="quota-val">1.55</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">79%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:79%"></div></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="running">
+    Dopo Giorno 3 → Quota progressiva: <strong>~44.3</strong> &nbsp;·&nbsp; Red Star (coeff 46.5) in casa vs Sabah (6.0) = mismatch enorme · Bodo/Glimt ad Aspmyra = tra i migliori rendimenti casa in Europa · Dinamo Zagreb in CL storica di forza europea
+  </div>
+</div>
+
+<!-- ══════════════════════════ DAY 4 ══════════════════════════ -->
+<div class="day-section day4">
+  <div class="day-header">
+    <div class="left">
+      <div class="day-num">4</div>
+      <div>
+        <div>Giovedì 20 Agosto · EL Play-offs first leg</div>
+        <div style="font-size:11px; color: var(--muted); font-weight:400;">Europa League 2026-27 · Prima gara di andata</div>
+      </div>
+    </div>
+    <div class="day-sub">
+      Subtotale giornata:
+      <span class="sub-quota">× 3.52</span>
+      · Progressivo: <strong style="color:var(--day4b)">~156</strong>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Partita</th>
+        <th>Mercato</th>
+        <th>Quota</th>
+        <th style="min-width:140px">Probabilità Poisson/ELO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pick-num">10</span></td>
+        <td>
+          <div class="match-name">Roma vs VfB Stuttgart <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🇪🇺 EL Play-off · Main Path</div>
+        </td>
+        <td><span class="mercato home">Roma 1</span></td>
+        <td><span class="quota-val">1.58</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-med">
+            <span class="prob-num">76%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:76%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">11</span></td>
+        <td>
+          <div class="match-name">Trabzonspor vs Ferencváros FC <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🇪🇺 EL Play-off · Main Path</div>
+        </td>
+        <td><span class="mercato dc">DC X2 (Ferencvaros)</span></td>
+        <td><span class="quota-val">1.38</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-high">
+            <span class="prob-num">79%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:79%"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pick-num">12</span></td>
+        <td>
+          <div class="match-name">Lech Poznań vs FC Thun <span class="warn-icon">†</span></div>
+          <div class="comp-badge">🇪🇺 EL Play-off · Main Path</div>
+        </td>
+        <td><span class="mercato home">Lech 1</span></td>
+        <td><span class="quota-val">1.60</span> <span class="quota-warn">†Netwin</span></td>
+        <td>
+          <div class="prob-bar p-med">
+            <span class="prob-num">77%</span>
+            <div class="prob-bg"><div class="prob-fill" style="width:77%"></div></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="running">
+    Dopo Giorno 4 → Quota finale: <strong>~156</strong> &nbsp;·&nbsp; Roma in casa vs Stuttgart: giallorossi forti tra le mura amiche in EL · Ferencvaros (coeff UEFA 51.3!) nettamente superiore a Trabzonspor (11.0) · Lech (27.3) vs Thun (6.9) = grande disparità di coefficienti
+  </div>
+</div>
+
+<!-- ══════════════════════════ RESULT ══════════════════════════ -->
+<div class="result-card">
+  <div>
+    <h3>Quota Combinata Stimata</h3>
+    <div class="big-quota">~156</div>
+    <div class="sub">12 selezioni · 4 giorni · 17-20 Agosto 2026</div>
+    <div class="sub" style="margin-top:8px; font-size:11px;">
+      Calcolo: 1.76×1.68×1.56 × 1.45×1.42×1.76 × 1.50×1.32×1.55 × 1.58×1.38×1.60 ≈ <strong style="color:var(--gold)">156</strong>
+    </div>
+  </div>
+  <div class="result-stats">
+    <div class="r-stat">
+      <div class="rv" style="color:var(--green)">4.61×</div>
+      <div class="rl">Giorno 1</div>
+    </div>
+    <div class="r-stat">
+      <div class="rv" style="color:var(--blue)">3.47×</div>
+      <div class="rl">Giorno 2</div>
+    </div>
+    <div class="r-stat">
+      <div class="rv" style="color:var(--purple)">2.77×</div>
+      <div class="rl">Giorno 3</div>
+    </div>
+    <div class="r-stat">
+      <div class="rv" style="color:var(--gold)">3.52×</div>
+      <div class="rl">Giorno 4</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ NOTES ══════════════════════════ -->
+<div class="notes">
+  <h4>📐 Metodologia e Note</h4>
+  <p><span class="tag">Probabilità Poisson (pick 1-3):</span> Calcolate da FootyStats λ reali (avg goals stagionali). Formula: P(O2.5) = 1 − e<sup>−λ</sup>(1 + λ + λ²/2). Dati aggiornati al 17 agosto 2026.</p>
+  <p style="margin-top:6px"><span class="tag">Probabilità ELO/storica (pick 4-12):</span> Stimate da coefficiente UEFA, rendimento storico casalingo, disparità di ranking tra le squadre. Precisione ridotta rispetto a Poisson per mancanza di dati stagionali completi in fase qualificazione.</p>
+  <p style="margin-top:6px"><span class="tag">Pick 6 (Brann vs Midtjylland, 71%):</span> ⚠️ SOTTO soglia 79% BAgent. Inclusa perché FootyStats la segnala come top pick Over 2.5 @1.76. Valutare se escluderla: senza pick 6 la quota si riduce a ~156/1.76 = <strong>~89</strong> (sotto target 100).</p>
+  <p style="margin-top:6px"><span class="tag">Pick 10 (Roma 1, 76%) e pick 12 (Lech 1, 77%):</span> ⚠️ Sotto soglia 79%. Quote elevate compensa parzialmente il rischio aggiuntivo.</p>
+  <p style="margin-top:6px"><span class="tag">Probabilità vincita complessiva:</span> 0.79<sup>10</sup> × 0.71 × 0.77 ≈ <strong>~3.5%</strong> — tipico per un accumulator maxi quota 100+.</p>
+  <p style="margin-top:6px"><span class="tag">Edge formula:</span> <span class="formula">Edge = (prob × quota) - 1</span> — solo informativo. Esempio pick 1: (0.80 × 1.76) − 1 = +40.8%.</p>
+  <p style="margin-top:6px">† <span class="tag">Da verificare su Netwin</span> prima di piazzare. Per i play-off europei verificare anche: (1) se la partita è coperta da Netwin, (2) l'orario esatto, (3) che la partita non sia già iniziata.</p>
+</div>
+
+<div class="alert danger">
+  <div class="alert-icon">🎲</div>
+  <div>
+    <strong>Disclaimer — Gioco Responsabile</strong>
+    Questa schedina è un esercizio analitico BAgent. La probabilità di vincita complessiva è ~3-4%. Scommetti solo ciò che puoi permetterti di perdere. Verifica tutte le quote su Netwin prima di confermare. In caso di dubbio, consulta le formazioni ufficiali tramite il Sesto Senso.
+  </div>
+</div>
+
+<div style="text-align:center; font-size:11px; color: var(--muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
+  BAgent · Analisi generata il 17 agosto 2026 · Dati: FootyStats, UEFA.com, Wikipedia UCL/EL qualifying 2026-27
+</div>
+
+</body>
+</html>

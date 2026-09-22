@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multipla MLS Americas — 20 Agosto 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a1a0f;
+    color: #e8f5e9;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 32px 24px 24px;
+    background: linear-gradient(135deg, #0d2b14 0%, #143d1c 50%, #0a2510 100%);
+    border: 1px solid #2e7d32;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px; right: -40px;
+    height: 120px;
+    background: radial-gradient(ellipse, rgba(76,175,80,0.12) 0%, transparent 70%);
+  }
+  .badge {
+    display: inline-block;
+    background: #1b5e20;
+    border: 1px solid #4caf50;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #a5d6a7;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+  .header .subtitle {
+    color: #81c784;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .quota-hero {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .quota-box {
+    text-align: center;
+  }
+  .quota-box .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #66bb6a;
+    margin-bottom: 4px;
+  }
+  .quota-box .value {
+    font-size: 36px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+  }
+  .quota-box .sub {
+    font-size: 12px;
+    color: #a5d6a7;
+    margin-top: 2px;
+  }
+  .divider-h { width: 1px; background: #2e7d32; align-self: stretch; }
+
+  /* SESTO SENSO BOX */
+  .sesto-box {
+    background: #0d2b14;
+    border: 1px solid #388e3c;
+    border-left: 4px solid #4caf50;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .sesto-box h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #66bb6a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .sesto-item { font-size: 13px; color: #c8e6c9; line-height: 1.7; }
+  .sesto-item span { color: #ffffff; font-weight: 600; }
+  .sesto-exclude {
+    background: rgba(183,28,28,0.15);
+    border: 1px solid rgba(229,57,53,0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+  }
+  .sesto-exclude .title { font-size: 12px; color: #ef9a9a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .sesto-exclude .item { font-size: 12px; color: #ffcdd2; line-height: 1.6; }
+
+  /* PICKS TABLE */
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #66bb6a;
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+  .picks-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+    margin-bottom: 20px;
+  }
+  .picks-table thead th {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #558b2f;
+    font-weight: 700;
+    padding: 6px 10px;
+    text-align: left;
+  }
+  .picks-table thead th:last-child { text-align: right; }
+
+  .pick-row td {
+    background: #0d2b14;
+    padding: 12px 14px;
+    border: 1px solid #1b5e20;
+    border-left: none;
+    border-right: none;
+  }
+  .pick-row td:first-child {
+    border-left: 1px solid #1b5e20;
+    border-radius: 8px 0 0 8px;
+  }
+  .pick-row td:last-child {
+    border-right: 1px solid #1b5e20;
+    border-radius: 0 8px 8px 0;
+    text-align: right;
+  }
+  .pick-row:hover td { background: #143d1c; }
+
+  .pick-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1b5e20;
+    border: 1px solid #4caf50;
+    color: #a5d6a7;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .match-name { font-size: 14px; font-weight: 700; color: #ffffff; }
+  .match-meta { font-size: 11px; color: #66bb6a; margin-top: 2px; }
+  .market-tag {
+    display: inline-block;
+    background: #1b5e20;
+    border: 1px solid #2e7d32;
+    border-radius: 12px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #a5d6a7;
+    white-space: nowrap;
+  }
+  .quota-cell {
+    font-size: 20px;
+    font-weight: 900;
+    color: #4caf50;
+    white-space: nowrap;
+  }
+  .edge-star { color: #ffd54f; font-size: 13px; }
+  .edge-eye { color: #80deea; font-size: 13px; }
+  .edge-val { font-size: 11px; color: #81c784; display: block; margin-top: 2px; }
+
+  /* FORMULA BOX */
+  .formula-box {
+    background: #0d2b14;
+    border: 1px solid #2e7d32;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .formula-box h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #66bb6a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .formula-item {
+    background: #143d1c;
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .formula-item .f-label { font-size: 11px; color: #66bb6a; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .formula-item .f-value { font-size: 20px; font-weight: 900; color: #ffffff; }
+  .formula-item .f-sub { font-size: 11px; color: #81c784; margin-top: 2px; }
+  .formula-item.highlight { border: 1px solid #4caf50; }
+  .formula-item.highlight .f-value { color: #4caf50; font-size: 24px; }
+
+  /* EXCLUDED BOX */
+  .excluded-box {
+    background: rgba(183,28,28,0.08);
+    border: 1px solid rgba(229,57,53,0.25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+  }
+  .excluded-box h3 { font-size: 12px; font-weight: 700; color: #ef9a9a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .excluded-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  .excluded-row:last-child { margin-bottom: 0; }
+  .excl-icon { color: #ef5350; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .excl-text { color: #ffcdd2; line-height: 1.5; }
+  .excl-text strong { color: #ffffff; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #388e3c;
+    margin-top: 24px;
+    padding: 14px;
+    border-top: 1px solid #1b5e20;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">🌎 BAgent · MLS Americas Night</div>
+    <h1>Multipla MLS — Notte Americana</h1>
+    <p class="subtitle">Giovedì 20 Agosto 2026 · Tutti i match alle 01:30 ora italiana</p>
+    <p style="font-size:12px;color:#4caf50;margin-top:6px;">📅 Analisi generata: Lunedì 17 Agosto 2026 · 22:30 IT</p>
+    <div class="quota-hero">
+      <div class="quota-box">
+        <div class="label">Quota Base</div>
+        <div class="value">1,246×</div>
+        <div class="sub">10 selezioni MLS</div>
+      </div>
+      <div class="divider-h"></div>
+      <div class="quota-box">
+        <div class="label">Con Bonus +25%</div>
+        <div class="value" style="color:#4caf50">1,558×</div>
+        <div class="sub">≥10 selezioni Netwin</div>
+      </div>
+      <div class="divider-h"></div>
+      <div class="quota-box">
+        <div class="label">Vincita €5</div>
+        <div class="value" style="color:#ffd54f">€7,790</div>
+        <div class="sub">con bonus applicato</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESTO SENSO -->
+  <div class="sesto-box">
+    <h3>🧠 Sesto Senso — Note Pre-Partita</h3>
+    <div class="sesto-item">→ <span>FC Cincinnati</span>: forma WWLWD, vittorie 4-2 su San Jose e 4-3 su Vancouver. Attacco prolifico in casa.</div>
+    <div class="sesto-item">→ <span>Columbus Crew</span>: top-3 Eastern Conference. Vittoria recente su Cincinnati in casa. Montreal in crisi di risultati.</div>
+    <div class="sesto-item">→ <span>Inter Miami</span>: 2° Est con 38 punti da 18 partite — uno dei team più in forma MLS. Away fixture gestibile vs Philly.</div>
+    <div class="sesto-item">→ <span>St. Louis City SC</span>: away favorite (@1.98) vs Sporting KC che ha perso 0-2 vs Houston. Derby Missouri con SKC in caduta libera.</div>
+    <div class="sesto-item">→ <span>Portland Timbers</span>: Providence Park fortino storico. San Diego FC è una delle squadre più nuove in MLS, poca esperienza in trasferta.</div>
+    <div class="sesto-item">→ <span>Nashville SC</span>: 2° in East con 38 pts — non inclusa perché gioca in trasferta a NYRB con edge negativo sulla DC.</div>
+    <div class="sesto-exclude">
+      <div class="title">⚠️ Escluse dal Sesto Senso</div>
+      <div class="item">❌ <strong>Seattle Sounders 1 @1.61</strong>: 6 sconfitte consecutive. Infortuni: Petkovic, Dotson, De La Vega, Roldan, Morris, Yeimar, Arriola (7 giocatori out). Edge completamente annullato.</div>
+      <div class="item">❌ <strong>Vancouver Whitecaps 1 @1.55</strong>: 0-3-4 nelle ultime 7 partite. Assenti: Brian White, Veselinovic (knee, 8-12 settimane), Caicedo, Cabrera, Halbouni. Nonostante la quota bassa, rischio elevato.</div>
+    </div>
+  </div>
+
+  <!-- PICKS -->
+  <div class="section-title">📋 Le 10 Selezioni</div>
+  <table class="picks-table">
+    <thead>
+      <tr>
+        <th style="width:36px">#</th>
+        <th>Partita</th>
+        <th>Mercato</th>
+        <th style="text-align:right">Quota · Edge</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">1</div></td>
+        <td>
+          <div class="match-name">Columbus Crew vs CF Montréal</div>
+          <div class="match-meta">MLS Eastern · Gio 20/08 · 01:30 IT</div>
+        </td>
+        <td><span class="market-tag">1 Columbus</span></td>
+        <td>
+          <span class="quota-cell">@1.61</span>
+          <span class="edge-val">⭐ Edge +7.9%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">2</div></td>
+        <td>
+          <div class="match-name">Minnesota United vs Atlanta United</div>
+          <div class="match-meta">MLS Eastern · Gio 20/08 · 01:30 IT</div>
+        </td>
+        <td><span class="market-tag">1 Minnesota</span></td>
+        <td>
+          <span class="quota-cell">@1.80</span>
+          <span class="edge-val">⭐ Edge +8.0%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">3</div></td>
+        <td>
+          <div class="match-name">Real Salt Lake vs FC Dallas</div>
+          <div class="match-meta">MLS Western · Gio 20/08 · 01:30 IT</div>
+        </td>
+        <td><span class="market-tag">1 RSL</span></td>
+        <td>
+          <span class="quota-cell">@1.88</span>
+          <span class="edge-val">👀 Edge +3.4%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">4</div></td>
+        <td>
+          <div class="match-name">FC Cincinnati vs New York City FC</div>
+          <div class="match-meta">MLS Eastern · Gio 20/08 · 01:30 IT</div>
+        </td>
+        <td><span class="market-tag">1 Cincinnati</span></td>
+        <td>
+          <span class="quota-cell">@1.97</span>
+          <span class="edge-val">👀 Edge +2.4%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">5</div></td>
+        <td>
+          <div class="match-name">Sporting KC vs St. Louis City SC</div>
+          <div class="match-meta">MLS Western · Gio 20/08 · 01:30 IT · Away fav</div>
+        </td>
+        <td><span class="market-tag">2 St. Louis</span></td>
+        <td>
+          <span class="quota-cell">@1.98</span>
+          <span class="edge-val">👀 Edge +3.0%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">6</div></td>
+        <td>
+          <div class="match-name">Portland Timbers vs San Diego FC</div>
+          <div class="match-meta">MLS Western · Gio 20/08 · 01:30 IT</div>
+        </td>
+        <td><span class="market-tag">1 Portland</span></td>
+        <td>
+          <span class="quota-cell">@2.10</span>
+          <span class="edge-val">⭐ Edge +5.0%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">7</div></td>
+        <td>
+          <div class="match-name">DC United vs New England Revolution</div>
+          <div class="match-meta">MLS Eastern · Gio 20/08 · 01:30 IT</div>
+        </td>
+        <td><span class="market-tag">1 DC United</span></td>
+        <td>
+          <span class="quota-cell">@2.17</span>
+          <span class="edge-val">👀 Edge +4.2%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">8</div></td>
+        <td>
+          <div class="match-name">Toronto FC vs Charlotte FC</div>
+          <div class="match-meta">MLS Eastern · Gio 20/08 · 01:30 IT</div>
+        </td>
+        <td><span class="market-tag">1 Toronto</span></td>
+        <td>
+          <span class="quota-cell">@2.20</span>
+          <span class="edge-val">⭐ Edge +5.6%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">9</div></td>
+        <td>
+          <div class="match-name">LA Galaxy vs San Jose Earthquakes</div>
+          <div class="match-meta">MLS Western · Gio 20/08 · 01:30 IT · Derby California</div>
+        </td>
+        <td><span class="market-tag">1 LA Galaxy</span></td>
+        <td>
+          <span class="quota-cell">@2.25</span>
+          <span class="edge-val">👀 Edge +3.5%</span>
+        </td>
+      </tr>
+
+      <tr class="pick-row">
+        <td><div class="pick-num">10</div></td>
+        <td>
+          <div class="match-name">Philadelphia Union vs Inter Miami CF</div>
+          <div class="match-meta">MLS Eastern · Gio 20/08 · 01:30 IT · Miami 2° Est, 38 pts</div>
+        </td>
+        <td><span class="market-tag">2 Inter Miami</span></td>
+        <td>
+          <span class="quota-cell">@2.60</span>
+          <span class="edge-val">👀 Edge +4.0%</span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- FORMULA VINCITA -->
+  <div class="formula-box">
+    <h3>💰 Formula Vincita</h3>
+    <div class="formula-grid">
+      <div class="formula-item">
+        <div class="f-label">Quota Base</div>
+        <div class="f-value">1,246×</div>
+        <div class="f-sub">10 selezioni combinate</div>
+      </div>
+      <div class="formula-item">
+        <div class="f-label">Bonus Netwin ≥10</div>
+        <div class="f-value">+25%</div>
+        <div class="f-sub">automatico su ≥10 selezioni</div>
+      </div>
+      <div class="formula-item highlight">
+        <div class="f-label">Quota Finale</div>
+        <div class="f-value">1,558×</div>
+        <div class="f-sub">con bonus applicato</div>
+      </div>
+      <div class="formula-item">
+        <div class="f-label">€1 → Vincita</div>
+        <div class="f-value">€1,558</div>
+        <div class="f-sub">puntata minima</div>
+      </div>
+      <div class="formula-item">
+        <div class="f-label">€2 → Vincita</div>
+        <div class="f-value">€3,116</div>
+        <div class="f-sub">puntata consigliata</div>
+      </div>
+      <div class="formula-item">
+        <div class="f-label">€5 → Vincita</div>
+        <div class="f-value">€7,790</div>
+        <div class="f-sub">puntata massima</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:12px 14px;background:#143d1c;border-radius:8px;font-size:12px;color:#81c784;line-height:1.6;">
+      <strong style="color:#a5d6a7">Formula Edge BAgent:</strong> Edge = (prob × quota) − 1 &nbsp;·&nbsp;
+      ⭐ ≥5% &nbsp;·&nbsp; 👀 positivo &lt;5% &nbsp;·&nbsp; ❌ negativo (escluso)<br>
+      <strong style="color:#a5d6a7">Stake consigliato:</strong> €1–€2 (alta quota = alta varianza — giocare responsabilmente)
+    </div>
+  </div>
+
+  <!-- ESCLUSE -->
+  <div class="excluded-box">
+    <h3>❌ Selezioni Escluse — Sesto Senso Negativo</h3>
+    <div class="excluded-row">
+      <span class="excl-icon">✗</span>
+      <div class="excl-text">
+        <strong>Seattle Sounders 1 @1.61</strong> (vs Austin FC) — 6 sconfitte consecutive in campionato.
+        7 infortuni: Petkovic, Dotson, De La Vega, Roldan, Jordan Morris, Yeimar, Arriola.
+        Quota apparentemente attraente ma rischio reale altissimo.
+      </div>
+    </div>
+    <div class="excluded-row">
+      <span class="excl-icon">✗</span>
+      <div class="excl-text">
+        <strong>Vancouver Whitecaps 1 @1.55</strong> (vs Houston Dynamo) — 0-3-4 nelle ultime 7 partite.
+        Assenti: Brian White, Veselinovic (ginocchio, 8-12 settimane), Caicedo, Cabrera, Halbouni.
+        Houston ha vinto 2-0 vs Sporting KC — in ripresa di forma.
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    BAgent · Analisi generata il 17 Agosto 2026 · Quote verificate su Netwin · Tutte le partite giovedì 20 agosto @01:30 ora italiana<br>
+    Sesto Senso attivo · Modello Poisson · Edge formula applicata
+  </div>
+
+</div>
+</body>
+</html>
