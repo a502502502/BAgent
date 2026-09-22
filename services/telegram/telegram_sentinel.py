@@ -359,6 +359,11 @@ class TelegramSentinel:
             self._send_main_menu(chat_id)
             return
 
+        # Riconoscimento richieste schedine/weekend
+        if any(w in lower_t for w in ["schedin", "ticket", "weekend", "multipl", "portfolio", "bigliett", "pronostic"]):
+            self._send_tickets_overview(chat_id)
+            return
+
         # Se l'utente scrive una partita (es. "San Lorenzo vs Banfield" o "Palmeiras - Galo")
         lower_t = text.lower()
         if " vs " in lower_t or " - " in lower_t or lower_t.startswith("/calcola "):
@@ -388,6 +393,108 @@ class TelegramSentinel:
                 ]
             }
         )
+
+    def _send_tickets_overview(self, chat_id: Optional[str] = None):
+        """Menu principale schedine con scelta rapida dei dettagli."""
+        text = (
+            "🎟️ <b>SCHEDINE UFFICIALI DEL WEEKEND (BUDGET 100€)</b>\n\n"
+            "Strategia Portfolio Quantitativa: <b>1 Master Multipla</b> (25€) + <b>3 Doppie di Copertura</b> (75€).\n"
+            "Tutti i match si giocano tra <b>sabato 28 settembre e martedì 1 ottobre 2026</b>.\n\n"
+            "👇 Tocca un pulsante qui sotto per vedere tutti gli eventi e le quote in dettaglio:"
+        )
+        reply_markup = {
+            "inline_keyboard": [
+                [{"text": "👑 Multiplona Master @10.85 (6 Eventi)", "callback_data": "ticket_master_detail"}],
+                [{"text": "🛡️ Le 3 Doppie di Copertura (Muraglia, Corner, Grandi)", "callback_data": "ticket_doppie_detail"}],
+                [{"text": "📑 Mostra Tutte le Schedine nei Minimi Dettagli", "callback_data": "ticket_all_detail"}],
+                [{"text": "🔙 Torna al Menu Principale", "callback_data": "menu_main"}]
+            ]
+        }
+        self.send_message(text, reply_markup=reply_markup, chat_id=chat_id)
+
+    def _send_ticket_master_detail(self, chat_id: Optional[str] = None):
+        """Invia i dettagli completi della Multiplona Master a 6 eventi."""
+        lines = [
+            "👑 <b>MULTIPLONA MASTER LATAM (6 EVENTI)</b>",
+            "📌 <b>ID:</b> <code>TICKET_MASTER_LATAM_28SET</code>",
+            "📊 <b>Quota Totale:</b> <code>@10.85</code>",
+            "💰 <b>Puntata Consigliata:</b> <code>25.00€</code> | 🏆 <b>Vincita Max:</b> <code>271.25€</code>",
+            "━━━━━━━━━━━━━━━━━━━━━━━━━",
+            "1️⃣ 📅 <b>Sab 28/09, 20:00 CEST</b> — 🇦🇷 <b>San Lorenzo vs Banfield</b>",
+            "   🎯 <i>Under 2.5 Gol</i> @ <b>1.50</b> [Prob: 74.4% | Edge: +11.6%]",
+            "   📈 Rassegna stampa: attacchi anemici, steam drop sharp.",
+            "",
+            "2️⃣ 📅 <b>Sab 28/09, 22:30 CEST</b> — 🇦🇷 <b>Estudiantes vs Defensa y Justicia</b>",
+            "   🎯 <i>Under 2.5 Gol</i> @ <b>1.52</b> [Prob: 73.1% | Edge: +11.1%]",
+            "   📈 Rassegna stampa: turnover Defensa, match bloccato.",
+            "",
+            "3️⃣ 📅 <b>Sab 28/09, 23:30 CEST</b> — 🇧🇷 <b>Palmeiras vs Atlético-MG</b>",
+            "   🎯 <i>Over 8.5 Corner Totali</i> @ <b>1.50</b> [Prob: 71.0% | Edge: +6.5%]",
+            "   📈 Statistiche: 11.4 corner medi/partita per Palmeiras in casa.",
+            "",
+            "4️⃣ 📅 <b>Dom 29/09, 02:00 CEST</b> — 🇧🇷 <b>Botafogo vs Grêmio</b>",
+            "   🎯 <i>Over 8.5 Corner Totali</i> @ <b>1.45</b> [Prob: 72.1% | Edge: +4.5%]",
+            "   📈 Statistiche: Botafogo capolista spinge forte sulle fasce.",
+            "",
+            "5️⃣ 📅 <b>Dom 29/09, 23:30 CEST</b> — 🇧🇷 <b>Internacional vs Vitória</b>",
+            "   🎯 <i>1X + Over 1.5 Gol</i> @ <b>1.52</b> [Prob: 68.8% | Edge: +4.6%]",
+            "   📈 Forma: Inter in serie positiva al Beira-Rio.",
+            "",
+            "6️⃣ 📅 <b>Mar 01/10, 02:00 CEST</b> — 🇦🇷 <b>Racing Club vs Platense</b>",
+            "   🎯 <i>1X + Under 3.5 Gol</i> @ <b>1.44</b> [Prob: 71.2% | Edge: +2.5%]",
+            "   📈 Cilindro fortino difensivo per il Racing.",
+            "━━━━━━━━━━━━━━━━━━━━━━━━━",
+            "💡 <b>STRATEGIA CASHOUT SCAGLIONATO:</b>",
+            "• Sabato sera dopo i primi 2 match argentini: primo step di cashout.",
+            "• Domenica mattina dopo i 2 match brasiliani: incasso parziale già in forte profitto!",
+            "• Chiudere o lasciare correre l'ultimo match a seconda del profitto accumulato."
+        ]
+        reply_markup = {
+            "inline_keyboard": [
+                [{"text": "🛡️ Mostra 3 Doppie di Copertura", "callback_data": "ticket_doppie_detail"}],
+                [{"text": "📑 Mostra Tutto Completo", "callback_data": "ticket_all_detail"}],
+                [{"text": "🔙 Torna a Schedine", "callback_data": "menu_tickets"}, {"text": "🏠 Menu", "callback_data": "menu_main"}]
+            ]
+        }
+        self.send_message("\n".join(lines), reply_markup=reply_markup, chat_id=chat_id)
+
+    def _send_ticket_doppie_detail(self, chat_id: Optional[str] = None):
+        """Invia i dettagli completi delle 3 Doppie di Copertura (Budget 75€)."""
+        lines = [
+            "🛡️ <b>LE 3 DOPPIE DI COPERTURA (BUDGET 75€)</b>",
+            "Probabilità congiunte altissime per blindare il capitale:",
+            "━━━━━━━━━━━━━━━━━━━━━━━━━",
+            "1️⃣ <b>DOPPIA 1: LA MURAGLIA ARGENTINA</b>",
+            "• Quota: <b>@1.48</b> | Puntata: <b>30.00€</b> | Incasso: <b>44.40€</b>",
+            "• Safe Rate Congiunto: <b>80.1%</b>",
+            "  📅 <b>Sab 28/09, 20:00</b> — San Lorenzo vs Banfield: <code>Under 3.5 Gol</code> @ <b>1.22</b>",
+            "  📅 <b>Sab 28/09, 22:30</b> — Estudiantes vs Defensa: <code>Under 3.5 Gol</code> @ <b>1.21</b>",
+            "",
+            "2️⃣ <b>DOPPIA 2: I CORNER DEL BRASILE</b>",
+            "• Quota: <b>@1.75</b> | Puntata: <b>25.00€</b> | Incasso: <b>43.75€</b>",
+            "• Safe Rate Congiunto: <b>68.5%</b>",
+            "  📅 <b>Sab 28/09, 23:30</b> — Palmeiras vs Atlético-MG: <code>Over 7.5 Corner</code> @ <b>1.35</b>",
+            "  📅 <b>Dom 29/09, 02:00</b> — Botafogo vs Grêmio: <code>Over 7.5 Corner</code> @ <b>1.30</b>",
+            "",
+            "3️⃣ <b>DOPPIA 3: LE GRANDI DI CASA</b>",
+            "• Quota: <b>@1.76</b> | Puntata: <b>20.00€</b> | Incasso: <b>35.20€</b>",
+            "• Safe Rate Congiunto: <b>61.2%</b>",
+            "  📅 <b>Dom 29/09, 23:30</b> — Internacional vs Vitória: <code>1X</code> @ <b>1.22</b>",
+            "  📅 <b>Mar 01/10, 02:00</b> — Racing Club vs Platense: <code>1X + Under 3.5 Gol</code> @ <b>1.44</b>",
+            "━━━━━━━━━━━━━━━━━━━━━━━━━",
+            "📊 <b>MATEMATICA DEL BUDGET (100€):</b>",
+            "• Bastano 2 doppie su 3 per rientrare di circa 80-88€.",
+            "• Se entrano tutte le 3 doppie: incasso 123.35€ (profitto netto +48.35€ sulle sole doppie).",
+            "• Con la Multiplona Master vincente: Incasso totale <b>394.60€</b>!"
+        ]
+        reply_markup = {
+            "inline_keyboard": [
+                [{"text": "👑 Mostra Multiplona Master", "callback_data": "ticket_master_detail"}],
+                [{"text": "📑 Mostra Tutto Completo", "callback_data": "ticket_all_detail"}],
+                [{"text": "🔙 Torna a Schedine", "callback_data": "menu_tickets"}, {"text": "🏠 Menu", "callback_data": "menu_main"}]
+            ]
+        }
+        self.send_message("\n".join(lines), reply_markup=reply_markup, chat_id=chat_id)
 
     def _process_callback_query(self, query: Dict[str, Any]):
         """Gestisce il click sui bottoni inline da parte dell'utente."""
@@ -440,30 +547,21 @@ class TelegramSentinel:
             self.send_message(text, reply_markup=reply_markup)
             return
 
-        if data == "menu_tickets":
-            text = (
-                "🎟️ <b>SCHEDINE UFFICIALI DEL WEEKEND (BUDGET 100€)</b>\n\n"
-                "1️⃣ <b>MULTIPLONA MASTER (6 EVENTI — CASHOUT)</b>\n"
-                "• Quota: <b>@10.85</b> | Puntata: <b>25.00€</b>\n"
-                "• Potenziale vincita: <b>271.25€</b>\n\n"
-                "2️⃣ <b>DOPPIA 1: LA MURAGLIA ARGENTINA</b>\n"
-                "• San Lorenzo U3.5 + Estudiantes U3.5\n"
-                "• Quota: <b>@1.48</b> | Puntata: <b>30.00€</b> (Incasso: 44.40€)\n\n"
-                "3️⃣ <b>DOPPIA 2: I CORNER DEL BRASILE</b>\n"
-                "• Palmeiras O7.5C + Botafogo O7.5C\n"
-                "• Quota: <b>@1.75</b> | Puntata: <b>25.00€</b> (Incasso: 43.75€)\n\n"
-                "4️⃣ <b>DOPPIA 3: LE GRANDI DI CASA</b>\n"
-                "• Internacional 1X + Racing 1X+U3.5\n"
-                "• Quota: <b>@1.76</b> | Puntata: <b>20.00€</b> (Incasso: 35.20€)\n\n"
-                "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                "💡 <i>Tutti i ticket sono pronti nei file reports/tickets/.</i>"
-            )
-            reply_markup = {
-                "inline_keyboard": [
-                    [{"text": "🔙 Torna al Menu", "callback_data": "menu_main"}]
-                ]
-            }
-            self.send_message(text, reply_markup=reply_markup)
+        if data in ["menu_tickets", "tickets"]:
+            self._send_tickets_overview(chat_id)
+            return
+
+        if data == "ticket_master_detail":
+            self._send_ticket_master_detail(chat_id)
+            return
+
+        if data == "ticket_doppie_detail":
+            self._send_ticket_doppie_detail(chat_id)
+            return
+
+        if data == "ticket_all_detail":
+            self._send_ticket_master_detail(chat_id)
+            self._send_ticket_doppie_detail(chat_id)
             return
 
         if data.startswith("calc_"):
