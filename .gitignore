@@ -30,5 +30,6 @@ output/
 *.sqlite
 *.sqlite3
 
-# Binaries
+# Binaries & Screenshots
 *.exe
+reports/*.png
