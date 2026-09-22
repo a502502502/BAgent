@@ -21,6 +21,9 @@ class NetwinMarketAction:
     combo_ou_line: Optional[float] = None
     multigol_range: Optional[str] = None
     multigol_scope: Optional[str] = None
+    specialty_side: Optional[str] = None  # 1/X/2 or OVER/UNDER for corner/cards
+    specialty_line: Optional[float] = None
+    chance_mix: Optional[str] = None  # e.g. "X o GG"
     raw: str = ""
 
     def column_hint(self) -> Optional[int]:
@@ -47,6 +50,23 @@ def parse_netwin_selection(market: str = "", pick: str = "") -> NetwinMarketActi
 
     if "MULTIGOL" in text.replace("MULTI GOL", "MULTIGOL"):
         return _parse_multigol(text.replace("MULTI GOL", "MULTIGOL"), raw)
+
+    chance = _parse_chance_mix(text)
+    if chance is not None:
+        return chance
+
+    corner = _parse_specialty(text, market_n, family="CORNER", keywords=("CORNER", "CALCI D'ANGOLO", "ANGOLI"))
+    if corner is not None:
+        return corner
+
+    cards = _parse_specialty(
+        text,
+        market_n,
+        family="CARDS",
+        keywords=("CARTELLIN", "SANZION", "AMMONIZ", "CARDS", "YELLOW"),
+    )
+    if cards is not None:
+        return cards
 
     if "+" in text:
         return _parse_combo(text, raw)
@@ -155,6 +175,60 @@ def _parse_combo(text: str, raw: str) -> NetwinMarketAction:
     )
 
 
+def _parse_chance_mix(text: str) -> Optional[NetwinMarketAction]:
+    if "CHANCE MIX" not in text and not re.search(r"\bO\b.*(GG|GOL|OVER)", text):
+        # Require explicit Chance Mix or "X o GG" / "1X o Over" pattern
+        if not re.search(r"\b(1X|X2|12|X|1|2)\s+O\s+(GG|GOL|OVER|UNDER)", text):
+            return None
+    m = re.search(
+        r"(?:CHANCE\s*MIX[:\s]*)?(1X|X2|12|X|1|2)\s+O\s+(GG|GOL|OVER\s*\d+(?:\.\d+)?|UNDER\s*\d+(?:\.\d+)?)",
+        text,
+    )
+    if not m:
+        return None
+    left, right = m.group(1), m.group(2).replace(" ", "")
+    if right in ("GG", "GOL"):
+        right = "GG"
+    mix = f"{left} o {right}"
+    return NetwinMarketAction(
+        family="CHANCE_MIX",
+        pick=mix,
+        chance_mix=mix,
+        raw=text,
+    )
+
+
+def _parse_specialty(
+    text: str,
+    market_n: str,
+    *,
+    family: str,
+    keywords: tuple[str, ...],
+) -> Optional[NetwinMarketAction]:
+    hay = f"{market_n} {text}"
+    if not any(k in hay for k in keywords):
+        return None
+    ou = _parse_ou(text)
+    if ou is not None:
+        side, line = ou
+        return NetwinMarketAction(
+            family=family,
+            pick=f"{side} {line:g}",
+            specialty_side=side,
+            specialty_line=line,
+            raw=text,
+        )
+    for token in ("1X", "X2", "12", "1", "X", "2"):
+        if re.search(rf"(?<![0-9A-Z]){token}(?![0-9A-Z])", text):
+            return NetwinMarketAction(
+                family=family,
+                pick=token,
+                specialty_side=token,
+                raw=text,
+            )
+    return NetwinMarketAction(family=family, pick=text, raw=text)
+
+
 def _parse_multigol(text: str, raw: str) -> NetwinMarketAction:
     m = re.search(
         r"MULTIGOL\s+(\d+\s*-\s*\d+)(?:\s+(CASA|OSPITE|HOME|AWAY|TOTALE|MATCH|PARTITA))?",
@@ -257,6 +331,24 @@ def market_tab_labels(action: NetwinMarketAction) -> list[str]:
         return ["MultiGol", "Multigol", "Multi Gol"]
     if action.family == "BTTS":
         return ["Gol/NoGol", "Gol / No Gol", "G/NG"]
+    if action.family == "CORNER":
+        return [
+            "Corner",
+            "Calci d'angolo",
+            "1X2 Corner",
+            "Under/Over Corner",
+            "U/O Corner",
+        ]
+    if action.family == "CARDS":
+        return [
+            "Cartellini",
+            "Sanzioni",
+            "Ammonizioni",
+            "Under/Over Cartellini",
+            "1X2 Cartellini",
+        ]
+    if action.family == "CHANCE_MIX":
+        return ["Chance Mix", "Combinazioni speciali", "Mix"]
     return []
 
 
@@ -285,6 +377,23 @@ def outcome_search_texts(action: NetwinMarketAction) -> list[str]:
                 action.multigol_range,
                 f"MultiGol {action.multigol_range}",
                 action.multigol_range.replace("-", " - "),
+            ]
+        )
+    if action.family in ("CORNER", "CARDS"):
+        if action.specialty_side in ("OVER", "UNDER") and action.specialty_line is not None:
+            side = "Over" if action.specialty_side == "OVER" else "Under"
+            line_s = f"{action.specialty_line:g}"
+            texts.extend([f"{side} {line_s}", line_s, f"{side} {line_s} Totale"])
+        elif action.specialty_side:
+            texts.append(action.specialty_side)
+    if action.family == "CHANCE_MIX" and action.chance_mix:
+        mix = action.chance_mix
+        texts.extend(
+            [
+                mix,
+                mix.replace(" o ", " O "),
+                mix.replace("GG", "Gol"),
+                mix.replace(" o ", "+"),
             ]
         )
     return texts

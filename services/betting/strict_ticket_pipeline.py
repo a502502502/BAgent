@@ -1,5 +1,3 @@
-from domain.models import MarketData, MatchContext
-from utils.logger import logger
 #!/usr/bin/env python3
 """
 services/betting/strict_ticket_pipeline.py

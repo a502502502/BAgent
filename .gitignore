@@ -33,3 +33,7 @@ output/
 # Binaries & Screenshots
 *.exe
 reports/*.png
+reports/receipts/
+
+# Auto-improve local backups (may contain secrets; not source of truth)
+backup_auto_*/
