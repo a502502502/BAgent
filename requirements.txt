@@ -14,3 +14,6 @@ pydantic>=2.0.0
 
 # --- Auto-Improver v2.0 ---
 pytest
+
+# --- Fonti dati aggiuntive (ClubElo, Understat, FBref, MatchHistory) ---
+soccerdata>=1.8.8
