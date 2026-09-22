@@ -111,33 +111,35 @@ class SquadAbsenceChecker:
         if not self.db_path.exists():
             return []
 
-        con = sqlite3.connect(self.db_path)
-        con.create_function("NORM", 1, normalize)
-        cur = con.cursor()
-        norm_p = normalize(player_name)
+        try:
+            with sqlite3.connect(self.db_path) as con:
+                con.create_function("NORM", 1, normalize)
+                cur = con.cursor()
+                norm_p = normalize(player_name)
 
-        cur.execute("""
-            SELECT player_id, name, number, position, age, team_id, team_name, league_name, last_updated
-            FROM players
-            WHERE NORM(name) LIKE ? OR NORM(name) LIKE ?
-        """, (f"%{norm_p}%", f"{norm_p}%"))
-        rows = cur.fetchall()
-        con.close()
+                cur.execute("""
+                    SELECT player_id, name, number, position, age, team_id, team_name, league_name, last_updated
+                    FROM players
+                    WHERE NORM(name) LIKE ? OR NORM(name) LIKE ?
+                """, (f"%{norm_p}%", f"{norm_p}%"))
+                rows = cur.fetchall()
 
-        results = []
-        for r in rows:
-            results.append({
-                "player_id": r[0],
-                "name": r[1],
-                "number": r[2],
-                "position": r[3],
-                "age": r[4],
-                "team_id": r[5],
-                "team_name": r[6],
-                "league_name": r[7],
-                "last_updated": r[8]
-            })
-        return results
+                results = []
+                for r in rows:
+                    results.append({
+                        "player_id": r[0],
+                        "name": r[1],
+                        "number": r[2],
+                        "position": r[3],
+                        "age": r[4],
+                        "team_id": r[5],
+                        "team_name": r[6],
+                        "league_name": r[7],
+                        "last_updated": r[8]
+                    })
+                return results
+        except sqlite3.OperationalError:
+            return []
 
     def verify_player_roster(self, player_name: str, team_name: str) -> Tuple[bool, str, Dict[str, Any]]:
         """
@@ -361,19 +363,21 @@ class SquadAbsenceChecker:
         }
 
         if self.db_path.exists():
-            con = sqlite3.connect(self.db_path)
-            cur = con.cursor()
-            cur.execute("SELECT name, team_name FROM players")
-            rows = cur.fetchall()
-            con.close()
+            try:
+                with sqlite3.connect(self.db_path) as con:
+                    cur = con.cursor()
+                    cur.execute("SELECT name, team_name FROM players")
+                    rows = cur.fetchall()
 
-            for full_name, team_name in rows:
-                parts = [p for p in re.split(r'[\s\.\-]+', full_name) if len(p) >= 5]
-                if parts:
-                    surname = parts[-1]
-                    norm_s = normalize(surname)
-                    if norm_s not in common_words and len(norm_s) >= 5:
-                        cache[norm_s] = (full_name, team_name)
+                    for full_name, team_name in rows:
+                        parts = [p for p in re.split(r'[\s\.\-]+', full_name) if len(p) >= 5]
+                        if parts:
+                            surname = parts[-1]
+                            norm_s = normalize(surname)
+                            if norm_s not in common_words and len(norm_s) >= 5:
+                                cache[norm_s] = (full_name, team_name)
+            except sqlite3.OperationalError:
+                pass
 
         self._surnames_cache = cache
         return cache
