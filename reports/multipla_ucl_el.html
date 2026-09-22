@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multipla UCL/EL — BAgent ~110x</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0a14; color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; }
+  .slip { max-width: 720px; margin: 0 auto; background: #12121f; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 48px rgba(0,0,0,0.7); }
+
+  .header { background: linear-gradient(135deg, #0d0d2b, #1a1060); padding: 28px; text-align: center; border-bottom: 3px solid #6c63ff; position: relative; }
+  .header .logo { font-size: 11px; letter-spacing: 4px; color: #6c63ff; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+  .header h1 { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: 1px; }
+  .header .subtitle { font-size: 13px; color: #9090c0; margin-top: 5px; }
+  .header .badge-row { display: flex; justify-content: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .badge { padding: 5px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .b-ucl { background: #1a1060; color: #6c63ff; border: 1px solid #6c63ff; }
+  .b-el { background: #1a0a30; color: #f7b731; border: 1px solid #f7b731; }
+  .b-quota { background: #0a1a0a; color: #4ecca3; border: 1px solid #4ecca3; }
+  .b-bonus { background: #1a0a0a; color: #e94560; border: 1px solid #e94560; }
+
+  .day-header { background: #0c0c1a; padding: 10px 22px; font-size: 10px; font-weight: 800; letter-spacing: 3px; color: #7070a0; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .day-header.d1 { border-left: 4px solid #6c63ff; color: #9090d0; }
+  .day-header.d2 { border-left: 4px solid #45aaf2; color: #7090b0; }
+  .day-header.d3 { border-left: 4px solid #f7b731; color: #a09070; }
+
+  .pick { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 14px 22px; border-bottom: 1px solid #1a1a2e; transition: background 0.15s; }
+  .pick:hover { background: #14142a; }
+  .pick-league { font-size: 10px; color: #505070; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+  .pick-match { font-size: 14px; font-weight: 700; color: #d0d0f0; margin-bottom: 5px; }
+  .pick-bottom { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .market-pill { font-size: 11px; padding: 2px 9px; border-radius: 4px; font-weight: 700; }
+  .m-1x2 { background: #0d1a2e; color: #45aaf2; }
+  .m-dc { background: #1a0d2e; color: #a78bfa; }
+  .edge-pill { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+  .e-star { background: #0a2a1a; color: #4ecca3; }
+  .e-eye { background: #1a1a10; color: #f7b731; }
+  .pick-odds { font-size: 24px; font-weight: 900; color: #f7b731; text-align: right; min-width: 60px; }
+  .pick-running { font-size: 10px; color: #304030; margin-top: 2px; text-align: right; }
+
+  .edge-box { background: #0c0c1a; border: 1px solid #1a1a3a; border-radius: 10px; margin: 12px 22px; padding: 12px 16px; }
+  .edge-title { font-size: 10px; color: #404060; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+  .edge-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-bottom: 3px; }
+  .edge-team { color: #8080a0; flex: 1; }
+  .edge-val { font-weight: 700; }
+  .ev-pos { color: #4ecca3; }
+  .ev-neg { color: #e94560; }
+  .ev-neutral { color: #f7b731; }
+
+  .formula-box { background: #0a0a18; border: 1px solid #2a2a50; border-radius: 10px; margin: 12px 22px 0; padding: 14px 18px; }
+  .formula-label { font-size: 10px; color: #404070; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .formula-item { text-align: center; }
+  .formula-value { font-size: 22px; font-weight: 900; }
+  .formula-desc { font-size: 10px; color: #505070; margin-top: 2px; }
+  .fv-base { color: #6c63ff; }
+  .fv-bonus { color: #f7b731; }
+  .fv-total { color: #4ecca3; }
+  .fv-stake { color: #e0e0e0; }
+
+  .sesto-box { background: #0a0810; border: 1px solid #2a1a40; border-radius: 10px; margin: 12px 22px 0; padding: 12px 16px; }
+  .sesto-title { font-size: 10px; color: #604080; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+  .sesto-row { font-size: 12px; color: #907090; margin-bottom: 4px; line-height: 1.5; }
+  .sesto-row strong { color: #c090d0; }
+
+  .footer { background: #080810; padding: 16px 22px; text-align: center; margin-top: 0; }
+  .footer-note { font-size: 11px; color: #303050; line-height: 1.7; }
+  .footer-note strong { color: #504060; }
+</style>
+</head>
+<body>
+<div class="slip">
+  <div class="header">
+    <div class="logo">BAgent · Sesto Senso + Poisson</div>
+    <h1>⚽ MULTIPLA UCL / EL PLAYOFFS</h1>
+    <div class="subtitle">18 — 20 Agosto 2026 · Quote verificate su Netwin</div>
+    <div class="badge-row">
+      <span class="badge b-quota">10 PICK · QUOTA ~88×</span>
+      <span class="badge b-bonus">+25% BONUS → ~110× / €1</span>
+      <span class="badge b-ucl">5× UCL</span>
+      <span class="badge b-el">5× EL</span>
+    </div>
+  </div>
+
+  <!-- MARTEDÌ 18 AGOSTO -->
+  <div class="day-header d1">📅 Martedì 18 Agosto — UCL Play-offs Andata</div>
+
+  <!-- Pick 1 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League — Croazia vs Norvegia</div>
+      <div class="pick-match">Dinamo Zagabria vs Viking FK</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-1x2">1X2: 1 — Dinamo vince in casa</span>
+        <span class="edge-pill e-star">⭐ Edge +33.8%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.76</div>
+      <div class="pick-running">×1.76</div>
+    </div>
+  </div>
+
+  <!-- Pick 2 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League — Bulgaria vs Grecia</div>
+      <div class="pick-match">Levski Sofia vs AEK Atene</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-dc">DC X2 — AEK non perde</span>
+        <span class="edge-pill e-star">⭐ Edge +16.5%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.37</div>
+      <div class="pick-running">×2.41</div>
+    </div>
+  </div>
+
+  <!-- Pick 3 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League — Israele vs Serbia</div>
+      <div class="pick-match">Hapoel Beer Sheva vs Stella Rossa Belgrado</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-dc">DC X2 — Red Star non perde</span>
+        <span class="edge-pill e-star">⭐ Edge +23.2%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.54</div>
+      <div class="pick-running">×3.71</div>
+    </div>
+  </div>
+
+  <!-- MERCOLEDÌ 19 AGOSTO -->
+  <div class="day-header d2">📅 Mercoledì 19 Agosto — UCL Play-offs Andata</div>
+
+  <!-- Pick 4 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League — Scozia vs Austria</div>
+      <div class="pick-match">Celtic vs LASK Linz</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-1x2">1X2: 1 — Celtic vince in casa</span>
+        <span class="edge-pill e-star">⭐ Edge +11.1%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.61</div>
+      <div class="pick-running">×5.97</div>
+    </div>
+  </div>
+
+  <!-- Pick 5 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League — Slovacchia vs Slovenia</div>
+      <div class="pick-match">Slovan Bratislava vs NK Celje</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-1x2">1X2: 1 — Slovan vince in casa</span>
+        <span class="edge-pill e-star">⭐ Edge +22.5%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.75</div>
+      <div class="pick-running">×10.45</div>
+    </div>
+  </div>
+
+  <!-- Pick 6 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Champions League — Olanda vs Norvegia</div>
+      <div class="pick-match">NEC Nijmegen vs Bodo/Glimt</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-dc">DC X2 — Bodo/Glimt non perde</span>
+        <span class="edge-pill e-eye">👀 Edge +6.6%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.48</div>
+      <div class="pick-running">×15.47</div>
+    </div>
+  </div>
+
+  <!-- GIOVEDÌ 20 AGOSTO -->
+  <div class="day-header d3">📅 Giovedì 20 Agosto — EL Play-offs Andata</div>
+
+  <!-- Pick 7 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League — Turchia vs Ungheria</div>
+      <div class="pick-match">Trabzonspor vs Ferencvaros</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-1x2">1X2: 1 — Trabzonspor vince in casa</span>
+        <span class="edge-pill e-eye">👀 Edge marginale</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.63</div>
+      <div class="pick-running">×25.22</div>
+    </div>
+  </div>
+
+  <!-- Pick 8 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League — Kazakistan vs Belgio</div>
+      <div class="pick-match">Kairat Almaty vs Anderlecht</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-dc">DC X2 — Anderlecht non perde</span>
+        <span class="edge-pill e-star">⭐ Edge +12.7%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.31</div>
+      <div class="pick-running">×33.04</div>
+    </div>
+  </div>
+
+  <!-- Pick 9 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League — Serbia vs Rep. Ceca</div>
+      <div class="pick-match">Stella Rossa vs Viktoria Plzen</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-1x2">1X2: 1 — Stella Rossa vince in casa</span>
+        <span class="edge-pill e-eye">👀 Edge +9.2%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.68</div>
+      <div class="pick-running">×55.51</div>
+    </div>
+  </div>
+
+  <!-- Pick 10 -->
+  <div class="pick">
+    <div>
+      <div class="pick-league">🏆 Europa League — Polonia vs Svizzera</div>
+      <div class="pick-match">Lech Poznan vs FC Thun</div>
+      <div class="pick-bottom">
+        <span class="market-pill m-1x2">1X2: 1 — Lech vince in casa</span>
+        <span class="edge-pill e-eye">👀 Edge +5.9%</span>
+      </div>
+    </div>
+    <div>
+      <div class="pick-odds">1.58</div>
+      <div class="pick-running">×87.71</div>
+    </div>
+  </div>
+
+  <!-- Edge Analysis -->
+  <div class="edge-box">
+    <div class="edge-title">📊 Analisi Edge — Formula: (P × Quota) − 1</div>
+    <div class="edge-row"><span class="edge-team">Dinamo 1</span><span class="edge-val ev-pos">+33.8% ⭐</span></div>
+    <div class="edge-row"><span class="edge-team">AEK DC X2</span><span class="edge-val ev-pos">+16.5% ⭐</span></div>
+    <div class="edge-row"><span class="edge-team">Red Star DC X2</span><span class="edge-val ev-pos">+23.2% ⭐</span></div>
+    <div class="edge-row"><span class="edge-team">Celtic 1</span><span class="edge-val ev-pos">+11.1% ⭐</span></div>
+    <div class="edge-row"><span class="edge-team">Slovan 1</span><span class="edge-val ev-pos">+22.5% ⭐</span></div>
+    <div class="edge-row"><span class="edge-team">Bodo/Glimt DC X2</span><span class="edge-val ev-neutral">+6.6% 👀</span></div>
+    <div class="edge-row"><span class="edge-team">Trabzonspor 1</span><span class="edge-val ev-neg">−7.1% 👀</span></div>
+    <div class="edge-row"><span class="edge-team">Anderlecht DC X2</span><span class="edge-val ev-pos">+12.7% ⭐</span></div>
+    <div class="edge-row"><span class="edge-team">Stella Rossa 1</span><span class="edge-val ev-neutral">+9.2% 👀</span></div>
+    <div class="edge-row"><span class="edge-team">Lech 1</span><span class="edge-val ev-neutral">+5.9% 👀</span></div>
+  </div>
+
+  <!-- Sesto Senso Notes -->
+  <div class="sesto-box">
+    <div class="sesto-title">🧠 Sesto Senso — Note Infortuni</div>
+    <div class="sesto-row"><strong>Fenerbahce</strong>: ESCLUSO — out Lukaku, Amrabat, Soyuncu, Oosterwolde, Musaba (5 assenti)</div>
+    <div class="sesto-row"><strong>Dinamo Zagabria</strong>: solo portiere Filipovic sospeso — Stojakovic ancora out ma non decisivo</div>
+    <div class="sesto-row"><strong>Celtic</strong>: quasi rosa completa — 5-1 vs Kilmarnock ultima uscita, forma eccellente</div>
+    <div class="sesto-row"><strong>Anderlecht/Lech/Trabzonspor</strong>: nessun infortunio rilevante segnalato</div>
+    <div class="sesto-row"><strong>Viking</strong>: difensore Baertelsen fuori — indebolisce il reparto arretrato</div>
+  </div>
+
+  <!-- Formula Quota -->
+  <div class="formula-box">
+    <div class="formula-label">💰 Calcolo Vincita</div>
+    <div class="formula-grid">
+      <div class="formula-item">
+        <div class="formula-value fv-base">×87.7</div>
+        <div class="formula-desc">Quota base (10 pick)</div>
+      </div>
+      <div class="formula-item">
+        <div class="formula-value fv-bonus">+25%</div>
+        <div class="formula-desc">Bonus Netwin ≥10 eventi</div>
+      </div>
+      <div class="formula-item">
+        <div class="formula-value fv-total">~110×</div>
+        <div class="formula-desc">Quota finale con bonus</div>
+      </div>
+      <div class="formula-item">
+        <div class="formula-value fv-stake">€550</div>
+        <div class="formula-desc">Vincita per €5 giocati</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-note">
+      <strong>BAgent · Multipla UCL/EL Playoffs</strong> — Sesto Senso + Poisson + Netwin live<br>
+      Quote verificate in diretta · 5 pick ⭐ edge ≥10% · Mix 1X2 + DC · 17/08/2026<br>
+      ⚠️ Trabzonspor: edge negativo, inclusa per volume quota · Rimuovere per versione conservativa
+    </div>
+  </div>
+</div>
+</body>
+</html>
