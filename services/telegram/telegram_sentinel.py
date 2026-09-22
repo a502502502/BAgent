@@ -22,7 +22,7 @@ import requests
 
 logger = logging.getLogger("TelegramSentinel")
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAFwuMzlNXDBkMbbMhE3HsxfudIbrGQQ0co")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
 
 
