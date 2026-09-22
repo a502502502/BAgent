@@ -35,6 +35,10 @@ Utilizzo:
 Nota: i CSV vengono scaricati dal GitHub ufficiale di Sackmann in data/tennis/.
 """
 
+
+raise SystemExit(
+    "TENNIS BAN (22/09/2026): script disabilitato. BAgent opera solo sul calcio."
+)
 from __future__ import annotations
 
 import argparse

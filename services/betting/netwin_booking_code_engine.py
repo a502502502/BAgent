@@ -14,9 +14,10 @@ import datetime
 class NetwinBookingCodeEngine:
     @staticmethod
     def generate_booking_code(ticket_id: str, selections: list, stake: float) -> str:
+        """Internal ledger id only. Real 6-digit Netwin codes come from NetwinAutomator."""
         raw_str = f"{ticket_id}_{len(selections)}_{stake}_{datetime.datetime.now().strftime('%Y%m%d')}"
         digest = hashlib.md5(raw_str.encode()).hexdigest()[:4].upper()
-        return f"NW-{digest}-T{ticket_id}"
+        return f"INT-{digest}-T{ticket_id}"
 
     @classmethod
     def get_today_booking_slips(cls):

@@ -12,6 +12,11 @@ Monitora in tempo reale le schedine in corso (Schedina 2, Schedina 3 e Schedina 
 
 from __future__ import annotations
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import sys
 import time
 import sqlite3
@@ -32,8 +37,8 @@ API_KEY = os.getenv("API_FOOTBALL_KEY", "")
 API_HOST = "v3.football.api-sports.io"
 HEADERS = {"x-apisports-key": API_KEY}
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 DB_PATH = ROOT / "storage" / "database" / "bagent.db"
 
 FID_UNION = 1575164

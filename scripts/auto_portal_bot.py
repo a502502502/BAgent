@@ -7,6 +7,11 @@ scripts/auto_portal_bot.py — Demone 24/7 Autonomo per Raspberry Pi.
 """
 
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import sys
 import time
 import json
@@ -40,8 +45,8 @@ if env_path.exists():
             if k.strip() and v.strip():
                 os.environ.setdefault(k.strip(), v.strip())
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 API_KEY = os.getenv("API_FOOTBALL_KEY", "")
 PORT = 8443
 PORTAL_DIR = ROOT / "portal"

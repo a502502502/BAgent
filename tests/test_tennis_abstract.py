@@ -1,7 +1,8 @@
-from providers.tennis.tennis_abstract.collector import (
-    TennisAbstractCollector
-)
+"""TENNIS BAN 22/09/2026 — test disabilitato."""
+import pytest
 
-collector = TennisAbstractCollector()
+pytestmark = pytest.mark.skip(reason="TENNIS BAN 22/09/2026")
 
-collector.collect("JannikSinner")
+
+def test_tennis_module_disabled():
+    assert False, "unreachable"

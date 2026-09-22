@@ -15,6 +15,10 @@ Inserire i match nella lista MATCHES con:
   - market_odds: quote bookmaker {player1, player2, over_2_5_sets, under_2_5_sets, ...}
 """
 
+
+raise SystemExit(
+    "TENNIS BAN (22/09/2026): script disabilitato. BAgent opera solo sul calcio."
+)
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

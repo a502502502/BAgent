@@ -1,3 +1,4 @@
+# DEPRECATED: prefer NetwinAutomator.build_ticket_and_book (services/betting/netwin_automator.py). Booking codes only.
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 from playwright.sync_api import sync_playwright

@@ -1,3 +1,7 @@
+
+raise SystemExit(
+    "TENNIS BAN (22/09/2026): script disabilitato. BAgent opera solo sul calcio."
+)
 import requests, re
 
 url = 'https://local-it.flashscore.ninja/2/x/feed/f_2_0_1_it_1'

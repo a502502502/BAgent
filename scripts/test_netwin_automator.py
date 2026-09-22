@@ -20,10 +20,10 @@ from services.telegram.interactive_bot import TelegramInteractiveBot
 # Ticket di Test (Sabato 22 Agosto - Cassaforte)
 TEST_TICKET_ID = f"T14_{int(time.time())}"
 TEST_SELECTIONS = [
-    {"match": "Brentford", "market": "UNDER_OVER", "pick": "Over 1.5"},
-    {"match": "Genoa", "market": "DOPPIA_CHANCE_OU", "pick": "X2 + Over 1.5"},
-    {"match": "Inter", "market": "DOPPIA_CHANCE_OU", "pick": "1X + Over 1.5"},
-    {"match": "Real Madrid", "market": "1X2", "pick": "2"},
+    {"match": "Brentford vs Tottenham", "market": "UNDER/OVER", "pick": "Over 1.5"},
+    {"match": "Genoa vs Napoli", "market": "DOPPIA CHANCE", "pick": "X2 + Over 1.5"},
+    {"match": "Inter vs Monza", "market": "DOPPIA CHANCE", "pick": "1X + Over 1.5"},
+    {"match": "Espanyol vs Real Madrid", "market": "1X2", "pick": "2"},
 ]
 
 CARD_TEXT = (

@@ -1,3 +1,7 @@
+
+raise SystemExit(
+    "TENNIS BAN (22/09/2026): script disabilitato. BAgent opera solo sul calcio."
+)
 import sqlite3
 from datetime import datetime
 

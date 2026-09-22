@@ -4,14 +4,20 @@ BAgent - Remote Smartphone Tunnel Manager (Cloudflare Quick Tunnel)
 Avvia un tunnel HTTPS pubblico sicuro e invia il link al bot Telegram dell'utente.
 """
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import re
 import sys
 import time
 import subprocess
 import requests
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8852289931:AAHy77CefE6rlzydAhYyfEbG-AB8XG7wlzg")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "466378357")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+
 
 def send_telegram(message):
     try:
