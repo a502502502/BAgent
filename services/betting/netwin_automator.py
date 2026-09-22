@@ -236,7 +236,7 @@ class NetwinAutomator:
             logger.error("Errore selezione %s / %s: %s", market, pick, exc)
         return False
 
-    def add_match_selection(self, match_info: Dict[str, Any]) -> bool:
+    def add_match_selection(self, match_info: Dict[str, Any], retries: int = 2) -> bool:
         home, away = split_home_away(match_info)
         market = match_info.get("market", "1X2")
         pick = match_info.get("pick", "1")
@@ -244,15 +244,27 @@ class NetwinAutomator:
         query = home or str(match_info.get("match") or "")
         logger.info("Inserimento: %s vs %s | %s | %s (@%s)", home, away, market, pick, odd)
 
-        if not query or not self.search_match(query):
-            return False
-        if not self.click_match_row(home, away):
-            self._screenshot("netwin_match_miss")
-            return False
-        ok = self.select_outcome(market=market, pick=pick, target_odd=odd)
-        if not ok:
-            self._screenshot("netwin_odd_miss")
-        return ok
+        last_err = ""
+        for attempt in range(1, max(1, retries) + 1):
+            try:
+                if not query or not self.search_match(query):
+                    last_err = "search_failed"
+                    continue
+                if not self.click_match_row(home, away):
+                    self._screenshot(f"netwin_match_miss_a{attempt}")
+                    last_err = "match_row_miss"
+                    continue
+                ok = self.select_outcome(market=market, pick=pick, target_odd=odd)
+                if ok:
+                    return True
+                self._screenshot(f"netwin_odd_miss_a{attempt}")
+                last_err = "odd_miss"
+            except Exception as exc:
+                last_err = str(exc)
+                logger.warning("Retry %s/%s fallito: %s", attempt, retries, exc)
+            self.page.wait_for_timeout(900)
+        logger.error("Selezione fallita dopo %s tentativi (%s)", retries, last_err)
+        return False
 
     def generate_booking_code(self, stake: float = 25.0) -> Dict[str, Any]:
         res: Dict[str, Any] = {"success": False, "booking_code": None, "error": None}

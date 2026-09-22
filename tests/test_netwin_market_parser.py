@@ -58,11 +58,32 @@ def test_multigol_2_4():
 
 def test_unknown_raises():
     try:
-        parse_netwin_selection("", "Chance Mix X o GG")
+        parse_netwin_selection("", "Mercato Inventato XYZ")
     except UnsupportedNetwinMarket as exc:
         assert "Cannot map" in str(exc)
         return
     raise AssertionError("expected UnsupportedNetwinMarket")
+
+
+def test_chance_mix_x_o_gg():
+    action = parse_netwin_selection("", "Chance Mix: X o GG")
+    assert action.family == "CHANCE_MIX"
+    assert action.chance_mix and "X" in action.chance_mix
+    assert any("Chance Mix" in t for t in market_tab_labels(action))
+
+
+def test_corner_over():
+    action = parse_netwin_selection("Corner", "Over 8.5")
+    assert action.family == "CORNER"
+    assert action.specialty_side == "OVER"
+    assert action.specialty_line == 8.5
+    assert any("Corner" in t for t in market_tab_labels(action))
+
+
+def test_cards_1x2():
+    action = parse_netwin_selection("Cartellini", "1")
+    assert action.family == "CARDS"
+    assert action.specialty_side == "1"
 
 
 def test_split_home_away_from_match():

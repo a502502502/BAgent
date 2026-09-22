@@ -131,15 +131,9 @@ class TelegramSentinel:
     # =========================================================================
 
     def send_bagel_alert(self, match: str, player_down: str, comeback_prob: float, surface: str = "clay"):
-        """Alert per crollo post-bagel (6-0/0-6) nel tennis."""
-        text = (
-            f"🚨 <b>ALLERTA BAGEL / CROLLO TENNIS</b>\n\n"
-            f"🎾 <b>{match}</b> ({surface.capitalize()})\n"
-            f"⚠️ <b>{player_down}</b> ha subito un 6-0 o 0-6.\n"
-            f"📉 Probabilità di rimonta stimata: <b>{comeback_prob:.1%}</b>\n\n"
-            f"💡 <i>Valutare live sniping sul favorito o hedge se in posizione.</i>"
-        )
-        return self.send_message(text)
+        """Disabilitato: tennis abolito (22/09/2026)."""
+        logger.warning("send_bagel_alert ignorato (TENNIS BAN): %s", match)
+        return False
 
     def send_red_card_alert(self, match: str, team_with_red: str, minute: int, xg_home_adj: float, xg_away_adj: float):
         """Alert per cartellino rosso nel calcio con xG ricalcolati."""
