@@ -1,0 +1,25 @@
+{
+    "ticket_id": "TICKET_COPERTURA_3_BIG_28SET",
+    "name": "Doppia Copertura 3: Le Grandi di Casa",
+    "created_at": "2026-09-22 13:50:00",
+    "total_odds": 1.76,
+    "stake": 20.0,
+    "potential_win": 35.2,
+    "conjoint_prob": 0.612,
+    "legs": [
+        {
+            "match": "Internacional vs Vitória",
+            "date_time": "2024-09-29 23:30 CEST",
+            "market": "Doppia Chance In",
+            "pick": "1X",
+            "netwin_odds": 1.22
+        },
+        {
+            "match": "Racing Club vs Platense",
+            "date_time": "2024-10-01 02:00 CEST",
+            "market": "Combo Doppia Chance + Under",
+            "pick": "1X + Under 3.5 Gol",
+            "netwin_odds": 1.44
+        }
+    ]
+}
