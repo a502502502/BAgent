@@ -4,14 +4,22 @@
 
 ## Cos'è BAgent
 
-Sistema di analisi scommesse sportive (calcio + tennis) con:
-- Modello Poisson per stima probabilità gol
+Sistema di analisi scommesse quantitative focalizzato **AL 100% SUL CALCIO (Tennis Tassativamente Abolito)** con:
+- Modello Poisson / Dixon-Coles per stima probabilità gol ed esiti esatti
+- Negative Binomial Engine per overdispersion dei corner
 - Sesto Senso = OBBLIGATORIO & QUOTIDIANO (lettura stampa sportiva internazionale + infortuni)
-- Edge formula: `Edge = (prob × quota) - 1`
-- MultiplaAdvisor per costruire accumulator con quota ≥ 30 e prob > 79%
+- Edge formula: `Edge = (prob × quota) - 1` e Sharp CLV Sentinel (Metodo Shin 1992)
+- MultiplaAdvisor e Fractional Kelly per la gestione del bankroll
 - Database SQLite con storico partite, statistiche, log previsioni
 
 ---
+
+## REGOLA SUPREMA — BAN PERMANENTE DEL TENNIS (TENNIS ABOLITO)
+🛑 **DIVIETO ASSOLUTO DI SCOMMESSE SUL TENNIS**:
+A partire dal 22 Settembre 2026, **il tennis è definitivamente ed irrevocabilmente CANCELLATO da qualsiasi programma, scansione, schedina o proposta di BAgent**.
+- **Motivazione Operativa**: Il tennis (in particolare circuiti ATP minori, WTA e Challenger) presenta un livello di varianza asimmetrica, cali fisici occulti, ritiri e blackout mentali (es. bagel 0-6 inspiegabili) incompatibile con il betting quantitativo a lungo termine.
+- **Direttiva**: TUTTI i ticket, le analisi, i modelli in-play e le automazioni devono essere concentrati **ESCLUSIVAMENTE SUL CALCIO** (campionati europei Tier 1/2/3, Serie A/B/C, Coppe Europee e leghe sudamericane regolamentate).
+
 
 ## Regole di Analisi (SEMPRE in vigore)
 
