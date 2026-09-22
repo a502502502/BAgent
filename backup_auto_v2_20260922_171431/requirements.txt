@@ -11,6 +11,3 @@ playwright>=1.44.0
 
 # --- Aggiunti da BAgent Auto-Improver ---
 pydantic>=2.0.0
-
-# --- Auto-Improver v2.0 ---
-pytest

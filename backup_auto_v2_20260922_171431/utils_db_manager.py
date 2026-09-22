@@ -4,6 +4,7 @@ from functools import wraps
 from typing import Any, Callable
 
 def get_robust_connection(db_path: str) -> sqlite3.Connection:
+    """Restituisce una connessione SQLite ottimizzata per la concorrenza e la robustezza."""
     conn = sqlite3.connect(db_path, timeout=10.0)
     conn.execute("PRAGMA journal_mode=WAL;")
     conn.execute("PRAGMA synchronous=NORMAL;")
@@ -12,6 +13,7 @@ def get_robust_connection(db_path: str) -> sqlite3.Connection:
     return conn
 
 def db_retry(max_retries: int = 3, base_delay: float = 1.0):
+    """Decorator per ritentare le operazioni DB con backoff esponenziale."""
     def decorator(func: Callable):
         @wraps(func)
         def wrapper(*args, **kwargs) -> Any:

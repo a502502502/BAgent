@@ -2,8 +2,8 @@ from pydantic import BaseModel, Field, model_validator
 
 class MarketData(BaseModel):
     market_name: str
-    quota: float = Field(..., gt=1.01)
-    probabilita_reale: float = Field(..., ge=0.0, le=1.0)
+    quota: float = Field(..., gt=1.01, description="La quota deve essere > 1.01")
+    probabilita_reale: float = Field(..., ge=0.0, le=1.0, description="Probabilità tra 0.0 e 1.0")
     
     @property
     def edge(self) -> float:

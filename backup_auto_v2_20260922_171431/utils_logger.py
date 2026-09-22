@@ -6,6 +6,7 @@ import os
 def setup_bagent_logger() -> logging.Logger:
     logger = logging.getLogger("BAgent_Core")
     logger.setLevel(logging.DEBUG)
+    
     os.makedirs("logs", exist_ok=True)
     
     file_formatter = logging.Formatter('%(asctime)s | %(levelname)-8s | %(module)s:%(lineno)d | %(message)s')
@@ -20,6 +21,7 @@ def setup_bagent_logger() -> logging.Logger:
     if not logger.handlers:
         logger.addHandler(file_handler)
         logger.addHandler(console_handler)
+    
     return logger
 
 logger = setup_bagent_logger()
