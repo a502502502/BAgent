@@ -1,0 +1,27 @@
+{
+    "ticket_id": "TICKET_COPERTURA_COPPE_22SET",
+    "name": "Doppia Copertura 2: Le Mura Italiane di Coppa",
+    "created_at": "2026-09-22 14:55:00",
+    "total_odds": 1.53,
+    "stake": 20.0,
+    "potential_win": 30.60,
+    "conjoint_prob": 0.752,
+    "legs": [
+        {
+            "match": "Torino vs Empoli",
+            "tournament": "Coppa Italia",
+            "date_time": "2026-09-22 21:00 CEST",
+            "market": "Under / Over Gol",
+            "pick": "Under 3.5 Gol",
+            "netwin_odds": 1.22
+        },
+        {
+            "match": "Napoli vs Palermo",
+            "tournament": "Coppa Italia",
+            "date_time": "2026-09-24 21:00 CEST",
+            "market": "Combo Doppia Chance + Gol",
+            "pick": "1X + Over 1.5 Gol",
+            "netwin_odds": 1.25
+        }
+    ]
+}
