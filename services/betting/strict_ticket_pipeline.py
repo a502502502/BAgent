@@ -180,7 +180,19 @@ class StrictTicketPipeline:
         ]
         
         # Gestione eccezioni nomi legittimi contenenti 'II' (es. Willem II in Eredivisie)
+        # e false positive " B " su "UEFA Nations League - League B" (coppa UEFA ammessa)
         text_for_reserves = text_to_check.replace("WILLEM II", "WILLEM_CLUB")
+        for _nl_token in (
+            "NATIONS LEAGUE - LEAGUE A",
+            "NATIONS LEAGUE - LEAGUE B",
+            "NATIONS LEAGUE - LEAGUE C",
+            "NATIONS LEAGUE - LEAGUE D",
+            "NATIONS LEAGUE LEAGUE A",
+            "NATIONS LEAGUE LEAGUE B",
+            "NATIONS LEAGUE LEAGUE C",
+            "NATIONS LEAGUE LEAGUE D",
+        ):
+            text_for_reserves = text_for_reserves.replace(_nl_token, "NATIONS_LEAGUE_UEFA")
         
         is_banned_tier2 = any(kw in text_to_check for kw in banned_leagues_keywords)
         is_banned_reserve = any(kw in text_for_reserves for kw in banned_reserve_keywords)
