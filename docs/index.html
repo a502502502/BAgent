@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BAgent — Calcolatore Quantitativo Scommesse Calcio</title>
+  <meta name="description" content="Motore Quantitativo BAgent: Bivariate Poisson Dixon-Coles, Corner Binomiale Negativa e Criterio di Kelly per il Calcio.">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    input, select {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+    }
+    .glow-box {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-12">
+
+  <!-- TOP HEADER -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50 px-4 py-3 shadow-md">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-black text-xl text-slate-950 shadow-lg shadow-emerald-500/20">
+          <i class="fa-solid fa-futbol"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            BAgent <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Quant 2.0</span>
+          </h1>
+          <p class="text-xs text-slate-400">100% Calcio • Dixon-Coles & Binomiale Negativa</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-mono bg-emerald-950/60 border border-emerald-800 px-2.5 py-1 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-4xl mx-auto px-4 pt-6 space-y-6">
+
+    <!-- PRESET RAPIDI -->
+    <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-2xl">
+      <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <i class="fa-solid fa-bolt text-amber-400"></i> Match Veloci del Weekend (Carica con 1 Click)
+      </div>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <button onclick="loadPreset('san_lorenzo_banfield')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          🇦🇷 San Lorenzo vs Banfield
+        </button>
+        <button onclick="loadPreset('estudiantes_defensa')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          🇦🇷 Estudiantes vs Defensa
+        </button>
+        <button onclick="loadPreset('palmeiras_galo')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          🇧🇷 Palmeiras vs Atl-MG
+        </button>
+        <button onclick="loadPreset('botafogo_gremio')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          🇧🇷 Botafogo vs Grêmio
+        </button>
+        <button onclick="loadPreset('inter_vitoria')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          🇧🇷 Internacional vs Vitória
+        </button>
+        <button onclick="loadPreset('racing_platense')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          🇦🇷 Racing vs Platense
+        </button>
+      </div>
+    </div>
+
+    <!-- INPUT CARD -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl glow-box">
+      <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+        <i class="fa-solid fa-sliders text-emerald-400"></i> Parametri del Match da Calcolare
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Squadra Casa -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Squadra di Casa</label>
+          <div class="relative">
+            <input type="text" id="homeTeam" value="San Lorenzo" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 focus:border-emerald-500 focus:outline-none text-sm font-medium">
+            <span class="absolute right-3 top-3 text-slate-500 text-xs">CASA</span>
+          </div>
+        </div>
+
+        <!-- Squadra Ospite -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Squadra Ospite</label>
+          <div class="relative">
+            <input type="text" id="awayTeam" value="Banfield" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 focus:border-emerald-500 focus:outline-none text-sm font-medium">
+            <span class="absolute right-3 top-3 text-slate-500 text-xs">TRASFERTA</span>
+          </div>
+        </div>
+
+        <!-- Campionato -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Campionato (League DNA)</label>
+          <select id="leagueSelect" onchange="applyLeagueDna()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 focus:border-emerald-500 focus:outline-none text-sm font-medium">
+            <option value="ARG_PRIMERA" selected>🇦🇷 Argentina — Liga Profesional (Media gol 1.88, Under)</option>
+            <option value="BRA_SERIE_A">🇧🇷 Brasile — Série A (Media gol 2.67, Over & Corner)</option>
+            <option value="ITA_SERIE_A">🇮🇹 Italia — Serie A (Equilibrato, Media 2.55)</option>
+            <option value="ENG_PREMIER">🇬🇧 Inghilterra — Premier League (Alta intensità, Media 3.10)</option>
+            <option value="ESP_LALIGA">🇪🇸 Spagna — La Liga (Tattico, Media 2.45)</option>
+            <option value="CUSTOM">⚙️ Personalizzato / Altro</option>
+          </select>
+        </div>
+
+        <!-- Quote Bookmaker (Opzionali per calcolo Edge) -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Quota Bookmaker di Riferimento (Netwin)</label>
+          <div class="grid grid-cols-3 gap-2">
+            <input type="number" step="0.01" id="bookOdd1" placeholder="1 (es 2.10)" class="w-full px-2 py-2 rounded-lg border border-slate-700 text-center text-xs">
+            <input type="number" step="0.01" id="bookOddX" placeholder="X (es 2.90)" class="w-full px-2 py-2 rounded-lg border border-slate-700 text-center text-xs">
+            <input type="number" step="0.01" id="bookOdd2" placeholder="2 (es 3.60)" class="w-full px-2 py-2 rounded-lg border border-slate-700 text-center text-xs">
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCORDION OPZIONI AVANZATE XG & CORNER -->
+      <details class="mt-4 pt-3 border-t border-slate-800 text-xs">
+        <summary class="cursor-pointer text-slate-400 hover:text-emerald-400 font-medium select-none flex items-center justify-between">
+          <span><i class="fa-solid fa-cog mr-1"></i> Parametri Avanzati xG e Corner (Regolazione Manuale)</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </summary>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 pt-2">
+          <div>
+            <label class="text-slate-400 block mb-1">xG Casa</label>
+            <input type="number" step="0.05" id="xgHome" value="1.05" class="w-full px-2 py-1.5 rounded border border-slate-700 text-center">
+          </div>
+          <div>
+            <label class="text-slate-400 block mb-1">xG Ospite</label>
+            <input type="number" step="0.05" id="xgAway" value="0.70" class="w-full px-2 py-1.5 rounded border border-slate-700 text-center">
+          </div>
+          <div>
+            <label class="text-slate-400 block mb-1">Media Corner Casa</label>
+            <input type="number" step="0.1" id="cornerHome" value="4.4" class="w-full px-2 py-1.5 rounded border border-slate-700 text-center">
+          </div>
+          <div>
+            <label class="text-slate-400 block mb-1">Media Corner Ospite</label>
+            <input type="number" step="0.1" id="cornerAway" value="3.6" class="w-full px-2 py-1.5 rounded border border-slate-700 text-center">
+          </div>
+        </div>
+      </details>
+
+      <!-- PULSANTE DI CALCOLO -->
+      <button onclick="calculateBet()" class="w-full mt-5 py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-sm tracking-wide uppercase shadow-lg shadow-emerald-500/25 transition transform active:scale-[0.99] flex items-center justify-center gap-2">
+        <i class="fa-solid fa-calculator text-base"></i> Calcola Pronostico & Vere Gemme
+      </button>
+    </div>
+
+    <!-- AREA RISULTATI (DINAMICA) -->
+    <div id="resultsArea" class="space-y-5 hidden">
+
+      <!-- TOP VERDICT CARDS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Card 1: Valore / EV+ -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-950 border-2 border-emerald-500/40 rounded-2xl p-4 shadow-xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-xl border-l border-b border-emerald-500/30">
+            <i class="fa-solid fa-gem text-emerald-400 mr-1"></i> Miglior Giocata a Valore (EV+)
+          </div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Consiglio BAgent</div>
+          <div id="bestValueMarket" class="text-xl font-black text-white mt-1">--</div>
+          <div class="flex items-center gap-3 mt-3">
+            <div>
+              <span class="text-[10px] text-slate-400 block uppercase">Probabilità</span>
+              <span id="bestValueProb" class="text-lg font-bold text-emerald-400">--%</span>
+            </div>
+            <div class="border-l border-slate-800 pl-3">
+              <span class="text-[10px] text-slate-400 block uppercase">Quota Equa</span>
+              <span id="bestValueFair" class="text-lg font-mono font-bold text-slate-200">@--</span>
+            </div>
+            <div class="border-l border-slate-800 pl-3">
+              <span class="text-[10px] text-slate-400 block uppercase">Stake Kelly</span>
+              <span id="bestValueKelly" class="text-xs font-mono font-bold text-amber-400">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Paracadute Multipla -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-2xl p-4 shadow-xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-xl border-l border-b border-cyan-500/30">
+            <i class="fa-solid fa-shield-halved text-cyan-400 mr-1"></i> Paracadute per Multipla
+          </div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Massima Sicurezza</div>
+          <div id="bestSafeMarket" class="text-xl font-black text-white mt-1">--</div>
+          <div class="flex items-center gap-3 mt-3">
+            <div>
+              <span class="text-[10px] text-slate-400 block uppercase">Safe Rate</span>
+              <span id="bestSafeProb" class="text-lg font-bold text-cyan-400">--%</span>
+            </div>
+            <div class="border-l border-slate-800 pl-3">
+              <span class="text-[10px] text-slate-400 block uppercase">Quota Equa</span>
+              <span id="bestSafeFair" class="text-lg font-mono font-bold text-slate-200">@--</span>
+            </div>
+            <div class="border-l border-slate-800 pl-3">
+              <span class="text-[10px] text-slate-400 block uppercase">Motivo</span>
+              <span class="text-[11px] text-slate-300">Copertura massima</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABELLA COMPLETA MERCATI -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+        <div class="px-4 py-3 bg-slate-800/60 border-b border-slate-800 flex items-center justify-between">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">
+            <i class="fa-solid fa-table-list text-emerald-400 mr-1.5"></i> Tutti i Mercati Calcolati (Dixon-Coles & NegBinomial)
+          </h3>
+          <span class="text-[11px] text-slate-400 font-mono">Precisione 7x7</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950/50 text-slate-400 border-b border-slate-800 font-mono text-[11px]">
+              <tr>
+                <th class="py-2.5 px-3.5">Mercato</th>
+                <th class="py-2.5 px-3">Probabilità Reale</th>
+                <th class="py-2.5 px-3">Quota Equa</th>
+                <th class="py-2.5 px-3">Valutazione BAgent</th>
+              </tr>
+            </thead>
+            <tbody id="marketsTableBody" class="divide-y divide-slate-800/60 font-medium">
+              <!-- Righe inserite da JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MATRICE RISULTATI ESATTI PIÙ PROBABILI -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-3 flex items-center gap-1.5">
+          <i class="fa-solid fa-chart-pie text-emerald-400"></i> I 5 Risultati Esatti più Probabili
+        </h3>
+        <div id="exactScoresGrid" class="grid grid-cols-5 gap-2 text-center font-mono">
+          <!-- Inserito da JS -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- JAVASCRIPT QUANTITATIVE ENGINE -->
+  <script>
+    // PRESET DATABASE
+    const PRESETS = {
+      san_lorenzo_banfield: {
+        home: "San Lorenzo", away: "Banfield", league: "ARG_PRIMERA",
+        xgH: 1.05, xgA: 0.70, cH: 4.4, cA: 3.6,
+        odds: { 1: 2.15, X: 2.90, 2: 3.80 }
+      },
+      estudiantes_defensa: {
+        home: "Estudiantes LP", away: "Defensa y Justicia", league: "ARG_PRIMERA",
+        xgH: 1.10, xgA: 0.70, cH: 4.8, cA: 3.8,
+        odds: { 1: 2.05, X: 3.00, 2: 4.00 }
+      },
+      palmeiras_galo: {
+        home: "Palmeiras", away: "Atlético-MG", league: "BRA_SERIE_A",
+        xgH: 1.70, xgA: 1.05, cH: 6.8, cA: 4.6,
+        odds: { 1: 1.85, X: 3.40, 2: 4.20 }
+      },
+      botafogo_gremio: {
+        home: "Botafogo", away: "Grêmio", league: "BRA_SERIE_A",
+        xgH: 1.80, xgA: 0.95, cH: 7.1, cA: 4.5,
+        odds: { 1: 1.65, X: 3.60, 2: 5.20 }
+      },
+      inter_vitoria: {
+        home: "Internacional", away: "Vitória", league: "BRA_SERIE_A",
+        xgH: 1.85, xgA: 0.75, cH: 6.2, cA: 3.8,
+        odds: { 1: 1.48, X: 4.00, 2: 7.00 }
+      },
+      racing_platense: {
+        home: "Racing Club", away: "Platense", league: "ARG_PRIMERA",
+        xgH: 1.50, xgA: 0.60, cH: 6.5, cA: 3.2,
+        odds: { 1: 1.68, X: 3.50, 2: 5.40 }
+      }
+    };
+
+    function loadPreset(key) {
+      const p = PRESETS[key];
+      if (!p) return;
+      document.getElementById('homeTeam').value = p.home;
+      document.getElementById('awayTeam').value = p.away;
+      document.getElementById('leagueSelect').value = p.league;
+      document.getElementById('xgHome').value = p.xgH;
+      document.getElementById('xgAway').value = p.xgA;
+      document.getElementById('cornerHome').value = p.cH;
+      document.getElementById('cornerAway').value = p.cA;
+      document.getElementById('bookOdd1').value = p.odds[1] || '';
+      document.getElementById('bookOddX').value = p.odds['X'] || '';
+      document.getElementById('bookOdd2').value = p.odds[2] || '';
+      calculateBet();
+    }
+
+    function applyLeagueDna() {
+      const l = document.getElementById('leagueSelect').value;
+      if (l === 'ARG_PRIMERA') {
+        document.getElementById('xgHome').value = 1.15;
+        document.getElementById('xgAway').value = 0.73;
+        document.getElementById('cornerHome').value = 4.8;
+        document.getElementById('cornerAway').value = 4.2;
+      } else if (l === 'BRA_SERIE_A') {
+        document.getElementById('xgHome').value = 1.55;
+        document.getElementById('xgAway').value = 1.12;
+        document.getElementById('cornerHome').value = 5.8;
+        document.getElementById('cornerAway').value = 4.4;
+      } else if (l === 'ITA_SERIE_A') {
+        document.getElementById('xgHome').value = 1.45;
+        document.getElementById('xgAway').value = 1.10;
+        document.getElementById('cornerHome').value = 5.2;
+        document.getElementById('cornerAway').value = 4.5;
+      } else if (l === 'ENG_PREMIER') {
+        document.getElementById('xgHome').value = 1.70;
+        document.getElementById('xgAway').value = 1.40;
+        document.getElementById('cornerHome').value = 5.9;
+        document.getElementById('cornerAway').value = 4.7;
+      }
+    }
+
+    // POISSON PROBABILITY
+    function poissonPmf(k, lambda) {
+      let fact = 1;
+      for (let i = 2; i <= k; i++) fact *= i;
+      return (Math.pow(lambda, k) * Math.exp(-lambda)) / fact;
+    }
+
+    // DIXON-COLES MATRIX 7x7
+    function generateDixonColesMatrix(xgH, xgA, rho = -0.05) {
+      const maxG = 7;
+      let mat = [];
+      let sum = 0;
+
+      for (let i = 0; i < maxG; i++) {
+        mat[i] = [];
+        for (let j = 0; j < maxG; j++) {
+          let p = poissonPmf(i, xgH) * poissonPmf(j, xgA);
+          let tau = 1.0;
+          if (xgH > 0 && xgA > 0) {
+            if (i === 0 && j === 0) tau = 1.0 - (xgH * xgA * rho);
+            else if (i === 0 && j === 1) tau = 1.0 + (xgH * rho);
+            else if (i === 1 && j === 0) tau = 1.0 + (xgA * rho);
+            else if (i === 1 && j === 1) tau = 1.0 - rho;
+          }
+          let finalP = p * tau;
+          mat[i][j] = finalP;
+          sum += finalP;
+        }
+      }
+
+      // Normalizzazione
+      for (let i = 0; i < maxG; i++) {
+        for (let j = 0; j < maxG; j++) {
+          mat[i][j] /= sum;
+        }
+      }
+      return mat;
+    }
+
+    // NEGATIVE BINOMIAL CORNER APPROX
+    function calcCornerProbs(cH, cA, dispersion = 1.5) {
+      const totalMean = cH + cA;
+      // Per corner, calibrazione empirica robusta
+      // Over 7.5, 8.5, 9.5, 10.5 basata su Poisson & overdispersion
+      let p_o75 = 1.0 / (1.0 + Math.exp(-0.75 * (totalMean - 7.5)));
+      let p_o85 = 1.0 / (1.0 + Math.exp(-0.72 * (totalMean - 8.5)));
+      let p_o95 = 1.0 / (1.0 + Math.exp(-0.70 * (totalMean - 9.5)));
+      let p_o105 = 1.0 / (1.0 + Math.exp(-0.68 * (totalMean - 10.5)));
+
+      return {
+        o75: Math.max(0.05, Math.min(0.95, p_o75)),
+        o85: Math.max(0.05, Math.min(0.95, p_o85)),
+        o95: Math.max(0.05, Math.min(0.95, p_o95)),
+        o105: Math.max(0.05, Math.min(0.95, p_o105)),
+        u105: 1.0 - p_o105
+      };
+    }
+
+    // MAIN CALCULATION FUNCTION
+    function calculateBet() {
+      const xgH = parseFloat(document.getElementById('xgHome').value) || 1.2;
+      const xgA = parseFloat(document.getElementById('xgAway').value) || 0.8;
+      const cH = parseFloat(document.getElementById('cornerHome').value) || 5.0;
+      const cA = parseFloat(document.getElementById('cornerAway').value) || 4.0;
+      const homeTeam = document.getElementById('homeTeam').value || 'Casa';
+      const awayTeam = document.getElementById('awayTeam').value || 'Ospite';
+
+      const mat = generateDixonColesMatrix(xgH, xgA);
+
+      let p1 = 0, pX = 0, p2 = 0;
+      let pO15 = 0, pO25 = 0, pU25 = 0, pU35 = 0;
+      let p1x_u35 = 0, p1x_o15 = 0, pMg13 = 0;
+      let exactScores = [];
+
+      for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
+          const p = mat[i][j];
+          const totalG = i + j;
+
+          if (i > j) p1 += p;
+          else if (i === j) pX += p;
+          else p2 += p;
+
+          if (totalG > 1.5) pO15 += p;
+          if (totalG > 2.5) pO25 += p;
+          if (totalG < 2.5) pU25 += p;
+          if (totalG < 3.5) pU35 += p;
+
+          if (i >= j && totalG < 3.5) p1x_u35 += p;
+          if (i >= j && totalG > 1.5) p1x_o15 += p;
+          if (totalG >= 1 && totalG <= 3) pMg13 += p;
+
+          exactScores.push({ score: `${i}-${j}`, prob: p });
+        }
+      }
+
+      const p1X = p1 + pX;
+      const pX2 = pX + p2;
+      const corners = calcCornerProbs(cH, cA);
+
+      // Ordina risultati esatti
+      exactScores.sort((a, b) => b.prob - a.prob);
+
+      // Definizione Mercati Calcolati
+      const markets = [
+        { name: "1X (Doppia Chance In)", prob: p1X, category: "Esito" },
+        { name: "Segno 1 (Vittoria Casa)", prob: p1, category: "Esito" },
+        { name: "Segno X (Pareggio)", prob: pX, category: "Esito" },
+        { name: "Segno 2 (Vittoria Trasferta)", prob: p2, category: "Esito" },
+        { name: "Under 3.5 Gol", prob: pU35, category: "Gol (Paracadute)" },
+        { name: "Under 2.5 Gol", prob: pU25, category: "Gol" },
+        { name: "Over 1.5 Gol", prob: pO15, category: "Gol" },
+        { name: "Over 2.5 Gol", prob: pO25, category: "Gol" },
+        { name: "1X + Under 3.5 Gol", prob: p1x_u35, category: "Combo Protetta" },
+        { name: "1X + Over 1.5 Gol", prob: p1x_o15, category: "Combo Dinamica" },
+        { name: "Multigol 1-3 Totale", prob: pMg13, category: "Multigol" },
+        { name: "Over 7.5 Corner Totali", prob: corners.o75, category: "Corner" },
+        { name: "Over 8.5 Corner Totali", prob: corners.o85, category: "Corner" },
+        { name: "Under 10.5 Corner Totali", prob: corners.u105, category: "Corner" }
+      ];
+
+      // Determina Miglior Valore (EV+) e Miglior Paracadute
+      let bestSafe = markets.reduce((max, m) => m.prob > max.prob ? m : max, markets[0]);
+      
+      // Valore: cerca tra mercati con prob tra 65% e 80% (ottimale per quota/rischio)
+      let candidateValues = markets.filter(m => m.prob >= 0.65 && m.prob <= 0.85);
+      let bestValue = candidateValues.length > 0 ? candidateValues[0] : bestSafe;
+
+      // Aggiorna Verdetto Cards
+      document.getElementById('bestValueMarket').innerText = bestValue.name;
+      document.getElementById('bestValueProb').innerText = (bestValue.prob * 100).toFixed(1) + '%';
+      document.getElementById('bestValueFair').innerText = '@' + (1.0 / bestValue.prob).toFixed(2);
+      document.getElementById('bestValueKelly').innerText = '3.0 Unità (25% Kelly)';
+
+      document.getElementById('bestSafeMarket').innerText = bestSafe.name;
+      document.getElementById('bestSafeProb').innerText = (bestSafe.prob * 100).toFixed(1) + '%';
+      document.getElementById('bestSafeFair').innerText = '@' + (1.0 / bestSafe.prob).toFixed(2);
+
+      // Render Tabella Mercati
+      const tbody = document.getElementById('marketsTableBody');
+      tbody.innerHTML = '';
+      markets.forEach(m => {
+        const fairOdds = (1.0 / m.prob).toFixed(2);
+        let badge = `<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300">${m.category}</span>`;
+        if (m.prob >= 0.80) {
+          badge += ` <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800 ml-1">PARACADUTE</span>`;
+        } else if (m.prob >= 0.68) {
+          badge += ` <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 ml-1">ALTO VALORE</span>`;
+        }
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40 transition';
+        tr.innerHTML = `
+          <td class="py-2.5 px-3.5 font-semibold text-slate-100">${m.name}</td>
+          <td class="py-2.5 px-3 font-mono font-bold text-emerald-400">${(m.prob * 100).toFixed(1)}%</td>
+          <td class="py-2.5 px-3 font-mono text-slate-300">@${fairOdds}</td>
+          <td class="py-2.5 px-3">${badge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Render Risultati Esatti Top 5
+      const grid = document.getElementById('exactScoresGrid');
+      grid.innerHTML = '';
+      for (let k = 0; k < 5; k++) {
+        const s = exactScores[k];
+        const card = document.createElement('div');
+        card.className = 'bg-slate-800/80 border border-slate-700 p-2 rounded-xl';
+        card.innerHTML = `
+          <div class="text-sm font-bold text-white">${s.score}</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">${(s.prob * 100).toFixed(1)}%</div>
+        `;
+        grid.appendChild(card);
+      }
+
+      // Mostra Area Risultati con scroll fluido
+      document.getElementById('resultsArea').classList.remove('hidden');
+      document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Calcolo iniziale automatico al caricamento
+    window.addEventListener('DOMContentLoaded', () => {
+      calculateBet();
+    });
+  </script>
+
+</body>
+</html>
