@@ -174,28 +174,14 @@ class TelegramSentinel:
     # =========================================================================
 
     def _execute_netwin_booking_sync(self, ticket_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Esegue NetwinAutomator in background per prenotare il ticket."""
+        """Esegue NetwinAutomator v2.0 in background per prenotare il ticket e ottenere il codice."""
         from services.betting.netwin_automator import NetwinAutomator
         automator = NetwinAutomator(headless=True)
         try:
-            build_result = automator.build_ticket(
-                selections=ticket_data["selections"],
-                bet_mode="MULTIPLE",
-                fixed_stake=ticket_data.get("stake", 10.0)
-            )
-            if not build_result.get("success"):
-                return {"success": False, "error": build_result.get("error", "Impossibile comporre il carrello")}
-
-            booking_result = automator.generate_booking_code()
-            if booking_result.get("success"):
-                return {
-                    "success": True,
-                    "booking_code": booking_result["booking_code"],
-                    "total_odds": build_result.get("total_odds", "N/A"),
-                    "applied_stake": build_result.get("applied_stake", ticket_data.get("stake", 10.0))
-                }
-            else:
-                return {"success": False, "error": booking_result.get("error", "Codice prenotazione non generato")}
+            selections = ticket_data.get("legs") or ticket_data.get("selections") or []
+            stake = float(ticket_data.get("stake", 25.0))
+            book_res = automator.build_ticket_and_book(selections=selections, stake=stake)
+            return book_res
         except Exception as e:
             logger.error(f"Errore prenotazione Netwin: {e}")
             return {"success": False, "error": str(e)}
@@ -481,6 +467,7 @@ class TelegramSentinel:
         ]
         reply_markup = {
             "inline_keyboard": [
+                [{"text": "⚡ Genera Codice Prenotazione Netwin (1-Click)", "callback_data": "book_ticket_master"}],
                 [{"text": "🛡️ Mostra 3 Doppie di Copertura", "callback_data": "ticket_doppie_detail"}],
                 [{"text": "📑 Mostra Tutto Completo", "callback_data": "ticket_all_detail"}],
                 [{"text": "🔙 Torna a Schedine", "callback_data": "menu_tickets"}, {"text": "🏠 Menu", "callback_data": "menu_main"}]
@@ -653,6 +640,61 @@ class TelegramSentinel:
             )
             return
 
+        if data == "book_ticket_master":
+            # Master Weekend Ticket
+            ticket_data = {
+                "name": "Multiplona Master Weekend (6 Eventi)",
+                "stake": 25.0,
+                "legs": [
+                    {"home": "Bristol Rovers", "match": "Bristol Rovers vs Exeter City", "market": "DOPPIA CHANCE", "pick": "1X", "netwin_odds": 1.19},
+                    {"home": "Swindon Town", "match": "Swindon Town vs Accrington", "market": "UNDER/OVER", "pick": "OVER", "netwin_odds": 1.22},
+                    {"home": "Heracles", "match": "Heracles vs Vitesse", "market": "DOPPIA CHANCE", "pick": "1X", "netwin_odds": 1.17},
+                    {"home": "Quilmes", "match": "Quilmes vs Güemes", "market": "UNDER/OVER", "pick": "UNDER", "netwin_odds": 1.53},
+                    {"home": "Goiás", "match": "Goiás vs Atlético GO", "market": "UNDER/OVER", "pick": "UNDER", "netwin_odds": 1.47},
+                    {"home": "Fortaleza", "match": "Fortaleza vs Athletic Club", "market": "UNDER/OVER", "pick": "UNDER", "netwin_odds": 1.60}
+                ]
+            }
+
+            requests.post(
+                f"{self.api_url}/editMessageText",
+                json={
+                    "chat_id": chat_id,
+                    "message_id": message_id,
+                    "text": (
+                        "🔄 <b>GENERAZIONE CODICE PRENOTAZIONE NETWIN IN CORSO...</b>\n\n"
+                        "Sto inserendo i 6 eventi nel carrello Netwin ed estraendo il codice a 6 cifre.\n"
+                        "Attendi circa 10-15 secondi..."
+                    ),
+                    "parse_mode": "HTML"
+                },
+                timeout=5
+            )
+
+            res = self._execute_netwin_booking_sync(ticket_data)
+
+            if res.get("success") and res.get("booking_code"):
+                code = res["booking_code"]
+                confirm_text = (
+                    f"🎯 <b>CODICE PRENOTAZIONE NETWIN GENERATO!</b>\n\n"
+                    f"🎟️ <b>CODICE:</b> <code>{code}</code>\n"
+                    f"📊 Eventi Inseriti: <b>{res.get('events_added', 6)} / 6</b>\n"
+                    f"💰 Stake Consigliato: <b>€ {res.get('stake', 25.0):.2f}</b>\n\n"
+                    f"👇 <b>COME CARICARE LA SCHEDINA IN 1 SECONDO:</b>\n"
+                    f"1️⃣ Apri <b>Netwin.it</b> (o la tua app Netwin)\n"
+                    f"2️⃣ Nel box a destra <b>'Schedina 1'</b>, inserisci <code>{code}</code> nel campo <b>Codice</b>\n"
+                    f"3️⃣ Clicca su <b>'Carica'</b>\n\n"
+                    f"👉 <i>Tutte le 6 quote compariranno già compilate nel carrello, pronte per essere giocate!</i>"
+                )
+            else:
+                confirm_text = (
+                    f"❌ <b>ERRORE GENERAZIONE CODICE NETWIN</b>\n\n"
+                    f"Motivo: <code>{res.get('error', 'Sconosciuto')}</code>\n\n"
+                    f"💡 <i>Puoi comunque verificare le quote e compilare la schedina manualmente.</i>"
+                )
+
+            self.send_message(confirm_text, chat_id=chat_id)
+            return
+
         if data.startswith("book_ticket_"):
             ticket_id = data.replace("book_ticket_", "")
             ticket_data = self.active_tickets.get(ticket_id)
@@ -677,7 +719,7 @@ class TelegramSentinel:
                     "chat_id": chat_id,
                     "message_id": message_id,
                     "text": (
-                        f"🔄 <b>Elaborazione in corso...</b>\n\n"
+                        f"🔄 <b>GENERAZIONE CODICE NETWIN IN CORSO...</b>\n\n"
                         f"Sto avviando NetwinAutomator per il ticket: <code>{ticket_data['name']}</code>.\n"
                         f"Attendi circa 10-15 secondi per l'interazione con il browser Netwin."
                     ),
@@ -689,23 +731,29 @@ class TelegramSentinel:
             # Esecuzione Playwright in background
             res = self._execute_netwin_booking_sync(ticket_data)
 
-            if res.get("success"):
+            if res.get("success") and res.get("booking_code"):
+                code = res["booking_code"]
                 confirm_text = (
-                    f"✅ <b>PRENOTAZIONE AVVENUTA CON SUCCESSO!</b>\n\n"
-                    f"🎟️ <b>Codice Prenotazione Netwin:</b> <code>{res['booking_code']}</code>\n"
-                    f"📊 Quota Totale: <code>@{res['total_odds']}</code>\n"
-                    f"💰 Stake Applicato: <code>€ {res['applied_stake']:.2f}</code>\n\n"
-                    f"📸 Ricevuta e log salvati nella cartella <code>reports/receipts</code>."
+                    f"🎯 <b>CODICE PRENOTAZIONE NETWIN GENERATO!</b>\n\n"
+                    f"🎟️ <b>CODICE:</b> <code>{code}</code>\n"
+                    f"📊 Eventi Inseriti: <b>{res.get('events_added', len(ticket_data.get('legs', [])))} / {len(ticket_data.get('legs', []))}</b>\n"
+                    f"💰 Stake Applicato: <b>€ {res.get('stake', ticket_data.get('stake', 25.0)):.2f}</b>\n\n"
+                    f"👇 <b>COME CARICARE LA SCHEDINA IN 1 SECONDO:</b>\n"
+                    f"1️⃣ Apri <b>Netwin.it</b> (o la tua app Netwin)\n"
+                    f"2️⃣ Nel box a destra <b>'Schedina 1'</b>, inserisci <code>{code}</code> nel campo <b>Codice</b>\n"
+                    f"3️⃣ Clicca su <b>'Carica'</b>\n\n"
+                    f"👉 <i>Tutte le quote compariranno già compilate nel carrello, pronte per essere giocate!</i>"
                 )
             else:
                 confirm_text = (
                     f"❌ <b>ERRORE PRENOTAZIONE NETWIN</b>\n\n"
                     f"Motivo: <code>{res.get('error', 'Sconosciuto')}</code>\n\n"
-                    f"💡 <i>Puoi prenotare manualmente o verificare il carrello.</i>"
+                    f"💡 <i>Puoi verificare le quote e compilare la schedina manualmente.</i>"
                 )
 
-            self.send_message(confirm_text)
+            self.send_message(confirm_text, chat_id=chat_id)
             self.active_tickets.pop(ticket_id, None)
+            return
 
     def start_listening(self):
         """Avvia il polling dei messaggi e callback Telegram (bloccante, eseguibile in thread)."""
