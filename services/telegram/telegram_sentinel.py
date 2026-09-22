@@ -35,19 +35,21 @@ class TelegramSentinel:
         self.token = token or TELEGRAM_TOKEN
         self.chat_id = chat_id or TELEGRAM_CHAT_ID
         self.api_url = f"https://api.telegram.org/bot{self.token}"
+        self.session = requests.Session()
         
         # Registro dei ticket attivi in attesa di approvazione
         self.active_tickets: Dict[str, Dict[str, Any]] = {}
         self._is_listening = False
 
-    def send_message(self, text: str, parse_mode: str = "HTML", reply_markup: Optional[Dict[str, Any]] = None) -> bool:
+    def send_message(self, text: str, parse_mode: str = "HTML", reply_markup: Optional[Dict[str, Any]] = None, chat_id: Optional[str] = None) -> bool:
         """Invia un messaggio di testo formattato con eventuale tastiera inline."""
-        if not self.token or not self.chat_id:
+        target_chat = chat_id or self.chat_id
+        if not self.token or not target_chat:
             logger.warning("Telegram Token o Chat ID mancanti.")
             return False
         
         payload: Dict[str, Any] = {
-            "chat_id": self.chat_id,
+            "chat_id": target_chat,
             "text": text,
             "parse_mode": parse_mode,
             "disable_web_page_preview": True
@@ -56,7 +58,7 @@ class TelegramSentinel:
             payload["reply_markup"] = reply_markup
 
         try:
-            resp = requests.post(f"{self.api_url}/sendMessage", json=payload, timeout=10)
+            resp = self.session.post(f"{self.api_url}/sendMessage", json=payload, timeout=10)
             if resp.status_code == 200:
                 logger.info("Notifica Telegram inviata con successo.")
                 return True
@@ -544,7 +546,7 @@ class TelegramSentinel:
         logger.info("🤖 Avvio Telegram Sentinel Listener (HTTP Long-Polling)...")
         # Elimina eventuali webhook pregressi per evitare errori 409 Conflict
         try:
-            requests.post(f"{self.api_url}/deleteWebhook", json={"drop_pending_updates": False}, timeout=10)
+            self.session.post(f"{self.api_url}/deleteWebhook", json={"drop_pending_updates": False}, timeout=10)
         except Exception as e:
             logger.warning(f"Errore deleteWebhook: {e}")
 
@@ -553,7 +555,7 @@ class TelegramSentinel:
 
         while self._is_listening:
             try:
-                resp = requests.get(f"{self.api_url}/getUpdates", params={"offset": offset, "timeout": 20}, timeout=25)
+                resp = self.session.get(f"{self.api_url}/getUpdates", params={"offset": offset, "timeout": 5}, timeout=10)
                 if resp.status_code == 200:
                     data = resp.json()
                     updates = data.get("result", [])
@@ -565,9 +567,13 @@ class TelegramSentinel:
                         elif "message" in u:
                             logger.info(f"Ricevuto messaggio utente: {u['message'].get('text')}")
                             self._process_message(u["message"])
+                elif resp.status_code == 409:
+                    logger.warning("Conflitto 409 su getUpdates. Attesa rilascio connessione (3s)...")
+                    time.sleep(3)
                 else:
                     logger.warning(f"getUpdates status {resp.status_code}: {resp.text}")
-                time.sleep(0.5)
+                    time.sleep(2)
+                time.sleep(0.3)
             except Exception as e:
                 logger.debug(f"Errore durante polling Telegram: {e}")
                 time.sleep(2)
