@@ -9,15 +9,15 @@ history = RankingHistory(
         RankingSnapshot(
             date="2026-01-01",
             rankings={
-                "JannikSinner": 1,
-                "CarlosAlcaraz": 2
+                "Juventus": 1,
+                "Milan": 2
             }
         ),
         RankingSnapshot(
             date="2026-01-08",
             rankings={
-                "JannikSinner": 2,
-                "CarlosAlcaraz": 1
+                "Juventus": 2,
+                "Milan": 1
             }
         )
     ]
@@ -25,25 +25,25 @@ history = RankingHistory(
 
 
 assert history.get_ranking(
-    "JannikSinner",
+    "Juventus",
     "2026-01-05"
 ) == 1
 
 
 assert history.get_ranking(
-    "JannikSinner",
+    "Juventus",
     "2026-01-10"
 ) == 2
 
 
 assert history.get_ranking(
-    "CarlosAlcaraz",
+    "Milan",
     "2026-01-05"
 ) == 2
 
 
 assert history.get_ranking(
-    "CarlosAlcaraz",
+    "Milan",
     "2026-01-10"
 ) == 1
 

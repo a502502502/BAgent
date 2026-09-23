@@ -1,5 +1,4 @@
 import csv
-from datetime import datetime
 from typing import List
 
 from application.validation.historical_match import HistoricalMatch
@@ -26,18 +25,19 @@ class HistoricalMatchLoader:
 
             for row in reader:
 
-                player_a = row["player_a"]
-                player_b = row["player_b"]
-                winner = row["winner"]
+                home_name = row["home_team"]
+                away_name = row["away_team"]
+                winner = row.get("winner")
+                league = row.get("league", "UNKNOWN")
 
                 match_id = row.get(
                     "match_id",
-                    f"{row.get('date', '')}-{player_a}-{player_b}"
+                    f"{row.get('date', '')}-{home_name}-{away_name}"
                 )
 
                 competition = Competition(
-                    id=row.get("tournament", "UNKNOWN"),
-                    name=row.get("tournament", "Unknown")
+                    id=league,
+                    name=league
                 )
 
                 match = Match(
@@ -46,18 +46,18 @@ class HistoricalMatchLoader:
                     competition=competition,
 
                     home=Competitor(
-                        id=player_a,
-                        name=player_a
+                        id=home_name,
+                        name=home_name
                     ),
 
                     away=Competitor(
-                        id=player_b,
-                        name=player_b
+                        id=away_name,
+                        name=away_name
                     ),
 
                     round_name=row.get("round"),
 
-                    court_name=row.get("surface"),
+                    venue=row.get("venue"),
 
                     status="Completed",
 

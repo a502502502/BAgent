@@ -6,7 +6,7 @@ from application.validation.historical_loader import (
 loader = HistoricalMatchLoader()
 
 matches = loader.load(
-    "data/historical/atp_matches.csv"
+    "tests/fixtures/matches.csv"
 )
 
 print()
@@ -29,7 +29,7 @@ assert len(matches) == 3
 
 assert (
     matches[0].winner_id ==
-    "JannikSinner"
+    "Juventus"
 )
 
 print()

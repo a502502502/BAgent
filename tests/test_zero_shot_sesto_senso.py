@@ -7,7 +7,7 @@ class TestZeroShotSestoSenso(unittest.TestCase):
         self.classifier = ZeroShotSestoSenso()
 
     def test_classify_injury(self):
-        snippet = "Alcaraz avverte un forte risentimento muscolare alla coscia destra in rifinitura, forfait probabile."
+        snippet = "Il centravanti avverte un forte risentimento muscolare alla coscia destra in rifinitura, forfait probabile."
         res = self.classifier.classify_snippet(snippet)
         self.assertEqual(res["top_category"], "INJURY_OR_ABSENCE")
         self.assertTrue(res["is_risk"])

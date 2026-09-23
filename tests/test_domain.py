@@ -5,26 +5,26 @@ from domain.models.match import Match
 
 competition = Competition(
     id="1",
-    name="ATP Montreal"
+    name="Serie A"
 )
 
-sinner = Competitor(
+home = Competitor(
     id="1",
-    name="Jannik Sinner",
+    name="Juventus",
     country="ITA"
 )
 
-alcaraz = Competitor(
+away = Competitor(
     id="2",
-    name="Carlos Alcaraz",
-    country="ESP"
+    name="Milan",
+    country="ITA"
 )
 
 match = Match(
     id="100",
     competition=competition,
-    home=sinner,
-    away=alcaraz,
+    home=home,
+    away=away,
     round_name="Quarter Final",
     status="Scheduled"
 )

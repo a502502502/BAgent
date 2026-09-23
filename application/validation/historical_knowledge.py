@@ -6,10 +6,6 @@ from application.validation.knowledge_factory import (
     HistoricalKnowledgeFactory,
 )
 
-from application.validation.player_mapping import (
-    PlayerMapping,
-)
-
 from domain.models.knowledge import Knowledge
 
 
@@ -84,20 +80,11 @@ class HistoricalKnowledge:
         if not date:
             return
 
-        ranking_date = (
-            self._previous_ranking_week(date)
-        )
-
-        rankings = {}
-
-        mapping = PlayerMapping(
-            rankings
-        )
-
         for player_id in player_ids:
 
-            ranking = mapping.find(
-                player_id
+            ranking = self.ranking_history.get_ranking(
+                player_id,
+                date,
             )
 
             if ranking is None:
@@ -106,7 +93,7 @@ class HistoricalKnowledge:
             knowledge = self.factory.ranking(
                 player_id=player_id,
                 ranking=ranking,
-                date=ranking_date
+                date=date,
             )
 
             repository.save(
@@ -136,7 +123,7 @@ class HistoricalKnowledge:
 
                 match = historical.match
 
-                if match.court_name != surface:
+                if match.venue != surface:
                     continue
 
                 if player_id not in [

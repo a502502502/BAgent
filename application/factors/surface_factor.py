@@ -39,7 +39,7 @@ class SurfaceFactor(Factor):
 
     def evaluate(self, context):
 
-        surface = context.match.court_name
+        surface = context.match.venue
 
         if not surface:
             return None

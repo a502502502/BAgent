@@ -1,4 +1,4 @@
-from repository.knowledge_repository import KnowledgeRepository
+from infrastructure.persistence.knowledge_repository import KnowledgeRepository
 
 from domain.models.knowledge import Knowledge
 
@@ -14,15 +14,15 @@ repository.save(
 
         entity_type="PLAYER",
 
-        entity_id="JannikSinner",
+        entity_id="Juventus",
 
-        key="ATP_RANK",
+        key="LEAGUE_POSITION",
 
         value=1,
 
         value_type="INTEGER",
 
-        source="ATP"
+        source="SEASON_TABLE"
 
     )
 
@@ -36,7 +36,7 @@ repository.save(
 
         entity_type="PLAYER",
 
-        entity_id="JannikSinner",
+        entity_id="Juventus",
 
         key="ELO",
 
@@ -58,15 +58,15 @@ repository.save(
 
         entity_type="PLAYER",
 
-        entity_id="CarlosAlcaraz",
+        entity_id="Milan",
 
-        key="ATP_RANK",
+        key="LEAGUE_POSITION",
 
         value=2,
 
         value_type="INTEGER",
 
-        source="ATP"
+        source="SEASON_TABLE"
 
     )
 
@@ -89,11 +89,11 @@ print()
 
 print("=" * 70)
 
-print("JANNIK SINNER")
+print("JUVENTUS")
 
 print("=" * 70)
 
-for item in repository.find_by_entity("JannikSinner"):
+for item in repository.find_by_entity("Juventus"):
 
     print(item)
 
@@ -101,7 +101,7 @@ print()
 
 print("=" * 70)
 
-print("ATP RANK")
+print("LEAGUE POSITION")
 
 print("=" * 70)
 
@@ -109,9 +109,9 @@ print(
 
     repository.find_by_key(
 
-        "JannikSinner",
+        "Juventus",
 
-        "ATP_RANK"
+        "LEAGUE_POSITION"
 
     )
 

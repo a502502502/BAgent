@@ -34,8 +34,8 @@ ranking_history = RankingHistory(
         RankingSnapshot(
             date="2026-01-01",
             rankings={
-                "Sinner": 1,
-                "Alcaraz": 2,
+                "Juventus": 1,
+                "Milan": 2,
             },
         ),
     ]
@@ -68,7 +68,7 @@ analyzer = Analyzer(
 # ---------------------------------------------------------
 
 competition = Competition(
-    id="ATP001",
+    id="SERIEA001",
     name="Test Tournament",
 )
 
@@ -78,14 +78,14 @@ competition = Competition(
 # ---------------------------------------------------------
 
 sinner = Competitor(
-    id="Sinner",
-    name="Jannik Sinner",
+    id="Juventus",
+    name="Juventus",
     country="Italy",
 )
 
 alcaraz = Competitor(
-    id="Alcaraz",
-    name="Carlos Alcaraz",
+    id="Milan",
+    name="Milan",
     country="Spain",
 )
 
@@ -100,16 +100,16 @@ match = Match(
     home=sinner,
     away=alcaraz,
     round_name="F",
-    court_name="Hard",
+    venue="Hard",
     status="Completed",
     start_time="2026-01-05",
-    winner="Sinner",
+    winner="Juventus",
 )
 
 
 historical_match = HistoricalMatch(
     match=match,
-    winner_id="Sinner",
+    winner_id="Juventus",
     date="2026-01-05",
 )
 

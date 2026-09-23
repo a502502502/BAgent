@@ -7,15 +7,15 @@ knowledge = Knowledge(
 
     entity_type="PLAYER",
 
-    entity_id="JannikSinner",
+    entity_id="Juventus",
 
-    key="ATP_RANK",
+    key="LEAGUE_POSITION",
 
     value=1,
 
     value_type="INTEGER",
 
-    source="ATP"
+    source="SEASON_TABLE"
 
 )
 
