@@ -3,7 +3,7 @@ from enum import Enum
 
 class KnowledgeKey(str, Enum):
 
-    ATP_RANK = "ATP_RANK"
+    LEAGUE_POSITION = "LEAGUE_POSITION"
 
     ELO = "ELO"
 
@@ -11,14 +11,12 @@ class KnowledgeKey(str, Enum):
 
     AGE = "AGE"
 
-    HAND = "HAND"
-
     HEIGHT = "HEIGHT"
 
     WEIGHT = "WEIGHT"
 
-    SURFACE_WINRATE = "SURFACE_WINRATE"
-
     LAST_10_FORM = "LAST_10_FORM"
 
     REST_DAYS = "REST_DAYS"
+
+    XG = "XG"

@@ -38,10 +38,10 @@ class HistoricalKnowledgeBuilder:
                     id=f"HIST-KN-{self._counter:06d}",
                     entity_type="PLAYER",
                     entity_id=player_id,
-                    key="ATP_RANK",
+                    key="LEAGUE_POSITION",
                     value=rank,
                     value_type="INTEGER",
-                    source="ATP",
+                    source="SEASON_TABLE",
                     confidence=1.0,
                     collected_at=datetime.utcnow()
                 )

@@ -21,10 +21,10 @@ class HistoricalKnowledgeFactory:
             id=f"HIST-RANK-{self.counter:06d}",
             entity_type="PLAYER",
             entity_id=player_id,
-            key="ATP_RANK",
+            key="LEAGUE_POSITION",
             value=ranking,
             value_type="INTEGER",
-            source="ATP_HISTORICAL",
+            source="SEASON_TABLE",
             confidence=1.0,
             collected_at=datetime.fromisoformat(
                 date

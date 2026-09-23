@@ -46,7 +46,7 @@ class HistoricalAnalyzer:
                 match.home.id,
                 match.away.id,
             ],
-            surface=match.court_name,
+            surface=match.venue,
             previous_matches=previous_matches or [],
         )
 

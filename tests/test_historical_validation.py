@@ -15,7 +15,7 @@ from application.validation.validator import Validator
 from domain.models.knowledge import Knowledge
 
 
-DATASET = "data/historical/atp_matches.csv"
+DATASET = "tests/fixtures/matches.csv"
 
 
 # ---------------------------------------------------------
@@ -28,11 +28,11 @@ repository.save(
     Knowledge(
         id="KN-001",
         entity_type="PLAYER",
-        entity_id="JannikSinner",
-        key="ATP_RANK",
+        entity_id="Juventus",
+        key="LEAGUE_POSITION",
         value=1,
         value_type="INTEGER",
-        source="ATP",
+        source="SEASON_TABLE",
         confidence=1.0,
         collected_at=datetime.utcnow()
     )
@@ -42,11 +42,11 @@ repository.save(
     Knowledge(
         id="KN-002",
         entity_type="PLAYER",
-        entity_id="CarlosAlcaraz",
-        key="ATP_RANK",
+        entity_id="Milan",
+        key="LEAGUE_POSITION",
         value=2,
         value_type="INTEGER",
-        source="ATP",
+        source="SEASON_TABLE",
         confidence=1.0,
         collected_at=datetime.utcnow()
     )

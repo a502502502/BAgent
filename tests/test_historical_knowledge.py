@@ -17,15 +17,15 @@ history = RankingHistory(
         RankingSnapshot(
             date="2026-01-01",
             rankings={
-                "Sinner": 1,
-                "Alcaraz": 2,
+                "Juventus": 1,
+                "Milan": 2,
             },
         ),
         RankingSnapshot(
             date="2026-01-08",
             rankings={
-                "Sinner": 2,
-                "Alcaraz": 1,
+                "Juventus": 2,
+                "Milan": 1,
             },
         ),
     ]
@@ -41,21 +41,21 @@ knowledge = HistoricalKnowledge(
 knowledge.populate(
     repository=repository,
     player_ids=[
-        "Sinner",
-        "Alcaraz",
+        "Juventus",
+        "Milan",
     ],
     date="2026-01-05",
 )
 
 
 sinner = repository.find_by_key(
-    "Sinner",
-    "ATP_RANK",
+    "Juventus",
+    "LEAGUE_POSITION",
 )
 
 alcaraz = repository.find_by_key(
-    "Alcaraz",
-    "ATP_RANK",
+    "Milan",
+    "LEAGUE_POSITION",
 )
 
 

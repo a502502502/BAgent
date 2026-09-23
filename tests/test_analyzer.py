@@ -21,11 +21,11 @@ repository.save(
     Knowledge(
         id="KN-TEST-001",
         entity_type="PLAYER",
-        entity_id="JannikSinner",
-        key="ATP_RANK",
+        entity_id="Juventus",
+        key="LEAGUE_POSITION",
         value=1,
         value_type="INTEGER",
-        source="ATP",
+        source="SEASON_TABLE",
         confidence=1.0,
         collected_at=datetime.utcnow()
     )
@@ -36,11 +36,11 @@ repository.save(
     Knowledge(
         id="KN-TEST-002",
         entity_type="PLAYER",
-        entity_id="CarlosAlcaraz",
-        key="ATP_RANK",
+        entity_id="Milan",
+        key="LEAGUE_POSITION",
         value=2,
         value_type="INTEGER",
-        source="ATP",
+        source="SEASON_TABLE",
         confidence=1.0,
         collected_at=datetime.utcnow()
     )
@@ -51,24 +51,24 @@ match = Match(
     id="MATCH-TEST-001",
 
     competition=Competition(
-        id="ATP-TEST",
-        name="ATP Test"
+        id="SERIEA-TEST",
+        name="Serie A"
     ),
 
     home=Competitor(
-        id="JannikSinner",
-        name="Jannik Sinner",
+        id="Juventus",
+        name="Juventus",
         country="ITA"
     ),
 
     away=Competitor(
-        id="CarlosAlcaraz",
-        name="Carlos Alcaraz",
+        id="Milan",
+        name="Milan",
         country="ESP"
     ),
 
     round_name="Test",
-    court_name=None,
+    venue=None,
     status="Scheduled",
     start_time=None
 )

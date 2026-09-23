@@ -11,11 +11,11 @@ class RankingFactor(Factor):
     def evaluate(self, context):
 
         home_rank = context.subject_profile.get(
-            KnowledgeKey.ATP_RANK.value
+            KnowledgeKey.LEAGUE_POSITION.value
         )
 
         away_rank = context.opponent_profile.get(
-            KnowledgeKey.ATP_RANK.value
+            KnowledgeKey.LEAGUE_POSITION.value
         )
 
         if home_rank is None or away_rank is None:
@@ -34,7 +34,7 @@ class RankingFactor(Factor):
             factor="Ranking",
             value=value,
             confidence=1.0,
-            explanation="ATP ranking comparison.",
+            explanation="League position comparison.",
             details={
                 "home_rank": home_rank.value,
                 "away_rank": away_rank.value,

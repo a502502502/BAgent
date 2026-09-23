@@ -18,7 +18,7 @@ class Match:
 
     round_name: Optional[str] = None
 
-    court_name: Optional[str] = None
+    venue: Optional[str] = None
 
     status: Optional[str] = None
 

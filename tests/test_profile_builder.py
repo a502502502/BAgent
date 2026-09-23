@@ -1,4 +1,4 @@
-from repository.knowledge_repository import KnowledgeRepository
+from infrastructure.persistence.knowledge_repository import KnowledgeRepository
 
 from services.profiles.profile_builder import ProfileBuilder
 
@@ -15,15 +15,15 @@ repository.save(
 
         entity_type="PLAYER",
 
-        entity_id="JannikSinner",
+        entity_id="Juventus",
 
-        key="ATP_RANK",
+        key="LEAGUE_POSITION",
 
         value=1,
 
         value_type="INTEGER",
 
-        source="ATP"
+        source="SEASON_TABLE"
 
     )
 
@@ -37,7 +37,7 @@ repository.save(
 
         entity_type="PLAYER",
 
-        entity_id="JannikSinner",
+        entity_id="Juventus",
 
         key="ELO",
 
@@ -59,7 +59,7 @@ repository.save(
 
         entity_type="PLAYER",
 
-        entity_id="JannikSinner",
+        entity_id="Juventus",
 
         key="COUNTRY",
 
@@ -67,7 +67,7 @@ repository.save(
 
         value_type="STRING",
 
-        source="ATP"
+        source="SEASON_TABLE"
 
     )
 
@@ -76,7 +76,7 @@ repository.save(
 
 builder = ProfileBuilder(repository)
 
-profile = builder.build("JannikSinner")
+profile = builder.build("Juventus")
 
 print()
 
@@ -102,11 +102,11 @@ print()
 
 print("=" * 70)
 
-print("ATP RANK")
+print("LEAGUE POSITION")
 
 print("=" * 70)
 
-print(profile.get("ATP_RANK"))
+print(profile.get("LEAGUE_POSITION"))
 
 print()
 
