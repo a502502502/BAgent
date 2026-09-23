@@ -22,8 +22,5 @@ def get_matches(sport_id, target_tournaments):
                     dt = datetime.datetime.fromtimestamp(ts, datetime.timezone(datetime.timedelta(hours=2)))
                     print(f"[{current_tournament}] {m_home.group(1)} vs {m_away.group(1)} -> {dt.strftime('%H:%M CEST')} (Status: {m_status.group(1) if m_status else 'Pre'})")
 
-print("--- TENNIS MATCHES ---")
-get_matches(2, ["Tolentino", "Ankara", "Pula", "Falun"])
-
-print("\n--- FOOTBALL MATCHES ---")
+print("--- FOOTBALL MATCHES ---")
 get_matches(1, ["Romania", "Macedonia", "Slovakia", "Serbia", "Europa League"])

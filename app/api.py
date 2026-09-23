@@ -1,27 +1,4 @@
-from app.use_cases.acquire_matches import AcquireMatchesUseCase
-
-
-def main():
-
-    use_case = AcquireMatchesUseCase()
-
-    matches = use_case.execute()
-
-    print()
-
-    print("=" * 60)
-
-    print("BAgent")
-
-    print("=" * 60)
-
-    print()
-
-    print(f"Match salvati: {matches}")
-
-    print()
-
+from app.main import main
 
 if __name__ == "__main__":
-
     main()

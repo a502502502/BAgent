@@ -1,9 +1,7 @@
 """
 Live Momentum Sentinel & In-Play Gem Sniping Engine
-Modelli matematici rigorosi per probabilità in-play post-eventi critici:
-- Tennis: rimonta post-bagel e break iniziale (con penalità psicologica e superficie)
-- Calcio: impatto espulsione su Poisson/xG e fair value in-play su tempo residuo
-- Lock anticipato e hedging ottimale (confronto profitto garantito vs expected value)
+Modelli in-play per il calcio: impatto di un'espulsione sul Poisson/xG,
+fair value sul tempo residuo, lock anticipato e hedging.
 """
 
 from __future__ import annotations
@@ -16,67 +14,6 @@ class LiveMomentumSentinel:
     """
     Sentinel in-play con modelli quantitativi per eventi critici e live trading.
     """
-
-    def _calculate_tennis_comeback_probability(
-        self,
-        player1_elo: float,
-        player2_elo: float,
-        sets_score: str,
-        games_score: str,
-        surface: str = "clay"
-    ) -> Dict[str, float]:
-        """
-        Calcola probabilità di rimonta dopo bagel o break iniziale.
-        Usa Markov condizionale con fattore psicologico post-bagel.
-        """
-        sets_parts = sets_score.split("-")
-        if len(sets_parts) != 2 or not sets_parts[0].isdigit() or not sets_parts[1].isdigit():
-            return {"p1_comeback_prob": 0.5, "p2_comeback_prob": 0.5}
-        
-        p1_sets = int(sets_parts[0])
-        p2_sets = int(sets_parts[1])
-        
-        # Elo differenziale (base probability)
-        elo_diff = player1_elo - player2_elo
-        base_p1_win = 1.0 / (1.0 + math.pow(10, -elo_diff / 400.0))
-        
-        # Fattore psicologico post-bagel
-        games_list = games_score.split()
-        bagel_penalty_p1 = 1.0
-        bagel_penalty_p2 = 1.0
-        
-        for g in games_list:
-            if "6-0" in g:
-                # P1 ha vinto 6-0, P2 ha subito bagel
-                bagel_penalty_p2 = 0.60
-            elif "0-6" in g:
-                # P2 ha vinto 6-0, P1 ha subito bagel
-                bagel_penalty_p1 = 0.60
-        
-        # Fattore superficie (su clay è più agevole recuperare)
-        surface_factor = {
-            "clay": 1.12,
-            "hard": 1.00,
-            "grass": 0.88
-        }.get(surface.lower(), 1.00)
-        
-        # Probabilità di rimonta se sotto di un set
-        if p1_sets < p2_sets:
-            p1_comeback = base_p1_win * bagel_penalty_p1 * surface_factor
-            p1_comeback = max(0.05, min(0.85, p1_comeback))
-            p2_comeback = 1.0 - p1_comeback
-        elif p2_sets < p1_sets:
-            p2_comeback = (1.0 - base_p1_win) * bagel_penalty_p2 * surface_factor
-            p2_comeback = max(0.05, min(0.85, p2_comeback))
-            p1_comeback = 1.0 - p2_comeback
-        else:
-            p1_comeback = base_p1_win
-            p2_comeback = 1.0 - base_p1_win
-        
-        return {
-            "p1_comeback_prob": round(p1_comeback, 3),
-            "p2_comeback_prob": round(p2_comeback, 3)
-        }
 
     def _calculate_red_card_impact(
         self,
@@ -233,85 +170,6 @@ class LiveMomentumSentinel:
                 "guaranteed_profit": (cashout_offer - original_stake) if cashout_offer is not None else 0.0,
                 "recommendation": hedge_recommendation
             }
-        }
-
-    def analyze_tennis_live_state(
-        self,
-        player1: str,
-        player2: str,
-        sets_score: str,
-        games_score: str,
-        player1_elo: float = 1500.0,
-        player2_elo: float = 1500.0,
-        surface: str = "clay",
-        active_bet: Optional[str] = None
-    ) -> Dict[str, Any]:
-        """
-        Analizza lo stato live di una partita di tennis con modelli quantitativi.
-        """
-        games = games_score.split()
-        alerts = []
-        status_verdict = "IN_PROGRESS"
-
-        # 1. Rilevamento Bagel
-        has_bagel = any("6-0" in g or "0-6" in g for g in games)
-        if has_bagel:
-            alerts.append({
-                "type": "BAGEL_COLLAPSE_WARNING",
-                "severity": "CRITICAL",
-                "message": "Rilevato set a zero (6-0/0-6). Grave crollo fisico o blackout mentale."
-            })
-            status_verdict = "HIGH_VOLATILITY"
-
-        # 2. Calcolo game totali
-        total_games_played = 0
-        for g in games:
-            parts = g.split("-")
-            if len(parts) == 2 and parts[0].isdigit() and parts[1].isdigit():
-                total_games_played += int(parts[0]) + int(parts[1])
-
-        # 3. Probabilità di rimonta
-        comeback_probs = self._calculate_tennis_comeback_probability(
-            player1_elo=player1_elo,
-            player2_elo=player2_elo,
-            sets_score=sets_score,
-            games_score=games_score,
-            surface=surface
-        )
-        
-        if comeback_probs["p1_comeback_prob"] < 0.20 or comeback_probs["p2_comeback_prob"] < 0.20:
-            alerts.append({
-                "type": "LOW_COMEBACK_PROBABILITY",
-                "severity": "HIGH",
-                "message": f"Probabilità di rimonta molto bassa (P1: {comeback_probs['p1_comeback_prob']:.1%}, P2: {comeback_probs['p2_comeback_prob']:.1%})."
-            })
-
-        # 4. Verifica lock Over
-        # In tennis best-of-3: se il 1° set va al tiebreak (7-6/6-7 = 13 game),
-        # il 2° set deve avere almeno 6 game (6-0), portando il totale a minimo 19 game.
-        over_locked = False
-        if active_bet and "over" in active_bet.lower():
-            if "18.5" in active_bet and (
-                total_games_played >= 19 or 
-                (total_games_played >= 13 and ("7-6" in games_score or "6-7" in games_score))
-            ):
-                over_locked = True
-                alerts.append({
-                    "type": "OVER_LOCK_CONFIRMED",
-                    "severity": "INFO",
-                    "message": f"Over 18.5 MATEMATICAMENTE CHIUSO: {total_games_played} game già disputati (minimo 19 garantiti)!"
-                })
-
-        return {
-            "match": f"{player1} vs {player2}",
-            "sets": sets_score,
-            "games": games_score,
-            "total_games": total_games_played,
-            "has_bagel": has_bagel,
-            "comeback_probabilities": comeback_probs,
-            "over_locked": over_locked,
-            "status_verdict": status_verdict,
-            "alerts": alerts
         }
 
     def analyze_football_live_state(

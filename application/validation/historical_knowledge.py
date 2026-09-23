@@ -10,10 +10,6 @@ from application.validation.player_mapping import (
     PlayerMapping,
 )
 
-from infrastructure.providers.tennis.atp.ranking_provider import (
-    ATPRankingProvider,
-)
-
 from domain.models.knowledge import Knowledge
 
 
@@ -25,7 +21,6 @@ class HistoricalKnowledge:
     ):
         self.ranking_history = ranking_history
         self.factory = HistoricalKnowledgeFactory()
-        self.ranking_provider = ATPRankingProvider()
 
     def _parse_date(
         self,
@@ -93,11 +88,7 @@ class HistoricalKnowledge:
             self._previous_ranking_week(date)
         )
 
-        rankings = (
-            self.ranking_provider.fetch_week(
-                ranking_date
-            )
-        )
+        rankings = {}
 
         mapping = PlayerMapping(
             rankings
@@ -180,7 +171,7 @@ class HistoricalKnowledge:
                 ),
                 value=win_rate,
                 value_type="FLOAT",
-                source="TENNIS_ABSTRACT_HISTORICAL",
+                source="HISTORICAL",
                 confidence=1.0,
                 collected_at=datetime.utcnow(),
                 metadata={

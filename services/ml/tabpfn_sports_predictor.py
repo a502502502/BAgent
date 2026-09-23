@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class TabPFNSportsPredictor:
     """
-    Predittore basato su TabPFN per match sportivi (Calcio & Tennis).
+    Predittore basato su TabPFN per il calcio.
     Esegue inferenza in-context su un set di match recenti della lega.
     """
 

@@ -1,6 +1,6 @@
 {
-    "sport": "tennis",
-    "tournament": "ATP Montreal",
+    "sport": "football",
+    "tournament": "Serie A",
     "headless": true,
     "timeout": 30
 }

@@ -1,27 +1,11 @@
-from app.use_cases.acquire_matches import AcquireMatchesUseCase
+import sys
+from pathlib import Path
 
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-def main():
-
-    use_case = AcquireMatchesUseCase()
-
-    matches = use_case.execute()
-
-    print()
-
-    print("=" * 60)
-
-    print("BAgent")
-
-    print("=" * 60)
-
-    print()
-
-    print(f"Match salvati: {matches}")
-
-    print()
-
+from main import main
 
 if __name__ == "__main__":
-
     main()
