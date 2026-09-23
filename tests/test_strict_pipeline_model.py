@@ -59,3 +59,37 @@ def test_negative_edge_stake_is_zero():
         estimated_prob=0.20,
     )
     assert stake == 0.0
+
+
+def test_same_match_markets_use_the_intersection_not_the_product():
+    pipeline = StrictTicketPipeline()
+    engine = QuantitativeEngine()
+    home = _candidate(market_name="Over 1.5", fixture_id=10)
+    away = _candidate(market_name="Over 2.5", fixture_id=10)
+    joint = pipeline.ticket_joint_probability([home, away])
+    over_15 = engine.goal_market_probability(1.7, 1.2, "Over 1.5")
+    over_25 = engine.goal_market_probability(1.7, 1.2, "Over 2.5")
+    assert joint == over_25
+    assert joint > over_15 * over_25
+
+
+def test_different_matches_still_multiply():
+    pipeline = StrictTicketPipeline()
+    engine = QuantitativeEngine()
+    first = _candidate(match_name="Home FC vs Away FC", fixture_id=10)
+    second = _candidate(match_name="Other FC vs Side FC", fixture_id=11)
+    joint = pipeline.ticket_joint_probability([first, second])
+    single = engine.goal_market_probability(1.7, 1.2, "Over 1.5")
+    assert joint == single * single
+
+
+def test_same_match_goal_and_corner_is_not_priced_as_independent():
+    pipeline = StrictTicketPipeline()
+    goals = _candidate(market_name="Over 1.5", fixture_id=10)
+    corners = _candidate(
+        market_name="Over 8.5 Corner Totali",
+        fixture_id=10,
+        avg_corners_home=6.0,
+        avg_corners_away=5.0,
+    )
+    assert pipeline.ticket_joint_probability([goals, corners]) is None

@@ -4,9 +4,113 @@ Ottimizzato con NumPy/SciPy per calcoli vettoriali ad alte prestazioni.
 """
 
 from __future__ import annotations
+import re
 import numpy as np
 from scipy.stats import poisson, nbinom
 from typing import Dict, Any, List, Optional
+
+_NON_GOAL_TOKENS = ("corner", "cartellin", "tiri", "falli")
+_PERIOD_MARKET = re.compile(r"tempo|\b[12]\s*°?\s*t\b|entrambi i tempi")
+_CLAUSE_PREFIX = re.compile(r"^(?:chance mix|doppia chance|esito finale|dc)\s+")
+_SIDE_WORDS = re.compile(
+    r"\b(?:casa|ospite|home|away|squadra\s*[12]|squadra|gol|totali|partita|match)\b"
+)
+
+
+def _normalize_market_name(market_name: str) -> str:
+    name = market_name.strip().lower().replace("–", "-").replace("—", "-")
+    name = name.replace("+", " + ").replace(":", " ")
+    name = re.sub(r"\([^)]*\)", " ", name)
+    return re.sub(r"\s+", " ", name).strip()
+
+
+def _market_clauses(name: str) -> tuple[str, list[str]]:
+    if " o " in name:
+        parts = [part.strip() for part in name.split(" o ") if part.strip()]
+        return "or", parts
+    if " + " in name:
+        parts = [part.strip() for part in name.split(" + ") if part.strip()]
+        return "and", parts
+    return "and", [name]
+
+
+def _clause_side(clause: str) -> Optional[str]:
+    if re.search(r"\b(?:casa|home)\b", clause) or re.search(r"squadra\s*1\b", clause):
+        return "home"
+    if re.search(r"\b(?:ospite|away)\b", clause) or re.search(r"squadra\s*2\b", clause):
+        return "away"
+    if re.search(r"\bsquadra\b", clause):
+        return "ambiguous"
+    return "total"
+
+
+def _goal_clause_mask(clause: str, home: np.ndarray, away: np.ndarray, total: np.ndarray) -> Optional[np.ndarray]:
+    clause = _CLAUSE_PREFIX.sub("", clause).strip()
+    clause = re.sub(r"\s+(?:si|sì|yes)$", "", clause).strip()
+    side = _clause_side(clause)
+    if side == "ambiguous":
+        return None
+    series = {"home": home, "away": away, "total": total}[side]
+    if clause in {"gol", "gg", "btts", "gol gol", "gol/gol"} or ("entrambe" in clause and "segn" in clause):
+        if side != "total":
+            return None
+        return (home >= 1) & (away >= 1)
+    if clause in {"no gol", "ng"}:
+        return ~((home >= 1) & (away >= 1))
+
+    core = re.sub(r"\s+", " ", _SIDE_WORDS.sub(" ", clause)).strip()
+
+    over = re.fullmatch(r"over\s*(\d+(?:\.\d+)?)", core)
+    under = re.fullmatch(r"under\s*(\d+(?:\.\d+)?)", core)
+    if over or under:
+        line = float((over or under).group(1))
+        band = series > line if over else series < line
+        return np.broadcast_to(band, total.shape)
+
+    multigol = re.fullmatch(r"multigol\s*(\d+)\s*-\s*(\d+)", core)
+    if multigol:
+        low, high = int(multigol.group(1)), int(multigol.group(2))
+        band = (series >= low) & (series <= high)
+        return np.broadcast_to(band, total.shape)
+
+    results = {
+        "1": home > away,
+        "1 fisso": home > away,
+        "2": away > home,
+        "2 fisso": away > home,
+        "1x": home >= away,
+        "x2": away >= home,
+        "12": home != away,
+        "x": home == away,
+        "pareggio": home == away,
+    }
+    return results.get(core)
+
+
+def _goal_market_mask(
+    market_name: str,
+    home: np.ndarray,
+    away: np.ndarray,
+    total: np.ndarray,
+) -> Optional[np.ndarray]:
+    """Maschera del mercato. 'o' è unione, '+' è intersezione. None se il nome non è un mercato gol."""
+    raw = market_name.lower()
+    if any(token in raw for token in _NON_GOAL_TOKENS) or _PERIOD_MARKET.search(raw):
+        return None
+    operator, clauses = _market_clauses(_normalize_market_name(market_name))
+    combined: Optional[np.ndarray] = None
+    for clause in clauses:
+        mask = _goal_clause_mask(clause, home, away, total)
+        if mask is None:
+            return None
+        if combined is None:
+            combined = mask
+        elif operator == "or":
+            combined = combined | mask
+        else:
+            combined = combined & mask
+    return combined
+
 
 class QuantitativeEngine:
     """
@@ -130,60 +234,32 @@ class QuantitativeEngine:
         market_name: str,
     ) -> Optional[float]:
         """Probabilità di un mercato gol dalla matrice Dixon-Coles. None se il nome non è mappato."""
-        name = " ".join(market_name.strip().lower().replace("–", "-").split())
-        if any(token in name for token in ("corner", "cartellin", "tiri", "falli")):
-            return None
+        return self.joint_goal_probability(xg_home, xg_away, [market_name])
 
+    def joint_goal_probability(
+        self,
+        xg_home: float,
+        xg_away: float,
+        market_names: List[str],
+    ) -> Optional[float]:
+        """Intersezione di più mercati gol sulla stessa matrice. None se un nome non è mappato."""
+        if not market_names:
+            return None
+        matrix, home, away, total = self._score_axes(xg_home, xg_away)
+        combined: Optional[np.ndarray] = None
+        for market_name in market_names:
+            mask = _goal_market_mask(market_name, home, away, total)
+            if mask is None:
+                return None
+            combined = mask if combined is None else (combined & mask)
+        return float(np.sum(matrix[combined]))
+
+    def _score_axes(self, xg_home: float, xg_away: float):
         matrix = self.generate_score_matrix(xg_home, xg_away)
         goals = np.arange(matrix.shape[0])
-        total = goals[:, None] + goals[None, :]
         home = goals[:, None]
         away = goals[None, :]
-
-        def prob(mask: np.ndarray) -> float:
-            return float(np.sum(matrix[mask]))
-
-        if "1x" in name and "over 1.5" in name:
-            return prob((home >= away) & (total > 1.5))
-        if "x2" in name and "over 1.5" in name:
-            return prob((away >= home) & (total > 1.5))
-        if "1x" in name and "multigol" in name:
-            hi = 5 if "1-5" in name else 4
-            return prob((home >= away) & (total >= 1) & (total <= hi))
-        if "x2" in name and "multigol" in name:
-            hi = 5 if "1-5" in name else 4
-            return prob((away >= home) & (total >= 1) & (total <= hi))
-        if "multigol" in name and ("ospite" in name or "away" in name):
-            return prob((away >= 1) & (away <= 3))
-        if "multigol" in name and "casa" in name:
-            return prob((home >= 1) & (home <= 3))
-        if "multigol 2-5" in name:
-            return prob((total >= 2) & (total <= 5))
-        if "multigol 2-4" in name:
-            return prob((total >= 2) & (total <= 4))
-        if "multigol 1-5" in name:
-            return prob((total >= 1) & (total <= 5))
-        if "multigol 1-4" in name:
-            return prob((total >= 1) & (total <= 4))
-        if "over 2.5" in name and "squadra" not in name:
-            return prob(total > 2.5)
-        if "over 1.5" in name and "squadra" not in name:
-            return prob(total > 1.5)
-        if "under 3.5" in name:
-            return prob(total < 3.5)
-        if "under 2.5" in name:
-            return prob(total < 2.5)
-        if name in {"gol", "btts", "gol/gol", "gg"} or "entrambe segnano" in name:
-            return prob((home >= 1) & (away >= 1))
-        if name in {"1x", "dc 1x", "doppia chance 1x", "doppia chance: 1x"}:
-            return prob(home >= away)
-        if name in {"x2", "dc x2", "doppia chance x2", "doppia chance: x2"}:
-            return prob(away >= home)
-        if name in {"1", "1 fisso", "esito finale 1", "esito finale: 1"}:
-            return prob(home > away)
-        if name in {"2", "2 fisso", "esito finale 2", "esito finale: 2"}:
-            return prob(away > home)
-        return None
+        return matrix, home, away, home + away
 
     def corner_market_probability(
         self,
@@ -203,7 +279,7 @@ class QuantitativeEngine:
         )["corner_markets"]
         for label, data in priced.items():
             line = label.lower().split("over ", 1)[-1].split(" ")[0]
-            if line in name:
+            if re.search(rf"(?<!\d){re.escape(line)}(?!\d)", name):
                 return float(data["prob"])
         return None
 

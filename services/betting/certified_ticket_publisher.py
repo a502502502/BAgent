@@ -73,7 +73,6 @@ def audit_and_publish(
     approved: List[MarketCandidate] = []
     reports: List[ValidationReport] = []
     total_odds = 1.0
-    joint_probability = 1.0
 
     for cand in candidates:
         rep = pipeline.validate_candidate(cand)
@@ -81,12 +80,24 @@ def audit_and_publish(
             approved.append(cand)
             reports.append(rep)
             total_odds *= float(cand.netwin_actual_odd or cand.bookmaker_odd)
-            joint_probability *= rep.real_probability
 
     if not approved:
         return {
             "success": False,
             "error": "Nessuna selezione ha superato StrictTicketPipeline.",
+            "approved": [],
+            "selections": [],
+            "telegram_sent": False,
+        }
+
+    joint_probability = pipeline.ticket_joint_probability(approved)
+    if joint_probability is None or joint_probability <= 0:
+        return {
+            "success": False,
+            "error": (
+                "Probabilità congiunta non calcolabile: mercati sulla stessa partita "
+                "non indipendenti o non mappati."
+            ),
             "approved": [],
             "selections": [],
             "telegram_sent": False,

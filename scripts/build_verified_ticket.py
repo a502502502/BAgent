@@ -46,7 +46,6 @@ def run_ticket_audit(
 
     approved_candidates = []
     total_approved_odds = 1.0
-    joint_probability = 1.0
 
     for idx, c in enumerate(candidates, 1):
         print(f"\n[SELEZIONE #{idx}] {c.match_name} ({c.tournament})")
@@ -70,7 +69,6 @@ def run_ticket_audit(
             print(f"   🔬 Dettagli:          {rep.details}")
             approved_candidates.append(c)
             total_approved_odds *= c.bookmaker_odd
-            joint_probability *= rep.real_probability
         else:
             print(f"   🔴 ESITO: BLOCCATO ALLA FONTE (Fase {rep.stage_failed})")
             print(f"   ⚠️  Motivo Blocco:    {rep.rejection_reason}")
@@ -93,7 +91,15 @@ def run_ticket_audit(
             "selezioni sono state SCARTATE perché non conformi alle regole."
         )
 
-    if approved_candidates:
+    joint_probability = (
+        pipeline.ticket_joint_probability(approved_candidates) if approved_candidates else None
+    )
+    if approved_candidates and (joint_probability is None or joint_probability <= 0):
+        print(
+            "\n❌ PROBABILITÀ CONGIUNTA NON CALCOLABILE: mercati sulla stessa partita "
+            "non indipendenti. TICKET NON GIOCABILE!"
+        )
+    elif approved_candidates:
         recommended_stake = pipeline.calculate_recommended_stake(
             current_bankroll=current_bankroll,
             total_odds=total_approved_odds,
