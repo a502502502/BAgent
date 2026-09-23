@@ -20,7 +20,9 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Any, Tuple, Optional
 from pathlib import Path
 
+from services.analysis.xg_poisson_engine import QuantitativeEngine
 from services.football.squad_absence_checker import SquadAbsenceChecker, PlayerAuditReport
+from services.betting.kelly_staking_engine import KellyStakingEngine
 from services.betting.netwin_odds_checker import NetwinOddsChecker
 
 @dataclass
@@ -36,7 +38,11 @@ class MarketCandidate:
     sixth_sense_risk_flags: List[str] = field(default_factory=list) # es. "ROTATION_RISK", "SLOW_START", "LOW_MOTIVATION"
     estimated_p_1h: float = 0.50          # Probabilità evento nel 1°T (0.0 - 1.0)
     estimated_p_2h: float = 0.60          # Probabilità evento nel 2°T (0.0 - 1.0)
-    estimated_p_90: Optional[float] = None # Probabilità evento nei 90 minuti
+    estimated_p_90: Optional[float] = None # Ignorata dal gate: la P reale esce dal motore
+    xg_home: Optional[float] = None
+    xg_away: Optional[float] = None
+    avg_corners_home: Optional[float] = None
+    avg_corners_away: Optional[float] = None
     is_compound_time_market: bool = False  # Richiede evento in entrambi i tempi? (es. Segna Entrambi Tempi)
     is_intermediate_deadline: bool = False # Può morire al 45' cancellando il 2°T? (es. HT/FT, Gol Entrambi Tempi)
     market_type: str = ""                  # '1X2', 'CORNER', 'FIRST_HALF', 'GOALS', 'COMBO', 'CARDS'
@@ -85,9 +91,15 @@ class StrictTicketPipeline:
     MAX_SESSION_BANKROLL_PCT = 0.15 # Max 15% del capitale totale investito in una sessione
     MAX_TICKET_BANKROLL_PCT = 0.08  # Max 8% del capitale su singolo ticket
 
-    def __init__(self, checker: Optional[SquadAbsenceChecker] = None, netwin_checker: Optional[NetwinOddsChecker] = None):
+    def __init__(
+        self,
+        checker: Optional[SquadAbsenceChecker] = None,
+        netwin_checker: Optional[NetwinOddsChecker] = None,
+        engine: Optional[QuantitativeEngine] = None,
+    ):
         self.checker = checker or SquadAbsenceChecker()
         self.netwin_checker = netwin_checker or NetwinOddsChecker()
+        self.engine = engine or QuantitativeEngine()
 
     @staticmethod
     def calculate_poisson(lmbda: float, k: int) -> float:
@@ -95,38 +107,46 @@ class StrictTicketPipeline:
             return 1.0 if k == 0 else 0.0
         return (math.exp(-lmbda) * (lmbda ** k)) / math.factorial(k)
 
-    def calculate_joint_probability(self, candidate: MarketCandidate) -> Tuple[float, float, str]:
-        """
-        Calcola la probabilità reale composta, la fair odd e il valore atteso (Edge).
-        """
-        if candidate.is_compound_time_market:
-            p_joint = candidate.estimated_p_1h * candidate.estimated_p_2h
-            fair_odd = 1.0 / max(0.001, p_joint)
-            implied_prob = 1.0 / candidate.bookmaker_odd
-            edge = (p_joint * candidate.bookmaker_odd) - 1.0
-            
-            report = (
-                f"Calcolo Composto Tempi: P(1T)={candidate.estimated_p_1h*100:.1f}% * P(2T)={candidate.estimated_p_2h*100:.1f}% "
-                f"➔ P(Reale)={p_joint*100:.1f}% (Fair Odd: @{fair_odd:.2f}). Quota bookmaker @{candidate.bookmaker_odd:.2f} "
-                f"richiede P(Implied)={implied_prob*100:.1f}%. Edge Matematico: {edge*100:+.1f}%"
+    def _probability_from_model(self, candidate: MarketCandidate) -> Optional[float]:
+        """P reale dal Poisson gol o dalla binomiale negativa dei corner. Mai da estimated_p_90."""
+        name = candidate.market_name.lower()
+        if "corner" in name:
+            if candidate.avg_corners_home is None or candidate.avg_corners_away is None:
+                return None
+            return self.engine.corner_market_probability(
+                candidate.avg_corners_home,
+                candidate.avg_corners_away,
+                candidate.market_name,
             )
-            return p_joint, edge, report
-        else:
-            if candidate.estimated_p_90 is not None:
-                p_full = candidate.estimated_p_90
-            else:
-                p_full = 1.0 - ((1.0 - candidate.estimated_p_1h) * (1.0 - candidate.estimated_p_2h))
+        if candidate.xg_home is None or candidate.xg_away is None:
+            return None
+        return self.engine.goal_market_probability(
+            candidate.xg_home,
+            candidate.xg_away,
+            candidate.market_name,
+        )
 
-            fair_odd = 1.0 / max(0.001, p_full)
-            implied_prob = 1.0 / candidate.bookmaker_odd
-            edge = (p_full * candidate.bookmaker_odd) - 1.0
-            
-            report = (
-                f"Copertura Pieni 90 Min: P(Reale)={p_full*100:.1f}% (Fair Odd: @{fair_odd:.2f}). "
-                f"Quota bookmaker @{candidate.bookmaker_odd:.2f} richiede {implied_prob*100:.1f}%. "
-                f"Edge Matematico: {edge*100:+.1f}%"
+    def calculate_joint_probability(self, candidate: MarketCandidate) -> Tuple[Optional[float], float, str]:
+        """
+        Probabilità, fair odd ed edge dal motore quantitativo.
+        Ritorna p=None se mancano xG/corner o se il mercato non è mappato.
+        """
+        p_full = self._probability_from_model(candidate)
+        if p_full is None:
+            return None, 0.0, (
+                "Probabilità non calcolata: servono xg_home e xg_away "
+                "(oppure medie corner per i mercati corner) e un mercato mappato sul motore."
             )
-            return p_full, edge, report
+
+        fair_odd = 1.0 / max(0.001, p_full)
+        implied_prob = 1.0 / candidate.bookmaker_odd
+        edge = (p_full * candidate.bookmaker_odd) - 1.0
+        report = (
+            f"Motore Dixon-Coles: P(Reale)={p_full*100:.1f}% (Fair Odd: @{fair_odd:.2f}). "
+            f"Quota bookmaker @{candidate.bookmaker_odd:.2f} richiede {implied_prob*100:.1f}%. "
+            f"Edge Matematico: {edge*100:+.1f}%"
+        )
+        return p_full, edge, report
 
     def validate_candidate(self, candidate: MarketCandidate) -> ValidationReport:
         """
@@ -555,6 +575,18 @@ class StrictTicketPipeline:
         # FASE 5 & 6: CALCOLO MATEMATICO ED EDGE REALE
         # =====================================================================
         p_real, edge, math_report = self.calculate_joint_probability(candidate)
+        if p_real is None:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=5,
+                rejection_reason=(
+                    f"[BLOCCATO - FASE 5: PROBABILITÀ NON CALCOLATA DAL MOTORE] {candidate.market_name} su {candidate.match_name}. "
+                    f"{math_report}"
+                ),
+                details=math_report,
+                sixth_sense_summary=candidate.sixth_sense_analysis,
+            )
         fair_odd = 1.0 / max(0.001, p_real)
 
         if edge < self.MIN_EDGE_THRESHOLD:
@@ -637,22 +669,25 @@ class StrictTicketPipeline:
             sixth_sense_summary=candidate.sixth_sense_analysis
         )
 
-    def calculate_recommended_stake(self, current_bankroll: float, total_odds: float, num_selections: int) -> float:
+    def calculate_recommended_stake(
+        self,
+        current_bankroll: float,
+        total_odds: float,
+        num_selections: int,
+        estimated_prob: Optional[float] = None,
+    ) -> float:
         """
-        FASE 8: Staking Scientifico & Money Management
+        FASE 8: stake da Kelly frazionario sulla probabilità congiunta del ticket.
+        num_selections resta nel contratto dei chiamanti; il tetto 8% è dentro Kelly.
         """
-        if current_bankroll <= 0:
+        del num_selections
+        if current_bankroll <= 0 or total_odds <= 1.0 or not estimated_prob or estimated_prob <= 0:
             return 0.0
-
-        if current_bankroll <= 15.0:
-            return min(round(current_bankroll * 0.35, 2), 3.00)
-
-        base_pct = self.MAX_TICKET_BANKROLL_PCT
-        if total_odds >= 4.0 or num_selections > 3:
-            base_pct = 0.05
-
-        stake = round(current_bankroll * base_pct, 2)
-        return max(2.00, stake)
+        recommendation = KellyStakingEngine(current_bankroll).calculate_stake(
+            odds=total_odds,
+            estimated_prob=estimated_prob,
+        )
+        return recommendation.recommended_stake
 
     def validate_ticket(self, candidates: List[MarketCandidate], current_bankroll: float, proposed_stake: Optional[float] = None) -> TicketValidationReport:
         """
@@ -663,6 +698,7 @@ class StrictTicketPipeline:
         rejection_reasons: List[str] = []
         legs_reports: List[ValidationReport] = []
         total_odds = 1.0
+        joint_probability: Optional[float] = None
 
         # Vincolo 1: Max 3-4 selezioni
         if len(candidates) > 4:
@@ -679,11 +715,17 @@ class StrictTicketPipeline:
             legs_reports.append(rep)
             if rep.passed:
                 total_odds *= c.bookmaker_odd
+                joint_probability = (joint_probability or 1.0) * rep.real_probability
             else:
                 rejection_reasons.append(f"{c.match_name} ({c.market_name}): {rep.rejection_reason}")
 
         # Money Management
-        rec_stake = self.calculate_recommended_stake(current_bankroll, total_odds, len(candidates))
+        rec_stake = self.calculate_recommended_stake(
+            current_bankroll,
+            total_odds,
+            len(candidates),
+            estimated_prob=joint_probability,
+        )
         chosen_stake = proposed_stake if proposed_stake is not None else rec_stake
         stake_pct = (chosen_stake / max(0.01, current_bankroll)) * 100
 

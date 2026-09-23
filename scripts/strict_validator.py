@@ -173,8 +173,9 @@ def run_demo():
         market_type="COMBO",
         team_avg_shots=14.0,
         has_upcoming_midweek_cup=False,
-        sixth_sense_analysis="Lecce al Via del Mare concede pochissimo a squadre di pari livello; Monza gioca blocco basso.",
-        estimated_p_90=0.83
+        sixth_sense_analysis="Lecce al Via del Mare concede pochissimo a squadre di pari livello; la gara resta aperta nei novanta minuti.",
+        xg_home=1.55,
+        xg_away=0.95,
     )
 
     candidates = [c1, c2, c3, c4]
@@ -193,7 +194,11 @@ def main():
     parser.add_argument("--type", type=str, default="", help="Tipologia mercato (1X2, CORNER, FIRST_HALF, COMBO, GOALS)")
     parser.add_argument("--shots", type=float, default=None, help="Media tiri registrata della squadra (per corner)")
     parser.add_argument("--midweek-cup", action="store_true", help="Squadra impegnata in coppe europee a breve")
-    parser.add_argument("--p-real", type=float, default=None, help="Probabilità reale stimata Poisson/modello (0.0-1.0)")
+    parser.add_argument("--p-real", type=float, default=None, help="Ignorato: la probabilità la calcola il motore Dixon-Coles")
+    parser.add_argument("--xg-home", type=float, default=None, help="xG casa per il motore Dixon-Coles")
+    parser.add_argument("--xg-away", type=float, default=None, help="xG ospite per il motore Dixon-Coles")
+    parser.add_argument("--corners-home", type=float, default=None, help="Media corner casa")
+    parser.add_argument("--corners-away", type=float, default=None, help="Media corner ospite")
     parser.add_argument("--first-half", action="store_true", help="Mercato limitato al 1° tempo")
     parser.add_argument("--sixth-sense", type=str, default="", help="Analisi Sesto Senso obbligatoria")
     parser.add_argument("--ticket-json", type=str, help="JSON array con candidati del ticket completo")
@@ -223,6 +228,10 @@ def main():
                     sixth_sense_analysis=item.get("sixth_sense_analysis", ""),
                     sixth_sense_risk_flags=item.get("sixth_sense_risk_flags", []),
                     estimated_p_90=float(item["estimated_p_90"]) if "estimated_p_90" in item else None,
+                    xg_home=float(item["xg_home"]) if item.get("xg_home") is not None else None,
+                    xg_away=float(item["xg_away"]) if item.get("xg_away") is not None else None,
+                    avg_corners_home=float(item["avg_corners_home"]) if item.get("avg_corners_home") is not None else None,
+                    avg_corners_away=float(item["avg_corners_away"]) if item.get("avg_corners_away") is not None else None,
                     estimated_p_1h=float(item.get("estimated_p_1h", 0.50)),
                     estimated_p_2h=float(item.get("estimated_p_2h", 0.60)),
                     player_name=item.get("player_name"),
@@ -250,7 +259,10 @@ def main():
             is_first_half_only=args.first_half,
             is_intermediate_deadline=args.first_half,
             sixth_sense_analysis=args.sixth_sense,
-            estimated_p_90=args.p_real
+            xg_home=args.xg_home,
+            xg_away=args.xg_away,
+            avg_corners_home=args.corners_home,
+            avg_corners_away=args.corners_away,
         )
         rep = validate_selection_cli(c)
         print(format_report(rep))

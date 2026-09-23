@@ -43,7 +43,7 @@ def inspect_calendario():
         print(f"Found {len(rows)} calendar rows:")
         for idx, r in enumerate(rows[:30]):
             txt = r.inner_text().strip().replace(chr(10), " | ")
-            if len(txt) > 10 and any(k in txt for k in ["Tennis", "Calcio", "17:", "18:", "19:", "20:", "21:"]):
+            if len(txt) > 10 and any(k in txt for k in ["Calcio", "17:", "18:", "19:", "20:", "21:"]):
                 print(f"  [{idx}] {txt[:160]}")
 
         browser.close()

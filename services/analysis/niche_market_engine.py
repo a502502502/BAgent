@@ -5,7 +5,6 @@ Scansiona e calcola le quote eque e l'Edge matematico sui mercati alternativi:
   2. Calcio Cartellini (Over/Under 3.5, 4.5, 5.5, 1X2 Cartellini)
   3. Calcio Combo Protette (1X + MultiGol 1-4, 1X + Over 1.5, MultiGol 2-4)
   4. Calcio Tiri Totali (Over 21.5, Over 23.5)
-  5. Tennis Handicap Game (-3.5, -4.5) e Set Betting (2-0)
 """
 
 from __future__ import annotations
@@ -217,101 +216,6 @@ class NicheMarketEngine:
 
             item = {
                 "match": f"{home_team} vs {away_team}",
-                "market_category": p["market_category"],
-                "market_name": p["market_name"],
-                "selection": p["selection"],
-                "odd": odd,
-                "fair_odd": p["fair_odd"],
-                "prob_real": p["prob_real"],
-                "edge_pct": edge,
-                "bss": bss,
-                "is_gem": edge >= (self.min_edge * 100) and odd >= 1.50,
-            }
-            if item["is_gem"]:
-                gems.append(item)
-
-        gems.sort(key=lambda x: (x["bss"], x["edge_pct"]), reverse=True)
-        return gems
-
-    def scan_tennis_niche(
-        self,
-        player1: str,
-        player2: str,
-        prob_p1: float,
-        prob_p2: float,
-        best_of: int = 3,
-        market_odds: Optional[Dict[str, float]] = None,
-    ) -> List[Dict[str, Any]]:
-        """
-        Calcola le quote eque e individua gemme ad alta quota nel tennis:
-        - Set Betting 2-0 / 2-1
-        - Handicap Game (-3.5, -4.5)
-        - Over/Under Game Totali
-        """
-        # Modello set analitico: probabilità set 2-0
-        # P(2-0) per P1 approssimata da p_p1 ^ 1.8 (quando p1 vince un set, ha inerzia psicologica sul secondo)
-        p_2_0_p1 = round((prob_p1 ** 1.7) * 0.95, 4)
-        p_2_1_p1 = round(max(0.05, prob_p1 - p_2_0_p1), 4)
-
-        p_2_0_p2 = round((prob_p2 ** 1.7) * 0.95, 4)
-        p_2_1_p2 = round(max(0.05, prob_p2 - p_2_0_p2), 4)
-
-        # Handicap Game: se P1 è molto favorita (prob > 70%), vince con scarto medio di 4.5+ game
-        if prob_p1 >= 0.70:
-            p_hcap_minus_35 = round(p_2_0_p1 * 0.92 + p_2_1_p1 * 0.35, 4)
-            p_hcap_minus_45 = round(p_2_0_p1 * 0.82 + p_2_1_p1 * 0.20, 4)
-        else:
-            p_hcap_minus_35 = round(prob_p1 * 0.60, 4)
-            p_hcap_minus_45 = round(prob_p1 * 0.45, 4)
-
-        # Over 21.5 Game: si verifica in quasi tutti i match a 3 set (p_2_1_p1 + p_2_1_p2) o in 2 set lottati (7-6, 6-4)
-        p_over_215 = round((p_2_1_p1 + p_2_1_p2) * 0.95 + (p_2_0_p1 + p_2_0_p2) * 0.28, 4)
-
-        picks = [
-            {
-                "market_category": "Set Betting",
-                "market_name": f"{player1} Vince 2-0",
-                "selection": f"2-0 {player1}",
-                "prob_real": p_2_0_p1,
-                "fair_odd": round(1.0 / p_2_0_p1, 2) if p_2_0_p1 > 0 else 99.0,
-                "default_market_odd": 1.85,
-            },
-            {
-                "market_category": "Handicap Game",
-                "market_name": f"Handicap Game -3.5 {player1}",
-                "selection": f"{player1} (-3.5 Game)",
-                "prob_real": p_hcap_minus_35,
-                "fair_odd": round(1.0 / p_hcap_minus_35, 2) if p_hcap_minus_35 > 0 else 99.0,
-                "default_market_odd": 1.78,
-            },
-            {
-                "market_category": "Handicap Game",
-                "market_name": f"Handicap Game -4.5 {player1}",
-                "selection": f"{player1} (-4.5 Game)",
-                "prob_real": p_hcap_minus_45,
-                "fair_odd": round(1.0 / p_hcap_minus_45, 2) if p_hcap_minus_45 > 0 else 99.0,
-                "default_market_odd": 2.10,
-            },
-            {
-                "market_category": "Game Totali",
-                "market_name": "Over 21.5 Game Totali",
-                "selection": "Over 21.5 Game",
-                "prob_real": p_over_215,
-                "fair_odd": round(1.0 / p_over_215, 2) if p_over_215 > 0 else 99.0,
-                "default_market_odd": 1.82,
-            },
-        ]
-
-        gems = []
-        for p in picks:
-            m_key = p["market_name"]
-            odd = (market_odds.get(m_key) or market_odds.get(p["selection"]) or p["default_market_odd"]) if market_odds else p["default_market_odd"]
-            edge = round((p["prob_real"] * odd - 1.0) * 100, 2)
-            q_factor = 1.15 if 1.60 <= odd <= 2.20 else 0.90
-            bss = round((p["prob_real"] ** 1.5) * (1.0 + edge / 100.0) * q_factor * 100.0, 1)
-
-            item = {
-                "match": f"{player1} vs {player2}",
                 "market_category": p["market_category"],
                 "market_name": p["market_name"],
                 "selection": p["selection"],

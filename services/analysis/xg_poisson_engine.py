@@ -123,6 +123,90 @@ class QuantitativeEngine:
             "true_gems": gems
         }
 
+    def goal_market_probability(
+        self,
+        xg_home: float,
+        xg_away: float,
+        market_name: str,
+    ) -> Optional[float]:
+        """Probabilità di un mercato gol dalla matrice Dixon-Coles. None se il nome non è mappato."""
+        name = " ".join(market_name.strip().lower().replace("–", "-").split())
+        if any(token in name for token in ("corner", "cartellin", "tiri", "falli")):
+            return None
+
+        matrix = self.generate_score_matrix(xg_home, xg_away)
+        goals = np.arange(matrix.shape[0])
+        total = goals[:, None] + goals[None, :]
+        home = goals[:, None]
+        away = goals[None, :]
+
+        def prob(mask: np.ndarray) -> float:
+            return float(np.sum(matrix[mask]))
+
+        if "1x" in name and "over 1.5" in name:
+            return prob((home >= away) & (total > 1.5))
+        if "x2" in name and "over 1.5" in name:
+            return prob((away >= home) & (total > 1.5))
+        if "1x" in name and "multigol" in name:
+            hi = 5 if "1-5" in name else 4
+            return prob((home >= away) & (total >= 1) & (total <= hi))
+        if "x2" in name and "multigol" in name:
+            hi = 5 if "1-5" in name else 4
+            return prob((away >= home) & (total >= 1) & (total <= hi))
+        if "multigol" in name and ("ospite" in name or "away" in name):
+            return prob((away >= 1) & (away <= 3))
+        if "multigol" in name and "casa" in name:
+            return prob((home >= 1) & (home <= 3))
+        if "multigol 2-5" in name:
+            return prob((total >= 2) & (total <= 5))
+        if "multigol 2-4" in name:
+            return prob((total >= 2) & (total <= 4))
+        if "multigol 1-5" in name:
+            return prob((total >= 1) & (total <= 5))
+        if "multigol 1-4" in name:
+            return prob((total >= 1) & (total <= 4))
+        if "over 2.5" in name and "squadra" not in name:
+            return prob(total > 2.5)
+        if "over 1.5" in name and "squadra" not in name:
+            return prob(total > 1.5)
+        if "under 3.5" in name:
+            return prob(total < 3.5)
+        if "under 2.5" in name:
+            return prob(total < 2.5)
+        if name in {"gol", "btts", "gol/gol", "gg"} or "entrambe segnano" in name:
+            return prob((home >= 1) & (away >= 1))
+        if name in {"1x", "dc 1x", "doppia chance 1x", "doppia chance: 1x"}:
+            return prob(home >= away)
+        if name in {"x2", "dc x2", "doppia chance x2", "doppia chance: x2"}:
+            return prob(away >= home)
+        if name in {"1", "1 fisso", "esito finale 1", "esito finale: 1"}:
+            return prob(home > away)
+        if name in {"2", "2 fisso", "esito finale 2", "esito finale: 2"}:
+            return prob(away > home)
+        return None
+
+    def corner_market_probability(
+        self,
+        avg_corners_home: float,
+        avg_corners_away: float,
+        market_name: str,
+    ) -> Optional[float]:
+        """Probabilità di una linea Over corner totali. None se la linea non è 8.5, 9.5 o 10.5."""
+        name = market_name.strip().lower()
+        if "corner" not in name:
+            return None
+        priced = self.analyze_corners(
+            "home",
+            "away",
+            avg_corners_home,
+            avg_corners_away,
+        )["corner_markets"]
+        for label, data in priced.items():
+            line = label.lower().split("over ", 1)[-1].split(" ")[0]
+            if line in name:
+                return float(data["prob"])
+        return None
+
     # Alias per compatibilità con il codice esistente
     analyze_niche_markets = analyze_football_markets
 

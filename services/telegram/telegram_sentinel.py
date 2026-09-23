@@ -130,11 +130,6 @@ class TelegramSentinel:
     # 🚨 LIVE ALERTS (Integrazione LiveMomentumSentinel)
     # =========================================================================
 
-    def send_bagel_alert(self, match: str, player_down: str, comeback_prob: float, surface: str = "clay"):
-        """Disabilitato: tennis abolito (22/09/2026)."""
-        logger.warning("send_bagel_alert ignorato (TENNIS BAN): %s", match)
-        return False
-
     def send_red_card_alert(self, match: str, team_with_red: str, minute: int, xg_home_adj: float, xg_away_adj: float):
         """Alert per cartellino rosso nel calcio con xG ricalcolati."""
         text = (

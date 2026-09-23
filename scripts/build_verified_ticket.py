@@ -46,6 +46,7 @@ def run_ticket_audit(
 
     approved_candidates = []
     total_approved_odds = 1.0
+    joint_probability = 1.0
 
     for idx, c in enumerate(candidates, 1):
         print(f"\n[SELEZIONE #{idx}] {c.match_name} ({c.tournament})")
@@ -69,6 +70,7 @@ def run_ticket_audit(
             print(f"   🔬 Dettagli:          {rep.details}")
             approved_candidates.append(c)
             total_approved_odds *= c.bookmaker_odd
+            joint_probability *= rep.real_probability
         else:
             print(f"   🔴 ESITO: BLOCCATO ALLA FONTE (Fase {rep.stage_failed})")
             print(f"   ⚠️  Motivo Blocco:    {rep.rejection_reason}")
@@ -96,6 +98,7 @@ def run_ticket_audit(
             current_bankroll=current_bankroll,
             total_odds=total_approved_odds,
             num_selections=len(approved_candidates),
+            estimated_prob=joint_probability,
         )
         pot_payout = recommended_stake * total_approved_odds
 
@@ -145,7 +148,8 @@ def main():
                 tournament="Champions League",
                 market_name="1X + Over 1.5",
                 bookmaker_odd=1.31,
-                estimated_p_90=0.88,
+                xg_home=1.9,
+                xg_away=0.8,
                 sixth_sense_analysis=(
                     "PSV con forte spinta interna al Philips Stadion ma Shakhtar esperto e "
                     "resiliente. Il mercato 1X+Over 1.5 protegge dall'1-1 e sfrutta le "
@@ -157,7 +161,8 @@ def main():
                 tournament="Champions League",
                 market_name="MultiGol 1-3 Ospite",
                 bookmaker_odd=1.30,
-                estimated_p_90=0.84,
+                xg_home=1.1,
+                xg_away=1.4,
                 sixth_sense_analysis=(
                     "Roma di Gasperini con assetto propositivo, produce sempre occasioni "
                     "ma in trasferta a Istanbul non dilaga oltre i 3 gol."
@@ -168,7 +173,8 @@ def main():
                 tournament="Champions League",
                 market_name="MultiGol 1-3 Casa",
                 bookmaker_odd=1.32,
-                estimated_p_90=0.83,
+                xg_home=1.3,
+                xg_away=1.5,
                 sixth_sense_analysis=(
                     "Entusiasmo storico al Sinigaglia per l'esordio europeo del Como. "
                     "Il Lipsia concede spazi in contropiede ma il Como segna solitamente 1-2 reti."

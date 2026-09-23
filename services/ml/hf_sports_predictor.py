@@ -2,15 +2,11 @@
 HFSportsPredictor — Integrazione modelli predittivi calibrati da Hugging Face.
 Repository sorgente: ruslanmv/sports-trends-models
 
-Fornisce:
-  1. Tennis: CalibratedClassifierCV (GradientBoosting) addestrato su match storici ATP/WTA/ITF.
-     Calcola probabilità di vittoria P1 vs P2, quota equa e Edge contro i bookmaker.
-  2. Calcio: CalibratedClassifierCV (HistGradientBoosting) addestrato su match di campionato.
-     Calcola probabilità 1X2, quota equa e Edge contro i bookmaker.
+Fornisce il modello calcio CalibratedClassifierCV (HistGradientBoosting)
+addestrato su match di campionato: probabilità 1X2, quota equa ed edge.
 """
 
 import os
-import math
 import urllib.request
 import logging
 from typing import Optional, Dict, Any, Tuple
@@ -22,7 +18,6 @@ logger = logging.getLogger(__name__)
 
 HF_MODELS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models", "hf_cache")
 FOOTBALL_URL = "https://huggingface.co/ruslanmv/sports-trends-models/resolve/main/football/latest/model.pkl"
-TENNIS_URL = "https://huggingface.co/ruslanmv/sports-trends-models/resolve/main/tennis/latest/model.pkl"
 
 
 class HFSportsPredictor:
@@ -30,7 +25,6 @@ class HFSportsPredictor:
         self.cache_dir = cache_dir or HF_MODELS_DIR
         os.makedirs(self.cache_dir, exist_ok=True)
         self.fb_model = None
-        self.tn_model = None
         self._load_models()
 
     def _ensure_file(self, filename: str, url: str) -> str:
@@ -47,118 +41,6 @@ class HFSportsPredictor:
             self.fb_model = joblib.load(fb_path)
         except Exception as e:
             logger.error(f"Impossibile caricare il modello Football HF: {e}")
-
-        try:
-            tn_path = self._ensure_file("tennis_model.pkl", TENNIS_URL)
-            self.tn_model = joblib.load(tn_path)
-        except Exception as e:
-            logger.error(f"Impossibile caricare il modello Tennis HF: {e}")
-
-    @staticmethod
-    def rank_to_elo(rank: int) -> float:
-        """Converte il ranking ATP/WTA/ITF in stima ELO."""
-        if rank <= 0:
-            return 1400.0  # Unranked / qualy
-        # Curva logaritmica: rank 1 ~ 2250, rank 10 ~ 2050, rank 100 ~ 1750, rank 500 ~ 1450, rank 1000 ~ 1300
-        elo = 2250.0 - 140.0 * math.log(max(1, rank))
-        return max(1100.0, min(2400.0, elo))
-
-    def predict_tennis(
-        self,
-        player1: str,
-        player2: str,
-        player1_rank: int = 0,
-        player2_rank: int = 0,
-        player1_elo: Optional[float] = None,
-        player2_elo: Optional[float] = None,
-        p1_form_5: float = 3.0,  # vittorie su ultime 5 (0-5)
-        p2_form_5: float = 3.0,
-        p1_form_10: float = 6.0, # vittorie su ultime 10 (0-10)
-        p2_form_10: float = 6.0,
-        p1_rest_days: float = 2.0,
-        p2_rest_days: float = 2.0,
-        h2h_p1_wins: int = 0,
-        h2h_p2_wins: int = 0,
-        market_odds: Optional[Dict[str, float]] = None,
-    ) -> Dict[str, Any]:
-        """
-        Predizione calibrata per match di Tennis (P1 vs P2).
-        Utilizza il GradientBoosting calibrato (19 feature) di ruslanmv/sports-trends-models.
-        """
-        if self.tn_model is None:
-            raise RuntimeError("Modello Tennis HF non inizializzato.")
-
-        e1 = player1_elo if player1_elo is not None else self.rank_to_elo(player1_rank)
-        e2 = player2_elo if player2_elo is not None else self.rank_to_elo(player2_rank)
-        elo_diff = e1 - e2
-
-        # Costruzione DataFrame compatibile con feature_names_in_
-        cols = list(self.tn_model.feature_names_in_)
-        row = {c: 0.0 for c in cols}
-        row["home_elo"] = e1
-        row["away_elo"] = e2
-        row["elo_diff"] = elo_diff
-        row["home_form_last_5"] = p1_form_5
-        row["away_form_last_5"] = p2_form_5
-        row["home_form_last_10"] = p1_form_10
-        row["away_form_last_10"] = p2_form_10
-        row["home_rest_days"] = p1_rest_days
-        row["away_rest_days"] = p2_rest_days
-        row["home_advantage"] = 0.0  # Tennis campo neutro / torneo
-        row["h2h_home_wins"] = float(h2h_p1_wins)
-        row["h2h_away_wins"] = float(h2h_p2_wins)
-        row["h2h_draws"] = 0.0
-        row["league_importance_score"] = 1.0
-        row["social_interest_score"] = 1.0
-
-        df = pd.DataFrame([row])
-        probs = self.tn_model.predict_proba(df)[0]
-        # Classi [0, 1]: 0 = Away/P2, 1 = Home/P1
-        prob_p2 = float(probs[0])
-        prob_p1 = float(probs[1])
-
-        fair_odds_p1 = round(1.0 / prob_p1, 2) if prob_p1 > 0 else 99.0
-        fair_odds_p2 = round(1.0 / prob_p2, 2) if prob_p2 > 0 else 99.0
-
-        result = {
-            "player1": player1,
-            "player2": player2,
-            "p1_elo": round(e1, 1),
-            "p2_elo": round(e2, 1),
-            "prob_p1": round(prob_p1, 4),
-            "prob_p2": round(prob_p2, 4),
-            "fair_odds_p1": fair_odds_p1,
-            "fair_odds_p2": fair_odds_p2,
-            "value_bets": [],
-        }
-
-        if market_odds:
-            o1 = market_odds.get("player1") or market_odds.get("1")
-            o2 = market_odds.get("player2") or market_odds.get("2")
-            if o1:
-                edge1 = round((prob_p1 * o1 - 1.0) * 100, 2)
-                result["market_odds_p1"] = o1
-                result["edge_p1_pct"] = edge1
-                if edge1 > 3.0:
-                    result["value_bets"].append({
-                        "selection": f"1 ({player1})",
-                        "odds": o1,
-                        "fair_odds": fair_odds_p1,
-                        "edge_pct": edge1
-                    })
-            if o2:
-                edge2 = round((prob_p2 * o2 - 1.0) * 100, 2)
-                result["market_odds_p2"] = o2
-                result["edge_p2_pct"] = edge2
-                if edge2 > 3.0:
-                    result["value_bets"].append({
-                        "selection": f"2 ({player2})",
-                        "odds": o2,
-                        "fair_odds": fair_odds_p2,
-                        "edge_pct": edge2
-                    })
-
-        return result
 
     def predict_football(
         self,

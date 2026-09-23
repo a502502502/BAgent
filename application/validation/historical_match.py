@@ -13,4 +13,4 @@ class HistoricalMatch:
 
     date: Optional[str] = None
 
-    source: str = "TennisAbstract"
+    source: str = "historical"

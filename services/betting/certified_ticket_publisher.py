@@ -73,6 +73,7 @@ def audit_and_publish(
     approved: List[MarketCandidate] = []
     reports: List[ValidationReport] = []
     total_odds = 1.0
+    joint_probability = 1.0
 
     for cand in candidates:
         rep = pipeline.validate_candidate(cand)
@@ -80,6 +81,7 @@ def audit_and_publish(
             approved.append(cand)
             reports.append(rep)
             total_odds *= float(cand.netwin_actual_odd or cand.bookmaker_odd)
+            joint_probability *= rep.real_probability
 
     if not approved:
         return {
@@ -94,6 +96,7 @@ def audit_and_publish(
         current_bankroll=bankroll,
         total_odds=total_odds,
         num_selections=len(approved),
+        estimated_prob=joint_probability,
     )
     selections = [
         candidate_to_netwin_selection(c, r) for c, r in zip(approved, reports)
