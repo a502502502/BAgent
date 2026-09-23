@@ -56,6 +56,7 @@ class MarketCandidate:
     netwin_actual_odd: Optional[float] = None # Pilastro 1: Quota reale rilevata su Netwin.it
     pre_match_odd_favorite: Optional[float] = None # Quota 1X2 pre-match della favorita
     is_parachute_market: bool = False      # Regola #66: Mercato inteso come paracadute/copertura difensiva
+    kickoff_time: Optional[str] = None     # Data e ora del match (es. '2026-09-24 20:45 CEST')
 
 
 @dataclass
@@ -195,6 +196,25 @@ class StrictTicketPipeline:
         """
         Applica il funnel sequenziale degli Stadi Obbligatori con Hard Gates.
         """
+        # =====================================================================
+        # GATE 0.05: ANTI-TIME-TRAVEL & CONTROLLO VALIDITÀ TEMPORALE
+        # =====================================================================
+        # Rifiuta match con date passate (2024, 2025) o eventi già chiusi
+        if candidate.kickoff_time:
+            time_str = candidate.kickoff_time.strip().upper()
+            if any(past in time_str for past in ["2024", "2025", "2023", "2022"]):
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - GATE 0.05: DATA NON ATTUALE / PARTITA VECCHIA] {candidate.match_name} "
+                        f"ha data '{candidate.kickoff_time}', relativa a una stagione passata. "
+                        f"Tassativamente vietato scommettere su match archiviati o anacronistici!"
+                    ),
+                    details=f"Data evento '{candidate.kickoff_time}' antecedente alla stagione operativa corrente."
+                )
+
         # =====================================================================
         # GATE 0: DIVIETO 1 O 2 FISSO E COMBO RIGIDE SOTTO QUOTA 1.65 (Protocollo Protezione & Anti-Varianza)
         # =====================================================================
