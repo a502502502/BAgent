@@ -88,6 +88,7 @@ class StrictTicketPipeline:
     """
 
     MIN_EDGE_THRESHOLD = 0.04       # Minimo +4.0% di edge reale sul bookmaker
+    MIN_LEG_PROBABILITY_THRESHOLD = 0.72 # Minimo 72.0% di probabilità per singola gamba di multipla
     MAX_SESSION_BANKROLL_PCT = 0.15 # Max 15% del capitale totale investito in una sessione
     MAX_TICKET_BANKROLL_PCT = 0.08  # Max 8% del capitale su singolo ticket
 
@@ -640,6 +641,23 @@ class StrictTicketPipeline:
                     f"[BLOCCATO - FASE 6: TRAPPOLA EDGE NEGATIVO] {candidate.market_name} su {candidate.match_name}. "
                     f"Edge: {edge*100:+.1f}% (Soglia minima richiesta: +{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
                     f"Quota offerta @{candidate.bookmaker_odd:.2f} inferiore alla quota equa reale @{fair_odd:.2f}!"
+                ),
+                real_probability=p_real,
+                fair_odds=fair_odd,
+                mathematical_edge=edge,
+                details=math_report,
+                sixth_sense_summary=candidate.sixth_sense_analysis
+            )
+
+        if p_real < self.MIN_LEG_PROBABILITY_THRESHOLD:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=6,
+                rejection_reason=(
+                    f"[BLOCCATO - FASE 6: PROBABILITÀ INSUFFICIENTE SOTTO SOGLIA 72%] {candidate.market_name} su {candidate.match_name}. "
+                    f"Probabilità reale calcolata: {p_real*100:.1f}% (soglia minima vincolante per gambe di multipla: >={self.MIN_LEG_PROBABILITY_THRESHOLD*100:.1f}%). "
+                    f"Linee sotto il 72% distruggono il win rate della schedina anche in presenza di un edge teorico marginale."
                 ),
                 real_probability=p_real,
                 fair_odds=fair_odd,
