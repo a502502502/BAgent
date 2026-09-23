@@ -148,6 +148,48 @@ class StrictTicketPipeline:
         )
         return p_full, edge, report
 
+    def ticket_joint_probability(self, candidates: List[MarketCandidate]) -> Optional[float]:
+        """
+        Probabilità del ticket. Partite diverse si moltiplicano.
+        Due mercati sulla stessa partita si intersecano sulla matrice dei punteggi:
+        il prodotto delle marginali vale solo se gli eventi sono indipendenti.
+        """
+        if not candidates:
+            return None
+        groups: Dict[tuple, List[MarketCandidate]] = {}
+        for candidate in candidates:
+            if candidate.fixture_id is not None:
+                key = ("fixture", candidate.fixture_id)
+            else:
+                key = ("name", " ".join(candidate.match_name.lower().split()))
+            groups.setdefault(key, []).append(candidate)
+
+        joint = 1.0
+        for group in groups.values():
+            if len(group) == 1:
+                probability = self._probability_from_model(group[0])
+                if probability is None:
+                    return None
+                joint *= probability
+                continue
+            if any("corner" in candidate.market_name.lower() for candidate in group):
+                return None
+            xg_pairs = {(candidate.xg_home, candidate.xg_away) for candidate in group}
+            if len(xg_pairs) != 1:
+                return None
+            xg_home, xg_away = next(iter(xg_pairs))
+            if xg_home is None or xg_away is None:
+                return None
+            probability = self.engine.joint_goal_probability(
+                xg_home,
+                xg_away,
+                [candidate.market_name for candidate in group],
+            )
+            if probability is None:
+                return None
+            joint *= probability
+        return joint
+
     def validate_candidate(self, candidate: MarketCandidate) -> ValidationReport:
         """
         Applica il funnel sequenziale degli Stadi Obbligatori con Hard Gates.
@@ -698,7 +740,7 @@ class StrictTicketPipeline:
         rejection_reasons: List[str] = []
         legs_reports: List[ValidationReport] = []
         total_odds = 1.0
-        joint_probability: Optional[float] = None
+        passed_candidates: List[MarketCandidate] = []
 
         # Vincolo 1: Max 3-4 selezioni
         if len(candidates) > 4:
@@ -715,16 +757,29 @@ class StrictTicketPipeline:
             legs_reports.append(rep)
             if rep.passed:
                 total_odds *= c.bookmaker_odd
-                joint_probability = (joint_probability or 1.0) * rep.real_probability
+                passed_candidates.append(c)
             else:
                 rejection_reasons.append(f"{c.match_name} ({c.market_name}): {rep.rejection_reason}")
+
+        joint_probability = self.ticket_joint_probability(passed_candidates) if passed_candidates else None
+        if passed_candidates and joint_probability is None:
+            rejection_reasons.append(
+                "[BLOCCATO - PROBABILITÀ CONGIUNTA] Due o più mercati sulla stessa partita "
+                "non sono indipendenti e non sono prezzabili insieme sulla matrice dei punteggi. "
+                "Il prodotto delle probabilità singole non è una probabilità del ticket."
+            )
+        elif passed_candidates and joint_probability <= 0:
+            rejection_reasons.append(
+                "[BLOCCATO - PROBABILITÀ CONGIUNTA] I mercati sulla stessa partita si escludono: "
+                "la probabilità dell'intersezione è zero."
+            )
 
         # Money Management
         rec_stake = self.calculate_recommended_stake(
             current_bankroll,
             total_odds,
             len(candidates),
-            estimated_prob=joint_probability,
+            estimated_prob=joint_probability if joint_probability and joint_probability > 0 else None,
         )
         chosen_stake = proposed_stake if proposed_stake is not None else rec_stake
         stake_pct = (chosen_stake / max(0.01, current_bankroll)) * 100

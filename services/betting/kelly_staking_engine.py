@@ -4,8 +4,14 @@ Modulo per il calcolo scientifico e dinamico dello stake (importo in €)
 per scommesse singole, multiple e sistemi.
 """
 
+import math
 from dataclasses import dataclass
 from typing import Optional, Dict, Any
+
+
+def _floor_half_euro(amount: float) -> float:
+    """Arrotonda per difetto a 0,50 €, così lo stake non supera il tetto."""
+    return math.floor(amount * 2 + 1e-9) / 2
 
 @dataclass
 class StakeRecommendation:
@@ -89,19 +95,21 @@ class KellyStakingEngine:
         
         # Applicazione Hard Cap di sicurezza (Max 8% bankroll)
         capped_pct = min(fractional_kelly_pct, self.HARD_CAP_SINGLE_TICKET_PCT)
-        
+        cap_eur = self.bankroll * self.HARD_CAP_SINGLE_TICKET_PCT
         raw_stake = self.bankroll * capped_pct
-        
-        # Arrotondamento ai 50 centesimi / euro più vicino per usabilità
-        if raw_stake < self.MINIMUM_STAKE_EUR and edge > 0:
-            # Se c'è edge positivo ma lo stake è sotto 2€, impostiamo il minimo sindacale
-            recommended_stake = self.MINIMUM_STAKE_EUR if self.bankroll >= 20.0 else 1.00
+        book_min = self.MINIMUM_STAKE_EUR if self.bankroll >= 20.0 else 1.0
+
+        if edge <= 0:
+            recommended_stake = 0.0
         else:
-            recommended_stake = round(raw_stake * 2) / 2 # Arrotondato a 0.50€
+            recommended_stake = _floor_half_euro(raw_stake)
+            if 0 < recommended_stake < book_min and book_min <= cap_eur + 1e-9:
+                recommended_stake = book_min
+            elif recommended_stake < book_min or recommended_stake > cap_eur + 1e-9:
+                recommended_stake = 0.0
 
         # Calcolo tasso di crescita geometrico atteso g = p * ln(1 + f*b) + q * ln(1 - f)
-        import math
-        f = capped_pct
+        f = recommended_stake / self.bankroll if self.bankroll else 0.0
         if f > 0 and (1 + f * b) > 0 and (1 - f) > 0:
             expected_growth = p * math.log(1 + f * b) + q * math.log(1 - f)
         else:
@@ -112,6 +120,9 @@ class KellyStakingEngine:
             verdict = "❌ NO BET (Edge negativo o nullo, il bookmaker ha il vantaggio)"
             risk_level = "ELEVATO"
             recommended_stake = 0.00
+        elif recommended_stake == 0.0:
+            verdict = "❌ NO BET (il minimo di puntata supera il tetto dell'8% del bankroll)"
+            risk_level = "ELEVATO"
         elif edge_pct < 5.0:
             verdict = "👀 MICRO VALUE (Edge positivo < 5%, stake ridotto)"
             risk_level = "MEDIO"
@@ -162,8 +173,12 @@ class KellyStakingEngine:
         # Se il totale supera il tetto giornaliero, normalizziamo proporzionalmente
         if total_allocated > max_daily_budget and total_allocated > 0:
             scale = max_daily_budget / total_allocated
+            book_min = self.MINIMUM_STAKE_EUR if self.bankroll >= 20.0 else 1.0
             for r in results:
-                scaled_stake = round((r["calculated_stake"] * scale) * 2) / 2
-                r["calculated_stake"] = max(scaled_stake, self.MINIMUM_STAKE_EUR)
+                scaled_stake = _floor_half_euro(r["calculated_stake"] * scale)
+                if 0 < scaled_stake < book_min:
+                    scaled_stake = 0.0
+                r["calculated_stake"] = scaled_stake
+                r["recommendation"].recommended_stake = scaled_stake
 
         return results
