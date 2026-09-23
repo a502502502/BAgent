@@ -106,3 +106,24 @@ def test_strict_pipeline_accepts_leg_meeting_both_edge_and_probability_floor():
     assert rep.stage_failed is None
     assert rep.real_probability >= 0.72
     assert rep.mathematical_edge >= 0.04
+
+
+def test_strict_pipeline_gate_0_05_anti_time_travel():
+    pipeline = StrictTicketPipeline()
+    candidate_past = MarketCandidate(
+        match_name="Palmeiras vs Atlético-MG",
+        tournament="Brasileirão",
+        market_name="Over 1.5",
+        bookmaker_odd=1.35,
+        xg_home=1.8,
+        xg_away=1.6,
+        sixth_sense_analysis="Match ad alta intensità.",
+        kickoff_time="2024-09-28 21:00 UTC",
+    )
+
+    rep = pipeline.validate_candidate(candidate_past)
+    assert not rep.passed
+    assert rep.stage_failed == 0
+    assert "GATE 0.05" in rep.rejection_reason
+    assert "DATA NON ATTUALE" in rep.rejection_reason
+
