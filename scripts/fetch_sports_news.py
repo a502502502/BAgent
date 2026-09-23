@@ -21,7 +21,13 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from services.football.external.sources.news import SixthSenseNewsCollector, get_league_config
+from services.football.external.sources.news import (
+    SixthSenseNewsCollector,
+    get_league_config,
+    is_football_article,
+    is_international_competition,
+    national_team_profile,
+)
 
 
 def main():
@@ -40,11 +46,17 @@ def main():
         print(f"\n=======================================================")
         print(f"📰 RASSEGNA STAMPA SPECIALIZZATA: {args.team.upper()} ({args.league})")
         print(f"=======================================================")
-        cfg = get_league_config(args.league)
-        lang = cfg["language"] if cfg else "it"
-        country = cfg["country"] if cfg else "IT"
-        
-        articles = collector.google.search_team(args.team, language=lang, country=country, max_results=args.max_results)
+        if is_international_competition(args.league):
+            profile = national_team_profile(args.team)
+            articles = collector._national_team_articles(args.team, profile, args.max_results)
+            articles = [a for a in articles if is_football_article(a)]
+        else:
+            cfg = get_league_config(args.league)
+            lang = cfg["language"] if cfg else "it"
+            country = cfg["country"] if cfg else "IT"
+            articles = collector.google.search_team(
+                args.team, language=lang, country=country, max_results=args.max_results
+            )
         print(f"\n📋 Trovati {len(articles)} articoli dai quotidiani di riferimento:")
         for idx, a in enumerate(articles, 1):
             print(f"\n[{idx}] {a.title}")
