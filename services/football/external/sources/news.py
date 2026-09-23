@@ -12,6 +12,7 @@ Produce una lista di articoli strutturati pronti per l'analisi LLM.
 from __future__ import annotations
 
 import os
+import re
 import time
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
@@ -160,6 +161,173 @@ def get_league_config(league: str) -> dict | None:
         if key in league_lower:
             return cfg
     return None
+
+
+# Competizioni tra nazionali: il sesto senso non usa la stampa di un campionato club.
+_INTERNATIONAL_MARKERS = (
+    "nations league",
+    "world cup",
+    "coppa del mondo",
+    "qualific",
+    "friendl",
+    "amichevol",
+    "euro championship",
+    "european championship",
+)
+
+# Stampa della nazionale, non del club. La chiave è il nome inglese usato da FootyStats.
+NATIONAL_TEAM_SOURCES: dict[str, dict] = {
+    "netherlands": {
+        "aliases": ("netherlands", "holland", "olanda", "nederland"),
+        "sites": ("nos.nl", "vi.nl", "telegraaf.nl"),
+        "language": "nl",
+        "country": "NL",
+        "search_suffix": "voetbal OR oranje OR blessure OR opstelling OR selectie",
+    },
+    "germany": {
+        "aliases": ("germany", "germania", "deutschland"),
+        "sites": ("kicker.de", "sport1.de"),
+        "language": "de",
+        "country": "DE",
+        "search_suffix": "kader OR verletzung OR aufstellung OR nationalmannschaft",
+    },
+    "serbia": {
+        "aliases": ("serbia", "srbija"),
+        "sites": ("tanjug.rs", "mozzartsport.com", "sportklub.rs"),
+        "language": "sr",
+        "country": "RS",
+        "search_suffix": "reprezentacija OR spisak OR povreda OR fudbal",
+    },
+    "greece": {
+        "aliases": ("greece", "grecia", "ellada"),
+        "sites": ("sport24.gr", "sdna.gr"),
+        "language": "el",
+        "country": "GR",
+        "search_suffix": "εθνική OR τραυματισμός OR αποστολή OR football",
+    },
+    "portugal": {
+        "aliases": ("portugal",),
+        "sites": ("abola.pt", "record.pt", "ojogo.pt"),
+        "language": "pt",
+        "country": "PT",
+        "search_suffix": "seleção OR lesão OR convocados OR futebol",
+    },
+    "wales": {
+        "aliases": ("wales", "galles", "cymru"),
+        "sites": ("bbc.co.uk",),
+        "language": "en",
+        "country": "GB",
+        "search_suffix": "Wales squad OR injury OR nations league",
+    },
+    "norway": {
+        "aliases": ("norway", "norvegia", "norge"),
+        "sites": ("vg.no", "nrk.no"),
+        "language": "no",
+        "country": "NO",
+        "search_suffix": "landslaget OR skade OR tropp OR fotball",
+    },
+    "denmark": {
+        "aliases": ("denmark", "danimarca", "danmark"),
+        "sites": ("bold.dk", "dr.dk"),
+        "language": "da",
+        "country": "DK",
+        "search_suffix": "landshold OR skade OR trup OR fodbold",
+    },
+    "italy": {
+        "aliases": ("italy", "italia"),
+        "sites": ("gazzetta.it", "corrieredellosport.it"),
+        "language": "it",
+        "country": "IT",
+        "search_suffix": "nazionale OR convocati OR infortunio OR ct",
+    },
+    "france": {
+        "aliases": ("france", "francia"),
+        "sites": ("lequipe.fr",),
+        "language": "fr",
+        "country": "FR",
+        "search_suffix": "équipe de france OR bleus OR blessure OR liste",
+    },
+    "spain": {
+        "aliases": ("spain", "spagna", "españa"),
+        "sites": ("marca.com", "as.com"),
+        "language": "es",
+        "country": "ES",
+        "search_suffix": "selección OR lesión OR convocatoria OR absoluta",
+    },
+    "england": {
+        "aliases": ("england", "inghilterra"),
+        "sites": ("bbc.co.uk", "theguardian.com"),
+        "language": "en",
+        "country": "GB",
+        "search_suffix": "England squad OR injury OR Three Lions",
+    },
+    "belgium": {
+        "aliases": ("belgium", "belgio", "belgique"),
+        "sites": ("rtbf.be",),
+        "language": "fr",
+        "country": "BE",
+        "search_suffix": "diables rouges OR sélection OR blessure",
+    },
+}
+
+_INTERNATIONAL_SITES = ("uefa.com",)
+_OFF_TOPIC = re.compile(
+    r"\b(basket(?:ball)?|3x3|volley(?:ball)?|pallavolo|sailgp|yacht|nba|euroleague|tennis|formula\s*1|the voice|serie tv)\b",
+    re.IGNORECASE,
+)
+_FOOTBALL_TEXT = re.compile(
+    r"football|calcio|voetbal|fussball|fußball|fudbal|fodbold|fotball|soccer|"
+    r"nations league|nazionale|oranje|mannschaft|kader|convoc|blessure|infortun|"
+    r"les[aã]o|sakat|opstelling|aufstellung|reprezentac|national team|uefa|fifa|"
+    r"landslag|landshold|selec",
+    re.IGNORECASE,
+)
+_FOOTBALL_SOURCE = (
+    "kicker", "nos.nl", "nos ", "vi.nl", "telegraaf", "uefa", "tanjug",
+    "mozzart", "sportklub", "sport24", "sdna", "bbc", "abola", "record.pt",
+    "ojogo", "gazzetta", "lequipe", "l'équipe", "marca", "vg.no", "nrk",
+    "bold.dk", "sport1",
+)
+
+
+def is_international_competition(league: str | None) -> bool:
+    """Nations League, Mondiale, qualificazioni e amichevoli non sono un campionato club."""
+    if not league:
+        return False
+    text = league.lower()
+    return any(marker in text for marker in _INTERNATIONAL_MARKERS)
+
+
+def national_team_profile(team: str) -> dict | None:
+    """Profilo stampa della nazionale. None se il paese non è mappato."""
+    name = team.strip().lower()
+    for profile in NATIONAL_TEAM_SOURCES.values():
+        if name in profile["aliases"]:
+            return profile
+    return None
+
+
+def is_football_article(article: "NewsArticle") -> bool:
+    """Scarta basket, vela e televisione quando il testo non parla di calcio."""
+    text = f"{article.title} {article.snippet or ''} {article.source}"
+    if _OFF_TOPIC.search(text) and not _FOOTBALL_TEXT.search(text):
+        return False
+    if _FOOTBALL_TEXT.search(text):
+        return True
+    identity = f"{article.source} {article.url}".lower()
+    return any(token in identity for token in _FOOTBALL_SOURCE)
+
+
+def _dedupe_articles(articles: list["NewsArticle"]) -> list["NewsArticle"]:
+    seen: set[str] = set()
+    unique: list[NewsArticle] = []
+    for article in articles:
+        key = article.title.strip().lower()
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        unique.append(article)
+    return unique
 
 
 # ------------------------------------------------------------------
@@ -435,6 +603,125 @@ class SixthSenseNewsCollector:
         self.language = language
         self.country = country
 
+    def _national_team_articles(
+        self,
+        team: str,
+        profile: dict | None,
+        max_results: int,
+    ) -> list[NewsArticle]:
+        if profile is None:
+            return self.google.search(
+                query=f'"{team}" (football OR soccer) (squad OR injury OR "nations league")',
+                language="en",
+                country="US",
+                max_results=max_results,
+            )
+        return self.google.search(
+            query=f'"{team}" {profile["search_suffix"]}',
+            language=profile["language"],
+            country=profile["country"],
+            max_results=max_results,
+        )
+
+    def _collect_international(
+        self,
+        home: str,
+        away: str,
+        match_date: Optional[str],
+        collected_at: str,
+        max_per_team: int,
+        league: Optional[str],
+    ) -> dict:
+        """Stampa di ciascun paese, nella sua lingua, più UEFA. Niente fallback italiano."""
+        home_profile = national_team_profile(home)
+        away_profile = national_team_profile(away)
+        sites: list[str] = list(_INTERNATIONAL_SITES)
+        for profile in (home_profile, away_profile):
+            if profile:
+                sites.extend(profile["sites"])
+
+        match_articles = self.google.search(
+            query=f'"{home}" "{away}" (football OR soccer OR "nations league" OR calcio)',
+            language="en",
+            country="US",
+            max_results=max_per_team,
+        )
+        for profile in (home_profile, away_profile):
+            if not profile:
+                continue
+            match_articles += self.google.search(
+                query=f'"{home}" "{away}" {profile["search_suffix"]}',
+                language=profile["language"],
+                country=profile["country"],
+                max_results=4,
+            )
+
+        home_articles = self._national_team_articles(home, home_profile, max_per_team)
+        away_articles = self._national_team_articles(away, away_profile, max_per_team)
+
+        for site in sites:
+            owner = next(
+                (
+                    profile
+                    for profile in (home_profile, away_profile)
+                    if profile and site in profile["sites"]
+                ),
+                None,
+            )
+            for team, _profile in ((home, home_profile), (away, away_profile)):
+                if owner:
+                    language = owner["language"]
+                    country = owner["country"]
+                    suffix = owner["search_suffix"]
+                else:
+                    language, country = "en", "US"
+                    suffix = 'football OR squad OR injury OR "nations league"'
+                extra = self.google.search(
+                    query=f'site:{site} "{team}" {suffix}',
+                    language=language,
+                    country=country,
+                    max_results=4,
+                )
+                if team == home:
+                    home_articles += extra
+                else:
+                    away_articles += extra
+
+        if self.newsapi._available():
+            for team, profile in ((home, home_profile), (away, away_profile)):
+                language = (profile or {}).get("language", "en")
+                if language not in ("en", "it", "de", "fr", "es", "pt", "nl", "no"):
+                    language = "en"
+                found = self.newsapi.search(
+                    query=f'"{team}" football OR soccer OR "nations league"',
+                    language=language,
+                    max_results=4,
+                )
+                if team == home:
+                    home_articles += found
+                else:
+                    away_articles += found
+
+        match_articles = _dedupe_articles([a for a in match_articles if is_football_article(a)])
+        home_articles = _dedupe_articles([a for a in home_articles if is_football_article(a)])
+        away_articles = _dedupe_articles([a for a in away_articles if is_football_article(a)])
+
+        return {
+            "home": home,
+            "away": away,
+            "match_date": match_date,
+            "collected_at": collected_at,
+            "league": league,
+            "league_source": ", ".join(sites),
+            "press_router": "national",
+            "articles": {
+                "match": [a.to_dict() for a in match_articles],
+                "home_team": [a.to_dict() for a in home_articles],
+                "away_team": [a.to_dict() for a in away_articles],
+            },
+            "total_articles": len(match_articles) + len(home_articles) + len(away_articles),
+        }
+
     def collect(
         self,
         home: str,
@@ -463,6 +750,11 @@ class SixthSenseNewsCollector:
         }
         """
         collected_at = datetime.utcnow().isoformat()
+
+        if is_international_competition(league):
+            return self._collect_international(
+                home, away, match_date, collected_at, max_per_team, league
+            )
 
         # Determina lingua/paese: usa config lega se disponibile
         league_cfg = get_league_config(league) if league else None
