@@ -63,12 +63,8 @@ class NationalTeamLambdaEngine:
         lambda_home = media tra xG fatti in casa/recente e xG/gol subiti dall'avversaria
         lambda_away = media tra xG fatti dall'ospite e xG/gol subiti dalla squadra di casa
         """
-        # Miscela pesata tra xG e gol effettivi subiti per catturare difese colabrodo
-        defense_home_leaked = max(home_stats.avg_xg_conceded, home_stats.avg_goals_conceded * 0.75 + home_stats.avg_xg_conceded * 0.25)
-        defense_away_leaked = max(away_stats.avg_xg_conceded, away_stats.avg_goals_conceded * 0.75 + away_stats.avg_xg_conceded * 0.25)
-
-        lambda_home = (home_stats.avg_xg_scored + defense_away_leaked) / 2.0
-        lambda_away = (away_stats.avg_xg_scored + defense_home_leaked) / 2.0
+        lambda_home = (home_stats.avg_xg_scored + away_stats.avg_xg_conceded) / 2.0
+        lambda_away = (away_stats.avg_xg_scored + home_stats.avg_xg_conceded) / 2.0
 
         # Floor di sicurezza minimo 0.20 per evitare divisioni per zero o matrici vuote
         return max(0.20, float(lambda_home)), max(0.20, float(lambda_away))
