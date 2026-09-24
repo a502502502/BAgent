@@ -20,6 +20,14 @@ MIN_LAMBDA = 0.15
 INJURY_RATE = 0.08
 INJURY_CAP = 0.25
 INJURY_FLOOR = 0.75
+SEVERE_CARDS_PER_GAME = 5.2
+REFEREE_ATTACK_BOOST = 1.03
+AGGREGATE_MARGIN = 2
+AGGREGATE_MANAGE = 0.90
+AGGREGATE_CHASE = 1.10
+AGGREGATE_LEAK = 1.15
+CORNER_DOMINANT_BOOST = 1.12
+CORNER_PARKED_FACTOR = 0.85
 
 _DEFENSIVE = (
     "portiere",
@@ -63,6 +71,10 @@ class MatchContext:
     leak_to_home: float = 1.0
     leak_to_away: float = 1.0
     unscoped_injury: bool = False
+    referee_cards_per_game: float | None = None
+    referee_style: str | None = None
+    first_leg_home: int | None = None
+    first_leg_away: int | None = None
 
 
 @dataclass(frozen=True)
@@ -77,6 +89,18 @@ class AttackProjection:
     veto_first_half: bool
     base_home: float = 0.0
     base_away: float = 0.0
+    veto_sanction: bool = False
+    veto_chase_home: bool = False
+    veto_chase_away: bool = False
+
+
+@dataclass(frozen=True)
+class CornerProjection:
+    corners_home: float
+    corners_away: float
+    notes: tuple[str, ...]
+    base_home: float
+    base_away: float
 
 
 def events_from_mappings(rows: list[dict] | None) -> list[SixthSenseEvent]:
@@ -194,7 +218,88 @@ def context_from_signals(
         leak_to_home=base.leak_to_home,
         leak_to_away=base.leak_to_away,
         unscoped_injury=unscoped_injury,
+        referee_cards_per_game=base.referee_cards_per_game,
+        referee_style=base.referee_style,
+        first_leg_home=base.first_leg_home,
+        first_leg_away=base.first_leg_away,
     )
+
+
+def referee_band(context: MatchContext) -> str:
+    """severe, permissive o unknown. Senza profilo non si inventa un arbitro."""
+    style = (context.referee_style or "").strip().lower()
+    if style in {"severe", "severo"}:
+        return "severe"
+    if style in {"permissive", "permissivo"}:
+        return "permissive"
+    cards = context.referee_cards_per_game
+    if cards is None:
+        return "unknown"
+    if cards > SEVERE_CARDS_PER_GAME:
+        return "severe"
+    return "permissive"
+
+
+def aggregate_margin(context: MatchContext) -> int | None:
+    """Gol dell'andata dal punto di vista di questa gara. Manca un numero: niente margine."""
+    if context.first_leg_home is None or context.first_leg_away is None:
+        return None
+    return context.first_leg_home - context.first_leg_away
+
+
+def _dominant_side(context: MatchContext, xg_home: float | None, xg_away: float | None) -> str | None:
+    if context.corto_muso_home and not context.corto_muso_away:
+        return "home"
+    if context.corto_muso_away and not context.corto_muso_home:
+        return "away"
+    if xg_home is None or xg_away is None:
+        return None
+    if xg_home >= DOMINANT_ATTACK and xg_home > xg_away:
+        return "home"
+    if xg_away >= DOMINANT_ATTACK and xg_away > xg_home:
+        return "away"
+    return None
+
+
+def project_corners(
+    corners_home: float | None,
+    corners_away: float | None,
+    context: MatchContext,
+    xg_home: float | None = None,
+    xg_away: float | None = None,
+) -> CornerProjection:
+    """La squadra che schiaccia produce più corner. Senza medie si resta al base."""
+    if corners_home is None or corners_away is None:
+        base_home = float(corners_home or 0.0)
+        base_away = float(corners_away or 0.0)
+        return CornerProjection(base_home, base_away, ("corner non forniti: proiezione base",), base_home, base_away)
+    home = float(corners_home)
+    away = float(corners_away)
+    notes: list[str] = []
+    side = _dominant_side(context, xg_home, xg_away)
+    if side == "home":
+        home *= CORNER_DOMINANT_BOOST
+        away *= CORNER_PARKED_FACTOR
+        notes.append("attacco dominante casa: corner casa +12%, ospite arroccato -15%")
+    elif side == "away":
+        away *= CORNER_DOMINANT_BOOST
+        home *= CORNER_PARKED_FACTOR
+        notes.append("attacco dominante ospite: corner ospite +12%, casa arroccata -15%")
+    return CornerProjection(home, away, tuple(notes), float(corners_home), float(corners_away))
+
+
+def market_context_veto(market: str, projection: AttackProjection) -> str | None:
+    """Veti che non dipendono dalla matrice dei punteggi. Senza bandiera non scattano."""
+    name = market.lower()
+    if projection.veto_sanction and "under" in name and ("cartellin" in name or "card" in name):
+        return "arbitro severo: under cartellini"
+    if projection.veto_sanction and "under" in name:
+        return "arbitro severo: combo conservativa esposta all'uomo in meno"
+    if projection.veto_chase_home and ("1x" in name or "under" in name):
+        return "ritorno: la casa deve ribaltare il margine, fuori la non-sconfitta e il catenaccio"
+    if projection.veto_chase_away and ("x2" in name or "under" in name):
+        return "ritorno: l'ospite deve ribaltare il margine, fuori la non-sconfitta e il catenaccio"
+    return None
 
 
 def project_attack(
@@ -243,6 +348,26 @@ def project_attack(
         notes.append("allarme infortuni senza squadra: i gol attesi restano quelli di partenza")
     if context.slow_start:
         notes.append("avvio lento: fuori i mercati che possono morire al 45'")
+    veto_sanction = False
+    band = referee_band(context)
+    if band == "severe":
+        home *= REFEREE_ATTACK_BOOST
+        away *= REFEREE_ATTACK_BOOST
+        veto_sanction = True
+        notes.append("arbitro severo: entrambi gli attacchi +3%, fuori under e catenaccio")
+    margin = aggregate_margin(context)
+    veto_chase_home = False
+    veto_chase_away = False
+    if margin is not None and margin >= AGGREGATE_MARGIN:
+        home *= AGGREGATE_MANAGE * AGGREGATE_LEAK
+        away *= AGGREGATE_CHASE
+        veto_chase_away = True
+        notes.append("andata: casa avanti di 2+, gestisce; ospite deve inseguire")
+    elif margin is not None and margin <= -AGGREGATE_MARGIN:
+        away *= AGGREGATE_MANAGE * AGGREGATE_LEAK
+        home *= AGGREGATE_CHASE
+        veto_chase_home = True
+        notes.append("andata: ospite avanti di 2+, gestisce; casa deve inseguire")
     home = max(MIN_LAMBDA, home)
     away = max(MIN_LAMBDA, away)
     return AttackProjection(
@@ -256,4 +381,7 @@ def project_attack(
         veto_first_half=context.slow_start or context.rotation_risk,
         base_home=xg_home,
         base_away=xg_away,
+        veto_sanction=veto_sanction,
+        veto_chase_home=veto_chase_home,
+        veto_chase_away=veto_chase_away,
     )

@@ -14,6 +14,7 @@ import numpy as np
 from services.analysis.xg_poisson_engine import QuantitativeEngine, _goal_market_mask
 from services.football.sixth_sense.lambda_context import (
     MatchContext,
+    market_context_veto,
     project_attack,
 )
 
@@ -130,6 +131,9 @@ def search_combo_edge(
 
 def _veto(market: str, mask: np.ndarray, projection) -> str | None:
     name = market.lower()
+    contextual = market_context_veto(market, projection)
+    if contextual:
+        return contextual
     if projection.veto_first_half and any(token in name for token in _FIRST_HALF):
         return "sesto senso: mercato che può morire al 45'"
     if projection.veto_home_one_nil and not bool(mask[1, 0]):

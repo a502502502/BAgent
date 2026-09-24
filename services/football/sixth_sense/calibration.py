@@ -27,6 +27,8 @@ MIN_PLAYED_BEFORE = 3
 # Ogni partita interna chiusa sposta il fattore dell'1%, mai oltre il 30%.
 INTERNAL_WEIGHT_PER_MATCH = 0.01
 INTERNAL_WEIGHT_CAP = 0.30
+DECAY_FULL_DAYS = 45
+DECAY_HALF_DAYS = 90
 
 _DDL = """
 CREATE TABLE IF NOT EXISTS sixth_sense_samples (
@@ -308,14 +310,44 @@ def settle_from_matches(db_path: Path | str | None = None) -> int:
     return settle_results(results, db_path)
 
 
-def fit_factors(samples: list[LambdaSample]) -> list[FactorFit]:
-    """Stima i fattori solo sulle partite chiuse della lista passata."""
+def sample_decay(match_date: str, as_of: date) -> float:
+    """1.0 entro 45 giorni, 0.5 fino a 90, 0.25 dopo. Una data futura vale zero."""
+    try:
+        played = date.fromisoformat(match_date[:10])
+    except ValueError:
+        return 0.0
+    if played > as_of:
+        return 0.0
+    age = (as_of - played).days
+    if age <= DECAY_FULL_DAYS:
+        return 1.0
+    if age <= DECAY_HALF_DAYS:
+        return 0.5
+    return 0.25
+
+
+def _as_of(samples: list[LambdaSample], as_of: date | None) -> date:
+    if as_of is not None:
+        return as_of
+    dates: list[date] = []
+    for sample in samples:
+        try:
+            dates.append(date.fromisoformat(sample.match_date[:10]))
+        except ValueError:
+            continue
+    return max(dates) if dates else date.today()
+
+
+def fit_factors(samples: list[LambdaSample], as_of: date | None = None) -> list[FactorFit]:
+    """Stima i fattori sulle partite chiuse, pesate per età. Nessuna gara dopo as_of."""
     settled = [sample for sample in samples if sample.settled]
+    anchor = _as_of(settled, as_of)
+    visible = [sample for sample in settled if sample_decay(sample.match_date, anchor) > 0]
     return [
-        _fit_rotation(settled),
-        _fit_side_flag(settled, "low_motivation", LOW_MOTIVATION_FACTOR, "low_motivation"),
-        _fit_side_flag(settled, "corto_muso", CORTO_MUSO_FACTOR, "corto_muso"),
-        _fit_injury_scale(settled),
+        _fit_rotation(visible, anchor),
+        _fit_side_flag(visible, "low_motivation", LOW_MOTIVATION_FACTOR, "low_motivation", anchor),
+        _fit_side_flag(visible, "corto_muso", CORTO_MUSO_FACTOR, "corto_muso", anchor),
+        _fit_injury_scale(visible, anchor),
     ]
 
 
@@ -565,20 +597,20 @@ def _sample_from_row(row: sqlite3.Row) -> LambdaSample:
     )
 
 
-def internal_weight(n_treated: int) -> float:
-    """0% sotto le 8 partite, poi 1% a partita, fermo al 30%."""
+def internal_weight(n_treated: float) -> float:
+    """0% sotto le 8 partite effettive, poi 1% a partita, fermo al 30%."""
     if n_treated < MIN_GROUP:
         return 0.0
-    return min(INTERNAL_WEIGHT_CAP, n_treated * INTERNAL_WEIGHT_PER_MATCH)
+    return min(INTERNAL_WEIGHT_CAP, float(n_treated) * INTERNAL_WEIGHT_PER_MATCH)
 
 
-def _apply_internal(prior: float, raw: float, n_treated: int, low: float, high: float) -> tuple[float, float]:
-    weight = internal_weight(n_treated)
+def _apply_internal(prior: float, raw: float, n_treated: float, low: float, high: float) -> tuple[float, float]:
+    weight = min(INTERNAL_WEIGHT_CAP, internal_weight(n_treated))
     clipped = min(high, max(low, raw))
     return prior + weight * (clipped - prior), weight
 
 
-def _ready(n_treated: int, n_control: int) -> bool:
+def _ready(n_treated: float, n_control: float) -> bool:
     return n_treated >= MIN_GROUP and n_control >= MIN_GROUP
 
 
@@ -616,10 +648,10 @@ def _side_is_clean(sample: LambdaSample, side: str) -> bool:
     )
 
 
-def _fit_rotation(samples: list[LambdaSample]) -> FactorFit:
+def _fit_rotation(samples: list[LambdaSample], as_of: date) -> FactorFit:
     treated = [sample for sample in samples if sample.rotation_risk and _only_rotation(sample)]
     control = [sample for sample in samples if _clean_match(sample)]
-    return _fit_total("rotation", ROTATION_FACTOR, treated, control)
+    return _fit_total("rotation", ROTATION_FACTOR, treated, control, as_of)
 
 
 def _only_rotation(sample: LambdaSample) -> bool:
@@ -637,49 +669,77 @@ def _only_rotation(sample: LambdaSample) -> bool:
     )
 
 
-def _fit_total(name: str, prior: float, treated: list[LambdaSample], control: list[LambdaSample]) -> FactorFit:
-    treated_rate = _goal_rate(treated)
-    control_rate = _goal_rate(control)
-    if treated_rate is None or control_rate is None or control_rate <= 0 or not _ready(len(treated), len(control)):
-        return FactorFit(name, prior, prior, len(treated), len(control), False)
+def _fit_total(
+    name: str,
+    prior: float,
+    treated: list[LambdaSample],
+    control: list[LambdaSample],
+    as_of: date,
+) -> FactorFit:
+    treated_rate, treated_mass = _goal_rate(treated, as_of)
+    control_rate, control_mass = _goal_rate(control, as_of)
+    if (
+        treated_rate is None
+        or control_rate is None
+        or control_rate <= 0
+        or not _ready(treated_mass, control_mass)
+    ):
+        return FactorFit(name, prior, prior, int(treated_mass), int(control_mass), False)
     raw = treated_rate / control_rate
-    fitted, weight = _apply_internal(prior, raw, len(treated), 0.50, 1.20)
-    return FactorFit(name, prior, fitted, len(treated), len(control), True, weight)
+    fitted, weight = _apply_internal(prior, raw, treated_mass, 0.50, 1.20)
+    return FactorFit(name, prior, fitted, int(treated_mass), int(control_mass), True, weight)
 
 
-def _goal_rate(samples: list[LambdaSample]) -> float | None:
-    base = sum(sample.base_xg_home + sample.base_xg_away for sample in samples)
-    actual = sum((sample.actual_home_goals or 0) + (sample.actual_away_goals or 0) for sample in samples)
-    if base <= 0 or not samples:
-        return None
-    return actual / base
+def _goal_rate(samples: list[LambdaSample], as_of: date) -> tuple[float | None, float]:
+    base = 0.0
+    actual = 0.0
+    mass = 0.0
+    for sample in samples:
+        weight = sample_decay(sample.match_date, as_of)
+        if weight <= 0:
+            continue
+        base += weight * (sample.base_xg_home + sample.base_xg_away)
+        actual += weight * ((sample.actual_home_goals or 0) + (sample.actual_away_goals or 0))
+        mass += weight
+    if base <= 0 or mass <= 0:
+        return None, mass
+    return actual / base, mass
 
 
-def _fit_side_flag(samples: list[LambdaSample], flag: str, prior: float, name: str) -> FactorFit:
+def _fit_side_flag(
+    samples: list[LambdaSample],
+    flag: str,
+    prior: float,
+    name: str,
+    as_of: date,
+) -> FactorFit:
     treated_actual = 0.0
     treated_base = 0.0
-    n_treated = 0
+    n_treated = 0.0
     control_actual = 0.0
     control_base = 0.0
-    n_control = 0
+    n_control = 0.0
     for sample in samples:
+        weight = sample_decay(sample.match_date, as_of)
+        if weight <= 0:
+            continue
         for side in ("home", "away"):
             actual = sample.actual_home_goals if side == "home" else sample.actual_away_goals
             base = sample.base_xg_home if side == "home" else sample.base_xg_away
             flagged = getattr(sample, f"{flag}_{side}")
             if flagged and _side_only_flag(sample, side, flag):
-                treated_actual += actual or 0
-                treated_base += base
-                n_treated += 1
+                treated_actual += weight * (actual or 0)
+                treated_base += weight * base
+                n_treated += weight
             elif _side_is_clean(sample, side):
-                control_actual += actual or 0
-                control_base += base
-                n_control += 1
+                control_actual += weight * (actual or 0)
+                control_base += weight * base
+                n_control += weight
     if treated_base <= 0 or control_base <= 0 or not _ready(n_treated, n_control):
-        return FactorFit(name, prior, prior, n_treated, n_control, False)
+        return FactorFit(name, prior, prior, int(n_treated), int(n_control), False)
     raw = (treated_actual / treated_base) / (control_actual / control_base)
     fitted, weight = _apply_internal(prior, raw, n_treated, 0.50, 1.20)
-    return FactorFit(name, prior, fitted, n_treated, n_control, True, weight)
+    return FactorFit(name, prior, fitted, int(n_treated), int(n_control), True, weight)
 
 
 def _side_only_flag(sample: LambdaSample, side: str, flag: str) -> bool:
@@ -704,12 +764,13 @@ def _side_only_flag(sample: LambdaSample, side: str, flag: str) -> bool:
     )
 
 
-def _fit_injury_scale(samples: list[LambdaSample]) -> FactorFit:
+def _fit_injury_scale(samples: list[LambdaSample], as_of: date) -> FactorFit:
     numerator = 0.0
     denominator = 0.0
-    n_treated = 0
+    n_treated = 0.0
     for sample in samples:
-        if sample.rotation_risk:
+        weight = sample_decay(sample.match_date, as_of)
+        if weight <= 0 or sample.rotation_risk:
             continue
         if (
             sample.attack_factor_home < 1.0
@@ -717,20 +778,20 @@ def _fit_injury_scale(samples: list[LambdaSample]) -> FactorFit:
             and not sample.corto_muso_home
             and sample.leak_to_home <= 1.0
         ):
-            numerator += sample.actual_home_goals or 0
-            denominator += sample.base_xg_home * sample.attack_factor_home
-            n_treated += 1
+            numerator += weight * (sample.actual_home_goals or 0)
+            denominator += weight * sample.base_xg_home * sample.attack_factor_home
+            n_treated += weight
         if (
             sample.attack_factor_away < 1.0
             and not sample.low_motivation_away
             and not sample.corto_muso_away
             and sample.leak_to_away <= 1.0
         ):
-            numerator += sample.actual_away_goals or 0
-            denominator += sample.base_xg_away * sample.attack_factor_away
-            n_treated += 1
+            numerator += weight * (sample.actual_away_goals or 0)
+            denominator += weight * sample.base_xg_away * sample.attack_factor_away
+            n_treated += weight
     if denominator <= 0 or n_treated < MIN_GROUP:
-        return FactorFit("injury_scale", 1.0, 1.0, n_treated, 0, False)
+        return FactorFit("injury_scale", 1.0, 1.0, int(n_treated), 0, False)
     raw = numerator / denominator
     fitted, weight = _apply_internal(1.0, raw, n_treated, 0.50, 1.50)
-    return FactorFit("injury_scale", 1.0, fitted, n_treated, 0, True, weight)
+    return FactorFit("injury_scale", 1.0, fitted, int(n_treated), 0, True, weight)
