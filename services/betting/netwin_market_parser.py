@@ -19,10 +19,14 @@ class NetwinMarketAction:
     combo_result: Optional[str] = None
     combo_ou_side: Optional[str] = None
     combo_ou_line: Optional[float] = None
+    combo_type: Optional[str] = None  # OU, MULTIGOL, BTTS
+    combo_multigol_range: Optional[str] = None  # "1-4", "2-5"
+    combo_multigol_scope: Optional[str] = "MATCH"  # MATCH, HOME, AWAY
     multigol_range: Optional[str] = None
     multigol_scope: Optional[str] = None
     specialty_side: Optional[str] = None  # 1/X/2 or OVER/UNDER for corner/cards
     specialty_line: Optional[float] = None
+    specialty_scope: Optional[str] = None  # HOME, AWAY, TOTAL for corner lines
     chance_mix: Optional[str] = None  # e.g. "X o GG"
     raw: str = ""
 
@@ -48,8 +52,9 @@ def parse_netwin_selection(market: str = "", pick: str = "") -> NetwinMarketActi
     pick_n = _normalize(pick)
     market_n = _normalize(market)
 
-    if "MULTIGOL" in text.replace("MULTI GOL", "MULTIGOL"):
-        return _parse_multigol(text.replace("MULTI GOL", "MULTIGOL"), raw)
+    folded = text.replace("MULTI GOL", "MULTIGOL")
+    if "MULTIGOL" in folded and "+" not in folded:
+        return _parse_multigol(folded, raw)
 
     chance = _parse_chance_mix(text)
     if chance is not None:
@@ -155,20 +160,57 @@ def _parse_1x2_from_market(market_n: str, pick_n: str, text: str) -> Optional[st
 
 
 def _parse_combo(text: str, raw: str) -> NetwinMarketAction:
-    left = text.split("+", 1)[0]
+    """1/X/2/1X/X2/12 plus MultiGol, Gol/NoGol, or Under/Over. The right-hand side decides the branch."""
+    folded = text.replace("MULTI GOL", "MULTIGOL")
+    left, _, right = folded.partition("+")
     result = _parse_dc(left)
     if result is None:
         m = re.search(r"(?<![0-9A-Z])([12X])(?![0-9A-Z])", left.strip())
         if m and m.group(1) in ("1", "2", "X"):
             result = m.group(1)
-    ou = _parse_ou(text)
-    if result is None or ou is None:
-        raise UnsupportedNetwinMarket(f"Cannot map combo: {raw!r}")
+    if result is None:
+        raise UnsupportedNetwinMarket(f"Cannot map combo result in {raw!r}")
+
+    multigol = re.search(r"MULTIGOL\s*(\d+\s*-\s*\d+)", right)
+    if multigol:
+        rng = re.sub(r"\s+", "", multigol.group(1))
+        scope = "MATCH"
+        if re.search(r"\b(?:CASA|HOME)\b", right):
+            scope = "HOME"
+        elif re.search(r"\b(?:OSPITE|AWAY)\b", right):
+            scope = "AWAY"
+        return NetwinMarketAction(
+            family="COMBO",
+            pick=folded,
+            combo_result=result,
+            combo_type="MULTIGOL",
+            combo_multigol_range=rng,
+            combo_multigol_scope=scope,
+            raw=raw,
+        )
+
+    btts = _parse_btts(right.strip())
+    if btts is not None and "UNDER" not in right and "OVER" not in right:
+        return NetwinMarketAction(
+            family="COMBO",
+            pick=folded,
+            combo_result=result,
+            combo_type="BTTS",
+            combo_ou_side=btts,
+            raw=raw,
+        )
+
+    ou = _parse_ou(folded)
+    if ou is None:
+        raise UnsupportedNetwinMarket(
+            f"Cannot map combo (neither MultiGol, Gol/NoGol nor Under/Over): {raw!r}"
+        )
     side, line = ou
     return NetwinMarketAction(
         family="COMBO",
-        pick=text,
+        pick=folded,
         combo_result=result,
+        combo_type="OU",
         combo_ou_side=side,
         combo_ou_line=line,
         raw=raw,
@@ -211,11 +253,13 @@ def _parse_specialty(
     ou = _parse_ou(text)
     if ou is not None:
         side, line = ou
+        scope = _corner_scope(text) if family == "CORNER" else None
         return NetwinMarketAction(
             family=family,
             pick=f"{side} {line:g}",
             specialty_side=side,
             specialty_line=line,
+            specialty_scope=scope,
             raw=text,
         )
     for token in ("1X", "X2", "12", "1", "X", "2"):
@@ -227,6 +271,15 @@ def _parse_specialty(
                 raw=text,
             )
     return NetwinMarketAction(family=family, pick=text, raw=text)
+
+
+def _corner_scope(text: str) -> str:
+    """HOME/AWAY when the corner line belongs to one side, otherwise the match total."""
+    if re.search(r"\b(?:CASA|HOME)\b", text):
+        return "HOME"
+    if re.search(r"\b(?:OSPITE|AWAY)\b", text):
+        return "AWAY"
+    return "TOTAL"
 
 
 def _parse_multigol(text: str, raw: str) -> NetwinMarketAction:
@@ -317,6 +370,14 @@ def extract_booking_code(scoped_text: str) -> Optional[str]:
 
 def market_tab_labels(action: NetwinMarketAction) -> list[str]:
     if action.family == "COMBO":
+        if action.combo_type == "MULTIGOL":
+            if action.combo_result in ("1X", "X2", "12"):
+                return ["Doppia Chance + MultiGol", "DC + MultiGol", "COMBO", "MultiGol"]
+            return ["1X2 + MultiGol", "Esito + MultiGol", "COMBO", "MultiGol"]
+        if action.combo_type == "BTTS":
+            if action.combo_result in ("1X", "X2", "12"):
+                return ["Doppia Chance + Gol/NoGol", "DC + G/NG", "COMBO"]
+            return ["1X2 + Gol/NoGol", "1X2 + Gol", "COMBO"]
         if action.combo_result in ("1X", "X2", "12"):
             return [
                 "Doppia Chance + U/O",
@@ -334,6 +395,7 @@ def market_tab_labels(action: NetwinMarketAction) -> list[str]:
     if action.family == "CORNER":
         return [
             "Corner",
+            "Angoli",
             "Calci d'angolo",
             "1X2 Corner",
             "Under/Over Corner",
@@ -354,7 +416,22 @@ def market_tab_labels(action: NetwinMarketAction) -> list[str]:
 
 def outcome_search_texts(action: NetwinMarketAction) -> list[str]:
     texts: list[str] = []
-    if action.family == "COMBO" and action.combo_result and action.combo_ou_side:
+    if action.family == "COMBO" and action.combo_result and action.combo_type == "MULTIGOL":
+        res = action.combo_result
+        rng = action.combo_multigol_range or ""
+        texts.extend(
+            [
+                f"{res} + MultiGol {rng}",
+                f"{res}+MultiGol {rng}",
+                f"MultiGol {rng}",
+                rng,
+            ]
+        )
+    elif action.family == "COMBO" and action.combo_result and action.combo_type == "BTTS":
+        res = action.combo_result
+        label = "NoGol" if action.combo_ou_side == "NOGOL" else "Gol"
+        texts.extend([f"{res} + {label}", f"{res}+{label}", label])
+    elif action.family == "COMBO" and action.combo_result and action.combo_ou_side:
         side = "Under" if action.combo_ou_side == "UNDER" else "Over"
         line = action.combo_ou_line or 1.5
         line_s = f"{line:g}"
@@ -379,11 +456,19 @@ def outcome_search_texts(action: NetwinMarketAction) -> list[str]:
                 action.multigol_range.replace("-", " - "),
             ]
         )
+        if action.multigol_scope == "HOME":
+            texts.append(f"MultiGol {action.multigol_range} Casa")
+        elif action.multigol_scope == "AWAY":
+            texts.append(f"MultiGol {action.multigol_range} Ospite")
     if action.family in ("CORNER", "CARDS"):
         if action.specialty_side in ("OVER", "UNDER") and action.specialty_line is not None:
             side = "Over" if action.specialty_side == "OVER" else "Under"
             line_s = f"{action.specialty_line:g}"
             texts.extend([f"{side} {line_s}", line_s, f"{side} {line_s} Totale"])
+            if action.specialty_scope == "HOME":
+                texts.append(f"{side} {line_s} Casa")
+            elif action.specialty_scope == "AWAY":
+                texts.append(f"{side} {line_s} Ospite")
         elif action.specialty_side:
             texts.append(action.specialty_side)
     if action.family == "CHANCE_MIX" and action.chance_mix:

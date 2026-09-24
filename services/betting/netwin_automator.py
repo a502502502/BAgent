@@ -15,7 +15,28 @@ from typing import Optional, Any, Dict, List
 
 from playwright.sync_api import sync_playwright, Page, BrowserContext
 
+from services.betting.netwin_market_parser import (
+    NetwinMarketAction,
+    UnsupportedNetwinMarket,
+    market_tab_labels,
+    outcome_search_texts,
+    parse_netwin_selection,
+)
+
 logger = logging.getLogger("NetwinAutomator")
+
+_SECONDARY_FAMILIES = frozenset({"COMBO", "MULTIGOL", "CORNER"})
+
+
+def _parsed_action(market: str, pick: str) -> Optional[NetwinMarketAction]:
+    try:
+        return parse_netwin_selection(market, pick)
+    except UnsupportedNetwinMarket:
+        return None
+
+
+def _needs_secondary_panel(action: NetwinMarketAction) -> bool:
+    return action.family in _SECONDARY_FAMILIES
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 RECEIPTS_DIR = ROOT_DIR / "reports" / "receipts"
@@ -161,10 +182,20 @@ class NetwinAutomator:
         """
         Seleziona la quota desiderata nella tabella della partita.
         Supporta 1X2, Doppia Chance (1X, X2, 12), Under/Over (2.5, 1.5, 3.5), Gol/NoGol.
+        Combo, MultiGol e corner aprono prima il pannello secondario: non stanno nella striscia a 10 colonne.
         """
         try:
             pick_clean = str(pick).strip().upper()
             market_clean = str(market).strip().upper()
+            action = _parsed_action(market, pick)
+
+            if action is not None and _needs_secondary_panel(action):
+                self._open_market_panel(action)
+                if self._click_exact_odd(target_odd, action):
+                    logger.info(f"✅ Quota secondaria {action.family} selezionata @{target_odd}.")
+                    return True
+                logger.warning(f"Pannello {action.family} aperto, quota {target_odd} non trovata per {pick!r}.")
+                return False
 
             # 1. Mercato 1X2
             if pick_clean in ["1", "X", "2"] and ("1X2" in market_clean or "ESITO" in market_clean or market_clean == ""):
@@ -210,18 +241,85 @@ class NetwinAutomator:
                     return True
 
             # 5. Fallback: cerca per valore di quota se fornito
-            if target_odd and target_odd > 1.0:
-                odd_str = f"{target_odd:.2f}"
-                odd_el = self.page.locator(f".contenitoreSingolaQuota:has-text('{odd_str}')").first
-                if odd_el.is_visible(timeout=2000):
-                    odd_el.click()
-                    logger.info(f"✅ Quota trovata per valore esatto @{odd_str}.")
-                    self.page.wait_for_timeout(800)
-                    return True
+            if self._click_exact_odd(target_odd):
+                logger.info(f"✅ Quota trovata per valore esatto @{float(target_odd):.2f}.")
+                return True
 
         except Exception as e:
             logger.error(f"Errore selezione esito {market} - {pick}: {e}")
 
+        return False
+
+    def _open_market_panel(self, action: NetwinMarketAction) -> bool:
+        """Apre il tab Combo, MultiGol o Angoli. Senza pagina non alza eccezioni."""
+        if self.page is None:
+            return False
+        for label in market_tab_labels(action):
+            if self._click_tab(re.escape(label)):
+                return True
+        if action.family == "CORNER":
+            pattern = "ANGOLI|CORNER|COMBO"
+        elif action.family == "MULTIGOL" or action.combo_type == "MULTIGOL":
+            pattern = "MULTIGOL|COMBO"
+        else:
+            pattern = "COMBO|MULTIGOL|ANGOLI"
+        return self._click_tab(pattern)
+
+    def _click_tab(self, pattern: str) -> bool:
+        if self.page is None:
+            return False
+        try:
+            tab = self.page.locator(f":text-matches('{pattern}', 'i')").first
+            if tab.is_visible(timeout=1200):
+                tab.click()
+                self.page.wait_for_timeout(600)
+                return True
+        except Exception as exc:
+            logger.warning(f"Tab Netwin '{pattern}' non aperto: {exc}")
+        return False
+
+    def _click_exact_odd(self, target_odd: Optional[float], action: Optional[NetwinMarketAction] = None) -> bool:
+        """Clicca il .contenitoreSingolaQuota della quota verificata, preferendo la riga del mercato."""
+        if self.page is None or not target_odd or float(target_odd) <= 1.0:
+            return False
+        odd_str = f"{float(target_odd):.2f}"
+        hints = [hint.lower() for hint in outcome_search_texts(action)] if action is not None else []
+        buttons = self.page.locator(".contenitoreSingolaQuota")
+        try:
+            count = buttons.count()
+        except Exception:
+            count = 0
+        fallback = None
+        for index in range(count):
+            button = buttons.nth(index)
+            try:
+                blob = button.inner_text()
+            except Exception:
+                continue
+            if odd_str not in blob:
+                continue
+            if fallback is None:
+                fallback = button
+            if hints and any(hint in blob.lower() for hint in hints):
+                button.click()
+                self.page.wait_for_timeout(800)
+                return True
+        if fallback is not None:
+            try:
+                if fallback.is_visible(timeout=1500):
+                    fallback.click()
+                    self.page.wait_for_timeout(800)
+                    return True
+            except Exception:
+                pass
+        try:
+            odd_el = self.page.locator(f".contenitoreSingolaQuota:has-text('{odd_str}')").first
+            if odd_el.is_visible(timeout=1500):
+                odd_el.click()
+                self.page.wait_for_timeout(800)
+                return True
+        except Exception as exc:
+            logger.warning(f"Quota @{odd_str} non cliccabile: {exc}")
         return False
 
     def add_match_selection(self, match_info: Dict[str, Any]) -> bool:
