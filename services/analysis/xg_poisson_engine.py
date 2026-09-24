@@ -283,6 +283,57 @@ class QuantitativeEngine:
                 return float(data["prob"])
         return None
 
+    def corner_over_probability(
+        self,
+        avg_corners_home: float,
+        avg_corners_away: float,
+        market_name: str,
+    ) -> Optional[float]:
+        """Over corner su totale, casa o ospite, dalla stessa binomiale negativa della matrice congiunta.
+
+        None se il nome non è un Over corner. La linea è libera: 4.5 di squadra e 8.5/9.5 totali
+        usano la stessa massa, senza una formula derivata dal totale.
+        """
+        name = market_name.strip().lower()
+        if "corner" not in name or "over" not in name:
+            return None
+        parsed = re.search(r"over\s*(\d+(?:\.\d+)?)", name)
+        if parsed is None:
+            return None
+        line = float(parsed.group(1))
+        matrix, home, away, total = self._corner_axes(avg_corners_home, avg_corners_away)
+        if re.search(r"\b(?:casa|home)\b", name):
+            band = home > line
+        elif re.search(r"\b(?:ospite|away)\b", name):
+            band = away > line
+        else:
+            band = total > line
+        mask = np.broadcast_to(band, matrix.shape)
+        return float(np.sum(matrix[mask]))
+
+    def _corner_axes(
+        self,
+        avg_corners_home: float,
+        avg_corners_away: float,
+        dispersion_factor: float = 1.5,
+        max_corners: int = 20,
+    ):
+        """Matrice congiunta dei corner. Stessa parametrizzazione di analyze_corners."""
+        alpha = 0.1 * dispersion_factor
+
+        def _params(mu: float) -> tuple[float, float]:
+            n = 1.0 / alpha
+            p = 1.0 / (1.0 + alpha * mu)
+            return n, p
+
+        n_home, p_home = _params(avg_corners_home)
+        n_away, p_away = _params(avg_corners_away)
+        corners = np.arange(max_corners)
+        matrix = np.outer(nbinom.pmf(corners, n_home, p_home), nbinom.pmf(corners, n_away, p_away))
+        home = corners[:, None]
+        away = corners[None, :]
+        return matrix, home, away, home + away
+
     # Alias per compatibilità con il codice esistente
     analyze_niche_markets = analyze_football_markets
 
@@ -299,31 +350,12 @@ class QuantitativeEngine:
         Modella i corner usando la Distribuzione Binomiale Negativa per gestire l'overdispersion.
         """
         # Parametrizzazione Binomiale Negativa da Media (mu) e Fattore di Dispersione (alpha)
-        # Varianza = mu + alpha * mu^2. 
-        # n (number of successes) = 1 / alpha
-        # p (probability) = 1 / (1 + alpha * mu)
-        
-        def get_nbinom_params(mu: float, alpha: float) -> tuple[float, float]:
-            n = 1.0 / alpha
-            p = 1.0 / (1.0 + alpha * mu)
-            return n, p
-
-        # Assumiamo un alpha di default (es. 0.1) se dispersion_factor è passato come moltiplicatore
-        alpha = 0.1 * dispersion_factor 
-        
-        n_home, p_home = get_nbinom_params(avg_corners_home, alpha)
-        n_away, p_away = get_nbinom_params(avg_corners_away, alpha)
-
-        max_corners = 20
-        corners_range = np.arange(max_corners)
-
-        # PMF vettoriali
-        pmf_home = nbinom.pmf(corners_range, n_home, p_home)
-        pmf_away = nbinom.pmf(corners_range, n_away, p_away)
-
-        # Matrice congiunta (assumendo indipendenza tra corner casa e ospite, buona approssimazione)
-        corner_matrix = np.outer(pmf_home, pmf_away)
-        total_corners_grid = corners_range[:, None] + corners_range[None, :]
+        # Varianza = mu + alpha * mu^2. n = 1 / alpha, p = 1 / (1 + alpha * mu).
+        corner_matrix, _home, _away, total_corners_grid = self._corner_axes(
+            avg_corners_home,
+            avg_corners_away,
+            dispersion_factor,
+        )
 
         prob_over_8_5 = np.sum(corner_matrix[total_corners_grid > 8.5])
         prob_over_9_5 = np.sum(corner_matrix[total_corners_grid > 9.5])
