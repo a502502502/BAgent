@@ -118,3 +118,70 @@ def test_combo_tab_and_labels():
     assert any("Doppia Chance" in t for t in tabs)
     labels = outcome_search_texts(action)
     assert any("1X" in t and "3.5" in t for t in labels)
+
+
+def test_combo_multigol_double_chance_and_straight():
+    home_dc = parse_netwin_selection("", "1X + MultiGol 1-4")
+    assert home_dc.family == "COMBO"
+    assert home_dc.combo_type == "MULTIGOL"
+    assert home_dc.combo_result == "1X"
+    assert home_dc.combo_multigol_range == "1-4"
+    assert home_dc.combo_multigol_scope == "MATCH"
+
+    away_band = parse_netwin_selection("", "x2 + multigol  2 - 4")
+    assert away_band.combo_type == "MULTIGOL"
+    assert away_band.combo_result == "X2"
+    assert away_band.combo_multigol_range == "2-4"
+
+    straight = parse_netwin_selection("", "1 + MultiGol 1-4")
+    assert straight.combo_type == "MULTIGOL"
+    assert straight.combo_result == "1"
+    assert straight.combo_multigol_range == "1-4"
+    assert any("MultiGol" in tab for tab in market_tab_labels(straight))
+
+
+def test_team_multigol_sets_home_or_away_scope():
+    home = parse_netwin_selection("", "MultiGol 1-2 Casa")
+    assert home.family == "MULTIGOL"
+    assert home.multigol_range == "1-2"
+    assert home.multigol_scope == "HOME"
+
+    away = parse_netwin_selection("", "MultiGol 1-3 Ospite")
+    assert away.multigol_range == "1-3"
+    assert away.multigol_scope == "AWAY"
+    assert any("Ospite" in label for label in outcome_search_texts(away))
+
+
+def test_combo_under_and_btts_keep_the_result_side():
+    under_35 = parse_netwin_selection("", "1X + Under 3.5")
+    assert under_35.combo_type == "OU"
+    assert under_35.combo_ou_side == "UNDER"
+    assert under_35.combo_ou_line == 3.5
+
+    under_45 = parse_netwin_selection("", "1X + Under 4.5")
+    assert under_45.combo_type == "OU"
+    assert under_45.combo_result == "1X"
+    assert under_45.combo_ou_line == 4.5
+
+    both_score = parse_netwin_selection("", "1X + Gol")
+    assert both_score.family == "COMBO"
+    assert both_score.combo_type == "BTTS"
+    assert both_score.combo_result == "1X"
+    assert both_score.combo_ou_side == "GOL"
+    assert any("Gol" in label for label in outcome_search_texts(both_score))
+
+
+def test_corner_lines_keep_over_and_record_the_side():
+    home_corners = parse_netwin_selection("", "Over 4.5 Corner Casa")
+    assert home_corners.family == "CORNER"
+    assert home_corners.specialty_side == "OVER"
+    assert home_corners.specialty_line == 4.5
+    assert home_corners.specialty_scope == "HOME"
+    assert any("Casa" in label for label in outcome_search_texts(home_corners))
+
+    total_corners = parse_netwin_selection("", "Over 8.5 Corner")
+    assert total_corners.family == "CORNER"
+    assert total_corners.specialty_side == "OVER"
+    assert total_corners.specialty_line == 8.5
+    assert total_corners.specialty_scope == "TOTAL"
+    assert any("Angoli" in tab for tab in market_tab_labels(total_corners))
