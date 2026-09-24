@@ -76,6 +76,10 @@ def parse_netwin_selection(market: str = "", pick: str = "") -> NetwinMarketActi
     if "+" in text:
         return _parse_combo(text, raw)
 
+    nxt = _parse_next_goal(text)
+    if nxt is not None:
+        return nxt
+
     btts = _parse_btts(pick_n) or _parse_btts(text)
     if btts is not None and "UNDER" not in text and "OVER" not in text:
         return NetwinMarketAction(family="BTTS", pick=btts, raw=raw)
@@ -104,6 +108,21 @@ def _normalize(value: str) -> str:
     text = text.replace("G/NG", "GOL")
     text = re.sub(r"\s+", " ", text)
     return text
+
+
+def _parse_next_goal(text: str) -> Optional[NetwinMarketAction]:
+    """Prossimo gol a tre vie. 'Gol' da solo resta Gol/NoGol e non entra qui."""
+    if "PROSSIMO GOL" in text or "NEXT GOAL" in text:
+        if re.search(r"\b(?:CASA|HOME)\b", text):
+            side = "HOME"
+        elif re.search(r"\b(?:OSPITE|AWAY)\b", text):
+            side = "AWAY"
+        else:
+            return None
+        return NetwinMarketAction(family="NEXT_GOAL", pick=side, specialty_side=side, raw=text)
+    if "NESSUN ALTRO GOL" in text or "NO MORE GOAL" in text:
+        return NetwinMarketAction(family="NEXT_GOAL", pick="NONE", specialty_side="NONE", raw=text)
+    return None
 
 
 def _parse_btts(text: str) -> Optional[str]:
@@ -392,6 +411,8 @@ def market_tab_labels(action: NetwinMarketAction) -> list[str]:
         return ["MultiGol", "Multigol", "Multi Gol"]
     if action.family == "BTTS":
         return ["Gol/NoGol", "Gol / No Gol", "G/NG"]
+    if action.family == "NEXT_GOAL":
+        return ["Prossimo Gol", "Next Goal", "Segna Prossimo Gol"]
     if action.family == "CORNER":
         return [
             "Corner",
@@ -471,6 +492,13 @@ def outcome_search_texts(action: NetwinMarketAction) -> list[str]:
                 texts.append(f"{side} {line_s} Ospite")
         elif action.specialty_side:
             texts.append(action.specialty_side)
+    if action.family == "NEXT_GOAL":
+        if action.specialty_side == "HOME":
+            texts.extend(["Prossimo Gol Casa", "Next Goal Casa", "Casa"])
+        elif action.specialty_side == "AWAY":
+            texts.extend(["Prossimo Gol Ospite", "Next Goal Ospite", "Ospite"])
+        else:
+            texts.extend(["Nessun Altro Gol", "No Goal"])
     if action.family == "CHANCE_MIX" and action.chance_mix:
         mix = action.chance_mix
         texts.extend(

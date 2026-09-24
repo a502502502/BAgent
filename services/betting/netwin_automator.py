@@ -25,7 +25,7 @@ from services.betting.netwin_market_parser import (
 
 logger = logging.getLogger("NetwinAutomator")
 
-_SECONDARY_FAMILIES = frozenset({"COMBO", "MULTIGOL", "CORNER"})
+_SECONDARY_FAMILIES = frozenset({"COMBO", "MULTIGOL", "CORNER", "NEXT_GOAL"})
 
 
 def _parsed_action(market: str, pick: str) -> Optional[NetwinMarketAction]:
@@ -259,6 +259,8 @@ class NetwinAutomator:
                 return True
         if action.family == "CORNER":
             pattern = "ANGOLI|CORNER|COMBO"
+        elif action.family == "NEXT_GOAL":
+            pattern = "PROSSIMO GOL|NEXT GOAL"
         elif action.family == "MULTIGOL" or action.combo_type == "MULTIGOL":
             pattern = "MULTIGOL|COMBO"
         else:
