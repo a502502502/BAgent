@@ -17,6 +17,7 @@ Fase 8: Staking Scientifico & Money Management (Kelly Frazionario: Max 5-8% cass
 from __future__ import annotations
 import math
 from dataclasses import dataclass, field
+from datetime import date
 from typing import Dict, List, Any, Tuple, Optional
 from pathlib import Path
 
@@ -24,6 +25,19 @@ from services.analysis.xg_poisson_engine import QuantitativeEngine
 from services.football.squad_absence_checker import SquadAbsenceChecker, PlayerAuditReport
 from services.betting.kelly_staking_engine import KellyStakingEngine
 from services.betting.netwin_odds_checker import NetwinOddsChecker
+from services.football.sixth_sense.lambda_context import (
+    context_from_signals,
+    events_from_mappings,
+    project_attack,
+)
+from services.football.sixth_sense.calibration import (
+    MIN_PLAYED_BEFORE,
+    SeasonMatch,
+    load_factors,
+    load_finished_matches,
+    played_before,
+    season_key,
+)
 
 @dataclass
 class MarketCandidate:
@@ -36,6 +50,7 @@ class MarketCandidate:
     team_name: Optional[str] = None
     sixth_sense_analysis: str = ""        # Analisi tattica, rassegna stampa, motivazioni, clima spogliatoio
     sixth_sense_risk_flags: List[str] = field(default_factory=list) # es. "ROTATION_RISK", "SLOW_START", "LOW_MOTIVATION"
+    sixth_sense_events: List[dict] = field(default_factory=list)  # eventi strutturati: team, event_type, impact, confidence
     estimated_p_1h: float = 0.50          # Probabilità evento nel 1°T (0.0 - 1.0)
     estimated_p_2h: float = 0.60          # Probabilità evento nel 2°T (0.0 - 1.0)
     estimated_p_90: Optional[float] = None # Ignorata dal gate: la P reale esce dal motore
@@ -57,6 +72,8 @@ class MarketCandidate:
     pre_match_odd_favorite: Optional[float] = None # Quota 1X2 pre-match della favorita
     is_parachute_market: bool = False      # Regola #66: Mercato inteso come paracadute/copertura difensiva
     kickoff_time: Optional[str] = None     # Data e ora del match (es. '2026-09-24 20:45 CEST')
+    home_matches_played: Optional[int] = None  # Usato solo se la fonte esterna non ha la squadra
+    away_matches_played: Optional[int] = None
 
 
 @dataclass
@@ -83,6 +100,34 @@ class TicketValidationReport:
     rejection_reasons: List[str]
 
 
+def _match_sides(match_name: str) -> Optional[Tuple[str, str]]:
+    parts = match_name.split(" vs ")
+    if len(parts) != 2:
+        return None
+    home, away = parts[0].strip(), parts[1].strip()
+    if not home or not away:
+        return None
+    return home, away
+
+
+def _season_block(candidate: MarketCandidate, reason: str) -> ValidationReport:
+    return ValidationReport(
+        passed=False,
+        candidate=candidate,
+        stage_failed=0,
+        rejection_reason=f"[BLOCCATO - PARTENZA DOPO 3 PARTITE] {candidate.match_name}. {reason}",
+        details=reason,
+    )
+
+
+def _season_of(candidate: MarketCandidate) -> str:
+    kickoff = (candidate.kickoff_time or "").strip()[:10]
+    try:
+        return season_key(date.fromisoformat(kickoff))
+    except ValueError:
+        return season_key(date.today())
+
+
 class StrictTicketPipeline:
     """
     Pipeline di validazione a 8 stadi con Sesto Senso integrato obbligatorio.
@@ -98,16 +143,35 @@ class StrictTicketPipeline:
         checker: Optional[SquadAbsenceChecker] = None,
         netwin_checker: Optional[NetwinOddsChecker] = None,
         engine: Optional[QuantitativeEngine] = None,
+        season_matches: Optional[List[SeasonMatch]] = None,
     ):
         self.checker = checker or SquadAbsenceChecker()
         self.netwin_checker = netwin_checker or NetwinOddsChecker()
         self.engine = engine or QuantitativeEngine()
+        self.season_matches = season_matches
 
     @staticmethod
     def calculate_poisson(lmbda: float, k: int) -> float:
         if lmbda <= 0:
             return 1.0 if k == 0 else 0.0
         return (math.exp(-lmbda) * (lmbda ** k)) / math.factorial(k)
+
+    def _goal_lambdas(self, candidate: MarketCandidate):
+        """xG di partenza scalati dagli eventi e dalle bandiere. I valori sul candidato restano grezzi."""
+        if candidate.xg_home is None or candidate.xg_away is None:
+            return None
+        context = context_from_signals(
+            candidate.sixth_sense_risk_flags,
+            events_from_mappings(candidate.sixth_sense_events),
+            candidate.xg_home,
+            candidate.xg_away,
+        )
+        return project_attack(
+            candidate.xg_home,
+            candidate.xg_away,
+            context,
+            load_factors(_season_of(candidate)),
+        )
 
     def _probability_from_model(self, candidate: MarketCandidate) -> Optional[float]:
         """P reale dal Poisson gol o dalla binomiale negativa dei corner. Mai da estimated_p_90."""
@@ -120,11 +184,12 @@ class StrictTicketPipeline:
                 candidate.avg_corners_away,
                 candidate.market_name,
             )
-        if candidate.xg_home is None or candidate.xg_away is None:
+        attack = self._goal_lambdas(candidate)
+        if attack is None:
             return None
         return self.engine.goal_market_probability(
-            candidate.xg_home,
-            candidate.xg_away,
+            attack.xg_home,
+            attack.xg_away,
             candidate.market_name,
         )
 
@@ -143,10 +208,18 @@ class StrictTicketPipeline:
         fair_odd = 1.0 / max(0.001, p_full)
         implied_prob = 1.0 / candidate.bookmaker_odd
         edge = (p_full * candidate.bookmaker_odd) - 1.0
+        attack = self._goal_lambdas(candidate)
+        sense = ""
+        if attack is not None and attack.notes:
+            sense = (
+                f" Sesto senso: xG {attack.base_home:.2f}/{attack.base_away:.2f}"
+                f" → {attack.xg_home:.2f}/{attack.xg_away:.2f}"
+                f" ({'; '.join(attack.notes)})."
+            )
         report = (
             f"Motore Dixon-Coles: P(Reale)={p_full*100:.1f}% (Fair Odd: @{fair_odd:.2f}). "
             f"Quota bookmaker @{candidate.bookmaker_odd:.2f} richiede {implied_prob*100:.1f}%. "
-            f"Edge Matematico: {edge*100:+.1f}%"
+            f"Edge Matematico: {edge*100:+.1f}%.{sense}"
         )
         return p_full, edge, report
 
@@ -176,12 +249,13 @@ class StrictTicketPipeline:
                 continue
             if any("corner" in candidate.market_name.lower() for candidate in group):
                 return None
-            xg_pairs = {(candidate.xg_home, candidate.xg_away) for candidate in group}
+            attacks = [self._goal_lambdas(candidate) for candidate in group]
+            if any(attack is None for attack in attacks):
+                return None
+            xg_pairs = {(attack.xg_home, attack.xg_away) for attack in attacks}
             if len(xg_pairs) != 1:
                 return None
             xg_home, xg_away = next(iter(xg_pairs))
-            if xg_home is None or xg_away is None:
-                return None
             probability = self.engine.joint_goal_probability(
                 xg_home,
                 xg_away,
@@ -191,6 +265,44 @@ class StrictTicketPipeline:
                 return None
             joint *= probability
         return joint
+
+    def _block_before_third_match(self, candidate: MarketCandidate) -> Optional[ValidationReport]:
+        """La partenza è dopo 3 partite chiuse del campionato in corso, lette dalla fonte."""
+        sides = _match_sides(candidate.match_name)
+        if sides is None:
+            return _season_block(
+                candidate,
+                "Manca il formato 'Squadra vs Squadra': non posso contare le partite già giocate.",
+            )
+        home, away = sides
+        kickoff = (candidate.kickoff_time or "").strip()[:10]
+        loaded = self.season_matches
+        if loaded is None and kickoff:
+            loaded = load_finished_matches(_season_of(candidate))
+        home_played = away_played = None
+        if loaded and kickoff:
+            home_played = played_before(loaded, home, kickoff, candidate.tournament)
+            away_played = played_before(loaded, away, kickoff, candidate.tournament)
+        if home_played is None:
+            home_played = candidate.home_matches_played
+        if away_played is None:
+            away_played = candidate.away_matches_played
+        if home_played is None or away_played is None:
+            return _season_block(
+                candidate,
+                "Storico del campionato in corso non caricato: senza le partite già giocate la selezione non parte.",
+            )
+        short = []
+        if home_played < MIN_PLAYED_BEFORE:
+            short.append(f"{home} ne ha {home_played}")
+        if away_played < MIN_PLAYED_BEFORE:
+            short.append(f"{away} ne ha {away_played}")
+        if short:
+            return _season_block(
+                candidate,
+                "Il modello parte dopo 3 partite chiuse. " + "; ".join(short) + ".",
+            )
+        return None
 
     def validate_candidate(self, candidate: MarketCandidate) -> ValidationReport:
         """
@@ -214,6 +326,10 @@ class StrictTicketPipeline:
                     ),
                     details=f"Data evento '{candidate.kickoff_time}' antecedente alla stagione operativa corrente."
                 )
+
+        early = self._block_before_third_match(candidate)
+        if early is not None:
+            return early
 
         # =====================================================================
         # GATE 0: DIVIETO 1 O 2 FISSO E COMBO RIGIDE SOTTO QUOTA 1.65 (Protocollo Protezione & Anti-Varianza)

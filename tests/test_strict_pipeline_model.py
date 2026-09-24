@@ -17,9 +17,59 @@ def _candidate(**overrides) -> MarketCandidate:
         xg_away=1.2,
         sixth_sense_analysis=SENSE,
         estimated_p_90=0.99,
+        home_matches_played=3,
+        away_matches_played=3,
     )
     data.update(overrides)
     return MarketCandidate(**data)
+
+
+def test_a_team_with_two_matches_does_not_start(tmp_path):
+    from services.football.sixth_sense.calibration import SeasonMatch
+
+    history = [
+        SeasonMatch("2026", f"2026-09-0{day}", "Home FC", f"Side {day}", 1, 0, "Serie A")
+        for day in range(1, 3)
+    ]
+    pipeline = StrictTicketPipeline(season_matches=history)
+    report = pipeline.validate_candidate(
+        _candidate(
+            kickoff_time="2026-09-24 20:45",
+            tournament="Serie A",
+            home_matches_played=10,
+            away_matches_played=10,
+        )
+    )
+    assert report.passed is False
+    assert report.stage_failed == 0
+    assert "dopo 3 partite" in report.rejection_reason.lower()
+
+
+def test_striker_absence_lowers_the_priced_probability():
+    pipeline = StrictTicketPipeline()
+    plain = pipeline._probability_from_model(_candidate())
+    hurt = _candidate(
+        sixth_sense_events=[
+            {
+                "team": "home",
+                "event_type": "injury",
+                "description": "punta titolare fuori",
+                "impact": -2.0,
+                "confidence": 1.0,
+            }
+        ]
+    )
+    priced = pipeline._probability_from_model(hurt)
+    _, _, report = pipeline.calculate_joint_probability(hurt)
+    assert priced < plain
+    assert hurt.xg_home == 1.7
+    assert "assenza offensiva casa" in report
+
+
+def test_injury_alarm_without_a_side_keeps_the_base_xg():
+    pipeline = StrictTicketPipeline()
+    flagged = _candidate(sixth_sense_risk_flags=["INJURY_ALARM"])
+    assert pipeline._probability_from_model(flagged) == pipeline._probability_from_model(_candidate())
 
 
 def test_missing_xg_is_rejected():

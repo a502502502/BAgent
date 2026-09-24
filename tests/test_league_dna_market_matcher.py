@@ -78,7 +78,9 @@ class TestLeagueDNAMarketMatcher(unittest.TestCase):
             market_name="Over 0.5 Gol",
             bookmaker_odd=1.08,
             estimated_p_90=0.88,
-            sixth_sense_analysis="River cerca la vittoria"
+            sixth_sense_analysis="River cerca la vittoria",
+            home_matches_played=3,
+            away_matches_played=3,
         )
         report = self.pipeline.validate_candidate(c)
         self.assertFalse(report.passed)

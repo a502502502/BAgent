@@ -106,7 +106,8 @@ Regole importanti:
 - Sii conservativo: preferisci impatti più bassi se non sei sicuro
 - slow_start: avvio lento, partita di studio, ritmo diesel. Corregge i gol attesi, non solo l'1X2
 - rotation: turnover atteso di formazione. Corregge i gol attesi di entrambe, non solo l'1X2
-- corto_muso: l'allenatore gestisce il minimo scarto e la gara può chiudersi 1-0 o 0-1. Corregge i gol attesi, non solo l'1X2"""
+- corto_muso: l'allenatore gestisce il minimo scarto e la gara può chiudersi 1-0 o 0-1. Corregge i gol attesi, non solo l'1X2
+- injury / suspension: assenza che toglie gol alla squadra indicata, con impact negativo. Se manca una punta, l'attacco di quella squadra cala. Se manca un difensore o il portiere, scrivi portiere o difensore nella description: sale l'attacco avversario. Corregge i gol attesi, non solo l'1X2"""
 
 
 # ------------------------------------------------------------------
