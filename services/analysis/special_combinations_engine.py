@@ -21,6 +21,19 @@ def _poisson_pmf(k: int, lam: float) -> float:
         return 1.0 if k == 0 else 0.0
     return (lam ** k) * math.exp(-lam) / math.factorial(k)
 
+def _price_or_fair(
+    odds: Dict[str, float],
+    key: str,
+    probability: float,
+    fair_odd: float,
+) -> Tuple[float, float]:
+    """Senza quota vera l'edge è zero: la fair odd non è un prezzo del banco."""
+    quoted = odds.get(key)
+    if quoted is None or quoted <= 1.0:
+        return fair_odd, 0.0
+    return quoted, (probability * quoted) - 1.0
+
+
 def build_bivariate_matrix(xg_home: float, xg_away: float, max_goals: int = 8) -> List[List[float]]:
     """Costruisce la matrice di probabilità P(Home=i, Away=j)."""
     home_pmf = [_poisson_pmf(i, xg_home) for i in range(max_goals + 1)]
@@ -73,8 +86,7 @@ class SpecialCombinationsEngine:
         p_0_1 = matrix[0][1]
         p_1x_or_o15 = round(1.0 - p_0_1, 4)
         fair_odd_1 = round(1.0 / max(0.001, p_1x_or_o15), 2)
-        odd_1 = odds.get("1X o Over 1.5", round(fair_odd_1 * 1.08, 2))
-        edge_1 = (p_1x_or_o15 * odd_1) - 1.0
+        odd_1, edge_1 = _price_or_fair(odds, "1X o Over 1.5", p_1x_or_o15, fair_odd_1)
 
         selections.append(SpecialSelection(
             market_family="CHANCE_MIX",
@@ -99,8 +111,7 @@ class SpecialCombinationsEngine:
         p_1_0 = matrix[1][0]
         p_x2_or_o15 = round(1.0 - p_1_0, 4)
         fair_odd_2 = round(1.0 / max(0.001, p_x2_or_o15), 2)
-        odd_2 = odds.get("X2 o Over 1.5", round(fair_odd_2 * 1.08, 2))
-        edge_2 = (p_x2_or_o15 * odd_2) - 1.0
+        odd_2, edge_2 = _price_or_fair(odds, "X2 o Over 1.5", p_x2_or_o15, fair_odd_2)
 
         selections.append(SpecialSelection(
             market_family="CHANCE_MIX",
@@ -124,8 +135,7 @@ class SpecialCombinationsEngine:
         p_under_and_nogol = matrix[0][0] + matrix[1][0] + matrix[0][1] + matrix[2][0] + matrix[0][2]
         p_gg_or_o25 = round(1.0 - p_under_and_nogol, 4)
         fair_odd_3 = round(1.0 / max(0.001, p_gg_or_o25), 2)
-        odd_3 = odds.get("Gol o Over 2.5", round(fair_odd_3 * 1.10, 2))
-        edge_3 = (p_gg_or_o25 * odd_3) - 1.0
+        odd_3, edge_3 = _price_or_fair(odds, "Gol o Over 2.5", p_gg_or_o25, fair_odd_3)
 
         selections.append(SpecialSelection(
             market_family="CHANCE_MIX",
@@ -149,8 +159,7 @@ class SpecialCombinationsEngine:
         p_away_clean_win = sum(matrix[0][j] for j in range(1, 9))
         p_1x_or_gg = round(1.0 - p_away_clean_win, 4)
         fair_odd_4 = round(1.0 / max(0.001, p_1x_or_gg), 2)
-        odd_4 = odds.get("1X o Gol", round(fair_odd_4 * 1.08, 2))
-        edge_4 = (p_1x_or_gg * odd_4) - 1.0
+        odd_4, edge_4 = _price_or_fair(odds, "1X o Gol", p_1x_or_gg, fair_odd_4)
 
         selections.append(SpecialSelection(
             market_family="CHANCE_MIX",
@@ -274,15 +283,29 @@ class SpecialCombinationsEngine:
         cm_list = self.evaluate_chance_mixes(match_name, xg_home, xg_away, bookmaker_odds)
         all_specials.extend(cm_list)
 
-        # 2. MultiGol Asimmetrico Tempi
-        xg_tot = xg_home + xg_away
-        all_specials.append(self.evaluate_asymmetric_halves(match_name, xg_tot))
+        odds = bookmaker_odds or {}
 
-        # 3. Dutching Paracadute per la favorita
+        # 2. MultiGol Asimmetrico Tempi — solo con quota reale
+        halves_key = "MultiGol 0-2 1°T + 1-3 2°T"
+        if halves_key in odds and odds[halves_key] > 1.0:
+            xg_tot = xg_home + xg_away
+            all_specials.append(
+                self.evaluate_asymmetric_halves(match_name, xg_tot, odds[halves_key])
+            )
+
+        # 3. Dutching Paracadute — solo se entrambe le quote sono presenti
         fav_name = match_name.split(" vs ")[0] if xg_home >= xg_away else match_name.split(" vs ")[-1]
         fav_xg = max(xg_home, xg_away)
-        if fav_xg >= 1.70:
-            all_specials.append(self.evaluate_dutching_lock(fav_name, fav_xg))
+        core_key = "MultiGol 1-3 Squadra"
+        para_key = "Over 3.5 Squadra"
+        if (
+            fav_xg >= 1.70
+            and odds.get(core_key, 0) > 1.0
+            and odds.get(para_key, 0) > 1.0
+        ):
+            all_specials.append(
+                self.evaluate_dutching_lock(fav_name, fav_xg, odds[core_key], odds[para_key])
+            )
 
         # Filtra per alta resilienza ed Edge positivo
         filtered = [s for s in all_specials if s.real_probability >= self.MIN_PROBABILITY_THRESHOLD and s.mathematical_edge >= self.MIN_EDGE_THRESHOLD]
