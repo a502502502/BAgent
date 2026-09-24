@@ -1,5 +1,7 @@
 """Le combo battono il banco solo con una quota vera, e il sesto senso cambia la matrice."""
 
+import pytest
+
 from services.analysis.combo_book_search import search_combo_edge
 from services.analysis.xg_poisson_engine import QuantitativeEngine
 from services.football.sixth_sense.analyzer import SixthSenseEvent
@@ -80,3 +82,32 @@ def test_rotation_event_shrinks_both_attacks_before_pricing():
     assert result.xg_away < 1.4
     assert base is not None and adjusted is not None
     assert adjusted < base
+
+
+def test_striker_injury_shrinks_only_that_attack():
+    events = [
+        SixthSenseEvent("home", "injury", "punta titolare fuori", impact=-2.0, confidence=1.0)
+    ]
+    context = context_from_events(events)
+    result = search_combo_edge(1.8, 1.2, {"Over 2.5": 2.40}, context)
+    assert result.xg_home == pytest.approx(1.8 * 0.84)
+    assert result.xg_away == 1.2
+    assert any("assenza offensiva casa" in note for note in result.notes)
+
+
+def test_goalkeeper_absence_raises_the_other_attack():
+    events = [
+        SixthSenseEvent("home", "injury", "portiere titolare fuori", impact=-2.0, confidence=1.0)
+    ]
+    result = search_combo_edge(1.4, 1.1, {"Over 1.5": 1.50}, context_from_events(events))
+    assert result.xg_home == 1.4
+    assert result.xg_away == pytest.approx(1.1 * 1.16)
+
+
+def test_doubtful_injury_does_not_move_the_lambdas():
+    events = [
+        SixthSenseEvent("away", "injury", "punta in dubbio", impact=-2.0, confidence=0.4)
+    ]
+    result = search_combo_edge(1.6, 1.3, {"Over 1.5": 1.50}, context_from_events(events))
+    assert result.xg_home == 1.6
+    assert result.xg_away == 1.3

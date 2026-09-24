@@ -79,6 +79,8 @@ def test_strict_pipeline_blocks_leg_below_72_percent_probability():
         xg_home=1.4,
         xg_away=1.2,
         sixth_sense_analysis="Buon volume di tiri su entrambi i lati.",
+        home_matches_played=3,
+        away_matches_played=3,
     )
 
     rep = pipeline.validate_candidate(candidate)
@@ -99,6 +101,8 @@ def test_strict_pipeline_accepts_leg_meeting_both_edge_and_probability_floor():
         xg_home=1.8,
         xg_away=1.6,
         sixth_sense_analysis="Olanda e Germania entrambe votate all attacco verticale; xG combinato elevato.",
+        home_matches_played=3,
+        away_matches_played=3,
     )
 
     rep = pipeline.validate_candidate(candidate)
