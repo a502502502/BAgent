@@ -140,9 +140,17 @@ _PAGE = r"""<!DOCTYPE html>
   .stat { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:8px 12px; min-width:110px; }
   .stat b { display:block; font-size:16px; }
   nav { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:8px; }
-  button { background:#0f172a; color:var(--muted); border:1px solid var(--line); border-radius:10px; padding:10px 6px; font-weight:700; cursor:pointer; }
-  button.on { background:#1e293b; color:var(--text); border-color:var(--yellow); }
-  button b { display:block; font-size:18px; color:var(--blue); }
+  nav button { background:#0f172a; color:var(--muted); border:1px solid var(--line); border-radius:10px; padding:10px 6px; font-weight:700; cursor:pointer; }
+  nav button.on { background:#1e293b; color:var(--text); border-color:var(--yellow); }
+  nav button b { display:block; font-size:18px; color:var(--blue); }
+  form { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; margin:0 0 16px; }
+  label { display:block; color:var(--muted); font-size:12px; margin:8px 0 4px; }
+  input[type="date"], textarea { width:100%; background:#0f172a; color:var(--text); border:1px solid var(--line); border-radius:8px; padding:8px; }
+  .flags input { width:auto; }
+  .flags { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+  .flags label { margin:0; color:var(--text); }
+  form button { background:#0369a1; color:#f0f9ff; border:0; border-radius:8px; padding:10px 14px; font-weight:700; cursor:pointer; }
+  #advice .why { margin:4px 0 0; color:var(--muted); font-size:13px; }
   #check { color:var(--muted); font-size:12px; min-height:18px; margin:0 0 12px; }
   #check.ok { color:var(--green); }
   #check.bad { color:var(--red); }
@@ -171,6 +179,24 @@ _PAGE = r"""<!DOCTYPE html>
     <button type="button" data-section="past">Passate <b id="n-past">0</b></button>
   </nav>
   <p id="check">Controllo ogni 30 secondi</p>
+  <form id="ask">
+    <strong>Chiedi schedina</strong>
+    <label for="ask-date">Data</label>
+    <input id="ask-date" name="date" type="date" required>
+    <label for="ask-query">Squadre o partite, una per riga. Vuoto: il meglio del giorno.</label>
+    <textarea id="ask-query" name="query" rows="3" placeholder="Napoli vs Cagliari"></textarea>
+    <div class="flags">
+      <label><input type="checkbox" name="corto_muso_home"> Casa di misura</label>
+      <label><input type="checkbox" name="corto_muso_away"> Ospite di misura</label>
+      <label><input type="checkbox" name="slow_start"> Avvio lento</label>
+      <label><input type="checkbox" name="rotation"> Turnover</label>
+      <label><input type="checkbox" name="low_motivation_home"> Motivazione bassa casa</label>
+      <label><input type="checkbox" name="low_motivation_away"> Motivazione bassa ospite</label>
+    </div>
+    <button type="submit">Mercato migliore</button>
+    <p id="ask-status" class="meta"></p>
+    <div id="advice"></div>
+  </form>
   <section id="list"></section>
 </main>
 <script type="application/json" id="boot">__BOOT__</script>
@@ -183,6 +209,7 @@ const EMPTY = {
 let data = JSON.parse(document.getElementById("boot").textContent);
 let section = "present";
 let left = 30;
+let adviceUrl = "";
 const list = document.getElementById("list");
 const check = document.getElementById("check");
 
@@ -244,12 +271,56 @@ function stamp() {
   return new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 }
 
+function selectionCard(row) {
+  const art = document.createElement("article");
+  art.className = "card";
+  const top = document.createElement("div");
+  top.className = "top";
+  const title = document.createElement("div");
+  title.appendChild(text("strong", row.match));
+  title.appendChild(text("div", (row.when || "") + " · " + (row.league || ""), "meta"));
+  title.appendChild(text("div", row.market || "", "pick"));
+  top.appendChild(title);
+  top.appendChild(text("div", row.odd || "—", "odd"));
+  art.appendChild(top);
+  art.appendChild(text("div", "P " + (row.probability || "—") + " · fair " + (row.fair_odd || "—") + " · edge " + (row.edge || "—"), "meta"));
+  (row.motivations || []).forEach(function (line) {
+    art.appendChild(text("p", line, "why"));
+  });
+  return art;
+}
+
+function showAdvice(payload) {
+  const box = document.getElementById("advice");
+  box.replaceChildren();
+  if (!payload) return;
+  if (payload.message && !payload.selections) {
+    box.appendChild(text("p", payload.message, "meta"));
+    return;
+  }
+  box.appendChild(text("p", payload.note || "", "meta"));
+  if (payload.total_odds) {
+    box.appendChild(text("p", "Quota combinata " + payload.total_odds, "meta"));
+  }
+  (payload.selections || []).forEach(function (row) { box.appendChild(selectionCard(row)); });
+  if (!(payload.selections || []).length) {
+    box.appendChild(text("p", payload.message || "Nessun mercato nello sweet spot per questa richiesta.", "meta"));
+  }
+  (payload.discarded || []).forEach(function (row) {
+    box.appendChild(text("p", (row.match || "") + ": " + (row.reason || ""), "meta"));
+  });
+}
+
 async function refresh() {
   try {
     const response = await fetch("schedine.json?t=" + Date.now(), { cache: "no-store" });
     if (!response.ok) throw new Error(String(response.status));
     data = await response.json();
     render();
+    try {
+      const engine = await fetch("motore.json?t=" + Date.now(), { cache: "no-store" });
+      if (engine.ok) adviceUrl = ((await engine.json()).advice_url || "").replace(/\/$/, "");
+    } catch (ignore) {}
     check.className = "ok";
     check.textContent = "Ultimo controllo " + stamp() + " · prossimo tra " + left + "s";
   } catch (error) {
@@ -258,12 +329,45 @@ async function refresh() {
   }
 }
 
+document.getElementById("ask").addEventListener("submit", async function (event) {
+  event.preventDefault();
+  const status = document.getElementById("ask-status");
+  if (!adviceUrl) {
+    status.textContent = "Motore non collegato. Il controllo lo riprova ogni 30 secondi.";
+    return;
+  }
+  const form = new FormData(event.target);
+  const flags = {};
+  ["corto_muso_home", "corto_muso_away", "slow_start", "rotation", "low_motivation_home", "low_motivation_away"].forEach(function (name) {
+    flags[name] = form.get(name) === "on";
+  });
+  status.textContent = "Calcolo in corso";
+  try {
+    const response = await fetch(adviceUrl + "/api/schedina", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        date: form.get("date"),
+        query: form.get("query") || "",
+        flags: flags
+      })
+    });
+    const payload = await response.json();
+    status.textContent = response.ok ? "Risposta aggiornata" : "Richiesta non riuscita";
+    showAdvice(payload);
+  } catch (error) {
+    status.textContent = "Motore non raggiungibile.";
+  }
+});
+
 document.querySelectorAll("button[data-section]").forEach(function (button) {
   button.addEventListener("click", function () {
     section = button.getAttribute("data-section");
     render();
   });
 });
+const today = new Date();
+document.getElementById("ask-date").value = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
 render();
 refresh();
 setInterval(function () {

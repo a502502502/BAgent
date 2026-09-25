@@ -48,7 +48,7 @@ def publish_once() -> str:
         old = json.loads(current_json.read_text(encoding="utf-8"))
         same_data = _body(old) == fresh
     shell = current_html.read_text(encoding="utf-8") if current_html.exists() else ""
-    same_shell = "Presenti" in shell and "schedine.json?t=" in shell
+    same_shell = "Chiedi schedina" in shell and "schedine.json?t=" in shell
     if same_data and same_shell:
         return "invariato"
     write_slip_archive(PUBLIC_SITE / "index.html")
