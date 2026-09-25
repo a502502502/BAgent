@@ -44,7 +44,7 @@ def main():
 
     specials = engine.scan_best_specials_for_match(args.match, args.xg_home, args.xg_away)
     if not specials:
-        print("\nNessuna combinazione speciale soddisfa i criteri di super-resilienza (Prob >= 82% & Edge >= +5%).")
+        print("\nNessuna combinazione con quota reale del banco. Senza prezzo l'edge non viene calcolato.")
         return
 
     print(f"\nTrovate {len(specials)} formule ad altissima resilienza:\n")

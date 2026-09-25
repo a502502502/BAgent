@@ -39,6 +39,8 @@ from services.football.base_model.goal_model import GoalModel
 from services.football.base_model.corner_model import CornerModel
 from services.football.base_model.aggregate_model import AggregateModel
 from services.football.sixth_sense.repository import SixthSenseRepository
+from services.football.sixth_sense.lambda_context import FactorSet, context_from_events, project_attack
+from services.football.sixth_sense.calibration import load_factors, record_projection, season_key
 
 
 # ------------------------------------------------------------------
@@ -74,6 +76,9 @@ class MatchAnalysisResult:
 
     # Dati grezzi per debug/log
     raw_data: dict = field(default_factory=dict)
+
+    # Note del sesto senso applicate ai gol attesi
+    goal_context_notes: list[str] = field(default_factory=list)
 
     def report(self) -> str:
         """
@@ -151,12 +156,20 @@ class MatchAnalysisResult:
                 "",
                 "── MERCATI GOL (Poisson) ───────────────────────────────",
                 f"  Gol attesi: {gm.get('expected_total', '?')} "
-                f"(casa {gm.get('lambda_home', '?')} + ospite {gm.get('lambda_away', '?')})",
+                f"(casa {gm.get('lambda_home', '?')} + ospite {gm.get('lambda_away', '?')})"
+                + (
+                    f" | prima del sesto senso casa {gm.get('lambda_home_base', '?')} "
+                    f"+ ospite {gm.get('lambda_away_base', '?')}"
+                    if gm.get("sixth_sense_notes")
+                    else ""
+                ),
                 f"  Over 1.5 : {gm.get('over_1_5', 0):.1%}  |  Under 1.5 : {gm.get('under_1_5', 0):.1%}",
                 f"  Over 2.5 : {gm.get('over_2_5', 0):.1%}  |  Under 2.5 : {gm.get('under_2_5', 0):.1%}",
                 f"  Over 3.5 : {gm.get('over_3_5', 0):.1%}  |  Under 3.5 : {gm.get('under_3_5', 0):.1%}",
                 f"  BTTS Sì  : {gm.get('btts_yes', 0):.1%}  |  BTTS No   : {gm.get('btts_no', 0):.1%}",
             ]
+            if self.goal_context_notes:
+                lines.append("  Sesto senso sui gol: " + "; ".join(self.goal_context_notes))
 
         # Mercati corner
         if self.corner_markets:
@@ -369,9 +382,30 @@ class SixthSenseEngine:
         # 5. Aggiustamento probabilità
         adjusted = self.adjuster.adjust(base_probs, sixth_sense)
 
-        # 6. Modello gol (Poisson)
-        goal_model = self._build_goal_model(bundle, adjusted)
+        # 6. Modello gol (Poisson), con i lambda già corretti dal sesto senso
+        played_on = match_date if isinstance(match_date, date) else date.fromisoformat(str(match_date)[:10])
+        season = season_key(played_on)
+        factors = load_factors(season)
+        goal_model, attack = self._build_goal_model(bundle, adjusted, sixth_sense, factors)
+        try:
+            record_projection(
+                season,
+                match_date_str,
+                home,
+                away,
+                attack.base_home,
+                attack.base_away,
+                goal_model.lh,
+                goal_model.la,
+                context_from_events(sixth_sense.events),
+            )
+        except Exception as e:
+            if verbose:
+                print(f"[BAgent] ⚠️  Archivio calibrazione non salvato: {e}")
         goal_markets = goal_model.markets()
+        goal_markets["lambda_home_base"] = round(attack.base_home, 3)
+        goal_markets["lambda_away_base"] = round(attack.base_away, 3)
+        goal_markets["sixth_sense_notes"] = list(attack.notes)
 
         if verbose:
             print(f"[BAgent] Goal model: {goal_model}")
@@ -423,6 +457,7 @@ class SixthSenseEngine:
             value_signals=value_signals,
             market_odds=market_odds or {},
             raw_data=bundle,
+            goal_context_notes=list(attack.notes),
         )
 
     def _build_corner_model(self, bundle: dict, adjusted: "AdjustedProbabilities") -> CornerModel:
@@ -446,18 +481,32 @@ class SixthSenseEngine:
 
         return CornerModel.from_win_prob(home_win=adjusted.home_win)
 
-    def _build_goal_model(self, bundle: dict, adjusted: "AdjustedProbabilities") -> GoalModel:
+    def _build_goal_model(
+        self,
+        bundle: dict,
+        adjusted: "AdjustedProbabilities",
+        sixth_sense: "SixthSenseAnalysis",
+        factors: FactorSet | None = None,
+    ):
         """
         Costruisce il GoalModel dalle fonti disponibili.
         Priorità: form stats > win probability da ClubElo/adjusted.
+        Gli eventi del sesto senso scalano i lambda prima dei mercati.
         """
-        # Prova a usare le form stats di SofaScore se disponibili
         ss = bundle.get("sofascore") or {}
         home_form = ss.get("home_form") or {}
         away_form = ss.get("away_form") or {}
 
         if home_form.get("matches", 0) >= 3 and away_form.get("matches", 0) >= 3:
-            return GoalModel.from_form_stats(home_form, away_form)
+            base = GoalModel.from_form_stats(home_form, away_form)
+        else:
+            base = GoalModel.from_win_prob(home_win=adjusted.home_win)
 
-        # Fallback: calibra dai da probabilità di vittoria casa
-        return GoalModel.from_win_prob(home_win=adjusted.home_win)
+        projection = project_attack(
+            base.lh,
+            base.la,
+            context_from_events(sixth_sense.events),
+            factors,
+        )
+        model = GoalModel(lambda_home=projection.xg_home, lambda_away=projection.xg_away)
+        return model, projection

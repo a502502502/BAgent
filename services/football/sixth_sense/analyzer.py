@@ -28,7 +28,7 @@ import anthropic
 @dataclass
 class SixthSenseEvent:
     team: str                  # 'home' | 'away' | 'both'
-    event_type: str            # injury | coach_change | morale | fatigue | suspension | other
+    event_type: str            # injury | coach_change | morale | fatigue | suspension | motivation | slow_start | rotation | corto_muso | other
     description: str           # spiegazione breve
     impact: float              # -3.0 ... +3.0 (negativo = penalizza quella squadra)
     confidence: float          # 0.0 ... 1.0
@@ -78,7 +78,7 @@ Schema di risposta:
   "events": [
     {
       "team": "home" | "away" | "both",
-      "event_type": "injury" | "coach_change" | "morale" | "fatigue" | "suspension" | "motivation" | "other",
+      "event_type": "injury" | "coach_change" | "morale" | "fatigue" | "suspension" | "motivation" | "slow_start" | "rotation" | "corto_muso" | "other",
       "description": "spiegazione concisa in italiano",
       "impact": <numero da -3.0 a +3.0>,
       "confidence": <numero da 0.0 a 1.0>,
@@ -103,7 +103,11 @@ Regole importanti:
 - Se non trovi notizie rilevanti, restituisci events: [] e overall_confidence: 0.0
 - Non inventare eventi non supportati dalle notizie fornite
 - Considera solo notizie recenti (ultime 72 ore sono più rilevanti)
-- Sii conservativo: preferisci impatti più bassi se non sei sicuro"""
+- Sii conservativo: preferisci impatti più bassi se non sei sicuro
+- slow_start: avvio lento, partita di studio, ritmo diesel. Corregge i gol attesi, non solo l'1X2
+- rotation: turnover atteso di formazione. Corregge i gol attesi di entrambe, non solo l'1X2
+- corto_muso: l'allenatore gestisce il minimo scarto e la gara può chiudersi 1-0 o 0-1. Corregge i gol attesi, non solo l'1X2
+- injury / suspension: assenza che toglie gol alla squadra indicata, con impact negativo. Se manca una punta, l'attacco di quella squadra cala. Se manca un difensore o il portiere, scrivi portiere o difensore nella description: sale l'attacco avversario. Corregge i gol attesi, non solo l'1X2"""
 
 
 # ------------------------------------------------------------------
