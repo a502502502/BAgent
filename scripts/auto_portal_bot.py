@@ -34,6 +34,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from services.portal.portal_builder import generate_portal_html
+from services.portal.slip_archive import write_slip_archive
 from scripts.bet_guard_validator import BetGuardValidator
 
 # Load .env
@@ -211,6 +212,7 @@ def execute_2hour_cycle() -> dict:
 
     try:
         generate_portal_html(portal_data)
+        write_slip_archive(ROOT / "portal" / "schedine.html", now=now_rome)
         print(f"[{now_rome.strftime('%H:%M:%S')}] ✅ Portale Web aggiornato con successo!", flush=True)
     except Exception as e:
         print(f"generate_portal_html error: {e}")
