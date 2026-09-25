@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAgent — Archivio schedine</title>
+<style>
+  :root { --bg:#070d19; --card:#111c30; --line:#1e293b; --text:#f8fafc; --muted:#94a3b8; --blue:#38bdf8; --green:#10b981; --yellow:#f59e0b; --red:#f87171; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); }
+  main { max-width:980px; margin:0 auto; padding:16px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  p { color:var(--muted); margin:0; }
+  header { display:flex; justify-content:space-between; gap:12px; align-items:flex-end; margin-bottom:14px; flex-wrap:wrap; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:8px 12px; min-width:110px; }
+  .stat b { display:block; font-size:16px; }
+  nav { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:8px; }
+  button { background:#0f172a; color:var(--muted); border:1px solid var(--line); border-radius:10px; padding:10px 6px; font-weight:700; cursor:pointer; }
+  button.on { background:#1e293b; color:var(--text); border-color:var(--yellow); }
+  button b { display:block; font-size:18px; color:var(--blue); }
+  #check { color:var(--muted); font-size:12px; min-height:18px; margin:0 0 12px; }
+  #check.ok { color:var(--green); }
+  #check.bad { color:var(--red); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; margin:0 0 12px; }
+  .top { display:flex; justify-content:space-between; gap:8px; }
+  .odd { font-size:20px; font-weight:800; color:var(--blue); }
+  .meta { color:var(--muted); font-size:12px; margin:6px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td { padding:6px 0; border-top:1px solid var(--line); vertical-align:top; }
+  .pick { color:var(--blue); }
+  .Vinta { color:var(--green); } .Persa { color:var(--red); } .Futura, .In, .corso { color:var(--yellow); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Archivio schedine</h1>
+      <p id="generated">Caricamento</p>
+    </div>
+    <div class="stat">P/L chiuso<b id="profit">—</b></div>
+  </header>
+  <nav>
+    <button type="button" data-section="present" class="on">Presenti <b id="n-present">0</b></button>
+    <button type="button" data-section="future">Future <b id="n-future">0</b></button>
+    <button type="button" data-section="past">Passate <b id="n-past">0</b></button>
+  </nav>
+  <p id="check">Controllo ogni 30 secondi</p>
+  <section id="list"></section>
+</main>
+<script type="application/json" id="boot">{"generated_at": "2026-09-25T14:14:57+02:00", "check_seconds": 30, "profit_label": "—", "present": [], "future": [], "past": [{"id": "TICKET_COPERTURA_COPPE_22SET", "title": "Doppia Copertura 2: Le Mura Italiane di Coppa", "label": "Chiusa", "stake": "20.00 €", "odds": "1.53×", "legs": [{"when": "22/09 21:00", "match": "Torino vs Empoli", "pick": "Under 3.5 Gol", "odd": "1.22"}, {"when": "24/09 21:00", "match": "Napoli vs Palermo", "pick": "1X + Over 1.5 Gol", "odd": "1.25"}]}, {"id": "TICKET_COPERTURA_SPAGNA_22SET", "title": "Doppia Copertura 1: I Giganti di Spagna", "label": "Chiusa", "stake": "20.00 €", "odds": "1.49×", "legs": [{"when": "22/09 21:00", "match": "Real Madrid vs Alavés", "pick": "1 (Vittoria Real Madrid)", "odd": "1.22"}, {"when": "23/09 21:00", "match": "Barcelona vs Getafe", "pick": "1 (Vittoria Barcellona)", "odd": "1.22"}]}, {"id": "TICKET_MASTER_INFRA_22SET", "title": "Multiplona Master Infrasettimanale (Martedì-Giovedì)", "label": "Chiusa", "stake": "15.00 €", "odds": "5.77×", "legs": [{"when": "22/09 21:00", "match": "Real Madrid vs Alavés", "pick": "1 + Over 1.5 Gol", "odd": "1.35"}, {"when": "22/09 21:00", "match": "Torino vs Empoli", "pick": "1X + Under 3.5 Gol", "odd": "1.45"}, {"when": "23/09 02:30", "match": "River Plate vs Colo-Colo", "pick": "1X", "odd": "1.20"}, {"when": "23/09 21:00", "match": "Barcelona vs Getafe", "pick": "1 + Over 1.5 Gol", "odd": "1.32"}, {"when": "23/09 21:00", "match": "Liverpool vs West Ham", "pick": "1X + Over 1.5 Gol", "odd": "1.35"}, {"when": "24/09 21:00", "match": "Napoli vs Palermo", "pick": "1 + Over 1.5 Gol", "odd": "1.38"}]}, {"id": "TICKET_SERALE_ELITE_21SET", "title": "Tripla Serale Vere Gemme (21 Settembre)", "label": "Chiusa", "stake": "10.00 €", "odds": "4.60×", "legs": [{"when": "21/09 18:00", "match": "David Goffin vs Mark Lajal", "pick": "1 (David Goffin)", "odd": "1.62"}, {"when": "21/09 19:00", "match": "Jonkoping vs Skovde AIK", "pick": "1X + Over 1.5", "odd": "1.72"}, {"when": "21/09 20:30", "match": "Trento vs Pro Vercelli", "pick": "MultiGol 1-2 Casa", "odd": "1.65"}]}]}</script>
+<script>
+const EMPTY = {
+  present: "Nessuna schedina in corso.",
+  future: "Nessuna schedina con kickoff ancora davanti.",
+  past: "Nessuna schedina chiusa in archivio."
+};
+let data = JSON.parse(document.getElementById("boot").textContent);
+let section = "present";
+let left = 30;
+const list = document.getElementById("list");
+const check = document.getElementById("check");
+
+function text(tag, value, className) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  node.textContent = value || "";
+  return node;
+}
+
+function card(slip) {
+  const art = document.createElement("article");
+  art.className = "card";
+  const top = document.createElement("div");
+  top.className = "top";
+  const title = document.createElement("div");
+  title.appendChild(text("strong", slip.title));
+  const meta = text("div", (slip.id || "") + " · " + (slip.label || ""), "meta");
+  meta.className = "meta " + (slip.label || "").split(" ")[0];
+  title.appendChild(meta);
+  top.appendChild(title);
+  top.appendChild(text("div", slip.odds || "—", "odd"));
+  art.appendChild(top);
+  art.appendChild(text("div", "Stake " + (slip.stake || "—"), "meta"));
+  const table = document.createElement("table");
+  (slip.legs || []).forEach(function (leg) {
+    const row = document.createElement("tr");
+    row.appendChild(text("td", leg.when || "—"));
+    const match = document.createElement("td");
+    match.appendChild(document.createTextNode(leg.match || ""));
+    match.appendChild(text("div", leg.pick || "", "pick"));
+    row.appendChild(match);
+    row.appendChild(text("td", leg.odd || "—"));
+    table.appendChild(row);
+  });
+  art.appendChild(table);
+  return art;
+}
+
+function render() {
+  ["present", "future", "past"].forEach(function (name) {
+    document.getElementById("n-" + name).textContent = String((data[name] || []).length);
+  });
+  document.getElementById("profit").textContent = data.profit_label || "—";
+  document.getElementById("generated").textContent = "Dati del " + (data.generated_at || "—");
+  document.querySelectorAll("button[data-section]").forEach(function (button) {
+    button.classList.toggle("on", button.getAttribute("data-section") === section);
+  });
+  list.replaceChildren();
+  const rows = data[section] || [];
+  if (!rows.length) {
+    list.appendChild(text("p", EMPTY[section], "meta"));
+    return;
+  }
+  rows.forEach(function (slip) { list.appendChild(card(slip)); });
+}
+
+function stamp() {
+  return new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+}
+
+async function refresh() {
+  try {
+    const response = await fetch("schedine.json?t=" + Date.now(), { cache: "no-store" });
+    if (!response.ok) throw new Error(String(response.status));
+    data = await response.json();
+    render();
+    check.className = "ok";
+    check.textContent = "Ultimo controllo " + stamp() + " · prossimo tra " + left + "s";
+  } catch (error) {
+    check.className = "bad";
+    check.textContent = "Controllo non riuscito alle " + stamp() + " · nuovo tentativo tra " + left + "s";
+  }
+}
+
+document.querySelectorAll("button[data-section]").forEach(function (button) {
+  button.addEventListener("click", function () {
+    section = button.getAttribute("data-section");
+    render();
+  });
+});
+render();
+refresh();
+setInterval(function () {
+  left -= 1;
+  if (left <= 0) {
+    left = data.check_seconds || 30;
+    refresh();
+    return;
+  }
+  const failed = check.className === "bad";
+  check.textContent = (failed ? "Controllo non riuscito" : "Ultimo controllo ok") + " · prossimo tra " + left + "s";
+}, 1000);
+</script>
+</body>
+</html>

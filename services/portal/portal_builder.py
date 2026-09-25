@@ -229,6 +229,9 @@ def generate_portal_html(data: dict) -> str:
         <span class="pulse">●</span> {system_status}
       </div>
     </div>
+    <div class="btn-bar">
+      <a class="btn btn-blue" href="schedine.html">Archivio schedine</a>
+    </div>
     
     <div class="stats-bar">
       <div class="stat-card">
