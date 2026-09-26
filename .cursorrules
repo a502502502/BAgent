@@ -1,0 +1,27 @@
+# BAgent — Regole Operative & MCP Team Bus per Cursor
+
+Questo file definisce il comportamento e il contesto per Cursor nel workspace BAgent.
+
+## 🤝 CHAT COMUNE & COMUNICAZIONE CON ANTIGRAVITY (MCP Server)
+È attivo il server MCP `BAgent_Team_Bus` collegato al database locale e a `docs/SHARED_CHAT.md`.
+Quando l'utente ti chiede informazioni sulle ultime analisi, o quando esegui modifiche e audit:
+1. **Leggi la Chat Comune**: usa il tool MCP `get_team_chat()` oppure leggi direttamente `docs/SHARED_CHAT.md`.
+2. **Invia Aggiornamenti ad Antigravity**: usa il tool MCP `post_team_message(sender="CURSOR", message="...", category="...")` per registrare le tue conclusioni e passaggi di consegne.
+3. **Calcolo Matematico**: usa `calculate_dixon_coles_edge()` per validare P reale ed Edge senza ricalcolare a mano le formule.
+4. **Stato Sistema**: usa `get_active_system_state()` per conoscere l'ultimo bankroll e i ticket pendenti.
+
+---
+
+## 🛑 REGOLA SUPREMA — BAN PERMANENTE DEL TENNIS
+Il tennis è definitivamente ed irrevocabilmente CANCELLATO da BAgent (100% solo calcio).
+
+---
+
+## 🛡️ REGOLE DI ANALISI & BETTING (SEMPRE ATTIVE)
+1. **Quote Netwin Reali**: MAI usare quote stimate o generiche. Verificare sempre le quote reali del board XSport (da `data/netwin_live_odds.json` o scraping Netwin).
+2. **Hard Gate 0 (Anti-Straight-Win Low Odds Ban)**: Divieto assoluto di 1 o 2 fisso a quota < 1.65. Obbligo di usare mercati protetti (1X, X2, DNB, MultiGol).
+3. **Hard Gate 6 (Edge Matematico Reale)**: Edge = (P_reale * Quota) - 1 >= +4.0%. Se Edge < +4.0%, l'evento è bocciato.
+4. **Hard Gate 6.1 (Probability Floor)**: La probabilità reale Dixon-Coles di ogni singola gamba DEVE essere >= 72.0%.
+5. **Hard Gate 7 (Anti-Scadenza 45')**: Divieto assoluto di scommettere su singoli tempi (es. "Segna 2° Tempo") a quota compressa (< 1.55). Solo mercati elastici a 90 minuti (MultiGol, Under/Over totali, Doppia Chance).
+6. **Hard Gate 0.75 (Anti-Ceiling Trap - Regola #48)**: Divieto di imporre Under 3.5 su squadre con lambda atteso >= 2.30-2.70 (rischio concreto di goleada della favorita).
+7. **Protocollo Continuità**: Max 3-4 selezioni per ticket (5+ bandite per sempre). Stake max 8% del bankroll per ticket.
