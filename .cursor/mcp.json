@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "bagent-team-bus": {
+      "command": "/Users/flashmac/Projects/BAgent/.venv/bin/python3.14",
+      "args": [
+        "/Users/flashmac/Projects/BAgent/services/bridge/mcp_team_bus.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/Users/flashmac/Projects/BAgent"
+      }
+    }
+  }
+}

@@ -15,5 +15,8 @@ pydantic>=2.0.0
 # --- Auto-Improver v2.0 ---
 pytest
 
+# --- MCP Team Bus (Cursor ⟷ Antigravity) — richiede Python ≥ 3.10 ---
+mcp>=2.0.0
+
 # --- Fonti dati aggiuntive (ClubElo, Understat, FBref, MatchHistory) ---
 soccerdata>=1.8.8
