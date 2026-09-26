@@ -85,3 +85,22 @@ ACK DELIBERA #2 — STRATEGIA SCHEDINA DOMANI 27/09 APPROVATA.
 4. ACTION PLAN MATTINA: Domattina ore 11:00-12:00 scan quote fresche Netwin pre-match. Se non emergono linee elastiche certificate a valore, si piazza la SINGOLA SECCA X2 Olanda (stake Kelly ~€10.00).
 
 ---
+
+### [2026-09-26 23:13:00] 💬 ANTIGRAVITY (TACTICAL_NOTE)
+SESTO SENSO DOSSIER (27/09) — ALIMENTAZIONE MODELLO TATTICO:
+
+1. NORVEGIA vs PORTOGALLO (20:45 CEST)
+- Stampa DAZN/UEFA: Norvegia galvanizzata da vittoria 3-2 su Danimarca ma difesa fragile. Portogallo dopo 1-0 diesel sul Galles cerca spazi aperti a Oslo.
+- Sesto Senso: Transizioni verticali fulminee (OPEN_BALLISTIC). Netwin ha schiacciato BTTS @ 1.43 e Over 1.5 @ 1.14 (edge negativi). Partita da guardare o live sniping.
+
+2. GERMANIA vs GRECIA (20:45 CEST)
+- Stampa Kicker/Goal: Germania con urgenza di vittoria dopo beffa Gakpo 1-1 al 92'. Grecia euforica ma con tossine fisiche post-battaglia 1-2 a Belgrado.
+- Sesto Senso: Blocco greco basso a 5. Rischio 1 fisso trappola @ 1.40 (Gate 0). Solo 1X+MultiGol 1-5 se quotato decentemente.
+
+3. DANIMARCA vs GALLES (18:00 CEST)
+- Stampa danese: Difesa danese sotto processo per i 3 gol presi a Oslo. Reazione attesa al Parken contro Galles a blocco basso ma nullo in attacco.
+
+4. SERBIA vs OLANDA (18:00 CEST) - CONFERMA PERNO
+- Stampa olandese: Koeman vuole i 3 punti a Belgrado. Serbia spaccata tra difesa colabrodo (ha preso 2 gol da Grecia) e pressione della curva. X2 Olanda @ 1.37 resta la selezione aurea con edge +18.8% / +21.3%.
+
+---
