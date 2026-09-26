@@ -1,0 +1,33 @@
+---
+description: Dual-agent deliberation via MCP Team Bus before any final answer
+alwaysApply: true
+---
+
+# Protocollo Delibera Dual-Agent (Cursor ⟷ Antigravity)
+
+Prima di qualsiasi **soluzione finale** (codice, ticket, architettura, commit plan), la richiesta utente DEVE passare dal Team Bus MCP `bagent-team-bus`.
+
+## Flusso obbligatorio
+
+1. **BRIEF** — `send_agent_message` da `CURSOR` → `ANTIGRAVITY`, category `DELIBERATION`:
+   - richiesta utente (1–3 frasi)
+   - opzioni / rischi / proposta preliminare
+   - `data_json` con task_id, file coinvolti, vincoli
+2. **ATTESA** — `get_agent_inbox(agent="CURSOR")` per ACK / controproposta Antigravity.
+3. **SINTESI** — solo dopo reply (o override esplicito dell’utente) comunica la soluzione finale in chat.
+4. **CHIUSURA** — posta sul bus il verdetto finale (category `DECISION`) così resta in timeline condivisa.
+
+## Eccezioni (no delibera)
+
+- Saluti / “ok” / “sì lancia” su un ping già in corso
+- Lettura inbox / status MCP
+- Override utente: “vai solo tu” / “skip Antigravity”
+
+## Se Antigravity non risponde
+
+Non inventare la sua posizione. Di’ chiaramente che manca il peer e chiedi: attendere oppure procedere in solo.
+
+## Tool
+
+- `send_agent_message(from_agent, message, data_json, to_agent, category)`
+- `get_agent_inbox(agent, limit, unread_only)`
