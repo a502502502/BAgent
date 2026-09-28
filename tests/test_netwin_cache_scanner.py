@@ -24,6 +24,10 @@ def test_nested_netwin_markets_flatten_to_the_combo_dictionary():
             },
             "GOL_NOGOL": {"Gol": 1.85, "NoGol": 1.90},
             "MULTIGOL": {"1-5": 1.44, "MultiGol 1-3 Casa": 1.62},
+            "PRIMO_TEMPO": {"1 1° Tempo": 2.70, "Under 1.5 1° Tempo": 1.25},
+            "CHANCE_MIX": {"Chance Mix: 1 o Over 2.5": 1.55, "Chance Mix: 1X o Gol": 1.35},
+            "DRAW_NO_BET": {"DNB 1": 1.40, "DNB 2": 2.90},
+            "MULTIGOL_SQUADRA": {"MultiGol 1-2 Casa": 1.58},
             "CORNER": {"9.5": {"Over": 1.70, "Under": 1.95}},
         }
     })
@@ -41,6 +45,13 @@ def test_nested_netwin_markets_flatten_to_the_combo_dictionary():
     assert flat["NoGol"] == 1.90
     assert flat["MultiGol 1-5"] == 1.44
     assert flat["MultiGol 1-3 Casa"] == 1.62
+    assert flat["1 1° Tempo"] == 2.70
+    assert flat["Under 1.5 1° Tempo"] == 1.25
+    assert flat["Chance Mix: 1 o Over 2.5"] == 1.55
+    assert flat["Chance Mix: 1X o Gol"] == 1.35
+    assert flat["DNB 1"] == 1.40
+    assert flat["DNB 2"] == 2.90
+    assert flat["MultiGol 1-2 Casa"] == 1.58
     assert flat["Over 9.5 Corner"] == 1.70
     assert flat["Under 9.5 Corner"] == 1.95
     assert "missing" not in flat

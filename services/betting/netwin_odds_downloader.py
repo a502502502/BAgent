@@ -41,14 +41,35 @@ TOURNAMENT_ALIASES: Dict[str, str] = {
 MULTIGOL_H_MAP: Dict[int, str] = {
     131073: "1-2",
     196609: "1-3",
+    196610: "2-3",
     262145: "1-4",
-    327681: "1-5",
     262146: "2-4",
+    262147: "3-4",
+    327681: "1-5",
     327682: "2-5",
+    327683: "3-5",
     393217: "1-6",
 }
 
-SECONDARY_AGGREGATES: List[int] = [452, 1477, 335, 444]
+SECONDARY_AGGREGATES: List[int] = [
+    452,   # DC + Under/Over
+    1477,  # DC + MultiGol
+    335,   # MultiGol
+    444,   # 1X2 + Under/Over
+    456,   # DC + Gol/NoGol
+    459,   # Chance Mix 1X2 o Under/Over
+    460,   # Chance Mix 1X2 o Gol/NoGol
+    461,   # Chance Mix Gol/NoGol o Under/Over
+    2846,  # Chance Mix DC o Gol/NoGol
+    389,   # MultiGol Squadra Casa e Ospite
+    448,   # 1X2 + Gol/NoGol
+    450,   # Under/Over + Gol/NoGol
+    2613,  # Draw No Bet
+    341,   # 1X2 e Doppia Chance 1° Tempo
+    344,   # Under/Over 1° Tempo
+    345,   # Gol/NoGol 1° Tempo
+    352,   # MultiGol 1° Tempo
+]
 
 
 def decode_multigol_range(h: int) -> str:
@@ -188,6 +209,128 @@ class NetwinOddsDownloader:
                         prefix = m_map.get(ce)
                         if prefix and spread_str:
                             m["markets"].setdefault("COMBO", {})[f"{prefix} {spread_str}"] = q
+
+                    # 5. DC + Gol/NoGol (agg 456)
+                    elif agg_id == 456:
+                        label = None
+                        if "DOPPIA CHANCE IN" in desc and "OUT" not in desc:
+                            label = "1X + Gol" if ce == 1 else ("1X + NoGol" if ce == 2 else None)
+                        elif "DOPPIA CHANCE OUT" in desc and "IN" not in desc:
+                            label = "X2 + Gol" if ce == 1 else ("X2 + NoGol" if ce == 2 else None)
+                        elif "DOPPIA CHANCE IN/OUT" in desc:
+                            label = "12 + Gol" if ce == 1 else ("12 + NoGol" if ce == 2 else None)
+                        if label:
+                            m["markets"].setdefault("COMBO", {})[label] = q
+
+                    # 6. Chance Mix 1X2 o Under/Over (agg 459)
+                    elif agg_id == 459 and ce == 1 and spread_str:
+                        label = None
+                        if "1 O OVER" in desc: label = f"Chance Mix: 1 o Over {spread_str}"
+                        elif "X O OVER" in desc: label = f"Chance Mix: X o Over {spread_str}"
+                        elif "2 O OVER" in desc: label = f"Chance Mix: 2 o Over {spread_str}"
+                        elif "1 O UNDER" in desc: label = f"Chance Mix: 1 o Under {spread_str}"
+                        elif "X O UNDER" in desc: label = f"Chance Mix: X o Under {spread_str}"
+                        elif "2 O UNDER" in desc: label = f"Chance Mix: 2 o Under {spread_str}"
+                        if label:
+                            m["markets"].setdefault("CHANCE_MIX", {})[label] = q
+
+                    # 7. Chance Mix 1X2 o Gol/NoGol (agg 460)
+                    elif agg_id == 460 and ce == 1:
+                        label = None
+                        if "1 OR GOL" in desc: label = "Chance Mix: 1 o Gol"
+                        elif "X OR GOL" in desc: label = "Chance Mix: X o Gol"
+                        elif "2 OR GOL" in desc: label = "Chance Mix: 2 o Gol"
+                        elif "1 OR NOGOL" in desc: label = "Chance Mix: 1 o NoGol"
+                        elif "X OR NOGOL" in desc: label = "Chance Mix: X o NoGol"
+                        elif "2 OR NOGOL" in desc: label = "Chance Mix: 2 o NoGol"
+                        if label:
+                            m["markets"].setdefault("CHANCE_MIX", {})[label] = q
+
+                    # 8. Chance Mix Gol/NoGol o Under/Over (agg 461)
+                    elif agg_id == 461 and ce == 1 and spread_str:
+                        label = None
+                        if "GOAL O OVER" in desc or "GOL O OVER" in desc: label = f"Gol o Over {spread_str}"
+                        elif "NO GOAL O OVER" in desc or "NOGOL O OVER" in desc: label = f"NoGol o Over {spread_str}"
+                        elif "NO GOAL O UNDER" in desc or "NOGOL O UNDER" in desc: label = f"NoGol o Under {spread_str}"
+                        if label:
+                            m["markets"].setdefault("CHANCE_MIX", {})[label] = q
+
+                    # 9. Chance Mix DC o Gol/NoGol (agg 2846)
+                    elif agg_id == 2846 and ce == 1:
+                        label = None
+                        if "1X OR GOL" in desc: label = "Chance Mix: 1X o Gol"
+                        elif "X2 OR GOL" in desc: label = "Chance Mix: X2 o Gol"
+                        elif "12 OR GOL" in desc: label = "Chance Mix: 12 o Gol"
+                        elif "1X OR NOGOL" in desc: label = "Chance Mix: 1X o NoGol"
+                        elif "X2 OR NOGOL" in desc: label = "Chance Mix: X2 o NoGol"
+                        elif "12 OR NOGOL" in desc: label = "Chance Mix: 12 o NoGol"
+                        if label:
+                            m["markets"].setdefault("CHANCE_MIX", {})[label] = q
+
+                    # 10. MultiGol Squadra Casa e Ospite (agg 389)
+                    elif agg_id == 389 and ce == 1 and mg_range:
+                        if "CASA" in desc:
+                            m["markets"].setdefault("MULTIGOL_SQUADRA", {})[f"MultiGol {mg_range} Casa"] = q
+                        elif "OSP" in desc:
+                            m["markets"].setdefault("MULTIGOL_SQUADRA", {})[f"MultiGol {mg_range} Ospite"] = q
+
+                    # 11. 1X2 + Gol/NoGol (agg 448)
+                    elif agg_id == 448:
+                        m_map = {1: "1 + Gol", 2: "1 + NoGol", 3: "X + Gol", 4: "X + NoGol", 5: "2 + Gol", 6: "2 + NoGol"}
+                        label = m_map.get(ce)
+                        if label:
+                            m["markets"].setdefault("COMBO", {})[label] = q
+
+                    # 12. Under/Over + Gol/NoGol (agg 450)
+                    elif agg_id == 450 and spread_str:
+                        uo_gng_map = {1: f"Under {spread_str} + Gol", 2: f"Over {spread_str} + Gol", 3: f"Under {spread_str} + NoGol", 4: f"Over {spread_str} + NoGol"}
+                        label = uo_gng_map.get(ce)
+                        if label:
+                            m["markets"].setdefault("COMBO", {})[label] = q
+
+                    # 13. Draw No Bet (agg 2613)
+                    elif agg_id == 2613:
+                        label = "DNB 1" if ce == 1 else ("DNB 2" if ce == 2 else None)
+                        if label:
+                            m["markets"].setdefault("DRAW_NO_BET", {})[label] = q
+
+                    # 14. 1X2 e Doppia Chance 1° Tempo (agg 341)
+                    elif agg_id == 341:
+                        label = None
+                        if "1X2" in desc and h == 1:
+                            m1x2_map = {1: "1 1° Tempo", 2: "X 1° Tempo", 3: "2 1° Tempo"}
+                            label = m1x2_map.get(ce)
+                        elif "DOPPIA CHANCE IN" in desc and "OUT" not in desc and h == 1 and ce == 1:
+                            label = "1X 1° Tempo"
+                        elif "DOPPIA CHANCE OUT" in desc and "IN" not in desc and h == 1 and ce == 2:
+                            label = "X2 1° Tempo"
+                        elif "DOPPIA CHANCE IN/OUT" in desc and h == 1 and ce == 2:
+                            label = "12 1° Tempo"
+                        if label:
+                            m["markets"].setdefault("PRIMO_TEMPO", {})[label] = q
+
+                    # 15. Under/Over 1° Tempo (agg 344)
+                    elif agg_id == 344:
+                        tempo = h >> 16
+                        spread_val = (h & 0xFFFF) / 10.0
+                        spread_1t = f"{spread_val:.1f}"
+                        if tempo == 1:
+                            label = f"Under {spread_1t} 1° Tempo" if ce == 1 else (f"Over {spread_1t} 1° Tempo" if ce == 2 else None)
+                            if label:
+                                m["markets"].setdefault("PRIMO_TEMPO", {})[label] = q
+
+                    # 16. Gol/NoGol 1° Tempo (agg 345)
+                    elif agg_id == 345 and h == 1:
+                        label = "Gol 1° Tempo" if ce == 1 else ("NoGol 1° Tempo" if ce == 2 else None)
+                        if label:
+                            m["markets"].setdefault("PRIMO_TEMPO", {})[label] = q
+
+                    # 17. MultiGol 1° Tempo (agg 352)
+                    elif agg_id == 352 and ce == 1:
+                        if "1" in desc or (h >> 16) == 1 or "1°" in desc or "1?" in desc:
+                            mg_1t = decode_multigol_range(h)
+                            if mg_1t:
+                                m["markets"].setdefault("PRIMO_TEMPO", {})[f"MultiGol {mg_1t} 1° Tempo"] = q
 
     def parse_torneo_centrale_payload(self, raw_data: Dict[str, Any], tournament_label: str = "") -> List[Dict[str, Any]]:
         """
@@ -438,6 +581,13 @@ class NetwinOddsDownloader:
                 for outcome, odd in mkts["MULTIGOL"].items():
                     key = f"{match_name.lower()}::{outcome.lower()}"
                     cache[key] = {"match": match_name, "market": outcome, "netwin_odd": odd}
+
+            # Primo Tempo, Chance Mix, MultiGol Squadra, Draw No Bet
+            for cat in ["PRIMO_TEMPO", "CHANCE_MIX", "MULTIGOL_SQUADRA", "DRAW_NO_BET"]:
+                if cat in mkts:
+                    for outcome, odd in mkts[cat].items():
+                        key = f"{match_name.lower()}::{outcome.lower()}"
+                        cache[key] = {"match": match_name, "market": outcome, "netwin_odd": odd}
 
         try:
             with open(CACHE_ODDS_FILE, "w", encoding="utf-8") as f:

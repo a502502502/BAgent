@@ -13,6 +13,7 @@ negativa congiunta sui valori già spostati da `project_corners`.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import re
 
 import numpy as np
 
@@ -185,9 +186,45 @@ def _classify(
     ranked: list[PricedCombo] = []
     rejected: list[RejectedCombo] = []
     seen: set[str] = set()
+
+    # Assi del 1° Tempo (fattore empirico 0.44 degli xG totali)
+    matrix_1t, home_1t, away_1t, total_1t = engine._score_axes(
+        projection.xg_home * 0.44, projection.xg_away * 0.44
+    )
+
     for market in catalog:
         seen.add(market)
-        mask = _goal_market_mask(market, home, away, total)
+        is_dnb = bool(re.search(r"\bdnb\s*[12]\b|draw no bet", market, re.I))
+        is_1t = bool(re.search(r"1\s*°?\s*tempo|\b1t\b|primo tempo", market, re.I))
+
+        if is_dnb:
+            m_upper = market.upper()
+            prob_home = float(np.sum(matrix[home > away]))
+            prob_away = float(np.sum(matrix[away > home]))
+            denom = prob_home + prob_away
+            if denom <= 0:
+                rejected.append(RejectedCombo(market, "probabilità DNB indefinita"))
+                continue
+            prob = (prob_home / denom) if ("1" in m_upper) else (prob_away / denom)
+            _consider(
+                market,
+                prob,
+                prices.get(market),
+                policy,
+                projection.notes,
+                ranked,
+                rejected,
+            )
+            continue
+
+        if is_1t:
+            clean_mkt = re.sub(r"\s*(?:1\s*°?\s*tempo|\b1t\b|primo tempo)\s*", " ", market, flags=re.I).strip()
+            mask = _goal_market_mask(clean_mkt, home_1t, away_1t, total_1t)
+            use_matrix = matrix_1t
+        else:
+            mask = _goal_market_mask(market, home, away, total)
+            use_matrix = matrix
+
         if mask is None:
             rejected.append(RejectedCombo(market, "mercato non mappato sulla matrice gol"))
             continue
@@ -197,7 +234,7 @@ def _classify(
             continue
         _consider(
             market,
-            float(np.sum(matrix[mask])),
+            float(np.sum(use_matrix[mask])),
             prices.get(market),
             policy,
             projection.notes,

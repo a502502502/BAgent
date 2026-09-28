@@ -111,3 +111,43 @@ def test_doubtful_injury_does_not_move_the_lambdas():
     result = search_combo_edge(1.6, 1.3, {"Over 1.5": 1.50}, context_from_events(events))
     assert result.xg_home == 1.6
     assert result.xg_away == 1.3
+
+
+def test_first_half_markets_priced_on_scaled_axes():
+    # In low-scoring games, Under 1.5 1° Tempo has high probability
+    odds = {
+        "Under 1.5 1° Tempo": 1.50,
+        "X 1° Tempo": 2.30,
+        "1X 1° Tempo": 1.35,
+    }
+    result = search_combo_edge(1.1, 0.7, book_odds=odds, catalog=tuple(odds.keys()))
+    ranked_mkts = [c.market for c in result.ranked]
+    assert "Under 1.5 1° Tempo" in ranked_mkts
+    # Verify probability corresponds to 1st half
+    combo = next(c for c in result.ranked if c.market == "Under 1.5 1° Tempo")
+    assert combo.probability > 0.70
+    assert combo.edge > 0.05
+
+
+def test_draw_no_bet_pricing():
+    # Home favored match (1.8 vs 0.8)
+    odds = {"DNB 1": 1.45, "DNB 2": 3.50}
+    result = search_combo_edge(1.8, 0.8, book_odds=odds, catalog=("DNB 1", "DNB 2"))
+    ranked_mkts = [c.market for c in result.ranked]
+    assert "DNB 1" in ranked_mkts
+    dnb1 = next(c for c in result.ranked if c.market == "DNB 1")
+    # P(home win | not draw) should be well above 65%
+    assert dnb1.probability > 0.65
+    assert dnb1.edge > 0.04
+
+
+def test_chance_mix_and_team_multigol():
+    odds = {
+        "Chance Mix: 1 o Over 2.5": 1.70,
+        "Chance Mix: 1X o Gol": 1.30,
+        "MultiGol 1-2 Casa": 1.65,
+    }
+    result = search_combo_edge(1.4, 0.9, book_odds=odds, catalog=tuple(odds.keys()), min_probability=0.50)
+    ranked_mkts = [c.market for c in result.ranked]
+    assert "Chance Mix: 1 o Over 2.5" in ranked_mkts or "MultiGol 1-2 Casa" in ranked_mkts
+

@@ -88,6 +88,10 @@ def flatten_netwin_markets(match_data: dict | None) -> dict[str, float]:
                 flat[str(key)] = odd
     _copy_multigol(markets.get("MULTIGOL") or markets.get("MultiGol"), flat)
     _copy_outcome_map(markets.get("COMBO") or markets.get("combo"), flat, lambda key: str(key))
+    _copy_outcome_map(markets.get("PRIMO_TEMPO") or markets.get("primo_tempo"), flat, lambda key: str(key))
+    _copy_outcome_map(markets.get("CHANCE_MIX") or markets.get("chance_mix"), flat, lambda key: str(key))
+    _copy_outcome_map(markets.get("DRAW_NO_BET") or markets.get("draw_no_bet"), flat, lambda key: str(key))
+    _copy_outcome_map(markets.get("MULTIGOL_SQUADRA") or markets.get("multigol_squadra"), flat, lambda key: str(key))
     _copy_goal_lines(markets.get("CORNER") or markets.get("CORNERS"), flat, corner=True)
     return flat
 
