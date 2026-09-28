@@ -1,4 +1,4 @@
-"""Cache Netwin piatta, pepite sopra soglia, snapshot Flashscore coerenti."""
+"""Cache Netwin piatta, Hidden Gems sopra soglia, snapshot Flashscore coerenti."""
 
 import json
 

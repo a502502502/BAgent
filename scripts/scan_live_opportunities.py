@@ -115,7 +115,7 @@ def main() -> None:
                 f"{item.probability:.1%}",
                 f"{item.edge:+.1%}",
                 f"{item.stake_pct:.1%}",
-                "PEPITA" if signal is not None else "",
+                "GEM" if signal is not None else "",
             )
         )
     for item in rejected:
@@ -127,7 +127,7 @@ def main() -> None:
     for row in rows:
         print(" | ".join(cell.ljust(widths[index]) for index, cell in enumerate(row)))
     if not priced:
-        print("Nessuna pepita nello sweet spot live.")
+        print("Nessuna Hidden Gem nello sweet spot live.")
 
 
 def _score(raw: str) -> tuple[int, int]:

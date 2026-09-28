@@ -150,7 +150,7 @@ def find_hidden_gems(
     corners_away: float | None = None,
     catalog: tuple[str, ...] = COMBO_CATALOG,
 ) -> ComboSearch:
-    """Pepite: sweet spot sul catalogo gol e, se le medie ci sono, sugli Over corner quotati."""
+    """Hidden Gems: sweet spot sul catalogo gol e, se le medie ci sono, sugli Over corner quotati."""
     band = sweet or HiddenMarketFilter()
     result = _classify(
         xg_home,

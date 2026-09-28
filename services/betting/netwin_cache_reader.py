@@ -175,7 +175,7 @@ def scan_netwin_matches(
     xg_for: Callable[[CachedMatch], tuple[float, float]] | None = None,
     context_for: Callable[[CachedMatch], MatchContext] | None = None,
 ) -> list[NetwinGem]:
-    """Confronta ogni quota piatta con la matrice. Tiene solo le pepite sopra soglia."""
+    """Confronta ogni quota piatta con la matrice. Tiene solo le Hidden Gems sopra soglia."""
     resolve_xg = xg_for or estimate_xg
     resolve_context = context_for or context_for_match
     sweet = HiddenMarketFilter(min_probability=min_probability, min_edge=min_edge)

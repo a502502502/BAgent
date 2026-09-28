@@ -38,7 +38,7 @@ def main() -> None:
     parser.add_argument("--xg-away", type=float, required=True)
     parser.add_argument("--odds", default="", help="Mercato=quota, separati da virgola")
     parser.add_argument("--min-edge", type=float, default=None)
-    parser.add_argument("--gems-only", action="store_true", help="Solo pepite nello sweet spot 1.35-1.80")
+    parser.add_argument("--gems-only", action="store_true", help="Solo Gems nello sweet spot 1.35-1.80")
     parser.add_argument("--corners-home", type=float, default=None)
     parser.add_argument("--corners-away", type=float, default=None)
     parser.add_argument("--referee-cards", type=float, default=None)
@@ -108,7 +108,7 @@ def _print_gems(result: ComboSearch) -> None:
     headers = ("Mercato", "Quota Book", "Fair Odd", "P_matrix", "Edge", "Note Tattiche Sesto Senso")
     if not result.ranked:
         print(" | ".join(headers))
-        print("Nessuna pepita nello sweet spot. Quota sotto 1.35, sopra 1.80, o con veto, resta fuori.")
+        print("Nessuna Hidden Gem nello sweet spot. Quota sotto 1.35, sopra 1.80, o con veto, resta fuori.")
         return
     rows = [headers]
     for combo in result.ranked:

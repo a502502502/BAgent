@@ -41,12 +41,12 @@ def main():
     args = parser.parse_args()
 
     if args.all:
-        tournaments = ["Europa League", "LaLiga", "Serie A", "Premier League", "Bundesliga"]
+        tournaments = ["Europa League", "LaLiga", "Serie A", "Premier League", "Bundesliga", "Argentina", "Brasile"]
     elif args.tournament:
         tournaments = [args.tournament]
     else:
-        # Default sui due tornei chiave di oggi/domani
-        tournaments = ["Europa League", "LaLiga"]
+        # Default sui tornei attivi chiave (inclusi campionati sudamericani in corso)
+        tournaments = ["Europa League", "LaLiga", "Argentina", "Brasile"]
 
     print("=" * 75)
     print(f"📥 NETWIN LIVE ODDS DOWNLOADER — Avvio Scarico Quote: {tournaments}")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Scansione istantanea del palinsesto Netwin già scaricato in cache.
 
-Legge `data/netwin_live_odds.json` e classifica le pepite con la matrice dei gol.
+Legge `data/netwin_live_odds.json` e classifica le Hidden Gems con la matrice dei gol.
 Il browser si apre solo con `--sync`, e solo se la cache manca o ha più di 12 ore.
 
 Uso:
@@ -58,7 +58,7 @@ def main() -> None:
     print(f"Partite in memoria: {len(matches)}")
     gems = scan_netwin_matches(matches, min_edge=args.min_edge, min_probability=args.min_prob)
     if not gems:
-        print("Nessuna pepita sopra le soglie.")
+        print("Nessuna Hidden Gem sopra le soglie.")
         return
 
     header = (
