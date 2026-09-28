@@ -104,3 +104,30 @@ SESTO SENSO DOSSIER (27/09) — ALIMENTAZIONE MODELLO TATTICO:
 - Stampa olandese: Koeman vuole i 3 punti a Belgrado. Serbia spaccata tra difesa colabrodo (ha preso 2 gol da Grecia) e pressione della curva. X2 Olanda @ 1.37 resta la selezione aurea con edge +18.8% / +21.3%.
 
 ---
+
+### [2026-09-26 23:24:41] 💬 ANTIGRAVITY (ODDS_AUDIT)
+MASTER TABLE DELIBERATA (27/09) — AUDIT INTEGRALE TUTTE LE GARE NETWIN:
+- Serbia-Olanda: X2 @ 1.37 -> P 86.7%, Fair 1.15, Edge +18.8% 🟢 UNICO PASS TOP VALUE
+- Germania-Grecia: 1 @ 1.40 Gate 0 BAN; Over 2.5 @ 1.46 Edge -7.6% 🔴; Under 3.5 P 58.9% 🔴
+- Norvegia-Portogallo: Over 1.5 @ 1.14 (quota compressa); BTTS @ 1.43 Edge -7.7% 🔴; 1X @ 1.45 Edge -8.2% 🔴
+- Danimarca-Galles: 1 @ 1.48 Gate 0 BAN; Over 1.5 @ 1.23 Edge -3.7% 🔴
+- Austria-Kosovo: 1 @ 1.56 Gate 0 BAN; Over 1.5 @ 1.24 Edge -4.0% 🔴
+- Israele-Irlanda: Under 3.5 @ 1.27 Edge -3.6% 🔴
+CONCLUSIONI: Verdetto confermato al 100% -> SINGOLA SECCA X2 Olanda @ 1.37.
+
+---
+
+### [2026-09-26 23:43:06] 💬 ANTIGRAVITY (ODDS_AUDIT)
+AUDIT LIVE NETWIN COMPLETATO: Verificato direttamente su Netwin (https://www.netwin.it/scommesse/calcio/nations-league/uefa-nations-league). Confermato il rilievo dell'utente: le quote precedenti per le doppie chance erano errate/non allineate al palinsesto Netwin reale. Es: Serbia-Olanda X2 era riportata @1.37 ma su Netwin è in realtà @1.09; Germania 1X è @1.10; Danimarca 1X è @1.11; Austria 1X è @1.14. Tutte queste DC sono < 1.20 e quindi non giocabili. I favoriti 1X2 secchi (1.38, 1.40, 1.46, 1.56) sono bocciati da Gate 0 (< 1.65). Tutte le quote del palinsesto di domani sono ora registrate al centesimo.
+
+---
+
+### [2026-09-27 18:38:17] 💬 ANTIGRAVITY (TICKET_DELIBERATION)
+PROPOSTA SCHEDINA UFFICIALE LUNEDI 28 SETTEMBRE 2026: Validata con successo da StrictTicketPipeline (Tutti i 7 Gates superati). Tripla di continuità: 1) Lettonia vs Cipro 1X @1.43 (P: 78.0%, Edge: +11.5%); 2) Romania vs Bosnia 1X @1.32 (P: 82.5%, Edge: +8.9%); 3) Svezia vs Polonia 1X @1.33 (P: 81.6%, Edge: +8.5%). Quota Totale: @2.51. Stake Kelly Frazionario: €9.50 (5.2% del bankroll di €182.18). Vincita potenziale: €23.84. HTML salvato in reports/schedina_28set.html.
+
+---
+
+### [2026-09-27 21:54:48] 💬 ANTIGRAVITY (LIVE_INPLAY_ACTION)
+PIAZZATE GIOCATE LIVE 2° TEMPO NATIONS LEAGUE (Domenica 27/09): 1) Germania vs Grecia (0-0 HT): Germania Segna Prossimo Gol @1.50 / Germania 1 Fisso Live @1.60; 2) Norvegia vs Portogallo (0-1 HT): Over 2.5 Live @1.60 / Gol Live @1.35 (Trigger Assedio Live Regola #50). L'utente ha confermato il piazzamento.
+
+---
