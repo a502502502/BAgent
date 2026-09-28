@@ -26,6 +26,17 @@ CACHE_ODDS_FILE = DATA_DIR / "netwin_odds_cache.json"
 
 XSPORT_APP_URL = "https://www.netwin.it/xsportapp/xsport_desktop/"
 
+TOURNAMENT_ALIASES: Dict[str, str] = {
+    "argentina": "Liga Profesional",
+    "brasile": "Serie A Brasiliana",
+    "brazil": "Serie A Brasiliana",
+    "spagna": "LaLiga",
+    "italia": "Serie A",
+    "inghilterra": "Premier League",
+    "germania": "Bundesliga",
+    "europa": "Europa League",
+}
+
 class NetwinOddsDownloader:
     """
     Scarica e decodifica i dati ufficiali di quota dal portale Netwin.it.
@@ -166,8 +177,12 @@ class NetwinOddsDownloader:
                 page.wait_for_timeout(3000)
 
                 for tourney in target_tournaments:
-                    logger.info(f"Selezione torneo su Netwin: '{tourney}'...")
-                    btn = page.locator(f":text-matches('{tourney}', 'i')").first
+                    search_name = TOURNAMENT_ALIASES.get(tourney.lower().strip(), tourney)
+                    logger.info(f"Selezione torneo su Netwin: '{tourney}' (cercato come '{search_name}')...")
+                    btn = page.locator(f":text-matches('^{search_name}$', 'i')")
+                    if btn.count() == 0:
+                        btn = page.locator(f":text-matches('{search_name}', 'i')")
+                    btn = btn.first
                     if btn.is_visible(timeout=3000):
                         captured_payloads.clear()
                         btn.click()
@@ -178,7 +193,7 @@ class NetwinOddsDownloader:
                             logger.info(f"Estratte {len(matches)} partite per {tourney}")
                             all_results.extend(matches)
                     else:
-                        logger.warning(f"Torneo '{tourney}' non trovato nel menu Netwin.")
+                        logger.warning(f"Torneo '{tourney}' ('{search_name}') non trovato nel menu Netwin.")
 
             except Exception as e:
                 logger.error(f"Errore durante navigazione Netwin: {e}")
