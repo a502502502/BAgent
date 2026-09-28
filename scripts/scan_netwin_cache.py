@@ -81,7 +81,15 @@ def main() -> None:
 def _sync_cache(tournament: str | None) -> None:
     from services.betting.netwin_odds_downloader import NetwinOddsDownloader
 
-    names = [tournament] if tournament else ["Liga Profesional", "Serie A Brasiliana"]
+    names = [tournament] if tournament else [
+        "Europa League",
+        "LaLiga",
+        "Serie A",
+        "Premier League",
+        "Bundesliga",
+        "Argentina",
+        "Brasile",
+    ]
     print(f"Cache assente o vecchia. Scarico: {names}")
     NetwinOddsDownloader(headless=True).download_tournaments(names)
 
