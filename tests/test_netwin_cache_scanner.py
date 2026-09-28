@@ -141,3 +141,84 @@ def test_flashscore_live_feed_becomes_a_snapshot_with_minute_score_and_cards():
     added = by_id["ADDED3"]
     assert added.minute == 93
     assert (added.home_goals, added.away_goals) == (2, 2)
+
+
+def test_secondary_aggregates_merge_into_match_combos():
+    from services.betting.netwin_odds_downloader import NetwinOddsDownloader, decode_multigol_range
+
+    assert decode_multigol_range(131073) == "1-2"
+    assert decode_multigol_range(196609) == "1-3"
+    assert decode_multigol_range(262145) == "1-4"
+    assert decode_multigol_range(327681) == "1-5"
+    assert decode_multigol_range(262146) == "2-4"
+    assert decode_multigol_range(327682) == "2-5"
+    assert decode_multigol_range(393217) == "1-6"
+    assert decode_multigol_range(262147) == "3-4"
+
+    downloader = NetwinOddsDownloader(headless=True)
+    matches = [
+        {
+            "match_name": "Palmeiras vs Bahia",
+            "palinsesto": 36401,
+            "avvenimento": 1001,
+            "markets": {},
+        }
+    ]
+
+    # 1. Test Agg 452 (DC + U/O)
+    agg_452 = {
+        "avs": [
+            {
+                "p": 36401,
+                "a": 1001,
+                "scs": [
+                    {
+                        "d": "DOPPIA CHANCE IN + U/O",
+                        "h": 250,
+                        "eqs": [{"ce": 1, "q": 170}, {"ce": 2, "q": 360}],
+                    },
+                    {
+                        "d": "DOPPIA CHANCE OUT + U/O",
+                        "h": 350,
+                        "eqs": [{"ce": 1, "q": 210}, {"ce": 2, "q": 650}],
+                    },
+                ],
+            }
+        ]
+    }
+    downloader._merge_aggregate_markets(matches, agg_452, 452)
+    assert matches[0]["markets"]["COMBO"]["1X + Under 2.5"] == 1.70
+    assert matches[0]["markets"]["COMBO"]["1X + Over 2.5"] == 3.60
+    assert matches[0]["markets"]["COMBO"]["X2 + Under 3.5"] == 2.10
+
+    # 2. Test Agg 1477 (DC + MultiGol)
+    agg_1477 = {
+        "avs": [
+            {
+                "p": 36401,
+                "a": 1001,
+                "scs": [
+                    {
+                        "d": "DC IN + MULTIGOAL",
+                        "h": 262145,  # 1-4
+                        "eqs": [{"ce": 1, "q": 145}],
+                    },
+                    {
+                        "d": "DC OUT + MULTIGOAL",
+                        "h": 327681,  # 1-5
+                        "eqs": [{"ce": 3, "q": 220}],
+                    },
+                ],
+            }
+        ]
+    }
+    downloader._merge_aggregate_markets(matches, agg_1477, 1477)
+    assert matches[0]["markets"]["COMBO"]["1X + MultiGol 1-4"] == 1.45
+    assert matches[0]["markets"]["COMBO"]["X2 + MultiGol 1-5"] == 2.20
+
+    # Flatten check
+    flat = flatten_netwin_markets(matches[0])
+    assert flat["1X + Under 2.5"] == 1.70
+    assert flat["1X + MultiGol 1-4"] == 1.45
+    assert flat["X2 + MultiGol 1-5"] == 2.20
+

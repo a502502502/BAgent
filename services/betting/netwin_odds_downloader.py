@@ -15,6 +15,7 @@ import time
 import logging
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import urllib.parse
 from playwright.sync_api import sync_playwright
 
 logger = logging.getLogger("NetwinOddsDownloader")
@@ -37,6 +38,30 @@ TOURNAMENT_ALIASES: Dict[str, str] = {
     "europa": "Europa League",
 }
 
+MULTIGOL_H_MAP: Dict[int, str] = {
+    131073: "1-2",
+    196609: "1-3",
+    262145: "1-4",
+    327681: "1-5",
+    262146: "2-4",
+    327682: "2-5",
+    393217: "1-6",
+}
+
+SECONDARY_AGGREGATES: List[int] = [452, 1477, 335, 444]
+
+
+def decode_multigol_range(h: int) -> str:
+    """Decodifica il range multigol dall'handicap a 32 bit di XSport/Microgame."""
+    if h in MULTIGOL_H_MAP:
+        return MULTIGOL_H_MAP[h]
+    min_g = h & 0xFFFF
+    max_g = (h >> 16) & 0xFFFF
+    if max_g >= 100:
+        return f"{min_g}+"
+    return f"{min_g}-{max_g}"
+
+
 class NetwinOddsDownloader:
     """
     Scarica e decodifica i dati ufficiali di quota dal portale Netwin.it.
@@ -51,6 +76,118 @@ class NetwinOddsDownloader:
         """Converte il valore numerico di handicap Netwin nel rispettivo spread (es. 250 -> '2.5')."""
         val = h_val / 100.0
         return f"{val:.1f}"
+
+    @staticmethod
+    def _fetch_aggregate_payload(cat_id: str, tourn_id: str, agg_id: int, request_context=None) -> Dict[str, Any] | None:
+        url = (
+            f"https://www.netwin.it/XSportDatastore/getTorneoCentrale"
+            f"?systemCode=EPLAY24&lingua=IT&hash=&sportId=1"
+            f"&categoryId={cat_id}&tournamentId={tourn_id}&idAggregata={agg_id}"
+        )
+        if request_context is not None:
+            try:
+                resp = request_context.get(url, timeout=10000)
+                if resp.status == 200:
+                    return resp.json()
+            except Exception as e:
+                logger.warning(f"Errore download aggregato {agg_id} via Playwright request: {e}")
+
+        try:
+            import urllib.request
+            import ssl
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+                "Referer": XSPORT_APP_URL,
+            }
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, context=ctx, timeout=10) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except Exception as e:
+            logger.warning(f"Errore download aggregato {agg_id} via urllib: {e}")
+            return None
+
+    def _merge_aggregate_markets(self, matches: List[Dict[str, Any]], aggregate_payload: Dict[str, Any], agg_id: int):
+        if not aggregate_payload or not matches:
+            return
+
+        events = aggregate_payload.get("avs", [])
+        if not events:
+            return
+
+        match_by_key: Dict[Any, Dict[str, Any]] = {}
+        for m in matches:
+            pal = m.get("palinsesto")
+            avv = m.get("avvenimento")
+            if pal is not None and avv is not None:
+                match_by_key[(pal, avv)] = m
+            clean_name = m.get("match_name", "").lower()
+            if clean_name:
+                match_by_key[clean_name] = m
+
+        for ev in events:
+            pal = ev.get("p")
+            avv = ev.get("a")
+            m = match_by_key.get((pal, avv))
+            if not m:
+                dsl = ev.get("dsl", {})
+                raw_name = dsl.get("IT") or dsl.get("ORIGINAL_FROM_DB") or ""
+                teams = [t.strip().lower() for t in raw_name.split("-")]
+                clean_name = " vs ".join(teams) if len(teams) == 2 else raw_name.lower()
+                m = match_by_key.get(clean_name)
+
+            if not m:
+                continue
+
+            for scs in ev.get("scs", []):
+                desc = (scs.get("d") or "").upper().strip()
+                h = scs.get("h", 0)
+                spread_str = self._parse_under_over_handicap(h) if h < 10000 else ""
+                mg_range = decode_multigol_range(h) if h >= 10000 else ""
+
+                for eq in scs.get("eqs", []):
+                    ce = eq.get("ce")
+                    q = round(eq.get("q", 0) / 100.0, 2)
+                    if q <= 1.01:
+                        continue
+
+                    # 1. DC + Under/Over (agg 452)
+                    if agg_id == 452:
+                        label = None
+                        if "DOPPIA CHANCE IN" in desc and "OUT" not in desc:
+                            label = f"1X + Under {spread_str}" if ce == 1 else (f"1X + Over {spread_str}" if ce == 2 else None)
+                        elif "DOPPIA CHANCE OUT" in desc and "IN" not in desc:
+                            label = f"X2 + Under {spread_str}" if ce == 1 else (f"X2 + Over {spread_str}" if ce == 2 else None)
+                        elif "DOPPIA CHANCE IN/OUT" in desc:
+                            label = f"12 + Under {spread_str}" if ce == 1 else (f"12 + Over {spread_str}" if ce == 2 else None)
+                        if label:
+                            m["markets"].setdefault("COMBO", {})[label] = q
+
+                    # 2. DC + MultiGol (agg 1477)
+                    elif agg_id == 1477:
+                        label = None
+                        if "DC IN" in desc and "OUT" not in desc and ce == 1:
+                            label = f"1X + MultiGol {mg_range}"
+                        elif "DC OUT" in desc and "IN" not in desc and ce == 3:
+                            label = f"X2 + MultiGol {mg_range}"
+                        elif "DC IN/OUT" in desc and ce == 1:
+                            label = f"12 + MultiGol {mg_range}"
+                        if label:
+                            m["markets"].setdefault("COMBO", {})[label] = q
+
+                    # 3. MultiGol Standard (agg 335)
+                    elif agg_id == 335:
+                        if ce == 1 and mg_range:
+                            m["markets"].setdefault("MULTIGOL", {})[f"MultiGol {mg_range}"] = q
+
+                    # 4. 1X2 + Under/Over (agg 444)
+                    elif agg_id == 444:
+                        m_map = {1: "1 + Under", 2: "1 + Over", 3: "X + Under", 4: "X + Over", 5: "2 + Under", 6: "2 + Over"}
+                        prefix = m_map.get(ce)
+                        if prefix and spread_str:
+                            m["markets"].setdefault("COMBO", {})[f"{prefix} {spread_str}"] = q
 
     def parse_torneo_centrale_payload(self, raw_data: Dict[str, Any], tournament_label: str = "") -> List[Dict[str, Any]]:
         """
@@ -191,6 +328,21 @@ class NetwinOddsDownloader:
                         for url, payload in captured_payloads.items():
                             matches = self.parse_torneo_centrale_payload(payload, tournament_label=tourney)
                             logger.info(f"Estratte {len(matches)} partite per {tourney}")
+
+                            try:
+                                parsed_url = urllib.parse.urlparse(url)
+                                qparams = urllib.parse.parse_qs(parsed_url.query)
+                                cat_id = qparams.get("categoryId", [None])[0]
+                                tourn_id = qparams.get("tournamentId", [None])[0]
+                                if cat_id and tourn_id:
+                                    logger.info(f"Scaricamento aggregati secondari per {tourney} (cat={cat_id}, tourn={tourn_id})...")
+                                    for agg_id in SECONDARY_AGGREGATES:
+                                        agg_payload = self._fetch_aggregate_payload(cat_id, tourn_id, agg_id, request_context=page.request)
+                                        if agg_payload:
+                                            self._merge_aggregate_markets(matches, agg_payload, agg_id)
+                            except Exception as e:
+                                logger.warning(f"Errore download aggregati secondari per {tourney}: {e}")
+
                             all_results.extend(matches)
                     else:
                         logger.warning(f"Torneo '{tourney}' ('{search_name}') non trovato nel menu Netwin.")
@@ -272,6 +424,18 @@ class NetwinOddsDownloader:
             # Gol / NoGol
             if "GOL_NOGOL" in mkts:
                 for outcome, odd in mkts["GOL_NOGOL"].items():
+                    key = f"{match_name.lower()}::{outcome.lower()}"
+                    cache[key] = {"match": match_name, "market": outcome, "netwin_odd": odd}
+
+            # Combo
+            if "COMBO" in mkts:
+                for outcome, odd in mkts["COMBO"].items():
+                    key = f"{match_name.lower()}::{outcome.lower()}"
+                    cache[key] = {"match": match_name, "market": outcome, "netwin_odd": odd}
+
+            # MultiGol
+            if "MULTIGOL" in mkts:
+                for outcome, odd in mkts["MULTIGOL"].items():
                     key = f"{match_name.lower()}::{outcome.lower()}"
                     cache[key] = {"match": match_name, "market": outcome, "netwin_odd": odd}
 

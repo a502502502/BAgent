@@ -83,6 +83,14 @@ def main():
             gng = mkts["GOL_NOGOL"]
             print(f"   • Gol/NoGol: Gol @ {gng.get('Gol')} | NoGol @ {gng.get('NoGol')}")
 
+        if "COMBO" in mkts:
+            combo_sample = ", ".join([f"{k} @ {v}" for k, v in list(mkts["COMBO"].items())[:3]])
+            print(f"   • Combo ({len(mkts['COMBO'])} linee): {combo_sample}...")
+
+        if "MULTIGOL" in mkts:
+            mg_sample = ", ".join([f"{k} @ {v}" for k, v in list(mkts["MULTIGOL"].items())[:3]])
+            print(f"   • MultiGol ({len(mkts['MULTIGOL'])} linee): {mg_sample}...")
+
     print("\n" + "=" * 75)
     print("📁 Quote archiviate e sincronizzate in:")
     print("   • data/netwin_live_odds.json (Palinsesto Completo)")
