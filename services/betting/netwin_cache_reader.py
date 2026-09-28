@@ -353,7 +353,7 @@ def _copy_multigol(source: object, flat: dict[str, float]) -> None:
 def _normalize_team_name(name: str) -> str:
     s = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode("utf-8")
     s = s.lower()
-    s = re.sub(r"\b(fc|sp|rj|mg|ba|pr|sc|sde|cr|ec|fr|y esgrima)\b", "", s)
+    s = re.sub(r"\b(fc|sp|rj|mg|ba|pr|sc|sde|cr|ec|fr|y esgrima|de|del|da|do|dos|das)\b", "", s)
     s = re.sub(r"[^a-z0-9]", " ", s)
     return " ".join(s.split())
 
@@ -368,13 +368,16 @@ def _find_matching_team(conn: sqlite3.Connection, raw_name: str, *, home_side: b
         all_teams = [row[0] for row in cursor if row[0]]
     except Exception:
         return raw_name
+    # 1. Exact normalized match
     for t in all_teams:
         if _normalize_team_name(t) == norm:
             return t
+    # 2. Substring match with minimum length check (evita che 'ob' matchi 'cordoba')
     for t in all_teams:
         t_norm = _normalize_team_name(t)
-        if norm and (norm in t_norm or t_norm in norm):
-            return t
+        if len(t_norm) >= 4 and len(norm) >= 4:
+            if norm in t_norm or t_norm in norm:
+                return t
     return raw_name
 
 
