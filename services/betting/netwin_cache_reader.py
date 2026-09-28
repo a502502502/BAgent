@@ -8,8 +8,10 @@ piatte, nel formato che `find_hidden_gems` confronta con la matrice dei gol.
 from __future__ import annotations
 
 import json
+import re
 import sqlite3
 import time
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -109,8 +111,28 @@ def load_cached_matches(
     return loaded
 
 
+LEAGUE_BASELINES: dict[str, tuple[float, float]] = {
+    "primera division arg": (1.20, 0.931),  # Totale 2.131 (Under 2.5: 62.5%, Under 3.5: 84.2%)
+    "liga profesional": (1.20, 0.931),
+    "argentina": (1.20, 0.931),
+    "brazil serie a": (1.52, 1.148),        # Totale 2.668 (Under 2.5: 48.4%, Under 3.5: 74.4%)
+    "serie a brasiliana": (1.52, 1.148),
+    "brasile": (1.52, 1.148),
+    "serie a": (1.60, 1.30),                # Totale 2.90
+    "premier league": (1.53, 1.29),         # Totale 2.82
+    "la liga": (1.65, 1.39),                # Totale 3.04
+    "laliga": (1.65, 1.39),
+    "bundesliga": (2.05, 1.76),             # Totale 3.81
+    "europa league": (1.48, 1.24),          # Totale 2.72
+}
+
+
 def tournament_baseline(tournament: str) -> tuple[float, float]:
-    """Spezza la media gol del cluster di lega in casa e trasferta."""
+    """Spezza la media gol certificata del torneo in casa e trasferta."""
+    key = (tournament or "").casefold().strip()
+    for league_name, baseline in LEAGUE_BASELINES.items():
+        if league_name in key or key in league_name:
+            return baseline
     _cluster, data = _MATCHER.identify_league_cluster(tournament or "")
     total = float((data.get("stats") or {}).get("avg_goals") or 2.50)
     home = max(0.2, total * 0.55)
@@ -120,9 +142,10 @@ def tournament_baseline(tournament: str) -> tuple[float, float]:
 def historical_xg(
     home: str,
     away: str,
+    tournament: str = "",
     db_path: Path | None = None,
 ) -> tuple[float, float] | None:
-    """Media gol certificata nel database. Sotto le 5 gare per squadra non basta."""
+    """Media gol certificata nel database con regressione bayesiana (shrinkage) verso la media di lega."""
     target = db_path or DB_PATH
     if not home or not away or not target.exists():
         return None
@@ -137,20 +160,30 @@ def historical_xg(
         return None
     finally:
         conn.close()
-    if len(home_rows) < MIN_TEAM_GAMES or len(away_rows) < MIN_TEAM_GAMES:
+    if len(home_rows) < MIN_TEAM_GAMES and len(away_rows) < MIN_TEAM_GAMES:
         return None
-    home_for = _mean(row[0] for row in home_rows)
-    home_against = _mean(row[1] for row in home_rows)
-    away_for = _mean(row[0] for row in away_rows)
-    away_against = _mean(row[1] for row in away_rows)
-    xg_home = min(3.5, max(0.2, (home_for + away_against) / 2.0))
-    xg_away = min(3.5, max(0.2, (away_for + home_against) / 2.0))
-    return xg_home, xg_away
+
+    l_home, l_away = tournament_baseline(tournament)
+
+    # Bayesian shrinkage (m = 5.0 partite a priori sulla media di lega)
+    m = 5.0
+    n_h = len(home_rows)
+    n_a = len(away_rows)
+
+    h_att = (sum(row[0] for row in home_rows) + m * l_home) / (n_h + m) if n_h else l_home
+    h_def = (sum(row[1] for row in home_rows) + m * l_away) / (n_h + m) if n_h else l_away
+
+    a_att = (sum(row[0] for row in away_rows) + m * l_away) / (n_a + m) if n_a else l_away
+    a_def = (sum(row[1] for row in away_rows) + m * l_home) / (n_a + m) if n_a else l_home
+
+    xg_home = min(3.5, max(0.2, (h_att / l_home) * (a_def / l_home) * l_home))
+    xg_away = min(3.5, max(0.2, (a_att / l_away) * (h_def / l_away) * l_away))
+    return round(xg_home, 2), round(xg_away, 2)
 
 
 def estimate_xg(match: CachedMatch, db_path: Path | None = None) -> tuple[float, float]:
-    """Prima lo storico delle due squadre, poi la baseline del torneo."""
-    stored = historical_xg(match.home_team, match.away_team, db_path)
+    """Prima lo storico shrunken delle due squadre, poi la baseline certificata del torneo."""
+    stored = historical_xg(match.home_team, match.away_team, match.tournament, db_path)
     if stored is not None:
         return stored
     return tournament_baseline(match.tournament)
@@ -316,7 +349,36 @@ def _copy_multigol(source: object, flat: dict[str, float]) -> None:
         flat[label] = odd
 
 
+def _normalize_team_name(name: str) -> str:
+    s = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode("utf-8")
+    s = s.lower()
+    s = re.sub(r"\b(fc|sp|rj|mg|ba|pr|sc|sde|cr|ec|fr|y esgrima)\b", "", s)
+    s = re.sub(r"[^a-z0-9]", " ", s)
+    return " ".join(s.split())
+
+
+def _find_matching_team(conn: sqlite3.Connection, raw_name: str, *, home_side: bool) -> str:
+    if not raw_name:
+        return raw_name
+    norm = _normalize_team_name(raw_name)
+    col = "home_team" if home_side else "away_team"
+    try:
+        cursor = conn.execute(f"SELECT DISTINCT {col} FROM matches WHERE status='FT'")
+        all_teams = [row[0] for row in cursor if row[0]]
+    except Exception:
+        return raw_name
+    for t in all_teams:
+        if _normalize_team_name(t) == norm:
+            return t
+    for t in all_teams:
+        t_norm = _normalize_team_name(t)
+        if norm and (norm in t_norm or t_norm in norm):
+            return t
+    return raw_name
+
+
 def _team_games(conn: sqlite3.Connection, team: str, *, home_side: bool) -> list[tuple[float, float]]:
+    db_team = _find_matching_team(conn, team, home_side=home_side)
     if home_side:
         query = """
             SELECT home_goals, away_goals FROM matches
@@ -327,7 +389,7 @@ def _team_games(conn: sqlite3.Connection, team: str, *, home_side: bool) -> list
             SELECT away_goals, home_goals FROM matches
             WHERE status='FT' AND away_team=? AND home_goals IS NOT NULL AND away_goals IS NOT NULL
         """
-    return [(float(scored), float(conceded)) for scored, conceded in conn.execute(query, (team,))]
+    return [(float(scored), float(conceded)) for scored, conceded in conn.execute(query, (db_team,))]
 
 
 def _mean(values) -> float:
