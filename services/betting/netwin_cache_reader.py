@@ -16,7 +16,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 
-from services.analysis.combo_book_search import HiddenMarketFilter, find_hidden_gems
+from services.analysis.combo_book_search import (
+    COMBO_CATALOG,
+    HiddenMarketFilter,
+    find_hidden_gems,
+)
 from services.analysis.league_dna_market_matcher import LeagueDNAMarketMatcher
 from services.database.schema import DB_PATH
 from services.football.sixth_sense.lambda_context import MatchContext
@@ -221,12 +225,14 @@ def scan_netwin_matches(
             continue
         if xg_home <= 0 or xg_away <= 0:
             continue
+        catalog = tuple(dict.fromkeys(COMBO_CATALOG + tuple(match.odds_dict.keys())))
         found = find_hidden_gems(
             xg_home,
             xg_away,
             match.odds_dict,
             resolve_context(match),
             sweet,
+            catalog=catalog,
         )
         note = "; ".join(found.notes)
         for combo in found.ranked:

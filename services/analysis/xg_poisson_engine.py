@@ -55,7 +55,7 @@ def _goal_clause_mask(clause: str, home: np.ndarray, away: np.ndarray, total: np
         if side != "total":
             return None
         return (home >= 1) & (away >= 1)
-    if clause in {"no gol", "ng"}:
+    if clause in {"no gol", "nogol", "ng"}:
         return ~((home >= 1) & (away >= 1))
 
     core = re.sub(r"\s+", " ", _SIDE_WORDS.sub(" ", clause)).strip()
