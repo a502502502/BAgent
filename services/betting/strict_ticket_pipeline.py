@@ -98,6 +98,7 @@ class TicketValidationReport:
     stake_percentage: float
     legs_reports: List[ValidationReport]
     rejection_reasons: List[str]
+    cloud_audit: Optional[Dict[str, Any]] = None  # Regola #75: Audit Obbligatorio Cloud AI Pre-Emissione (Groq LPU 120B)
 
 
 def _match_sides(match_name: str) -> Optional[Tuple[str, str]]:
@@ -710,14 +711,15 @@ class StrictTicketPipeline:
         # Controllo coppe infrasettimanali
         risk_flags_upper = [f.upper() for f in candidate.sixth_sense_risk_flags]
         has_cup = candidate.has_upcoming_midweek_cup or "MIDWEEK_CUP" in risk_flags_upper
-        if has_cup and (candidate.is_intermediate_deadline or candidate.is_first_half_only or candidate.is_compound_time_market):
+        is_first_half_under = any(w in candidate.market_name.lower() for w in ["under", "multigol 0-1", "multigol 0-2", "0-1", "0-2"])
+        if has_cup and (candidate.is_intermediate_deadline or candidate.is_first_half_only or candidate.is_compound_time_market) and not is_first_half_under:
             return ValidationReport(
                 passed=False,
                 candidate=candidate,
                 stage_failed=4,
                 rejection_reason=(
                     f"[BLOCCATO - SESTO SENSO: TURNOVER PRE-COPPA & AVVIO DIESEL] {candidate.match_name} ha un impegno europeo nei giorni successivi. "
-                    f"Tassativamente vietati mercati 1° tempo o mercati rigidi sui due tempi a quota compressa (Lezione Sunderland-Arsenal 0-0 HT)!"
+                    f"Tassativamente vietati mercati 1° tempo over o mercati rigidi sui due tempi a quota compressa (Lezione Sunderland-Arsenal 0-0 HT)!"
                 ),
                 sixth_sense_summary=candidate.sixth_sense_analysis
             )
@@ -733,7 +735,7 @@ class StrictTicketPipeline:
                     rejection_reason=f"[BLOCCATO - SESTO SENSO: RISCHIO TURNOVER] Rilevato turnover massiccio per {candidate.match_name}!",
                     sixth_sense_summary=candidate.sixth_sense_analysis
                 )
-            if flag_upper == "SLOW_START" and (candidate.is_intermediate_deadline or candidate.is_first_half_only):
+            if flag_upper == "SLOW_START" and (candidate.is_intermediate_deadline or candidate.is_first_half_only) and not is_first_half_under:
                 return ValidationReport(
                     passed=False,
                     candidate=candidate,
@@ -871,7 +873,15 @@ class StrictTicketPipeline:
         )
         return recommendation.recommended_stake
 
-    def validate_ticket(self, candidates: List[MarketCandidate], current_bankroll: float, proposed_stake: Optional[float] = None) -> TicketValidationReport:
+    def validate_ticket(
+        self,
+        candidates: List[MarketCandidate],
+        current_bankroll: float,
+        proposed_stake: Optional[float] = None,
+        ticket_title: Optional[str] = None,
+        enable_cloud_audit: bool = True,
+        strict_ai_block: bool = False,
+    ) -> TicketValidationReport:
         """
         Audit di Livello Ticket: valida tutte le selezioni ed applica i vincoli di schedina.
         - Protocollo Continuità: Max 3-4 selezioni per ticket (5+ gambe tassativamente vietate).
@@ -950,6 +960,45 @@ class StrictTicketPipeline:
 
         ticket_passed = (len(rejection_reasons) == 0)
 
+        # =====================================================================
+        # GATE 9: REGOLA #75 - AUDIT INDIPENDENTE ONLINE VIA GROQ CLOUD (0€, LPU)
+        # =====================================================================
+        cloud_audit_result = None
+        if ticket_passed and enable_cloud_audit:
+            try:
+                from services.debate.groq_auditor import GroqAuditor
+                auditor = GroqAuditor()
+                if auditor.is_configured():
+                    legs_payload = [
+                        {
+                            "match_name": c.match_name,
+                            "tournament": c.tournament,
+                            "market": c.market_name,
+                            "book_odd": float(c.netwin_actual_odd or c.bookmaker_odd),
+                            "fair_odd": float(rep.fair_odds if rep.fair_odds > 0 else 1.0),
+                            "probability": float(rep.real_probability),
+                            "edge": float(rep.mathematical_edge),
+                            "sixth_sense": c.sixth_sense_analysis,
+                        }
+                        for c, rep in zip(candidates, legs_reports)
+                        if rep.passed
+                    ]
+                    cloud_audit_result = auditor.audit_ticket(
+                        title=ticket_title or "Ticket Certificato BAgent",
+                        legs=legs_payload,
+                        bankroll=current_bankroll,
+                    )
+                    if cloud_audit_result.get("success") and not cloud_audit_result.get("approved"):
+                        if strict_ai_block:
+                            rejection_reasons.append(
+                                f"[BLOCCATO - REGOLA #75: AUDIT CLOUD AI BOCCIATO] Il modello Groq Cloud "
+                                f"({cloud_audit_result.get('model_used')}) ha rigettato il ticket evidenziando "
+                                f"trappole o asimmetria di rischio."
+                            )
+                            ticket_passed = False
+            except Exception as e:
+                cloud_audit_result = {"success": False, "error": str(e), "approved": True}
+
         return TicketValidationReport(
             passed=ticket_passed,
             num_selections=len(candidates),
@@ -957,5 +1006,6 @@ class StrictTicketPipeline:
             recommended_stake=chosen_stake,
             stake_percentage=round(stake_pct, 1),
             legs_reports=legs_reports,
-            rejection_reasons=rejection_reasons
+            rejection_reasons=rejection_reasons,
+            cloud_audit=cloud_audit_result,
         )

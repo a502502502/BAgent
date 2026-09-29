@@ -118,7 +118,16 @@ def format_ticket_report(ticket_report: TicketValidationReport) -> str:
         lines.append("\nQUESTO TICKET È BLOCCATO. È VIETATO PROPORLO ALL'UTENTE SENZA CORREZIONI.")
     else:
         lines.append("\n" + "=" * 85)
-        lines.append("✅ TUTTI I CONTROLLI SUPERATI CON SUCCESSO. IL TICKET È MATEMATICAMENTE E TATTICAMENTE BLINDATO.")
+        lines.append("✅ TUTTI I CONTROLLI MATEMATICI SUPERATI CON SUCCESSO.")
+        lines.append("=" * 85)
+
+    if ticket_report.cloud_audit and ticket_report.cloud_audit.get("success"):
+        audit = ticket_report.cloud_audit
+        status_icon = "🟢 APPROVATA" if audit.get("approved") else "⚠️ CRITICA / BOCCIATA"
+        lines.append("\n" + "=" * 85)
+        lines.append(f"🏛️  AUDIT CLOUD AI INDIPENDENTE (Regola #75 — Groq {audit.get('model_used', '120B')} LPU: {status_icon})")
+        lines.append("=" * 85)
+        lines.append(audit.get("critique", ""))
         lines.append("=" * 85)
 
     return "\n".join(lines)

@@ -53,11 +53,8 @@ def blocking_objections(measurement: Dict[str, Any]) -> List[Dict[str, str]]:
     def add(code: str, detail: str) -> None:
         blocks.append({"code": code, "detail": detail})
 
-    if measurement.get("is_period") or _PERIOD.search(market):
-        add(
-            "DIES_AT_45",
-            f"{market} chiude al 45': la selezione deve vivere 90 minuti.",
-        )
+    # Regola 45' rimossa: i mercati 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, ecc.)
+    # sono pienamente ammessi e prezzati matematicamente via Poisson (xG * 0.45).
     engine_p = measurement.get("engine_probability")
     if engine_p is None:
         add(

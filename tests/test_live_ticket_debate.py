@@ -35,7 +35,7 @@ def _blocked_leg(**overrides):
 def test_period_market_and_drift_stay_blocking():
     first_half = _blocked_leg()
     codes = {item["code"] for item in first_half["objections"]}
-    assert "DIES_AT_45" in codes
+    assert "DIES_AT_45" not in codes  # Regola 45' rimossa: mercati primo tempo ammessi
     assert "ENGINE_UNMAPPED" in codes
     assert "STOCK_SIXTH_SENSE" in codes
     assert "VALIDATOR_BLOCK" in codes

@@ -27,7 +27,7 @@ Prima giornata di un campionato: niente 1X2, Over o combo sul risultato. Si entr
 ## Mercati
 
 - Scansionare tutti i mercati (`scripts/scan_omni_markets.py`). Si gioca il migliore per probabilità, quota e respiro a 90 minuti. Nessun mercato è escluso per abitudine.
-- Sweet spot: probabilità reale 72-88%, quota 1.28-1.65 (fino a 1.85 sulle combo a doppia chance), edge ≥ +5%, vita 90 minuti. Sotto 1.22 è una trappola. I mercati che muoiono al 45' a quota compressa sono bocciati.
+- Sweet spot: probabilità reale 72-88%, quota 1.28-1.65 (fino a 1.85 sulle combo a doppia chance), edge ≥ +5%. Sotto 1.22 è una trappola. Mercati 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, 1X 1°T) ammessi e prezzati con precisione via Poisson (xG × 0.45).
 - 1 o 2 secco sotto 1.65 è vietato. Sostituire con 1X, 1X + Over 1.5, DNB o MultiGol 1-3 squadra. Niente 2 fisso in trasferta di coppa.
 - Δ punti ≤ 3: niente Over 2.5 forzato. Over 1.5 o doppia chance.
 - "Prima contro ultima" non è una base sicura. Niente `1 + Over 1.5` o `1 + Under 3.5` sotto 1.65. Usare `1X + MultiGol 1-4` o `MultiGol 1-3 Casa`, e controllare gli H2H della stagione.
@@ -61,4 +61,5 @@ Minuto e punteggio solo dal feed Flashscore. Trigger: assedio se la sfavorita (f
 
 ## Pipeline
 
-`scripts/build_verified_ticket.py`, in ordine: rosa, infortuni, distinta, probabilità composta, edge ≥ +4%, niente mercato che muore al 45' sotto 1.55, Kelly. Poi il validatore. Senza certificato non si propone la schedina come giocabile. Una lettura di solo Sesto Senso, chiesta espressamente, si dichiara come tale e non è un certificato.
+`scripts/build_verified_ticket.py`, in ordine: rosa, infortuni, distinta, probabilità composta, edge ≥ +4%, Kelly. Poi il validatore (`scripts/strict_validator.py`).
+- **Regola #75 (Audit Obbligatorio Cloud AI Pre-Emissione)**: Ogni volta che viene generata o validata una schedina, deve essere eseguito l'audit online indipendente via Groq Cloud (`services/debate/groq_auditor.py` con modello 120B a 0€). L'esito dell'audit (EV, scenari di perdita e verdetto) viene allegato al ticket per smascherare trappole bookmaker prima della proposta finale. Senza validatore e audit non si propone la schedina come giocabile. Una lettura di solo Sesto Senso, chiesta espressamente, si dichiara come tale e non è un certificato.

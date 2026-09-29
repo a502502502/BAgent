@@ -1,0 +1,18 @@
+# Cursor Rules for BAgent
+
+## Regola Fondamentale: Zero Costo & Zero Token Drain
+- Non effettuare chiamate API a pagamento (Anthropic, OpenAI a consumo).
+- Non utilizzare Ollama in locale (lento, pesante su GPU e con template instabili).
+- Utilizzare esclusivamente l'endpoint online di Groq Cloud (gratuito su LPU) per l'inferenza AI con modello `openai/gpt-oss-120b`.
+- Utilizzare SEMPRE ed ESCLUSIVAMENTE i termini "Gems" o "Hidden Gems" (vietato qualsiasi sinonimo in italiano).
+
+## Regola #75: Audit Obbligatorio Cloud AI Pre-Emissione Schedine
+- Ogni volta che viene generata, assemblata, validata o proposta una schedina o selezione multipla:
+  1. La schedina deve prima superare i filtri matematici locali (`StrictTicketPipeline` / `scripts/strict_validator.py`).
+  2. Viene invocato automaticamente `services.debate.groq_auditor.GroqAuditor` (o `python scripts/audit_ticket_online.py`) per un audit critico avversariale in cloud.
+  3. L'esito dell'audit (Analisi EV, Identificazione Trappole Bookmaker, Scenario Perdita, Verdetto e Stake consigliata) deve essere presentato all'utente insieme al ticket.
+  4. Se l'Auditor boccia una selezione identificando un rischio strutturale (es. tetto su favorita, dipendenza da Under primo tempo a cascata), la selezione deve essere rettificata prima di essere proposta come giocabile.
+
+## Mercati 1° Tempo (Pienamente Ammessi)
+- I mercati sul 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, 1X 1°T) sono pienamente ammessi e prezzati via Poisson (xG × 0.45).
+- Il blocco "DIES_AT_45" ("chiude al 45': la selezione deve vivere 90 minuti") è stato formalmente eliminato sia dal validatore che dal protocollo di dibattito.
