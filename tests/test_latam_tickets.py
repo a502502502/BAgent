@@ -83,3 +83,17 @@ def test_build_disjoint_tickets_insufficient_matches():
     ]
     tickets = build_disjoint_tickets(items, bankroll=37.32)
     assert len(tickets) == 0  # NO BET
+
+
+def test_quantitative_engine_first_half_pricing():
+    from services.analysis.xg_poisson_engine import QuantitativeEngine
+    engine = QuantitativeEngine()
+    prob_mg = engine.goal_market_probability(1.1, 1.0, "MultiGol 0-1 1° Tempo")
+    prob_u15 = engine.goal_market_probability(1.1, 1.0, "Under 1.5 1° Tempo")
+    prob_1x = engine.goal_market_probability(1.1, 1.0, "1X 1° Tempo")
+
+    assert prob_mg is not None and prob_mg > 0.70
+    assert prob_u15 is not None and prob_u15 > 0.70
+    assert prob_1x is not None and prob_1x > 0.70
+    assert abs(prob_mg - prob_u15) < 1e-4  # MultiGol 0-1 coincides with Under 1.5 in goal count
+

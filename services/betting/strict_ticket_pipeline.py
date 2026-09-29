@@ -833,24 +833,10 @@ class StrictTicketPipeline:
                 )
 
         # =====================================================================
-        # FASE 7: FILTRO STRUTTURALE DI MERCATO (ANTI-SCADENZA 45')
+        # FASE 7: VALUTAZIONE STRUTTURALE DI MERCATO (Regola 45' rimossa)
         # =====================================================================
-        if candidate.is_intermediate_deadline and candidate.bookmaker_odd < 1.55:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=7,
-                rejection_reason=(
-                    f"[BLOCCATO - FASE 7: TRAPPOLA SCADENZA INTERMEDIA 45'] {candidate.market_name} a quota @{candidate.bookmaker_odd:.2f}. "
-                    f"Può morire all'intervallo (45') cancellando il 2° tempo a quota compressa (< 1.55). "
-                    f"Consentiti solo mercati con 90 minuti di respiro!"
-                ),
-                real_probability=p_real,
-                fair_odds=fair_odd,
-                mathematical_edge=edge,
-                details=math_report,
-                sixth_sense_summary=candidate.sixth_sense_analysis
-            )
+        # Rimossa la trappola anti-scadenza 45' su direttiva utente: i mercati
+        # 1° Tempo sono pienamente ammessi e prezzati matematicamente via Poisson.
 
         # Approvato!
         return ValidationReport(

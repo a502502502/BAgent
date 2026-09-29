@@ -10,11 +10,19 @@ from scipy.stats import poisson, nbinom
 from typing import Dict, Any, List, Optional
 
 _NON_GOAL_TOKENS = ("corner", "cartellin", "tiri", "falli")
-_PERIOD_MARKET = re.compile(r"tempo|\b[12]\s*°?\s*t\b|entrambi i tempi")
+_COMPOUND_PERIOD_MARKET = re.compile(r"entrambi i tempi")
+_FIRST_HALF_REGEX = re.compile(r"\b(?:1\s*°?\s*tempo|1\s*°?\s*t|primo\s+tempo|1h)\b", re.IGNORECASE)
+_SECOND_HALF_REGEX = re.compile(r"\b(?:2\s*°?\s*tempo|2\s*°?\s*t|secondo\s+tempo|2h)\b", re.IGNORECASE)
 _CLAUSE_PREFIX = re.compile(r"^(?:chance mix|doppia chance|esito finale|dc)\s+")
 _SIDE_WORDS = re.compile(
     r"\b(?:casa|ospite|home|away|squadra\s*[12]|squadra|gol|totali|partita|match)\b"
 )
+
+
+def _clean_period_tokens(market_name: str) -> str:
+    cleaned = _FIRST_HALF_REGEX.sub("", market_name)
+    cleaned = _SECOND_HALF_REGEX.sub("", cleaned)
+    return re.sub(r"\s+", " ", cleaned).strip()
 
 
 def _normalize_market_name(market_name: str) -> str:
@@ -95,9 +103,10 @@ def _goal_market_mask(
 ) -> Optional[np.ndarray]:
     """Maschera del mercato. 'o' è unione, '+' è intersezione. None se il nome non è un mercato gol."""
     raw = market_name.lower()
-    if any(token in raw for token in _NON_GOAL_TOKENS) or _PERIOD_MARKET.search(raw):
+    if any(token in raw for token in _NON_GOAL_TOKENS) or _COMPOUND_PERIOD_MARKET.search(raw):
         return None
-    operator, clauses = _market_clauses(_normalize_market_name(market_name))
+    cleaned = _clean_period_tokens(market_name)
+    operator, clauses = _market_clauses(_normalize_market_name(cleaned))
     combined: Optional[np.ndarray] = None
     for clause in clauses:
         mask = _goal_clause_mask(clause, home, away, total)
@@ -245,7 +254,18 @@ class QuantitativeEngine:
         """Intersezione di più mercati gol sulla stessa matrice. None se un nome non è mappato."""
         if not market_names:
             return None
-        matrix, home, away, total = self._score_axes(xg_home, xg_away)
+        is_all_1h = all(_FIRST_HALF_REGEX.search(m) for m in market_names)
+        is_all_2h = all(_SECOND_HALF_REGEX.search(m) for m in market_names)
+        is_any_1h = any(_FIRST_HALF_REGEX.search(m) for m in market_names)
+        is_any_2h = any(_SECOND_HALF_REGEX.search(m) for m in market_names)
+        if (is_any_1h or is_any_2h) and not (is_all_1h or is_all_2h):
+            return None
+        if is_all_1h:
+            matrix, home, away, total = self._score_axes(xg_home * 0.45, xg_away * 0.45)
+        elif is_all_2h:
+            matrix, home, away, total = self._score_axes(xg_home * 0.55, xg_away * 0.55)
+        else:
+            matrix, home, away, total = self._score_axes(xg_home, xg_away)
         combined: Optional[np.ndarray] = None
         for market_name in market_names:
             mask = _goal_market_mask(market_name, home, away, total)

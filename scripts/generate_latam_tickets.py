@@ -3,7 +3,7 @@
 scripts/generate_latam_tickets.py — Generatore di Schedine Certificate Sudamerica (Argentina & Brasile).
 
 Conformità Totale a CLAUDE.md & Strict Ticket Pipeline:
-- Esclude a monte i mercati a 45' (MultiGol 1° Tempo, ecc.) per la regola del respiro a 90 minuti (Gate 7).
+- Include i mercati a 45' (1° Tempo) prezzati matematicamente via Dixon-Coles (45% xG).
 - Sanifica le doppie chance corrotte / scambiate (X2 @ 1.76 vs 2 @ 1.80).
 - Normalizza squadre e leghe per collegare lo storico reale 2026 dal DB (Gate 0).
 - Include Sesto Senso tattico obbligatorio per ogni selezione (Fase 4).
@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -65,9 +66,8 @@ def audit_candidate_with_strict_pipeline(
     dna_matcher: LeagueDNAMarketMatcher,
 ) -> Optional[Tuple[MarketCandidate, ValidationReport, str]]:
     """Esegue l'audit completo di tutti i gate dello StrictValidator e del DNA su una selezione."""
-    # 1. Filtro Strutturale 45 minuti
-    if is_45_min_market(gem.market):
-        return None
+    # 1. Mercati primo tempo ammessi e prezzati via Poisson 45% xG
+    # (Regola 45' disattivata su direttiva utente)
 
     # 2. Check DNA Tattico
     home, away = split_teams(gem.match_name)
@@ -249,6 +249,8 @@ def main():
     parser.add_argument("--min-prob", type=float, default=0.72, help="Probabilità minima di ciascuna selezione (default 0.72)")
     parser.add_argument("--min-edge", type=float, default=0.04, help="Edge minimo di ciascuna selezione (default 0.04)")
     parser.add_argument("--publish-to-bus", action="store_true", help="Pubblica l'esito sul Bus MCP per Cursor")
+    parser.add_argument("--wait", action="store_true", help="Attende sincronicamente il verdetto di Cursor via MCP bus")
+    parser.add_argument("--timeout", type=int, default=120, help="Timeout in secondi per l'attesa sincrona (default: 120)")
     args = parser.parse_args()
 
     # 1. Carica le partite in cache
@@ -312,7 +314,7 @@ def main():
         bus = AgentBusStore()
         if tickets:
             summary_text = "\n\n".join([format_ticket(t) for t in tickets])
-            bus.post_task(
+            task = bus.post_task(
                 title="Schedine Certificate Sudamerica (Rigorosamente Disgiunte)",
                 instructions=(
                     "Sono state generate nuove schedine certificate conformi a tutti gli 8 gate dello StrictValidator:\n\n"
@@ -322,13 +324,38 @@ def main():
                 target_files=["scripts/generate_latam_tickets.py"],
                 sender="Antigravity",
             )
-            print("🚀 Schedine pubblicate con successo sul Bus MCP!")
+            task_id = task["task_id"]
+            print(f"🚀 Schedine pubblicate con successo sul Bus MCP! [Task ID: {task_id}]")
+
+            if getattr(args, "wait", False):
+                timeout = args.timeout
+                interval = 2
+                start_t = time.time()
+                print(f"\n⏳ Attesa sincrona della verifica da Cursor via MCP sul task [{task_id}] (timeout: {timeout}s)...")
+                verified = False
+                while time.time() - start_t < timeout:
+                    t_cur = bus.get_task(task_id=task_id)
+                    if t_cur and t_cur.get("status") in ["COMPLETED", "BLOCKED", "NEEDS_REVIEW", "REJECTED"]:
+                        print("\n" + "=" * 75)
+                        print(f"🎯 VERIFICA RICEVUTA DA CURSOR! [Stato: {t_cur.get('status')}]")
+                        print("=" * 75)
+                        print(f"• Summary: {t_cur.get('summary')}")
+                        if t_cur.get("git_commit"):
+                            print(f"• Commit Git: {t_cur.get('git_commit')}")
+                        if t_cur.get("notes_for_antigravity"):
+                            print(f"• Note per Antigravity: {t_cur.get('notes_for_antigravity')}")
+                        print("=" * 75)
+                        verified = True
+                        break
+                    time.sleep(interval)
+                if not verified:
+                    print(f"\n⏱️ TIMEOUT ({timeout}s): Cursor non ha ancora risposto sul bus. Task rimane PENDING.")
         else:
             bus.send_guidance(
                 topic="Audit Schedine Sudamerica - Esito NO BET",
                 guidance_text=(
                     "L'audit con StrictTicketPipeline ha bocciato le proposte precedenti. "
-                    "Nessuna schedina soddisfa congiuntamente quota >= 1.22, 90 minuti di respiro ed assenza di correlazione. "
+                    "Nessuna schedina soddisfa congiuntamente quota >= 1.22, P >= 72% ed assenza di correlazione. "
                     "Verdetto attuale: NO BET sul Sudamerica."
                 ),
                 sender="Antigravity",
