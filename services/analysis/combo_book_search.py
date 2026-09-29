@@ -141,6 +141,38 @@ def search_combo_edge(
     )
 
 
+def rank_quoted_markets(
+    xg_home: float,
+    xg_away: float,
+    book_odds: dict[str, float] | None = None,
+    context: MatchContext | None = None,
+    corners_home: float | None = None,
+    corners_away: float | None = None,
+    catalog: tuple[str, ...] = COMBO_CATALOG,
+) -> ComboSearch:
+    """Ogni mercato quotato da 1.20 in su. Lo sweet spot non scarta la partita."""
+    return _classify(
+        xg_home,
+        xg_away,
+        book_odds,
+        context,
+        _PricePolicy(min_probability=0.0, min_edge=-9.0, min_odd=1.20, max_odd=None),
+        catalog,
+        corners_home=corners_home,
+        corners_away=corners_away,
+        price_corners=True,
+    )
+
+
+def market_verdict(edge: float) -> str:
+    """Stella da +5%, occhio se l'edge è positivo sotto quella soglia, croce se è negativo."""
+    if edge >= 0.05:
+        return "stella"
+    if edge > 0:
+        return "occhio"
+    return "croce"
+
+
 def find_hidden_gems(
     xg_home: float,
     xg_away: float,
@@ -321,6 +353,9 @@ def _consider(
 ) -> None:
     if quoted is None or quoted <= 1.0:
         rejected.append(RejectedCombo(market, "quota del banco assente"))
+        return
+    if probability <= 0:
+        rejected.append(RejectedCombo(market, "probabilità nulla"))
         return
     if policy.min_odd is not None and quoted < policy.min_odd:
         rejected.append(RejectedCombo(market, f"quota {quoted:.2f} sotto il minimo {policy.min_odd:.2f}"))

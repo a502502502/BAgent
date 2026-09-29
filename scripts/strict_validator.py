@@ -13,7 +13,7 @@ Hard Gates Implementati:
 - Gate 0.8 (Regola #49): Anti-Allucinazione Nominale & Formazioni (Divieto memoria parametrica 2024, audit entità DB 2026/27)
 - Gate 1-3: Controllo anagrafico 2026/27, indisponibili e formazioni ufficiali
 - Gate 4 (Regola #43): Sesto Senso Obbligatorio & Rischio Coppe Europee Infrasettimanali
-- Gate 5-6: Calcolo Probabilità Reale & Edge Matematico Reale (>= +4.0%)
+- Gate 5-6: Calcolo Probabilità Reale & Edge. Sotto il 72% o sotto +4% è un avviso, non una bocciatura
 - Gate 7: Filtro Anti-Scadenza 45' a quota compressa (< 1.55)
 - Gate 8: Money Management (Max 3-4 selezioni per ticket, Max 8% bankroll per ticket)
 

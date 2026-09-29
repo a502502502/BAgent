@@ -10,7 +10,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
-from services.analysis.combo_book_search import find_hidden_gems
+from services.analysis.combo_book_search import market_verdict, rank_quoted_markets
+from services.betting.netwin_cache_reader import historical_xg
 from services.football.sixth_sense.lambda_context import MatchContext
 
 ROME = ZoneInfo("Europe/Rome")
@@ -35,6 +36,20 @@ _BANNED = (
     "prim b",
     "ligue 2",
     "segunda",
+    "primera b",
+    "primera c",
+    "ascenso",
+    "liga ii",
+    "2. liga",
+    "nb ii",
+    "nb iii",
+    "u19",
+    "u20",
+    "u21",
+    "u23",
+    "feminin",
+    "femenin",
+    "junior",
     "tennis",
     "atp",
     "wta",
@@ -68,6 +83,26 @@ _ALLOWED = (
     "europa league",
     "conference league",
     "uefa nations league",
+    "nations league",
+    "mls",
+    "austria bundesliga",
+    "ekstraklasa",
+    "j1 league",
+    "liga mx",
+    "ukrainian premier",
+    "prva hnl",
+    "serbia superliga",
+    "colombia primera",
+    "chile primera",
+    "czech first",
+    "peru primera",
+    "uruguay primera",
+    "ecuador serie a",
+    "paraguay division",
+    "hungary nb i",
+    "romania liga i",
+    "copa libertadores",
+    "copa sudamericana",
 )
 
 
@@ -97,13 +132,15 @@ def advise_records(
         reason = _reject_record(record, moment)
         if reason == "lega fuori perimetro" and not asked:
             continue
+        _fill_xg(record)
+        reason = _reject_record(record, moment)
         seen += 1
         if reason:
             discarded.append({"match": _name(record), "reason": reason})
             continue
         choice = _best_market(record, flags)
         if choice is None:
-            discarded.append({"match": _name(record), "reason": "nessun mercato nello sweet spot"})
+            discarded.append({"match": _name(record), "reason": "nessun mercato prezzabile"})
             continue
         picked.append(choice)
     picked.sort(key=lambda row: row["_edge"], reverse=True)
@@ -141,8 +178,8 @@ def _empty_message(asked: bool, seen: int, discarded: list[dict]) -> str:
         return "Partita trovata, ma FootyStats non ha gli xG prematch: senza quelli non calcolo un mercato."
     if reasons == {"partita rinviata"}:
         return "Le partite trovate sono rinviate."
-    if reasons == {"nessun mercato nello sweet spot"}:
-        return "Nessun mercato nello sweet spot per le partite ammesse."
+    if reasons == {"nessun mercato prezzabile"}:
+        return "Nessun mercato prezzabile sopra quota 1.20 per le partite ammesse."
     return "Nessuna selezione. " + "; ".join(sorted(reasons))
 
 
@@ -183,8 +220,23 @@ def records_from_feed(rows: list[dict], leagues: dict[int, str]) -> list[dict]:
     return records
 
 
+def _fill_xg(record: dict) -> None:
+    """Se il feed non porta gli xG prematch, usa lo storico gol della stagione."""
+    if record.get("xg_home") and record.get("xg_away"):
+        return
+    found = historical_xg(
+        str(record.get("home") or ""),
+        str(record.get("away") or ""),
+        str(record.get("league") or ""),
+    )
+    if found is None:
+        return
+    record["xg_home"], record["xg_away"] = found
+    record["xg_source"] = "storico stagionale"
+
+
 def _best_market(record: dict, context: MatchContext) -> dict | None:
-    result = find_hidden_gems(
+    result = rank_quoted_markets(
         record["xg_home"],
         record["xg_away"],
         record["odds"],
@@ -193,13 +245,19 @@ def _best_market(record: dict, context: MatchContext) -> dict | None:
     if not result.ranked:
         return None
     best = result.ranked[0]
+    verdict = market_verdict(best.edge)
     notes = list(result.notes)
     if not notes:
-        notes.append("Nessun flag di sesto senso: i gol attesi restano quelli FootyStats.")
+        source = record.get("xg_source") or "FootyStats"
+        notes.append(f"Nessun flag di sesto senso: i gol attesi restano quelli {source}.")
     notes.append(
-        f"Migliore nello sweet spot: quota {best.book_odd:.2f}, "
+        f"Verdetto {verdict}: quota {best.book_odd:.2f}, "
         f"fair {best.fair_odd:.2f}, probabilità {best.probability:.1%}, edge {best.edge:+.1%}."
     )
+    if best.probability < 0.72:
+        notes.append("Probabilità sotto il 72%: etichetta informativa, la partita resta prezzabile.")
+    if not 1.35 <= best.book_odd <= 1.80:
+        notes.append("Quota fuori dalla banda 1.35-1.80: il mercato resta visibile.")
     when = record["kickoff"].astimezone(ROME).strftime("%d/%m %H:%M") if record.get("kickoff") else "—"
     return {
         "match": _name(record),
@@ -210,6 +268,7 @@ def _best_market(record: dict, context: MatchContext) -> dict | None:
         "probability": f"{best.probability:.1%}",
         "fair_odd": f"{best.fair_odd:.2f}",
         "edge": f"{best.edge:+.1%}",
+        "verdict": verdict,
         "motivations": notes,
         "_edge": best.edge,
     }

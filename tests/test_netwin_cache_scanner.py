@@ -90,7 +90,7 @@ def test_cached_match_resolves_teams_and_skips_a_corrupt_file(tmp_path):
     assert load_cached_matches(path=tmp_path / "missing.json") == []
 
 
-def test_hidden_gems_keep_the_priced_edge_and_drop_the_rest(tmp_path):
+def test_priced_markets_stay_on_the_board_with_a_verdict(tmp_path):
     xg_home, xg_away = 1.20, 0.95
     engine = QuantitativeEngine()
     gem_p = engine.goal_market_probability(xg_home, xg_away, "MultiGol 1-4")
@@ -123,13 +123,14 @@ def test_hidden_gems_keep_the_priced_edge_and_drop_the_rest(tmp_path):
     )
     markets = [gem.market for gem in gems]
     assert "MultiGol 1-4" in markets
-    assert "MultiGol 1-3" not in markets
-    assert "Over 2.5" not in markets
+    assert "MultiGol 1-3" in markets
+    assert "Over 2.5" in markets
     assert gems[0].edge >= gems[-1].edge
-    for gem in gems:
-        assert gem.probability >= 0.70
-        assert gem.edge >= 0.045
-        assert gem.book_odd == 1.65 or gem.market != "MultiGol 1-4"
+    assert gems[0].market == "MultiGol 1-4"
+    assert gems[0].verdict == "stella"
+    thin = next(gem for gem in gems if gem.market == "MultiGol 1-3")
+    assert thin.verdict in {"occhio", "croce"}
+    assert "Fuori dalla banda" in thin.notes
 
 
 def test_flashscore_live_feed_becomes_a_snapshot_with_minute_score_and_cards():

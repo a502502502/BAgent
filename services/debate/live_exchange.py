@@ -368,7 +368,9 @@ def measure_leg(proposal: Dict[str, Any]) -> Dict[str, Any]:
         measurement["tournament"] = tournament
         from services.betting.netwin_cache_reader import estimate_xg
 
-        xg_home, xg_away = estimate_xg(cached)
+        resolved = estimate_xg(cached)
+        if resolved:
+            xg_home, xg_away = resolved
         cache_odd = cached.odds_dict.get(market)
         if cache_odd is not None:
             measurement["book_odd"] = float(cache_odd)

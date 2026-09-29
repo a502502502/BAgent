@@ -326,8 +326,8 @@ class StrictTicketPipeline:
             joint *= probability
         return joint
 
-    def _block_before_third_match(self, candidate: MarketCandidate) -> Optional[ValidationReport]:
-        """La partenza è dopo 3 partite chiuse del campionato in corso, lette dalla fonte."""
+    def _early_sample_warning(self, candidate: MarketCandidate) -> str | ValidationReport | None:
+        """Meno di 3 partite chiuse è un avviso. L'xG con shrinkage resta utilizzabile."""
         sides = _match_sides(candidate.match_name)
         if sides is None:
             return _season_block(
@@ -368,9 +368,10 @@ class StrictTicketPipeline:
         if away_played < MIN_PLAYED_BEFORE:
             short.append(f"{away} ne ha {away_played}")
         if short:
-            return _season_block(
-                candidate,
-                "Il modello parte dopo 3 partite chiuse. " + "; ".join(short) + ".",
+            return (
+                "[AVVISO CAMPIONE CORTO] Meno di 3 partite chiuse. "
+                + "; ".join(short)
+                + ". L'xG resta quello shrunk sulla media di lega."
             )
         return None
 
@@ -413,9 +414,10 @@ class StrictTicketPipeline:
                     details=f"kickoff_time privo di orario: '{candidate.kickoff_time}'"
                 )
 
-        early = self._block_before_third_match(candidate)
-        if early is not None:
-            return early
+        sample_notice = self._early_sample_warning(candidate)
+        if isinstance(sample_notice, ValidationReport):
+            return sample_notice
+        sample_warning = sample_notice
 
         # =====================================================================
         # GATE 0: DIVIETO 1 O 2 FISSO E COMBO RIGIDE SOTTO QUOTA 1.65 (Protocollo Protezione & Anti-Varianza)
@@ -877,22 +879,11 @@ class StrictTicketPipeline:
             )
 
         if p_real < self.MIN_LEG_PROBABILITY_THRESHOLD:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=6,
-                rejection_reason=(
-                    f"[BLOCCATO - FASE 6: PROBABILITÀ INSUFFICIENTE SOTTO SOGLIA 72%] {candidate.market_name} su {candidate.match_name}. "
-                    f"Probabilità reale calcolata: {p_real*100:.1f}% (soglia minima vincolante per gambe di multipla: >={self.MIN_LEG_PROBABILITY_THRESHOLD*100:.1f}%). "
-                    f"Linee sotto il 72% distruggono il win rate della schedina anche in presenza di un edge teorico marginale."
-                ),
-                real_probability=p_real,
-                fair_odds=fair_odd,
-                mathematical_edge=edge,
-                details=math_report,
-                sixth_sense_summary=candidate.sixth_sense_analysis,
-                edge_warning=edge_warning,
+            probability_warning = (
+                f"[AVVISO PROBABILITÀ INFORMATIVO] Probabilità reale {p_real*100:.1f}% sotto il 72%. "
+                f"La selezione resta prezzabile: la soglia è un'etichetta, non una bocciatura."
             )
+            edge_warning = f"{edge_warning} | {probability_warning}" if edge_warning else probability_warning
 
         # =====================================================================
         # GATE 6.5: NETWIN AGGIO SENTINEL (Informativo / Warning Only)
@@ -919,6 +910,9 @@ class StrictTicketPipeline:
         # =====================================================================
         # Rimossa la trappola anti-scadenza 45' su direttiva utente: i mercati
         # 1° Tempo sono pienamente ammessi e prezzati matematicamente via Poisson.
+
+        if sample_warning:
+            edge_warning = f"{edge_warning} | {sample_warning}" if edge_warning else sample_warning
 
         # Approvato!
         return ValidationReport(

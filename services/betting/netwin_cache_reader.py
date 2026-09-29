@@ -18,8 +18,8 @@ from typing import Callable
 
 from services.analysis.combo_book_search import (
     COMBO_CATALOG,
-    HiddenMarketFilter,
-    find_hidden_gems,
+    market_verdict,
+    rank_quoted_markets,
 )
 from services.analysis.league_dna_market_matcher import LeagueDNAMarketMatcher
 from services.database.schema import DB_PATH
@@ -27,7 +27,7 @@ from services.football.sixth_sense.lambda_context import MatchContext
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 DEFAULT_CACHE = ROOT / "data" / "netwin_live_odds.json"
-MIN_TEAM_GAMES = 5
+MIN_TEAM_GAMES = 1
 CACHE_MAX_AGE_HOURS = 12.0
 
 _MATCHER = LeagueDNAMarketMatcher()
@@ -53,6 +53,7 @@ class NetwinGem:
     probability: float
     edge: float
     notes: str
+    verdict: str = ""
 
 
 def cache_is_stale(path: Path | None = None, max_age_hours: float = CACHE_MAX_AGE_HOURS) -> bool:
@@ -166,13 +167,112 @@ LEAGUE_BASELINES: dict[str, tuple[float, float]] = {
 def tournament_baseline(tournament: str) -> tuple[float, float]:
     """Spezza la media gol certificata del torneo in casa e trasferta."""
     key = (tournament or "").casefold().strip()
-    for league_name, baseline in LEAGUE_BASELINES.items():
-        if league_name in key or key in league_name:
-            return baseline
+    stored = _stored_league_baseline(key)
+    if stored is not None:
+        return stored
+    hardcoded = _hardcoded_baseline(key)
+    if hardcoded is not None:
+        return hardcoded
     _cluster, data = _MATCHER.identify_league_cluster(tournament or "")
     total = float((data.get("stats") or {}).get("avg_goals") or 2.50)
     home = max(0.2, total * 0.55)
     return home, max(0.2, total - home)
+
+
+_LEAGUE_AVERAGE_CACHE: dict[str, tuple[float, float, int]] | None = None
+
+# Token del torneo -> frammento del nome lega salvato in matches.league
+_STORED_LEAGUE_TOKENS = (
+    ("nations league", "uefa nations league"),
+    ("libertadores", "copa libertadores"),
+    ("sudamericana", "copa sudamericana"),
+    ("ekstraklasa", "ekstraklasa"),
+    ("liga mx", "liga mx"),
+    ("j1 league", "j1 league"),
+    ("prva hnl", "prva hnl"),
+    ("hnl", "prva hnl"),
+    ("superliga serbia", "serbia superliga"),
+    ("serbia", "serbia superliga"),
+    ("primera a", "colombia primera a"),
+    ("colombia", "colombia primera a"),
+    ("chile", "chile primera"),
+    ("czech", "czech first league"),
+    ("cechia", "czech first league"),
+    ("peru", "peru primera"),
+    ("uruguay", "uruguay primera"),
+    ("ecuador", "ecuador serie a"),
+    ("paraguay", "paraguay division profesional"),
+    ("nb i", "hungary nb i"),
+    ("hungary", "hungary nb i"),
+    ("ungheria", "hungary nb i"),
+    ("liga i", "romania liga i"),
+    ("romania", "romania liga i"),
+    ("ukrain", "ukrainian premier league"),
+    ("ucraina", "ukrainian premier league"),
+    ("austria", "austria bundesliga"),
+    ("mls", "mls"),
+)
+
+
+def _hardcoded_baseline(key: str) -> tuple[float, float] | None:
+    hits: list[tuple[int, tuple[float, float]]] = []
+    for league_name, baseline in LEAGUE_BASELINES.items():
+        if league_name == "bundesliga" and "austria" in key:
+            continue
+        if league_name in key:
+            hits.append((len(league_name), baseline))
+    if not hits:
+        return None
+    return max(hits)[1]
+
+
+def _stored_league_baseline(tournament: str) -> tuple[float, float] | None:
+    """Media gol casa/trasferta dello storico importato, quando la lega non ha una baseline fissa."""
+    if not tournament or not DB_PATH.exists():
+        return None
+    token = next((fragment for needle, fragment in _STORED_LEAGUE_TOKENS if needle in tournament), "")
+    if not token:
+        return None
+    averages = _league_averages()
+    best: tuple[int, float, float] | None = None
+    for name, (home, away, count) in averages.items():
+        if token not in name or count < 20:
+            continue
+        if best is None or count > best[0]:
+            best = (count, home, away)
+    if best is None:
+        return None
+    return round(best[1], 3), round(best[2], 3)
+
+
+def _league_averages() -> dict[str, tuple[float, float, int]]:
+    global _LEAGUE_AVERAGE_CACHE
+    if _LEAGUE_AVERAGE_CACHE is not None:
+        return _LEAGUE_AVERAGE_CACHE
+    found: dict[str, tuple[float, float, int]] = {}
+    try:
+        conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+    except sqlite3.Error:
+        _LEAGUE_AVERAGE_CACHE = found
+        return found
+    try:
+        rows = conn.execute(
+            """
+            SELECT league, AVG(home_goals), AVG(away_goals), COUNT(*)
+            FROM matches
+            WHERE status='FT' AND home_goals IS NOT NULL AND away_goals IS NOT NULL
+            GROUP BY league
+            """
+        )
+        for league, home, away, count in rows:
+            if league and home is not None and away is not None:
+                found[str(league).casefold()] = (float(home), float(away), int(count))
+    except sqlite3.Error:
+        found = {}
+    finally:
+        conn.close()
+    _LEAGUE_AVERAGE_CACHE = found
+    return found
 
 
 def historical_xg(
@@ -190,12 +290,13 @@ def historical_xg(
     except sqlite3.Error:
         return None
     try:
-        home_rows = _team_games(conn, home, home_side=True)
-        away_rows = _team_games(conn, away, home_side=False)
+        home_rows = _team_games(conn, home, home_side=True, league=tournament)
+        away_rows = _team_games(conn, away, home_side=False, league=tournament)
     except sqlite3.Error:
         return None
     finally:
         conn.close()
+    # Anche un campione corto entra: lo shrinkage (m=5) lo tira verso la media di lega.
     if len(home_rows) < MIN_TEAM_GAMES and len(away_rows) < MIN_TEAM_GAMES:
         return None
 
@@ -217,12 +318,9 @@ def historical_xg(
     return round(xg_home, 2), round(xg_away, 2)
 
 
-def estimate_xg(match: CachedMatch, db_path: Path | None = None) -> tuple[float, float]:
-    """Prima lo storico shrunken delle due squadre, poi la baseline certificata del torneo."""
-    stored = historical_xg(match.home_team, match.away_team, match.tournament, db_path)
-    if stored is not None:
-        return stored
-    return tournament_baseline(match.tournament)
+def estimate_xg(match: CachedMatch, db_path: Path | None = None) -> tuple[float, float] | None:
+    """Solo lo storico delle due squadre. Senza un nome agganciato non si inventa la media di lega."""
+    return historical_xg(match.home_team, match.away_team, match.tournament, db_path)
 
 
 def context_for_match(match: CachedMatch) -> MatchContext:
@@ -241,32 +339,37 @@ def scan_netwin_matches(
     *,
     min_edge: float = 0.045,
     min_probability: float = 0.70,
-    xg_for: Callable[[CachedMatch], tuple[float, float]] | None = None,
+    xg_for: Callable[[CachedMatch], tuple[float, float] | None] | None = None,
     context_for: Callable[[CachedMatch], MatchContext] | None = None,
 ) -> list[NetwinGem]:
-    """Confronta ogni quota piatta con la matrice. Tiene solo le Hidden Gems sopra soglia."""
+    """Ogni mercato quotato da 1.20, con verdetto. Le soglie non scartano più la partita."""
     resolve_xg = xg_for or estimate_xg
     resolve_context = context_for or context_for_match
-    sweet = HiddenMarketFilter(min_probability=min_probability, min_edge=min_edge)
     gems: list[NetwinGem] = []
     for match in matches:
         try:
-            xg_home, xg_away = resolve_xg(match)
+            resolved = resolve_xg(match)
         except (TypeError, ValueError):
             continue
+        if not resolved:
+            continue
+        xg_home, xg_away = resolved
         if xg_home <= 0 or xg_away <= 0:
             continue
         catalog = tuple(dict.fromkeys(COMBO_CATALOG + tuple(match.odds_dict.keys())))
-        found = find_hidden_gems(
+        found = rank_quoted_markets(
             xg_home,
             xg_away,
             match.odds_dict,
             resolve_context(match),
-            sweet,
             catalog=catalog,
         )
         note = "; ".join(found.notes)
         for combo in found.ranked:
+            verdict = market_verdict(combo.edge)
+            extra = ""
+            if combo.edge < min_edge or combo.probability < min_probability:
+                extra = " Fuori dalla banda 70% / +4.5%: il mercato resta in elenco."
             gems.append(
                 NetwinGem(
                     tournament=match.tournament,
@@ -276,7 +379,8 @@ def scan_netwin_matches(
                     fair_odd=combo.fair_odd,
                     probability=combo.probability,
                     edge=combo.edge,
-                    notes=note,
+                    notes=(note + extra).strip(),
+                    verdict=verdict,
                 )
             )
     gems.sort(key=lambda gem: gem.edge, reverse=True)
@@ -387,39 +491,194 @@ def _copy_multigol(source: object, flat: dict[str, float]) -> None:
         flat[label] = odd
 
 
+_EDGE_NOISE = frozenset({
+    "fc", "cf", "ac", "afc", "cfc", "club", "clube", "ec", "cr", "cd", "sde",
+    "rj", "mg", "ba", "pr", "sc", "sp", "rs", "pe", "ce", "go", "es",
+    "de", "del", "da", "do", "dos", "das",
+})
+
+# Ago del torneo -> frammento del nome salvato in matches.league. Il più lungo vince.
+_LEAGUE_HINTS = _STORED_LEAGUE_TOKENS + (
+    ("brazil serie a", "brazil serie a"),
+    ("brasileirao", "brazil serie a"),
+    ("brasile", "brazil serie a"),
+    ("serie a brasiliana", "brazil serie a"),
+    ("brasiliana", "brazil serie a"),
+    ("primera division arg", "primera division arg"),
+    ("liga profesional", "primera division arg"),
+    ("argentina", "primera division arg"),
+    ("premier league", "premier league"),
+    ("inghilterra", "premier league"),
+    ("la liga", "la liga"),
+    ("laliga", "la liga"),
+    ("spagna", "la liga"),
+    ("bundesliga", "bundesliga"),
+    ("germania", "bundesliga"),
+    ("ligue 1", "ligue 1"),
+    ("francia", "ligue 1"),
+    ("primeira liga", "primeira liga"),
+    ("portogallo", "primeira liga"),
+    ("eredivisie", "eredivisie"),
+    ("olanda", "eredivisie"),
+    ("scottish premiership", "scottish premiership"),
+    ("scozia", "scottish premiership"),
+    ("jupiler", "jupiler pro league"),
+    ("belgio", "jupiler pro league"),
+    ("pro league", "jupiler pro league"),
+    ("superliga den", "superliga den"),
+    ("danimarca", "superliga den"),
+    ("eliteserien", "eliteserien"),
+    ("norvegia", "eliteserien"),
+    ("allsvenskan", "allsvenskan"),
+    ("svezia", "allsvenskan"),
+    ("super league greece", "super league greece"),
+    ("grecia", "super league greece"),
+    ("super lig", "super lig"),
+    ("turchia", "super lig"),
+    ("swiss super", "swiss super league"),
+    ("svizzera", "swiss super league"),
+    ("champions league", "champions league"),
+    ("europa league", "europa league"),
+    ("conference league", "conference league"),
+    ("serie a", "serie a"),
+    ("italia", "serie a"),
+)
+
+
 def _normalize_team_name(name: str) -> str:
     s = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode("utf-8")
     s = s.lower()
-    s = re.sub(r"\b(fc|sp|rj|mg|ba|pr|sc|sde|cr|ec|fr|y esgrima|de|del|da|do|dos|das)\b", "", s)
     s = re.sub(r"[^a-z0-9]", " ", s)
     return " ".join(s.split())
 
 
-def _find_matching_team(conn: sqlite3.Connection, raw_name: str, *, home_side: bool) -> str:
-    if not raw_name:
-        return raw_name
-    norm = _normalize_team_name(raw_name)
-    col = "home_team" if home_side else "away_team"
+def _core_tokens(name: str) -> tuple[str, ...]:
+    """Toglie solo le sigle ai bordi (FC, PR, RJ). Il corpo del nome resta intero."""
+    tokens = _normalize_team_name(name).split()
+    changed = True
+    while changed and tokens:
+        changed = False
+        if tokens[0] in _EDGE_NOISE:
+            tokens = tokens[1:]
+            changed = True
+        if tokens and tokens[-1] in _EDGE_NOISE:
+            tokens = tokens[:-1]
+            changed = True
+    return tuple(tokens)
+
+
+def team_names_match(left: str, right: str) -> bool:
+    """Stesso club. «Atlético PR» non è «Atlético Madrid» e «Cerro» non è «Cerro Porteño»."""
+    if not left or not right:
+        return False
+    if _normalize_team_name(left) == _normalize_team_name(right):
+        return True
+    core = _core_tokens(left)
+    return bool(core) and core == _core_tokens(right)
+
+
+def _league_names_for(conn: sqlite3.Connection, tournament: str) -> list[str]:
+    key = (tournament or "").casefold().strip()
+    if not key:
+        return []
     try:
-        cursor = conn.execute(f"SELECT DISTINCT {col} FROM matches WHERE status='FT'")
-        all_teams = [row[0] for row in cursor if row[0]]
-    except Exception:
-        return raw_name
-    # 1. Exact normalized match
-    for t in all_teams:
-        if _normalize_team_name(t) == norm:
-            return t
-    # 2. Substring match with minimum length check (evita che 'ob' matchi 'cordoba')
-    for t in all_teams:
-        t_norm = _normalize_team_name(t)
-        if len(t_norm) >= 4 and len(norm) >= 4:
-            if norm in t_norm or t_norm in norm:
-                return t
-    return raw_name
+        available = [row[0] for row in conn.execute("SELECT DISTINCT league FROM matches") if row[0]]
+    except sqlite3.Error:
+        return []
+    exact = [name for name in available if name.casefold() == key]
+    if exact:
+        return exact
+    hits = [(len(needle), fragment) for needle, fragment in _LEAGUE_HINTS if needle in key]
+    if not hits:
+        contained = [name for name in available if name.casefold() in key]
+        if not contained:
+            return []
+        return [max(contained, key=len)]
+    fragment = max(hits)[1]
+    if fragment == "bundesliga" and "austria" in key:
+        fragment = "austria bundesliga"
+    exact = [name for name in available if name.casefold() == fragment]
+    if exact:
+        return exact
+    return [name for name in available if fragment in name.casefold()]
 
 
-def _team_games(conn: sqlite3.Connection, team: str, *, home_side: bool) -> list[tuple[float, float]]:
-    db_team = _find_matching_team(conn, team, home_side=home_side)
+def _team_pool(conn: sqlite3.Connection, leagues: list[str]) -> list[str]:
+    if leagues:
+        marks = ",".join("?" for _ in leagues)
+        query = f"""
+            SELECT DISTINCT team FROM (
+                SELECT home_team AS team FROM matches WHERE league IN ({marks})
+                UNION
+                SELECT away_team AS team FROM matches WHERE league IN ({marks})
+            )
+        """
+        rows = conn.execute(query, (*leagues, *leagues))
+    else:
+        rows = conn.execute(
+            """
+            SELECT DISTINCT team FROM (
+                SELECT home_team AS team FROM matches
+                UNION
+                SELECT away_team AS team FROM matches
+            )
+            """
+        )
+    return [row[0] for row in rows if row[0]]
+
+
+def _unique_team(raw_name: str, pool: list[str], *, loose: bool) -> str:
+    if not raw_name or not pool:
+        return ""
+    norm = _normalize_team_name(raw_name)
+    exact = [team for team in pool if _normalize_team_name(team) == norm]
+    if len(set(exact)) == 1:
+        return exact[0]
+    if len(set(exact)) > 1:
+        return ""
+    if not loose:
+        return ""
+    core = _core_tokens(raw_name)
+    if not core:
+        return ""
+    loose_hits = [team for team in pool if _core_tokens(team) == core]
+    if len(set(loose_hits)) == 1:
+        return loose_hits[0]
+    return ""
+
+
+def _find_matching_team(
+    conn: sqlite3.Connection,
+    raw_name: str,
+    *,
+    home_side: bool,
+    league: str = "",
+) -> str:
+    """Il nome si risolve nel campionato della partita. Fuori da lì solo se il nome è unico."""
+    del home_side
+    if not raw_name:
+        return ""
+    try:
+        leagues = _league_names_for(conn, league)
+        if leagues:
+            chosen = _unique_team(raw_name, _team_pool(conn, leagues), loose=True)
+            if chosen:
+                return chosen
+        return _unique_team(raw_name, _team_pool(conn, []), loose=False)
+    except sqlite3.Error:
+        return ""
+
+
+def _team_games(
+    conn: sqlite3.Connection,
+    team: str,
+    *,
+    home_side: bool,
+    league: str = "",
+) -> list[tuple[float, float]]:
+    db_team = _find_matching_team(conn, team, home_side=home_side, league=league)
+    if not db_team:
+        return []
     if home_side:
         query = """
             SELECT home_goals, away_goals FROM matches

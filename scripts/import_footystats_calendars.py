@@ -16,28 +16,49 @@ sys.path.insert(0, str(ROOT))
 
 from services.database.schema import get_db  # noqa: E402
 
-# name, country, FootyStats season_id della stagione corrente
+# Nome salvato, paese, nome lega FootyStats, id di riserva se la lista non risponde.
+# L'id usato è quello della stagione con l'anno più alto.
 TARGETS = [
-    ("Serie A", "Italy", 17084),
-    ("Premier League", "England", 17146),
-    ("La Liga", "Spain", 17199),
-    ("Bundesliga", "Germany", 17210),
-    ("Ligue 1", "France", 17102),
-    ("Primeira Liga", "Portugal", 17217),
-    ("Eredivisie", "Netherlands", 17097),
-    ("Scottish Premiership", "Scotland", 17148),
-    ("Jupiler Pro League", "Belgium", 17171),
-    ("Superliga DEN", "Denmark", 17091),
-    ("Eliteserien", "Norway", 16558),
-    ("Allsvenskan", "Sweden", 16576),
-    ("Super League Greece", "Greece", 17356),
-    ("Super Lig", "Turkey", 17265),
-    ("Swiss Super League", "Switzerland", 17129),
-    ("Brazil Serie A", "Brazil", 16544),
-    ("Primera Division ARG", "Argentina", 16571),
-    ("Champions League", "Europe", 17128),
-    ("Europa League", "Europe", 17127),
-    ("Conference League", "Europe", 17130),
+    ("Serie A", "Italy", "Serie A", 17084),
+    ("Premier League", "England", "Premier League", 17146),
+    ("La Liga", "Spain", "La Liga", 17199),
+    ("Bundesliga", "Germany", "Bundesliga", 17210),
+    ("Ligue 1", "France", "Ligue 1", 17102),
+    ("Primeira Liga", "Portugal", "Liga NOS", 17217),
+    ("Eredivisie", "Netherlands", "Eredivisie", 17097),
+    ("Scottish Premiership", "Scotland", "Premiership", 17148),
+    ("Jupiler Pro League", "Belgium", "Pro League", 17171),
+    ("Superliga DEN", "Denmark", "Superliga", 17091),
+    ("Eliteserien", "Norway", "Eliteserien", 16558),
+    ("Allsvenskan", "Sweden", "Allsvenskan", 16576),
+    ("Super League Greece", "Greece", "Super League", 17356),
+    ("Super Lig", "Turkey", "Süper Lig", 17265),
+    ("Swiss Super League", "Switzerland", "Super League", 17129),
+    ("Brazil Serie A", "Brazil", "Serie A", 16544),
+    ("Primera Division ARG", "Argentina", "Primera División", 16571),
+    ("Champions League", "Europe", "UEFA Champions League", 17128),
+    ("Europa League", "Europe", "UEFA Europa League", 17127),
+    ("Conference League", "Europe", "UEFA Europa Conference League", 17130),
+    ("MLS", "USA", "MLS", 16504),
+    ("Austria Bundesliga", "Austria", "Bundesliga", 17181),
+    ("Ekstraklasa", "Poland", "Ekstraklasa", 17112),
+    ("J1 League", "Japan", "J1 League", 17115),
+    ("Liga MX", "Mexico", "Liga MX", 17099),
+    ("Ukrainian Premier League", "Ukraine", "Ukrainian Premier League", 17191),
+    ("Prva HNL", "Croatia", "Prva HNL", 17087),
+    ("Serbia SuperLiga", "Serbia", "SuperLiga", 17119),
+    ("Colombia Primera A", "Colombia", "Categoria Primera A", 16614),
+    ("Chile Primera", "Chile", "Primera División", 16615),
+    ("Czech First League", "Czech Republic", "First League", 17157),
+    ("Peru Primera", "Peru", "Primera División", 16905),
+    ("Uruguay Primera", "Uruguay", "Primera División", 16708),
+    ("Ecuador Serie A", "Ecuador", "Primera Categoría Serie A", 16714),
+    ("Paraguay Division Profesional", "Paraguay", "Division Profesional", 16533),
+    ("Hungary NB I", "Hungary", "NB I", 17165),
+    ("Romania Liga I", "Romania", "Liga I", 17247),
+    ("Copa Libertadores", "South America", "Copa Libertadores", 16556),
+    ("Copa Sudamericana", "South America", "Copa Sudamericana", 16547),
+    ("UEFA Nations League", "International", "UEFA Nations League", 16808),
 ]
 
 COLUMNS = [
@@ -115,6 +136,21 @@ def fetch_matches(key: str, season_id: int) -> list[dict]:
         time.sleep(0.4)
 
 
+def _resolve_season_id(country: str, league_name: str, fallback: int) -> int:
+    """Stagione con l'anno più alto. Se FootyStats non risponde, resta l'id di riserva."""
+    try:
+        from services.football.external.footystats_client import FootyStatsClient
+
+        found = FootyStatsClient().get_latest_season_id(country, league_name)
+    except Exception as exc:
+        print(f"{league_name}: elenco stagioni non letto ({exc}). Uso {fallback}.")
+        return fallback
+    if not found:
+        print(f"{country} {league_name}: stagione non trovata. Uso {fallback}.")
+        return fallback
+    return int(found)
+
+
 def main() -> None:
     key = _load_key()
     conn = get_db()
@@ -136,8 +172,13 @@ def main() -> None:
     ]
     print(f"{'Lega':<24} {'Stagione':<12} {'N':>5} {'FT':>5} {'NS':>5} {'Prima':<12} {'Ultima'}")
     saved = 0
-    for name, country, season_id in targets:
-        raw = fetch_matches(key, season_id)
+    for name, country, league_name, fallback in targets:
+        season_id = _resolve_season_id(country, league_name, fallback)
+        try:
+            raw = fetch_matches(key, season_id)
+        except RuntimeError as exc:
+            print(f"{name:<24} ERRORE {exc}")
+            continue
         time.sleep(0.6)
         seasons: set[str] = set()
         dates: list[str] = []

@@ -24,7 +24,7 @@ def _candidate(**overrides) -> MarketCandidate:
     return MarketCandidate(**data)
 
 
-def test_a_team_with_two_matches_does_not_start(tmp_path):
+def test_a_team_with_two_matches_stays_with_a_warning():
     from services.football.sixth_sense.calibration import SeasonMatch
 
     history = [
@@ -40,9 +40,9 @@ def test_a_team_with_two_matches_does_not_start(tmp_path):
             away_matches_played=10,
         )
     )
-    assert report.passed is False
-    assert report.stage_failed == 0
-    assert "dopo 3 partite" in report.rejection_reason.lower()
+    assert report.passed is True
+    assert report.edge_warning is not None
+    assert "3 partite" in report.edge_warning.lower()
 
 
 def test_striker_absence_lowers_the_priced_probability():

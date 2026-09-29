@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from services.football.external.footystats_client import latest_season
 from services.portal.slip_advisor import advise_records, context_from_flags, records_from_feed, rows_on_date
 
 load_dotenv(ROOT / ".env")
@@ -100,7 +101,9 @@ def _feed(date: str) -> tuple[list[dict], dict[int, str]]:
         title = f"{item.get('name') or ''} {item.get('league_name') or ''}".lower()
         seasons = item.get("season") or []
         if "uefa nations league" in title and "women" not in title and seasons:
-            nations_id = int(seasons[-1]["id"])
+            chosen = latest_season(seasons)
+            if chosen and chosen.get("id") is not None:
+                nations_id = int(chosen["id"])
         for season in seasons:
             season_id = season.get("id")
             if season_id is not None:

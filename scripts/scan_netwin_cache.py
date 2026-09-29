@@ -58,11 +58,11 @@ def main() -> None:
     print(f"Partite in memoria: {len(matches)}")
     gems = scan_netwin_matches(matches, min_edge=args.min_edge, min_probability=args.min_prob)
     if not gems:
-        print("Nessuna Hidden Gem sopra le soglie.")
+        print("Nessun mercato prezzabile sopra quota 1.20.")
         return
 
     header = (
-        f"{'#':>3} | {'Torneo':<22} | {'Partita':<36} | {'Mercato':<22} | "
+        f"{'#':>3} | {'Verdetto':<8} | {'Torneo':<22} | {'Partita':<36} | {'Mercato':<22} | "
         f"{'Quota':>6} | {'Fair':>6} | {'P_matrix':>8} | {'Edge':>7} | Note tattiche"
     )
     print(header)
@@ -72,7 +72,7 @@ def main() -> None:
         if len(note) > 80:
             note = note[:77] + "..."
         print(
-            f"{index:>3} | {gem.tournament[:22]:<22} | {gem.match_name[:36]:<36} | "
+            f"{index:>3} | {(gem.verdict or '—'):<8} | {gem.tournament[:22]:<22} | {gem.match_name[:36]:<36} | "
             f"{gem.market[:22]:<22} | {gem.book_odd:6.2f} | {gem.fair_odd:6.2f} | "
             f"{gem.probability:8.1%} | {gem.edge:+7.1%} | {note}"
         )

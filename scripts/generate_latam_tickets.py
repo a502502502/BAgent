@@ -79,6 +79,8 @@ def audit_candidate_with_strict_pipeline(
     if dna_res.is_prohibited:
         return None
 
+    if gem.edge < 0:
+        return None
     stored = historical_xg(home, away, gem.tournament)
     if stored is None:
         return None

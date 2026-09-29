@@ -3,7 +3,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from services.analysis.combo_book_search import find_hidden_gems
+from services.analysis.combo_book_search import rank_quoted_markets
 from services.football.sixth_sense.lambda_context import MatchContext
 from services.portal.slip_advisor import advise_records, league_allowed, records_from_feed
 
@@ -16,18 +16,21 @@ def test_the_shown_market_is_the_highest_edge_gem_and_explains_why():
     context = MatchContext(corto_muso_home=True)
     record = _record("Napoli", "Cagliari", "Italy Serie A", {"Under 3.5": 1.55, "Over 2.5": 1.70})
     result = advise_records([record], NOW, context)
-    gems = find_hidden_gems(1.85, 0.95, record["odds"], context)
+    gems = rank_quoted_markets(1.85, 0.95, record["odds"], context)
     assert gems.ranked
     best = gems.ranked[0]
     shown = result["selections"][0]
     assert shown["market"] == best.market
+    assert shown["verdict"] in {"stella", "occhio", "croce"}
     assert any("corto muso" in line for line in shown["motivations"])
-    assert any("sweet spot" in line for line in shown["motivations"])
+    assert any("Verdetto" in line for line in shown["motivations"])
     assert "validatore" in result["note"]
 
 
-def test_italia_vs_belgio_is_the_english_fixture_and_stops_without_xg():
+def test_italia_vs_belgio_is_the_english_fixture_and_stops_without_xg(monkeypatch):
+    monkeypatch.setattr("services.portal.slip_advisor.historical_xg", lambda *_args, **_kwargs: None)
     assert league_allowed("International UEFA Nations League") is True
+    assert league_allowed("USA MLS") is True
     record = _record("Italy", "Belgium", "International UEFA Nations League", {"Over 2.5": 1.80})
     record["xg_home"] = None
     record["xg_away"] = None
@@ -48,6 +51,31 @@ def test_a_lower_league_or_a_match_without_prices_never_becomes_a_pick():
     result = advise_records(records, NOW, query="Milan")
     assert result["selections"] == []
     assert result["discarded"][0]["reason"] == "quote assenti nel feed"
+
+
+def test_a_price_outside_the_sweet_spot_stays_on_the_board():
+    record = _record("Casa", "Ospite", "USA MLS", {"MultiGol 1-5": 1.25})
+    record["xg_home"] = 1.2
+    record["xg_away"] = 1.0
+    result = advise_records([record], NOW)
+    assert result["count"] == 1
+    shown = result["selections"][0]
+    assert shown["market"] == "MultiGol 1-5"
+    assert shown["verdict"] == "stella"
+    assert any("1.35-1.80" in line for line in shown["motivations"])
+
+
+def test_missing_prematch_xg_is_filled_from_season_history(monkeypatch):
+    monkeypatch.setattr(
+        "services.portal.slip_advisor.historical_xg",
+        lambda *_args, **_kwargs: (1.4, 1.1),
+    )
+    record = _record("River Plate", "Boca Juniors", "Argentina Liga Profesional", {"Over 1.5": 1.45})
+    record["xg_home"] = None
+    record["xg_away"] = None
+    result = advise_records([record], NOW)
+    assert result["count"] == 1
+    assert result["selections"][0]["market"]
 
 
 def test_only_the_three_strongest_edges_enter_the_slip():
