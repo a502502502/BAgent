@@ -1,24 +1,13 @@
 {
-    "ticket_id": "TICKET_TRIPLA_NOBILE_NOTTURNA_03OTT",
-    "name": "Tripla Nobile Notturna Sudamerica (3-4 Ottobre)",
-    "period": "Weekend 3-4 Ottobre 2026",
-    "created_at": "2026-09-29 14:45:00",
-    "total_odds": 2.18,
-    "conjoint_prob": 0.568,
-    "edge_pct": 23.9,
-    "groq_audit": "BOCCIATA (All-or-nothing su 3 eventi a quota compressa)",
+    "ticket_id": "TICKET_RADDOPPIO_BOMBONERA_GALO_03OTT",
+    "name": "Schedina 3 — Raddoppio Blindato Bombonera & Galo (3 Ottobre)",
+    "period": "Sabato 3 Ottobre 2026",
+    "created_at": "2026-09-29 14:56:00",
+    "total_odds": 2.09,
+    "conjoint_prob": 0.604,
+    "edge_pct": 26.1,
+    "groq_audit": "APPROVATA (Rettifica Dialettica Accolta)",
     "legs": [
-        {
-            "match": "Sao Paulo Fc Sp vs Santos Sp",
-            "tournament": "Brasile Serie A",
-            "date_time": "2026-10-03 01:00 CEST",
-            "market": "Doppia Chance",
-            "pick": "1X",
-            "netwin_odds": 1.27,
-            "prob": 0.830,
-            "edge_pct": 5.4,
-            "rationale": "Clássico San-São al Morumbi: Santos in forte affanno esterno, São Paulo imbattuto nelle ultime 6 uscite casalinghe."
-        },
         {
             "match": "Boca Juniors vs Union Santa Fe",
             "tournament": "Primera Division Argentina",
@@ -28,18 +17,18 @@
             "netwin_odds": 1.32,
             "prob": 0.835,
             "edge_pct": 10.2,
-            "rationale": "Alla Bombonera Boca solidissimo in retroguardia; vince con qualsiasi NoGol (0-0, 1-0, 2-0, 0-1) o qualsiasi Under 2.5."
+            "rationale": "Bombonera roccaforte difensiva del Boca. Vince con qualsiasi NoGol (0-0, 1-0, 2-0, 0-1) o con qualsiasi Under 2.5."
         },
         {
             "match": "Atletico Mineiro Mg vs Bragantino Sp",
             "tournament": "Brasile Serie A",
             "date_time": "2026-10-03 23:30 CEST",
-            "market": "Doppia Chance",
-            "pick": "1X",
-            "netwin_odds": 1.30,
-            "prob": 0.820,
-            "edge_pct": 6.6,
-            "rationale": "Galo all'Arena MRV con netta superiorità territoriale contro un Bragantino sterile fuori casa."
+            "market": "Combo",
+            "pick": "1X + Under 3.5",
+            "netwin_odds": 1.58,
+            "prob": 0.724,
+            "edge_pct": 14.5,
+            "rationale": "Accolta obiezione Groq: rimosso il derby rischioso San-Sao. Combo 1X + Under 3.5 per il Galo all'Arena MRV a quota di reale valore."
         }
     ]
 }
