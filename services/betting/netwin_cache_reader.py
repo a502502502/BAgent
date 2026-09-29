@@ -93,7 +93,34 @@ def flatten_netwin_markets(match_data: dict | None) -> dict[str, float]:
     _copy_outcome_map(markets.get("DRAW_NO_BET") or markets.get("draw_no_bet"), flat, lambda key: str(key))
     _copy_outcome_map(markets.get("MULTIGOL_SQUADRA") or markets.get("multigol_squadra"), flat, lambda key: str(key))
     _copy_goal_lines(markets.get("CORNER") or markets.get("CORNERS"), flat, corner=True)
+    _sanitize_double_chance(flat)
     return flat
+
+
+def _sanitize_double_chance(flat: dict[str, float]) -> None:
+    """Rimuove quote di Doppia Chance palesemente corrotte o scambiate rispetto all'1X2."""
+    o1, ox, o2 = flat.get("1"), flat.get("X"), flat.get("2")
+    if not (o1 and ox and o2):
+        return
+
+    fair_1x = 1.0 / (1.0 / o1 + 1.0 / ox)
+    fair_x2 = 1.0 / (1.0 / ox + 1.0 / o2)
+    fair_12 = 1.0 / (1.0 / o1 + 1.0 / o2)
+
+    # Hard bounds matematici: una doppia chance include due esiti, quindi la sua quota
+    # non può mai essere superiore (o quasi uguale) al segno secco, né discostarsi vistosamente
+    # dal valore equo teorico calcolato sui prezzi 1X2 del banco.
+    if "X2" in flat:
+        if flat["X2"] >= o2 or abs(flat["X2"] - fair_x2) > 0.35:
+            del flat["X2"]
+
+    if "1X" in flat:
+        if flat["1X"] >= o1 or abs(flat["1X"] - fair_1x) > 0.35:
+            del flat["1X"]
+
+    if "12" in flat:
+        if flat["12"] >= min(o1, o2) or abs(flat["12"] - fair_12) > 0.35:
+            del flat["12"]
 
 
 def load_cached_matches(

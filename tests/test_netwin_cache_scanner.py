@@ -233,3 +233,19 @@ def test_secondary_aggregates_merge_into_match_combos():
     assert flat["1X + MultiGol 1-4"] == 1.45
     assert flat["X2 + MultiGol 1-5"] == 2.20
 
+
+def test_sanitize_double_chance_purges_incoherent_odds():
+    # Caso Santos: 1=4.05, X=3.60, 2=1.80. X2 a 1.76 è assurda (fair ~1.20) e va eliminata.
+    raw_match = {
+        "markets": {
+            "1X2": {"1": 4.05, "X": 3.60, "2": 1.80},
+            "DOPPIA_CHANCE": {"1X": 1.92, "X2": 1.76, "12": 1.27},
+        }
+    }
+    flat = flatten_netwin_markets(raw_match)
+    assert "1X" in flat
+    assert flat["1X"] == 1.92
+    assert "12" in flat
+    assert flat["12"] == 1.27
+    assert "X2" not in flat  # Corrotta / anomala, scartata!
+

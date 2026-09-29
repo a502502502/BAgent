@@ -200,6 +200,7 @@ def main():
     parser.add_argument("--corners-home", type=float, default=None, help="Media corner casa")
     parser.add_argument("--corners-away", type=float, default=None, help="Media corner ospite")
     parser.add_argument("--first-half", action="store_true", help="Mercato limitato al 1° tempo")
+    parser.add_argument("--kickoff", type=str, default=None, help="Data e ora di inizio (es. '2026-10-09 00:30')")
     parser.add_argument("--sixth-sense", type=str, default="", help="Analisi Sesto Senso obbligatoria")
     parser.add_argument("--ticket-json", type=str, help="JSON array con candidati del ticket completo")
 
@@ -263,6 +264,7 @@ def main():
             xg_away=args.xg_away,
             avg_corners_home=args.corners_home,
             avg_corners_away=args.corners_away,
+            kickoff_time=args.kickoff,
         )
         rep = validate_selection_cli(c)
         print(format_report(rep))

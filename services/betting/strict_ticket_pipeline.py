@@ -275,12 +275,12 @@ class StrictTicketPipeline:
                 "Manca il formato 'Squadra vs Squadra': non posso contare le partite già giocate.",
             )
         home, away = sides
-        kickoff = (candidate.kickoff_time or "").strip()[:10]
+        kickoff = (candidate.kickoff_time or "").strip()[:10] or date.today().isoformat()
         loaded = self.season_matches
-        if loaded is None and kickoff:
+        if loaded is None:
             loaded = load_finished_matches(_season_of(candidate))
         home_played = away_played = None
-        if loaded and kickoff:
+        if loaded:
             home_played = played_before(loaded, home, kickoff, candidate.tournament)
             away_played = played_before(loaded, away, kickoff, candidate.tournament)
         if home_played is None:

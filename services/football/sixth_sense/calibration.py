@@ -7,7 +7,9 @@ chiusa e confrontabile, con tetto al 30%. Il resto resta il prior.
 
 from __future__ import annotations
 
+import re
 import sqlite3
+import unicodedata
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -438,6 +440,38 @@ def after_third(matches: list[SeasonMatch]) -> list[SeasonMatch]:
     return kept
 
 
+_CALIBRATION_LEAGUE_ALIASES = {
+    "brasile": "brazil serie a",
+    "brasil": "brazil serie a",
+    "brazil": "brazil serie a",
+    "brazil serie a": "brazil serie a",
+    "argentina": "primera division arg",
+    "liga profesional": "primera division arg",
+    "primera division": "primera division arg",
+    "primera division arg": "primera division arg",
+}
+
+
+def _norm_league_calibration(league: str) -> str:
+    low = league.strip().casefold()
+    return _CALIBRATION_LEAGUE_ALIASES.get(low, low)
+
+
+def _team_name_matches_calibration(team_a: str, team_b: str) -> bool:
+    def _clean(n: str) -> str:
+        s = unicodedata.normalize("NFKD", n).encode("ASCII", "ignore").decode("utf-8").casefold()
+        s = re.sub(r"\b(fc|sp|rj|mg|ba|pr|sc|sde|cr|ec|fr|y esgrima|de|del|da|do|dos|das|clube)\b", "", s)
+        s = re.sub(r"[^a-z0-9]", " ", s)
+        return " ".join(s.split())
+
+    na, nb = _clean(team_a), _clean(team_b)
+    if na == nb:
+        return True
+    if len(na) >= 4 and len(nb) >= 4 and (na in nb or nb in na):
+        return True
+    return False
+
+
 def played_before(
     matches: list[SeasonMatch],
     team: str,
@@ -445,13 +479,15 @@ def played_before(
     league: str = "",
 ) -> int | None:
     """Partite già chiuse da quella squadra prima di questa data. None se la squadra non è nella fonte."""
-    name = team.casefold()
-    league_name = league.casefold()
+    league_norm = _norm_league_calibration(league)
     seen = [
         match
         for match in matches
-        if (not league_name or match.league.casefold() == league_name)
-        and name in {match.home_team.casefold(), match.away_team.casefold()}
+        if (not league_norm or _norm_league_calibration(match.league) == league_norm)
+        and (
+            _team_name_matches_calibration(team, match.home_team)
+            or _team_name_matches_calibration(team, match.away_team)
+        )
     ]
     if not seen:
         return None
