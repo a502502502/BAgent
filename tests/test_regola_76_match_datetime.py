@@ -43,6 +43,14 @@ def test_gate_005_blocks_past_season():
     assert "DATA NON ATTUALE" in report.rejection_reason
 
 
+def test_gate_005_reads_compact_netwin_kickoff():
+    pipeline = StrictTicketPipeline()
+    c = _make_candidate("Flamengo vs Vasco", kickoff="20261009 00:30:00")
+    report = pipeline.validate_candidate(c)
+    assert "ORA MANCANTE" not in (report.rejection_reason or "")
+    assert c.kickoff_time == "2026-10-09 00:30"
+
+
 def test_gate_005_accepts_valid_date_and_time():
     pipeline = StrictTicketPipeline()
     c = _make_candidate("Flamengo vs Vasco", kickoff="2026-10-09 00:30 CEST")

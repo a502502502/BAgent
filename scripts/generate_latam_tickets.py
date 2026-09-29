@@ -38,6 +38,7 @@ if str(ROOT_DIR) not in sys.path:
 
 from services.betting.netwin_cache_reader import (
     NetwinGem,
+    historical_xg,
     load_cached_matches,
     scan_netwin_matches,
     split_teams,
@@ -84,10 +85,13 @@ def audit_candidate_with_strict_pipeline(
     if dna_res.is_prohibited:
         return None
 
-    # 3. Sesto Senso contestuale sintetico
+    stored = historical_xg(home, away, gem.tournament)
+    if stored is None:
+        return None
+    xg_home, xg_away = stored
     sixth_sense = (
-        f"DNA Lega [{dna_res.league_cluster}]: match a ritmo spezzettato e intensità difensiva elevata. "
-        f"Trend H2H e volume gol conforme al profilo tattico ({dna_res.tactical_rationale})."
+        f"Storico 2026 nel database: xG {xg_home:.2f}-{xg_away:.2f} "
+        f"da gol segnati e subiti, con shrinkage sulla media di {gem.tournament}."
     )
 
     candidate = MarketCandidate(
@@ -97,8 +101,10 @@ def audit_candidate_with_strict_pipeline(
         bookmaker_odd=gem.book_odd,
         kickoff_time=kickoff,
         sixth_sense_analysis=sixth_sense,
-        xg_home=1.0,
-        xg_away=0.9,
+        xg_home=xg_home,
+        xg_away=xg_away,
+        verified_sources_checked=True,
+        verified_source_notes="storico gol 2026 in data/bagent.db",
     )
 
     report = pipeline.validate_candidate(candidate)
