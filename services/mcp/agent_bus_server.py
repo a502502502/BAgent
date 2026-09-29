@@ -156,6 +156,57 @@ class AgentBusMcpServer:
                 }
             },
             {
+                "name": "debate_status",
+                "description": (
+                    "Legge lo stato di un dibattito live fra Cursor e Antigravity: "
+                    "obiezioni misurate, replica e voto."
+                ),
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "debate_id": {
+                            "type": "string",
+                            "description": "ID del dibattito (debate_...)"
+                        }
+                    },
+                    "required": ["debate_id"]
+                }
+            },
+            {
+                "name": "debate_rebut",
+                "description": (
+                    "Antigravity replica a una critica di Cursor. "
+                    "LEG n: CONCEDE ritira la selezione. "
+                    "LEG n: REPLACE market=\"...\" odd=1.40 la rimisura. "
+                    "La prosa non cancella le obiezioni."
+                ),
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "debate_id": {"type": "string"},
+                        "text": {
+                            "type": "string",
+                            "description": "Replica con una riga LEG per ogni selezione"
+                        }
+                    },
+                    "required": ["debate_id", "text"]
+                }
+            },
+            {
+                "name": "debate_judge",
+                "description": (
+                    "Cursor vota l'ultima replica. Una selezione passa solo se il validatore "
+                    "la firma dopo CONCEDE o REPLACE. Non prenota su Netwin."
+                ),
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "debate_id": {"type": "string"}
+                    },
+                    "required": ["debate_id"]
+                }
+            },
+            {
                 "name": "agent_bus_read_messages",
                 "description": (
                     "Legge la cronologia dei messaggi scambiati tra Antigravity e Cursor sul canale di comunicazione."
@@ -231,6 +282,39 @@ class AgentBusMcpServer:
             inc_odds = arguments.get("include_odds_summary", True)
             snapshot = self.store.get_system_snapshot(include_odds_summary=inc_odds)
             return json.dumps(snapshot, indent=2, ensure_ascii=False)
+
+        elif name == "debate_status":
+            from services.debate.live_exchange import LiveTicketDebate
+
+            debate_id = arguments.get("debate_id", "")
+            debate = LiveTicketDebate(store=self.store).store.get_debate(debate_id)
+            if debate is None:
+                return f"Nessun dibattito {debate_id} sul bus."
+            turns = debate.get("turns") or []
+            last = turns[-1]["content"] if turns else ""
+            return (
+                f"{debate.get('debate_id')} [{debate.get('status')}] {debate.get('title')}\n\n"
+                f"{last}"
+            )
+
+        elif name == "debate_rebut":
+            from services.debate.live_exchange import LiveTicketDebate
+
+            debate = LiveTicketDebate(store=self.store).rebut(
+                arguments.get("debate_id", ""),
+                arguments.get("text", ""),
+            )
+            return (
+                f"Replica registrata su {debate.get('debate_id')}. "
+                f"Stato: {debate.get('status')}. In attesa del voto di Cursor."
+            )
+
+        elif name == "debate_judge":
+            from services.debate.live_exchange import LiveTicketDebate
+
+            debate = LiveTicketDebate(store=self.store).judge(arguments.get("debate_id", ""))
+            turns = debate.get("turns") or []
+            return turns[-1]["content"] if turns else debate.get("status", "")
 
         elif name == "agent_bus_read_messages":
             limit = int(arguments.get("limit", 10))

@@ -297,6 +297,62 @@ class AgentBusStore:
         msgs = raw.get("messages", [])
         return msgs[-limit:]
 
+    def upsert_debate(self, debate: Dict[str, Any]) -> Dict[str, Any]:
+        """Crea o aggiorna una sessione di dibattito sul bus condiviso."""
+        raw = self._read_raw()
+        debates = raw.setdefault("debates", [])
+        debate_id = debate.get("debate_id")
+        if not debate_id:
+            raise ValueError("debate_id mancante")
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        debate["updated_at"] = now
+        for index, existing in enumerate(debates):
+            if existing.get("debate_id") == debate_id:
+                debates[index] = debate
+                break
+        else:
+            debate.setdefault("created_at", now)
+            debates.insert(0, debate)
+        self._save_raw(raw)
+        return debate
+
+    def get_debate(self, debate_id: str) -> Optional[Dict[str, Any]]:
+        """Legge una sessione di dibattito. None se l'id non c'è."""
+        raw = self._read_raw()
+        for debate in raw.get("debates", []):
+            if debate.get("debate_id") == debate_id:
+                return debate
+        return None
+
+    def wait_for_debate_message(
+        self,
+        debate_id: str,
+        message_type: str,
+        timeout: float = 120,
+        interval: float = 2.0,
+    ) -> Optional[Dict[str, Any]]:
+        """Attende un turno nuovo sul dibattito. None allo scadere del timeout."""
+        wanted = message_type.upper()
+        seen = {
+            message.get("id")
+            for message in self._read_raw().get("messages", [])
+            if (message.get("metadata") or {}).get("debate_id") == debate_id
+            and message.get("message_type") == wanted
+        }
+        deadline = time.time() + timeout
+        while time.time() < deadline:
+            fresh = [
+                message
+                for message in self._read_raw().get("messages", [])
+                if (message.get("metadata") or {}).get("debate_id") == debate_id
+                and message.get("message_type") == wanted
+                and message.get("id") not in seen
+            ]
+            if fresh:
+                return fresh[-1]
+            time.sleep(interval)
+        return None
+
     # --- SYSTEM SNAPSHOT API ---
 
     def get_system_snapshot(self, include_odds_summary: bool = True) -> Dict[str, Any]:

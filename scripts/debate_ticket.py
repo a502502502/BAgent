@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
-scripts/debate_ticket.py — CLI per lanciare il Dibattito in Tempo Reale tra Agenti sulle Schedine.
+scripts/debate_ticket.py — Arena euristica: obiezione e replica escono dallo stesso processo.
 
-Esegue il protocollo dialettico a 5 fasi tra Antigravity (The Quant) e Cursor (The Auditor).
-Stampa la trascrizione formattata e registra l'esito sul bus MCP per Cursor.
+Il confronto sul bus, con attesa della replica di Antigravity, è scripts/live_ticket_debate.py.
 """
 
 from __future__ import annotations
