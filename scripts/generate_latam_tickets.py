@@ -249,6 +249,7 @@ def main():
     parser.add_argument("--min-prob", type=float, default=0.72, help="Probabilità minima di ciascuna selezione (default 0.72)")
     parser.add_argument("--min-edge", type=float, default=0.04, help="Edge minimo di ciascuna selezione (default 0.04)")
     parser.add_argument("--publish-to-bus", action="store_true", help="Pubblica l'esito sul Bus MCP per Cursor")
+    parser.add_argument("--debate", action="store_true", help="Esegue il dibattito dialettico live (Antigravity vs Cursor Persona) sui ticket generati")
     parser.add_argument("--wait", action="store_true", help="Attende sincronicamente il verdetto di Cursor via MCP bus")
     parser.add_argument("--timeout", type=int, default=120, help="Timeout in secondi per l'attesa sincrona (default: 120)")
     args = parser.parse_args()
@@ -300,7 +301,7 @@ def main():
     if not tickets:
         print("🛑 VERDETTO: NO BET (ZERO SCHEDINE GIOCABILI)")
         print("   Nessuna combinazione di selezioni indipendenti soddisfa congiuntamente:")
-        print("   - Vita utile del mercato a 90 minuti (esclusione mercati a 45' come 1° Tempo);")
+        print("   - Valutazione quantitativa Dixon-Coles (inclusi mercati 1° Tempo prezzati matematicamente);")
         print("   - Quota minima protetta >= 1.22 ed Edge reale >= +4.0%;")
         print("   - Assenza di correlazione o riutilizzo partite tra ticket.")
         print("   Tassativamente vietato forzare giocate su Netwin senza certificazione piena.\n")
@@ -308,6 +309,24 @@ def main():
         for t in tickets:
             print(format_ticket(t))
             print()
+
+    # 5.5 Dibattito dialettico live se richiesto (--debate)
+    if getattr(args, "debate", False) and tickets:
+        from services.debate.ticket_debate_arena import TicketDebateArena
+        arena = TicketDebateArena()
+        print("\n" + "#" * 85)
+        print("🥊 TICKET DEBATE ARENA LIVE (ANTIGRAVITY VS CURSOR AUDITOR)")
+        print("#" * 85 + "\n")
+        debated_tickets = []
+        for t in tickets:
+            rep = arena.run_debate(t)
+            print(rep.transcript_markdown)
+            print("\n" + "-" * 85 + "\n")
+            if rep.overall_approved:
+                debated_tickets.append(t)
+            if args.publish_to_bus:
+                arena.record_debate_to_bus(rep)
+        tickets = debated_tickets
 
     # 6. Pubblicazione opzionale su Bus MCP
     if args.publish_to_bus:
