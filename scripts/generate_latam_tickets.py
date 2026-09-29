@@ -54,12 +54,6 @@ from services.database.performance_tracker import PerformanceTracker
 from services.mcp.agent_bus_store import AgentBusStore
 
 
-def is_45_min_market(market_name: str) -> bool:
-    """Verifica se il mercato scade al 45' (violando la regola del respiro sui 90 minuti)."""
-    m = market_name.lower()
-    return any(w in m for w in ["tempo", "1°t", "2°t", "1° t", "2° t", "primo tempo", "secondo tempo"])
-
-
 def audit_candidate_with_strict_pipeline(
     gem: NetwinGem,
     kickoff: str,

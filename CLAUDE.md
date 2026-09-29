@@ -9,8 +9,8 @@ Il testo integrale, con le lezioni e lo stato dei task di agosto 2026, è in `do
 ## Operatività
 
 - Sesto Senso ogni giorno, prima dei numeri: Gazzetta, BBC, Marca, Kicker, L'Équipe, MondoPengwin. `scripts/fetch_sports_news.py --home --away --league`.
-- FootyStats prima di ogni probabilità: avg gol, Over 2.5%, BTTS%, xG, forma. Stagione in corso, salvo richiesta esplicita dello storico.
-- Niente classifica, allenatore, rosa, H2H o forma inventati. Se il feed certificato non c'è, la partita si scarta: "Dati non certificati nel feed ufficiale: partita scartata dal validatore".
+- Prima di ogni probabilità: lo storico gol della stagione in `data/bagent.db` (xG con shrinkage sulla media di lega). FootyStats, se risponde, integra avg gol, Over 2.5%, BTTS% e forma. La Regola #55 è soddisfatta da quello storico: con xG di casa e trasferta letti dal database la fonte è verificata. Senza né database né FootyStats la partita si scarta.
+- Niente classifica, allenatore, rosa, H2H o forma inventati. Se non c'è né lo storico in database né FootyStats: "Dati non certificati nel feed ufficiale: partita scartata dal validatore".
 - Niente approvazione a parole prima di `scripts/strict_validator.py`. Il verdetto in chat porta lo stato dello script.
 - Quota minima 1.20. Verdetto: stella se edge ≥ 5%, occhio se positivo sotto il 5%, croce se negativo. L'edge negativo o sotto +4% genera un avviso di warning informativo e NON boccia la giocata.
 - Max 3-4 selezioni per ticket. Max 8% del bankroll a schedina, 5-8% Kelly sul singolo ticket, 15% a sessione. Se un ticket pomeridiano perde, stop: niente recupero serale.
@@ -26,8 +26,8 @@ Prima giornata di un campionato: niente 1X2, Over o combo sul risultato. Si entr
 
 ## Mercati
 
-- Scansionare tutti i mercati (`scripts/scan_omni_markets.py`). Si gioca il migliore per probabilità, quota e respiro a 90 minuti. Nessun mercato è escluso per abitudine.
-- Sweet spot: probabilità reale 72-88%, quota 1.28-1.65 (fino a 1.85 sulle combo a doppia chance), edge ≥ +5%. Sotto 1.22 è una trappola. Mercati 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, 1X 1°T) ammessi e prezzati con precisione via Poisson (xG × 0.45).
+- Scansionare tutti i mercati (`scripts/scan_omni_markets.py`). Si gioca il migliore per probabilità e quota. Nessun mercato è escluso per abitudine.
+- Sweet spot: probabilità reale 72-88% su ogni selezione, quota 1.28-1.65 (fino a 1.85 sulle combo a doppia chance), edge ≥ +5%. Sotto 1.22 è una trappola. I mercati del 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, 1X 1°T) sono ammessi da quota 1.20 e si prezzano con Poisson su xG × 0.45. Non esiste un blocco «quota sotto 1.55 perché chiude al 45'».
 - 1 o 2 secco sotto 1.65 è vietato. Sostituire con 1X, 1X + Over 1.5, DNB o MultiGol 1-3 squadra. Niente 2 fisso in trasferta di coppa.
 - Δ punti ≤ 3: niente Over 2.5 forzato. Over 1.5 o doppia chance.
 - "Prima contro ultima" non è una base sicura. Niente `1 + Over 1.5` o `1 + Under 3.5` sotto 1.65. Usare `1X + MultiGol 1-4` o `MultiGol 1-3 Casa`, e controllare gli H2H della stagione.
@@ -64,5 +64,6 @@ Minuto e punteggio solo dal feed Flashscore. Trigger: assedio se la sfavorita (f
 `scripts/build_verified_ticket.py`, in ordine: rosa, infortuni, distinta, probabilità composta, calcolo edge (warning se < +4%), Kelly. Poi il validatore (`scripts/strict_validator.py`).
 - **Regola #75 (Audit Obbligatorio Cloud AI Pre-Emissione)**: Ogni volta che viene generata o validata una schedina, deve essere eseguito l'audit online indipendente via Groq Cloud (`services/debate/groq_auditor.py` con modello 120B a 0€). L'esito dell'audit (EV, scenari di perdita e verdetto) viene allegato al ticket per smascherare trappole bookmaker prima della proposta finale. Senza validatore e audit non si propone la schedina come giocabile. Una lettura di solo Sesto Senso, chiesta espressamente, si dichiara come tale e non è un certificato.
 - **Regola #76 (Data e Ora Obbligatorie per Ogni Partita / Selezione)**: In ogni schedina, ticket JSON, report terminale, alert Telegram o pagina web, la **data e l'ora di inizio** della partita (`kickoff_time`) devono essere SEMPRE presenti ed esplicitate (es. `2026-10-09 00:30 CEST` o `04/10/2026 ore 19:30`). È severamente vietato proporre partite o selezioni prive di data e orario o con indicazioni generiche. Il validatore (`StrictTicketPipeline` Gate 0.05 e `scripts/strict_validator.py`) deve bloccare le selezioni prive di data e ora complete.
-- **Regola #77 (Ciclo Dialettico Obbligatorio Pre-Costruzione Schedina - Debate & Re-Audit Loop)**: Questa regola deve essere tassativamente eseguita prima di costruire qualsiasi schedina. L'Auditor (Groq 120B) fa l'avvocato del diavolo e trova la trappola (*"Perché questa leg rischia di saltare?"*). Il Modellista Quantitativo (Antigravity) accoglie l'obiezione, torna sul palinsesto Netwin e ristruttura le giocate con mercati protetti (MultiGol 1° Tempo, Chance Mix, Under 3.5) o eliminando le quote compresse e i derby ingannevoli. Re-Audit: la schedina rettificata viene risottomessa a Groq finché non si raggiunge il consenso unanime (🟢 APPROVATA con valore atteso positivo). Nessuna schedina può essere proposta o pubblicata senza aver completato questo ciclo di convergenza dialettica.
+- **Regola #77 (Ciclo Dialettico Obbligatorio Pre-Costruzione Schedina - Debate & Re-Audit Loop)**: Prima di pubblicare, l'Auditor (Groq 120B) cerca la trappola e il modellista può sostituire il mercato. Il re-audit si allega al ticket. Non sostituisce il validatore e non resuscita una selezione sotto il 72%.
+- **Regola #78 (Unificazione)**: Il certificato è `strict_validator` con probabilità di ogni selezione ≥ 72%, xG dallo storico 2026 e calcio d'inizio con data e ora. I primi tempi prezzati con xG × 0.45 passano da quota 1.20. Il vecchio blocco «sotto 1.55 perché chiude al 45'» non si applica. L'audit Groq si allega e non ribalta quel verdetto.
 
