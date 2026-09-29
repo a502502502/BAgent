@@ -1,0 +1,36 @@
+{
+    "ticket_id": "TICKET_RADDOPPIO_WEEKEND_03OTT",
+    "name": "Raddoppio Catenaccio Argentina (Weekend 3-4 Ottobre)",
+    "period": "Weekend 3-4 Ottobre 2026",
+    "created_at": "2026-09-29 14:15:00",
+    "total_odds": 1.97,
+    "stake": 1.30,
+    "potential_win": 2.56,
+    "conjoint_prob": 0.645,
+    "edge_pct": 27.1,
+    "groq_audit": "APPROVATA (STAKE PRUDENTE 2-3%)",
+    "legs": [
+        {
+            "match": "Defensa Y Justicia vs San Lorenzo",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-03 19:45 CEST",
+            "market": "Under / Over",
+            "pick": "Under 2.5",
+            "netwin_odds": 1.43,
+            "prob": 0.757,
+            "edge_pct": 8.3,
+            "rationale": "Ritmi spezzettati e blocco difensivo basso. Entrambe concedono pochissimi xG e nel 78% dei precedenti recenti il totale gol è rimasto sotto 2.5."
+        },
+        {
+            "match": "Atletico Tucuman vs Barracas Central",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-03 22:00 CEST",
+            "market": "Under / Over",
+            "pick": "Under 2.5",
+            "netwin_odds": 1.38,
+            "prob": 0.852,
+            "edge_pct": 17.6,
+            "rationale": "Tucuman reduce da una serie di 0-0 seriali, Barracas attacco debolissimo in trasferta. Match da 0-0 o 1-0 con xG combinato < 1.4."
+        }
+    ]
+}

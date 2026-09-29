@@ -1,0 +1,36 @@
+{
+    "ticket_id": "TICKET_RADDOPPIO_TATTICO_08OTT",
+    "name": "Raddoppio Tattico Infrasettimanale (Turno 8 Ottobre)",
+    "period": "Turno 8-9-10 Ottobre 2026",
+    "created_at": "2026-09-29 14:15:00",
+    "total_odds": 2.19,
+    "stake": 1.15,
+    "potential_win": 2.52,
+    "conjoint_prob": 0.584,
+    "edge_pct": 27.9,
+    "groq_audit": "APPROVATA (+27.9% EV)",
+    "legs": [
+        {
+            "match": "Sarmiento Junin vs River Plate",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-08 00:30 CEST",
+            "market": "Chance Mix",
+            "pick": "Chance Mix: 1X o Gol",
+            "netwin_odds": 1.45,
+            "prob": 0.774,
+            "edge_pct": 12.2,
+            "rationale": "Sarmiento lotta per la salvezza e si chiude a 5. River propositivo ma in crisi tecnica e perforabile fuori casa. Vince con pareggio, vittoria casa o con entrambe a segno. Perde solo su 0-1 o 0-2 River a zero."
+        },
+        {
+            "match": "Botafogo Fr Rj vs Cr Vasco Da Gama Rj",
+            "tournament": "Brasileirao Serie A",
+            "date_time": "2026-10-08 01:30 CEST",
+            "market": "Doppia Chance",
+            "pick": "1X",
+            "netwin_odds": 1.51,
+            "prob": 0.754,
+            "edge_pct": 13.8,
+            "rationale": "Clássico Carioca: Botafogo al Nilton Santos superiore per ritmo e tenuta atletica. Vasco fragile e con pessimo rendimento esterno nei derby."
+        }
+    ]
+}
