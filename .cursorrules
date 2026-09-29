@@ -31,3 +31,8 @@
   3. **Re-Audit Iterativo**: la schedina rettificata viene risottomessa a Groq finché non si raggiunge il consenso unanime (🟢 APPROVATA con valore atteso positivo).
   4. È severamente vietato proporre come definitiva o pubblicare qualsiasi schedina che non abbia superato con successo questo ciclo di risoluzione dialettica congiunta.
 
+## Regola sull'Edge Matematico: Solo Informativo / Warning (Non Bocciante)
+- L'Edge matematico (`(prob * quota) - 1`) e il margine/aggio bookmaker sono esclusivamente indicatori analitici informativi e avvisi di rischio (warning).
+- Un edge negativo o inferiore alla soglia (+4%) NON deve MAI bocciare automaticamente una schedina o selezione in `StrictTicketPipeline` o `scripts/strict_validator.py`.
+- Il validatore deve generare un warning informativo (`edge_warning`) ed esporlo chiaramente in console, dashboard e report, permettendo comunque l'approvazione (`passed=True`) se i requisiti qualitativi, dialettici (Groq 120B) e strutturali sono soddisfatti.
+

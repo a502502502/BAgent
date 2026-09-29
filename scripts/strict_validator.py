@@ -77,6 +77,8 @@ def format_report(report: ValidationReport) -> str:
         out.append(f"  ESITO: 🟢 CERTIFICATO ED APPROVATO")
         out.append(f"  Probabilità Reale: {report.real_probability*100:.1f}% | Fair Odd: @{report.fair_odds:.2f}")
         out.append(f"  Edge Matematico:    {report.mathematical_edge*100:+.1f}%")
+        if report.edge_warning:
+            out.append(f"  ⚠️  AVVISO EDGE (WARNING INFORMATIVO): {report.edge_warning}")
         out.append(f"  Sesto Senso:        {c.sixth_sense_analysis}")
     else:
         out.append(f"  ESITO: 🔴 BOCCIATO TASSATIVAMENTE (Gate {report.stage_failed})")

@@ -88,6 +88,7 @@ class ValidationReport:
     mathematical_edge: float = 0.0
     details: str = ""
     sixth_sense_summary: str = ""
+    edge_warning: Optional[str] = None
 
 
 @dataclass
@@ -788,21 +789,16 @@ class StrictTicketPipeline:
             )
         fair_odd = 1.0 / max(0.001, p_real)
 
+        # =====================================================================
+        # FASE 6: VALUTAZIONE EDGE ED AGGIO (INFORMATIVO / WARNING ONLY)
+        # =====================================================================
+        # Su direttiva utente, l'edge negativo non boccia la schedina ma funge
+        # solo da informazione aggiuntiva di avviso di rischio (warning).
+        edge_warning = None
         if edge < self.MIN_EDGE_THRESHOLD:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=6,
-                rejection_reason=(
-                    f"[BLOCCATO - FASE 6: TRAPPOLA EDGE NEGATIVO] {candidate.market_name} su {candidate.match_name}. "
-                    f"Edge: {edge*100:+.1f}% (Soglia minima richiesta: +{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
-                    f"Quota offerta @{candidate.bookmaker_odd:.2f} inferiore alla quota equa reale @{fair_odd:.2f}!"
-                ),
-                real_probability=p_real,
-                fair_odds=fair_odd,
-                mathematical_edge=edge,
-                details=math_report,
-                sixth_sense_summary=candidate.sixth_sense_analysis
+            edge_warning = (
+                f"[AVVISO EDGE INFORMATIVO] Edge calcolato {edge*100:+.1f}% inferiore alla soglia (+{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
+                f"Quota bookmaker @{candidate.bookmaker_odd:.2f} vs Quota equa stimata @{fair_odd:.2f}."
             )
 
         if p_real < self.MIN_LEG_PROBABILITY_THRESHOLD:
@@ -819,11 +815,12 @@ class StrictTicketPipeline:
                 fair_odds=fair_odd,
                 mathematical_edge=edge,
                 details=math_report,
-                sixth_sense_summary=candidate.sixth_sense_analysis
+                sixth_sense_summary=candidate.sixth_sense_analysis,
+                edge_warning=edge_warning,
             )
 
         # =====================================================================
-        # GATE 6.5: NETWIN AGGIO SENTINEL (Pilastro 1)
+        # GATE 6.5: NETWIN AGGIO SENTINEL (Informativo / Warning Only)
         # =====================================================================
         netwin_odd = candidate.netwin_actual_odd
         if netwin_odd is None:
@@ -836,21 +833,11 @@ class StrictTicketPipeline:
         if netwin_odd is not None:
             netwin_edge = (p_real * netwin_odd) - 1.0
             if netwin_edge < self.MIN_EDGE_THRESHOLD:
-                return ValidationReport(
-                    passed=False,
-                    candidate=candidate,
-                    stage_failed=6,
-                    rejection_reason=(
-                        f"[BLOCCATO - GATE 6.5: NETWIN AGGIO TRAP] Quota proposta @{candidate.bookmaker_odd:.2f} tagliata a @{netwin_odd:.2f} su Netwin. "
-                        f"L'Edge reale crolla da {edge*100:+.1f}% a {netwin_edge*100:+.1f}% (minimo richiesto: +{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
-                        f"Margine del banco eccessivo che distrugge il valore atteso."
-                    ),
-                    real_probability=p_real,
-                    fair_odds=fair_odd,
-                    mathematical_edge=netwin_edge,
-                    details=f"Quota Netwin @{netwin_odd:.2f} vs Teorica @{candidate.bookmaker_odd:.2f}.",
-                    sixth_sense_summary=candidate.sixth_sense_analysis
+                netwin_warn = (
+                    f"[AVVISO NETWIN AGGIO INFORMATIVO] Quota proposta @{candidate.bookmaker_odd:.2f} tagliata a @{netwin_odd:.2f} su Netwin. "
+                    f"Edge risultante: {netwin_edge*100:+.1f}%."
                 )
+                edge_warning = f"{edge_warning} | {netwin_warn}" if edge_warning else netwin_warn
 
         # =====================================================================
         # FASE 7: VALUTAZIONE STRUTTURALE DI MERCATO (Regola 45' rimossa)
@@ -868,7 +855,8 @@ class StrictTicketPipeline:
             fair_odds=fair_odd,
             mathematical_edge=edge,
             details=math_report,
-            sixth_sense_summary=candidate.sixth_sense_analysis
+            sixth_sense_summary=candidate.sixth_sense_analysis,
+            edge_warning=edge_warning,
         )
 
     def calculate_recommended_stake(
