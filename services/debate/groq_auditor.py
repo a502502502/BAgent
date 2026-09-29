@@ -140,3 +140,61 @@ class GroqAuditor:
                 "error": str(e),
                 "approved": False,
             }
+
+    def dialectic_debate_loop(
+        self,
+        title: str,
+        initial_legs: List[Dict[str, Any]],
+        rectification_callback: Optional[Any] = None,
+        bankroll: float = 37.32,
+        max_turns: int = 3,
+    ) -> Dict[str, Any]:
+        """
+        Regola #77: Ciclo Dialettico Obbligatorio Pre-Costruzione Schedina.
+        1. L'Auditor (Groq 120B) fa l'avvocato del diavolo e scova la trappola.
+        2. Il Modellista Quantitativo accoglie l'obiezione e ristruttura le giocate.
+        3. Re-Audit finché non si raggiunge il consenso unanime (APPROVATA).
+        """
+        debate_history = []
+        current_legs = list(initial_legs)
+        current_title = title
+
+        for turn in range(1, max_turns + 1):
+            audit_res = self.audit_ticket(current_title, current_legs, bankroll=bankroll)
+            debate_history.append({
+                "turn": turn,
+                "title": current_title,
+                "legs": [dict(l) for l in current_legs],
+                "approved": audit_res.get("approved", False),
+                "critique": audit_res.get("critique", ""),
+                "total_odd": audit_res.get("total_odd", 1.0),
+            })
+
+            if audit_res.get("approved"):
+                return {
+                    "consensus_reached": True,
+                    "final_status": "APPROVATA",
+                    "turns_needed": turn,
+                    "final_legs": current_legs,
+                    "total_odd": audit_res.get("total_odd", 1.0),
+                    "audit_verdict": audit_res.get("critique", ""),
+                    "debate_history": debate_history,
+                }
+
+            # Se bocciata e ci sono altri turni, attiva la rettifica quantitativa
+            if turn < max_turns and rectification_callback is not None:
+                new_legs = rectification_callback(audit_res, current_legs)
+                if new_legs and new_legs != current_legs:
+                    current_legs = new_legs
+                    current_title = f"{title} (Rettifica Turno {turn+1})"
+                    continue
+
+        return {
+            "consensus_reached": False,
+            "final_status": "BOCCIATA_SENZA_CONSENSO",
+            "turns_needed": max_turns,
+            "final_legs": current_legs,
+            "total_odd": debate_history[-1].get("total_odd", 1.0) if debate_history else 1.0,
+            "audit_verdict": debate_history[-1].get("critique", "") if debate_history else "",
+            "debate_history": debate_history,
+        }

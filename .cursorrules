@@ -24,3 +24,10 @@
   3. Il validatore (`StrictTicketPipeline` Gate 0.05 e `scripts/strict_validator.py`) deve verificare la presenza e completezza del campo `kickoff_time` e rigettare le selezioni che ne sono sprovviste.
   4. Tutte le interfacce utente (dashboard GitHub Pages, HTML, report CLI) devono mostrare in evidenza il badge temporale (data e ora) per ciascun evento.
 
+## Regola #77: Ciclo Dialettico Obbligatorio Pre-Costruzione Schedina (Debate & Re-Audit Loop)
+- Questa regola deve essere tassativamente eseguita prima di costruire, validare o proporre qualsiasi schedina all'utente:
+  1. **L'Auditor (Groq 120B)** fa l'avvocato del diavolo e scova la trappola nascosta del bookmaker (*"Perché questa leg rischia di saltare?"*).
+  2. **Il Modellista Quantitativo (Antigravity)** accoglie l'obiezione critica, torna sul palinsesto Netwin e ristruttura le giocate con mercati protetti, paracadute (es. MultiGol 1° Tempo, Chance Mix, Under 3.5) o eliminando le quote compresse e i derby ingannevoli.
+  3. **Re-Audit Iterativo**: la schedina rettificata viene risottomessa a Groq finché non si raggiunge il consenso unanime (🟢 APPROVATA con valore atteso positivo).
+  4. È severamente vietato proporre come definitiva o pubblicare qualsiasi schedina che non abbia superato con successo questo ciclo di risoluzione dialettica congiunta.
+
