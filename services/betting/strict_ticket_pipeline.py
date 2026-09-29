@@ -16,6 +16,7 @@ Fase 8: Staking Scientifico & Money Management (Kelly Frazionario: Max 5-8% cass
 
 from __future__ import annotations
 import math
+import re
 from dataclasses import dataclass, field
 from datetime import date
 from typing import Dict, List, Any, Tuple, Optional
@@ -310,9 +311,9 @@ class StrictTicketPipeline:
         Applica il funnel sequenziale degli Stadi Obbligatori con Hard Gates.
         """
         # =====================================================================
-        # GATE 0.05: ANTI-TIME-TRAVEL & CONTROLLO VALIDITÀ TEMPORALE
+        # GATE 0.05: ANTI-TIME-TRAVEL & CONTROLLO VALIDITÀ TEMPORALE (Regola #76)
         # =====================================================================
-        # Rifiuta match con date passate (2024, 2025) o eventi già chiusi
+        # Regola #76: se presente, deve contenere data e orario d'inizio completi e non anacronistici
         if candidate.kickoff_time:
             time_str = candidate.kickoff_time.strip().upper()
             if any(past in time_str for past in ["2024", "2025", "2023", "2022"]):
@@ -326,6 +327,20 @@ class StrictTicketPipeline:
                         f"Tassativamente vietato scommettere su match archiviati o anacronistici!"
                     ),
                     details=f"Data evento '{candidate.kickoff_time}' antecedente alla stagione operativa corrente."
+                )
+            # Verifica presenza dell'orario (es. 'HH:MM')
+            has_time = bool(re.search(r"\b\d{1,2}:\d{2}\b", candidate.kickoff_time))
+            if not has_time:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #76: ORA MANCANTE] {candidate.match_name} "
+                        f"ha kickoff_time '{candidate.kickoff_time}', ma manca l'orario di inizio (richiesto es. 'HH:MM'). "
+                        f"La Regola #76 impone che data e ora siano sempre presenti."
+                    ),
+                    details=f"kickoff_time privo di orario: '{candidate.kickoff_time}'"
                 )
 
         early = self._block_before_third_match(candidate)
@@ -891,6 +906,15 @@ class StrictTicketPipeline:
         legs_reports: List[ValidationReport] = []
         total_odds = 1.0
         passed_candidates: List[MarketCandidate] = []
+
+        # Vincolo 0 (Regola #76): Data e ora obbligatorie per ciascuna selezione del ticket
+        for c in candidates:
+            if not c.kickoff_time or not c.kickoff_time.strip():
+                rejection_reasons.append(
+                    f"[BLOCCATO - REGOLA #76: DATA E ORA MANCANTI] {c.match_name} "
+                    f"non riporta data e ora della partita. La Regola #76 impone che ogni "
+                    f"selezione contenga sempre data e orario d'inizio."
+                )
 
         # Vincolo 1: Max 3-4 selezioni
         if len(candidates) > 4:

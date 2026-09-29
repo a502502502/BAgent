@@ -235,8 +235,11 @@ def format_ticket(ticket: Dict[str, Any]) -> str:
         g = item["gem"]
         rep = item["report"]
         dna = item["dna_status"]
+        cand = item.get("candidate")
+        kickoff_str = getattr(cand, "kickoff_time", None) or "Non specificata"
         lines.append(
             f"  {idx}. ⚽ {g.match_name} ({g.tournament})\n"
+            f"     📅 Data e Ora: {kickoff_str}\n"
             f"     Mercato: '{g.market}' @ {g.book_odd:.2f} (Fair @{rep.fair_odds:.2f}, P={rep.real_probability*100:.1f}%, Edge {rep.mathematical_edge:+.1%})\n"
             f"     DNA Tattico: [{dna}] | Status: 🟢 CERTIFICATO DA STRICT VALIDATOR"
         )

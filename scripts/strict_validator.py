@@ -63,6 +63,8 @@ def format_report(report: ValidationReport) -> str:
     c = report.candidate
     out = []
     out.append(f"• Evento: {c.match_name} ({c.tournament or 'Lega'})")
+    kickoff_display = c.kickoff_time or "⚠️ NON SPECIFICATA (Violazione Regola #76)"
+    out.append(f"  📅 Data e Ora:      {kickoff_display}")
     out.append(f"• Mercato Proposto: '{c.market_name}' @ {c.bookmaker_odd:.2f}")
     if c.market_type:
         out.append(f"  Tipologia Mercato: {c.market_type}")
@@ -143,7 +145,8 @@ def run_demo():
         bookmaker_odd=1.38,
         market_type="1X2",
         sixth_sense_analysis="Athletic favoritissimo al San Mames contro neopromossa.",
-        estimated_p_90=0.74
+        estimated_p_90=0.74,
+        kickoff_time="2026-10-04 14:00 CEST",
     )
 
     # Test 2: Liverpool Corner (Quello saltato oggi!)
@@ -155,7 +158,8 @@ def run_demo():
         market_type="CORNER",
         team_avg_shots=11.2, # Sotto 18!
         sixth_sense_analysis="Liverpool attacca ad Anfield ma Fulham si difende ordinato.",
-        estimated_p_90=0.75
+        estimated_p_90=0.75,
+        kickoff_time="2026-10-04 16:00 CEST",
     )
 
     # Test 3: Arsenal MultiGol 1° Tempo prima della Champions (Quello saltato stasera!)
@@ -170,7 +174,8 @@ def run_demo():
         is_intermediate_deadline=True,
         sixth_sense_analysis="Arsenal gioca col Sunderland prima della Champions League.",
         sixth_sense_risk_flags=["MIDWEEK_CUP", "SLOW_START"],
-        estimated_p_1h=0.68
+        estimated_p_1h=0.68,
+        kickoff_time="2026-10-04 18:30 CEST",
     )
 
     # Test 4: Selezione Protetta Valida per Domenica (Lecce vs Monza 1X + MultiGol 1-5)
@@ -185,6 +190,7 @@ def run_demo():
         sixth_sense_analysis="Lecce al Via del Mare concede pochissimo a squadre di pari livello; la gara resta aperta nei novanta minuti.",
         xg_home=1.55,
         xg_away=0.95,
+        kickoff_time="2026-10-04 20:45 CEST",
     )
 
     candidates = [c1, c2, c3, c4]
@@ -246,7 +252,8 @@ def main():
                     estimated_p_2h=float(item.get("estimated_p_2h", 0.60)),
                     player_name=item.get("player_name"),
                     team_name=item.get("team_name"),
-                    fixture_id=item.get("fixture_id")
+                    fixture_id=item.get("fixture_id"),
+                    kickoff_time=item.get("kickoff_time") or item.get("kickoff") or item.get("date_time"),
                 )
                 candidates.append(c)
 
