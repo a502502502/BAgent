@@ -199,3 +199,25 @@ def test_mcp_unknown_method(mcp_server):
     }
     resp = mcp_server.dispatch(req)
     assert resp["error"]["code"] == -32601
+
+
+def test_cmd_wait_for_report_success(bus_store):
+    from scripts.agent_bus import cmd_wait_for_report
+    import argparse
+    task = bus_store.post_task(title="Test wait", instructions="test")
+    bus_store.report_result(task_id=task["task_id"], status="COMPLETED", summary="All good")
+
+    args = argparse.Namespace(task_id=task["task_id"], timeout=2, interval=0.1)
+    ret = cmd_wait_for_report(args, bus_store)
+    assert ret == 0
+
+
+def test_cmd_wait_for_report_timeout(bus_store):
+    from scripts.agent_bus import cmd_wait_for_report
+    import argparse
+    task = bus_store.post_task(title="Pending task", instructions="wait test")
+
+    args = argparse.Namespace(task_id=task["task_id"], timeout=1, interval=0.2)
+    ret = cmd_wait_for_report(args, bus_store)
+    assert ret == 1
+

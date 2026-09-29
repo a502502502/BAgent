@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 
 # UTF-8 su Windows
@@ -63,6 +64,38 @@ def cmd_post_task(args, store: AgentBusStore):
     print("\n--- ISTRUZIONI PER CURSOR ---")
     print(task['instructions'])
     print("=" * 75)
+
+    if getattr(args, "wait", False):
+        cmd_wait_for_report(args, store, task_id=task['task_id'])
+
+
+def cmd_wait_for_report(args, store: AgentBusStore, task_id: Optional[str] = None):
+    target_id = task_id or getattr(args, "task_id", None)
+    timeout = getattr(args, "timeout", 120)
+    interval = getattr(args, "interval", 2)
+    start_t = time.time()
+
+    label = f"sul task [{target_id}]" if target_id else "sull'ultimo task attivo"
+    print(f"\n⏳ Attesa sincrona della verifica da Cursor via MCP {label} (timeout: {timeout}s)...")
+
+    while time.time() - start_t < timeout:
+        task = store.get_task(task_id=target_id)
+        if task and task.get("status") in ["COMPLETED", "BLOCKED", "NEEDS_REVIEW", "REJECTED"]:
+            print("\n" + "=" * 75)
+            print(f"🎯 VERIFICA RICEVUTA DA CURSOR! [Stato: {task.get('status')}]")
+            print("=" * 75)
+            print(f"• Summary: {task.get('summary')}")
+            if task.get("git_commit"):
+                print(f"• Commit Git: {task.get('git_commit')}")
+            if task.get("notes_for_antigravity"):
+                print(f"• Note per Antigravity: {task.get('notes_for_antigravity')}")
+            print("=" * 75)
+            return 0
+        time.sleep(interval)
+
+    print(f"\n⏱️ TIMEOUT ({timeout}s): Cursor non ha ancora inviato un report di verifica.")
+    print("Il task rimane salvato sul bus in stato PENDING per essere letto con 'antigravity_get_task'.")
+    return 1
 
 
 def cmd_get_task(args, store: AgentBusStore):
@@ -167,6 +200,15 @@ def main():
     p_task.add_argument("--instructions", required=True, type=str, help="Istruzioni dettagliate")
     p_task.add_argument("--files", type=str, default="", help="File target separati da virgola")
     p_task.add_argument("--sender", type=str, default="Antigravity", help="Mittente del task")
+    p_task.add_argument("--wait", action="store_true", help="Attende sincronicamente il report di verifica di Cursor")
+    p_task.add_argument("--timeout", type=int, default=120, help="Secondi massimi di attesa in modalità sincrona (default: 120)")
+    p_task.add_argument("--interval", type=int, default=2, help="Secondi tra un polling e l'altro (default: 2)")
+
+    # wait-for-report
+    p_wait = subparsers.add_parser("wait-for-report", help="Attende il report di Cursor su un task")
+    p_wait.add_argument("--task-id", type=str, default=None, help="ID specifico del task (default: ultimo attivo)")
+    p_wait.add_argument("--timeout", type=int, default=120, help="Secondi massimi di attesa (default: 120)")
+    p_wait.add_argument("--interval", type=int, default=2, help="Secondi tra i controlli (default: 2)")
 
     # get-task
     p_get = subparsers.add_parser("get-task", help="Mostra l'ultimo task attivo")
@@ -205,6 +247,8 @@ def main():
         cmd_get_task(args, store)
     elif args.command == "report":
         cmd_report(args, store)
+    elif args.command == "wait-for-report":
+        cmd_wait_for_report(args, store)
     elif args.command == "log":
         cmd_log(args, store)
     elif args.command == "send-message":
