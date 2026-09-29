@@ -148,10 +148,33 @@ def _fold_team(name: str) -> str:
 
     text = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode("ascii")
     text = text.casefold()
+    text = re.sub(r"['’]", "", text)
     text = re.sub(r"\b(?:fc|sp|rj|mg|ba|pr|sc|ec|cr|de|do|da)\b", " ", text)
     text = re.sub(r"[^a-z0-9]", " ", text)
     return " ".join(text.split())
 
+
+_KNOWN_TEAM_ALIASES: dict[str, str] = {
+    # Argentina (Netwin -> DB / FootyStats canonical)
+    "instituto cordoba": "instituto",
+    "talleres de cordoba": "talleres cordoba",
+    "talleres cordoba": "talleres cordoba",
+    "gimnasia y esgrima mendoza": "gimnasia mendoza",
+    "gimnasia esgrima mendoza": "gimnasia mendoza",
+    "sarmiento junin": "sarmiento",
+    "newells old boys": "newells old boys",
+    "central cordoba": "central cordoba sde",
+    "racing": "racing club",
+    "racing club": "racing club",
+    # Brasile
+    "atletico mineiro": "atletico mineiro",
+    "atletico mg": "atletico mineiro",
+    "atletico paranaense": "athletico paranaense",
+    "atletico pr": "athletico paranaense",
+    "athletico pr": "athletico paranaense",
+    "bragantino": "red bull bragantino",
+    "rb bragantino": "red bull bragantino",
+}
 
 _DB_LEAGUES = {
     "argentina": {"primera division arg"},
@@ -172,10 +195,11 @@ def _db_leagues(tournament: str) -> set[str]:
 
 
 def _resolve_season_team(matches: List[SeasonMatch], label: str, leagues: set[str]) -> Optional[str]:
-    """Allinea 'Atletico Tucuman' al nome presente nello storico, dentro la lega giusta."""
+    """Allinea 'Atletico Tucuman' o 'Instituto Cordoba' al nome presente nello storico, dentro la lega giusta."""
     target = _fold_team(label)
     if len(target) < 4:
         return None
+    target_alias = _KNOWN_TEAM_ALIASES.get(target, target)
     for match in matches:
         if leagues and match.league.casefold() not in leagues:
             continue
@@ -183,7 +207,17 @@ def _resolve_season_team(matches: List[SeasonMatch], label: str, leagues: set[st
             folded = _fold_team(side)
             if len(folded) < 4:
                 continue
-            if folded == target or target in folded or folded in target:
+            folded_alias = _KNOWN_TEAM_ALIASES.get(folded, folded)
+            if (
+                folded == target
+                or folded == target_alias
+                or folded_alias == target
+                or folded_alias == target_alias
+                or target in folded
+                or folded in target
+                or target_alias in folded
+                or folded in target_alias
+            ):
                 return side
     return None
 

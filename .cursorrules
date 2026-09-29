@@ -32,8 +32,12 @@
   3. **Re-Audit Iterativo**: la schedina rettificata viene risottomessa a Groq finché non si raggiunge il consenso unanime (🟢 APPROVATA con valore atteso positivo).
   4. È severamente vietato proporre come definitiva o pubblicare qualsiasi schedina che non abbia superato con successo questo ciclo di risoluzione dialettica congiunta.
 
-## Regola sull'Edge Matematico: Solo Informativo / Warning (Non Bocciante)
-- L'Edge matematico (`(prob * quota) - 1`) e il margine/aggio bookmaker sono esclusivamente indicatori analitici informativi e avvisi di rischio (warning).
-- Un edge negativo o inferiore alla soglia (+4%) NON deve MAI bocciare automaticamente una schedina o selezione in `StrictTicketPipeline` o `scripts/strict_validator.py`.
-- Il validatore deve generare un warning informativo (`edge_warning`) ed esporlo chiaramente in console, dashboard e report, permettendo comunque l'approvazione (`passed=True`) se i requisiti qualitativi, dialettici (Groq 120B) e strutturali sono soddisfatti.
+## Regola #79: Stream Unico e Snapshot dei Dati (I Due Soli File & Aggancio Nomi Obbligatorio)
+- **I Due Soli File Autorizzati**: Sia Cursor che Antigravity leggono e calcolano esclusivamente su due sorgenti dati:
+  1. `data/netwin_live_odds.json`, rigenerato dallo script Netwin prima di ogni palinsesto (quote reali mercati speciali: MultiGol 1°T, Chance Mix, Combo).
+  2. `data/bagent.db`, per i gol della stagione, xG e partite già giocate.
+- **Regola di Freschezza dello Snapshot**: Non si pubblica alcuna schedina se il file `data/netwin_live_odds.json` ha più di qualche ora (massimo 6-12 ore). In caso di cache obsoleta, lo scraper deve essere rieseguito prima del calcolo.
+- **Regola di Aggancio Nomi Obbligatorio (Entity Linking)**: Ogni squadra del palinsesto Netwin deve avere un nome riconosciuto e agganciato allo storico in `data/bagent.db` (tramite `_KNOWN_TEAM_ALIASES` e normalizzazione apostrofi/stopwords). Senza questo aggancio è vietato pubblicare la schedina o ripiegare su medie arbitrarie.
+- **Divieto di Scritture Conflittuali**: Le Hidden Gems e i verdetti si calcolano rigorosamente su questo snapshot sincronizzato.
+
 

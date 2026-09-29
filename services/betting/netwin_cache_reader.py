@@ -545,9 +545,33 @@ _LEAGUE_HINTS = _STORED_LEAGUE_TOKENS + (
 )
 
 
+_KNOWN_TEAM_ALIASES: dict[str, str] = {
+    # Argentina (Netwin -> DB / FootyStats canonical)
+    "instituto cordoba": "instituto",
+    "talleres de cordoba": "talleres cordoba",
+    "talleres cordoba": "talleres cordoba",
+    "gimnasia y esgrima mendoza": "gimnasia mendoza",
+    "gimnasia esgrima mendoza": "gimnasia mendoza",
+    "sarmiento junin": "sarmiento",
+    "newells old boys": "newells old boys",
+    "central cordoba": "central cordoba sde",
+    "racing": "racing club",
+    "racing club": "racing club",
+    # Brasile
+    "atletico mineiro": "atletico mineiro",
+    "atletico mg": "atletico mineiro",
+    "atletico paranaense": "athletico paranaense",
+    "atletico pr": "athletico paranaense",
+    "athletico pr": "athletico paranaense",
+    "bragantino": "red bull bragantino",
+    "rb bragantino": "red bull bragantino",
+}
+
+
 def _normalize_team_name(name: str) -> str:
     s = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode("utf-8")
     s = s.lower()
+    s = re.sub(r"['’]", "", s)
     s = re.sub(r"[^a-z0-9]", " ", s)
     return " ".join(s.split())
 
@@ -571,10 +595,17 @@ def team_names_match(left: str, right: str) -> bool:
     """Stesso club. «Atlético PR» non è «Atlético Madrid» e «Cerro» non è «Cerro Porteño»."""
     if not left or not right:
         return False
-    if _normalize_team_name(left) == _normalize_team_name(right):
+    norm_l = _normalize_team_name(left)
+    norm_r = _normalize_team_name(right)
+    if norm_l == norm_r:
         return True
-    core = _core_tokens(left)
-    return bool(core) and core == _core_tokens(right)
+    alias_l = _KNOWN_TEAM_ALIASES.get(norm_l, norm_l)
+    alias_r = _KNOWN_TEAM_ALIASES.get(norm_r, norm_r)
+    if alias_l == norm_r or norm_l == alias_r or alias_l == alias_r:
+        return True
+    core_l = _core_tokens(left)
+    core_r = _core_tokens(right)
+    return bool(core_l) and (core_l == core_r or core_l == _core_tokens(alias_r) or _core_tokens(alias_l) == core_r)
 
 
 def _league_names_for(conn: sqlite3.Connection, tournament: str) -> list[str]:
@@ -631,19 +662,28 @@ def _unique_team(raw_name: str, pool: list[str], *, loose: bool) -> str:
     if not raw_name or not pool:
         return ""
     norm = _normalize_team_name(raw_name)
-    exact = [team for team in pool if _normalize_team_name(team) == norm]
+    alias = _KNOWN_TEAM_ALIASES.get(norm, norm)
+    exact = [team for team in pool if _normalize_team_name(team) in (norm, alias)]
     if len(set(exact)) == 1:
         return exact[0]
     if len(set(exact)) > 1:
-        return ""
+        for t in exact:
+            if _normalize_team_name(t) == alias:
+                return t
+        return exact[0]
     if not loose:
         return ""
     core = _core_tokens(raw_name)
+    core_alias = _core_tokens(alias)
     if not core:
         return ""
-    loose_hits = [team for team in pool if _core_tokens(team) == core]
+    loose_hits = [team for team in pool if _core_tokens(team) in (core, core_alias)]
     if len(set(loose_hits)) == 1:
         return loose_hits[0]
+    if len(set(loose_hits)) > 1:
+        for t in loose_hits:
+            if _normalize_team_name(t) == alias:
+                return t
     return ""
 
 
