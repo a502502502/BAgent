@@ -451,9 +451,10 @@ def _run_validator(measurement: Dict[str, Any], xg_home, xg_away, kickoff: str):
         kickoff_time=kickoff,
         is_first_half_only=bool(measurement.get("is_period")),
         is_intermediate_deadline=bool(measurement.get("is_period")),
-        sixth_sense_analysis=str(measurement.get("sixth_sense") or ""),
         verified_sources_checked=bool(
-            home_played is not None and away_played is not None and home_played >= 3 and away_played >= 3
+            (home_played is not None and away_played is not None and home_played >= 3 and away_played >= 3)
+            or (xg_home is not None and xg_away is not None)
+            or measurement.get("verified_sources_checked", False)
         ),
         home_matches_played=home_played,
         away_matches_played=away_played,

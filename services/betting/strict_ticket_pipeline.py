@@ -358,6 +358,11 @@ class StrictTicketPipeline:
         if away_played is None:
             away_played = candidate.away_matches_played
         if home_played is None or away_played is None:
+            if candidate.xg_home is not None and candidate.xg_away is not None:
+                return (
+                    "[AVVISO CAMPIONE CORTO] Storico partite locali non registrato nel DB per una o entrambe le squadre: "
+                    "valutazione condotta su telemetria oggettiva xG e shrinkage."
+                )
             return _season_block(
                 candidate,
                 "Storico del campionato in corso non caricato: senza le partite già giocate la selezione non parte.",

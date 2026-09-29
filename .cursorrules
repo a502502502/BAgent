@@ -13,9 +13,10 @@
   3. L'esito dell'audit (Analisi EV, Identificazione Trappole Bookmaker, Scenario Perdita, Verdetto e Stake consigliata) deve essere presentato all'utente insieme al ticket.
   4. Se l'Auditor boccia una selezione identificando un rischio strutturale (es. tetto su favorita, dipendenza da Under primo tempo a cascata), la selezione deve essere rettificata prima di essere proposta come giocabile.
 
-## Mercati 1° Tempo (Pienamente Ammessi)
-- I mercati sul 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, 1X 1°T) sono pienamente ammessi e prezzati via Poisson (xG × 0.45).
-- Il blocco "DIES_AT_45" ("chiude al 45': la selezione deve vivere 90 minuti") è stato formalmente eliminato sia dal validatore che dal protocollo di dibattito.
+## Regola #78: Unificazione Regole con Cursor & Abolizione Tassativa Regole Fantasma
+- **Abolizione Regola Fantasma 45' / Quota compressa**: È tassativamente VIETATO sia ad Antigravity che a Cursor bocciare selezioni sul 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, 1X 1°T) con motivazioni quali "chiude al 45'" o "quota inferiore a 1.55".
+- **Mercati 1° Tempo Pienamente Ammessi**: I mercati 1° Tempo sono validi da quota minima generale @1.20 se supportati da modello Poisson (split xG × 0.45) e probabilità adeguata.
+- **Risoluzione Telemetrica Automatica (Regola #55 - Stadio 0)**: Se un match dispone di parametri xG o dati statistici da database/feed (FootyStats, Sofascore, Flashscore, baselines 2026), la verifica telemetrica delle fonti reali è AUTOMATICAMENTE soddisfatta (verified_sources_checked = True). Vietato bloccare a monte a Stadio 0 eventi con telemetria numerica disponibile.
 
 ## Regola #76: Data e Ora Obbligatorie per Ogni Partita / Selezione
 - In ogni schedina generata, ticket JSON, logica di pipeline, report a terminale, messaggio Telegram o pagina web/dashboard:

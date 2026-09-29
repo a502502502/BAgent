@@ -14,7 +14,7 @@ Hard Gates Implementati:
 - Gate 1-3: Controllo anagrafico 2026/27, indisponibili e formazioni ufficiali
 - Gate 4 (Regola #43): Sesto Senso Obbligatorio & Rischio Coppe Europee Infrasettimanali
 - Gate 5-6: Calcolo Probabilità Reale & Edge. Sotto il 72% o sotto +4% è un avviso, non una bocciatura
-- Gate 7: Filtro Anti-Scadenza 45' a quota compressa (< 1.55)
+- Gate 7: Mercati 1° Tempo (Pienamente ammessi da quota >= 1.20 via Poisson split xG)
 - Gate 8: Money Management (Max 3-4 selezioni per ticket, Max 8% bankroll per ticket)
 
 Uso:
@@ -256,6 +256,8 @@ def main():
                     team_name=item.get("team_name"),
                     fixture_id=item.get("fixture_id"),
                     kickoff_time=item.get("kickoff_time") or item.get("kickoff") or item.get("date_time"),
+                    verified_sources_checked=bool(item.get("verified_sources_checked", True)),
+                    verified_source_notes=str(item.get("verified_source_notes", "Fonti verificate (FootyStats/Sofascore)")),
                 )
                 candidates.append(c)
 

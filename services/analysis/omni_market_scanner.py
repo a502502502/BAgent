@@ -117,8 +117,6 @@ class OmniMarketScanner:
         if edge < 0.03 or p_real < 0.65:
             return 0.0
 
-        if resilience_type == "INTERMEDIATE_45_TRAP" and odd < 1.55:
-            return 0.0
 
         # Quota Utility Factor (premio range ideale 1.28 - 1.65)
         if 1.28 <= odd <= 1.65:
@@ -356,9 +354,6 @@ class OmniMarketScanner:
             if edge < 0.04:
                 is_appr = False
                 rej = f"Edge insufficiente o negativo ({edge*100:+.1f}%)"
-            elif res_type == "INTERMEDIATE_45_TRAP" and odd < 1.55:
-                is_appr = False
-                rej = f"Trappola 45' a quota compressa (@{odd:.2f} < 1.55)"
             elif p_real < 0.70:
                 is_appr = False
                 rej = f"Probabilità reale troppo bassa per mercato sicuro ({p_real*100:.1f}% < 70%)"

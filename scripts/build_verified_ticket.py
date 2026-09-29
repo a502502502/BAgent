@@ -9,7 +9,7 @@ Esegue l'audit sequenziale obbligatorio prima di piazzare o proporre qualsiasi t
 4. Sesto Senso & Intelligence Tattica (OBBLIGATORIO: rassegna, spogliatoio, trappole)
 5. Calcolo Probabilità Reale Coniugata (Poisson & Modelli Tempi)
 6. Filtro Edge Matematico Reale (Minimo +4.0%)
-7. Filtro Anti-Scadenza 45' (< 1.55)
+7. Mercati 1° Tempo (Pienamente ammessi da quota >= 1.20 via Poisson split xG)
 8. Money Management (Kelly Frazionario calcolato sul Bankroll attuale)
 
 Uso CLI:
