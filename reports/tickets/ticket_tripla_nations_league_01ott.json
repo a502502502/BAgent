@@ -1,0 +1,50 @@
+{
+    "ticket_id": "TICKET_NL_01OTT",
+    "name": "Schedina Nations League — Tripla Chance Mix (1 Ottobre)",
+    "period": "Giovedì 1 Ottobre 2026",
+    "created_at": "2026-09-30 13:10:00",
+    "total_odds": 2.00,
+    "stake": 2.50,
+    "potential_win": 5.00,
+    "conjoint_prob": 0.827,
+    "edge_pct": 65.4,
+    "validator_status": "STADI 0-8 SUPERATI (Certificata StrictTicketPipeline)",
+    "legs": [
+        {
+            "match": "Germania vs Serbia",
+            "tournament": "UEFA Nations League",
+            "date_time": "2026-10-01 20:45 CEST",
+            "market": "Chance Mix",
+            "pick": "Chance Mix: 1X o Over 1.5",
+            "netwin_odds": 1.20,
+            "prob": 0.948,
+            "fair_odds": 1.06,
+            "edge_pct": 13.7,
+            "rationale": "Allianz Arena: Germania di Klopp in cerca di riscatto dopo l'avvio stentato. Serbia a zero punti costretta a non fare solo barricate. La Chance Mix è ultra-blindata: vince sia se la Germania non perde, sia se la partita registra almeno due reti totali (coprendo persino uno 0-2 ospite)."
+        },
+        {
+            "match": "Danimarca vs Portogallo",
+            "tournament": "UEFA Nations League",
+            "date_time": "2026-10-01 20:45 CEST",
+            "market": "Chance Mix",
+            "pick": "Chance Mix: X2 o Over 1.5",
+            "netwin_odds": 1.30,
+            "prob": 0.936,
+            "fair_odds": 1.07,
+            "edge_pct": 21.7,
+            "rationale": "Parken Stadium: scontro al vertice del Gruppo 4. Il Portogallo dispone di un arsenale offensivo devastante ma la Danimarca al Parken spinge con intensità. Protezione doppia asimmetrica: basta che il Portogallo esca indenne oppure che vengano segnati almeno 2 gol nei 90 minuti."
+        },
+        {
+            "match": "Galles vs Norvegia",
+            "tournament": "UEFA Nations League",
+            "date_time": "2026-10-01 20:45 CEST",
+            "market": "Chance Mix",
+            "pick": "Chance Mix: X2 o Over 1.5",
+            "netwin_odds": 1.28,
+            "prob": 0.932,
+            "fair_odds": 1.07,
+            "edge_pct": 19.3,
+            "rationale": "Cardiff City Stadium: Galles in grave affanno a zero gol e privo dell'infortunato Harry Wilson. Norvegia trascinata da Erling Haaland, superiore sul piano atletico e delle conclusioni. L'X2 o Over 1.5 garantisce una tenuta del 93.2% sui 90 minuti."
+        }
+    ]
+}
