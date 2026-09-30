@@ -10,7 +10,10 @@ __pycache__/
 logs/
 
 # Generated data
-data/
+data/*
+!data/active_user_tickets.json
+!data/netwin_live_odds.json
+!data/netwin_odds_cache.json
 output/
 
 # Python cache

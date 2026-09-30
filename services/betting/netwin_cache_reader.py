@@ -542,6 +542,8 @@ _LEAGUE_HINTS = _STORED_LEAGUE_TOKENS + (
     ("conference league", "conference league"),
     ("serie a", "serie a"),
     ("italia", "serie a"),
+    ("nations league", "uefa nations league"),
+    ("uefa nations league", "uefa nations league"),
 )
 
 
@@ -565,6 +567,43 @@ _KNOWN_TEAM_ALIASES: dict[str, str] = {
     "athletico pr": "athletico paranaense",
     "bragantino": "red bull bragantino",
     "rb bragantino": "red bull bragantino",
+    # UEFA Nations League (Italian Netwin -> FootyStats English canonical)
+    "germania": "germany",
+    "grecia": "greece",
+    "olanda": "netherlands",
+    "danimarca": "denmark",
+    "portogallo": "portugal",
+    "irlanda": "republic of ireland",
+    "repubblica d irlanda": "republic of ireland",
+    "galles": "wales",
+    "norvegia": "norway",
+    "azerbaigian": "azerbaijan",
+    "gibilterra": "gibraltar",
+    "israele": "israel",
+    "belgio": "belgium",
+    "francia": "france",
+    "spagna": "spain",
+    "inghilterra": "england",
+    "repubblica ceca": "czech republic",
+    "croazia": "croatia",
+    "turchia": "turkey",
+    "svezia": "sweden",
+    "polonia": "poland",
+    "bosnia erzegovina": "bosnia and herzegovina",
+    "ungheria": "hungary",
+    "irlanda del nord": "northern ireland",
+    "isole far oer": "faroe islands",
+    "slovacchia": "slovakia",
+    "svizzera": "switzerland",
+    "finlandia": "finland",
+    "islanda": "iceland",
+    "cipro": "cyprus",
+    "bielorussia": "belarus",
+    "liechtenstein": "liechtenstein",
+    "malta": "malta",
+    "kosovo": "kosovo",
+    "serbia": "serbia",
+    "austria": "austria",
 }
 
 
@@ -729,7 +768,18 @@ def _team_games(
             SELECT away_goals, home_goals FROM matches
             WHERE status='FT' AND away_team=? AND home_goals IS NOT NULL AND away_goals IS NOT NULL
         """
-    return [(float(scored), float(conceded)) for scored, conceded in conn.execute(query, (db_team,))]
+    rows = [(float(scored), float(conceded)) for scored, conceded in conn.execute(query, (db_team,))]
+    if not rows:
+        # Fallback a tutte le partite disputate della squadra se il campione dello specifico lato casa/fuori è vuoto
+        fallback_query = """
+            SELECT 
+                CASE WHEN home_team=? THEN home_goals ELSE away_goals END,
+                CASE WHEN home_team=? THEN away_goals ELSE home_goals END
+            FROM matches
+            WHERE status='FT' AND (home_team=? OR away_team=?) AND home_goals IS NOT NULL AND away_goals IS NOT NULL
+        """
+        rows = [(float(scored), float(conceded)) for scored, conceded in conn.execute(fallback_query, (db_team, db_team, db_team, db_team))]
+    return rows
 
 
 def _mean(values) -> float:
