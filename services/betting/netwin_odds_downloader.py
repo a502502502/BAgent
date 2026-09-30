@@ -36,6 +36,9 @@ TOURNAMENT_ALIASES: Dict[str, str] = {
     "inghilterra": "Premier League",
     "germania": "Bundesliga",
     "europa": "Europa League",
+    "nations league": "UEFA Nations League",
+    "uefa nations league": "UEFA Nations League",
+    "nations": "UEFA Nations League",
 }
 
 MULTIGOL_H_MAP: Dict[int, str] = {
@@ -383,18 +386,16 @@ class NetwinOddsDownloader:
                     for eq in eqs:
                         if eq.get("ce") == 1:
                             match_data["markets"].setdefault("DOPPIA_CHANCE", {})["1X"] = round(eq.get("q", 0) / 100.0, 2)
-                        elif eq.get("ce") == 2:
+
+                elif "DOPPIA CHANCE OUT" in desc and "IN" not in desc:
+                    for eq in eqs:
+                        if eq.get("ce") == 2:
                             match_data["markets"].setdefault("DOPPIA_CHANCE", {})["X2"] = round(eq.get("q", 0) / 100.0, 2)
 
                 elif "DOPPIA CHANCE IN/OUT" in desc:
                     for eq in eqs:
                         if eq.get("ce") == 2:
                             match_data["markets"].setdefault("DOPPIA_CHANCE", {})["12"] = round(eq.get("q", 0) / 100.0, 2)
-
-                elif "DOPPIA CHANCE OUT" in desc:
-                    for eq in eqs:
-                        if eq.get("ce") == 1 and "X2" not in match_data["markets"].get("DOPPIA_CHANCE", {}):
-                            match_data["markets"].setdefault("DOPPIA_CHANCE", {})["X2"] = round(eq.get("q", 0) / 100.0, 2)
 
                 # 3. UNDER / OVER GOL
                 elif desc == "U/O" or "UNDER / OVER" in desc:

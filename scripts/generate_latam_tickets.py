@@ -54,6 +54,13 @@ from services.database.performance_tracker import PerformanceTracker
 from services.mcp.agent_bus_store import AgentBusStore
 
 
+def is_45_min_market(market_name: str) -> bool:
+    """Riconosce se un mercato fa riferimento al primo tempo (45 minuti)."""
+    tokens = ["1° tempo", "1°tempo", "1° t", "1°t", "primo tempo", "1h"]
+    name = market_name.lower()
+    return any(t in name for t in tokens)
+
+
 def audit_candidate_with_strict_pipeline(
     gem: NetwinGem,
     kickoff: str,

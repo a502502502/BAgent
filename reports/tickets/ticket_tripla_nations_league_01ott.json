@@ -1,0 +1,55 @@
+{
+    "ticket_id": "TICKET_TRIPLA_NATIONS_LEAGUE_01OTT",
+    "name": "Tripla Value Nations League (@2.78)",
+    "created_at": "2026-09-30 13:55:00",
+    "total_odds": 2.78,
+    "stake": 2.50,
+    "potential_win": 6.95,
+    "conjoint_prob": 0.442,
+    "edge_pct": 22.9,
+    "groq_audit": "APPROVATA",
+    "legs": [
+        {
+            "match": "Grecia vs Olanda",
+            "tournament": "UEFA Nations League",
+            "date_time": "2026-10-01 20:45 CEST",
+            "palinsesto_aams": 36401,
+            "avvenimento_aams": 29851,
+            "market": "Under / Over",
+            "pick": "Under 3.5",
+            "netwin_odds": 1.45,
+            "prob": 0.743,
+            "fair_odds": 1.35,
+            "edge_pct": 7.8,
+            "rationale": "Grecia storicamente difensiva con blocco basso asfissiante (0.8 gol subiti medi). L'Olanda in trasferta ad Atene gestisce il possesso e riduce al minimo i rischi di transizione. La selezione copre fino a 3 gol complessivi."
+        },
+        {
+            "match": "Germania vs Serbia",
+            "tournament": "UEFA Nations League",
+            "date_time": "2026-10-01 20:45 CEST",
+            "palinsesto_aams": 36401,
+            "avvenimento_aams": 33314,
+            "market": "Under / Over",
+            "pick": "Under 4.5",
+            "netwin_odds": 1.32,
+            "prob": 0.819,
+            "fair_odds": 1.22,
+            "edge_pct": 8.1,
+            "rationale": "Germania nettamente favorita (@1.23) ma la linea Under 4.5 offre una probabilità solida dell'81.9% coprendo fino a 4 reti totali (es. 2-0, 3-0, 3-1, 2-1, 4-0). Quota Netwin @1.32 contro fair @1.22 (edge +8.1%)."
+        },
+        {
+            "match": "Danimarca vs Portogallo",
+            "tournament": "UEFA Nations League",
+            "date_time": "2026-10-01 20:45 CEST",
+            "palinsesto_aams": 36401,
+            "avvenimento_aams": 33284,
+            "market": "Under / Over",
+            "pick": "Under 3.5",
+            "netwin_odds": 1.45,
+            "prob": 0.726,
+            "fair_odds": 1.38,
+            "edge_pct": 5.3,
+            "rationale": "Danimarca tradizionalmente solida e tattica al Parken contro le formazioni di prima fascia. Il Portogallo gestisce il possesso palla controllando i ritmi in trasferta. Probabilità Dixon-Coles 72.6% con quota Netwin a @1.45."
+        }
+    ]
+}
