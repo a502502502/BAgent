@@ -16,3 +16,12 @@ Salvato e sincronizzato stato del repository su GitHub (main: 717e651):
 - Test unitari test_strategy.py convalidati con successo.
 
 ---
+
+### [2026-09-30 10:53:00] 🤖 ANTIGRAVITY (BRANCH_MERGE)
+Completato il merge unificato del branch origin/cursor/combo-book-edge-5eb1 dentro main.
+- Tutti i 21 commit (+14.800 righe) di Cursor sono ora nel branch principale 'main'.
+- Risolto prezzamento mercati 1° Tempo (Poisson xG * 0.45) e rimozione blocco 45' under 1.55.
+- Verificato ticket Schedina 2 (Tripla 1° Tempo): Ticket Passed: True (P > 80%, Edge > +13%).
+- Installata dipendenza scipy nel venv locale e allineati tutti i test di regressione.
+
+---
