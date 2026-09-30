@@ -159,4 +159,22 @@ class BehavioralMarketRulesEngine:
                 "confidence": "HIGH"
             })
 
+        # -------------------------------------------------------------
+        # REGOLA 6: "CORAZZATA IN RISCATTO / FAVORITA SCHIACCIANTE: 1X + MULTIGOL 2-5" (Regola #80)
+        # Domanda: La squadra è una big o favorita schiacciante con attacco d'élite e reazione d'orgoglio?
+        # -------------------------------------------------------------
+        if (
+            home_profile.avg_goals_scored >= 2.0 or
+            home_profile.post_lead_behavior == "RULLO_COMPRESSORE"
+        ):
+            recommended_markets.append({
+                "market": "1X + MultiGol 2-5 (o MultiGol 2-5 Casa): SI",
+                "trigger_reason": (
+                    f"{home_profile.team_name} ha potenziale offensivo dominante (media {home_profile.avg_goals_scored:.1f} gol). "
+                    f"In caso di reazione o partita interna, produce alto volume balistico escludendo l'Under 1.5 e goleade da 6+ reti."
+                ),
+                "tactical_logic": "Copre 2-0, 2-1, 3-0, 3-1, 4-0, 4-1, 1-1. Sposa l'efficienza delle quote eliminando il rischio di Under forzati da micro-campioni.",
+                "confidence": "VERY_HIGH"
+            })
+
         return recommended_markets

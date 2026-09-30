@@ -526,6 +526,49 @@ class StrictTicketPipeline:
             )
 
         # =====================================================================
+        # GATE 0.1: REGOLA #80 - DIVIETO UNDER & CONTRO-FAVORITA SU CORAZZATE (Anti-Small-Sample Bias)
+        # =====================================================================
+        # Se la favorita è schiacciante (quota pre-match <= 1.35 o club/nazionale dominante),
+        # è severamente vietato proporre mercati a favore della sfavorita o Under rigidi
+        # scaturiti da distorsioni di campioni corti (es. 1-2 giornate).
+        dominant_powerhouses = [
+            "GERMANIA", "GERMANY", "MANCHESTER CITY", "MAN CITY", "BAYERN", "REAL MADRID",
+            "BARCELONA", "BARCELLONA", "PSG", "PARIS", "INTER", "ARSENAL", "LIVERPOOL"
+        ]
+        is_powerhouse_match = any(p in candidate.match_name.upper() for p in dominant_powerhouses)
+        is_heavy_favorite = (
+            (candidate.pre_match_odd_favorite is not None and candidate.pre_match_odd_favorite <= 1.35)
+            or (is_powerhouse_match and (" VS " in candidate.match_name.upper() and candidate.match_name.upper().startswith(tuple(dominant_powerhouses))))
+        )
+        if is_heavy_favorite:
+            # Mercati contro la favorita vietati
+            is_anti_favorite = (
+                "X2" in m_upper or m_upper.startswith("2") or " 2 " in m_upper
+                or "2 O " in m_upper or "X2 O " in m_upper
+                or ("OSPITE" in m_upper and ("MULTIGOL" in m_upper and ("2-" in m_upper or "3-" in m_upper)))
+            )
+            # Mercati Under stretti vietati
+            is_strict_under = (
+                "UNDER 2.5" in m_upper or "UNDER 1.5" in m_upper
+                or "MULTIGOL 0-1" in m_upper or "MULTIGOL 0-2" in m_upper
+                or "UNDER 3.5" in m_upper
+            )
+            if is_anti_favorite or is_strict_under:
+                reason_type = "MERCATO CONTRO-FAVORITA" if is_anti_favorite else "UNDER STRETTO SU ATTACCO DOMINANTE"
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #80: ANTI-SMALL-SAMPLE BIAS & {reason_type}] {candidate.market_name} su {candidate.match_name}. "
+                        f"Per corazzate o favorite schiaccianti (quota pre-match <= 1.35) è tassativamente vietato "
+                        f"proporre esiti contro la favorita o forzare Under generati da micro-campioni storici (Lezione Germania post-Grecia). "
+                        f"Sostituire obbligatoriamente con opzioni a trazione anteriore protetta: '1X + MultiGol 2-5', 'MultiGol 2-5 Casa' o '1X + Over 1.5'."
+                    ),
+                    details="Violazione Regola #80: mercati contro la favorita o Under stretti su squadra dominante vietati."
+                )
+
+        # =====================================================================
         # GATE 0.2: REGOLA #56 - BAN TOTALE SECONDE DIVISIONI, CAMPIONATI MINORI & SQUADRE RISERVE/B
         # =====================================================================
         # Divieto assoluto di Seconde Categorie (Serie B, Ligue 2, LaLiga 2, Eerste Divisie, ecc.)

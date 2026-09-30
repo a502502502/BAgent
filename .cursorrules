@@ -40,4 +40,20 @@
 - **Regola di Aggancio Nomi Obbligatorio (Entity Linking)**: Ogni squadra del palinsesto Netwin deve avere un nome riconosciuto e agganciato allo storico in `data/bagent.db` (tramite `_KNOWN_TEAM_ALIASES` e normalizzazione apostrofi/stopwords). Senza questo aggancio è vietato pubblicare la schedina o ripiegare su medie arbitrarie.
 - **Divieto di Scritture Conflittuali**: Le Hidden Gems e i verdetti si calcolano rigorosamente su questo snapshot sincronizzato.
 
+## Regola #80: Rispetto del Potenziale Reale delle Squadre, delle Quote di Mercato e del Sesto Senso (Anti-Small-Sample Bias)
+- **Divieto di Cecità Meccanica su Micro-Campioni**: È tassativamente VIETATO basare la selezione dei mercati esclusivamente su micro-campioni storici (es. 1-2 giornate iniziali di un torneo o Nations League) ignorando il blasone, la caratura tecnica della rosa e l'efficienza delle quote bookmaker.
+- **Divieto Under e Mercati Contro-Favorita su Corazzate (Quota Pre-Match <= 1.35 o Over 2.5 <= 1.45)**:
+  1. Se una squadra d'élite gioca in casa con quota 1X2 <= 1.35 o linea Over 2.5 <= 1.45 (es. Germania vs Serbia, Man City, Bayern, Real Madrid), è SEVERAMENTE VIETATO proporre esiti favorevoli alla sfavorita (X2, 2, X2+MG, Chance Mix X2 o NoGol) o forzare mercati Under/tetti stretti sui gol (Under 2.5, Under 3.5, MultiGol 0-2 Casa).
+  2. Una sconfitta isolata per pura varianza (es. Germania 0-1 Grecia con 1.91 xG prodotti) NON trasforma una corazzata in una squadra da Under. Al contrario, per il Sesto Senso scatta la "Reazione da Riscatto Agonistico" che aumenta il volume offensivo atteso.
+  3. Su favorite schiaccianti, i soli mercati ammessi sono a trazione anteriore protetta: `1X + MultiGol 2-5`, `MultiGol 2-5 Casa`, `1X + Over 1.5`, oppure `MultiGol 1-3/1-4 Ospite` e `X2 + Over 1.5` quando la favorita gioca in trasferta (es. Olanda in Grecia, Norvegia in Galles, Portogallo in Danimarca).
+
+## Regola #81: Protocollo Analitico Specialistico su Corner e Cartellini
+- **Corner**:
+  1. *Filtro Volume Tiri (Regola #45)*: Per proporre linee Over Corner di squadra elevate (Over >= 5.5), la squadra deve registrare almeno 18.0 tiri medi a partita (es. Olanda con 23.5 tiri).
+  2. *Anti-Blowout Trap (Regola #66)*: Vietato Over Corner elevati su favorite con rischio goleada rapida (il ritmo cala nella ripresa). Preferire `1 Corner` secco o linee moderate (Over 4.5/5.5).
+  3. *Asimmetria Territoriale*: Individuare il divario di baricentro (squadra dominante con tanti tiri contro squadra arroccata genera tanti corner per la favorita e zero per la sfavorita).
+- **Cartellini**:
+  1. *Fattore Livello / Tensione di Categoria*: Le serie minori e le sfide di Lega D (es. Malta vs Gibilterra) presentano ritmi spezzettati e tassi di fallosità strutturalmente più alti (Over 4.5 cartellini naturale).
+  2. *Asimmetria Disciplinare da Dribbling*: Squadre dotate di funamboli e velocisti (Musiala, Wirtz, Vinicius) provocano sistematicamente ammonizioni tattiche negli avversari. Scommettere sul segno `2 Cartellini` (più ammonizioni per la sfavorita che difende) o `Over Cartellini Squadra Sfavorita`.
+
 
