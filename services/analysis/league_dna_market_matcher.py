@@ -74,6 +74,7 @@ class LeagueDNAMarketMatcher:
                 "argentina", "liga profesional", "primera division argentina", "copa de la liga",
                 "brasile", "serie a brasiliana", "brasileirao", "serie b brasiliana",
                 "colombia", "primera a colombia", "uruguay", "paraguay", "venezuela",
+                "chile", "peru", "ecuador",
                 "serie b", "serie b italia", "ligue 2"
             ],
             "description": "Campionato a logoramento difensivo, ritmi spezzettati da falli, baricentri bassi e 0-0 frequente.",

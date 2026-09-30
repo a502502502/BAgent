@@ -10,11 +10,19 @@ from scipy.stats import poisson, nbinom
 from typing import Dict, Any, List, Optional
 
 _NON_GOAL_TOKENS = ("corner", "cartellin", "tiri", "falli")
-_PERIOD_MARKET = re.compile(r"tempo|\b[12]\s*°?\s*t\b|entrambi i tempi")
+_COMPOUND_PERIOD_MARKET = re.compile(r"entrambi i tempi")
+_FIRST_HALF_REGEX = re.compile(r"\b(?:1\s*°?\s*tempo|1\s*°?\s*t|primo\s+tempo|1h)\b", re.IGNORECASE)
+_SECOND_HALF_REGEX = re.compile(r"\b(?:2\s*°?\s*tempo|2\s*°?\s*t|secondo\s+tempo|2h)\b", re.IGNORECASE)
 _CLAUSE_PREFIX = re.compile(r"^(?:chance mix|doppia chance|esito finale|dc)\s+")
 _SIDE_WORDS = re.compile(
     r"\b(?:casa|ospite|home|away|squadra\s*[12]|squadra|gol|totali|partita|match)\b"
 )
+
+
+def _clean_period_tokens(market_name: str) -> str:
+    cleaned = _FIRST_HALF_REGEX.sub("", market_name)
+    cleaned = _SECOND_HALF_REGEX.sub("", cleaned)
+    return re.sub(r"\s+", " ", cleaned).strip()
 
 
 def _normalize_market_name(market_name: str) -> str:
@@ -55,7 +63,7 @@ def _goal_clause_mask(clause: str, home: np.ndarray, away: np.ndarray, total: np
         if side != "total":
             return None
         return (home >= 1) & (away >= 1)
-    if clause in {"no gol", "ng"}:
+    if clause in {"no gol", "nogol", "ng"}:
         return ~((home >= 1) & (away >= 1))
 
     core = re.sub(r"\s+", " ", _SIDE_WORDS.sub(" ", clause)).strip()
@@ -95,9 +103,10 @@ def _goal_market_mask(
 ) -> Optional[np.ndarray]:
     """Maschera del mercato. 'o' è unione, '+' è intersezione. None se il nome non è un mercato gol."""
     raw = market_name.lower()
-    if any(token in raw for token in _NON_GOAL_TOKENS) or _PERIOD_MARKET.search(raw):
+    if any(token in raw for token in _NON_GOAL_TOKENS) or _COMPOUND_PERIOD_MARKET.search(raw):
         return None
-    operator, clauses = _market_clauses(_normalize_market_name(market_name))
+    cleaned = _clean_period_tokens(market_name)
+    operator, clauses = _market_clauses(_normalize_market_name(cleaned))
     combined: Optional[np.ndarray] = None
     for clause in clauses:
         mask = _goal_clause_mask(clause, home, away, total)
@@ -245,7 +254,18 @@ class QuantitativeEngine:
         """Intersezione di più mercati gol sulla stessa matrice. None se un nome non è mappato."""
         if not market_names:
             return None
-        matrix, home, away, total = self._score_axes(xg_home, xg_away)
+        is_all_1h = all(_FIRST_HALF_REGEX.search(m) for m in market_names)
+        is_all_2h = all(_SECOND_HALF_REGEX.search(m) for m in market_names)
+        is_any_1h = any(_FIRST_HALF_REGEX.search(m) for m in market_names)
+        is_any_2h = any(_SECOND_HALF_REGEX.search(m) for m in market_names)
+        if (is_any_1h or is_any_2h) and not (is_all_1h or is_all_2h):
+            return None
+        if is_all_1h:
+            matrix, home, away, total = self._score_axes(xg_home * 0.45, xg_away * 0.45)
+        elif is_all_2h:
+            matrix, home, away, total = self._score_axes(xg_home * 0.55, xg_away * 0.55)
+        else:
+            matrix, home, away, total = self._score_axes(xg_home, xg_away)
         combined: Optional[np.ndarray] = None
         for market_name in market_names:
             mask = _goal_market_mask(market_name, home, away, total)
@@ -283,6 +303,57 @@ class QuantitativeEngine:
                 return float(data["prob"])
         return None
 
+    def corner_over_probability(
+        self,
+        avg_corners_home: float,
+        avg_corners_away: float,
+        market_name: str,
+    ) -> Optional[float]:
+        """Over corner su totale, casa o ospite, dalla stessa binomiale negativa della matrice congiunta.
+
+        None se il nome non è un Over corner. La linea è libera: 4.5 di squadra e 8.5/9.5 totali
+        usano la stessa massa, senza una formula derivata dal totale.
+        """
+        name = market_name.strip().lower()
+        if "corner" not in name or "over" not in name:
+            return None
+        parsed = re.search(r"over\s*(\d+(?:\.\d+)?)", name)
+        if parsed is None:
+            return None
+        line = float(parsed.group(1))
+        matrix, home, away, total = self._corner_axes(avg_corners_home, avg_corners_away)
+        if re.search(r"\b(?:casa|home)\b", name):
+            band = home > line
+        elif re.search(r"\b(?:ospite|away)\b", name):
+            band = away > line
+        else:
+            band = total > line
+        mask = np.broadcast_to(band, matrix.shape)
+        return float(np.sum(matrix[mask]))
+
+    def _corner_axes(
+        self,
+        avg_corners_home: float,
+        avg_corners_away: float,
+        dispersion_factor: float = 1.5,
+        max_corners: int = 20,
+    ):
+        """Matrice congiunta dei corner. Stessa parametrizzazione di analyze_corners."""
+        alpha = 0.1 * dispersion_factor
+
+        def _params(mu: float) -> tuple[float, float]:
+            n = 1.0 / alpha
+            p = 1.0 / (1.0 + alpha * mu)
+            return n, p
+
+        n_home, p_home = _params(avg_corners_home)
+        n_away, p_away = _params(avg_corners_away)
+        corners = np.arange(max_corners)
+        matrix = np.outer(nbinom.pmf(corners, n_home, p_home), nbinom.pmf(corners, n_away, p_away))
+        home = corners[:, None]
+        away = corners[None, :]
+        return matrix, home, away, home + away
+
     # Alias per compatibilità con il codice esistente
     analyze_niche_markets = analyze_football_markets
 
@@ -299,31 +370,12 @@ class QuantitativeEngine:
         Modella i corner usando la Distribuzione Binomiale Negativa per gestire l'overdispersion.
         """
         # Parametrizzazione Binomiale Negativa da Media (mu) e Fattore di Dispersione (alpha)
-        # Varianza = mu + alpha * mu^2. 
-        # n (number of successes) = 1 / alpha
-        # p (probability) = 1 / (1 + alpha * mu)
-        
-        def get_nbinom_params(mu: float, alpha: float) -> tuple[float, float]:
-            n = 1.0 / alpha
-            p = 1.0 / (1.0 + alpha * mu)
-            return n, p
-
-        # Assumiamo un alpha di default (es. 0.1) se dispersion_factor è passato come moltiplicatore
-        alpha = 0.1 * dispersion_factor 
-        
-        n_home, p_home = get_nbinom_params(avg_corners_home, alpha)
-        n_away, p_away = get_nbinom_params(avg_corners_away, alpha)
-
-        max_corners = 20
-        corners_range = np.arange(max_corners)
-
-        # PMF vettoriali
-        pmf_home = nbinom.pmf(corners_range, n_home, p_home)
-        pmf_away = nbinom.pmf(corners_range, n_away, p_away)
-
-        # Matrice congiunta (assumendo indipendenza tra corner casa e ospite, buona approssimazione)
-        corner_matrix = np.outer(pmf_home, pmf_away)
-        total_corners_grid = corners_range[:, None] + corners_range[None, :]
+        # Varianza = mu + alpha * mu^2. n = 1 / alpha, p = 1 / (1 + alpha * mu).
+        corner_matrix, _home, _away, total_corners_grid = self._corner_axes(
+            avg_corners_home,
+            avg_corners_away,
+            dispersion_factor,
+        )
 
         prob_over_8_5 = np.sum(corner_matrix[total_corners_grid > 8.5])
         prob_over_9_5 = np.sum(corner_matrix[total_corners_grid > 9.5])

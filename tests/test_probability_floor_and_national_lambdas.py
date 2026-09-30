@@ -68,9 +68,9 @@ def test_national_team_lambda_engine_portugal_wales():
     assert not res.passed_edge
 
 
-def test_strict_pipeline_blocks_leg_below_72_percent_probability():
+def test_strict_pipeline_labels_leg_below_72_percent_probability():
     pipeline = StrictTicketPipeline()
-    # Mock candidato con edge positivo (+15.4% >= +4%) ma probabilità < 72% (48.1% < 72%)
+    # Edge positivo ma probabilità sotto il 72%: avviso, non bocciatura.
     candidate = MarketCandidate(
         match_name="Team A vs Team B",
         tournament="Serie A",
@@ -79,12 +79,15 @@ def test_strict_pipeline_blocks_leg_below_72_percent_probability():
         xg_home=1.4,
         xg_away=1.2,
         sixth_sense_analysis="Buon volume di tiri su entrambi i lati.",
+        home_matches_played=3,
+        away_matches_played=3,
     )
 
     rep = pipeline.validate_candidate(candidate)
-    assert not rep.passed
-    assert rep.stage_failed == 6
-    assert "PROBABILITÀ INSUFFICIENTE SOTTO SOGLIA 72%" in rep.rejection_reason
+    assert rep.passed
+    assert rep.stage_failed is None
+    assert rep.edge_warning is not None
+    assert "AVVISO PROBABILITÀ INFORMATIVO" in rep.edge_warning
     assert rep.real_probability < 0.72
 
 
@@ -92,13 +95,15 @@ def test_strict_pipeline_accepts_leg_meeting_both_edge_and_probability_floor():
     pipeline = StrictTicketPipeline()
     # xG 1.8 vs 1.6 su Over 1.5: P = 85.7% (>= 72%), quota 1.22 -> Edge = +4.6% (>= +4%)
     candidate = MarketCandidate(
-        match_name="Netherlands vs Germany",
+        match_name="Home FC vs Away FC",
         tournament="UEFA Nations League",
         market_name="Over 1.5",
         bookmaker_odd=1.22,
         xg_home=1.8,
         xg_away=1.6,
         sixth_sense_analysis="Olanda e Germania entrambe votate all attacco verticale; xG combinato elevato.",
+        home_matches_played=3,
+        away_matches_played=3,
     )
 
     rep = pipeline.validate_candidate(candidate)

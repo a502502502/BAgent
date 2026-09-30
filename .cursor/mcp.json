@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bagent-bus": {
+      "command": "python",
+      "args": ["services/mcp/agent_bus_server.py"]
+    }
+  }
+}

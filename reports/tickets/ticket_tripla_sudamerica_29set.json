@@ -1,0 +1,46 @@
+{
+    "ticket_id": "TICKET_TRIPLA_SUDAMERICA_29SET",
+    "name": "Tripla Special Combo Sudamerica (@3.50)",
+    "created_at": "2026-09-29 13:35:00",
+    "total_odds": 3.50,
+    "stake": 0.75,
+    "potential_win": 2.63,
+    "conjoint_prob": 0.501,
+    "edge_pct": 58.4,
+    "groq_audit": "APPROVATA (STAKE PRUDENTE)",
+    "legs": [
+        {
+            "match": "Fluminense vs Coritiba",
+            "tournament": "Brasileirao Serie A",
+            "date_time": "2026-10-09 00:30 CEST",
+            "market": "Chance Mix",
+            "pick": "Chance Mix: X2 o Gol",
+            "netwin_odds": 1.53,
+            "prob": 0.762,
+            "edge_pct": 16.7,
+            "rationale": "Doppia via di fuga: pareggio/vittoria Coritiba oppure qualsiasi risultato con entrambe a segno. Perde solo sull'1-0/2-0 Fluminense."
+        },
+        {
+            "match": "Atletico Tucuman vs Barracas Central",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-03 21:00 CEST",
+            "market": "Under / Over",
+            "pick": "Under 2.5",
+            "netwin_odds": 1.38,
+            "prob": 0.852,
+            "edge_pct": 17.6,
+            "rationale": "Scontro a baricentro basso tra due formazioni tra le più abuliche della Primera Division argentina."
+        },
+        {
+            "match": "Clube Do Remo vs Gremio",
+            "tournament": "Brasileirao Serie A",
+            "date_time": "2026-10-09 00:30 CEST",
+            "market": "Primo Tempo",
+            "pick": "MultiGol 0-1 1° Tempo",
+            "netwin_odds": 1.66,
+            "prob": 0.764,
+            "edge_pct": 26.8,
+            "rationale": "Avvio diesel tipico del Brasileirão: Grêmio fuori casa gioca con 2 mediani bloccati. Nel 77% dei primi tempi si va al riposo sullo 0-0 o 1-0."
+        }
+    ]
+}

@@ -41,12 +41,12 @@ def main():
     args = parser.parse_args()
 
     if args.all:
-        tournaments = ["Europa League", "LaLiga", "Serie A", "Premier League", "Bundesliga"]
+        tournaments = ["Europa League", "LaLiga", "Serie A", "Premier League", "Bundesliga", "Argentina", "Brasile"]
     elif args.tournament:
         tournaments = [args.tournament]
     else:
-        # Default sui due tornei chiave di oggi/domani
-        tournaments = ["Europa League", "LaLiga"]
+        # Default sui tornei attivi chiave (inclusi campionati sudamericani in corso)
+        tournaments = ["Europa League", "LaLiga", "Argentina", "Brasile"]
 
     print("=" * 75)
     print(f"📥 NETWIN LIVE ODDS DOWNLOADER — Avvio Scarico Quote: {tournaments}")
@@ -82,6 +82,14 @@ def main():
         if "GOL_NOGOL" in mkts:
             gng = mkts["GOL_NOGOL"]
             print(f"   • Gol/NoGol: Gol @ {gng.get('Gol')} | NoGol @ {gng.get('NoGol')}")
+
+        if "COMBO" in mkts:
+            combo_sample = ", ".join([f"{k} @ {v}" for k, v in list(mkts["COMBO"].items())[:3]])
+            print(f"   • Combo ({len(mkts['COMBO'])} linee): {combo_sample}...")
+
+        if "MULTIGOL" in mkts:
+            mg_sample = ", ".join([f"{k} @ {v}" for k, v in list(mkts["MULTIGOL"].items())[:3]])
+            print(f"   • MultiGol ({len(mkts['MULTIGOL'])} linee): {mg_sample}...")
 
     print("\n" + "=" * 75)
     print("📁 Quote archiviate e sincronizzate in:")

@@ -1,27 +1,43 @@
-# BAgent — Regole Operative & MCP Team Bus per Cursor
+# Cursor Rules for BAgent
 
-Questo file definisce il comportamento e il contesto per Cursor nel workspace BAgent.
+## Regola Fondamentale: Zero Costo & Zero Token Drain
+- Non effettuare chiamate API a pagamento (Anthropic, OpenAI a consumo).
+- Non utilizzare Ollama in locale (lento, pesante su GPU e con template instabili).
+- Utilizzare esclusivamente l'endpoint online di Groq Cloud (gratuito su LPU) per l'inferenza AI con modello `openai/gpt-oss-120b`.
+- Utilizzare SEMPRE ed ESCLUSIVAMENTE i termini "Gems" o "Hidden Gems" (vietato qualsiasi sinonimo in italiano).
 
-## 🤝 CHAT COMUNE & COMUNICAZIONE CON ANTIGRAVITY (MCP Server)
-È attivo il server MCP `BAgent_Team_Bus` collegato al database locale e a `docs/SHARED_CHAT.md`.
-Quando l'utente ti chiede informazioni sulle ultime analisi, o quando esegui modifiche e audit:
-1. **Leggi la Chat Comune**: usa il tool MCP `get_team_chat()` oppure leggi direttamente `docs/SHARED_CHAT.md`.
-2. **Invia Aggiornamenti ad Antigravity**: usa il tool MCP `post_team_message(sender="CURSOR", message="...", category="...")` per registrare le tue conclusioni e passaggi di consegne.
-3. **Calcolo Matematico**: usa `calculate_dixon_coles_edge()` per validare P reale ed Edge senza ricalcolare a mano le formule.
-4. **Stato Sistema**: usa `get_active_system_state()` per conoscere l'ultimo bankroll e i ticket pendenti.
+## Regola #75: Audit Obbligatorio Cloud AI Pre-Emissione Schedine
+- Ogni volta che viene generata, assemblata, validata o proposta una schedina o selezione multipla:
+  1. La schedina deve prima superare i filtri matematici locali (`StrictTicketPipeline` / `scripts/strict_validator.py`).
+  2. Viene invocato automaticamente `services.debate.groq_auditor.GroqAuditor` (o `python scripts/audit_ticket_online.py`) per un audit critico avversariale in cloud.
+  3. L'esito dell'audit (Analisi EV, Identificazione Trappole Bookmaker, Scenario Perdita, Verdetto e Stake consigliata) deve essere presentato all'utente insieme al ticket.
+  4. Se l'Auditor boccia una selezione identificando un rischio strutturale (es. tetto su favorita, dipendenza da Under primo tempo a cascata), la selezione deve essere rettificata prima di essere proposta come giocabile.
 
----
+## Regola #78: Unificazione Regole con Cursor & Abolizione Tassativa Regole Fantasma
+- **Abolizione Regola Fantasma 45' / Quota compressa**: È tassativamente VIETATO sia ad Antigravity che a Cursor bocciare selezioni sul 1° Tempo (MultiGol 0-1 1°T, Under 1.5 1°T, 1X 1°T) con motivazioni quali "chiude al 45'" o "quota inferiore a 1.55".
+- **Mercati 1° Tempo Pienamente Ammessi**: I mercati 1° Tempo sono validi da quota minima generale @1.20 se supportati da modello Poisson (split xG × 0.45) e probabilità adeguata.
+- **Risoluzione Telemetrica Automatica (Regola #55 - Stadio 0)**: Se un match dispone di parametri xG o dati statistici da database/feed (FootyStats, Sofascore, Flashscore, baselines 2026), la verifica telemetrica delle fonti reali è AUTOMATICAMENTE soddisfatta (verified_sources_checked = True). Vietato bloccare a monte a Stadio 0 eventi con telemetria numerica disponibile.
 
-## 🛑 REGOLA SUPREMA — BAN PERMANENTE DEL TENNIS
-Il tennis è definitivamente ed irrevocabilmente CANCELLATO da BAgent (100% solo calcio).
+## Regola #76: Data e Ora Obbligatorie per Ogni Partita / Selezione
+- In ogni schedina generata, ticket JSON, logica di pipeline, report a terminale, messaggio Telegram o pagina web/dashboard:
+  1. La **DATA** (giorno, mese, anno) e l'**ORA DI INIZIO** (kickoff time / CEST) di OGNI singola partita devono essere SEMPRE e TASSATIVAMENTE presenti ed esplicitate (es. `2026-10-09 00:30 CEST` o `04/10/2026 ore 19:30`).
+  2. È severamente vietato proporre partite o selezioni prive di data e orario o con indicazioni generiche/mancanti.
+  3. Il validatore (`StrictTicketPipeline` Gate 0.05 e `scripts/strict_validator.py`) deve verificare la presenza e completezza del campo `kickoff_time` e rigettare le selezioni che ne sono sprovviste.
+  4. Tutte le interfacce utente (dashboard GitHub Pages, HTML, report CLI) devono mostrare in evidenza il badge temporale (data e ora) per ciascun evento.
 
----
+## Regola #77: Ciclo Dialettico Obbligatorio Pre-Costruzione Schedina (Debate & Re-Audit Loop)
+- Questa regola deve essere tassativamente eseguita prima di costruire, validare o proporre qualsiasi schedina all'utente:
+  1. **L'Auditor (Groq 120B)** fa l'avvocato del diavolo e scova la trappola nascosta del bookmaker (*"Perché questa leg rischia di saltare?"*).
+  2. **Il Modellista Quantitativo (Antigravity)** accoglie l'obiezione critica, torna sul palinsesto Netwin e ristruttura le giocate con mercati protetti, paracadute (es. MultiGol 1° Tempo, Chance Mix, Under 3.5) o eliminando le quote compresse e i derby ingannevoli.
+  3. **Re-Audit Iterativo**: la schedina rettificata viene risottomessa a Groq finché non si raggiunge il consenso unanime (🟢 APPROVATA con valore atteso positivo).
+  4. È severamente vietato proporre come definitiva o pubblicare qualsiasi schedina che non abbia superato con successo questo ciclo di risoluzione dialettica congiunta.
 
-## 🛡️ REGOLE DI ANALISI & BETTING (SEMPRE ATTIVE)
-1. **Quote Netwin Reali**: MAI usare quote stimate o generiche. Verificare sempre le quote reali del board XSport (da `data/netwin_live_odds.json` o scraping Netwin).
-2. **Hard Gate 0 (Anti-Straight-Win Low Odds Ban)**: Divieto assoluto di 1 o 2 fisso a quota < 1.65. Obbligo di usare mercati protetti (1X, X2, DNB, MultiGol).
-3. **Hard Gate 6 (Edge Matematico Reale)**: Edge = (P_reale * Quota) - 1 >= +4.0%. Se Edge < +4.0%, l'evento è bocciato.
-4. **Hard Gate 6.1 (Probability Floor)**: La probabilità reale Dixon-Coles di ogni singola gamba DEVE essere >= 72.0%.
-5. **Hard Gate 7 (Anti-Scadenza 45')**: Divieto assoluto di scommettere su singoli tempi (es. "Segna 2° Tempo") a quota compressa (< 1.55). Solo mercati elastici a 90 minuti (MultiGol, Under/Over totali, Doppia Chance).
-6. **Hard Gate 0.75 (Anti-Ceiling Trap - Regola #48)**: Divieto di imporre Under 3.5 su squadre con lambda atteso >= 2.30-2.70 (rischio concreto di goleada della favorita).
-7. **Protocollo Continuità**: Max 3-4 selezioni per ticket (5+ bandite per sempre). Stake max 8% del bankroll per ticket.
+## Regola #79: Stream Unico e Snapshot dei Dati (I Due Soli File & Aggancio Nomi Obbligatorio)
+- **I Due Soli File Autorizzati**: Sia Cursor che Antigravity leggono e calcolano esclusivamente su due sorgenti dati:
+  1. `data/netwin_live_odds.json`, rigenerato dallo script Netwin prima di ogni palinsesto (quote reali mercati speciali: MultiGol 1°T, Chance Mix, Combo).
+  2. `data/bagent.db`, per i gol della stagione, xG e partite già giocate.
+- **Regola di Freschezza dello Snapshot**: Non si pubblica alcuna schedina se il file `data/netwin_live_odds.json` ha più di qualche ora (massimo 6-12 ore). In caso di cache obsoleta, lo scraper deve essere rieseguito prima del calcolo.
+- **Regola di Aggancio Nomi Obbligatorio (Entity Linking)**: Ogni squadra del palinsesto Netwin deve avere un nome riconosciuto e agganciato allo storico in `data/bagent.db` (tramite `_KNOWN_TEAM_ALIASES` e normalizzazione apostrofi/stopwords). Senza questo aggancio è vietato pubblicare la schedina o ripiegare su medie arbitrarie.
+- **Divieto di Scritture Conflittuali**: Le Hidden Gems e i verdetti si calcolano rigorosamente su questo snapshot sincronizzato.
+
+

@@ -1,0 +1,34 @@
+{
+    "ticket_id": "TICKET_RADDOPPIO_WEEKEND_03OTT",
+    "name": "Schedina 1 — Raddoppio Primi Tempi Blindati (3 Ottobre)",
+    "period": "Sabato 3 Ottobre 2026",
+    "created_at": "2026-09-29 14:56:00",
+    "total_odds": 1.86,
+    "conjoint_prob": 0.681,
+    "edge_pct": 26.7,
+    "groq_audit": "APPROVATA (Rettifica Dialettica Accolta)",
+    "legs": [
+        {
+            "match": "Defensa Y Justicia vs San Lorenzo",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-03 19:45 CEST",
+            "market": "Primo Tempo",
+            "pick": "MultiGol 0-1 1° Tempo",
+            "netwin_odds": 1.38,
+            "prob": 0.82,
+            "edge_pct": 13.2,
+            "rationale": "Accolta obiezione Groq su Under 2.5 secco a 90': focalizzato sui primi 45' dove l'82% dei match finisce 0-0 o 1-0."
+        },
+        {
+            "match": "Atletico Tucuman vs Barracas Central",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-03 22:00 CEST",
+            "market": "Primo Tempo",
+            "pick": "MultiGol 0-1 1° Tempo",
+            "netwin_odds": 1.35,
+            "prob": 0.83,
+            "edge_pct": 12.0,
+            "rationale": "Studio prolungato: Barracas tira nello specchio in media solo 0.7 volte nei primi 45'. Blocco difensivo garantito."
+        }
+    ]
+}

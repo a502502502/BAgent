@@ -220,6 +220,45 @@ def _create_tables(conn: sqlite3.Connection) -> None:
         ON sixth_sense_events(home_team, away_team, match_date);
     CREATE INDEX IF NOT EXISTS idx_ss_events_type
         ON sixth_sense_events(event_type, team);
+
+    -- Sesto senso: fotografia pre-partita chiusa poi col risultato
+    CREATE TABLE IF NOT EXISTS sixth_sense_samples (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        season TEXT NOT NULL,
+        match_date TEXT NOT NULL,
+        home_team TEXT NOT NULL,
+        away_team TEXT NOT NULL,
+        fixture_id INTEGER,
+        base_xg_home REAL NOT NULL,
+        base_xg_away REAL NOT NULL,
+        projected_xg_home REAL NOT NULL,
+        projected_xg_away REAL NOT NULL,
+        rotation_risk INTEGER NOT NULL DEFAULT 0,
+        slow_start INTEGER NOT NULL DEFAULT 0,
+        low_motivation_home INTEGER NOT NULL DEFAULT 0,
+        low_motivation_away INTEGER NOT NULL DEFAULT 0,
+        corto_muso_home INTEGER NOT NULL DEFAULT 0,
+        corto_muso_away INTEGER NOT NULL DEFAULT 0,
+        attack_factor_home REAL NOT NULL DEFAULT 1,
+        attack_factor_away REAL NOT NULL DEFAULT 1,
+        leak_to_home REAL NOT NULL DEFAULT 1,
+        leak_to_away REAL NOT NULL DEFAULT 1,
+        actual_home_goals INTEGER,
+        actual_away_goals INTEGER,
+        settled_at TEXT,
+        UNIQUE(season, match_date, home_team, away_team)
+    );
+    CREATE TABLE IF NOT EXISTS sixth_sense_factor_fits (
+        season TEXT NOT NULL,
+        factor_name TEXT NOT NULL,
+        prior REAL NOT NULL,
+        fitted REAL NOT NULL,
+        n_treated INTEGER NOT NULL,
+        n_control INTEGER NOT NULL,
+        fitted_at TEXT NOT NULL,
+        used INTEGER NOT NULL,
+        PRIMARY KEY(season, factor_name)
+    );
     """)
     conn.commit()
 

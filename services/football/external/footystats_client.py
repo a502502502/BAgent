@@ -73,7 +73,7 @@ class FootyStatsClient:
         return []
 
     def get_latest_season_id(self, country: str, league_name: str) -> Optional[int]:
-        """Risolve automaticamente l'ID dell'ultima stagione attiva (es. 2026/2027) per un dato campionato."""
+        """Risolve l'ID della stagione più recente (es. 2026/2027), non l'ultima voce della lista."""
         leagues = self.get_league_list()
         country_clean = country.strip().lower()
         league_clean = league_name.strip().lower()
@@ -84,9 +84,9 @@ class FootyStatsClient:
             name = item.get("name", "").strip().lower()
 
             if (c == country_clean and ln == league_clean) or (league_clean in name and c == country_clean):
-                seasons = item.get("season", [])
-                if seasons:
-                    return seasons[-1].get("id")
+                chosen = latest_season(item.get("season") or [])
+                if chosen:
+                    return chosen.get("id")
         return None
 
     def get_league_table(self, league_id: int) -> List[Dict[str, Any]]:
@@ -120,6 +120,21 @@ class FootyStatsClient:
         if res and "data" in res and isinstance(res["data"], list):
             return res["data"]
         return []
+
+def latest_season(seasons: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    """La voce con l'anno iniziale più alto. L'ordine della lista FootyStats non è cronologico."""
+    usable = [row for row in seasons if isinstance(row, dict) and row.get("id") is not None]
+    if not usable:
+        return None
+    return max(usable, key=_season_rank)
+
+
+def _season_rank(season: Dict[str, Any]) -> int:
+    digits = "".join(ch for ch in str(season.get("year") or "") if ch.isdigit())
+    if len(digits) >= 4:
+        return int(digits[:4])
+    return -1
+
 
 if __name__ == "__main__":
     client = FootyStatsClient()

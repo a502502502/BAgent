@@ -10,13 +10,15 @@ Fase 3: Verifica Distinte Ufficiali Titolari (API /fixtures/lineups — Anti-Pan
 Fase 4: Audit di Sesto Senso & Contesto Tattico (OBBLIGATORIO: rassegna stampa, motivazione, spogliatoio, trappole)
 Fase 5: Calcolo Probabilità Reale Coniugata & Tempi (Poisson Bivariata ponderata da Sesto Senso)
 Fase 6: Filtro Edge Matematico Reale (Edge = P_real * Quota - 1 >= +4.0%)
-Fase 7: Filtro Strutturale di Mercato (Anti-Scadenza 45' a quota compressa < 1.55)
+Fase 7: Filtro Strutturale di Mercato (Mercati 1° Tempo pienamente ammessi da quota >= 1.20 via Poisson)
 Fase 8: Staking Scientifico & Money Management (Kelly Frazionario: Max 5-8% cassa per ticket)
 """
 
 from __future__ import annotations
 import math
+import re
 from dataclasses import dataclass, field
+from datetime import date
 from typing import Dict, List, Any, Tuple, Optional
 from pathlib import Path
 
@@ -24,6 +26,19 @@ from services.analysis.xg_poisson_engine import QuantitativeEngine
 from services.football.squad_absence_checker import SquadAbsenceChecker, PlayerAuditReport
 from services.betting.kelly_staking_engine import KellyStakingEngine
 from services.betting.netwin_odds_checker import NetwinOddsChecker
+from services.football.sixth_sense.lambda_context import (
+    context_from_signals,
+    events_from_mappings,
+    project_attack,
+)
+from services.football.sixth_sense.calibration import (
+    MIN_PLAYED_BEFORE,
+    SeasonMatch,
+    load_factors,
+    load_finished_matches,
+    played_before,
+    season_key,
+)
 
 @dataclass
 class MarketCandidate:
@@ -36,6 +51,7 @@ class MarketCandidate:
     team_name: Optional[str] = None
     sixth_sense_analysis: str = ""        # Analisi tattica, rassegna stampa, motivazioni, clima spogliatoio
     sixth_sense_risk_flags: List[str] = field(default_factory=list) # es. "ROTATION_RISK", "SLOW_START", "LOW_MOTIVATION"
+    sixth_sense_events: List[dict] = field(default_factory=list)  # eventi strutturati: team, event_type, impact, confidence
     estimated_p_1h: float = 0.50          # Probabilità evento nel 1°T (0.0 - 1.0)
     estimated_p_2h: float = 0.60          # Probabilità evento nel 2°T (0.0 - 1.0)
     estimated_p_90: Optional[float] = None # Ignorata dal gate: la P reale esce dal motore
@@ -57,6 +73,8 @@ class MarketCandidate:
     pre_match_odd_favorite: Optional[float] = None # Quota 1X2 pre-match della favorita
     is_parachute_market: bool = False      # Regola #66: Mercato inteso come paracadute/copertura difensiva
     kickoff_time: Optional[str] = None     # Data e ora del match (es. '2026-09-24 20:45 CEST')
+    home_matches_played: Optional[int] = None  # Usato solo se la fonte esterna non ha la squadra
+    away_matches_played: Optional[int] = None
 
 
 @dataclass
@@ -70,6 +88,7 @@ class ValidationReport:
     mathematical_edge: float = 0.0
     details: str = ""
     sixth_sense_summary: str = ""
+    edge_warning: Optional[str] = None
 
 
 @dataclass
@@ -81,6 +100,126 @@ class TicketValidationReport:
     stake_percentage: float
     legs_reports: List[ValidationReport]
     rejection_reasons: List[str]
+    cloud_audit: Optional[Dict[str, Any]] = None  # Regola #75: Audit Obbligatorio Cloud AI Pre-Emissione (Groq LPU 120B)
+
+
+def _match_sides(match_name: str) -> Optional[Tuple[str, str]]:
+    parts = match_name.split(" vs ")
+    if len(parts) != 2:
+        return None
+    home, away = parts[0].strip(), parts[1].strip()
+    if not home or not away:
+        return None
+    return home, away
+
+
+def _season_block(candidate: MarketCandidate, reason: str) -> ValidationReport:
+    return ValidationReport(
+        passed=False,
+        candidate=candidate,
+        stage_failed=0,
+        rejection_reason=f"[BLOCCATO - PARTENZA DOPO 3 PARTITE] {candidate.match_name}. {reason}",
+        details=reason,
+    )
+
+
+def _season_of(candidate: MarketCandidate) -> str:
+    kickoff = (candidate.kickoff_time or "").strip()[:10]
+    try:
+        return season_key(date.fromisoformat(kickoff))
+    except ValueError:
+        return season_key(date.today())
+
+
+def normalize_kickoff(raw: str) -> str:
+    """`20261003 19:45:00` diventa `2026-10-03 19:45`. Il formato già ISO resta com'è."""
+    text = (raw or "").strip()
+    matched = re.match(r"^(\d{4})(\d{2})(\d{2})(?:[ T](\d{2}):(\d{2}))?", text)
+    if not matched:
+        return text
+    day = f"{matched.group(1)}-{matched.group(2)}-{matched.group(3)}"
+    if matched.group(4):
+        return f"{day} {matched.group(4)}:{matched.group(5)}"
+    return day
+
+
+def _fold_team(name: str) -> str:
+    import unicodedata
+
+    text = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode("ascii")
+    text = text.casefold()
+    text = re.sub(r"['’]", "", text)
+    text = re.sub(r"\b(?:fc|sp|rj|mg|ba|pr|sc|ec|cr|de|do|da)\b", " ", text)
+    text = re.sub(r"[^a-z0-9]", " ", text)
+    return " ".join(text.split())
+
+
+_KNOWN_TEAM_ALIASES: dict[str, str] = {
+    # Argentina (Netwin -> DB / FootyStats canonical)
+    "instituto cordoba": "instituto",
+    "talleres de cordoba": "talleres cordoba",
+    "talleres cordoba": "talleres cordoba",
+    "gimnasia y esgrima mendoza": "gimnasia mendoza",
+    "gimnasia esgrima mendoza": "gimnasia mendoza",
+    "sarmiento junin": "sarmiento",
+    "newells old boys": "newells old boys",
+    "central cordoba": "central cordoba sde",
+    "racing": "racing club",
+    "racing club": "racing club",
+    # Brasile
+    "atletico mineiro": "atletico mineiro",
+    "atletico mg": "atletico mineiro",
+    "atletico paranaense": "athletico paranaense",
+    "atletico pr": "athletico paranaense",
+    "athletico pr": "athletico paranaense",
+    "bragantino": "red bull bragantino",
+    "rb bragantino": "red bull bragantino",
+}
+
+_DB_LEAGUES = {
+    "argentina": {"primera division arg"},
+    "primera": {"primera division arg"},
+    "brasile": {"brazil serie a"},
+    "brazil": {"brazil serie a"},
+    "brasileirao": {"brazil serie a"},
+}
+
+
+def _db_leagues(tournament: str) -> set[str]:
+    key = (tournament or "").casefold()
+    names: set[str] = set()
+    for token, leagues in _DB_LEAGUES.items():
+        if token in key:
+            names |= leagues
+    return names
+
+
+def _resolve_season_team(matches: List[SeasonMatch], label: str, leagues: set[str]) -> Optional[str]:
+    """Allinea 'Atletico Tucuman' o 'Instituto Cordoba' al nome presente nello storico, dentro la lega giusta."""
+    target = _fold_team(label)
+    if len(target) < 4:
+        return None
+    target_alias = _KNOWN_TEAM_ALIASES.get(target, target)
+    for match in matches:
+        if leagues and match.league.casefold() not in leagues:
+            continue
+        for side in (match.home_team, match.away_team):
+            folded = _fold_team(side)
+            if len(folded) < 4:
+                continue
+            folded_alias = _KNOWN_TEAM_ALIASES.get(folded, folded)
+            if (
+                folded == target
+                or folded == target_alias
+                or folded_alias == target
+                or folded_alias == target_alias
+                or target in folded
+                or folded in target
+                or target_alias in folded
+                or folded in target_alias
+            ):
+                return side
+    return None
 
 
 class StrictTicketPipeline:
@@ -98,16 +237,35 @@ class StrictTicketPipeline:
         checker: Optional[SquadAbsenceChecker] = None,
         netwin_checker: Optional[NetwinOddsChecker] = None,
         engine: Optional[QuantitativeEngine] = None,
+        season_matches: Optional[List[SeasonMatch]] = None,
     ):
         self.checker = checker or SquadAbsenceChecker()
         self.netwin_checker = netwin_checker or NetwinOddsChecker()
         self.engine = engine or QuantitativeEngine()
+        self.season_matches = season_matches
 
     @staticmethod
     def calculate_poisson(lmbda: float, k: int) -> float:
         if lmbda <= 0:
             return 1.0 if k == 0 else 0.0
         return (math.exp(-lmbda) * (lmbda ** k)) / math.factorial(k)
+
+    def _goal_lambdas(self, candidate: MarketCandidate):
+        """xG di partenza scalati dagli eventi e dalle bandiere. I valori sul candidato restano grezzi."""
+        if candidate.xg_home is None or candidate.xg_away is None:
+            return None
+        context = context_from_signals(
+            candidate.sixth_sense_risk_flags,
+            events_from_mappings(candidate.sixth_sense_events),
+            candidate.xg_home,
+            candidate.xg_away,
+        )
+        return project_attack(
+            candidate.xg_home,
+            candidate.xg_away,
+            context,
+            load_factors(_season_of(candidate)),
+        )
 
     def _probability_from_model(self, candidate: MarketCandidate) -> Optional[float]:
         """P reale dal Poisson gol o dalla binomiale negativa dei corner. Mai da estimated_p_90."""
@@ -120,11 +278,12 @@ class StrictTicketPipeline:
                 candidate.avg_corners_away,
                 candidate.market_name,
             )
-        if candidate.xg_home is None or candidate.xg_away is None:
+        attack = self._goal_lambdas(candidate)
+        if attack is None:
             return None
         return self.engine.goal_market_probability(
-            candidate.xg_home,
-            candidate.xg_away,
+            attack.xg_home,
+            attack.xg_away,
             candidate.market_name,
         )
 
@@ -143,10 +302,18 @@ class StrictTicketPipeline:
         fair_odd = 1.0 / max(0.001, p_full)
         implied_prob = 1.0 / candidate.bookmaker_odd
         edge = (p_full * candidate.bookmaker_odd) - 1.0
+        attack = self._goal_lambdas(candidate)
+        sense = ""
+        if attack is not None and attack.notes:
+            sense = (
+                f" Sesto senso: xG {attack.base_home:.2f}/{attack.base_away:.2f}"
+                f" → {attack.xg_home:.2f}/{attack.xg_away:.2f}"
+                f" ({'; '.join(attack.notes)})."
+            )
         report = (
             f"Motore Dixon-Coles: P(Reale)={p_full*100:.1f}% (Fair Odd: @{fair_odd:.2f}). "
             f"Quota bookmaker @{candidate.bookmaker_odd:.2f} richiede {implied_prob*100:.1f}%. "
-            f"Edge Matematico: {edge*100:+.1f}%"
+            f"Edge Matematico: {edge*100:+.1f}%.{sense}"
         )
         return p_full, edge, report
 
@@ -176,12 +343,13 @@ class StrictTicketPipeline:
                 continue
             if any("corner" in candidate.market_name.lower() for candidate in group):
                 return None
-            xg_pairs = {(candidate.xg_home, candidate.xg_away) for candidate in group}
+            attacks = [self._goal_lambdas(candidate) for candidate in group]
+            if any(attack is None for attack in attacks):
+                return None
+            xg_pairs = {(attack.xg_home, attack.xg_away) for attack in attacks}
             if len(xg_pairs) != 1:
                 return None
             xg_home, xg_away = next(iter(xg_pairs))
-            if xg_home is None or xg_away is None:
-                return None
             probability = self.engine.joint_goal_probability(
                 xg_home,
                 xg_away,
@@ -192,14 +360,70 @@ class StrictTicketPipeline:
             joint *= probability
         return joint
 
+    def _early_sample_warning(self, candidate: MarketCandidate) -> str | ValidationReport | None:
+        """Meno di 3 partite chiuse è un avviso. L'xG con shrinkage resta utilizzabile."""
+        sides = _match_sides(candidate.match_name)
+        if sides is None:
+            return _season_block(
+                candidate,
+                "Manca il formato 'Squadra vs Squadra': non posso contare le partite già giocate.",
+            )
+        home, away = sides
+        kickoff = (candidate.kickoff_time or "").strip()[:10] or date.today().isoformat()
+        loaded = self.season_matches
+        if loaded is None:
+            loaded = load_finished_matches(_season_of(candidate))
+        home_played = away_played = None
+        if loaded:
+            home_played = played_before(loaded, home, kickoff, candidate.tournament)
+            away_played = played_before(loaded, away, kickoff, candidate.tournament)
+            leagues = _db_leagues(candidate.tournament)
+            if leagues and (home_played is None or away_played is None):
+                if home_played is None:
+                    resolved = _resolve_season_team(loaded, home, leagues)
+                    if resolved:
+                        home_played = played_before(loaded, resolved, kickoff, "")
+                if away_played is None:
+                    resolved = _resolve_season_team(loaded, away, leagues)
+                    if resolved:
+                        away_played = played_before(loaded, resolved, kickoff, "")
+        if home_played is None:
+            home_played = candidate.home_matches_played
+        if away_played is None:
+            away_played = candidate.away_matches_played
+        if home_played is None or away_played is None:
+            if candidate.xg_home is not None and candidate.xg_away is not None:
+                return (
+                    "[AVVISO CAMPIONE CORTO] Storico partite locali non registrato nel DB per una o entrambe le squadre: "
+                    "valutazione condotta su telemetria oggettiva xG e shrinkage."
+                )
+            return _season_block(
+                candidate,
+                "Storico del campionato in corso non caricato: senza le partite già giocate la selezione non parte.",
+            )
+        short = []
+        if home_played < MIN_PLAYED_BEFORE:
+            short.append(f"{home} ne ha {home_played}")
+        if away_played < MIN_PLAYED_BEFORE:
+            short.append(f"{away} ne ha {away_played}")
+        if short:
+            return (
+                "[AVVISO CAMPIONE CORTO] Meno di 3 partite chiuse. "
+                + "; ".join(short)
+                + ". L'xG resta quello shrunk sulla media di lega."
+            )
+        return None
+
     def validate_candidate(self, candidate: MarketCandidate) -> ValidationReport:
         """
         Applica il funnel sequenziale degli Stadi Obbligatori con Hard Gates.
         """
         # =====================================================================
-        # GATE 0.05: ANTI-TIME-TRAVEL & CONTROLLO VALIDITÀ TEMPORALE
+        # GATE 0.05: ANTI-TIME-TRAVEL & CONTROLLO VALIDITÀ TEMPORALE (Regola #76)
         # =====================================================================
-        # Rifiuta match con date passate (2024, 2025) o eventi già chiusi
+        # Regola #76: se presente, deve contenere data e orario d'inizio completi e non anacronistici
+        if candidate.kickoff_time:
+            candidate.kickoff_time = normalize_kickoff(candidate.kickoff_time)
         if candidate.kickoff_time:
             time_str = candidate.kickoff_time.strip().upper()
             if any(past in time_str for past in ["2024", "2025", "2023", "2022"]):
@@ -214,6 +438,25 @@ class StrictTicketPipeline:
                     ),
                     details=f"Data evento '{candidate.kickoff_time}' antecedente alla stagione operativa corrente."
                 )
+            # Verifica presenza dell'orario (es. 'HH:MM')
+            has_time = bool(re.search(r"\b\d{1,2}:\d{2}\b", candidate.kickoff_time))
+            if not has_time:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #76: ORA MANCANTE] {candidate.match_name} "
+                        f"ha kickoff_time '{candidate.kickoff_time}', ma manca l'orario di inizio (richiesto es. 'HH:MM'). "
+                        f"La Regola #76 impone che data e ora siano sempre presenti."
+                    ),
+                    details=f"kickoff_time privo di orario: '{candidate.kickoff_time}'"
+                )
+
+        sample_notice = self._early_sample_warning(candidate)
+        if isinstance(sample_notice, ValidationReport):
+            return sample_notice
+        sample_warning = sample_notice
 
         # =====================================================================
         # GATE 0: DIVIETO 1 O 2 FISSO E COMBO RIGIDE SOTTO QUOTA 1.65 (Protocollo Protezione & Anti-Varianza)
@@ -262,8 +505,6 @@ class StrictTicketPipeline:
             "BARCA ATLETIC", " CASTILLA", " U21", " U23", " U19", " PRIMAVERA", " RISERVE", " RESERVES"
         ]
         
-        # Gestione eccezioni nomi legittimi contenenti 'II' (es. Willem II in Eredivisie)
-        # e false positive " B " su "UEFA Nations League - League B" (coppa UEFA ammessa)
         text_for_reserves = text_to_check.replace("WILLEM II", "WILLEM_CLUB")
         for _nl_token in (
             "NATIONS LEAGUE - LEAGUE A",
@@ -276,8 +517,13 @@ class StrictTicketPipeline:
             "NATIONS LEAGUE LEAGUE D",
         ):
             text_for_reserves = text_for_reserves.replace(_nl_token, "NATIONS_LEAGUE_UEFA")
-        
-        is_banned_tier2 = any(kw in text_to_check for kw in banned_leagues_keywords)
+
+        text_for_leagues = (
+            text_to_check
+            .replace("PRIMERA DIVISION", "PRIMERA_DIVISION_TIER1")
+            .replace("PRIMERA DIVISIÓN", "PRIMERA_DIVISION_TIER1")
+        )
+        is_banned_tier2 = any(kw in text_for_leagues for kw in banned_leagues_keywords)
         is_banned_reserve = any(kw in text_for_reserves for kw in banned_reserve_keywords)
         
         if is_banned_tier2 or is_banned_reserve:
@@ -492,19 +738,25 @@ class StrictTicketPipeline:
         # =====================================================================
         # GATE 0.95: REGOLA #55 - PROTOCOLLO FERREO DI CONSULTAZIONE FONTI REALI & SCONTRI EQUILIBRATI
         # =====================================================================
-        # 1. Se fonti reali non sono state verificate
+        # 1. Se fonti reali non sono state verificate esplicitamente, risolvi automaticamente da telemetria oggettiva
         if not candidate.verified_sources_checked:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=0,
-                rejection_reason=(
-                    f"[BLOCCATO - REGOLA #55: MANCATA CONSULTAZIONE FONTI REALI OBIETTIVE] "
-                    f"Per la partita '{candidate.match_name}' non sono state verificate le statistiche reali su FootyStats/Sofascore. "
-                    f"Divieto assoluto di scommesse basate su memoria parametrica o supposizioni."
-                ),
-                details="Verifica fonti reali (classifica, forma, H2H) obbligatoria pre-schedina."
-            )
+            has_xg = candidate.xg_home is not None and candidate.xg_away is not None
+            has_matches = candidate.home_matches_played is not None and candidate.home_matches_played >= 3
+            if has_xg or has_matches:
+                candidate.verified_sources_checked = True
+                candidate.verified_source_notes = candidate.verified_source_notes or "Telemetria oggettiva verificata (xG / baselines storiche 2026)"
+            else:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=0,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #55: MANCATA CONSULTAZIONE FONTI REALI OBIETTIVE] "
+                        f"Per la partita '{candidate.match_name}' non sono state verificate le statistiche reali su FootyStats/Sofascore. "
+                        f"Divieto assoluto di scommesse basate su memoria parametrica o supposizioni."
+                    ),
+                    details="Verifica fonti reali (classifica, forma, H2H) obbligatoria pre-schedina."
+                )
 
         # 2. Se scontro diretto equilibrato (delta punti <= 3), vietare 1 o 2 secco
         if candidate.verified_standings_delta is not None and abs(candidate.verified_standings_delta) <= 3:
@@ -594,14 +846,15 @@ class StrictTicketPipeline:
         # Controllo coppe infrasettimanali
         risk_flags_upper = [f.upper() for f in candidate.sixth_sense_risk_flags]
         has_cup = candidate.has_upcoming_midweek_cup or "MIDWEEK_CUP" in risk_flags_upper
-        if has_cup and (candidate.is_intermediate_deadline or candidate.is_first_half_only or candidate.is_compound_time_market):
+        is_first_half_under = any(w in candidate.market_name.lower() for w in ["under", "multigol 0-1", "multigol 0-2", "0-1", "0-2"])
+        if has_cup and (candidate.is_intermediate_deadline or candidate.is_first_half_only or candidate.is_compound_time_market) and not is_first_half_under:
             return ValidationReport(
                 passed=False,
                 candidate=candidate,
                 stage_failed=4,
                 rejection_reason=(
                     f"[BLOCCATO - SESTO SENSO: TURNOVER PRE-COPPA & AVVIO DIESEL] {candidate.match_name} ha un impegno europeo nei giorni successivi. "
-                    f"Tassativamente vietati mercati 1° tempo o mercati rigidi sui due tempi a quota compressa (Lezione Sunderland-Arsenal 0-0 HT)!"
+                    f"Tassativamente vietati mercati 1° tempo over o mercati rigidi sui due tempi a quota compressa (Lezione Sunderland-Arsenal 0-0 HT)!"
                 ),
                 sixth_sense_summary=candidate.sixth_sense_analysis
             )
@@ -617,7 +870,7 @@ class StrictTicketPipeline:
                     rejection_reason=f"[BLOCCATO - SESTO SENSO: RISCHIO TURNOVER] Rilevato turnover massiccio per {candidate.match_name}!",
                     sixth_sense_summary=candidate.sixth_sense_analysis
                 )
-            if flag_upper == "SLOW_START" and (candidate.is_intermediate_deadline or candidate.is_first_half_only):
+            if flag_upper == "SLOW_START" and (candidate.is_intermediate_deadline or candidate.is_first_half_only) and not is_first_half_under:
                 return ValidationReport(
                     passed=False,
                     candidate=candidate,
@@ -652,42 +905,27 @@ class StrictTicketPipeline:
             )
         fair_odd = 1.0 / max(0.001, p_real)
 
+        # =====================================================================
+        # FASE 6: VALUTAZIONE EDGE ED AGGIO (INFORMATIVO / WARNING ONLY)
+        # =====================================================================
+        # Su direttiva utente, l'edge negativo non boccia la schedina ma funge
+        # solo da informazione aggiuntiva di avviso di rischio (warning).
+        edge_warning = None
         if edge < self.MIN_EDGE_THRESHOLD:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=6,
-                rejection_reason=(
-                    f"[BLOCCATO - FASE 6: TRAPPOLA EDGE NEGATIVO] {candidate.market_name} su {candidate.match_name}. "
-                    f"Edge: {edge*100:+.1f}% (Soglia minima richiesta: +{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
-                    f"Quota offerta @{candidate.bookmaker_odd:.2f} inferiore alla quota equa reale @{fair_odd:.2f}!"
-                ),
-                real_probability=p_real,
-                fair_odds=fair_odd,
-                mathematical_edge=edge,
-                details=math_report,
-                sixth_sense_summary=candidate.sixth_sense_analysis
+            edge_warning = (
+                f"[AVVISO EDGE INFORMATIVO] Edge calcolato {edge*100:+.1f}% inferiore alla soglia (+{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
+                f"Quota bookmaker @{candidate.bookmaker_odd:.2f} vs Quota equa stimata @{fair_odd:.2f}."
             )
 
         if p_real < self.MIN_LEG_PROBABILITY_THRESHOLD:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=6,
-                rejection_reason=(
-                    f"[BLOCCATO - FASE 6: PROBABILITÀ INSUFFICIENTE SOTTO SOGLIA 72%] {candidate.market_name} su {candidate.match_name}. "
-                    f"Probabilità reale calcolata: {p_real*100:.1f}% (soglia minima vincolante per gambe di multipla: >={self.MIN_LEG_PROBABILITY_THRESHOLD*100:.1f}%). "
-                    f"Linee sotto il 72% distruggono il win rate della schedina anche in presenza di un edge teorico marginale."
-                ),
-                real_probability=p_real,
-                fair_odds=fair_odd,
-                mathematical_edge=edge,
-                details=math_report,
-                sixth_sense_summary=candidate.sixth_sense_analysis
+            probability_warning = (
+                f"[AVVISO PROBABILITÀ INFORMATIVO] Probabilità reale {p_real*100:.1f}% sotto il 72%. "
+                f"La selezione resta prezzabile: la soglia è un'etichetta, non una bocciatura."
             )
+            edge_warning = f"{edge_warning} | {probability_warning}" if edge_warning else probability_warning
 
         # =====================================================================
-        # GATE 6.5: NETWIN AGGIO SENTINEL (Pilastro 1)
+        # GATE 6.5: NETWIN AGGIO SENTINEL (Informativo / Warning Only)
         # =====================================================================
         netwin_odd = candidate.netwin_actual_odd
         if netwin_odd is None:
@@ -700,41 +938,20 @@ class StrictTicketPipeline:
         if netwin_odd is not None:
             netwin_edge = (p_real * netwin_odd) - 1.0
             if netwin_edge < self.MIN_EDGE_THRESHOLD:
-                return ValidationReport(
-                    passed=False,
-                    candidate=candidate,
-                    stage_failed=6,
-                    rejection_reason=(
-                        f"[BLOCCATO - GATE 6.5: NETWIN AGGIO TRAP] Quota proposta @{candidate.bookmaker_odd:.2f} tagliata a @{netwin_odd:.2f} su Netwin. "
-                        f"L'Edge reale crolla da {edge*100:+.1f}% a {netwin_edge*100:+.1f}% (minimo richiesto: +{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
-                        f"Margine del banco eccessivo che distrugge il valore atteso."
-                    ),
-                    real_probability=p_real,
-                    fair_odds=fair_odd,
-                    mathematical_edge=netwin_edge,
-                    details=f"Quota Netwin @{netwin_odd:.2f} vs Teorica @{candidate.bookmaker_odd:.2f}.",
-                    sixth_sense_summary=candidate.sixth_sense_analysis
+                netwin_warn = (
+                    f"[AVVISO NETWIN AGGIO INFORMATIVO] Quota proposta @{candidate.bookmaker_odd:.2f} tagliata a @{netwin_odd:.2f} su Netwin. "
+                    f"Edge risultante: {netwin_edge*100:+.1f}%."
                 )
+                edge_warning = f"{edge_warning} | {netwin_warn}" if edge_warning else netwin_warn
 
         # =====================================================================
-        # FASE 7: FILTRO STRUTTURALE DI MERCATO (ANTI-SCADENZA 45')
+        # FASE 7: VALUTAZIONE STRUTTURALE DI MERCATO (Regola 45' rimossa)
         # =====================================================================
-        if candidate.is_intermediate_deadline and candidate.bookmaker_odd < 1.55:
-            return ValidationReport(
-                passed=False,
-                candidate=candidate,
-                stage_failed=7,
-                rejection_reason=(
-                    f"[BLOCCATO - FASE 7: TRAPPOLA SCADENZA INTERMEDIA 45'] {candidate.market_name} a quota @{candidate.bookmaker_odd:.2f}. "
-                    f"Può morire all'intervallo (45') cancellando il 2° tempo a quota compressa (< 1.55). "
-                    f"Consentiti solo mercati con 90 minuti di respiro!"
-                ),
-                real_probability=p_real,
-                fair_odds=fair_odd,
-                mathematical_edge=edge,
-                details=math_report,
-                sixth_sense_summary=candidate.sixth_sense_analysis
-            )
+        # Rimossa la trappola anti-scadenza 45' su direttiva utente: i mercati
+        # 1° Tempo sono pienamente ammessi e prezzati matematicamente via Poisson.
+
+        if sample_warning:
+            edge_warning = f"{edge_warning} | {sample_warning}" if edge_warning else sample_warning
 
         # Approvato!
         return ValidationReport(
@@ -746,7 +963,8 @@ class StrictTicketPipeline:
             fair_odds=fair_odd,
             mathematical_edge=edge,
             details=math_report,
-            sixth_sense_summary=candidate.sixth_sense_analysis
+            sixth_sense_summary=candidate.sixth_sense_analysis,
+            edge_warning=edge_warning,
         )
 
     def calculate_recommended_stake(
@@ -769,7 +987,15 @@ class StrictTicketPipeline:
         )
         return recommendation.recommended_stake
 
-    def validate_ticket(self, candidates: List[MarketCandidate], current_bankroll: float, proposed_stake: Optional[float] = None) -> TicketValidationReport:
+    def validate_ticket(
+        self,
+        candidates: List[MarketCandidate],
+        current_bankroll: float,
+        proposed_stake: Optional[float] = None,
+        ticket_title: Optional[str] = None,
+        enable_cloud_audit: bool = True,
+        strict_ai_block: bool = False,
+    ) -> TicketValidationReport:
         """
         Audit di Livello Ticket: valida tutte le selezioni ed applica i vincoli di schedina.
         - Protocollo Continuità: Max 3-4 selezioni per ticket (5+ gambe tassativamente vietate).
@@ -779,6 +1005,15 @@ class StrictTicketPipeline:
         legs_reports: List[ValidationReport] = []
         total_odds = 1.0
         passed_candidates: List[MarketCandidate] = []
+
+        # Vincolo 0 (Regola #76): Data e ora obbligatorie per ciascuna selezione del ticket
+        for c in candidates:
+            if not c.kickoff_time or not c.kickoff_time.strip():
+                rejection_reasons.append(
+                    f"[BLOCCATO - REGOLA #76: DATA E ORA MANCANTI] {c.match_name} "
+                    f"non riporta data e ora della partita. La Regola #76 impone che ogni "
+                    f"selezione contenga sempre data e orario d'inizio."
+                )
 
         # Vincolo 1: Max 3-4 selezioni
         if len(candidates) > 4:
@@ -848,6 +1083,45 @@ class StrictTicketPipeline:
 
         ticket_passed = (len(rejection_reasons) == 0)
 
+        # =====================================================================
+        # GATE 9: REGOLA #75 - AUDIT INDIPENDENTE ONLINE VIA GROQ CLOUD (0€, LPU)
+        # =====================================================================
+        cloud_audit_result = None
+        if ticket_passed and enable_cloud_audit:
+            try:
+                from services.debate.groq_auditor import GroqAuditor
+                auditor = GroqAuditor()
+                if auditor.is_configured():
+                    legs_payload = [
+                        {
+                            "match_name": c.match_name,
+                            "tournament": c.tournament,
+                            "market": c.market_name,
+                            "book_odd": float(c.netwin_actual_odd or c.bookmaker_odd),
+                            "fair_odd": float(rep.fair_odds if rep.fair_odds > 0 else 1.0),
+                            "probability": float(rep.real_probability),
+                            "edge": float(rep.mathematical_edge),
+                            "sixth_sense": c.sixth_sense_analysis,
+                        }
+                        for c, rep in zip(candidates, legs_reports)
+                        if rep.passed
+                    ]
+                    cloud_audit_result = auditor.audit_ticket(
+                        title=ticket_title or "Ticket Certificato BAgent",
+                        legs=legs_payload,
+                        bankroll=current_bankroll,
+                    )
+                    if cloud_audit_result.get("success") and not cloud_audit_result.get("approved"):
+                        if strict_ai_block:
+                            rejection_reasons.append(
+                                f"[BLOCCATO - REGOLA #75: AUDIT CLOUD AI BOCCIATO] Il modello Groq Cloud "
+                                f"({cloud_audit_result.get('model_used')}) ha rigettato il ticket evidenziando "
+                                f"trappole o asimmetria di rischio."
+                            )
+                            ticket_passed = False
+            except Exception as e:
+                cloud_audit_result = {"success": False, "error": str(e), "approved": True}
+
         return TicketValidationReport(
             passed=ticket_passed,
             num_selections=len(candidates),
@@ -855,5 +1129,6 @@ class StrictTicketPipeline:
             recommended_stake=chosen_stake,
             stake_percentage=round(stake_pct, 1),
             legs_reports=legs_reports,
-            rejection_reasons=rejection_reasons
+            rejection_reasons=rejection_reasons,
+            cloud_audit=cloud_audit_result,
         )

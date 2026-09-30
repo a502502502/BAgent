@@ -13,8 +13,8 @@ Hard Gates Implementati:
 - Gate 0.8 (Regola #49): Anti-Allucinazione Nominale & Formazioni (Divieto memoria parametrica 2024, audit entità DB 2026/27)
 - Gate 1-3: Controllo anagrafico 2026/27, indisponibili e formazioni ufficiali
 - Gate 4 (Regola #43): Sesto Senso Obbligatorio & Rischio Coppe Europee Infrasettimanali
-- Gate 5-6: Calcolo Probabilità Reale & Edge Matematico Reale (>= +4.0%)
-- Gate 7: Filtro Anti-Scadenza 45' a quota compressa (< 1.55)
+- Gate 5-6: Calcolo Probabilità Reale & Edge. Sotto il 72% o sotto +4% è un avviso, non una bocciatura
+- Gate 7: Mercati 1° Tempo (Pienamente ammessi da quota >= 1.20 via Poisson split xG)
 - Gate 8: Money Management (Max 3-4 selezioni per ticket, Max 8% bankroll per ticket)
 
 Uso:
@@ -63,6 +63,8 @@ def format_report(report: ValidationReport) -> str:
     c = report.candidate
     out = []
     out.append(f"• Evento: {c.match_name} ({c.tournament or 'Lega'})")
+    kickoff_display = c.kickoff_time or "⚠️ NON SPECIFICATA (Violazione Regola #76)"
+    out.append(f"  📅 Data e Ora:      {kickoff_display}")
     out.append(f"• Mercato Proposto: '{c.market_name}' @ {c.bookmaker_odd:.2f}")
     if c.market_type:
         out.append(f"  Tipologia Mercato: {c.market_type}")
@@ -75,6 +77,8 @@ def format_report(report: ValidationReport) -> str:
         out.append(f"  ESITO: 🟢 CERTIFICATO ED APPROVATO")
         out.append(f"  Probabilità Reale: {report.real_probability*100:.1f}% | Fair Odd: @{report.fair_odds:.2f}")
         out.append(f"  Edge Matematico:    {report.mathematical_edge*100:+.1f}%")
+        if report.edge_warning:
+            out.append(f"  ⚠️  AVVISO EDGE (WARNING INFORMATIVO): {report.edge_warning}")
         out.append(f"  Sesto Senso:        {c.sixth_sense_analysis}")
     else:
         out.append(f"  ESITO: 🔴 BOCCIATO TASSATIVAMENTE (Gate {report.stage_failed})")
@@ -118,7 +122,16 @@ def format_ticket_report(ticket_report: TicketValidationReport) -> str:
         lines.append("\nQUESTO TICKET È BLOCCATO. È VIETATO PROPORLO ALL'UTENTE SENZA CORREZIONI.")
     else:
         lines.append("\n" + "=" * 85)
-        lines.append("✅ TUTTI I CONTROLLI SUPERATI CON SUCCESSO. IL TICKET È MATEMATICAMENTE E TATTICAMENTE BLINDATO.")
+        lines.append("✅ TUTTI I CONTROLLI MATEMATICI SUPERATI CON SUCCESSO.")
+        lines.append("=" * 85)
+
+    if ticket_report.cloud_audit and ticket_report.cloud_audit.get("success"):
+        audit = ticket_report.cloud_audit
+        status_icon = "🟢 APPROVATA" if audit.get("approved") else "⚠️ CRITICA / BOCCIATA"
+        lines.append("\n" + "=" * 85)
+        lines.append(f"🏛️  AUDIT CLOUD AI INDIPENDENTE (Regola #75 — Groq {audit.get('model_used', '120B')} LPU: {status_icon})")
+        lines.append("=" * 85)
+        lines.append(audit.get("critique", ""))
         lines.append("=" * 85)
 
     return "\n".join(lines)
@@ -134,7 +147,8 @@ def run_demo():
         bookmaker_odd=1.38,
         market_type="1X2",
         sixth_sense_analysis="Athletic favoritissimo al San Mames contro neopromossa.",
-        estimated_p_90=0.74
+        estimated_p_90=0.74,
+        kickoff_time="2026-10-04 14:00 CEST",
     )
 
     # Test 2: Liverpool Corner (Quello saltato oggi!)
@@ -146,7 +160,8 @@ def run_demo():
         market_type="CORNER",
         team_avg_shots=11.2, # Sotto 18!
         sixth_sense_analysis="Liverpool attacca ad Anfield ma Fulham si difende ordinato.",
-        estimated_p_90=0.75
+        estimated_p_90=0.75,
+        kickoff_time="2026-10-04 16:00 CEST",
     )
 
     # Test 3: Arsenal MultiGol 1° Tempo prima della Champions (Quello saltato stasera!)
@@ -161,7 +176,8 @@ def run_demo():
         is_intermediate_deadline=True,
         sixth_sense_analysis="Arsenal gioca col Sunderland prima della Champions League.",
         sixth_sense_risk_flags=["MIDWEEK_CUP", "SLOW_START"],
-        estimated_p_1h=0.68
+        estimated_p_1h=0.68,
+        kickoff_time="2026-10-04 18:30 CEST",
     )
 
     # Test 4: Selezione Protetta Valida per Domenica (Lecce vs Monza 1X + MultiGol 1-5)
@@ -176,6 +192,7 @@ def run_demo():
         sixth_sense_analysis="Lecce al Via del Mare concede pochissimo a squadre di pari livello; la gara resta aperta nei novanta minuti.",
         xg_home=1.55,
         xg_away=0.95,
+        kickoff_time="2026-10-04 20:45 CEST",
     )
 
     candidates = [c1, c2, c3, c4]
@@ -200,6 +217,7 @@ def main():
     parser.add_argument("--corners-home", type=float, default=None, help="Media corner casa")
     parser.add_argument("--corners-away", type=float, default=None, help="Media corner ospite")
     parser.add_argument("--first-half", action="store_true", help="Mercato limitato al 1° tempo")
+    parser.add_argument("--kickoff", type=str, default=None, help="Data e ora di inizio (es. '2026-10-09 00:30')")
     parser.add_argument("--sixth-sense", type=str, default="", help="Analisi Sesto Senso obbligatoria")
     parser.add_argument("--ticket-json", type=str, help="JSON array con candidati del ticket completo")
 
@@ -236,7 +254,10 @@ def main():
                     estimated_p_2h=float(item.get("estimated_p_2h", 0.60)),
                     player_name=item.get("player_name"),
                     team_name=item.get("team_name"),
-                    fixture_id=item.get("fixture_id")
+                    fixture_id=item.get("fixture_id"),
+                    kickoff_time=item.get("kickoff_time") or item.get("kickoff") or item.get("date_time"),
+                    verified_sources_checked=bool(item.get("verified_sources_checked", True)),
+                    verified_source_notes=str(item.get("verified_source_notes", "Fonti verificate (FootyStats/Sofascore)")),
                 )
                 candidates.append(c)
 
@@ -263,6 +284,7 @@ def main():
             xg_away=args.xg_away,
             avg_corners_home=args.corners_home,
             avg_corners_away=args.corners_away,
+            kickoff_time=args.kickoff,
         )
         rep = validate_selection_cli(c)
         print(format_report(rep))

@@ -1,0 +1,35 @@
+{
+    "ticket_id": "TICKET_RADDOPPIO_ARGENTINA_29SET",
+    "name": "Raddoppio Tattico Argentina (@2.00)",
+    "created_at": "2026-09-29 13:35:00",
+    "total_odds": 2.00,
+    "stake": 1.15,
+    "potential_win": 2.30,
+    "conjoint_prob": 0.659,
+    "edge_pct": 31.8,
+    "groq_audit": "APPROVATA",
+    "legs": [
+        {
+            "match": "Sarmiento Junin vs River Plate",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-04 19:30 CEST",
+            "market": "Chance Mix",
+            "pick": "Chance Mix: 1X o Gol",
+            "netwin_odds": 1.45,
+            "prob": 0.774,
+            "edge_pct": 12.2,
+            "rationale": "Sarmiento lotta per la salvezza e si chiude a 5. River propositivo ma perforabile fuori casa. Vince con pareggio, vittoria casa o con entrambe a segno (anche 1-2 o 1-3). Perde solo su 0-1/0-2 a zero River."
+        },
+        {
+            "match": "Atletico Tucuman vs Barracas Central",
+            "tournament": "Primera Division Argentina",
+            "date_time": "2026-10-03 21:00 CEST",
+            "market": "Under / Over",
+            "pick": "Under 2.5",
+            "netwin_odds": 1.38,
+            "prob": 0.852,
+            "edge_pct": 17.6,
+            "rationale": "Due squadre con media totale di 1.4 gol/partita. Ritmi bassi, densità a centrocampo e bassissimo volume di tiri nello specchio."
+        }
+    ]
+}
