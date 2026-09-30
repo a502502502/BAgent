@@ -1,0 +1,18 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - BAgent-FootyStats-Client/2.0
+    method: GET
+    uri: https://api.football-data-api.com/league-list?key=test-key
+  response:
+    body:
+      string: '{"data":[{"country":"Italy","name":"Serie A"}]}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+version: 1

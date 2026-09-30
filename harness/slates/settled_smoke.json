@@ -1,0 +1,9 @@
+{
+  "bankroll": 200,
+  "bets": [
+    {"probability": 0.8, "outcome": 1, "odds": 1.45},
+    {"probability": 0.8, "outcome": 1, "odds": 1.45},
+    {"probability": 0.8, "outcome": 0, "odds": 1.45},
+    {"probability": 0.8, "outcome": 1, "odds": 1.45}
+  ]
+}

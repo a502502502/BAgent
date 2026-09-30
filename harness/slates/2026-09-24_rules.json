@@ -1,0 +1,40 @@
+{
+  "id": "2026-09-24_rules",
+  "note": "Giornata congelata. Nessuna chiamata di rete: xG e quote stanno nel file.",
+  "selections": [
+    {
+      "match_name": "Home FC vs Away FC",
+      "tournament": "Serie A",
+      "market_name": "Over 1.5",
+      "bookmaker_odd": 1.4,
+      "kickoff_time": "2026-09-24 20:45 CEST",
+      "xg_home": 1.7,
+      "xg_away": 1.2,
+      "expect": {"passed": true}
+    },
+    {
+      "match_name": "Como vs Pisa",
+      "tournament": "Serie B",
+      "market_name": "Over 1.5",
+      "bookmaker_odd": 1.4,
+      "kickoff_time": "2026-09-24 15:00 CEST",
+      "expect": {"passed": false, "stage_failed": 0, "rule": "REGOLA #56"}
+    },
+    {
+      "match_name": "Ajax vs Twente",
+      "tournament": "Eredivisie",
+      "market_name": "Under 2.5",
+      "bookmaker_odd": 1.45,
+      "kickoff_time": "2026-09-24 14:30 CEST",
+      "expect": {"passed": false, "stage_failed": 0, "rule": "REGOLA #71"}
+    },
+    {
+      "match_name": "Home FC vs Away FC",
+      "tournament": "Serie A",
+      "market_name": "Over 1.5",
+      "bookmaker_odd": 1.4,
+      "kickoff_time": "2026-09-24",
+      "expect": {"passed": false, "stage_failed": 0, "rule": "REGOLA #76"}
+    }
+  ]
+}
