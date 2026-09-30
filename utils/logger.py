@@ -22,4 +22,11 @@ def setup_bagent_logger() -> logging.Logger:
         logger.addHandler(console_handler)
     return logger
 
+# Support logger.success() commonly used across BAgent modules
+if not hasattr(logging.Logger, "success"):
+    def _logger_success(self, message, *args, **kws):
+        if self.isEnabledFor(logging.INFO):
+            self._log(logging.INFO, message, args, **kws)
+    logging.Logger.success = _logger_success
+
 logger = setup_bagent_logger()
