@@ -382,3 +382,15 @@ class OmniMarketScanner:
 
         scanned_picks.sort(key=lambda x: (x.is_approved, x.balanced_safety_score), reverse=True)
         return scanned_picks
+
+    def filter_corner_markets(self, team_stats: dict, market_name: str, quota: float, prob: float):
+        """Regola #45: Blocca i corner se i tiri totali sono < 18."""
+        if "Corner" in market_name:
+            avg_shots = team_stats.get('avg_total_shots', 0)
+            if avg_shots < 18:
+                return None
+        from domain.models import MarketData
+        market = MarketData(market_name=market_name, quota=quota, probabilita_reale=prob)
+        if market.edge < 0.04:
+            return None
+        return market

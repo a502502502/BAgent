@@ -198,3 +198,27 @@ class LiveSiegeEngine:
             rationale=rationale,
             telegram_alert_html=tg_html
         )
+
+    def check_siege_trigger(
+        self,
+        home_team: str,
+        away_team: str,
+        pre_match_odds_home: float,
+        current_score: tuple,
+        minute: int,
+    ) -> list[Any]:
+        """Supporto per chiamate dirette check_siege_trigger."""
+        opp = self.evaluate_in_play(
+            match_name=f"{home_team} vs {away_team}",
+            minute=minute,
+            home_team=home_team,
+            away_team=away_team,
+            home_score=current_score[0],
+            away_score=current_score[1],
+            pre_match_odd_home=pre_match_odds_home,
+            pre_match_odd_away=3.20,
+        )
+        return [opp] if opp else []
+
+# Alias per retrocompatibilità
+SiegeEngine = LiveSiegeEngine
