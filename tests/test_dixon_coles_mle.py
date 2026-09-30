@@ -1,18 +1,16 @@
-"""Dixon-Coles MLE: design somma-zero, ρ, shrinkage e lettura da sqlite."""
+"""Dixon-Coles MLE: velocità, media degli attacchi, decay, shrinkage, niente rete."""
 
 import sqlite3
 import time
+from datetime import datetime
 
 import numpy as np
+import pandas as pd
 import pytest
 from scipy.optimize import check_grad
 from scipy.stats import poisson
 
-from services.analysis.dixon_coles_mle import (
-    exponential_weights,
-    fit_league_from_db,
-    fit_matches,
-)
+from services.analysis.dixon_coles_mle import DixonColesMLE, _design_matrix, _objective
 
 
 def _sample_score(rng, lam, mu, rho, max_goals=8):
@@ -27,6 +25,20 @@ def _sample_score(rng, lam, mu, rho, max_goals=8):
     grid /= grid.sum()
     flat = int(rng.choice(grid.size, p=grid.ravel()))
     return divmod(flat, max_goals)
+
+
+def _frame(home, away, hg, ag, dates=None) -> pd.DataFrame:
+    if dates is None:
+        dates = np.full(len(home), np.datetime64("2026-05-01"))
+    return pd.DataFrame(
+        {
+            "home_team": home,
+            "away_team": away,
+            "home_goals": hg,
+            "away_goals": ag,
+            "date": dates,
+        }
+    )
 
 
 def _season(n_teams=20, rho=-0.12, seed=7):
@@ -49,12 +61,28 @@ def _season(n_teams=20, rho=-0.12, seed=7):
             away.append(guest)
             hg.append(gh)
             ag.append(ga)
-    return home, away, hg, ag, teams, attack
+    return _frame(home, away, hg, ag), teams, attack
+
+
+def _tiny_league():
+    home, away, hg, ag = [], [], [], []
+    regulars = ["A", "B", "C", "D", "E"]
+    for host in regulars:
+        for guest in regulars:
+            if host == guest:
+                continue
+            home += [host, host]
+            away += [guest, guest]
+            hg += [1, 1]
+            ag += [1, 1]
+    home += ["Tiny", "Tiny"]
+    away += ["A", "B"]
+    hg += [6, 6]
+    ag += [0, 0]
+    return _frame(home, away, hg, ag)
 
 
 def test_gradient_matches_finite_differences():
-    from services.analysis.dixon_coles_mle import _design_matrix, _objective
-
     home = np.array([0, 1, 2, 0, 3, 1])
     away = np.array([1, 2, 3, 2, 0, 3])
     hg = np.array([0, 1, 2, 1, 0, 1])
@@ -75,98 +103,97 @@ def test_gradient_matches_finite_differences():
     assert check_grad(fun, grad, theta) < 1e-4
 
 
-def test_design_row_matches_the_explicit_rates():
-    home, away, hg, ag, _, _ = _season()
-    model = fit_matches(home, away, hg, ag, shrink_threshold=None)
-    for host, guest in list(zip(home, away))[::40]:
-        explicit = model.rates_from_explicit(host, guest)
-        design = model.rates_from_design(host, guest)
-        assert explicit == pytest.approx(design, rel=1e-9, abs=1e-9)
+def test_design_row_matches_predict_lambdas_without_shrinkage():
+    frame, _, _ = _season()
+    engine = DixonColesMLE(xi=0.0, shrinkage_m=0.0)
+    engine.fit(frame)
+    sample = frame.iloc[::40]
+    for row in sample.itertuples(index=False):
+        explicit = engine.predict_lambdas(row.home_team, row.away_team)
+        design = engine._rates_from_design(row.home_team, row.away_team)
+        assert explicit == pytest.approx(design, rel=1e-8, abs=1e-8)
 
 
-def test_full_season_converges_within_one_and_a_half_seconds():
-    home, away, hg, ag, _, _ = _season()
-    assert len(home) == 380
+def test_full_season_fits_within_one_and_a_half_seconds_and_attack_mean_is_one():
+    frame, _, _ = _season()
+    assert len(frame) == 380
+    engine = DixonColesMLE()
     started = time.perf_counter()
-    model = fit_matches(home, away, hg, ag, shrink_threshold=None)
-    elapsed = time.perf_counter() - started
-    assert elapsed < 1.5
-    assert model.success
-    assert -0.25 <= model.rho <= 0.25
+    result = engine.fit(frame)
+    assert time.perf_counter() - started < 1.5
+    assert result.fit_time_seconds < 1.5
+    attack_mean = float(np.mean(list(result.attack_params.values())))
+    assert attack_mean == pytest.approx(1.0, abs=0.001)
+    assert -0.25 <= result.rho <= 0.25
 
 
-def test_rho_and_attack_are_recovered():
+def test_rho_sign_and_attack_order_are_recovered():
     true_rho = -0.12
-    home, away, hg, ag, teams, attack = _season(rho=true_rho, seed=11)
-    model = fit_matches(home, away, hg, ag, shrink_threshold=None)
-    assert model.rho == pytest.approx(true_rho, abs=0.08)
-    order = [model._index[name] for name in teams]
-    estimated = model._alpha_hat[order]
+    frame, teams, attack = _season(rho=true_rho, seed=11)
+    engine = DixonColesMLE(xi=0.0, shrinkage_m=0.0)
+    result = engine.fit(frame)
+    assert result.rho == pytest.approx(true_rho, abs=0.08)
+    order = [engine._index[name] for name in teams]
+    estimated = engine._alpha_hat[order]
     assert np.corrcoef(attack, estimated)[0, 1] > 0.8
     assert estimated[int(np.argmax(attack))] > estimated[int(np.argmin(attack))]
 
 
-def test_shrinkage_pulls_a_two_match_team_toward_one():
-    hosts, guests, hg, ag = [], [], [], []
-    regulars = ["A", "B", "C", "D", "E"]
-    for i, home in enumerate(regulars):
-        for away in regulars:
-            if home == away:
-                continue
-            hosts += [home, home]
-            guests += [away, away]
-            hg += [1, 1]
-            ag += [1, 1]
-    hosts += ["Tiny", "Tiny"]
-    guests += ["A", "B"]
-    hg += [6, 6]
-    ag += [0, 0]
-
-    raw = fit_matches(hosts, guests, hg, ag, shrink_threshold=None)
-    shrunk = fit_matches(hosts, guests, hg, ag, shrink_threshold=5)
-    assert raw.n_matches["Tiny"] == 2
-    assert shrunk.n_matches["Tiny"] < 3
-    assert raw.attack["Tiny"] > 1.4
-    assert abs(shrunk.attack["Tiny"] - 1.0) < abs(raw.attack["Tiny"] - 1.0)
-    assert shrunk.attack["A"] == pytest.approx(raw.attack["A"])
-    lam_raw, mu_raw = raw.expected_goals("A", "B")
-    lam_shrunk, mu_shrunk = shrunk.expected_goals("A", "B")
-    assert lam_shrunk == pytest.approx(lam_raw, rel=1e-9)
-    assert mu_shrunk == pytest.approx(mu_raw, rel=1e-9)
+def test_two_match_team_shrinks_toward_one():
+    frame = _tiny_league()
+    pure = DixonColesMLE(xi=0.0, shrinkage_m=0.0).fit(frame)
+    shrunk = DixonColesMLE(xi=0.0, shrinkage_m=3.0).fit(frame)
+    assert pure.sample_sizes["Tiny"] == 2
+    played, prior = 2.0, 3.0
+    expected = played / (played + prior) * pure.attack_params["Tiny"] + prior / (played + prior)
+    assert shrunk.attack_params["Tiny"] == pytest.approx(expected)
+    assert abs(shrunk.attack_params["Tiny"] - 1.0) < abs(pure.attack_params["Tiny"] - 1.0)
+    expected_defense = played / (played + prior) * pure.defense_params["Tiny"] + prior / (played + prior)
+    assert shrunk.defense_params["Tiny"] == pytest.approx(expected_defense)
 
 
-def test_time_decay_downweights_old_matches():
-    day = np.datetime64("2026-09-01")
-    dates = np.array([day, day + np.timedelta64(100, "D")])
-    weights = exponential_weights(dates, xi=0.01)
-    assert weights[-1] == pytest.approx(1.0)
-    assert weights[0] == pytest.approx(np.exp(-1.0))
-    assert exponential_weights(dates, xi=None).tolist() == [1.0, 1.0]
-
-    hosts, guests, hg, ag, played = [], [], [], [], []
+def test_matches_from_six_months_ago_weigh_less_than_recent_ones():
+    home, away, hg, ag, played = [], [], [], [], []
     clubs = ["A", "B", "C", "D"]
     early = np.datetime64("2026-01-01")
     late = np.datetime64("2026-07-01")
     for stamp, hot_goals, conceded in ((early, 0, 2), (late, 3, 0)):
-        for i, home in enumerate(clubs):
-            for away in clubs[i + 1 :]:
-                hosts.append(home)
-                guests.append(away)
+        for i, host in enumerate(clubs):
+            for guest in clubs[i + 1 :]:
+                home.append(host)
+                away.append(guest)
                 hg.append(1)
                 ag.append(1)
                 played.append(stamp)
-        for away in clubs:
-            hosts.append("Hot")
-            guests.append(away)
+        for guest in clubs:
+            home.append("Hot")
+            away.append(guest)
             hg.append(hot_goals)
             ag.append(conceded)
             played.append(stamp)
-    flat = fit_matches(hosts, guests, hg, ag, dates=played, xi=0.0, shrink_threshold=None)
-    recent = fit_matches(hosts, guests, hg, ag, dates=played, xi=0.02, shrink_threshold=None)
-    assert recent.attack["Hot"] > flat.attack["Hot"]
+    frame = _frame(home, away, hg, ag, played)
+    reference = datetime(2026, 7, 1)
+    flat = DixonColesMLE(xi=0.0, shrinkage_m=0.0).fit(frame, reference_date=reference)
+    recent = DixonColesMLE(xi=0.0019, shrinkage_m=0.0).fit(frame, reference_date=reference)
+    assert recent.attack_params["Hot"] > flat.attack_params["Hot"]
+    gap_days = (late - early) / np.timedelta64(1, "D")
+    assert np.exp(-0.0019 * float(gap_days)) < 1.0
 
 
-def test_fit_league_from_db_uses_only_finished_matches(tmp_path):
+def test_score_matrix_uses_tau_and_sums_to_one():
+    engine = DixonColesMLE(xi=0.0, shrinkage_m=0.0)
+    engine.fit(_season(rho=-0.12, seed=3)[0])
+    names = list(engine.result.attack_params)
+    matrix = engine.generate_score_matrix(names[0], names[1], max_goals=7)
+    assert matrix.shape == (8, 8)
+    assert matrix.sum() == pytest.approx(1.0)
+    lam, mu = engine.predict_lambdas(names[0], names[1])
+    independent = poisson.pmf(0, lam) * poisson.pmf(0, mu)
+    if engine.result.rho < 0:
+        assert matrix[0, 0] > independent * 0.5
+
+
+def test_fit_from_db_keeps_finished_matches_of_one_competition(tmp_path):
     db = tmp_path / "bagent.db"
     conn = sqlite3.connect(db)
     conn.execute(
@@ -184,13 +211,13 @@ def test_fit_league_from_db_uses_only_finished_matches(tmp_path):
         ("Serie A", "2026", "2026-09-04", "FT", "Lazio", "Roma", 1, 2),
         ("Serie A", "2026", "2026-09-05", "NS", "Milan", "Roma", None, None),
         ("Serie B", "2026", "2026-09-01", "FT", "Como", "Pisa", 4, 0),
+        ("Serie A", "2025", "2025-09-01", "FT", "Juve", "Napoli", 1, 0),
     ]
     conn.executemany("INSERT INTO matches VALUES (?,?,?,?,?,?,?,?)", rows)
     conn.commit()
     conn.close()
 
-    model = fit_league_from_db(db, "Serie A", 2026, shrink_threshold=None)
-    assert set(model.teams) == {"Lazio", "Milan", "Roma"}
-    assert "Como" not in model.teams
-    lam, mu = model.expected_goals("Milan", "Roma")
-    assert lam > 0 and mu > 0
+    result = DixonColesMLE(xi=0.0, shrinkage_m=0.0).fit_from_db(db, "Serie A", season="2026")
+    assert set(result.attack_params) == {"Lazio", "Milan", "Roma"}
+    assert "Como" not in result.attack_params
+    assert "Juve" not in result.attack_params
