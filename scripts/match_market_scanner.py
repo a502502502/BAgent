@@ -8,13 +8,18 @@ from __future__ import annotations
 
 import argparse
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from services.analysis.match_market_optimizer import MatchMarketOptimizer, _CARD_WORD, _CORNER_WORD
+from services.betting.netwin_cache_reader import load_cached_matches
+
+ROME = ZoneInfo("Europe/Rome")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -22,6 +27,8 @@ def main(argv: list[str] | None = None) -> int:
         sys.stdout.reconfigure(encoding="utf-8")
     args = _parser().parse_args(argv)
     optimizer = MatchMarketOptimizer()
+    if args.days:
+        return _scan_days(optimizer, args.days)
     try:
         scan = optimizer.scan(args.match or "", args.home or "", args.away or "")
     except LookupError as exc:
@@ -66,7 +73,67 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--min-prob", type=float, default=0.70)
     parser.add_argument("--min-odd", type=float, default=1.20)
     parser.add_argument("--alternatives", action="store_true")
+    parser.add_argument("--days", type=int, default=0, help="Scansiona i match nei prossimi N giorni")
     return parser
+
+
+def _scan_days(optimizer: MatchMarketOptimizer, days: int) -> int:
+    now = datetime.now(ROME)
+    end = now + timedelta(days=days)
+    found = []
+    for match in load_cached_matches():
+        kickoff = _parse_kickoff(match.kickoff)
+        if kickoff is None or not (now <= kickoff < end):
+            continue
+        try:
+            scan = optimizer.scan(home=match.home_team, away=match.away_team)
+        except LookupError:
+            continue
+        for row in scan.markets:
+            if row.odd is None or row.edge is None or row.edge < 0.15 or row.probability < 0.60:
+                continue
+            found.append((row.edge, kickoff, scan, row))
+    found.sort(key=lambda item: item[0], reverse=True)
+    certified = [item for item in found if _sample_is_usable(item[2])]
+    withheld = [item for item in found if not _sample_is_usable(item[2])]
+    print(f"Valore nei prossimi {days} giorni  P>=60%  edge>=15%  campione utilizzabile  ({len(certified)} mercati)")
+    _print_rows(certified)
+    if withheld:
+        print(f"Sotto soglia campione: stima di sanita', da non giocare  ({len(withheld)} mercati)")
+        _print_rows(withheld[:12])
+    return 0
+
+
+def _sample_is_usable(scan) -> bool:
+    if scan.source not in {"dixon-coles", "dixon-coles-shrunk"}:
+        return False
+    if scan.sample_home is None or scan.sample_away is None:
+        return False
+    return min(scan.sample_home, scan.sample_away) >= 8
+
+
+def _print_rows(rows: list) -> None:
+    if not rows:
+        print("  nessuno")
+        return
+    print(f"  {'Quando':<16} {'Partita':<28} {'Mercato':<28} {'Q':>6} {'Fair':>6} {'P%':>6} {'Edge%':>7}  Fonte")
+    for edge, kickoff, scan, row in rows:
+        flag = "  edge alto" if edge >= 0.50 else ""
+        print(
+            f"  {kickoff.strftime('%d/%m %H:%M'):<16} {scan.match_name:<28} {row.market:<28} "
+            f"{row.odd:6.2f} {row.fair_odd:6.2f} {row.probability * 100:6.1f} {edge * 100:6.1f}  "
+            f"{scan.source}{flag}"
+        )
+
+
+def _parse_kickoff(value: str) -> datetime | None:
+    text = value.strip()
+    for fmt in ("%Y%m%d %H:%M:%S", "%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M"):
+        try:
+            return datetime.strptime(text, fmt).replace(tzinfo=ROME)
+        except ValueError:
+            continue
+    return None
 
 
 def _print_markets(rows) -> None:

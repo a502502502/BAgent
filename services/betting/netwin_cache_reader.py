@@ -591,6 +591,7 @@ _KNOWN_TEAM_ALIASES: dict[str, str] = {
     "israele": "israel",
     "belgio": "belgium",
     "francia": "france",
+    "italia": "italy",
     "spagna": "spain",
     "inghilterra": "england",
     "repubblica ceca": "czech republic",

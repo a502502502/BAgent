@@ -92,3 +92,34 @@ def test_corners_and_cards_partition(tmp_path):
     quoted = {row.market: row.odd for row in optimizer.scan_result.markets}
     assert quoted["Over 8.5 Corner"] == 1.90
     assert quoted["Under 3.5 Cartellini"] == 1.70
+
+
+def test_germany_serbia_does_not_keep_a_two_match_mle():
+    optimizer = MatchMarketOptimizer()
+    scan = optimizer.scan("Germania vs Serbia")
+    assert scan.source != "dixon-coles"
+    assert scan.lambda_home > scan.lambda_away
+    priced = {row.market: row for row in scan.markets}
+    assert priced["1"].probability > priced["2"].probability
+    artifacts = {
+        row.market
+        for row in scan.markets
+        if row.edge is not None and row.edge > 0.80 and row.market in {
+            "2",
+            "MultiGol 0-1 Casa",
+            "Chance Mix: 2 o Under 2.5",
+        }
+    }
+    assert artifacts == set()
+
+
+def test_portugal_norway_without_1x2_does_not_keep_two_match_shrinkage():
+    optimizer = MatchMarketOptimizer()
+    scan = optimizer.scan("Portogallo vs Norvegia")
+    assert scan.sample_home is not None and scan.sample_home < 8
+    assert scan.source == "baseline-sanity"
+    assert scan.lambda_home > scan.lambda_away
+    priced = {row.market: row for row in scan.markets}
+    home_low = priced.get("MultiGol 0-1 Casa")
+    if home_low is not None and home_low.edge is not None:
+        assert home_low.edge < 0.25

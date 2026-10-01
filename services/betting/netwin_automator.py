@@ -149,12 +149,16 @@ class NetwinAutomator:
     def clear_betslip(self) -> bool:
         """Svuota il carrello scommesse da selezioni residue."""
         try:
-            svuota_btn = self.page.locator("button:has-text('SVUOTA'), div:has-text('SVUOTA'), .btn:has-text('SVUOTA')").first
-            if svuota_btn.is_visible():
-                svuota_btn.click()
-                logger.info("🗑️ Carrello scommesse svuotato.")
-                self.page.wait_for_timeout(800)
-                return True
+            removed = 0
+            for _ in range(12):
+                trash = self.page.locator(".grid-schedina_bottone-generico").first
+                if not trash.is_visible(timeout=800):
+                    break
+                trash.click()
+                removed += 1
+                self.page.wait_for_timeout(300)
+            if removed:
+                logger.info(f"Carrello scommesse svuotato ({removed}).")
         except Exception:
             pass
         return True
@@ -185,14 +189,20 @@ class NetwinAutomator:
         try:
             clean_name = re.sub(r"[^a-zA-Z0-9 ]", "", team_name).strip()
             first_word = clean_name.split()[0] if clean_name.split() else clean_name
-            pattern = re.compile(rf"^{re.escape(first_word)}$", re.IGNORECASE)
-            names = self.page.locator("p").filter(has_text=pattern)
+            wanted = {clean_name.casefold(), first_word.casefold()}
+            names = self.page.locator("p")
             for index in range(names.count()):
                 name = names.nth(index)
-                if not name.is_visible():
+                try:
+                    if not name.is_visible():
+                        continue
+                    text = " ".join(name.inner_text().split()).casefold()
+                except Exception:
+                    continue
+                if text not in wanted:
                     continue
                 name.click()
-                logger.info(f"Riga match '{first_word}' cliccata per aprire i mercati.")
+                logger.info(f"Riga match '{text}' cliccata per aprire i mercati.")
                 self.page.wait_for_timeout(1500)
                 return True
         except Exception as e:
@@ -209,6 +219,18 @@ class NetwinAutomator:
             pick_clean = str(pick).strip().upper()
             market_clean = str(market).strip().upper()
             action = _parsed_action(market, pick)
+
+            if (
+                action is not None
+                and action.family == "COMBO"
+                and action.combo_type == "MULTIGOL"
+                and action.combo_result in {"1X", "X2", "12"}
+            ):
+                if self._click_dc_multigol(action):
+                    logger.info(f"✅ Combo {action.combo_result} + MultiGol {action.combo_multigol_range} selezionata.")
+                    return True
+                logger.warning(f"Combo DC+MG non selezionata per {pick!r}.")
+                return False
 
             if action is not None and _needs_secondary_panel(action):
                 self._open_market_panel(action)
@@ -352,10 +374,69 @@ class NetwinAutomator:
             return False
 
         self._row_team = home_team
+        match = str(match_info.get("match") or "")
+        self._row_opponent = match.split(" vs ", 1)[1].strip() if " vs " in match else ""
         self.click_match_row(home_team)
 
         success = self.select_outcome(market=market, pick=pick, target_odd=odd)
         return success
+
+    def _click_dc_multigol(self, action: NetwinMarketAction) -> bool:
+        """Apre Combo 1X2 → DC+MG, sceglie il range (2/4) e clicca la quota della colonna."""
+        if self.page is None or not action.combo_multigol_range:
+            return False
+        if not self._click_visible_text("Combo 1X2") or not self._click_visible_text("DC+MG"):
+            return False
+        token = re.sub(r"[^a-zA-Z0-9 ]", "", getattr(self, "_row_team", "")).split()
+        opponent = re.sub(r"[^a-zA-Z0-9 ]", "", getattr(self, "_row_opponent", "")).split()
+        rows = self.page.locator(".contenitoreRiga")
+        if token:
+            rows = rows.filter(has_text=token[0])
+        if opponent:
+            rows = rows.filter(has_text=opponent[0])
+        if rows.count() == 0:
+            return False
+        row = rows.first
+        column = {"1X": 0, "X2": 1, "12": 2}[action.combo_result]
+        toggles = row.locator("button.dropdown-toggle")
+        if toggles.count() <= column:
+            return False
+        toggles.nth(column).click(timeout=3000)
+        self.page.wait_for_timeout(400)
+        label = action.combo_multigol_range.replace("-", "/")
+        option = self.page.locator(".dropdown-menu.show").get_by_text(label, exact=True).first
+        option.click(timeout=3000)
+        self.page.wait_for_timeout(400)
+        visible = []
+        quotes = row.locator(".contenitoreSingolaQuota")
+        for index in range(quotes.count()):
+            quote = quotes.nth(index)
+            try:
+                if quote.is_visible():
+                    visible.append(quote)
+            except Exception:
+                continue
+        if len(visible) <= column:
+            return False
+        visible[column].click(timeout=3000)
+        self.page.wait_for_timeout(800)
+        return True
+
+    def _click_visible_text(self, label: str) -> bool:
+        if self.page is None:
+            return False
+        nodes = self.page.get_by_text(label, exact=True)
+        for index in range(nodes.count()):
+            node = nodes.nth(index)
+            try:
+                if node.is_visible():
+                    node.click()
+                    self.page.wait_for_timeout(500)
+                    return True
+            except Exception:
+                continue
+        logger.warning(f"Etichetta Netwin '{label}' non visibile.")
+        return False
 
     def _click_row_ou(self, pick_clean: str) -> bool:
         """Apre la linea nel menu della riga e clicca l'Under o l'Over visibile."""
@@ -485,9 +566,15 @@ class NetwinAutomator:
             self.page.wait_for_timeout(1000)
 
         logger.info(f"Eventi aggiunti al carrello: {added}/{len(selections)}")
-        if added == 0:
+        if added != len(selections):
+            self.clear_betslip()
             self.close()
-            return {"success": False, "error": "Nessun evento aggiunto al carrello."}
+            return {
+                "success": False,
+                "error": f"Aggiunte {added}/{len(selections)} selezioni. Prenotazione non emessa.",
+                "events_added": added,
+                "total_events": len(selections),
+            }
 
         # Genera codice prenotazione
         book_res = self.generate_booking_code(stake=stake)

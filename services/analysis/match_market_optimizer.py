@@ -9,6 +9,7 @@ Nessuna chiamata di rete.
 
 from __future__ import annotations
 
+import logging
 import re
 import sqlite3
 from dataclasses import dataclass
@@ -30,6 +31,13 @@ from services.betting.netwin_cache_reader import (
     _league_names_for,
 )
 from services.database.schema import DB_PATH
+
+logger = logging.getLogger(__name__)
+
+# Due o tre partite non identificano un attacco. Sotto questa soglia il MLE si scarta.
+MIN_DIXON_COLES_SAMPLE = 8
+# Oltre questo scarto sull'1 il modello piccolo non viene pubblicato così com'è.
+MAX_1X2_GAP = 0.38
 
 _FIRST_HALF = re.compile(
     r"\b(?:1\s*°?\s*tempo|1\s*°?\s*t|primo\s+tempo|1h)\b",
@@ -232,14 +240,19 @@ class MatchMarketOptimizer:
         if self._xg_override is not None:
             rho = -0.05 if self._rho_override is None else self._rho_override
             return self._xg_override[0], self._xg_override[1], rho, "override", None, None
+        self._rejected_sample = None
         fitted = self._dixon_coles(match)
         if fitted is not None:
-            return fitted
-        historic = historical_xg(match.home_team, match.away_team, match.tournament, self.db_path)
-        if historic is not None:
-            return historic[0], historic[1], -0.05, "poisson-shrinkage", None, None
-        base_home, base_away = tournament_baseline(match.tournament)
-        return base_home, base_away, -0.05, "baseline", None, None
+            chosen = fitted
+        else:
+            home_n, away_n = self._rejected_sample or self._count_samples(match)
+            historic = historical_xg(match.home_team, match.away_team, match.tournament, self.db_path)
+            if historic is not None:
+                chosen = (historic[0], historic[1], -0.05, "poisson-shrinkage", home_n, away_n)
+            else:
+                base_home, base_away = tournament_baseline(match.tournament)
+                chosen = (base_home, base_away, -0.05, "baseline", home_n, away_n)
+        return self._guard_market_divergence(match, chosen)
 
     def counts_for(self, match: CachedMatch) -> tuple[float, float, float, float, str]:
         if self._corner_override is not None:
@@ -371,15 +384,102 @@ class MatchMarketOptimizer:
             except KeyError:
                 continue
             sizes = engine.result.sample_sizes
+            home_n = int(sizes.get(home) or 0)
+            away_n = int(sizes.get(away) or 0)
+            if min(home_n, away_n) < MIN_DIXON_COLES_SAMPLE:
+                logger.warning(
+                    "Dixon-Coles scartato per %s: campione %s/%s sotto %s",
+                    match.match_name,
+                    home_n,
+                    away_n,
+                    MIN_DIXON_COLES_SAMPLE,
+                )
+                self._rejected_sample = (home_n, away_n)
+                return None
             return (
                 lam_home,
                 lam_away,
                 engine.result.rho,
                 "dixon-coles",
-                sizes.get(home),
-                sizes.get(away),
+                home_n,
+                away_n,
             )
         return None
+
+    def _guard_market_divergence(self, match: CachedMatch, chosen: tuple) -> tuple:
+        lam_home, lam_away, rho, source, home_n, away_n = chosen
+        small = home_n is not None and away_n is not None and min(home_n, away_n) < MIN_DIXON_COLES_SAMPLE
+        implied = _implied_1x2(match.odds_dict)
+        if implied is None:
+            if not small:
+                return chosen
+            base_home, base_away = tournament_baseline(match.tournament)
+            tilted_home, tilted_away = _temper_total(base_home, base_away, match.odds_dict)
+            logger.warning(
+                "Campione %s/%s sotto %s su %s e 1X2 assente: uso la media di lega",
+                home_n,
+                away_n,
+                MIN_DIXON_COLES_SAMPLE,
+                match.match_name,
+            )
+            return tilted_home, tilted_away, -0.05, "baseline-sanity", home_n, away_n
+        model_home = _outcome_probs(lam_home, lam_away, rho)[0]
+        gap = abs(model_home - implied[0])
+        if gap > MAX_1X2_GAP:
+            logger.warning(
+                "Divergenza 1X2 di %.0f punti su %s: modello %.0f%%, quota implicita %.0f%%",
+                gap * 100,
+                match.match_name,
+                model_home * 100,
+                implied[0] * 100,
+            )
+        trusted = source == "dixon-coles" and not small
+        if trusted and gap <= MAX_1X2_GAP:
+            return chosen
+        if trusted:
+            base_home, base_away = tournament_baseline(match.tournament)
+            return (
+                0.5 * lam_home + 0.5 * base_home,
+                0.5 * lam_away + 0.5 * base_away,
+                -0.05,
+                "dixon-coles-shrunk",
+                home_n,
+                away_n,
+            )
+        if not small and gap <= MAX_1X2_GAP:
+            return chosen
+        tilted_home, tilted_away = _baseline_tilt(match.tournament, implied)
+        if small:
+            tilted_home, tilted_away = _temper_total(tilted_home, tilted_away, match.odds_dict)
+        return tilted_home, tilted_away, -0.05, "baseline-sanity", home_n, away_n
+
+    def _count_samples(self, match: CachedMatch) -> tuple[int, int]:
+        if not self.db_path.exists():
+            return 0, 0
+        try:
+            conn = sqlite3.connect(f"file:{self.db_path}?mode=ro", uri=True)
+        except sqlite3.Error:
+            return 0, 0
+        try:
+            leagues = _league_names_for(conn, match.tournament)
+            if not leagues:
+                return 0, 0
+            marks = ",".join("?" for _ in leagues)
+            rows = conn.execute(
+                f"""
+                SELECT home_team, away_team FROM matches
+                WHERE status = 'FT' AND league IN ({marks})
+                  AND home_goals IS NOT NULL AND away_goals IS NOT NULL
+                """,
+                tuple(leagues),
+            ).fetchall()
+        except sqlite3.Error:
+            return 0, 0
+        finally:
+            conn.close()
+        home_n = sum(1 for home, away in rows if team_names_match(match.home_team, home) or team_names_match(match.home_team, away))
+        away_n = sum(1 for home, away in rows if team_names_match(match.away_team, home) or team_names_match(match.away_team, away))
+        return home_n, away_n
 
     def _fit_league(self, league: str) -> DixonColesMLE | None:
         if league in self._fits:
@@ -397,6 +497,75 @@ class MatchMarketOptimizer:
         if self.scan_result is None:
             raise RuntimeError("Chiama scan prima di leggere i mercati")
         return self.scan_result
+
+
+def _implied_1x2(odds: dict[str, float]) -> tuple[float, float, float] | None:
+    for keys in (("1", "X", "2"), ("1 + Over 1.5", "X + Over 1.5", "2 + Over 1.5")):
+        parsed = _devig(odds, keys)
+        if parsed is not None:
+            return parsed
+    return None
+
+
+def _devig(odds: dict[str, float], keys: tuple[str, str, str]) -> tuple[float, float, float] | None:
+    prices = []
+    for key in keys:
+        odd = odds.get(key)
+        if odd is None or odd <= 1.0:
+            return None
+        prices.append(1.0 / float(odd))
+    total = sum(prices)
+    if total <= 0.0:
+        return None
+    return prices[0] / total, prices[1] / total, prices[2] / total
+
+
+def _outcome_probs(lam_home: float, lam_away: float, rho: float) -> tuple[float, float, float]:
+    full, _half = _matrices(lam_home, lam_away, rho)
+    home, away, total = _axes(full)
+    return tuple(
+        float(np.sum(full[_goal_market_mask(name, home, away, total)]))
+        for name in ("1", "X", "2")
+    )
+
+
+def _temper_total(lam_home: float, lam_away: float, odds: dict[str, float]) -> tuple[float, float]:
+    """Avvicina il totale gol alla linea 2.5 quotata, senza copiarla."""
+    under = odds.get("Under 2.5")
+    over = odds.get("Over 2.5")
+    if under is None or over is None or under <= 1.0 or over <= 1.0:
+        return lam_home, lam_away
+    implied_under = (1.0 / under) / ((1.0 / under) + (1.0 / over))
+    current = _under_prob(lam_home, lam_away)
+    target = (0.25 * current) + (0.75 * implied_under)
+    low, high = 0.45, 2.2
+    for _ in range(14):
+        scale = (low + high) / 2.0
+        if _under_prob(lam_home * scale, lam_away * scale) > target:
+            low = scale
+        else:
+            high = scale
+    scale = (low + high) / 2.0
+    return lam_home * scale, lam_away * scale
+
+
+def _under_prob(lam_home: float, lam_away: float) -> float:
+    full, _half = _matrices(lam_home, lam_away, -0.05)
+    home, away, total = _axes(full)
+    mask = _goal_market_mask("Under 2.5", home, away, total)
+    if mask is None:
+        return 0.5
+    return float(np.sum(full[mask]))
+
+
+def _baseline_tilt(tournament: str, implied: tuple[float, float, float]) -> tuple[float, float]:
+    """Media di lega, inclinata appena verso il segno che il book considera favorito."""
+    base_home, base_away = tournament_baseline(tournament)
+    tilt = (implied[0] / max(implied[2], 0.05)) ** 0.35
+    return (
+        min(3.2, max(0.35, base_home * tilt)),
+        min(3.2, max(0.25, base_away / tilt)),
+    )
 
 
 def _singles_for(family: str, priced: dict[str, PricedMarket]) -> tuple[str, ...]:
