@@ -94,6 +94,8 @@ def flatten_netwin_markets(match_data: dict | None) -> dict[str, float]:
     _copy_outcome_map(markets.get("DRAW_NO_BET") or markets.get("draw_no_bet"), flat, lambda key: str(key))
     _copy_outcome_map(markets.get("MULTIGOL_SQUADRA") or markets.get("multigol_squadra"), flat, lambda key: str(key))
     _copy_goal_lines(markets.get("CORNER") or markets.get("CORNERS"), flat, corner=True)
+    for key in ("CARTELLINI", "CARTELLINO", "CARDS", "CARD"):
+        _copy_goal_lines(markets.get(key), flat, suffix=" Cartellini")
     _sanitize_double_chance(flat)
     return flat
 
@@ -449,10 +451,17 @@ def _copy_outcome_map(source: object, flat: dict[str, float], rename: Callable[[
             flat[rename(key)] = odd
 
 
-def _copy_goal_lines(source: object, flat: dict[str, float], *, corner: bool) -> None:
+def _copy_goal_lines(
+    source: object,
+    flat: dict[str, float],
+    *,
+    corner: bool = False,
+    suffix: str | None = None,
+) -> None:
     if not isinstance(source, dict):
         return
-    suffix = " Corner" if corner else ""
+    if suffix is None:
+        suffix = " Corner" if corner else ""
     for line, sides in source.items():
         label = str(line).strip()
         if isinstance(sides, dict):
