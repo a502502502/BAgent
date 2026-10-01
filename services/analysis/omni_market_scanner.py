@@ -108,15 +108,16 @@ class OmniMarketScanner:
         p_real: float,
         odd: float,
         edge: float,
-        resilience_type: str
+        resilience_type: str,
+        market_name: str = ""
     ) -> float:
         """
         Calcola il Balanced Safety Score (BSS):
-        Trova il sweet spot tra Alta Probabilità + Quota Efficace + Edge Reale + Respiro a 90'.
+        Trova il sweet spot tra Alta Probabilità + Quota Efficace + Edge Reale + Respiro a 90'
+        e moltiplicatore empirico di efficacia da TipsterIntelligenceEngine.
         """
         if edge < 0.03 or p_real < 0.65:
             return 0.0
-
 
         # Quota Utility Factor (premio range ideale 1.28 - 1.65)
         if 1.28 <= odd <= 1.65:
@@ -140,8 +141,17 @@ class OmniMarketScanner:
         else:
             res_factor = 0.70
 
-        # BSS formula
-        bss = (p_real ** 1.6) * (1.0 + edge) * q_factor * res_factor * 100.0
+        # Tipster Intelligence Empirical Multiplier
+        tipster_factor = 1.0
+        if market_name:
+            try:
+                from services.analysis.tipster_intelligence import TipsterIntelligenceEngine
+                tipster_factor = TipsterIntelligenceEngine().get_market_efficacy_weight(market_name)
+            except Exception:
+                tipster_factor = 1.0
+
+        # BSS formula moltiplicata per il fattore empirico
+        bss = (p_real ** 1.6) * (1.0 + edge) * q_factor * res_factor * tipster_factor * 100.0
         return round(bss, 2)
 
     def scan_fixture(
@@ -346,7 +356,8 @@ class OmniMarketScanner:
                 p_real=p_real,
                 odd=odd,
                 edge=edge,
-                resilience_type=res_type
+                resilience_type=res_type,
+                market_name=sel_name
             )
 
             is_appr = True

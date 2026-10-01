@@ -23,7 +23,7 @@ CHECK_SECONDS = 30
 MATCH_WINDOW = timedelta(minutes=120)
 
 _CLOSED = {"WON": "Vinta", "LOST": "Persa", "CASHOUT": "Cashout", "VOID": "Void"}
-_OPEN = {"PENDING", "IN CORSO", "OPEN"}
+_OPEN = {"PENDING", "IN CORSO", "OPEN", "IN_PLAY"}
 _SECTION_LABEL = {"present": "In corso", "future": "Futura", "past": "Chiusa"}
 
 
@@ -280,8 +280,30 @@ def load_slips(
     database = db_path if db_path is not None else DEFAULT_DB
     for slip in _slips_from_db(database):
         previous = found.get(slip.slip_id)
-        if previous is not None and not slip.legs:
-            slip.legs = previous.legs
+        if previous is not None:
+            if not slip.legs:
+                slip.legs = previous.legs
+            else:
+                merged_legs = []
+                for idx, leg in enumerate(slip.legs):
+                    when = leg.when
+                    tournament = leg.tournament
+                    if when is None and idx < len(previous.legs) and previous.legs[idx].when is not None:
+                        when = previous.legs[idx].when
+                    if not tournament and idx < len(previous.legs) and previous.legs[idx].tournament:
+                        tournament = previous.legs[idx].tournament
+                    merged_legs.append(
+                        SlipLeg(
+                            match=leg.match,
+                            pick=leg.pick,
+                            odd=leg.odd,
+                            when=when,
+                            tournament=tournament,
+                            result=leg.result,
+                            score=leg.score,
+                        )
+                    )
+                slip.legs = merged_legs
         found[slip.slip_id] = slip
 
     # Risoluzione automatica esiti e semafori da database delle partite chiuse (FT)

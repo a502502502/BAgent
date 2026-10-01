@@ -1,1 +1,182 @@
-[]
+[
+  {
+    "ticket_id": "TICKET_USER_NL_MULTIPLA4_01OCT",
+    "date_created": "2026-10-01 20:15:00",
+    "stake_eur": 15.0,
+    "total_odds": 3.4,
+    "potential_payout_eur": 52.63,
+    "status": "LOST",
+    "strategy": "USER_PLAYED_TICKET",
+    "notes": "Giocata utente Netwin - Bonus 1.53\u20ac",
+    "legs": [
+      {
+        "match": "Galles vs Norvegia",
+        "tournament": "UEFA Nations League",
+        "market": "X2 + Over 1.5",
+        "odds": 1.28,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Germania vs Serbia",
+        "tournament": "UEFA Nations League",
+        "market": "1 + Over 2.5",
+        "odds": 1.41,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Isole Far Oer vs Slovacchia",
+        "tournament": "UEFA Nations League",
+        "market": "X2 + MultiGol 1-5",
+        "odds": 1.25,
+        "status": "PENDING",
+        "kickoff": "2026-10-02 20:45 CEST"
+      },
+      {
+        "match": "Francia vs Italia",
+        "tournament": "UEFA Nations League",
+        "market": "1 + Over 1.5",
+        "odds": 1.51,
+        "status": "PENDING",
+        "kickoff": "2026-10-02 20:45 CEST"
+      }
+    ],
+    "profit_loss_eur": -15.0
+  },
+  {
+    "ticket_id": "TICKET_USER_NL_UNDER3_01OCT",
+    "date_created": "2026-10-01 20:15:00",
+    "stake_eur": 25.0,
+    "total_odds": 3.15,
+    "potential_payout_eur": 78.76,
+    "status": "LOST",
+    "strategy": "USER_PLAYED_TICKET",
+    "notes": "Giocata utente Netwin",
+    "legs": [
+      {
+        "match": "Danimarca vs Portogallo",
+        "tournament": "UEFA Nations League",
+        "market": "Under 3.5",
+        "odds": 1.52,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Germania vs Serbia",
+        "tournament": "UEFA Nations League",
+        "market": "Under 4.5",
+        "odds": 1.41,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Grecia vs Olanda",
+        "tournament": "UEFA Nations League",
+        "market": "Under 3.5",
+        "odds": 1.47,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      }
+    ],
+    "profit_loss_eur": -25.0
+  },
+  {
+    "ticket_id": "TICKET_USER_NL_COMBO6_01OCT",
+    "date_created": "2026-10-01 20:15:00",
+    "stake_eur": 10.0,
+    "total_odds": 11.33,
+    "potential_payout_eur": 124.7,
+    "status": "LOST",
+    "strategy": "USER_PLAYED_TICKET",
+    "notes": "Giocata utente Netwin - Bonus 11.33\u20ac",
+    "legs": [
+      {
+        "match": "Galles vs Norvegia",
+        "tournament": "UEFA Nations League",
+        "market": "X2 + MultiGol 2-5",
+        "odds": 1.38,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Danimarca vs Portogallo",
+        "tournament": "UEFA Nations League",
+        "market": "X2 + MultiGol 1-5",
+        "odds": 1.45,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Grecia vs Olanda",
+        "tournament": "UEFA Nations League",
+        "market": "X2 + MultiGol 1-5",
+        "odds": 1.48,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Germania vs Serbia",
+        "tournament": "UEFA Nations League",
+        "market": "1X + MultiGol 2-4",
+        "odds": 1.6,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Bosnia Erzegovina vs Svezia",
+        "tournament": "UEFA Nations League",
+        "market": "X2 + MultiGol 1-5",
+        "odds": 1.65,
+        "status": "PENDING",
+        "kickoff": "2026-10-02 20:45 CEST"
+      },
+      {
+        "match": "Francia vs Italia",
+        "tournament": "UEFA Nations League",
+        "market": "1X + MultiGol 1-4",
+        "odds": 1.45,
+        "status": "PENDING",
+        "kickoff": "2026-10-02 20:45 CEST"
+      }
+    ],
+    "profit_loss_eur": -10.0
+  },
+  {
+    "ticket_id": "TICKET_USER_NL_CORNER3_01OCT",
+    "date_created": "2026-10-01 20:15:00",
+    "stake_eur": 20.0,
+    "total_odds": 4.38,
+    "potential_payout_eur": 87.67,
+    "status": "LOST",
+    "strategy": "USER_PLAYED_TICKET",
+    "notes": "Giocata utente Netwin - Corner 1\u00b0 Tempo",
+    "legs": [
+      {
+        "match": "Azerbaigian vs Liechtenstein",
+        "tournament": "UEFA Nations League",
+        "market": "1X2 Corner Tempo 1: 1",
+        "odds": 1.19,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 18:00 CEST"
+      },
+      {
+        "match": "Grecia vs Olanda",
+        "tournament": "UEFA Nations League",
+        "market": "1X2 Corner Tempo 1: 2",
+        "odds": 1.97,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      },
+      {
+        "match": "Germania vs Serbia",
+        "tournament": "UEFA Nations League",
+        "market": "Over 4.5 Corner Tempo 1",
+        "odds": 1.87,
+        "status": "PENDING",
+        "kickoff": "2026-10-01 20:45 CEST"
+      }
+    ],
+    "profit_loss_eur": -20.0
+  }
+]

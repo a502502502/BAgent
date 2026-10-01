@@ -2,485 +2,433 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>📱 BAgent Mobile — Sabato 29 Agosto 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BAgent — Centrale Operativa 24/7 (Raspberry Pi)</title>
 <style>
   :root {
-    --bg-main: #070a13;
-    --bg-card: #0f172a;
-    --bg-card-alt: #131d35;
-    --border: #1e293b;
-    --gold: #ffd700;
-    --blue: #38bdf8;
-    --green: #4ade80;
-    --purple: #c084fc;
-    --red: #f87171;
-    --text: #f8fafc;
-    --muted: #94a3b8;
+    --bg: #070d19;
+    --card-bg: #111c30;
+    --card-border: #1e293b;
+    --accent-blue: #38bdf8;
+    --accent-green: #10b981;
+    --accent-yellow: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-purple: #a855f7;
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; 
-    background: var(--bg-main); 
-    color: var(--text); 
-    line-height: 1.4; 
-    padding: 12px 12px 80px 12px; 
-    -webkit-font-smoothing: antialiased;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.4;
   }
-
-  /* Sticky App Header */
-  .app-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(7, 10, 19, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 12px 4px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .app-title h1 { font-size: 1.2em; font-weight: 900; color: var(--gold); }
-  .app-title p { font-size: 0.75em; color: var(--muted); }
+  .container { max-width: 1000px; margin: 0 auto; }
   
-  .profit-pill {
-    background: #1e1b4b;
-    border: 1px solid #6366f1;
-    color: #a5b4fc;
-    font-size: 0.72em;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  /* Segmented Control Tabs */
-  .tab-bar {
-    display: flex;
-    background: #0f172a;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 3px;
-    margin-bottom: 16px;
-  }
-  .tab-btn {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    font-size: 0.82em;
-    font-weight: 700;
-    padding: 8px 4px;
-    border-radius: 9px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .tab-btn.active {
-    background: #1e293b;
-    color: var(--gold);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
-
-  /* Tab Content */
-  .tab-pane { display: none; }
-  .tab-pane.active { display: block; animation: fadeIn 0.2s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* Mobile Ticket Card */
-  .m-ticket {
-    background: var(--bg-card);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-  }
-  .m-ticket.gold { border-color: var(--gold); }
-  .m-ticket.purple { border-color: var(--purple); }
-  .m-ticket.blue { border-color: var(--blue); }
-
-  .ticket-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .ticket-name { font-size: 1.05em; font-weight: 800; }
-  .ticket-odds-badge {
-    font-size: 1.1em;
-    font-weight: 900;
-    padding: 3px 10px;
-    border-radius: 8px;
-    background: #1e1b09;
-    color: var(--gold);
-    border: 1px solid #785207;
-  }
-  .ticket-odds-badge.purple { background: #261138; color: var(--purple); border-color: #6b21a8; }
-  .ticket-odds-badge.blue { background: #0c2038; color: var(--blue); border-color: #0369a1; }
-
-  .m-event-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 0.85em;
-  }
-  .m-event-row:last-child { border-bottom: none; }
-  .m-ev-time { color: var(--gold); font-weight: 700; font-size: 0.8em; margin-right: 6px; }
-  .m-ev-match { font-weight: 600; color: #fff; }
-  .m-ev-pick { color: var(--green); font-weight: 700; text-align: right; }
-  .m-ev-odd { color: var(--muted); font-size: 0.8em; }
-
-  .ticket-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--border);
-    font-size: 0.85em;
-  }
-  .ticket-pot { font-size: 1.1em; font-weight: 900; color: var(--green); }
-
-  /* Mobile Match Card */
-  .m-match {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #111c30 0%, #0a1120 100%);
+    border: 1px solid var(--card-border);
     border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.6);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .brand { font-size: 18px; font-weight: 800; color: var(--accent-blue); display: flex; align-items: center; gap: 6px; }
+  .status-badge { background: #064e3b; color: #a7f3d0; border: 1px solid #059669; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .stat-card {
+    background: #091120;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+  .stat-val { font-size: 16px; font-weight: 800; color: var(--accent-green); margin-top: 2px; }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
     padding: 14px;
     margin-bottom: 14px;
   }
-  .m-match-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.78em;
-    color: var(--blue);
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .m-match-title { font-size: 1.1em; font-weight: 800; color: #fff; margin-bottom: 8px; }
-  
-  .m-lineups {
-    background: #080d1a;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 0.78em;
-    margin: 8px 0;
-    line-height: 1.4;
-  }
-  .m-out { color: var(--red); margin-top: 4px; font-weight: 600; }
-
-  .m-sesto {
-    background: #061f18;
-    border: 1px solid #059669;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 0.82em;
-    color: #d1fae5;
-    margin: 8px 0;
-  }
-
-  .m-pick-pill {
+  h2 {
+    font-size: 14.5px;
+    color: var(--accent-yellow);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #064e3b;
-    border: 1px solid #10b981;
-    border-radius: 8px;
-    padding: 8px 12px;
-    color: #fff;
-    font-weight: 800;
-    font-size: 0.9em;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* TICKETS */
+  .ticket-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .ticket-card {
+    background: #0a1222;
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .ticket-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .ticket-title { font-size: 13px; font-weight: 700; color: #fff; }
+  .ticket-odds { font-size: 18px; font-weight: 900; color: var(--accent-blue); }
+  .ticket-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+  .cashout-box {
+    background: #1e1b4b;
+    border: 1px solid #4338ca;
+    color: #c7d2fe;
+    font-size: 11px;
+    padding: 6px 8px;
+    border-radius: 6px;
     margin-top: 8px;
   }
 
-  /* Referee List Card */
-  .m-ref-card {
-    background: #0c1829;
-    border: 1px solid #1e3a8a;
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 10px;
-    font-size: 0.85em;
-  }
-  .m-ref-head { display: flex; justify-content: space-between; font-weight: 700; color: #93c5fd; margin-bottom: 4px; }
-  .m-ref-stats { color: var(--gold); font-weight: 800; font-size: 0.8em; }
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  th { background: #070d19; color: var(--text-muted); font-size: 10px; text-transform: uppercase; padding: 6px; text-align: left; border-bottom: 1px solid var(--card-border); }
+  td { padding: 6px; border-bottom: 1px solid var(--card-border); vertical-align: middle; }
+  .sesto-senso-cell { font-size: 10.5px; color: #cbd5e1; line-height: 1.3; }
 
-  /* Bottom Bar */
-  .bot-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(7, 10, 19, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid var(--border);
-    padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8em;
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 10px; }
+  .badge-blue { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+  .badge-green { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+  .badge-yellow { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+  .badge-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+  
+  /* ACTION BUTTONS */
+  .btn-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .btn {
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
   }
+  .btn-green { background: #065f46; border-color: var(--accent-green); color: #ecfdf5; }
+  .btn-blue { background: #0369a1; border-color: var(--accent-blue); color: #f0f9ff; }
+
+  .pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 </style>
 </head>
 <body>
 
-  <!-- APP HEADER -->
-  <div class="app-header">
-    <div class="app-title">
-      <h1>🛡️ BAgent Mobile</h1>
-      <p>Sabato 29 Agosto 2026</p>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="brand">
+        🍓 BAgent Hub 24/7 — Portale Autonomo Raspberry Pi
+      </div>
+      <div class="status-badge">
+        <span class="pulse">●</span> OPERATIVO ● 24/7
+      </div>
     </div>
-    <div class="profit-pill">Cassa Ieri: +115.96 € 💰</div>
+    <div class="btn-bar">
+      <a class="btn btn-blue" href="schedine.html">Archivio schedine</a>
+    </div>
+    
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">💰 Bankroll</div>
+        <div class="stat-val">230.00 €</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🛡️ Hard Cap (8%)</div>
+        <div class="stat-val" style="color:var(--accent-blue);">18.40 €</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">⏱️ Ultimo Refresh</div>
+        <div class="stat-val" style="color:#fff; font-size:12px;">20:21:21</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🔄 Prossimo Ciclo</div>
+        <div class="stat-val" style="color:var(--accent-yellow); font-size:12px;">Live Flashscore Attivo (20:45 CEST)</div>
+      </div>
+    </div>
+
+    <div class="btn-bar">
+      <a class="btn btn-green" href="https://t.me/A502502_bot" target="_blank">📲 Apri Bot Telegram (@A502502_bot)</a>
+      <a class="btn btn-blue" href="javascript:location.reload()">🔄 Ricarica Live</a>
+    </div>
   </div>
 
-  <!-- TABS -->
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('tickets')">🎫 3 Ticket</button>
-    <button class="tab-btn" onclick="switchTab('matches')">🏟️ 6 Partite</button>
-    <button class="tab-btn" onclick="switchTab('refs')">⚖️ Arbitri</button>
-  </div>
-
-  <!-- TAB 1: 3 TICKETS -->
-  <div id="tab-tickets" class="tab-pane active">
-
-    <!-- TICKET 1 -->
-    <div class="m-ticket gold">
-      <div class="ticket-top">
-        <div class="ticket-name" style="color:var(--gold);">🛡️ 1. Quaterna d'Acciaio</div>
-        <div class="ticket-odds-badge">4.52×</div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">13:30</span><span class="m-ev-match">Liverpool - Forest</span></div>
-        <div><span class="m-ev-pick">1</span> <span class="m-ev-odd">@1.54</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">15:30</span><span class="m-ev-match">Lipsia - Gladbach</span></div>
-        <div><span class="m-ev-pick">1X + O1.5</span> <span class="m-ev-odd">@1.35</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">18:30</span><span class="m-ev-match">Dortmund - Amburgo</span></div>
-        <div><span class="m-ev-pick">1 + O1.5</span> <span class="m-ev-odd">@1.50</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">20:45</span><span class="m-ev-match">Lione - Le Havre</span></div>
-        <div><span class="m-ev-pick">1</span> <span class="m-ev-odd">@1.45</span></div>
-      </div>
-      <div class="ticket-footer">
-        <span>Stake: <strong>20.00 €</strong></span>
-        <span class="ticket-pot">Pot: 90.40 €</span>
-      </div>
-    </div>
-
-    <!-- TICKET 2 -->
-    <div class="m-ticket purple">
-      <div class="ticket-top">
-        <div class="ticket-name" style="color:var(--purple);">💎 2. Corner & Cartellini</div>
-        <div class="ticket-odds-badge purple">4.30×</div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">13:30</span><span class="m-ev-match">Liverpool - Forest</span></div>
-        <div><span class="m-ev-pick">Over 1.5 Casa</span> <span class="m-ev-odd">@1.45</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">15:30</span><span class="m-ev-match">Lipsia - Gladbach</span></div>
-        <div><span class="m-ev-pick">1X2 Corner: 1</span> <span class="m-ev-odd">@1.32</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">18:30</span><span class="m-ev-match">Dortmund - Amburgo</span></div>
-        <div><span class="m-ev-pick">Corner 1°T: 1</span> <span class="m-ev-odd">@1.45</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">21:30</span><span class="m-ev-match">Siviglia - Atlético</span></div>
-        <div><span class="m-ev-pick">Over 4.5 Cart.</span> <span class="m-ev-odd">@1.55</span></div>
-      </div>
-      <div class="ticket-footer">
-        <span>Stake: <strong>20.00 €</strong></span>
-        <span class="ticket-pot" style="color:var(--purple);">Pot: 86.00 €</span>
-      </div>
-    </div>
-
-    <!-- TICKET 3 -->
-    <div class="m-ticket blue">
-      <div class="ticket-top">
-        <div class="ticket-name" style="color:var(--blue);">⚡ 3. Quintina d'Elite</div>
-        <div class="ticket-odds-badge blue">9.62×</div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">13:30</span><span class="m-ev-match">Liverpool - Forest</span></div>
-        <div><span class="m-ev-pick">1 + O1.5</span> <span class="m-ev-odd">@1.72</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">15:30</span><span class="m-ev-match">Elversberg - Leverkusen</span></div>
-        <div><span class="m-ev-pick">2</span> <span class="m-ev-odd">@1.58</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">18:30</span><span class="m-ev-match">Tottenham - Newcastle</span></div>
-        <div><span class="m-ev-pick">Gol (BTTS)</span> <span class="m-ev-odd">@1.48</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">20:45</span><span class="m-ev-match">Juventus - Parma</span></div>
-        <div><span class="m-ev-pick">1X + U3.5</span> <span class="m-ev-odd">@1.45</span></div>
-      </div>
-      <div class="m-event-row">
-        <div><span class="m-ev-time">21:30</span><span class="m-ev-match">Siviglia - Atlético</span></div>
-        <div><span class="m-ev-pick">1X (Colpo)</span> <span class="m-ev-odd">@1.65</span></div>
-      </div>
-      <div class="ticket-footer">
-        <span>Stake: <strong>15.00 €</strong> (+6% Bonus)</span>
-        <span class="ticket-pot" style="color:var(--blue);">Pot: ~153.00 €</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- TAB 2: 6 MATCHES -->
-  <div id="tab-matches" class="tab-pane">
-
-    <!-- MATCH 1 -->
-    <div class="m-match">
-      <div class="m-match-header"><span>PREMIER LEAGUE</span><span>⏰ 13:30 CEST</span></div>
-      <div class="m-match-title">Liverpool vs Nottingham Forest</div>
-      <div class="m-lineups">
-        <strong>LFC:</strong> Alisson; Frimpong, Van Dijk, Kerkez; Wirtz, Isak, Gakpo.<br>
-        <strong>NFFC:</strong> Sels; Milenković, Murillo; Gibbs-White, Ndoye, Jesus.<br>
-        <div class="m-out">❌ Forest senza Sangaré e Savona. Campo bagnato ad Anfield.</div>
-      </div>
-      <div class="m-sesto">🧠 <strong>Sesto Senso:</strong> Debutto casalingo per Iraola. Ritmo altissimo su campo bagnato.</div>
-      <div class="m-pick-pill"><span>⭐ Pick: 1 (1X2 Liverpool)</span><span style="color:var(--gold);">@1.54</span></div>
-    </div>
-
-    <!-- MATCH 2 -->
-    <div class="m-match">
-      <div class="m-match-header"><span>BUNDESLIGA</span><span>⏰ 18:30 CEST</span></div>
-      <div class="m-match-title">Borussia Dortmund vs Hamburger SV</div>
-      <div class="m-lineups">
-        <strong>BVB:</strong> Kobel; Anton, Svensson, Ryerson; Veerman, Guirassy, Karetsas.<br>
-        <strong>HSV:</strong> Bornauw, Torunarigha, Jatta, Daka.<br>
-        <div class="m-out">❌ HSV con difesa decimata (Omari/Muheim OUT).</div>
-      </div>
-      <div class="m-sesto">🧠 <strong>Sesto Senso:</strong> Muro Giallo (81.000) e Guirassy dominante al centro.</div>
-      <div class="m-pick-pill"><span>⭐ Pick: 1 + Over 1.5 Gol</span><span style="color:var(--gold);">@1.50</span></div>
-    </div>
-
-    <!-- MATCH 3 -->
-    <div class="m-match">
-      <div class="m-match-header"><span>BUNDESLIGA</span><span>⏰ 15:30 CEST</span></div>
-      <div class="m-match-title">RB Lipsia vs Borussia M'gladbach</div>
-      <div class="m-sesto">🧠 <strong>Sesto Senso:</strong> Demichelis reduce da 6 gol in coppa. Gladbach fragile fuori casa.</div>
-      <div class="m-pick-pill"><span>⭐ Pick: 1X + Over 1.5</span><span style="color:var(--gold);">@1.35</span></div>
-    </div>
-
-    <!-- MATCH 4 -->
-    <div class="m-match">
-      <div class="m-match-header"><span>PREMIER LEAGUE</span><span>⏰ 18:30 CEST</span></div>
-      <div class="m-match-title">Tottenham vs Newcastle</div>
-      <div class="m-sesto">🧠 <strong>Sesto Senso:</strong> De Zerbi vs Jaissle a viso aperto. Entrambe concedono tantissimo.</div>
-      <div class="m-pick-pill"><span>🔥 Pick: Gol (Entrambe Segnano)</span><span style="color:var(--gold);">@1.48</span></div>
-    </div>
-
-    <!-- MATCH 5 -->
-    <div class="m-match">
-      <div class="m-match-header"><span>LALIGA — TRAPPOLA</span><span>⏰ 21:30 CEST</span></div>
-      <div class="m-match-title">Siviglia vs Atlético Madrid</div>
-      <div class="m-lineups">
-        <div class="m-out">🚨 Atlético senza Le Normand (rosso), Sørloth (infortunio) e Álvarez (febbre). 32°C a Siviglia.</div>
-      </div>
-      <div class="m-sesto">🧠 <strong>Sesto Senso:</strong> Siviglia a punteggio pieno in casa. Arbitro Rojas da 5.2 cartellini.</div>
-      <div class="m-pick-pill"><span>💥 Pick: Doppia Chance 1X</span><span style="color:var(--gold);">@1.65</span></div>
-    </div>
-
-    <!-- MATCH 6 -->
-    <div class="m-match">
-      <div class="m-match-header"><span>SERIE A</span><span>⏰ 20:45 CEST</span></div>
-      <div class="m-match-title">Juventus vs Parma</div>
-      <div class="m-lineups">
-        <div class="m-out">❌ Kenan Yildiz KO (piede sinistro). Juve con Douglas Luiz e Bremer.</div>
-      </div>
-      <div class="m-sesto">🧠 <strong>Sesto Senso:</strong> Parma blocco basso. Partita da punteggio controllato (1-0, 2-0).</div>
-      <div class="m-pick-pill"><span>🛡️ Pick: 1X + Under 3.5</span><span style="color:var(--gold);">@1.45</span></div>
-    </div>
-
-  </div>
-
-  <!-- TAB 3: REFEREES -->
-  <div id="tab-refs" class="tab-pane">
-
-    <div class="m-ref-card" style="border-color:var(--red);">
-      <div class="m-ref-head"><span>🇪🇸 Siviglia - Atlético (21:30)</span><span class="m-ref-stats">🚨 5.2 Gialli</span></div>
-      <div>Arbitro: <strong>Javier Alberola Rojas</strong> (VAR: Villanueva)</div>
-      <div style="font-size:0.75em; color:var(--red); margin-top:4px;">💥 Miniera Cartellini: Fischia tantissimo a 32°C. Over 4.5 Cartellini d'acciaio!</div>
-    </div>
-
-    <div class="m-ref-card">
-      <div class="m-ref-head"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Tottenham - Newcastle (18:30)</span><span class="m-ref-stats">4.6 Gialli</span></div>
-      <div>Arbitro: <strong>Peter Bankes</strong> (VAR PGMOL)</div>
-      <div style="font-size:0.75em; color:var(--muted); margin-top:4px;">Severo sui contatti precoci e falli tattici in ripartenza.</div>
-    </div>
-
-    <div class="m-ref-card">
-      <div class="m-ref-head"><span>🇩🇪 Dortmund - Amburgo (18:30)</span><span class="m-ref-stats">4.2 Gialli</span></div>
-      <div>Arbitro: <strong>Felix Zwayer</strong> (VAR DFB)</div>
-      <div style="font-size:0.75em; color:var(--muted); margin-top:4px;">Grande esperienza, severo sulle proteste al Westfalenstadion.</div>
-    </div>
-
-    <div class="m-ref-card">
-      <div class="m-ref-head"><span>🇮🇹 Juventus - Parma (20:45)</span><span class="m-ref-stats">4.0 Gialli</span></div>
-      <div>Arbitro: <strong>Francesco Fourneau</strong> (VAR Lissone)</div>
-      <div style="font-size:0.75em; color:var(--muted); margin-top:4px;">Meticoloso sui contatti in area e sulle perdite di tempo.</div>
-    </div>
-
-    <div class="m-ref-card">
-      <div class="m-ref-head"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Liverpool - Forest (13:30)</span><span class="m-ref-stats">3.8 Gialli</span></div>
-      <div>Arbitro: <strong>Sam Barrott</strong> (VAR: Michael Oliver)</div>
-      <div style="font-size:0.75em; color:var(--muted); margin-top:4px;">Lascia correre, favorisce ritmo fluido e corner Liverpool.</div>
-    </div>
-
-    <div class="m-ref-card">
-      <div class="m-ref-head"><span>🇩🇪 Lipsia - Gladbach (15:30)</span><span class="m-ref-stats">3.6 Gialli</span></div>
-      <div>Arbitro: <strong>Sven Jablonski</strong> (VAR DFB)</div>
-      <div style="font-size:0.75em; color:var(--muted); margin-top:4px;">Permissivo, favorisce le transizioni veloci.</div>
-    </div>
-
-    <div class="m-ref-card">
-      <div class="m-ref-head"><span>🇫🇷 Lione - Le Havre (20:45)</span><span class="m-ref-stats">3.5 Gialli</span></div>
-      <div>Arbitro: <strong>François Letexier</strong> (VAR FFF)</div>
-      <div style="font-size:0.75em; color:var(--muted); margin-top:4px;">Top referee internazionale, manovra fluida.</div>
-    </div>
-
-  </div>
-
-  <!-- FIXED BOTTOM BAR -->
-  <div class="bot-bar">
-    <span>Capitale: <strong>55.00 €</strong></span>
-    <span style="color:var(--gold); font-weight:800;">Potenziale: 329.40 € 🚀</span>
-  </div>
-
-  <script>
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+  <!-- SEZIONE 1: TICKET IN CORSO -->
+  <div class="card">
+    <h2>
+      <span>🎫 SCHEDINE & TICKET IN GIOCO (LIVE)</span>
+      <span class="badge badge-green">4 Attivi</span>
+    </h2>
+    <div class="ticket-grid">
       
-      if(tabId === 'tickets') {
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('tab-tickets').classList.add('active');
-      } else if(tabId === 'matches') {
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('tab-matches').classList.add('active');
-      } else if(tabId === 'refs') {
-        document.querySelectorAll('.tab-btn')[2].classList.add('active');
-        document.getElementById('tab-refs').classList.add('active');
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <div>
+                    <span class="badge badge-yellow">IN GIOCO (NETWIN)</span>
+                    <h3 class="ticket-title">Giocata utente Netwin - Bonus 1.53€</h3>
+                </div>
+                <div class="ticket-odds">3.40×</div>
+            </div>
+            <div class="ticket-meta">
+                <span>Rif: <code>TICKET_USER_NL_MULTIPLA4_01OCT</code></span>
+                <span>Stake: <strong>15.00 €</strong> ➔ Pot: <strong style="color:var(--accent-green);">52.63 €</strong></span>
+            </div>
+            <table>
+                <tbody>
+                    
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Galles vs Norvegia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + Over 1.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.28 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Germania vs Serbia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1 + Over 2.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.41 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Isole Far Oer vs Slovacchia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + MultiGol 1-5</span></td>
+                <td style="width: 15%; text-align: right;">@1.25 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Francia vs Italia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1 + Over 1.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.51 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+                </tbody>
+            </table>
+            <div class="cashout-box">🛡️ <strong>Cashout / Take-Profit Suggerito:</strong> Monitoraggio attivo live BAgent — Attesa esiti 1° Tempo.</div>
+        </div>
+        
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <div>
+                    <span class="badge badge-yellow">IN GIOCO (NETWIN)</span>
+                    <h3 class="ticket-title">Giocata utente Netwin</h3>
+                </div>
+                <div class="ticket-odds">3.15×</div>
+            </div>
+            <div class="ticket-meta">
+                <span>Rif: <code>TICKET_USER_NL_UNDER3_01OCT</code></span>
+                <span>Stake: <strong>25.00 €</strong> ➔ Pot: <strong style="color:var(--accent-green);">78.76 €</strong></span>
+            </div>
+            <table>
+                <tbody>
+                    
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Danimarca vs Portogallo</td>
+                <td style="width: 25%;"><span class="badge badge-blue">Under 3.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.52 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Germania vs Serbia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">Under 4.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.41 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Grecia vs Olanda</td>
+                <td style="width: 25%;"><span class="badge badge-blue">Under 3.5</span></td>
+                <td style="width: 15%; text-align: right;">@1.47 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+                </tbody>
+            </table>
+            <div class="cashout-box">🛡️ <strong>Cashout / Take-Profit Suggerito:</strong> Monitoraggio attivo live BAgent — Attesa esiti 1° Tempo.</div>
+        </div>
+        
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <div>
+                    <span class="badge badge-yellow">IN GIOCO (NETWIN)</span>
+                    <h3 class="ticket-title">Giocata utente Netwin - Bonus 11.33€</h3>
+                </div>
+                <div class="ticket-odds">11.33×</div>
+            </div>
+            <div class="ticket-meta">
+                <span>Rif: <code>TICKET_USER_NL_COMBO6_01OCT</code></span>
+                <span>Stake: <strong>10.00 €</strong> ➔ Pot: <strong style="color:var(--accent-green);">124.70 €</strong></span>
+            </div>
+            <table>
+                <tbody>
+                    
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Galles vs Norvegia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + MultiGol 2-5</span></td>
+                <td style="width: 15%; text-align: right;">@1.38 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Danimarca vs Portogallo</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + MultiGol 1-5</span></td>
+                <td style="width: 15%; text-align: right;">@1.45 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Grecia vs Olanda</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + MultiGol 1-5</span></td>
+                <td style="width: 15%; text-align: right;">@1.48 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Germania vs Serbia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1X + MultiGol 2-4</span></td>
+                <td style="width: 15%; text-align: right;">@1.60 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Bosnia Erzegovina vs Svezia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">X2 + MultiGol 1-5</span></td>
+                <td style="width: 15%; text-align: right;">@1.65 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Francia vs Italia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1X + MultiGol 1-4</span></td>
+                <td style="width: 15%; text-align: right;">@1.45 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+                </tbody>
+            </table>
+            <div class="cashout-box">🛡️ <strong>Cashout / Take-Profit Suggerito:</strong> Monitoraggio attivo live BAgent — Attesa esiti 1° Tempo.</div>
+        </div>
+        
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <div>
+                    <span class="badge badge-yellow">IN GIOCO (NETWIN)</span>
+                    <h3 class="ticket-title">Giocata utente Netwin - Corner 1° Tempo</h3>
+                </div>
+                <div class="ticket-odds">4.38×</div>
+            </div>
+            <div class="ticket-meta">
+                <span>Rif: <code>TICKET_USER_NL_CORNER3_01OCT</code></span>
+                <span>Stake: <strong>20.00 €</strong> ➔ Pot: <strong style="color:var(--accent-green);">87.67 €</strong></span>
+            </div>
+            <table>
+                <tbody>
+                    
+            <tr>
+                <td style="width: 15%; font-weight: 600;">18:00</td>
+                <td style="width: 45%;">Azerbaigian vs Liechtenstein</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1X2 Corner Tempo 1: 1</span></td>
+                <td style="width: 15%; text-align: right;">@1.19 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Grecia vs Olanda</td>
+                <td style="width: 25%;"><span class="badge badge-blue">1X2 Corner Tempo 1: 2</span></td>
+                <td style="width: 15%; text-align: right;">@1.97 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+            <tr>
+                <td style="width: 15%; font-weight: 600;">20:45</td>
+                <td style="width: 45%;">Germania vs Serbia</td>
+                <td style="width: 25%;"><span class="badge badge-blue">Over 4.5 Corner Tempo 1</span></td>
+                <td style="width: 15%; text-align: right;">@1.87 <span style="font-size:10px;">⏳</span></td>
+            </tr>
+            
+                </tbody>
+            </table>
+            <div class="cashout-box">🛡️ <strong>Cashout / Take-Profit Suggerito:</strong> Monitoraggio attivo live BAgent — Attesa esiti 1° Tempo.</div>
+        </div>
+        
+    </div>
+  </div>
+
+  <!-- SEZIONE 2: OPPORTUNITÀ D'ORO FILTRATE DA BETGUARD -->
+  <div class="card">
+    <h2>
+      <span>💎 OPPORTUNITÀ D'ORO VALIDATE DA BETGUARD (PROSSIME 24H)</span>
+      <span class="badge badge-blue">Regola #26 Attiva</span>
+    </h2>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 8%;">Ora</th>
+            <th style="width: 25%;">Partita & Torneo</th>
+            <th style="width: 15%;">Mercato Netwin</th>
+            <th style="width: 8%;">Quota</th>
+            <th style="width: 8%;">Edge</th>
+            <th style="width: 36%;">Sesto Senso & Validazione BetGuard</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+            <td style="font-weight: 700; color: var(--accent-blue);">20:45</td>
+            <td><strong>Germania vs Serbia</strong><br><span style="font-size: 10px; color: var(--text-muted);">UEFA Nations League</span></td>
+            <td><span class="badge badge-green">1X + MultiGol 2-5</span></td>
+            <td style="font-weight: 800;">@1.27</td>
+            <td><span class="badge badge-purple">+27.1%</span></td>
+            <td class="sesto-senso-cell">Germania corazzata casalinga dopo il pareggio con la Grecia. Copre 2-0, 2-1, 3-0, 3-1, 4-0, 1-1.</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: var(--accent-blue);">20:45</td>
+            <td><strong>Galles vs Norvegia</strong><br><span style="font-size: 10px; color: var(--text-muted);">UEFA Nations League</span></td>
+            <td><span class="badge badge-green">X2 + Over 1.5</span></td>
+            <td style="font-weight: 800;">@1.32</td>
+            <td><span class="badge badge-purple">+18.4%</span></td>
+            <td class="sesto-senso-cell">Spinta offensiva scandinava e vulnerabilità difensiva gallese. Copre ogni vittoria esterna e 1-1.</td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
 </body>
 </html>

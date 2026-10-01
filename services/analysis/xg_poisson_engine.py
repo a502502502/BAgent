@@ -25,6 +25,31 @@ def _clean_period_tokens(market_name: str) -> str:
     return re.sub(r"\s+", " ", cleaned).strip()
 
 
+def _parse_compound_periods(market_name: str) -> Optional[tuple[str, str]]:
+    raw = market_name.lower().strip()
+    raw = re.sub(r"\s*:\s*(?:si|sì|yes)$", "", raw).strip()
+    
+    # MultiGol A-B 1°T + C-D 2°T
+    m_mg = re.search(r"multigol\s*(\d+)-(\d+)\s*(?:1°?\s*t|primo\s*tempo).*?(?:multigol\s*)?(\d+)-(\d+)\s*(?:2°?\s*t|secondo\s*tempo)", raw)
+    if m_mg:
+        return f"multigol {m_mg.group(1)}-{m_mg.group(2)}", f"multigol {m_mg.group(3)}-{m_mg.group(4)}"
+        
+    # Over / Under nei due tempi (es. OV 1°T + OV 2°T 0.5 0.5 o Over 0.5 1°T + Over 0.5 2°T)
+    m_ov = re.search(r"(over|ov|under|un)\s*(\d+(?:\.\d+)?)?\s*(?:1°?\s*t|primo\s*tempo).*?(over|ov|under|un)\s*(\d+(?:\.\d+)?)?\s*(?:2°?\s*t|secondo\s*tempo)(?:\s*(\d+(?:\.\d+)?)\s*(\d+(?:\.\d+)?)?)?", raw)
+    if m_ov:
+        t1 = "under" if "un" in m_ov.group(1) else "over"
+        t2 = "under" if "un" in m_ov.group(3) else "over"
+        l1 = m_ov.group(2) or m_ov.group(5) or "0.5"
+        l2 = m_ov.group(4) or m_ov.group(6) or l1
+        return f"{t1} {l1}", f"{t2} {l2}"
+
+    # Gol entrambi i tempi / Over 0.5 entrambi i tempi
+    if ("entrambi i tempi" in raw and "over" in raw) or "gol entrambi i tempi" in raw or "gol in entrambi i tempi" in raw:
+        return "over 0.5", "over 0.5"
+
+    return None
+
+
 def _normalize_market_name(market_name: str) -> str:
     name = market_name.strip().lower().replace("–", "-").replace("—", "-")
     name = name.replace("+", " + ").replace(":", " ")
@@ -254,6 +279,19 @@ class QuantitativeEngine:
         """Intersezione di più mercati gol sulla stessa matrice. None se un nome non è mappato."""
         if not market_names:
             return None
+        if len(market_names) == 1:
+            compound = _parse_compound_periods(market_names[0])
+            if compound is not None:
+                c1, c2 = compound
+                m_1h, h_1h, a_1h, t_1h = self._score_axes(xg_home * 0.45, xg_away * 0.45)
+                m_2h, h_2h, a_2h, t_2h = self._score_axes(xg_home * 0.55, xg_away * 0.55)
+                mask_1h = _goal_clause_mask(c1, h_1h, a_1h, t_1h)
+                mask_2h = _goal_clause_mask(c2, h_2h, a_2h, t_2h)
+                if mask_1h is not None and mask_2h is not None:
+                    p_1h = float(np.sum(m_1h[mask_1h]))
+                    p_2h = float(np.sum(m_2h[mask_2h]))
+                    return p_1h * p_2h
+
         is_all_1h = all(_FIRST_HALF_REGEX.search(m) for m in market_names)
         is_all_2h = all(_SECOND_HALF_REGEX.search(m) for m in market_names)
         is_any_1h = any(_FIRST_HALF_REGEX.search(m) for m in market_names)

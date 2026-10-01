@@ -23,6 +23,18 @@ _ALIASES = {
     "francia": ("france", "francia"),
     "polonia": ("poland", "polonia"),
     "bosnia erzegovina": ("bosnia",),
+    "germania": ("germany", "germania"),
+    "serbia": ("serbia",),
+    "danimarca": ("denmark", "danimarca"),
+    "portogallo": ("portugal", "portogallo"),
+    "grecia": ("greece", "grecia"),
+    "olanda": ("netherlands", "holland", "olanda"),
+    "galles": ("wales", "galles"),
+    "norvegia": ("norway", "norvegia"),
+    "isole far oer": ("faroe", "far oer"),
+    "slovacchia": ("slovakia", "slovacchia"),
+    "azerbaigian": ("azerbaijan", "azerbaigian"),
+    "liechtenstein": ("liechtenstein",),
 }
 
 

@@ -1,0 +1,37 @@
+{
+  "ticket_id": "TICKET_USER_NL_CORNER3_01OCT",
+  "name": "TICKET_USER_NL_CORNER3_01OCT",
+  "created_at": "2026-10-01 20:15:00",
+  "total_odds": 4.38,
+  "stake": 20.0,
+  "potential_win": 87.67,
+  "status": "IN_PLAY",
+  "strategy": "USER_PLAYED_TICKET",
+  "notes": "Giocata utente Netwin - Corner 1° Tempo",
+  "legs": [
+    {
+      "match": "Azerbaigian vs Liechtenstein",
+      "tournament": "UEFA Nations League",
+      "pick": "1X2 Corner Tempo 1: 1",
+      "odds": 1.19,
+      "date_time": "2026-10-01 18:00 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Grecia vs Olanda",
+      "tournament": "UEFA Nations League",
+      "pick": "1X2 Corner Tempo 1: 2",
+      "odds": 1.97,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Germania vs Serbia",
+      "tournament": "UEFA Nations League",
+      "pick": "Over 4.5 Corner Tempo 1",
+      "odds": 1.87,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    }
+  ]
+}

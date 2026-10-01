@@ -1,0 +1,37 @@
+{
+  "ticket_id": "TICKET_USER_NL_UNDER3_01OCT",
+  "name": "TICKET_USER_NL_UNDER3_01OCT",
+  "created_at": "2026-10-01 20:15:00",
+  "total_odds": 3.15,
+  "stake": 25.0,
+  "potential_win": 78.76,
+  "status": "IN_PLAY",
+  "strategy": "USER_PLAYED_TICKET",
+  "notes": "Giocata utente Netwin",
+  "legs": [
+    {
+      "match": "Danimarca vs Portogallo",
+      "tournament": "UEFA Nations League",
+      "pick": "Under 3.5",
+      "odds": 1.52,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Germania vs Serbia",
+      "tournament": "UEFA Nations League",
+      "pick": "Under 4.5",
+      "odds": 1.41,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Grecia vs Olanda",
+      "tournament": "UEFA Nations League",
+      "pick": "Under 3.5",
+      "odds": 1.47,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    }
+  ]
+}

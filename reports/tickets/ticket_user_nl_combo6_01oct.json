@@ -1,0 +1,61 @@
+{
+  "ticket_id": "TICKET_USER_NL_COMBO6_01OCT",
+  "name": "TICKET_USER_NL_COMBO6_01OCT",
+  "created_at": "2026-10-01 20:15:00",
+  "total_odds": 11.33,
+  "stake": 10.0,
+  "potential_win": 124.7,
+  "status": "IN_PLAY",
+  "strategy": "USER_PLAYED_TICKET",
+  "notes": "Giocata utente Netwin - Bonus 11.33€",
+  "legs": [
+    {
+      "match": "Galles vs Norvegia",
+      "tournament": "UEFA Nations League",
+      "pick": "X2 + MultiGol 2-5",
+      "odds": 1.38,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Danimarca vs Portogallo",
+      "tournament": "UEFA Nations League",
+      "pick": "X2 + MultiGol 1-5",
+      "odds": 1.45,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Grecia vs Olanda",
+      "tournament": "UEFA Nations League",
+      "pick": "X2 + MultiGol 1-5",
+      "odds": 1.48,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Germania vs Serbia",
+      "tournament": "UEFA Nations League",
+      "pick": "1X + MultiGol 2-4",
+      "odds": 1.6,
+      "date_time": "2026-10-01 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Bosnia Erzegovina vs Svezia",
+      "tournament": "UEFA Nations League",
+      "pick": "X2 + MultiGol 1-5",
+      "odds": 1.65,
+      "date_time": "2026-10-02 20:45 CEST",
+      "status": "PENDING"
+    },
+    {
+      "match": "Francia vs Italia",
+      "tournament": "UEFA Nations League",
+      "pick": "1X + MultiGol 1-4",
+      "odds": 1.45,
+      "date_time": "2026-10-02 20:45 CEST",
+      "status": "PENDING"
+    }
+  ]
+}
