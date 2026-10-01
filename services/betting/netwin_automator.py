@@ -42,6 +42,24 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 RECEIPTS_DIR = ROOT_DIR / "reports" / "receipts"
 NETWIN_URL = "https://www.netwin.it/scommesse"
 
+
+def _ou_line(pick: str) -> float | None:
+    found = re.search(r"(\d+(?:[.,]\d+)?)", pick)
+    if found is None:
+        return None
+    return float(found.group(1).replace(",", "."))
+
+
+def _use_installed_chromium() -> None:
+    """Il percorso browser della sandbox è vuoto: usa il Chromium già scaricato in locale."""
+    configured = os.environ.get("PLAYWRIGHT_BROWSERS_PATH") or ""
+    bundled = Path(configured) / "chromium-1234" / "chrome-win64" / "chrome.exe" if configured else None
+    if bundled is not None and bundled.exists():
+        return
+    local = Path(os.environ.get("LOCALAPPDATA", "")) / "ms-playwright" / "chromium-1234" / "chrome-win64" / "chrome.exe"
+    if local.exists():
+        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(local.parent.parent.parent)
+
 class NetwinAutomator:
     """
     Automatore Playwright per Netwin.it (XSport Engine).
@@ -61,6 +79,7 @@ class NetwinAutomator:
             return self.page
 
         logger.info(f"Avvio Browser Chromium Netwin (Headless: {self.headless})...")
+        _use_installed_chromium()
         self._playwright = sync_playwright().start()
 
         user_agent = (
@@ -162,15 +181,17 @@ class NetwinAutomator:
             return False
 
     def click_match_row(self, team_name: str) -> bool:
-        """Clicca sulla riga del match per aprire la vista di lega e mercati."""
+        """Clicca il nome squadra visibile. I primi nodi omonimi sono div nascosti."""
         try:
-            # Pulisce il nome per il matching
-            clean_name = re.sub(r'[^a-zA-Z0-9 ]', '', team_name).strip()
+            clean_name = re.sub(r"[^a-zA-Z0-9 ]", "", team_name).strip()
             first_word = clean_name.split()[0] if clean_name.split() else clean_name
-            
-            match_el = self.page.locator(f":text-matches('{first_word}', 'i')").first
-            if match_el.is_visible(timeout=4000):
-                match_el.click()
+            pattern = re.compile(rf"^{re.escape(first_word)}$", re.IGNORECASE)
+            names = self.page.locator("p").filter(has_text=pattern)
+            for index in range(names.count()):
+                name = names.nth(index)
+                if not name.is_visible():
+                    continue
+                name.click()
                 logger.info(f"Riga match '{first_word}' cliccata per aprire i mercati.")
                 self.page.wait_for_timeout(1500)
                 return True
@@ -218,15 +239,9 @@ class NetwinAutomator:
                     self.page.wait_for_timeout(800)
                     return True
 
-            # 3. Under / Over
-            if "UNDER" in pick_clean or "OVER" in pick_clean:
-                is_under = "UNDER" in pick_clean
-                uo_target = 6 if is_under else 7  # colonna 6=Under, 7=Over nella vista standard 2.5
-                odds = self.page.locator(".contenitoreSingolaQuota").all()
-                if len(odds) >= 8:
-                    odds[uo_target].click()
-                    logger.info(f"✅ Quota Under/Over ({pick_clean}) selezionata con successo.")
-                    self.page.wait_for_timeout(800)
+            # 3. Under / Over sulla riga della squadra, linea 0.5 … 5.5
+            if ("UNDER" in pick_clean or "OVER" in pick_clean) and "+" not in pick_clean:
+                if self._click_row_ou(pick_clean):
                     return True
 
             # 4. Gol / NoGol
@@ -336,10 +351,46 @@ class NetwinAutomator:
         if not self.search_match(home_team):
             return False
 
+        self._row_team = home_team
         self.click_match_row(home_team)
 
         success = self.select_outcome(market=market, pick=pick, target_odd=odd)
         return success
+
+    def _click_row_ou(self, pick_clean: str) -> bool:
+        """Apre la linea nel menu della riga e clicca l'Under o l'Over visibile."""
+        line = _ou_line(pick_clean)
+        if line is None or self.page is None:
+            return False
+        token = re.sub(r"[^a-zA-Z0-9 ]", "", getattr(self, "_row_team", "")).split()
+        rows = self.page.locator(".contenitoreRiga")
+        if token:
+            rows = rows.filter(has_text=token[0])
+        if rows.count() == 0:
+            return False
+        row = rows.first
+        toggle = row.locator("button.dropdown-toggle").first
+        toggle.click(timeout=3000)
+        label = f"{line:g}"
+        option = self.page.locator(".dropdown-menu").get_by_text(label, exact=True).first
+        option.click(timeout=3000)
+        self.page.wait_for_timeout(400)
+        visible = []
+        quotes = row.locator(".contenitoreSingolaQuota")
+        for index in range(quotes.count()):
+            quote = quotes.nth(index)
+            try:
+                if quote.is_visible():
+                    visible.append(quote)
+            except Exception:
+                continue
+        slot = 6 if "UNDER" in pick_clean else 7
+        if len(visible) <= slot:
+            return False
+        visible[slot].click(timeout=3000)
+        logger.info(f"Quota Under/Over {pick_clean} selezionata sulla riga.")
+        self.page.wait_for_timeout(800)
+        return True
 
     def generate_booking_code(self, stake: float = 25.0) -> Dict[str, Any]:
         """
@@ -406,7 +457,12 @@ class NetwinAutomator:
 
         return res
 
-    def build_ticket_and_book(self, selections: List[Dict[str, Any]], stake: float = 25.0) -> Dict[str, Any]:
+    def build_ticket_and_book(
+        self,
+        selections: List[Dict[str, Any]],
+        stake: float = 25.0,
+        receipt_id: str | None = None,
+    ) -> Dict[str, Any]:
         """
         Flusso completo:
         1. Apre Netwin
@@ -438,6 +494,11 @@ class NetwinAutomator:
         book_res["events_added"] = added
         book_res["total_events"] = len(selections)
         book_res["stake"] = stake
+        code = book_res.get("booking_code")
+        if receipt_id and code and self.page is not None and not self.page.is_closed():
+            shot = RECEIPTS_DIR / f"prenotazione_{receipt_id}_{code}.png"
+            self.page.screenshot(path=str(shot), full_page=True)
+            book_res["screenshot"] = str(shot)
 
         self.close()
         return book_res

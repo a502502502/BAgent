@@ -49,6 +49,7 @@ class Slip:
     profit: float | None
     legs: list[SlipLeg] = field(default_factory=list)
     source: str = ""
+    booking_code: str | None = None
 
     @property
     def kickoff(self) -> datetime | None:
@@ -360,6 +361,8 @@ _PAGE = r"""<!DOCTYPE html>
   .semaforo-lost { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
   .semaforo-pending { background:rgba(234,179,8,0.15); color:var(--yellow); border:1px solid rgba(234,179,8,0.3); }
   .semaforo-void { background:rgba(148,163,184,0.15); color:var(--muted); border:1px solid rgba(148,163,184,0.3); }
+  .booking-badge { margin:8px 0 4px; padding:8px 10px; border:1px solid var(--yellow); border-radius:8px; background:#1e293b; color:var(--yellow); font-size:14px; }
+  .booking-badge strong { color:var(--text); font-size:18px; letter-spacing:0.12em; }
 </style>
 </head>
 <body>
@@ -412,6 +415,15 @@ function card(slip) {
   top.appendChild(title);
   top.appendChild(text("div", slip.odds || "—", "odd"));
   art.appendChild(top);
+  if (slip.booking_code) {
+    const booking = document.createElement("div");
+    booking.className = "booking-badge";
+    booking.appendChild(document.createTextNode("🎟️ Prenotazione Netwin: "));
+    const code = document.createElement("strong");
+    code.textContent = slip.booking_code;
+    booking.appendChild(code);
+    art.appendChild(booking);
+  }
   art.appendChild(text("div", "Stake " + (slip.stake || "—"), "meta"));
   const table = document.createElement("table");
   (slip.legs || []).forEach(function (leg) {
@@ -564,6 +576,7 @@ def _slip_from_json(path: Path) -> Slip | None:
         profit=_number(payload.get("profit_loss_eur")),
         legs=legs,
         source=path.name,
+        booking_code=_booking_code(payload.get("booking_code")),
     )
 
 
@@ -626,6 +639,7 @@ def _public_slip(slip: Slip, section: str) -> dict:
         "label": label,
         "stake": None if slip.stake is None else f"{slip.stake:.2f} €",
         "odds": None if slip.total_odds is None else f"{slip.total_odds:.2f}×",
+        "booking_code": slip.booking_code,
         "legs": [
             {
                 "when": _when_label(leg.when),
@@ -656,6 +670,13 @@ def _parse_when(value: str) -> datetime | None:
         except ValueError:
             continue
         return parsed.replace(tzinfo=ROME)
+    return None
+
+
+def _booking_code(value: object) -> str | None:
+    text = str(value or "").strip()
+    if len(text) == 6 and text.isdigit():
+        return text
     return None
 
 

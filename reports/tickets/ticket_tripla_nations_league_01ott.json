@@ -3,7 +3,7 @@
     "name": "Tripla Value Nations League (@2.78)",
     "created_at": "2026-09-30 14:35:00",
     "total_odds": 2.78,
-    "stake": 2.50,
+    "stake": 2.5,
     "potential_win": 6.95,
     "conjoint_prob": 0.558,
     "fair_odds": 1.79,
@@ -64,5 +64,6 @@
             "edge_pct": 12.4,
             "rationale": "Storico 2026/27 in bagent.db: 2 partite chiuse a testa (Danimarca xG 1.88-1.40, Portogallo xG 1.69-1.44) con shrinkage bayesiano (xG shrunk 1.17 - 1.25). Danimarca solida e tattica al Parken, Portogallo a gestione del ritmo. P=77.5% per Under 3.5 con edge +12.4%."
         }
-    ]
+    ],
+    "booking_code": "707503"
 }

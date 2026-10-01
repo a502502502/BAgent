@@ -131,7 +131,7 @@ def test_smoothing_is_applied():
     )
 
 
-def test_missing_profile_returns_none():
+def test_missing_profile_uses_neutral_prior():
 
     away = FootballTeamProfile(
         team_id="Away",
@@ -147,10 +147,11 @@ def test_missing_profile_returns_none():
         )
     )
 
-    assert contribution is None
+    assert contribution is not None
+    assert contribution.details.get("missing_profile_policy") == "neutral_prior"
 
 
-def test_no_history_returns_none():
+def test_neither_has_history_returns_none():
 
     home = FootballTeamProfile(
         team_id="Home",
@@ -161,8 +162,7 @@ def test_no_history_returns_none():
     away = FootballTeamProfile(
         team_id="Away",
         team_name="Away",
-        matches=10,
-        wins=5,
+        matches=0,
     )
 
     contribution = (

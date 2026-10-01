@@ -4,7 +4,7 @@
     "period": "Weekend 3-4 Ottobre 2026",
     "created_at": "2026-09-29 14:15:00",
     "total_odds": 2.66,
-    "stake": 0.80,
+    "stake": 0.8,
     "potential_win": 2.13,
     "conjoint_prob": 0.507,
     "edge_pct": 34.9,
@@ -43,5 +43,6 @@
             "edge_pct": 12.3,
             "rationale": "Clasico Cordobes: altissima tensione agonistica, fallosita e ritmi bloccati nella prima frazione. Nessuna delle due squadre rischia nei primi 45'."
         }
-    ]
+    ],
+    "booking_code": "195589"
 }
