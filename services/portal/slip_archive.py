@@ -34,6 +34,8 @@ class SlipLeg:
     odd: float | None
     when: datetime | None
     tournament: str = ""
+    result: str = ""
+    score: str = ""
 
 
 @dataclass
@@ -69,6 +71,199 @@ class Slip:
         return "past"
 
 
+def _clean_team_name(name: str) -> str:
+    alias = {
+        "germania": "germany", "grecia": "greece", "olanda": "netherlands",
+        "danimarca": "denmark", "portogallo": "portugal", "azerbaigian": "azerbaijan",
+        "liechtenstein": "liechtenstein", "malta": "malta", "gibilterra": "gibraltar",
+        "galles": "wales", "norvegia": "norway", "austria": "austria",
+        "irlanda": "republic of ireland", "israele": "israel", "kosovo": "kosovo",
+        "croazia": "croatia", "polonia": "poland", "belgio": "belgium",
+        "francia": "france", "italia": "italy", "spagna": "spain",
+        "isole far oer": "faroe islands", "bosnia erzegovina": "bosnia and herzegovina",
+        "bosnia ed erzegovina": "bosnia and herzegovina", "slovacchia": "slovakia",
+        "svezia": "sweden", "inghilterra": "england", "scozia": "scotland",
+        "svizzera": "switzerland", "turchia": "turkey", "ungheria": "hungary",
+    }
+    low = name.strip().lower()
+    return alias.get(low, low)
+
+
+def _evaluate_pick(
+    pick: str,
+    h_goals: int,
+    a_goals: int,
+    ht_h: int | None = None,
+    ht_a: int | None = None,
+) -> bool | None:
+    p = pick.strip().lower()
+    tot = h_goals + a_goals
+
+    # Under / Over standard
+    if p in ("under 0.5", "u0.5"): return tot <= 0
+    if p in ("under 1.5", "u1.5"): return tot <= 1
+    if p in ("under 2.5", "u2.5"): return tot <= 2
+    if p in ("under 3.5", "u3.5"): return tot <= 3
+    if p in ("under 4.5", "u4.5"): return tot <= 4
+    if p in ("under 5.5", "u5.5"): return tot <= 5
+    if p in ("over 0.5", "o0.5"): return tot >= 1
+    if p in ("over 1.5", "o1.5"): return tot >= 2
+    if p in ("over 2.5", "o2.5"): return tot >= 3
+    if p in ("over 3.5", "o3.5"): return tot >= 4
+    if p in ("over 4.5", "o4.5"): return tot >= 5
+
+    # 1X2 / Doppia Chance
+    if p == "1": return h_goals > a_goals
+    if p in ("x", "pareggio"): return h_goals == a_goals
+    if p == "2": return h_goals < a_goals
+    if p == "1x": return h_goals >= a_goals
+    if p == "x2": return h_goals <= a_goals
+    if p == "12": return h_goals != a_goals
+
+    # Gol / NoGol
+    if p in ("gol", "gg", "btts"): return h_goals > 0 and a_goals > 0
+    if p in ("nogol", "no gol", "ng"): return h_goals == 0 or a_goals == 0
+
+    # MultiGol Squadra
+    if p == "multigol 0-2 casa": return 0 <= h_goals <= 2
+    if p == "multigol 0-2 ospite": return 0 <= a_goals <= 2
+    if p == "multigol 0-3 casa": return 0 <= h_goals <= 3
+    if p == "multigol 0-3 ospite": return 0 <= a_goals <= 3
+    if p == "multigol 1-3 casa": return 1 <= h_goals <= 3
+    if p == "multigol 1-3 ospite": return 1 <= a_goals <= 3
+
+    # MultiGol Match
+    if p == "multigol 1-4": return 1 <= tot <= 4
+    if p == "multigol 1-5": return 1 <= tot <= 5
+    if p == "multigol 2-4": return 2 <= tot <= 4
+    if p == "multigol 2-5": return 2 <= tot <= 5
+    if p == "multigol 1-3": return 1 <= tot <= 3
+    if p == "multigol 2-3": return 2 <= tot <= 3
+
+    # 1° Tempo
+    if "1° tempo" in p or "1t" in p:
+        if ht_h is None or ht_a is None:
+            return None
+        tot_ht = ht_h + ht_a
+        if "1 1° tempo" in p or "1 1t" in p: return ht_h > ht_a
+        if "x 1° tempo" in p or "x 1t" in p: return ht_h == ht_a
+        if "2 1° tempo" in p or "2 1t" in p: return ht_h < ht_a
+        if "1x 1° tempo" in p or "1x 1t" in p: return ht_h >= ht_a
+        if "x2 1° tempo" in p or "x2 1t" in p: return ht_h <= ht_a
+        if "0-1" in p: return 0 <= tot_ht <= 1
+        if "under 1.5" in p: return tot_ht <= 1
+
+    # Combo Congiunte (+)
+    if " + " in p:
+        parts = p.split(" + ")
+        res_parts = [_evaluate_pick(sub, h_goals, a_goals, ht_h, ht_a) for sub in parts]
+        if any(r is False for r in res_parts):
+            return False
+        if all(r is True for r in res_parts):
+            return True
+        return None
+
+    # Chance Mix (o)
+    if " o " in p:
+        clean_expr = p.replace("chance mix:", "").strip()
+        parts = clean_expr.split(" o ")
+        res_parts = [_evaluate_pick(sub, h_goals, a_goals, ht_h, ht_a) for sub in parts]
+        if any(r is True for r in res_parts):
+            return True
+        if all(r is False for r in res_parts):
+            return False
+        return None
+
+    return None
+
+
+def _load_finished_matches(db_path: Path) -> dict[tuple[str, str], dict]:
+    if not db_path.exists():
+        return {}
+    try:
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row
+    except sqlite3.Error:
+        return {}
+    cache = {}
+    try:
+        cursor = conn.execute(
+            "SELECT home_team, away_team, home_goals, away_goals, home_goals_ht, away_goals_ht FROM matches WHERE status='FT'"
+        )
+        for row in cursor:
+            h = _clean_team_name(str(row["home_team"] or ""))
+            a = _clean_team_name(str(row["away_team"] or ""))
+            if h and a and row["home_goals"] is not None and row["away_goals"] is not None:
+                cache[(h, a)] = {
+                    "h_goals": int(row["home_goals"]),
+                    "a_goals": int(row["away_goals"]),
+                    "ht_h": int(row["home_goals_ht"]) if row["home_goals_ht"] is not None else None,
+                    "ht_a": int(row["away_goals_ht"]) if row["away_goals_ht"] is not None else None,
+                }
+    except sqlite3.Error:
+        pass
+    finally:
+        conn.close()
+    return cache
+
+
+def _resolve_leg_outcome(
+    match_str: str,
+    pick: str,
+    finished: dict[tuple[str, str], dict],
+) -> tuple[str | None, str]:
+    delimiter = " vs " if " vs " in match_str else (" - " if " - " in match_str else None)
+    if not delimiter:
+        return None, ""
+    parts = match_str.split(delimiter, 1)
+    h_clean = _clean_team_name(parts[0])
+    a_clean = _clean_team_name(parts[1])
+    match_info = finished.get((h_clean, a_clean))
+    if not match_info:
+        return None, ""
+    h_g = match_info["h_goals"]
+    a_g = match_info["a_goals"]
+    outcome = _evaluate_pick(pick, h_g, a_g, match_info.get("ht_h"), match_info.get("ht_a"))
+    score_str = f"{h_g}-{a_g}"
+    if outcome is True:
+        return "WON", score_str
+    if outcome is False:
+        return "LOST", score_str
+    return None, score_str
+
+
+def _settle_slip_legs(slip: Slip, finished: dict[tuple[str, str], dict]) -> None:
+    updated: list[SlipLeg] = []
+    for leg in slip.legs:
+        res = (leg.result or "").upper()
+        score = leg.score or ""
+        if res not in ("WON", "LOST", "VOID"):
+            eval_res, eval_score = _resolve_leg_outcome(leg.match, leg.pick, finished)
+            if eval_res:
+                res = eval_res
+                score = eval_score
+            else:
+                res = "PENDING"
+        updated.append(
+            SlipLeg(
+                match=leg.match,
+                pick=leg.pick,
+                odd=leg.odd,
+                when=leg.when,
+                tournament=leg.tournament,
+                result=res,
+                score=score,
+            )
+        )
+    slip.legs = updated
+    if slip.status not in _CLOSED and updated:
+        statuses = [l.result for l in updated]
+        if all(s == "WON" for s in statuses):
+            slip.status = "WON"
+        elif any(s == "LOST" for s in statuses):
+            slip.status = "LOST"
+
+
 def load_slips(
     tickets_dir: Path | None = None,
     db_path: Path | None = None,
@@ -87,6 +282,12 @@ def load_slips(
         if previous is not None and not slip.legs:
             slip.legs = previous.legs
         found[slip.slip_id] = slip
+
+    # Risoluzione automatica esiti e semafori da database delle partite chiuse (FT)
+    matches_cache = _load_finished_matches(database)
+    for slip in found.values():
+        _settle_slip_legs(slip, matches_cache)
+
     return list(found.values())
 
 
@@ -162,6 +363,11 @@ _PAGE = r"""<!DOCTYPE html>
   td { padding:6px 0; border-top:1px solid var(--line); vertical-align:top; }
   .pick { color:var(--blue); }
   .Vinta { color:var(--green); } .Persa { color:var(--red); } .Futura, .In, .corso { color:var(--yellow); }
+  .semaforo { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+  .semaforo-won { background:rgba(34,197,94,0.15); color:var(--green); border:1px solid rgba(34,197,94,0.3); }
+  .semaforo-lost { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
+  .semaforo-pending { background:rgba(234,179,8,0.15); color:var(--yellow); border:1px solid rgba(234,179,8,0.3); }
+  .semaforo-void { background:rgba(148,163,184,0.15); color:var(--muted); border:1px solid rgba(148,163,184,0.3); }
 </style>
 </head>
 <body>
@@ -243,6 +449,25 @@ function card(slip) {
     match.appendChild(text("div", leg.pick || "", "pick"));
     row.appendChild(match);
     row.appendChild(text("td", leg.odd || "—"));
+    const semTd = document.createElement("td");
+    semTd.style.textAlign = "right";
+    const badge = document.createElement("span");
+    const st = (leg.result || "").toUpperCase();
+    if (st === "WON" || st === "VINTA" || st === "PRESA") {
+      badge.className = "semaforo semaforo-won";
+      badge.textContent = "🟢 Presa" + (leg.score ? " (" + leg.score + ")" : "");
+    } else if (st === "LOST" || st === "PERSA") {
+      badge.className = "semaforo semaforo-lost";
+      badge.textContent = "🔴 Persa" + (leg.score ? " (" + leg.score + ")" : "");
+    } else if (st === "VOID" || st === "RIMBORSO") {
+      badge.className = "semaforo semaforo-void";
+      badge.textContent = "⚪ Void";
+    } else {
+      badge.className = "semaforo semaforo-pending";
+      badge.textContent = "🟡 In attesa" + (leg.score ? " (" + leg.score + ")" : "");
+    }
+    semTd.appendChild(badge);
+    row.appendChild(semTd);
     table.appendChild(row);
   });
   art.appendChild(table);
@@ -421,6 +646,7 @@ def _slip_from_json(path: Path) -> Slip | None:
             clock = _parse_when(created.strftime("%Y-%m-%d") + " " + str(raw.get("time")))
             when = clock
         odd = _number(raw.get("netwin_odds") or raw.get("odds"))
+        res_raw = str(raw.get("result") or raw.get("status") or raw.get("result_status") or "").upper()
         legs.append(
             SlipLeg(
                 match=str(raw.get("match") or ""),
@@ -428,6 +654,8 @@ def _slip_from_json(path: Path) -> Slip | None:
                 odd=odd,
                 when=when,
                 tournament=str(raw.get("tournament") or ""),
+                result=res_raw,
+                score=str(raw.get("score") or ""),
             )
         )
     return Slip(
@@ -470,6 +698,8 @@ def _slips_from_db(db_path: Path) -> list[Slip]:
                             odd=_number(leg["odds"]),
                             when=None,
                             tournament=str(leg["tournament"] or ""),
+                            result=str(leg["result_status"] or "").upper(),
+                            score="",
                         )
                     )
             slips.append(
@@ -506,6 +736,8 @@ def _public_slip(slip: Slip, section: str) -> dict:
                 "match": leg.match,
                 "pick": leg.pick,
                 "odd": "—" if leg.odd is None else f"{leg.odd:.2f}",
+                "result": leg.result or "PENDING",
+                "score": leg.score or "",
             }
             for leg in slip.legs
         ],

@@ -75,6 +75,49 @@ def test_a_title_with_markup_is_escaped(tmp_path):
     assert "\\u003cscript>" in page
 
 
+def test_leg_outcome_and_semaforo_flag_rendered_correctly(tmp_path):
+    # Setup test DB with finished match
+    db = tmp_path / "bagent.db"
+    conn = sqlite3.connect(db)
+    conn.execute(
+        """CREATE TABLE matches (
+            home_team TEXT, away_team TEXT, status TEXT,
+            home_goals INTEGER, away_goals INTEGER, home_goals_ht INTEGER, away_goals_ht INTEGER
+        )"""
+    )
+    conn.execute("INSERT INTO matches VALUES ('Germany', 'Serbia', 'FT', 2, 1, 1, 0)")
+    conn.commit()
+    conn.close()
+
+    # Slip with two legs: Under 3.5 (WON) and Under 2.5 (LOST)
+    path = tmp_path / "test_ticket.json"
+    path.write_text(
+        json.dumps(
+            {
+                "ticket_id": "TEST_SEMAFORO",
+                "name": "Test Semaforo",
+                "status": "PENDING",
+                "legs": [
+                    {"match": "Germania vs Serbia", "pick": "Under 3.5", "netwin_odds": 1.40, "date_time": "2026-09-24 20:45"},
+                    {"match": "Grecia vs Olanda", "pick": "Under 2.5", "netwin_odds": 1.60, "date_time": "2026-10-02 20:45"},
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    slips = load_slips(tmp_path, db)
+    slip = slips[0]
+    assert slip.legs[0].result == "WON"
+    assert slip.legs[0].score == "2-1"
+    assert slip.legs[1].result == "PENDING"
+
+    page = render_slip_page(slips, NOW)
+    assert "semaforo" in page
+    assert "semaforo-won" in page
+    assert "Presa" in page
+
+
 def _write(folder, filename, slip_id, kickoff, match, pick):
     (folder / filename).write_text(
         json.dumps(
