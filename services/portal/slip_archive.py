@@ -566,7 +566,7 @@ def _slip_from_json(path: Path) -> Slip | None:
     if not isinstance(payload, dict):
         return None
     slip_id = str(payload.get("ticket_id") or path.stem)
-    created = _parse_when(str(payload.get("created_at") or ""))
+    created = _parse_when(str(payload.get("created_at") or payload.get("date_created") or ""))
     legs = []
     for raw in payload.get("legs") or []:
         if not isinstance(raw, dict):
@@ -580,7 +580,7 @@ def _slip_from_json(path: Path) -> Slip | None:
         legs.append(
             SlipLeg(
                 match=str(raw.get("match") or ""),
-                pick=str(raw.get("pick") or raw.get("selection") or ""),
+                pick=str(raw.get("pick") or raw.get("selection") or raw.get("market") or ""),
                 odd=odd,
                 when=when,
                 tournament=str(raw.get("tournament") or ""),
@@ -590,11 +590,11 @@ def _slip_from_json(path: Path) -> Slip | None:
         )
     return Slip(
         slip_id=slip_id,
-        title=str(payload.get("name") or payload.get("description") or slip_id),
+        title=str(payload.get("title") or payload.get("name") or payload.get("description") or slip_id),
         status=str(payload.get("status") or "").upper(),
         stake=_number(payload.get("stake") or payload.get("stake_eur")),
         total_odds=_number(payload.get("total_odds")),
-        payout=_number(payload.get("payout_eur") or payload.get("potential_win")),
+        payout=_number(payload.get("payout_eur") or payload.get("potential_win") or payload.get("potential_payout_eur")),
         profit=_number(payload.get("profit_loss_eur")),
         legs=legs,
         source=path.name,
