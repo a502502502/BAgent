@@ -1,0 +1,39 @@
+{
+  "ticket_id": "TICKET_RADDOPPIO_ARGENTINA_03OCT",
+  "name": "Raddoppio D'Acciaio Argentina (Avellaneda + Mendoza)",
+  "title": "Raddoppio D'Acciaio Argentina (Avellaneda + Mendoza)",
+  "created_at": "2026-10-02 23:50:00",
+  "date_created": "2026-10-02 23:50:00",
+  "stake": 10.0,
+  "stake_eur": 10.0,
+  "total_odds": 2.57,
+  "potential_win": 25.74,
+  "potential_payout_eur": 25.74,
+  "status": "OPEN",
+  "strategy": "DNA_SUDAMERICA_UNDER35",
+  "notes": "Raddoppio certificato da strict_validator: Independiente 1X+U3.5 (@1.56) + Rivadavia 1X+U3.5 (@1.65 con Edge +6.8% Stella)",
+  "legs": [
+    {
+      "match": "Independiente vs Instituto Cordoba",
+      "tournament": "Liga Profesional Argentina",
+      "market": "1X + Under 3.5",
+      "pick": "1X + Under 3.5",
+      "odds": 1.56,
+      "netwin_odds": 1.56,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 00:15 CEST",
+      "date_time": "2026-10-03 00:15 CEST"
+    },
+    {
+      "match": "Independiente Rivadavia vs Gimnasia La Plata",
+      "tournament": "Liga Profesional Argentina",
+      "market": "1X + Under 3.5",
+      "pick": "1X + Under 3.5",
+      "odds": 1.65,
+      "netwin_odds": 1.65,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 02:30 CEST",
+      "date_time": "2026-10-03 02:30 CEST"
+    }
+  ]
+}
