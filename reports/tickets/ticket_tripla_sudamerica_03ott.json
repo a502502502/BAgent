@@ -1,0 +1,37 @@
+{
+  "ticket_id": "TICKET_SUDAMERICA_TRIPLA_03OCT",
+  "title": "Tripla Notturna Sudamerica (Argentina + Brasile)",
+  "date_created": "2026-10-02 22:35:00",
+  "stake_eur": 5.0,
+  "total_odds": 3.46,
+  "potential_payout_eur": 17.30,
+  "status": "OPEN",
+  "strategy": "DNA_SUDAMERICA_UNDER35",
+  "notes": "Formula protetta 1X + Under 3.5 coerente con il DNA dei campionati sudamericani ad alto attrito",
+  "legs": [
+    {
+      "match": "Independiente vs Instituto Cordoba",
+      "tournament": "Liga Profesional Argentina",
+      "market": "1X + Under 3.5",
+      "odds": 1.56,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 00:15 CEST"
+    },
+    {
+      "match": "Sao Paulo Fc Sp vs Santos Sp",
+      "tournament": "Serie A Brasiliana",
+      "market": "1X + Under 3.5",
+      "odds": 1.55,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 01:00 CEST"
+    },
+    {
+      "match": "Boca Juniors vs Union Santa Fe",
+      "tournament": "Liga Profesional Argentina",
+      "market": "1X + Under 3.5",
+      "odds": 1.43,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 02:30 CEST"
+    }
+  ]
+}

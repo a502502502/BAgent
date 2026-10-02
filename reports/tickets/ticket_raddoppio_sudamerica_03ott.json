@@ -1,0 +1,29 @@
+{
+  "ticket_id": "TICKET_SUDAMERICA_RADDOPPIO_03OCT",
+  "title": "Raddoppio Flash Sudamerica (Argentina + Brasile)",
+  "date_created": "2026-10-02 22:35:00",
+  "stake_eur": 10.0,
+  "total_odds": 2.42,
+  "potential_payout_eur": 24.18,
+  "status": "OPEN",
+  "strategy": "DNA_SUDAMERICA_UNDER35",
+  "notes": "Raddoppio secco ad alta probabilità sui due big match di mezzanotte e dell'1:00",
+  "legs": [
+    {
+      "match": "Independiente vs Instituto Cordoba",
+      "tournament": "Liga Profesional Argentina",
+      "market": "1X + Under 3.5",
+      "odds": 1.56,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 00:15 CEST"
+    },
+    {
+      "match": "Sao Paulo Fc Sp vs Santos Sp",
+      "tournament": "Serie A Brasiliana",
+      "market": "1X + Under 3.5",
+      "odds": 1.55,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 01:00 CEST"
+    }
+  ]
+}

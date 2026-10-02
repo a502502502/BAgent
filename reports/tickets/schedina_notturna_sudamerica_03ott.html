@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAgent — Schedine Notturne Sudamerica (Argentina & Brasile)</title>
+<style>
+  :root {
+    --bg: #090e17;
+    --card-bg: #111a2e;
+    --card-border: #1e2c4a;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --cyan: #38bdf8;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --purple: #a855f7;
+    --rose: #f43f5e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 24px 16px 60px;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .badge-header {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 40%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 650px;
+    margin: 0 auto;
+  }
+  .ticket-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .ticket-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+  }
+  .ticket-card.tripla::before {
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+  }
+  .ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .ticket-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .ticket-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stats-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 8px 14px;
+    text-align: center;
+    min-width: 90px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .stat-val {
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    margin-top: 2px;
+  }
+  .stat-val.highlight { color: var(--green); }
+  .stat-val.cyan { color: var(--cyan); }
+  .stat-val.yellow { color: var(--yellow); }
+  
+  .leg-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .leg-item {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .leg-left {
+    flex: 1;
+    min-width: 250px;
+  }
+  .leg-match {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .leg-league {
+    font-size: 11px;
+    color: var(--cyan);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .leg-kickoff {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .leg-pick-badge {
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-align: right;
+  }
+  .leg-odd {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--green);
+    margin-left: 8px;
+  }
+  .leg-rationale {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(255,255,255,0.06);
+    width: 100%;
+  }
+  .dna-box {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #fde68a;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .dna-box strong { color: var(--yellow); }
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 40px;
+    border-top: 1px solid var(--card-border);
+    padding-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="badge-header">Palinsesto Notturno Ufficiale • 02-03 Ottobre 2026</div>
+    <h1>BAgent — Schedine Notturne Sudamerica</h1>
+    <p class="subtitle">Quote ufficiali Netwin.it calcolate sul DNA dei campionati di Argentina e Brasile: abolizione del segno 1X2 rigido e protezione totale con mercati asimmetrici <strong>1X + Under 3.5</strong>.</p>
+  </header>
+
+  <div class="dna-box">
+    <strong>🛡️ Regola DNA Sudamerica (#82 & #51):</strong> In Argentina e Brasile i match sono caratterizzati da baricentri bassi, media di soli 1.8 gol a partita e continue interruzioni fisiche. Vietato scommettere sul segno 1 o 2 secco: la combo protetta <code>1X + Under 3.5</code> copre contemporaneamente 6 risultati esatti (1-0, 0-0, 2-0, 1-1, 2-1, 3-0), garantendo una tenuta matematica impenetrabile.
+  </div>
+
+  <!-- TICKET 1: IL RADDOPPIO FLASH -->
+  <div class="ticket-card">
+    <div class="ticket-header">
+      <div>
+        <div class="ticket-title">⚡ Schedina 1: Il Raddoppio Flash Sudamerica</div>
+        <div class="ticket-meta">2 Selezioni • Inizio ore 00:15 CEST • Formula Top Safety</div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-pill">
+          <div class="stat-label">Quota Totale</div>
+          <div class="stat-val cyan">@ 2.42</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">P(Reale)</div>
+          <div class="stat-val highlight">41.8%</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Stake</div>
+          <div class="stat-val">10.00 €</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Vincita</div>
+          <div class="stat-val highlight">24.18 €</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="leg-list">
+      <!-- LEG 1 -->
+      <div class="leg-item">
+        <div class="leg-left">
+          <div class="leg-league">🇦🇷 Argentina • Liga Profesional</div>
+          <div class="leg-match">Independiente vs Instituto Cordoba</div>
+          <div class="leg-kickoff">Calcio d'inizio: 03/10/2026 ore 00:15 CEST</div>
+        </div>
+        <div class="leg-pick-badge">
+          1X + Under 3.5 <span class="leg-odd">@ 1.56</span>
+        </div>
+        <div class="leg-rationale">
+          <strong>Sesto Senso:</strong> All'Estadio Libertadores de América i padroni di casa controllano il ritmo con possesso prolungato. L'Instituto si difende con blocco basso a 5 per strappare lo 0-0. P(Reale) 66.8% con Edge +4.2%.
+        </div>
+      </div>
+
+      <!-- LEG 2 -->
+      <div class="leg-item">
+        <div class="leg-left">
+          <div class="leg-league">🇧🇷 Brasile • Serie A (Brasileirão)</div>
+          <div class="leg-match">Sao Paulo vs Santos</div>
+          <div class="leg-kickoff">Calcio d'inizio: 03/10/2026 ore 01:00 CEST</div>
+        </div>
+        <div class="leg-pick-badge">
+          1X + Under 3.5 <span class="leg-odd">@ 1.55</span>
+        </div>
+        <div class="leg-rationale">
+          <strong>Sesto Senso:</strong> Grande Clássico San-São al Morumbi. Derby teso e sentitissimo tra due formazioni che concedono pochissimo spazio. Il San Paolo è storicamente roccioso in casa, Santos di pura rimessa.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKET 2: LA TRIPLA NOTTURNA -->
+  <div class="ticket-card tripla">
+    <div class="ticket-header">
+      <div>
+        <div class="ticket-title">🏆 Schedina 2: La Tripla Notturna Sudamerica</div>
+        <div class="ticket-meta">3 Selezioni • Fino alle 02:30 CEST • Alta Resa</div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-pill">
+          <div class="stat-label">Quota Totale</div>
+          <div class="stat-val cyan">@ 3.46</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">P(Reale)</div>
+          <div class="stat-val highlight">28.6%</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Stake</div>
+          <div class="stat-val">5.00 €</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Vincita</div>
+          <div class="stat-val highlight">17.30 €</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="leg-list">
+      <!-- LEG 1 -->
+      <div class="leg-item">
+        <div class="leg-left">
+          <div class="leg-league">🇦🇷 Argentina • Liga Profesional</div>
+          <div class="leg-match">Independiente vs Instituto Cordoba</div>
+          <div class="leg-kickoff">Calcio d'inizio: 03/10/2026 ore 00:15 CEST</div>
+        </div>
+        <div class="leg-pick-badge">
+          1X + Under 3.5 <span class="leg-odd">@ 1.56</span>
+        </div>
+        <div class="leg-rationale">
+          <strong>Sesto Senso:</strong> Difesa casalinga impenetrabile, match da 1-0 o 1-1.
+        </div>
+      </div>
+
+      <!-- LEG 2 -->
+      <div class="leg-item">
+        <div class="leg-left">
+          <div class="leg-league">🇧🇷 Brasile • Serie A (Brasileirão)</div>
+          <div class="leg-match">Sao Paulo vs Santos</div>
+          <div class="leg-kickoff">Calcio d'inizio: 03/10/2026 ore 01:00 CEST</div>
+        </div>
+        <div class="leg-pick-badge">
+          1X + Under 3.5 <span class="leg-odd">@ 1.55</span>
+        </div>
+        <div class="leg-rationale">
+          <strong>Sesto Senso:</strong> Il derby paulista garantisce ritmi spezzettati e pochissimi varchi.
+        </div>
+      </div>
+
+      <!-- LEG 3 -->
+      <div class="leg-item">
+        <div class="leg-left">
+          <div class="leg-league">🇦🇷 Argentina • Liga Profesional</div>
+          <div class="leg-match">Boca Juniors vs Union Santa Fe</div>
+          <div class="leg-kickoff">Calcio d'inizio: 03/10/2026 ore 02:30 CEST</div>
+        </div>
+        <div class="leg-pick-badge">
+          1X + Under 3.5 <span class="leg-odd">@ 1.43</span>
+        </div>
+        <div class="leg-rationale">
+          <strong>Sesto Senso:</strong> Alla Bombonera il Boca non perde quasi mai, ma non dilaga. Union squadra rognosa con media gol esterna sotto lo 0.8. Coperti 1-0, 2-0, 0-0 e 1-1.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    BAgent Protocol • Telemetria Quantitativa Dixon-Coles & Motore Poisson • Database <code>data/bagent.db</code>
+  </footer>
+
+</div>
+
+</body>
+</html>
