@@ -1,0 +1,39 @@
+{
+  "ticket_id": "TICKET_RADDOPPIO_SERALE_03OCT",
+  "name": "Raddoppio Serale Nations League (Spagna + Scozia)",
+  "title": "Raddoppio Serale Nations League (Spagna + Scozia)",
+  "created_at": "2026-10-03 20:05:00",
+  "date_created": "2026-10-03 20:05:00",
+  "stake": 10.0,
+  "stake_eur": 10.0,
+  "total_odds": 2.33,
+  "potential_win": 23.25,
+  "potential_payout_eur": 23.25,
+  "status": "OPEN",
+  "strategy": "FLOW_ASYMMETRIC_NATIONS",
+  "notes": "Raddoppio ore 20:45 certificato da strict_validator: Spagna MultiGol 2-4 (@1.54) + Scozia X2 + Under 3.5 (@1.51)",
+  "legs": [
+    {
+      "match": "Spagna vs Repubblica Ceca",
+      "tournament": "UEFA Nations League",
+      "market": "MultiGol 2-4",
+      "pick": "MultiGol 2-4",
+      "odds": 1.54,
+      "netwin_odds": 1.54,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 20:45 CEST",
+      "date_time": "2026-10-03 20:45 CEST"
+    },
+    {
+      "match": "Macedonia Del Nord vs Scozia",
+      "tournament": "UEFA Nations League",
+      "market": "X2 + Under 3.5",
+      "pick": "X2 + Under 3.5",
+      "odds": 1.51,
+      "netwin_odds": 1.51,
+      "status": "PENDING",
+      "kickoff": "2026-10-03 20:45 CEST",
+      "date_time": "2026-10-03 20:45 CEST"
+    }
+  ]
+}
