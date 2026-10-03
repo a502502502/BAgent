@@ -9,9 +9,10 @@
   "total_odds": 3.46,
   "potential_win": 17.30,
   "potential_payout_eur": 17.30,
-  "status": "OPEN",
+  "status": "LOST",
+  "profit_loss_eur": -5.0,
   "strategy": "DNA_SUDAMERICA_UNDER35",
-  "notes": "Formula protetta 1X + Under 3.5 coerente con il DNA dei campionati sudamericani ad alto attrito",
+  "notes": "Tripla persa su Independiente e San Paolo; centrata la vittoria 3-0 del Boca",
   "legs": [
     {
       "match": "Independiente vs Instituto Cordoba",
@@ -20,7 +21,9 @@
       "pick": "1X + Under 3.5",
       "odds": 1.56,
       "netwin_odds": 1.56,
-      "status": "PENDING",
+      "status": "LOST",
+      "result": "LOST",
+      "score": "1-4",
       "kickoff": "2026-10-03 00:15 CEST",
       "date_time": "2026-10-03 00:15 CEST"
     },
@@ -31,7 +34,9 @@
       "pick": "1X + Under 3.5",
       "odds": 1.55,
       "netwin_odds": 1.55,
-      "status": "PENDING",
+      "status": "LOST",
+      "result": "LOST",
+      "score": "1-2",
       "kickoff": "2026-10-03 01:00 CEST",
       "date_time": "2026-10-03 01:00 CEST"
     },
@@ -42,7 +47,9 @@
       "pick": "1X + Under 3.5",
       "odds": 1.43,
       "netwin_odds": 1.43,
-      "status": "PENDING",
+      "status": "WON",
+      "result": "WON",
+      "score": "3-0",
       "kickoff": "2026-10-03 02:30 CEST",
       "date_time": "2026-10-03 02:30 CEST"
     }

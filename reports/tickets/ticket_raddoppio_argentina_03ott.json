@@ -9,9 +9,10 @@
   "total_odds": 2.57,
   "potential_win": 25.74,
   "potential_payout_eur": 25.74,
-  "status": "OPEN",
+  "status": "LOST",
+  "profit_loss_eur": -10.0,
   "strategy": "DNA_SUDAMERICA_UNDER35",
-  "notes": "Raddoppio certificato da strict_validator: Independiente 1X+U3.5 (@1.56) + Rivadavia 1X+U3.5 (@1.65 con Edge +6.8% Stella)",
+  "notes": "Raddoppio certificato da strict_validator: Independiente crolla 1-4 ad Avellaneda; Rivadavia centra 1-1",
   "legs": [
     {
       "match": "Independiente vs Instituto Cordoba",
@@ -20,7 +21,9 @@
       "pick": "1X + Under 3.5",
       "odds": 1.56,
       "netwin_odds": 1.56,
-      "status": "PENDING",
+      "status": "LOST",
+      "result": "LOST",
+      "score": "1-4",
       "kickoff": "2026-10-03 00:15 CEST",
       "date_time": "2026-10-03 00:15 CEST"
     },
@@ -31,7 +34,9 @@
       "pick": "1X + Under 3.5",
       "odds": 1.65,
       "netwin_odds": 1.65,
-      "status": "PENDING",
+      "status": "WON",
+      "result": "WON",
+      "score": "1-1",
       "kickoff": "2026-10-03 02:30 CEST",
       "date_time": "2026-10-03 02:30 CEST"
     }
