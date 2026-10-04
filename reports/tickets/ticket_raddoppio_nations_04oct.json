@@ -1,0 +1,39 @@
+{
+  "ticket_id": "TICKET_RADDOPPIO_NATIONS_04OCT",
+  "name": "Raddoppio Nations League Domenica Sera (Olanda + Portogallo)",
+  "title": "Raddoppio Nations League Domenica Sera (Olanda + Portogallo)",
+  "created_at": "2026-10-04 19:18:00",
+  "date_created": "2026-10-04 19:18:00",
+  "stake": 10.0,
+  "stake_eur": 10.0,
+  "total_odds": 2.31,
+  "potential_win": 23.10,
+  "potential_payout_eur": 23.10,
+  "status": "OPEN",
+  "strategy": "FLOW_ASYMMETRIC_NATIONS",
+  "notes": "Raddoppio ore 20:45 certificato da strict_validator con lezioni Tipster Intelligence: Olanda MultiGol 2-4 (@1.50) + Portogallo 1X + MultiGol 1-4 (@1.54)",
+  "legs": [
+    {
+      "match": "Olanda vs Serbia",
+      "tournament": "UEFA Nations League",
+      "market": "MultiGol 2-4",
+      "pick": "MultiGol 2-4",
+      "odds": 1.50,
+      "netwin_odds": 1.50,
+      "status": "PENDING",
+      "kickoff": "2026-10-04 20:45 CEST",
+      "date_time": "2026-10-04 20:45 CEST"
+    },
+    {
+      "match": "Portogallo vs Norvegia",
+      "tournament": "UEFA Nations League",
+      "market": "1X + MultiGol 1-4",
+      "pick": "1X + MultiGol 1-4",
+      "odds": 1.54,
+      "netwin_odds": 1.54,
+      "status": "PENDING",
+      "kickoff": "2026-10-04 20:45 CEST",
+      "date_time": "2026-10-04 20:45 CEST"
+    }
+  ]
+}
