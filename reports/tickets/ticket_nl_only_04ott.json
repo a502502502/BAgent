@@ -1,0 +1,76 @@
+{
+  "id": "TICKET_NL_ONLY_04OCT",
+  "ticket_id": "TICKET_USER_NL_TRIPLA_04OCT",
+  "name": "Tripla Nations League solo 04 ottobre (post-XI)",
+  "title": "Tripla Nations League solo 04 ottobre (post-XI)",
+  "created_at": "2026-10-04T20:26:00",
+  "date_created": "2026-10-04 20:30:00",
+  "played_at": "2026-10-04 20:31:00",
+  "status": "OPEN",
+  "strict_passed": true,
+  "variant_recommended": "TRIPLA",
+  "strategy": "NL_ONLY_POST_LINEUP",
+  "total_odds": 3.82,
+  "stake": 6.3,
+  "stake_eur": 6.3,
+  "potential_win": 24.07,
+  "potential_payout_eur": 24.07,
+  "bankroll_eur": 79.19,
+  "legs": [
+    {
+      "match": "Grecia vs Germania",
+      "tournament": "UEFA Nations League",
+      "kickoff": "2026-10-04 20:45 CEST",
+      "date_time": "2026-10-04 20:45 CEST",
+      "market": "X2 + MultiGol 2-5",
+      "pick": "X2 + MultiGol 2-5",
+      "odd": 1.62,
+      "odds": 1.62,
+      "netwin_odds": 1.62,
+      "p": 0.559,
+      "edge": -0.094,
+      "status": "PENDING"
+    },
+    {
+      "match": "Portogallo vs Norvegia",
+      "tournament": "UEFA Nations League",
+      "kickoff": "2026-10-04 20:45 CEST",
+      "date_time": "2026-10-04 20:45 CEST",
+      "market": "Chance Mix: X o Gol",
+      "pick": "Chance Mix: X o Gol",
+      "odd": 1.43,
+      "odds": 1.43,
+      "netwin_odds": 1.43,
+      "p": 0.658,
+      "edge": -0.059,
+      "status": "PENDING"
+    },
+    {
+      "match": "Galles vs Danimarca",
+      "tournament": "UEFA Nations League",
+      "kickoff": "2026-10-04 20:45 CEST",
+      "date_time": "2026-10-04 20:45 CEST",
+      "market": "X2 + MultiGol 2-5",
+      "pick": "X2 + MultiGol 2-5",
+      "odd": 1.65,
+      "odds": 1.65,
+      "netwin_odds": 1.65,
+      "p": 0.52,
+      "edge": -0.142,
+      "status": "PENDING"
+    }
+  ],
+  "alt_doppia": {
+    "markets": [
+      "Grecia X2+Over 1.5 @1.52",
+      "POR X o Gol @1.43"
+    ],
+    "total": 2.17,
+    "note": "alternativa corta non giocata"
+  },
+  "excluded": [
+    "Irlanda (campo neutro Serbia)",
+    "Olanda MG2-4 (rischio XI)"
+  ],
+  "notes": "Giocata dall'utente. Solo Nations League, certificata Strict post-formazioni. Edge warning-only. Nessun nome giocatore nel Sesto Senso (Regola #49)."
+}
