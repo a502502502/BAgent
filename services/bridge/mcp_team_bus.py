@@ -192,16 +192,17 @@ def calculate_dixon_coles_edge(match_name: str, market_name: str, odd: float, xg
         edge = (p * odd) - 1.0
         passed_prob = p >= 0.72
         passed_edge = edge >= 0.04
-        status = "🟢 CERTIFICABILE" if (passed_prob and passed_edge) else "🔴 BOCCIATO"
+        edge_label = "ok" if passed_edge else "WARNING informativo (non bloccante)"
+        prob_label = "ok" if passed_prob else "WARNING informativo (etichetta)"
 
         return (
             f"=== AUDIT MATEMATICO: {match_name} ===\n"
             f"• Mercato: '{market_name}' @ {odd:.2f}\n"
             f"• Parametri xG: {xg_home:.2f} - {xg_away:.2f}\n"
-            f"• P(Reale Dixon-Coles): {p*100:.1f}%\n"
+            f"• P(Reale Dixon-Coles): {p*100:.1f}% ({prob_label})\n"
             f"• Fair Odd: @{fair:.2f}\n"
-            f"• Edge Matematico: {edge*100:+.1f}%\n"
-            f"• Esito Gate: {status} (Floor >= 72%: {passed_prob}, Edge >= +4%: {passed_edge})"
+            f"• Edge Matematico: {edge*100:+.1f}% ({edge_label})\n"
+            f"• Esito: calcolabile — edge/P non decidono da soli se considerare la scommessa"
         )
     except Exception as e:
         return f"Errore nel calcolo quantitativo: {e}"

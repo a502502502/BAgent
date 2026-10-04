@@ -1882,7 +1882,7 @@
   "huracan vs aldosivi::1": {
     "match": "Huracan vs Aldosivi",
     "market": "1",
-    "netwin_odd": 1.67
+    "netwin_odd": 1.74
   },
   "huracan vs aldosivi::x": {
     "match": "Huracan vs Aldosivi",
@@ -1892,22 +1892,22 @@
   "huracan vs aldosivi::2": {
     "match": "Huracan vs Aldosivi",
     "market": "2",
-    "netwin_odd": 5.4
+    "netwin_odd": 5.2
   },
   "huracan vs aldosivi::1x": {
     "match": "Huracan vs Aldosivi",
     "market": "1X",
-    "netwin_odd": 1.14
+    "netwin_odd": 1.16
   },
   "huracan vs aldosivi::x2": {
     "match": "Huracan vs Aldosivi",
     "market": "X2",
-    "netwin_odd": 4.65
+    "netwin_odd": 2.02
   },
   "huracan vs aldosivi::12": {
     "match": "Huracan vs Aldosivi",
     "market": "12",
-    "netwin_odd": 1.3
+    "netwin_odd": 1.32
   },
   "huracan vs aldosivi::under 2.5": {
     "match": "Huracan vs Aldosivi",
@@ -1962,27 +1962,27 @@
   "huracan vs aldosivi::gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Gol",
-    "netwin_odd": 2.33
+    "netwin_odd": 2.28
   },
   "huracan vs aldosivi::nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "NoGol",
-    "netwin_odd": 1.51
+    "netwin_odd": 1.53
   },
   "huracan vs aldosivi::1x + under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + Under 2.5",
-    "netwin_odd": 1.74
+    "netwin_odd": 1.76
   },
   "huracan vs aldosivi::1x + over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + Over 2.5",
-    "netwin_odd": 2.9
+    "netwin_odd": 2.97
   },
   "huracan vs aldosivi::1x + under 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + Under 4.5",
-    "netwin_odd": 1.22
+    "netwin_odd": 1.23
   },
   "huracan vs aldosivi::1x + over 4.5": {
     "match": "Huracan vs Aldosivi",
@@ -1992,7 +1992,7 @@
   "huracan vs aldosivi::1x + under 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + Under 3.5",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.4
   },
   "huracan vs aldosivi::1x + over 3.5": {
     "match": "Huracan vs Aldosivi",
@@ -2007,262 +2007,262 @@
   "huracan vs aldosivi::1x + over 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + Over 1.5",
-    "netwin_odd": 1.7
+    "netwin_odd": 1.71
   },
   "huracan vs aldosivi::x2 + under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Under 2.5",
-    "netwin_odd": 2.65
+    "netwin_odd": 2.57
   },
   "huracan vs aldosivi::x2 + over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Over 2.5",
-    "netwin_odd": 8.75
+    "netwin_odd": 8.25
   },
   "huracan vs aldosivi::x2 + under 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Under 1.5",
-    "netwin_odd": 4.45
+    "netwin_odd": 4.4
   },
   "huracan vs aldosivi::x2 + over 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Over 1.5",
-    "netwin_odd": 3.65
+    "netwin_odd": 3.45
   },
   "huracan vs aldosivi::x2 + under 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Under 3.5",
-    "netwin_odd": 2.3
+    "netwin_odd": 2.23
   },
   "huracan vs aldosivi::x2 + over 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Over 3.5",
-    "netwin_odd": 15.0
+    "netwin_odd": 14.0
   },
   "huracan vs aldosivi::x2 + under 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Under 4.5",
-    "netwin_odd": 2.03
+    "netwin_odd": 1.97
   },
   "huracan vs aldosivi::x2 + over 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Over 4.5",
-    "netwin_odd": 55.0
+    "netwin_odd": 50.0
   },
   "huracan vs aldosivi::12 + under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Under 2.5",
-    "netwin_odd": 2.28
+    "netwin_odd": 2.32
   },
   "huracan vs aldosivi::12 + over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Over 2.5",
-    "netwin_odd": 2.67
+    "netwin_odd": 2.7
   },
   "huracan vs aldosivi::12 + under 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Under 1.5",
-    "netwin_odd": 3.6
+    "netwin_odd": 3.65
   },
   "huracan vs aldosivi::12 + over 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Over 1.5",
-    "netwin_odd": 1.9
+    "netwin_odd": 1.91
   },
   "huracan vs aldosivi::12 + under 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Under 3.5",
-    "netwin_odd": 1.57
+    "netwin_odd": 1.58
   },
   "huracan vs aldosivi::12 + over 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Over 3.5",
-    "netwin_odd": 5.9
+    "netwin_odd": 6.0
   },
   "huracan vs aldosivi::12 + under 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Under 4.5",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.4
   },
   "huracan vs aldosivi::12 + over 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Over 4.5",
-    "netwin_odd": 11.5
+    "netwin_odd": 12.0
   },
   "huracan vs aldosivi::1x + multigol 1-2": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 1-2",
-    "netwin_odd": 2.15
+    "netwin_odd": 2.21
   },
   "huracan vs aldosivi::1x + multigol 1-3": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 1-3",
-    "netwin_odd": 1.58
+    "netwin_odd": 1.63
   },
   "huracan vs aldosivi::1x + multigol 1-4": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 1-4",
-    "netwin_odd": 1.35
+    "netwin_odd": 1.38
   },
   "huracan vs aldosivi::1x + multigol 1-5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 1-5",
-    "netwin_odd": 1.28
+    "netwin_odd": 1.31
   },
   "huracan vs aldosivi::1x + multigol 2-4": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 2-4",
-    "netwin_odd": 1.81
+    "netwin_odd": 1.85
   },
   "huracan vs aldosivi::1x + multigol 2-5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 2-5",
-    "netwin_odd": 1.68
+    "netwin_odd": 1.71
   },
   "huracan vs aldosivi::1x + multigol 3-4": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 3-4",
-    "netwin_odd": 3.63
+    "netwin_odd": 3.7
   },
   "huracan vs aldosivi::1x + multigol 3-5": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 3-5",
-    "netwin_odd": 3.14
+    "netwin_odd": 3.19
   },
   "huracan vs aldosivi::1x + multigol 2-3": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + MultiGol 2-3",
-    "netwin_odd": 1.93
+    "netwin_odd": 1.98
   },
   "huracan vs aldosivi::x2 + multigol 1-2": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 1-2",
-    "netwin_odd": 4.03
+    "netwin_odd": 3.92
   },
   "huracan vs aldosivi::x2 + multigol 1-3": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 1-3",
-    "netwin_odd": 3.35
+    "netwin_odd": 3.24
   },
   "huracan vs aldosivi::x2 + multigol 1-4": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 1-4",
-    "netwin_odd": 2.89
+    "netwin_odd": 2.78
   },
   "huracan vs aldosivi::x2 + multigol 1-5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 1-5",
-    "netwin_odd": 2.77
+    "netwin_odd": 2.66
   },
   "huracan vs aldosivi::x2 + multigol 2-4": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 2-4",
-    "netwin_odd": 3.87
+    "netwin_odd": 3.67
   },
   "huracan vs aldosivi::x2 + multigol 2-5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 2-5",
-    "netwin_odd": 3.64
+    "netwin_odd": 3.47
   },
   "huracan vs aldosivi::x2 + multigol 3-4": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 3-4",
-    "netwin_odd": 10.26
+    "netwin_odd": 9.59
   },
   "huracan vs aldosivi::x2 + multigol 3-5": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 3-5",
-    "netwin_odd": 8.81
+    "netwin_odd": 8.31
   },
   "huracan vs aldosivi::x2 + multigol 2-3": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + MultiGol 2-3",
-    "netwin_odd": 4.14
+    "netwin_odd": 3.92
   },
   "huracan vs aldosivi::12 + multigol 1-2": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 1-2",
-    "netwin_odd": 2.24
+    "netwin_odd": 2.31
   },
   "huracan vs aldosivi::12 + multigol 1-3": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 1-3",
-    "netwin_odd": 1.51
+    "netwin_odd": 1.54
   },
   "huracan vs aldosivi::12 + multigol 1-4": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 1-4",
-    "netwin_odd": 1.33
+    "netwin_odd": 1.36
   },
   "huracan vs aldosivi::12 + multigol 1-5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 1-5",
-    "netwin_odd": 1.23
+    "netwin_odd": 1.26
   },
   "huracan vs aldosivi::12 + multigol 2-4": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 2-4",
-    "netwin_odd": 2.1
+    "netwin_odd": 2.14
   },
   "huracan vs aldosivi::12 + multigol 2-5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 2-5",
-    "netwin_odd": 1.87
+    "netwin_odd": 1.9
   },
   "huracan vs aldosivi::12 + multigol 3-4": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 3-4",
-    "netwin_odd": 3.27
+    "netwin_odd": 3.3
   },
   "huracan vs aldosivi::12 + multigol 3-5": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 3-5",
-    "netwin_odd": 2.74
+    "netwin_odd": 2.76
   },
   "huracan vs aldosivi::12 + multigol 2-3": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + MultiGol 2-3",
-    "netwin_odd": 2.18
+    "netwin_odd": 2.21
   },
   "huracan vs aldosivi::1 + under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Under 2.5",
-    "netwin_odd": 3.0
+    "netwin_odd": 3.1
   },
   "huracan vs aldosivi::1 + over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Over 2.5",
-    "netwin_odd": 3.25
+    "netwin_odd": 3.35
   },
   "huracan vs aldosivi::x + under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X + Under 2.5",
-    "netwin_odd": 3.65
+    "netwin_odd": 3.6
   },
   "huracan vs aldosivi::x + over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X + Over 2.5",
-    "netwin_odd": 21.25
+    "netwin_odd": 19.55
   },
   "huracan vs aldosivi::2 + under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Under 2.5",
-    "netwin_odd": 8.5
+    "netwin_odd": 8.0
   },
   "huracan vs aldosivi::2 + over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Over 2.5",
-    "netwin_odd": 13.0
+    "netwin_odd": 12.0
   },
   "huracan vs aldosivi::1 + under 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Under 1.5",
-    "netwin_odd": 5.1
+    "netwin_odd": 5.25
   },
   "huracan vs aldosivi::1 + over 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Over 1.5",
-    "netwin_odd": 2.27
+    "netwin_odd": 2.35
   },
   "huracan vs aldosivi::x + under 1.5": {
     "match": "Huracan vs Aldosivi",
@@ -2272,7 +2272,7 @@
   "huracan vs aldosivi::x + over 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X + Over 1.5",
-    "netwin_odd": 5.6
+    "netwin_odd": 5.4
   },
   "huracan vs aldosivi::2 + under 1.5": {
     "match": "Huracan vs Aldosivi",
@@ -2282,52 +2282,52 @@
   "huracan vs aldosivi::2 + over 1.5": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Over 1.5",
-    "netwin_odd": 9.5
+    "netwin_odd": 8.75
   },
   "huracan vs aldosivi::1 + under 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Under 3.5",
-    "netwin_odd": 2.03
+    "netwin_odd": 2.1
   },
   "huracan vs aldosivi::1 + over 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Over 3.5",
-    "netwin_odd": 6.85
+    "netwin_odd": 7.25
   },
   "huracan vs aldosivi::x + under 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X + Under 3.5",
-    "netwin_odd": 3.6
+    "netwin_odd": 3.55
   },
   "huracan vs aldosivi::x + over 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X + Over 3.5",
-    "netwin_odd": 24.0
+    "netwin_odd": 23.0
   },
   "huracan vs aldosivi::2 + under 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Under 3.5",
-    "netwin_odd": 5.8
+    "netwin_odd": 5.5
   },
   "huracan vs aldosivi::2 + over 3.5": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Over 3.5",
-    "netwin_odd": 40.0
+    "netwin_odd": 36.0
   },
   "huracan vs aldosivi::1 + under 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Under 4.5",
-    "netwin_odd": 1.77
+    "netwin_odd": 1.83
   },
   "huracan vs aldosivi::1 + over 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Over 4.5",
-    "netwin_odd": 14.5
+    "netwin_odd": 15.0
   },
   "huracan vs aldosivi::x + under 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "X + Under 4.5",
-    "netwin_odd": 3.2
+    "netwin_odd": 3.1
   },
   "huracan vs aldosivi::x + over 4.5": {
     "match": "Huracan vs Aldosivi",
@@ -2337,57 +2337,57 @@
   "huracan vs aldosivi::2 + under 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Under 4.5",
-    "netwin_odd": 5.4
+    "netwin_odd": 5.1
   },
   "huracan vs aldosivi::2 + over 4.5": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Over 4.5",
-    "netwin_odd": 80.0
+    "netwin_odd": 70.0
   },
   "huracan vs aldosivi::1x + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + Gol",
-    "netwin_odd": 2.75
+    "netwin_odd": 2.7
   },
   "huracan vs aldosivi::1x + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "1X + NoGol",
-    "netwin_odd": 1.81
+    "netwin_odd": 1.86
   },
   "huracan vs aldosivi::x2 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + Gol",
-    "netwin_odd": 4.2
+    "netwin_odd": 4.0
   },
   "huracan vs aldosivi::x2 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 + NoGol",
-    "netwin_odd": 3.85
+    "netwin_odd": 3.75
   },
   "huracan vs aldosivi::12 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + Gol",
-    "netwin_odd": 3.8
+    "netwin_odd": 3.75
   },
   "huracan vs aldosivi::12 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "12 + NoGol",
-    "netwin_odd": 1.85
+    "netwin_odd": 1.88
   },
   "huracan vs aldosivi::1 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + Gol",
-    "netwin_odd": 4.95
+    "netwin_odd": 5.0
   },
   "huracan vs aldosivi::1 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "1 + NoGol",
-    "netwin_odd": 2.3
+    "netwin_odd": 2.4
   },
   "huracan vs aldosivi::x + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "X + Gol",
-    "netwin_odd": 5.6
+    "netwin_odd": 5.4
   },
   "huracan vs aldosivi::x + nogol": {
     "match": "Huracan vs Aldosivi",
@@ -2397,52 +2397,52 @@
   "huracan vs aldosivi::2 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + Gol",
-    "netwin_odd": 15.0
+    "netwin_odd": 13.5
   },
   "huracan vs aldosivi::2 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "2 + NoGol",
-    "netwin_odd": 8.0
+    "netwin_odd": 7.5
   },
   "huracan vs aldosivi::under 2.5 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Under 2.5 + Gol",
-    "netwin_odd": 7.0
+    "netwin_odd": 6.85
   },
   "huracan vs aldosivi::over 2.5 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Over 2.5 + Gol",
-    "netwin_odd": 3.25
+    "netwin_odd": 3.2
   },
   "huracan vs aldosivi::under 2.5 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "Under 2.5 + NoGol",
-    "netwin_odd": 1.77
+    "netwin_odd": 1.78
   },
   "huracan vs aldosivi::over 2.5 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "Over 2.5 + NoGol",
-    "netwin_odd": 8.0
+    "netwin_odd": 8.5
   },
   "huracan vs aldosivi::under 3.5 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Under 3.5 + Gol",
-    "netwin_odd": 3.44
+    "netwin_odd": 3.35
   },
   "huracan vs aldosivi::over 3.5 + gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Over 3.5 + Gol",
-    "netwin_odd": 5.13
+    "netwin_odd": 5.02
   },
   "huracan vs aldosivi::under 3.5 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "Under 3.5 + NoGol",
-    "netwin_odd": 1.54
+    "netwin_odd": 1.56
   },
   "huracan vs aldosivi::over 3.5 + nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "Over 3.5 + NoGol",
-    "netwin_odd": 21.8
+    "netwin_odd": 24.3
   },
   "huracan vs aldosivi::multigol 1-2": {
     "match": "Huracan vs Aldosivi",
@@ -2527,32 +2527,32 @@
   "huracan vs aldosivi::1 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "1 1° Tempo",
-    "netwin_odd": 2.28
+    "netwin_odd": 2.35
   },
   "huracan vs aldosivi::x 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "X 1° Tempo",
-    "netwin_odd": 2.0
+    "netwin_odd": 1.98
   },
   "huracan vs aldosivi::2 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "2 1° Tempo",
-    "netwin_odd": 6.15
+    "netwin_odd": 5.8
   },
   "huracan vs aldosivi::1x 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "1X 1° Tempo",
-    "netwin_odd": 1.12
+    "netwin_odd": 1.13
   },
   "huracan vs aldosivi::x2 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "X2 1° Tempo",
-    "netwin_odd": 1.47
+    "netwin_odd": 1.45
   },
   "huracan vs aldosivi::12 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "12 1° Tempo",
-    "netwin_odd": 1.6
+    "netwin_odd": 1.61
   },
   "huracan vs aldosivi::under 0.5 1° tempo": {
     "match": "Huracan vs Aldosivi",
@@ -2587,7 +2587,7 @@
   "huracan vs aldosivi::gol 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "Gol 1° Tempo",
-    "netwin_odd": 5.6
+    "netwin_odd": 5.5
   },
   "huracan vs aldosivi::nogol 1° tempo": {
     "match": "Huracan vs Aldosivi",
@@ -2597,12 +2597,12 @@
   "huracan vs aldosivi::multigol 1-2 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-2 1° Tempo",
-    "netwin_odd": 1.66
+    "netwin_odd": 1.67
   },
   "huracan vs aldosivi::multigol 1-3 1° tempo": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-3 1° Tempo",
-    "netwin_odd": 1.52
+    "netwin_odd": 1.53
   },
   "huracan vs aldosivi::multigol 2-3 1° tempo": {
     "match": "Huracan vs Aldosivi",
@@ -2637,22 +2637,22 @@
   "huracan vs aldosivi::chance mix: 1 o over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 1 o Over 2.5",
-    "netwin_odd": 1.41
+    "netwin_odd": 1.43
   },
   "huracan vs aldosivi::chance mix: x o over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: X o Over 2.5",
-    "netwin_odd": 1.53
+    "netwin_odd": 1.52
   },
   "huracan vs aldosivi::chance mix: 2 o over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 2 o Over 2.5",
-    "netwin_odd": 1.93
+    "netwin_odd": 1.91
   },
   "huracan vs aldosivi::chance mix: 1 o under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 1 o Under 2.5",
-    "netwin_odd": 1.06
+    "netwin_odd": 1.07
   },
   "huracan vs aldosivi::chance mix: x o under 2.5": {
     "match": "Huracan vs Aldosivi",
@@ -2662,27 +2662,27 @@
   "huracan vs aldosivi::chance mix: 2 o under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 2 o Under 2.5",
-    "netwin_odd": 1.34
+    "netwin_odd": 1.33
   },
   "huracan vs aldosivi::chance mix: 1 o gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 1 o Gol",
-    "netwin_odd": 1.22
+    "netwin_odd": 1.23
   },
   "huracan vs aldosivi::chance mix: x o gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: X o Gol",
-    "netwin_odd": 1.81
+    "netwin_odd": 1.78
   },
   "huracan vs aldosivi::chance mix: 2 o gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 2 o Gol",
-    "netwin_odd": 1.85
+    "netwin_odd": 1.8
   },
   "huracan vs aldosivi::chance mix: 1 o nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 1 o NoGol",
-    "netwin_odd": 1.2
+    "netwin_odd": 1.21
   },
   "huracan vs aldosivi::chance mix: x o nogol": {
     "match": "Huracan vs Aldosivi",
@@ -2692,17 +2692,17 @@
   "huracan vs aldosivi::chance mix: 2 o nogol": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: 2 o NoGol",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.4
   },
   "huracan vs aldosivi::gol o over 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "Gol o Over 2.5",
-    "netwin_odd": 1.03
+    "netwin_odd": 1.04
   },
   "huracan vs aldosivi::nogol o under 2.5": {
     "match": "Huracan vs Aldosivi",
     "market": "NoGol o Under 2.5",
-    "netwin_odd": 1.26
+    "netwin_odd": 1.27
   },
   "huracan vs aldosivi::chance mix: 12 o nogol": {
     "match": "Huracan vs Aldosivi",
@@ -2712,7 +2712,7 @@
   "huracan vs aldosivi::chance mix: x2 o gol": {
     "match": "Huracan vs Aldosivi",
     "market": "Chance Mix: X2 o Gol",
-    "netwin_odd": 1.5
+    "netwin_odd": 1.46
   },
   "huracan vs aldosivi::chance mix: x2 o nogol": {
     "match": "Huracan vs Aldosivi",
@@ -2727,97 +2727,97 @@
   "huracan vs aldosivi::multigol 1-3 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-3 Casa",
-    "netwin_odd": 1.32
+    "netwin_odd": 1.33
   },
   "huracan vs aldosivi::multigol 2-3 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 2-3 Casa",
-    "netwin_odd": 2.3
+    "netwin_odd": 2.35
   },
   "huracan vs aldosivi::multigol 1-4 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-4 Casa",
-    "netwin_odd": 1.27
+    "netwin_odd": 1.28
   },
   "huracan vs aldosivi::multigol 2-4 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 2-4 Casa",
-    "netwin_odd": 2.17
+    "netwin_odd": 2.23
   },
   "huracan vs aldosivi::multigol 0-1 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 0-1 Casa",
-    "netwin_odd": 1.65
+    "netwin_odd": 1.62
   },
   "huracan vs aldosivi::multigol 0-2 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 0-2 Casa",
-    "netwin_odd": 1.17
+    "netwin_odd": 1.16
   },
   "huracan vs aldosivi::multigol 1-5 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-5 Casa",
-    "netwin_odd": 1.24
+    "netwin_odd": 1.25
   },
   "huracan vs aldosivi::multigol 2-5 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 2-5 Casa",
-    "netwin_odd": 2.11
+    "netwin_odd": 2.16
   },
   "huracan vs aldosivi::multigol 1-6 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-6 Casa",
-    "netwin_odd": 1.24
+    "netwin_odd": 1.25
   },
   "huracan vs aldosivi::multigol 2-6 casa": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 2-6 Casa",
-    "netwin_odd": 2.09
+    "netwin_odd": 2.14
   },
   "huracan vs aldosivi::multigol 1-2 ospite": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-2 Ospite",
-    "netwin_odd": 1.95
+    "netwin_odd": 1.9
   },
   "huracan vs aldosivi::multigol 1-3 ospite": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 1-3 Ospite",
-    "netwin_odd": 1.85
+    "netwin_odd": 1.8
   },
   "huracan vs aldosivi::multigol 2-3 ospite": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 2-3 Ospite",
-    "netwin_odd": 5.9
+    "netwin_odd": 5.5
   },
   "huracan vs aldosivi::multigol 0-1 ospite": {
     "match": "Huracan vs Aldosivi",
     "market": "MultiGol 0-1 Ospite",
-    "netwin_odd": 1.12
+    "netwin_odd": 1.13
   },
   "huracan vs aldosivi::dnb 1": {
     "match": "Huracan vs Aldosivi",
     "market": "DNB 1",
-    "netwin_odd": 1.23
+    "netwin_odd": 1.26
   },
   "huracan vs aldosivi::dnb 2": {
     "match": "Huracan vs Aldosivi",
     "market": "DNB 2",
-    "netwin_odd": 3.75
+    "netwin_odd": 3.5
   },
   "estudiantes vs gimnasia y esgrima mendoza::1": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
     "market": "1",
-    "netwin_odd": 1.7
+    "netwin_odd": 1.71
   },
   "estudiantes vs gimnasia y esgrima mendoza::x": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
     "market": "X",
-    "netwin_odd": 3.4
+    "netwin_odd": 3.45
   },
   "estudiantes vs gimnasia y esgrima mendoza::2": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
     "market": "2",
-    "netwin_odd": 5.0
+    "netwin_odd": 5.1
   },
   "estudiantes vs gimnasia y esgrima mendoza::1x": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
@@ -2827,7 +2827,7 @@
   "estudiantes vs gimnasia y esgrima mendoza::x2": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
     "market": "X2",
-    "netwin_odd": 4.4
+    "netwin_odd": 2.06
   },
   "estudiantes vs gimnasia y esgrima mendoza::12": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
@@ -3357,12 +3357,12 @@
   "estudiantes vs gimnasia y esgrima mendoza::over 3.5 + gol": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
     "market": "Over 3.5 + Gol",
-    "netwin_odd": 4.27
+    "netwin_odd": 4.05
   },
   "estudiantes vs gimnasia y esgrima mendoza::under 3.5 + nogol": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
     "market": "Under 3.5 + NoGol",
-    "netwin_odd": 1.7
+    "netwin_odd": 1.73
   },
   "estudiantes vs gimnasia y esgrima mendoza::over 3.5 + nogol": {
     "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
@@ -3742,7 +3742,7 @@
   "deportivo riestra vs central cordoba::1": {
     "match": "Deportivo Riestra vs Central Cordoba",
     "market": "1",
-    "netwin_odd": 1.9
+    "netwin_odd": 1.91
   },
   "deportivo riestra vs central cordoba::x": {
     "match": "Deportivo Riestra vs Central Cordoba",
@@ -3752,22 +3752,22 @@
   "deportivo riestra vs central cordoba::2": {
     "match": "Deportivo Riestra vs Central Cordoba",
     "market": "2",
-    "netwin_odd": 4.3
+    "netwin_odd": 4.35
   },
   "deportivo riestra vs central cordoba::1x": {
     "match": "Deportivo Riestra vs Central Cordoba",
     "market": "1X",
-    "netwin_odd": 1.2
+    "netwin_odd": 1.21
   },
   "deportivo riestra vs central cordoba::x2": {
     "match": "Deportivo Riestra vs Central Cordoba",
     "market": "X2",
-    "netwin_odd": 3.85
+    "netwin_odd": 1.84
   },
   "deportivo riestra vs central cordoba::12": {
     "match": "Deportivo Riestra vs Central Cordoba",
     "market": "12",
-    "netwin_odd": 1.33
+    "netwin_odd": 1.34
   },
   "deportivo riestra vs central cordoba::under 2.5": {
     "match": "Deportivo Riestra vs Central Cordoba",
@@ -4677,32 +4677,32 @@
   "talleres de cordoba vs belgrano::1": {
     "match": "Talleres De Cordoba vs Belgrano",
     "market": "1",
-    "netwin_odd": 2.5
+    "netwin_odd": 2.52
   },
   "talleres de cordoba vs belgrano::x": {
     "match": "Talleres De Cordoba vs Belgrano",
     "market": "X",
-    "netwin_odd": 3.0
+    "netwin_odd": 3.05
   },
   "talleres de cordoba vs belgrano::2": {
     "match": "Talleres De Cordoba vs Belgrano",
     "market": "2",
-    "netwin_odd": 2.85
+    "netwin_odd": 2.9
   },
   "talleres de cordoba vs belgrano::1x": {
     "match": "Talleres De Cordoba vs Belgrano",
     "market": "1X",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.4
   },
   "talleres de cordoba vs belgrano::x2": {
     "match": "Talleres De Cordoba vs Belgrano",
     "market": "X2",
-    "netwin_odd": 2.7
+    "netwin_odd": 1.5
   },
   "talleres de cordoba vs belgrano::12": {
     "match": "Talleres De Cordoba vs Belgrano",
     "market": "12",
-    "netwin_odd": 1.36
+    "netwin_odd": 1.37
   },
   "talleres de cordoba vs belgrano::under 2.5": {
     "match": "Talleres De Cordoba vs Belgrano",
@@ -5607,32 +5607,32 @@
   "argentinos juniors vs tigre::1": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1",
-    "netwin_odd": 1.87
+    "netwin_odd": 1.81
   },
   "argentinos juniors vs tigre::x": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X",
-    "netwin_odd": 3.1
+    "netwin_odd": 3.25
   },
   "argentinos juniors vs tigre::2": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2",
-    "netwin_odd": 4.5
+    "netwin_odd": 4.8
   },
   "argentinos juniors vs tigre::1x": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X",
-    "netwin_odd": 1.19
+    "netwin_odd": 1.18
   },
   "argentinos juniors vs tigre::x2": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2",
-    "netwin_odd": 4.0
+    "netwin_odd": 1.94
   },
   "argentinos juniors vs tigre::12": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12",
-    "netwin_odd": 1.34
+    "netwin_odd": 1.33
   },
   "argentinos juniors vs tigre::under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -5647,7 +5647,7 @@
   "argentinos juniors vs tigre::under 0.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Under 0.5",
-    "netwin_odd": 5.7
+    "netwin_odd": 5.75
   },
   "argentinos juniors vs tigre::over 0.5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -5687,27 +5687,27 @@
   "argentinos juniors vs tigre::gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Gol",
-    "netwin_odd": 2.18
+    "netwin_odd": 2.23
   },
   "argentinos juniors vs tigre::nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "NoGol",
-    "netwin_odd": 1.58
+    "netwin_odd": 1.56
   },
   "argentinos juniors vs tigre::1x + under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Under 2.5",
-    "netwin_odd": 1.78
+    "netwin_odd": 1.77
   },
   "argentinos juniors vs tigre::1x + over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Over 2.5",
-    "netwin_odd": 3.15
+    "netwin_odd": 3.05
   },
   "argentinos juniors vs tigre::1x + under 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Under 4.5",
-    "netwin_odd": 1.26
+    "netwin_odd": 1.25
   },
   "argentinos juniors vs tigre::1x + over 4.5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -5717,97 +5717,97 @@
   "argentinos juniors vs tigre::1x + under 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Under 3.5",
-    "netwin_odd": 1.43
+    "netwin_odd": 1.41
   },
   "argentinos juniors vs tigre::1x + over 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Over 3.5",
-    "netwin_odd": 5.7
+    "netwin_odd": 5.6
   },
   "argentinos juniors vs tigre::1x + under 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Under 1.5",
-    "netwin_odd": 3.2
+    "netwin_odd": 3.15
   },
   "argentinos juniors vs tigre::1x + over 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Over 1.5",
-    "netwin_odd": 1.77
+    "netwin_odd": 1.75
   },
   "argentinos juniors vs tigre::x2 + under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Under 2.5",
-    "netwin_odd": 2.4
+    "netwin_odd": 2.48
   },
   "argentinos juniors vs tigre::x2 + over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Over 2.5",
-    "netwin_odd": 7.0
+    "netwin_odd": 7.5
   },
   "argentinos juniors vs tigre::x2 + under 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Under 1.5",
-    "netwin_odd": 4.2
+    "netwin_odd": 4.3
   },
   "argentinos juniors vs tigre::x2 + over 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Over 1.5",
-    "netwin_odd": 3.05
+    "netwin_odd": 3.25
   },
   "argentinos juniors vs tigre::x2 + under 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Under 3.5",
-    "netwin_odd": 2.08
+    "netwin_odd": 2.15
   },
   "argentinos juniors vs tigre::x2 + over 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Over 3.5",
-    "netwin_odd": 12.0
+    "netwin_odd": 13.0
   },
   "argentinos juniors vs tigre::x2 + under 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Under 4.5",
-    "netwin_odd": 1.82
+    "netwin_odd": 1.9
   },
   "argentinos juniors vs tigre::x2 + over 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Over 4.5",
-    "netwin_odd": 40.0
+    "netwin_odd": 44.0
   },
   "argentinos juniors vs tigre::12 + under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + Under 2.5",
-    "netwin_odd": 2.38
+    "netwin_odd": 2.35
   },
   "argentinos juniors vs tigre::12 + over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + Over 2.5",
-    "netwin_odd": 2.75
+    "netwin_odd": 2.72
   },
   "argentinos juniors vs tigre::12 + under 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + Under 1.5",
-    "netwin_odd": 3.7
+    "netwin_odd": 3.65
   },
   "argentinos juniors vs tigre::12 + over 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + Over 1.5",
-    "netwin_odd": 1.97
+    "netwin_odd": 1.94
   },
   "argentinos juniors vs tigre::12 + under 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + Under 3.5",
-    "netwin_odd": 1.61
+    "netwin_odd": 1.6
   },
   "argentinos juniors vs tigre::12 + over 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + Over 3.5",
-    "netwin_odd": 6.25
+    "netwin_odd": 6.15
   },
   "argentinos juniors vs tigre::12 + under 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + Under 4.5",
-    "netwin_odd": 1.43
+    "netwin_odd": 1.41
   },
   "argentinos juniors vs tigre::12 + over 4.5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -5817,232 +5817,232 @@
   "argentinos juniors vs tigre::1x + multigol 1-2": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 1-2",
-    "netwin_odd": 2.26
+    "netwin_odd": 2.22
   },
   "argentinos juniors vs tigre::1x + multigol 1-3": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 1-3",
-    "netwin_odd": 1.69
+    "netwin_odd": 1.64
   },
   "argentinos juniors vs tigre::1x + multigol 1-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 1-4",
-    "netwin_odd": 1.43
+    "netwin_odd": 1.4
   },
   "argentinos juniors vs tigre::1x + multigol 1-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 1-5",
-    "netwin_odd": 1.36
+    "netwin_odd": 1.32
   },
   "argentinos juniors vs tigre::1x + multigol 2-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 2-4",
-    "netwin_odd": 1.9
+    "netwin_odd": 1.86
   },
   "argentinos juniors vs tigre::1x + multigol 2-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 2-5",
-    "netwin_odd": 1.77
+    "netwin_odd": 1.73
   },
   "argentinos juniors vs tigre::1x + multigol 3-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 3-4",
-    "netwin_odd": 3.88
+    "netwin_odd": 3.76
   },
   "argentinos juniors vs tigre::1x + multigol 3-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 3-5",
-    "netwin_odd": 3.38
+    "netwin_odd": 3.27
   },
   "argentinos juniors vs tigre::1x + multigol 2-3": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + MultiGol 2-3",
-    "netwin_odd": 2.05
+    "netwin_odd": 2.0
   },
   "argentinos juniors vs tigre::x2 + multigol 1-2": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 1-2",
-    "netwin_odd": 3.57
+    "netwin_odd": 3.71
   },
   "argentinos juniors vs tigre::x2 + multigol 1-3": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 1-3",
-    "netwin_odd": 2.91
+    "netwin_odd": 3.05
   },
   "argentinos juniors vs tigre::x2 + multigol 1-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 1-4",
-    "netwin_odd": 2.49
+    "netwin_odd": 2.6
   },
   "argentinos juniors vs tigre::x2 + multigol 1-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 1-5",
-    "netwin_odd": 2.38
+    "netwin_odd": 2.49
   },
   "argentinos juniors vs tigre::x2 + multigol 2-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 2-4",
-    "netwin_odd": 3.26
+    "netwin_odd": 3.41
   },
   "argentinos juniors vs tigre::x2 + multigol 2-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 2-5",
-    "netwin_odd": 3.08
+    "netwin_odd": 3.21
   },
   "argentinos juniors vs tigre::x2 + multigol 3-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 3-4",
-    "netwin_odd": 8.22
+    "netwin_odd": 8.73
   },
   "argentinos juniors vs tigre::x2 + multigol 3-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 3-5",
-    "netwin_odd": 7.16
+    "netwin_odd": 7.55
   },
   "argentinos juniors vs tigre::x2 + multigol 2-3": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + MultiGol 2-3",
-    "netwin_odd": 3.55
+    "netwin_odd": 3.7
   },
   "argentinos juniors vs tigre::12 + multigol 1-2": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 1-2",
-    "netwin_odd": 2.35
+    "netwin_odd": 2.3
   },
   "argentinos juniors vs tigre::12 + multigol 1-3": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 1-3",
-    "netwin_odd": 1.56
+    "netwin_odd": 1.54
   },
   "argentinos juniors vs tigre::12 + multigol 1-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 1-4",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.36
   },
   "argentinos juniors vs tigre::12 + multigol 1-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 1-5",
-    "netwin_odd": 1.29
+    "netwin_odd": 1.26
   },
   "argentinos juniors vs tigre::12 + multigol 2-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 2-4",
-    "netwin_odd": 2.2
+    "netwin_odd": 2.15
   },
   "argentinos juniors vs tigre::12 + multigol 2-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 2-5",
-    "netwin_odd": 1.96
+    "netwin_odd": 1.91
   },
   "argentinos juniors vs tigre::12 + multigol 3-4": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 3-4",
-    "netwin_odd": 3.38
+    "netwin_odd": 3.33
   },
   "argentinos juniors vs tigre::12 + multigol 3-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 3-5",
-    "netwin_odd": 2.84
+    "netwin_odd": 2.79
   },
   "argentinos juniors vs tigre::12 + multigol 2-3": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + MultiGol 2-3",
-    "netwin_odd": 2.27
+    "netwin_odd": 2.22
   },
   "argentinos juniors vs tigre::1 + under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Under 2.5",
-    "netwin_odd": 3.35
+    "netwin_odd": 3.2
   },
   "argentinos juniors vs tigre::1 + over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Over 2.5",
-    "netwin_odd": 3.65
+    "netwin_odd": 3.5
   },
   "argentinos juniors vs tigre::x + under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Under 2.5",
-    "netwin_odd": 3.4
+    "netwin_odd": 3.5
   },
   "argentinos juniors vs tigre::x + over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Over 2.5",
-    "netwin_odd": 17.85
+    "netwin_odd": 18.7
   },
   "argentinos juniors vs tigre::2 + under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Under 2.5",
-    "netwin_odd": 7.25
+    "netwin_odd": 7.5
   },
   "argentinos juniors vs tigre::2 + over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Over 2.5",
-    "netwin_odd": 10.0
+    "netwin_odd": 11.0
   },
   "argentinos juniors vs tigre::1 + under 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Under 1.5",
-    "netwin_odd": 5.6
+    "netwin_odd": 5.4
   },
   "argentinos juniors vs tigre::1 + over 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Over 1.5",
-    "netwin_odd": 2.57
+    "netwin_odd": 2.45
   },
   "argentinos juniors vs tigre::x + under 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Under 1.5",
-    "netwin_odd": 6.85
+    "netwin_odd": 7.0
   },
   "argentinos juniors vs tigre::x + over 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Over 1.5",
-    "netwin_odd": 5.0
+    "netwin_odd": 5.2
   },
   "argentinos juniors vs tigre::2 + under 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Under 1.5",
-    "netwin_odd": 10.0
+    "netwin_odd": 10.5
   },
   "argentinos juniors vs tigre::2 + over 1.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Over 1.5",
-    "netwin_odd": 7.25
+    "netwin_odd": 8.0
   },
   "argentinos juniors vs tigre::1 + under 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Under 3.5",
-    "netwin_odd": 2.26
+    "netwin_odd": 2.17
   },
   "argentinos juniors vs tigre::1 + over 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Over 3.5",
-    "netwin_odd": 8.0
+    "netwin_odd": 7.5
   },
   "argentinos juniors vs tigre::x + under 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Under 3.5",
-    "netwin_odd": 3.4
+    "netwin_odd": 3.5
   },
   "argentinos juniors vs tigre::x + over 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Over 3.5",
-    "netwin_odd": 20.0
+    "netwin_odd": 22.0
   },
   "argentinos juniors vs tigre::2 + under 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Under 3.5",
-    "netwin_odd": 4.95
+    "netwin_odd": 5.2
   },
   "argentinos juniors vs tigre::2 + over 3.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Over 3.5",
-    "netwin_odd": 30.0
+    "netwin_odd": 33.0
   },
   "argentinos juniors vs tigre::1 + under 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Under 4.5",
-    "netwin_odd": 1.98
+    "netwin_odd": 1.9
   },
   "argentinos juniors vs tigre::1 + over 4.5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6052,7 +6052,7 @@
   "argentinos juniors vs tigre::x + under 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Under 4.5",
-    "netwin_odd": 2.95
+    "netwin_odd": 3.05
   },
   "argentinos juniors vs tigre::x + over 4.5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6062,32 +6062,32 @@
   "argentinos juniors vs tigre::2 + under 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Under 4.5",
-    "netwin_odd": 4.5
+    "netwin_odd": 4.75
   },
   "argentinos juniors vs tigre::2 + over 4.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Over 4.5",
-    "netwin_odd": 55.0
+    "netwin_odd": 60.0
   },
   "argentinos juniors vs tigre::1x + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + Gol",
-    "netwin_odd": 2.65
+    "netwin_odd": 2.67
   },
   "argentinos juniors vs tigre::1x + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X + NoGol",
-    "netwin_odd": 2.0
+    "netwin_odd": 1.93
   },
   "argentinos juniors vs tigre::x2 + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + Gol",
-    "netwin_odd": 3.6
+    "netwin_odd": 3.8
   },
   "argentinos juniors vs tigre::x2 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 + NoGol",
-    "netwin_odd": 3.5
+    "netwin_odd": 3.6
   },
   "argentinos juniors vs tigre::12 + gol": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6097,77 +6097,77 @@
   "argentinos juniors vs tigre::12 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 + NoGol",
-    "netwin_odd": 1.97
+    "netwin_odd": 1.93
   },
   "argentinos juniors vs tigre::1 + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + Gol",
-    "netwin_odd": 5.2
+    "netwin_odd": 5.1
   },
   "argentinos juniors vs tigre::1 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 + NoGol",
-    "netwin_odd": 2.65
+    "netwin_odd": 2.52
   },
   "argentinos juniors vs tigre::x + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + Gol",
-    "netwin_odd": 5.0
+    "netwin_odd": 5.2
   },
   "argentinos juniors vs tigre::x + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X + NoGol",
-    "netwin_odd": 6.85
+    "netwin_odd": 7.0
   },
   "argentinos juniors vs tigre::2 + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + Gol",
-    "netwin_odd": 11.5
+    "netwin_odd": 12.5
   },
   "argentinos juniors vs tigre::2 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 + NoGol",
-    "netwin_odd": 6.6
+    "netwin_odd": 7.0
   },
   "argentinos juniors vs tigre::under 2.5 + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Under 2.5 + Gol",
-    "netwin_odd": 6.25
+    "netwin_odd": 6.6
   },
   "argentinos juniors vs tigre::over 2.5 + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Over 2.5 + Gol",
-    "netwin_odd": 3.1
+    "netwin_odd": 3.15
   },
   "argentinos juniors vs tigre::under 2.5 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Under 2.5 + NoGol",
-    "netwin_odd": 1.8
+    "netwin_odd": 1.78
   },
   "argentinos juniors vs tigre::over 2.5 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Over 2.5 + NoGol",
-    "netwin_odd": 9.75
+    "netwin_odd": 9.25
   },
   "argentinos juniors vs tigre::under 3.5 + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Under 3.5 + Gol",
-    "netwin_odd": 3.21
+    "netwin_odd": 3.26
   },
   "argentinos juniors vs tigre::over 3.5 + gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Over 3.5 + Gol",
-    "netwin_odd": 4.86
+    "netwin_odd": 4.91
   },
   "argentinos juniors vs tigre::under 3.5 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Under 3.5 + NoGol",
-    "netwin_odd": 1.59
+    "netwin_odd": 1.58
   },
   "argentinos juniors vs tigre::over 3.5 + nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Over 3.5 + NoGol",
-    "netwin_odd": 29.1
+    "netwin_odd": 26.7
   },
   "argentinos juniors vs tigre::multigol 1-2": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6187,7 +6187,7 @@
   "argentinos juniors vs tigre::multigol 1-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 1-5",
-    "netwin_odd": 1.06
+    "netwin_odd": 1.05
   },
   "argentinos juniors vs tigre::multigol 1-6": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6222,12 +6222,12 @@
   "argentinos juniors vs tigre::multigol 3-5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 3-5",
-    "netwin_odd": 2.42
+    "netwin_odd": 2.4
   },
   "argentinos juniors vs tigre::multigol 3-6": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 3-6",
-    "netwin_odd": 2.32
+    "netwin_odd": 2.3
   },
   "argentinos juniors vs tigre::multigol 4-5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6237,7 +6237,7 @@
   "argentinos juniors vs tigre::multigol 4-6": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 4-6",
-    "netwin_odd": 4.65
+    "netwin_odd": 4.6
   },
   "argentinos juniors vs tigre::multigol 5-6": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6252,37 +6252,37 @@
   "argentinos juniors vs tigre::1 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1 1° Tempo",
-    "netwin_odd": 2.52
+    "netwin_odd": 2.43
   },
   "argentinos juniors vs tigre::x 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X 1° Tempo",
-    "netwin_odd": 1.96
+    "netwin_odd": 1.97
   },
   "argentinos juniors vs tigre::2 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "2 1° Tempo",
-    "netwin_odd": 5.2
+    "netwin_odd": 5.5
   },
   "argentinos juniors vs tigre::1x 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "1X 1° Tempo",
-    "netwin_odd": 1.14
+    "netwin_odd": 1.13
   },
   "argentinos juniors vs tigre::x2 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "X2 1° Tempo",
-    "netwin_odd": 1.4
+    "netwin_odd": 1.42
   },
   "argentinos juniors vs tigre::12 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "12 1° Tempo",
-    "netwin_odd": 1.64
+    "netwin_odd": 1.62
   },
   "argentinos juniors vs tigre::under 0.5 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Under 0.5 1° Tempo",
-    "netwin_odd": 2.3
+    "netwin_odd": 2.32
   },
   "argentinos juniors vs tigre::over 0.5 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6297,12 +6297,12 @@
   "argentinos juniors vs tigre::over 2.5 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Over 2.5 1° Tempo",
-    "netwin_odd": 7.75
+    "netwin_odd": 7.5
   },
   "argentinos juniors vs tigre::under 1.5 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Under 1.5 1° Tempo",
-    "netwin_odd": 1.26
+    "netwin_odd": 1.27
   },
   "argentinos juniors vs tigre::over 1.5 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6312,12 +6312,12 @@
   "argentinos juniors vs tigre::gol 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Gol 1° Tempo",
-    "netwin_odd": 5.4
+    "netwin_odd": 5.5
   },
   "argentinos juniors vs tigre::nogol 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "NoGol 1° Tempo",
-    "netwin_odd": 1.11
+    "netwin_odd": 1.1
   },
   "argentinos juniors vs tigre::multigol 1-2 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6327,7 +6327,7 @@
   "argentinos juniors vs tigre::multigol 1-3 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 1-3 1° Tempo",
-    "netwin_odd": 1.54
+    "netwin_odd": 1.53
   },
   "argentinos juniors vs tigre::multigol 2-3 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6347,12 +6347,12 @@
   "argentinos juniors vs tigre::multigol 3-4 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 3-4 1° Tempo",
-    "netwin_odd": 8.91
+    "netwin_odd": 8.63
   },
   "argentinos juniors vs tigre::multigol 0-1 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 0-1 1° Tempo",
-    "netwin_odd": 1.41
+    "netwin_odd": 1.4
   },
   "argentinos juniors vs tigre::multigol 0-2 1° tempo": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6362,22 +6362,22 @@
   "argentinos juniors vs tigre::chance mix: 1 o over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 1 o Over 2.5",
-    "netwin_odd": 1.48
+    "netwin_odd": 1.46
   },
   "argentinos juniors vs tigre::chance mix: x o over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: X o Over 2.5",
-    "netwin_odd": 1.5
+    "netwin_odd": 1.51
   },
   "argentinos juniors vs tigre::chance mix: 2 o over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 2 o Over 2.5",
-    "netwin_odd": 1.88
+    "netwin_odd": 1.9
   },
   "argentinos juniors vs tigre::chance mix: 1 o under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 1 o Under 2.5",
-    "netwin_odd": 1.09
+    "netwin_odd": 1.08
   },
   "argentinos juniors vs tigre::chance mix: x o under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6387,27 +6387,27 @@
   "argentinos juniors vs tigre::chance mix: 2 o under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 2 o Under 2.5",
-    "netwin_odd": 1.31
+    "netwin_odd": 1.32
   },
   "argentinos juniors vs tigre::chance mix: 1 o gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 1 o Gol",
-    "netwin_odd": 1.26
+    "netwin_odd": 1.25
   },
   "argentinos juniors vs tigre::chance mix: x o gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: X o Gol",
-    "netwin_odd": 1.71
+    "netwin_odd": 1.74
   },
   "argentinos juniors vs tigre::chance mix: 2 o gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 2 o Gol",
-    "netwin_odd": 1.7
+    "netwin_odd": 1.74
   },
   "argentinos juniors vs tigre::chance mix: 1 o nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 1 o NoGol",
-    "netwin_odd": 1.25
+    "netwin_odd": 1.23
   },
   "argentinos juniors vs tigre::chance mix: x o nogol": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6417,37 +6417,37 @@
   "argentinos juniors vs tigre::chance mix: 2 o nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 2 o NoGol",
-    "netwin_odd": 1.41
+    "netwin_odd": 1.4
   },
   "argentinos juniors vs tigre::gol o over 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Gol o Over 2.5",
-    "netwin_odd": 1.05
+    "netwin_odd": 1.04
   },
   "argentinos juniors vs tigre::nogol o under 2.5": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "NoGol o Under 2.5",
-    "netwin_odd": 1.29
+    "netwin_odd": 1.28
   },
   "argentinos juniors vs tigre::chance mix: 1x o gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 1X o Gol",
-    "netwin_odd": 1.05
+    "netwin_odd": 1.04
   },
   "argentinos juniors vs tigre::chance mix: 12 o nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: 12 o NoGol",
-    "netwin_odd": 1.11
+    "netwin_odd": 1.1
   },
   "argentinos juniors vs tigre::chance mix: x2 o gol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: X2 o Gol",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.42
   },
   "argentinos juniors vs tigre::chance mix: x2 o nogol": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "Chance Mix: X2 o NoGol",
-    "netwin_odd": 1.1
+    "netwin_odd": 1.11
   },
   "argentinos juniors vs tigre::multigol 1-2 casa": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6457,62 +6457,62 @@
   "argentinos juniors vs tigre::multigol 1-3 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 1-3 Casa",
-    "netwin_odd": 1.34
+    "netwin_odd": 1.33
   },
   "argentinos juniors vs tigre::multigol 2-3 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 2-3 Casa",
-    "netwin_odd": 2.45
+    "netwin_odd": 2.4
   },
   "argentinos juniors vs tigre::multigol 1-4 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 1-4 Casa",
-    "netwin_odd": 1.28
+    "netwin_odd": 1.29
   },
   "argentinos juniors vs tigre::multigol 2-4 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 2-4 Casa",
-    "netwin_odd": 2.35
+    "netwin_odd": 2.29
   },
   "argentinos juniors vs tigre::multigol 0-1 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 0-1 Casa",
-    "netwin_odd": 1.55
+    "netwin_odd": 1.58
   },
   "argentinos juniors vs tigre::multigol 0-2 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 0-2 Casa",
-    "netwin_odd": 1.14
+    "netwin_odd": 1.15
   },
   "argentinos juniors vs tigre::multigol 1-5 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 1-5 Casa",
-    "netwin_odd": 1.28
+    "netwin_odd": 1.26
   },
   "argentinos juniors vs tigre::multigol 2-5 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 2-5 Casa",
-    "netwin_odd": 2.28
+    "netwin_odd": 2.22
   },
   "argentinos juniors vs tigre::multigol 2-6 casa": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 2-6 Casa",
-    "netwin_odd": 2.26
+    "netwin_odd": 2.2
   },
   "argentinos juniors vs tigre::multigol 1-2 ospite": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 1-2 Ospite",
-    "netwin_odd": 1.81
+    "netwin_odd": 1.85
   },
   "argentinos juniors vs tigre::multigol 1-3 ospite": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 1-3 Ospite",
-    "netwin_odd": 1.7
+    "netwin_odd": 1.75
   },
   "argentinos juniors vs tigre::multigol 2-3 ospite": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 2-3 Ospite",
-    "netwin_odd": 4.8
+    "netwin_odd": 5.1
   },
   "argentinos juniors vs tigre::multigol 1-4 ospite": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6522,7 +6522,7 @@
   "argentinos juniors vs tigre::multigol 0-1 ospite": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "MultiGol 0-1 Ospite",
-    "netwin_odd": 1.16
+    "netwin_odd": 1.15
   },
   "argentinos juniors vs tigre::multigol 1-5 ospite": {
     "match": "Argentinos Juniors vs Tigre",
@@ -6532,37 +6532,37 @@
   "argentinos juniors vs tigre::dnb 1": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "DNB 1",
-    "netwin_odd": 1.33
+    "netwin_odd": 1.3
   },
   "argentinos juniors vs tigre::dnb 2": {
     "match": "Argentinos Juniors vs Tigre",
     "market": "DNB 2",
-    "netwin_odd": 3.05
+    "netwin_odd": 3.25
   },
   "banfield vs rosario central::1": {
     "match": "Banfield vs Rosario Central",
     "market": "1",
-    "netwin_odd": 3.9
+    "netwin_odd": 3.95
   },
   "banfield vs rosario central::x": {
     "match": "Banfield vs Rosario Central",
     "market": "X",
-    "netwin_odd": 3.2
+    "netwin_odd": 3.25
   },
   "banfield vs rosario central::2": {
     "match": "Banfield vs Rosario Central",
     "market": "2",
-    "netwin_odd": 1.95
+    "netwin_odd": 1.97
   },
   "banfield vs rosario central::1x": {
     "match": "Banfield vs Rosario Central",
     "market": "1X",
-    "netwin_odd": 1.77
+    "netwin_odd": 1.78
   },
   "banfield vs rosario central::x2": {
     "match": "Banfield vs Rosario Central",
     "market": "X2",
-    "netwin_odd": 1.9
+    "netwin_odd": 1.24
   },
   "banfield vs rosario central::12": {
     "match": "Banfield vs Rosario Central",
@@ -9792,27 +9792,27 @@
   "estudiantes rio cuarto vs racing::1": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1",
-    "netwin_odd": 3.85
+    "netwin_odd": 4.1
   },
   "estudiantes rio cuarto vs racing::x": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X",
-    "netwin_odd": 3.0
+    "netwin_odd": 3.05
   },
   "estudiantes rio cuarto vs racing::2": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2",
-    "netwin_odd": 2.05
+    "netwin_odd": 2.0
   },
   "estudiantes rio cuarto vs racing::1x": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X",
-    "netwin_odd": 1.7
+    "netwin_odd": 1.76
   },
   "estudiantes rio cuarto vs racing::x2": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2",
-    "netwin_odd": 2.0
+    "netwin_odd": 1.23
   },
   "estudiantes rio cuarto vs racing::12": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -9837,7 +9837,7 @@
   "estudiantes rio cuarto vs racing::over 0.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Over 0.5",
-    "netwin_odd": 1.11
+    "netwin_odd": 1.1
   },
   "estudiantes rio cuarto vs racing::under 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -9847,7 +9847,7 @@
   "estudiantes rio cuarto vs racing::over 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Over 1.5",
-    "netwin_odd": 1.52
+    "netwin_odd": 1.53
   },
   "estudiantes rio cuarto vs racing::under 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -9872,27 +9872,27 @@
   "estudiantes rio cuarto vs racing::gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Gol",
-    "netwin_odd": 2.23
+    "netwin_odd": 2.26
   },
   "estudiantes rio cuarto vs racing::nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "NoGol",
-    "netwin_odd": 1.56
+    "netwin_odd": 1.55
   },
   "estudiantes rio cuarto vs racing::1x + under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Under 2.5",
-    "netwin_odd": 2.2
+    "netwin_odd": 2.25
   },
   "estudiantes rio cuarto vs racing::1x + over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Over 2.5",
-    "netwin_odd": 6.5
+    "netwin_odd": 6.85
   },
   "estudiantes rio cuarto vs racing::1x + under 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Under 4.5",
-    "netwin_odd": 1.68
+    "netwin_odd": 1.73
   },
   "estudiantes rio cuarto vs racing::1x + over 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -9902,87 +9902,87 @@
   "estudiantes rio cuarto vs racing::1x + under 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Under 3.5",
-    "netwin_odd": 1.9
+    "netwin_odd": 1.94
   },
   "estudiantes rio cuarto vs racing::1x + over 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Over 3.5",
-    "netwin_odd": 11.5
+    "netwin_odd": 12.0
   },
   "estudiantes rio cuarto vs racing::1x + under 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Under 1.5",
-    "netwin_odd": 3.75
+    "netwin_odd": 3.8
   },
   "estudiantes rio cuarto vs racing::1x + over 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Over 1.5",
-    "netwin_odd": 2.9
+    "netwin_odd": 3.0
   },
   "estudiantes rio cuarto vs racing::x2 + under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Under 2.5",
-    "netwin_odd": 1.77
+    "netwin_odd": 1.76
   },
   "estudiantes rio cuarto vs racing::x2 + over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Over 2.5",
-    "netwin_odd": 3.6
+    "netwin_odd": 3.5
   },
   "estudiantes rio cuarto vs racing::x2 + under 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Under 1.5",
-    "netwin_odd": 3.1
+    "netwin_odd": 3.05
   },
   "estudiantes rio cuarto vs racing::x2 + over 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Over 1.5",
-    "netwin_odd": 1.93
+    "netwin_odd": 1.9
   },
   "estudiantes rio cuarto vs racing::x2 + under 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Under 3.5",
-    "netwin_odd": 1.45
+    "netwin_odd": 1.43
   },
   "estudiantes rio cuarto vs racing::x2 + over 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Over 3.5",
-    "netwin_odd": 6.75
+    "netwin_odd": 6.6
   },
   "estudiantes rio cuarto vs racing::x2 + under 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Under 4.5",
-    "netwin_odd": 1.3
+    "netwin_odd": 1.28
   },
   "estudiantes rio cuarto vs racing::x2 + over 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Over 4.5",
-    "netwin_odd": 18.0
+    "netwin_odd": 17.0
   },
   "estudiantes rio cuarto vs racing::12 + under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + Under 2.5",
-    "netwin_odd": 2.3
+    "netwin_odd": 2.28
   },
   "estudiantes rio cuarto vs racing::12 + over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + Over 2.5",
-    "netwin_odd": 2.97
+    "netwin_odd": 2.95
   },
   "estudiantes rio cuarto vs racing::12 + under 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + Under 1.5",
-    "netwin_odd": 3.5
+    "netwin_odd": 3.45
   },
   "estudiantes rio cuarto vs racing::12 + over 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + Over 1.5",
-    "netwin_odd": 2.08
+    "netwin_odd": 2.07
   },
   "estudiantes rio cuarto vs racing::12 + under 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + Under 3.5",
-    "netwin_odd": 1.6
+    "netwin_odd": 1.58
   },
   "estudiantes rio cuarto vs racing::12 + over 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -9992,7 +9992,7 @@
   "estudiantes rio cuarto vs racing::12 + under 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + Under 4.5",
-    "netwin_odd": 1.43
+    "netwin_odd": 1.42
   },
   "estudiantes rio cuarto vs racing::12 + over 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10002,152 +10002,152 @@
   "estudiantes rio cuarto vs racing::1x + multigol 1-2": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 1-2",
-    "netwin_odd": 3.25
+    "netwin_odd": 3.34
   },
   "estudiantes rio cuarto vs racing::1x + multigol 1-3": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 1-3",
-    "netwin_odd": 2.64
+    "netwin_odd": 2.72
   },
   "estudiantes rio cuarto vs racing::1x + multigol 1-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 1-4",
-    "netwin_odd": 2.28
+    "netwin_odd": 2.37
   },
   "estudiantes rio cuarto vs racing::1x + multigol 1-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 1-5",
-    "netwin_odd": 2.19
+    "netwin_odd": 2.27
   },
   "estudiantes rio cuarto vs racing::1x + multigol 2-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 2-4",
-    "netwin_odd": 3.05
+    "netwin_odd": 3.18
   },
   "estudiantes rio cuarto vs racing::1x + multigol 2-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 2-5",
-    "netwin_odd": 2.89
+    "netwin_odd": 3.01
   },
   "estudiantes rio cuarto vs racing::1x + multigol 3-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 3-4",
-    "netwin_odd": 7.65
+    "netwin_odd": 8.15
   },
   "estudiantes rio cuarto vs racing::1x + multigol 3-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 3-5",
-    "netwin_odd": 6.72
+    "netwin_odd": 7.11
   },
   "estudiantes rio cuarto vs racing::1x + multigol 2-3": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + MultiGol 2-3",
-    "netwin_odd": 3.25
+    "netwin_odd": 3.36
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 1-2": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 1-2",
-    "netwin_odd": 2.31
+    "netwin_odd": 2.28
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 1-3": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 1-3",
-    "netwin_odd": 1.76
+    "netwin_odd": 1.73
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 1-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 1-4",
-    "netwin_odd": 1.52
+    "netwin_odd": 1.49
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 1-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 1-5",
-    "netwin_odd": 1.45
+    "netwin_odd": 1.42
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 2-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 2-4",
-    "netwin_odd": 2.05
+    "netwin_odd": 2.02
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 2-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 2-5",
-    "netwin_odd": 1.93
+    "netwin_odd": 1.9
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 3-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 3-4",
-    "netwin_odd": 4.39
+    "netwin_odd": 4.29
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 3-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 3-5",
-    "netwin_odd": 3.86
+    "netwin_odd": 3.77
   },
   "estudiantes rio cuarto vs racing::x2 + multigol 2-3": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + MultiGol 2-3",
-    "netwin_odd": 2.18
+    "netwin_odd": 2.14
   },
   "estudiantes rio cuarto vs racing::12 + multigol 1-2": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 1-2",
-    "netwin_odd": 2.29
+    "netwin_odd": 2.27
   },
   "estudiantes rio cuarto vs racing::12 + multigol 1-3": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 1-3",
-    "netwin_odd": 1.55
+    "netwin_odd": 1.54
   },
   "estudiantes rio cuarto vs racing::12 + multigol 1-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 1-4",
-    "netwin_odd": 1.4
+    "netwin_odd": 1.38
   },
   "estudiantes rio cuarto vs racing::12 + multigol 1-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 1-5",
-    "netwin_odd": 1.31
+    "netwin_odd": 1.29
   },
   "estudiantes rio cuarto vs racing::12 + multigol 2-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 2-4",
-    "netwin_odd": 2.32
+    "netwin_odd": 2.27
   },
   "estudiantes rio cuarto vs racing::12 + multigol 2-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 2-5",
-    "netwin_odd": 2.08
+    "netwin_odd": 2.04
   },
   "estudiantes rio cuarto vs racing::12 + multigol 3-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 3-4",
-    "netwin_odd": 3.59
+    "netwin_odd": 3.55
   },
   "estudiantes rio cuarto vs racing::12 + multigol 3-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 3-5",
-    "netwin_odd": 3.05
+    "netwin_odd": 3.01
   },
   "estudiantes rio cuarto vs racing::12 + multigol 2-3": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + MultiGol 2-3",
-    "netwin_odd": 2.32
+    "netwin_odd": 2.34
   },
   "estudiantes rio cuarto vs racing::1 + under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Under 2.5",
-    "netwin_odd": 6.15
+    "netwin_odd": 6.4
   },
   "estudiantes rio cuarto vs racing::1 + over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Over 2.5",
-    "netwin_odd": 9.0
+    "netwin_odd": 9.5
   },
   "estudiantes rio cuarto vs racing::x + under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X + Under 2.5",
-    "netwin_odd": 3.25
+    "netwin_odd": 3.3
   },
   "estudiantes rio cuarto vs racing::x + over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10157,22 +10157,22 @@
   "estudiantes rio cuarto vs racing::2 + under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Under 2.5",
-    "netwin_odd": 3.5
+    "netwin_odd": 3.4
   },
   "estudiantes rio cuarto vs racing::2 + over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Over 2.5",
-    "netwin_odd": 4.25
+    "netwin_odd": 4.1
   },
   "estudiantes rio cuarto vs racing::1 + under 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Under 1.5",
-    "netwin_odd": 8.5
+    "netwin_odd": 8.75
   },
   "estudiantes rio cuarto vs racing::1 + over 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Over 1.5",
-    "netwin_odd": 6.4
+    "netwin_odd": 6.75
   },
   "estudiantes rio cuarto vs racing::x + under 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10182,27 +10182,27 @@
   "estudiantes rio cuarto vs racing::x + over 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X + Over 1.5",
-    "netwin_odd": 4.95
+    "netwin_odd": 5.1
   },
   "estudiantes rio cuarto vs racing::2 + under 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Under 1.5",
-    "netwin_odd": 5.6
+    "netwin_odd": 5.5
   },
   "estudiantes rio cuarto vs racing::2 + over 1.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Over 1.5",
-    "netwin_odd": 2.95
+    "netwin_odd": 2.82
   },
   "estudiantes rio cuarto vs racing::1 + under 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Under 3.5",
-    "netwin_odd": 4.25
+    "netwin_odd": 4.4
   },
   "estudiantes rio cuarto vs racing::1 + over 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Over 3.5",
-    "netwin_odd": 27.0
+    "netwin_odd": 28.0
   },
   "estudiantes rio cuarto vs racing::x + under 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10212,32 +10212,32 @@
   "estudiantes rio cuarto vs racing::x + over 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X + Over 3.5",
-    "netwin_odd": 21.0
+    "netwin_odd": 22.0
   },
   "estudiantes rio cuarto vs racing::2 + under 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Under 3.5",
-    "netwin_odd": 2.4
+    "netwin_odd": 2.32
   },
   "estudiantes rio cuarto vs racing::2 + over 3.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Over 3.5",
-    "netwin_odd": 9.75
+    "netwin_odd": 9.5
   },
   "estudiantes rio cuarto vs racing::1 + under 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Under 4.5",
-    "netwin_odd": 3.9
+    "netwin_odd": 4.05
   },
   "estudiantes rio cuarto vs racing::1 + over 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Over 4.5",
-    "netwin_odd": 50.0
+    "netwin_odd": 55.0
   },
   "estudiantes rio cuarto vs racing::x + under 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X + Under 4.5",
-    "netwin_odd": 2.85
+    "netwin_odd": 2.87
   },
   "estudiantes rio cuarto vs racing::x + over 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10247,57 +10247,57 @@
   "estudiantes rio cuarto vs racing::2 + under 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Under 4.5",
-    "netwin_odd": 2.13
+    "netwin_odd": 2.06
   },
   "estudiantes rio cuarto vs racing::2 + over 4.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Over 4.5",
-    "netwin_odd": 21.0
+    "netwin_odd": 20.0
   },
   "estudiantes rio cuarto vs racing::1x + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + Gol",
-    "netwin_odd": 3.45
+    "netwin_odd": 3.6
   },
   "estudiantes rio cuarto vs racing::1x + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X + NoGol",
-    "netwin_odd": 3.1
+    "netwin_odd": 3.15
   },
   "estudiantes rio cuarto vs racing::x2 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + Gol",
-    "netwin_odd": 2.77
+    "netwin_odd": 2.8
   },
   "estudiantes rio cuarto vs racing::x2 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 + NoGol",
-    "netwin_odd": 2.06
+    "netwin_odd": 2.02
   },
   "estudiantes rio cuarto vs racing::12 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + Gol",
-    "netwin_odd": 3.85
+    "netwin_odd": 3.9
   },
   "estudiantes rio cuarto vs racing::12 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "12 + NoGol",
-    "netwin_odd": 1.98
+    "netwin_odd": 1.96
   },
   "estudiantes rio cuarto vs racing::1 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + Gol",
-    "netwin_odd": 10.5
+    "netwin_odd": 11.0
   },
   "estudiantes rio cuarto vs racing::1 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 + NoGol",
-    "netwin_odd": 5.6
+    "netwin_odd": 5.8
   },
   "estudiantes rio cuarto vs racing::x + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X + Gol",
-    "netwin_odd": 4.95
+    "netwin_odd": 5.1
   },
   "estudiantes rio cuarto vs racing::x + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10307,52 +10307,52 @@
   "estudiantes rio cuarto vs racing::2 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + Gol",
-    "netwin_odd": 5.8
+    "netwin_odd": 5.75
   },
   "estudiantes rio cuarto vs racing::2 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 + NoGol",
-    "netwin_odd": 2.87
+    "netwin_odd": 2.77
   },
   "estudiantes rio cuarto vs racing::under 2.5 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Under 2.5 + Gol",
-    "netwin_odd": 6.15
+    "netwin_odd": 6.25
   },
   "estudiantes rio cuarto vs racing::over 2.5 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Over 2.5 + Gol",
-    "netwin_odd": 3.2
+    "netwin_odd": 3.25
   },
   "estudiantes rio cuarto vs racing::under 2.5 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Under 2.5 + NoGol",
-    "netwin_odd": 1.73
+    "netwin_odd": 1.72
   },
   "estudiantes rio cuarto vs racing::over 2.5 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Over 2.5 + NoGol",
-    "netwin_odd": 11.5
+    "netwin_odd": 11.0
   },
   "estudiantes rio cuarto vs racing::under 3.5 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Under 3.5 + Gol",
-    "netwin_odd": 3.15
+    "netwin_odd": 3.18
   },
   "estudiantes rio cuarto vs racing::over 3.5 + gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Over 3.5 + Gol",
-    "netwin_odd": 5.1
+    "netwin_odd": 5.19
   },
   "estudiantes rio cuarto vs racing::under 3.5 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Under 3.5 + NoGol",
-    "netwin_odd": 1.56
+    "netwin_odd": 1.55
   },
   "estudiantes rio cuarto vs racing::over 3.5 + nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Over 3.5 + NoGol",
-    "netwin_odd": 40.2
+    "netwin_odd": 37.4
   },
   "estudiantes rio cuarto vs racing::multigol 1-2": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10367,7 +10367,7 @@
   "estudiantes rio cuarto vs racing::multigol 1-4": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-4",
-    "netwin_odd": 1.12
+    "netwin_odd": 1.11
   },
   "estudiantes rio cuarto vs racing::multigol 1-5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10437,7 +10437,7 @@
   "estudiantes rio cuarto vs racing::1 1° tempo": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1 1° Tempo",
-    "netwin_odd": 4.75
+    "netwin_odd": 4.95
   },
   "estudiantes rio cuarto vs racing::x 1° tempo": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10447,17 +10447,17 @@
   "estudiantes rio cuarto vs racing::2 1° tempo": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "2 1° Tempo",
-    "netwin_odd": 2.8
+    "netwin_odd": 2.72
   },
   "estudiantes rio cuarto vs racing::1x 1° tempo": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "1X 1° Tempo",
-    "netwin_odd": 1.34
+    "netwin_odd": 1.35
   },
   "estudiantes rio cuarto vs racing::x2 1° tempo": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "X2 1° Tempo",
-    "netwin_odd": 1.16
+    "netwin_odd": 1.15
   },
   "estudiantes rio cuarto vs racing::12 1° tempo": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10547,22 +10547,22 @@
   "estudiantes rio cuarto vs racing::chance mix: 1 o over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 1 o Over 2.5",
-    "netwin_odd": 1.88
+    "netwin_odd": 1.91
   },
   "estudiantes rio cuarto vs racing::chance mix: x o over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: X o Over 2.5",
-    "netwin_odd": 1.52
+    "netwin_odd": 1.53
   },
   "estudiantes rio cuarto vs racing::chance mix: 2 o over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 2 o Over 2.5",
-    "netwin_odd": 1.56
+    "netwin_odd": 1.55
   },
   "estudiantes rio cuarto vs racing::chance mix: 1 o under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 1 o Under 2.5",
-    "netwin_odd": 1.25
+    "netwin_odd": 1.26
   },
   "estudiantes rio cuarto vs racing::chance mix: x o under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10572,22 +10572,22 @@
   "estudiantes rio cuarto vs racing::chance mix: 2 o under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 2 o Under 2.5",
-    "netwin_odd": 1.1
+    "netwin_odd": 1.09
   },
   "estudiantes rio cuarto vs racing::chance mix: 1 o gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 1 o Gol",
-    "netwin_odd": 1.65
+    "netwin_odd": 1.68
   },
   "estudiantes rio cuarto vs racing::chance mix: x o gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: X o Gol",
-    "netwin_odd": 1.71
+    "netwin_odd": 1.72
   },
   "estudiantes rio cuarto vs racing::chance mix: 2 o gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 2 o Gol",
-    "netwin_odd": 1.32
+    "netwin_odd": 1.31
   },
   "estudiantes rio cuarto vs racing::chance mix: 1 o nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10602,22 +10602,22 @@
   "estudiantes rio cuarto vs racing::chance mix: 2 o nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 2 o NoGol",
-    "netwin_odd": 1.26
+    "netwin_odd": 1.25
   },
   "estudiantes rio cuarto vs racing::gol o over 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Gol o Over 2.5",
-    "netwin_odd": 1.06
+    "netwin_odd": 1.05
   },
   "estudiantes rio cuarto vs racing::nogol o under 2.5": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "NoGol o Under 2.5",
-    "netwin_odd": 1.27
+    "netwin_odd": 1.26
   },
   "estudiantes rio cuarto vs racing::chance mix: 1x o gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: 1X o Gol",
-    "netwin_odd": 1.33
+    "netwin_odd": 1.35
   },
   "estudiantes rio cuarto vs racing::chance mix: 1x o nogol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10632,32 +10632,32 @@
   "estudiantes rio cuarto vs racing::chance mix: x2 o gol": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "Chance Mix: X2 o Gol",
-    "netwin_odd": 1.09
+    "netwin_odd": 1.08
   },
   "estudiantes rio cuarto vs racing::multigol 1-2 casa": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-2 Casa",
-    "netwin_odd": 1.78
+    "netwin_odd": 1.8
   },
   "estudiantes rio cuarto vs racing::multigol 1-3 casa": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-3 Casa",
-    "netwin_odd": 1.66
+    "netwin_odd": 1.7
   },
   "estudiantes rio cuarto vs racing::multigol 2-3 casa": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 2-3 Casa",
-    "netwin_odd": 4.5
+    "netwin_odd": 4.75
   },
   "estudiantes rio cuarto vs racing::multigol 1-4 casa": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-4 Casa",
-    "netwin_odd": 1.68
+    "netwin_odd": 1.72
   },
   "estudiantes rio cuarto vs racing::multigol 0-1 casa": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 0-1 Casa",
-    "netwin_odd": 1.18
+    "netwin_odd": 1.17
   },
   "estudiantes rio cuarto vs racing::multigol 0-2 casa": {
     "match": "Estudiantes Rio Cuarto vs Racing",
@@ -10667,67 +10667,67 @@
   "estudiantes rio cuarto vs racing::multigol 1-5 casa": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-5 Casa",
-    "netwin_odd": 1.67
+    "netwin_odd": 1.71
   },
   "estudiantes rio cuarto vs racing::multigol 1-2 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-2 Ospite",
-    "netwin_odd": 1.57
+    "netwin_odd": 1.56
   },
   "estudiantes rio cuarto vs racing::multigol 1-3 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-3 Ospite",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.37
   },
   "estudiantes rio cuarto vs racing::multigol 2-3 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 2-3 Ospite",
-    "netwin_odd": 2.7
+    "netwin_odd": 2.65
   },
   "estudiantes rio cuarto vs racing::multigol 1-4 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-4 Ospite",
-    "netwin_odd": 1.34
+    "netwin_odd": 1.32
   },
   "estudiantes rio cuarto vs racing::multigol 2-4 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 2-4 Ospite",
-    "netwin_odd": 2.63
+    "netwin_odd": 2.57
   },
   "estudiantes rio cuarto vs racing::multigol 0-1 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 0-1 Ospite",
-    "netwin_odd": 1.45
+    "netwin_odd": 1.47
   },
   "estudiantes rio cuarto vs racing::multigol 0-2 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 0-2 Ospite",
-    "netwin_odd": 1.1
+    "netwin_odd": 1.11
   },
   "estudiantes rio cuarto vs racing::multigol 1-5 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 1-5 Ospite",
-    "netwin_odd": 1.34
+    "netwin_odd": 1.32
   },
   "estudiantes rio cuarto vs racing::multigol 2-5 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 2-5 Ospite",
-    "netwin_odd": 2.55
+    "netwin_odd": 2.5
   },
   "estudiantes rio cuarto vs racing::multigol 2-6 ospite": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "MultiGol 2-6 Ospite",
-    "netwin_odd": 2.53
+    "netwin_odd": 2.47
   },
   "estudiantes rio cuarto vs racing::dnb 1": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "DNB 1",
-    "netwin_odd": 2.62
+    "netwin_odd": 2.75
   },
   "estudiantes rio cuarto vs racing::dnb 2": {
     "match": "Estudiantes Rio Cuarto vs Racing",
     "market": "DNB 2",
-    "netwin_odd": 1.43
+    "netwin_odd": 1.4
   },
   "defensa y justicia vs san lorenzo::1": {
     "match": "Defensa Y Justicia vs San Lorenzo",
@@ -12587,7 +12587,7 @@
   "velez sarsfield vs platense::1": {
     "match": "Velez Sarsfield vs Platense",
     "market": "1",
-    "netwin_odd": 1.9
+    "netwin_odd": 1.92
   },
   "velez sarsfield vs platense::x": {
     "match": "Velez Sarsfield vs Platense",
@@ -12597,7 +12597,7 @@
   "velez sarsfield vs platense::2": {
     "match": "Velez Sarsfield vs Platense",
     "market": "2",
-    "netwin_odd": 4.55
+    "netwin_odd": 4.6
   },
   "velez sarsfield vs platense::1x": {
     "match": "Velez Sarsfield vs Platense",
@@ -12607,12 +12607,12 @@
   "velez sarsfield vs platense::x2": {
     "match": "Velez Sarsfield vs Platense",
     "market": "X2",
-    "netwin_odd": 4.05
+    "netwin_odd": 1.83
   },
   "velez sarsfield vs platense::12": {
     "match": "Velez Sarsfield vs Platense",
     "market": "12",
-    "netwin_odd": 1.36
+    "netwin_odd": 1.37
   },
   "velez sarsfield vs platense::under 2.5": {
     "match": "Velez Sarsfield vs Platense",
@@ -45873,5 +45873,70 @@
     "match": "Islanda vs Bulgaria",
     "market": "MultiGol 3-6 Casa",
     "netwin_odd": 2.61
+  },
+  "huracan vs aldosivi::chance mix: 1x o gol": {
+    "match": "Huracan vs Aldosivi",
+    "market": "Chance Mix: 1X o Gol",
+    "netwin_odd": 1.03
+  },
+  "argentinos juniors vs tigre::multigol 1-6 casa": {
+    "match": "Argentinos Juniors vs Tigre",
+    "market": "MultiGol 1-6 Casa",
+    "netwin_odd": 1.26
+  },
+  "newells old boys vs atletico lanus::1": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "1",
+    "netwin_odd": 3.75
+  },
+  "newells old boys vs atletico lanus::x": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "X",
+    "netwin_odd": 1.85
+  },
+  "newells old boys vs atletico lanus::2": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "2",
+    "netwin_odd": 3.3
+  },
+  "newells old boys vs atletico lanus::under 1.5": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "Under 1.5",
+    "netwin_odd": 1.2
+  },
+  "newells old boys vs atletico lanus::over 1.5": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "Over 1.5",
+    "netwin_odd": 3.8
+  },
+  "newells old boys vs atletico lanus::under 2.5": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "Under 2.5",
+    "netwin_odd": 1.02
+  },
+  "newells old boys vs atletico lanus::over 2.5": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "Over 2.5",
+    "netwin_odd": 8.0
+  },
+  "newells old boys vs atletico lanus::under 0.5": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "Under 0.5",
+    "netwin_odd": 2.05
+  },
+  "newells old boys vs atletico lanus::over 0.5": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "Over 0.5",
+    "netwin_odd": 1.6
+  },
+  "newells old boys vs atletico lanus::gol": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "Gol",
+    "netwin_odd": 3.2
+  },
+  "newells old boys vs atletico lanus::nogol": {
+    "match": "Newells Old Boys vs Atletico Lanus",
+    "market": "NoGol",
+    "netwin_odd": 2.05
   }
 }

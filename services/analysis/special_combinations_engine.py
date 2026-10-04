@@ -307,7 +307,7 @@ class SpecialCombinationsEngine:
                 self.evaluate_dutching_lock(fav_name, fav_xg, odds[core_key], odds[para_key])
             )
 
-        # Filtra per alta resilienza ed Edge positivo
-        filtered = [s for s in all_specials if s.real_probability >= self.MIN_PROBABILITY_THRESHOLD and s.mathematical_edge >= self.MIN_EDGE_THRESHOLD]
-        filtered.sort(key=lambda s: s.real_probability, reverse=True)
+        # Edge non filtra: resta etichetta. Ordina per probabilità, poi edge.
+        filtered = list(all_specials)
+        filtered.sort(key=lambda s: (s.real_probability, s.mathematical_edge), reverse=True)
         return filtered

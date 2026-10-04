@@ -360,14 +360,14 @@ class OmniMarketScanner:
                 market_name=sel_name
             )
 
+            # Edge/P sotto soglia: warning in rejection_reason, mai is_approved=False
             is_appr = True
-            rej = None
+            warns = []
             if edge < 0.04:
-                is_appr = False
-                rej = f"Edge insufficiente o negativo ({edge*100:+.1f}%)"
-            elif p_real < 0.70:
-                is_appr = False
-                rej = f"Probabilità reale troppo bassa per mercato sicuro ({p_real*100:.1f}% < 70%)"
+                warns.append(f"[AVVISO EDGE] {edge*100:+.1f}% sotto +4% (non bloccante)")
+            if p_real < 0.70:
+                warns.append(f"[AVVISO P] {p_real*100:.1f}% sotto 70% (etichetta)")
+            rej = " | ".join(warns) if warns else None
 
             notes = (
                 f"P_real: {p_real*100:.1f}% | Fair Odd: @{fair_odd:.2f} | "
@@ -401,7 +401,4 @@ class OmniMarketScanner:
             if avg_shots < 18:
                 return None
         from domain.models import MarketData
-        market = MarketData(market_name=market_name, quota=quota, probabilita_reale=prob)
-        if market.edge < 0.04:
-            return None
-        return market
+        return MarketData(market_name=market_name, quota=quota, probabilita_reale=prob)

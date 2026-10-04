@@ -96,21 +96,21 @@ class NetwinOddsChecker:
         orig_edge = (real_probability * proposed_odd) - 1.0
         netwin_edge = (real_probability * netwin_odd) - 1.0
 
-        # Rileva Aggio Trap: decurtazione della quota >= 8% oppure Edge reale sceso sotto il 4%
+        # Aggio / edge sotto +4%: solo warning informativo (mai blocco decisionale).
         is_haircut = (proposed_odd - netwin_odd) / max(0.01, proposed_odd) >= self.MAX_ALLOWED_ODD_HAIRCUT
         is_aggio_trap = is_haircut or (netwin_edge < self.MIN_ACCEPTABLE_EDGE)
 
-        passed = not is_aggio_trap and (netwin_edge >= self.MIN_ACCEPTABLE_EDGE)
+        passed = True
 
         rejection_reason = None
         alt_market = None
         alt_odd = None
 
-        if not passed:
+        if is_aggio_trap:
             rejection_reason = (
-                f"[BLOCCATO - NETWIN AGGIO TRAP] Quota proposta @{proposed_odd:.2f} tagliata a @{netwin_odd:.2f} su Netwin. "
-                f"L'Edge reale crolla da {orig_edge:+.1%} a {netwin_edge:+.1%} (minimo richiesto: +4.0%). "
-                f"Scommessa matematicamente sconveniente sul banco."
+                f"[AVVISO NETWIN AGGIO INFORMATIVO] Quota proposta @{proposed_odd:.2f} "
+                f"vs Netwin @{netwin_odd:.2f}. Edge da {orig_edge:+.1%} a {netwin_edge:+.1%} "
+                f"(soglia informativa +4.0%, non bloccante)."
             )
             
             # Suggerisci alternativa elastica non compressa

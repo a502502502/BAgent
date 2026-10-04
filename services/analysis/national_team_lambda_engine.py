@@ -9,9 +9,9 @@ Invece di consentire l'inserimento di xG manuali o arbitrari:
        lambda_home = mean(xg_home_scored, xg_away_conceded)
        lambda_away = mean(xg_away_scored, xg_home_conceded)
 3. Genera la matrice bivariata Dixon-Coles con correzione Tau (rho=-0.05)
-4. Applica il doppio vincolo inderogabile:
-       - Edge Matematico >= +4.0%
-       - Probabilità Minima della Gamba >= 72.0%
+4. Espone edge e probabilità come etichette informative:
+       - Edge < +4.0% → warning (non esclude la scommessa)
+       - Probabilità < 72.0% → warning (allineato allo StrictTicketPipeline)
 """
 
 from __future__ import annotations
@@ -97,18 +97,19 @@ class NationalTeamLambdaEngine:
 
         passed_edge = edge >= self.MIN_EDGE_THRESHOLD
         passed_prob_floor = prob >= self.MIN_PROBABILITY_FLOOR
-        is_certified = passed_edge and passed_prob_floor
+        # Certificabile se il mercato è calcolabile: edge/P sono solo warning.
+        is_certified = True
 
         rejection_reasons: List[str] = []
         if not passed_edge:
             rejection_reasons.append(
-                f"Edge {edge*100:+.1f}% inferiore alla soglia minima vincolante +{self.MIN_EDGE_THRESHOLD*100:.1f}%. "
-                f"Quota offerta @{bookmaker_odd:.2f} vs Quota Equa @{fair_odd:.2f}."
+                f"[AVVISO EDGE INFORMATIVO] Edge {edge*100:+.1f}% sotto +{self.MIN_EDGE_THRESHOLD*100:.1f}% "
+                f"(non bloccante). Quota @{bookmaker_odd:.2f} vs fair @{fair_odd:.2f}."
             )
         if not passed_prob_floor:
             rejection_reasons.append(
-                f"Probabilità reale {prob*100:.1f}% inferiore alla soglia di sicurezza minima {self.MIN_PROBABILITY_FLOOR*100:.1f}% "
-                f"richiesta per le gambe di multipla (rischio abbattimento win rate)."
+                f"[AVVISO PROBABILITÀ INFORMATIVO] Probabilità {prob*100:.1f}% sotto "
+                f"{self.MIN_PROBABILITY_FLOOR*100:.1f}% (etichetta, non bocciatura)."
             )
 
         return MarketEvaluationResult(

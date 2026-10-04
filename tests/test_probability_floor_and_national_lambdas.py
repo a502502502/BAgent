@@ -41,11 +41,13 @@ def test_national_team_lambda_engine_serbia_greece():
         bookmaker_odd=1.73,
     )
 
-    assert not res.is_certified
+    # Edge/P sotto soglia: warning, mercato resta certificabile (calcolabile)
+    assert res.is_certified
     assert res.probability < 0.60  # P ~ 54.2%
     assert res.edge_pct < 0.0      # Edge negativo (-6.3%)
     assert not res.passed_edge
     assert not res.passed_probability_floor
+    assert any("AVVISO EDGE" in r for r in res.rejection_reasons)
 
 
 def test_national_team_lambda_engine_portugal_wales():
@@ -59,13 +61,14 @@ def test_national_team_lambda_engine_portugal_wales():
         bookmaker_odd=1.62,
     )
 
-    assert not res.is_certified
-    # P ~ 63.3%, sotto la soglia minima del 72%
+    assert res.is_certified
+    # P ~ 63.3%, sotto la soglia minima del 72% → warning
     assert res.probability < 0.72
     assert not res.passed_probability_floor
-    # Edge ~ +2.6%, sotto il +4.0%
+    # Edge ~ +2.6%, sotto il +4.0% → warning non bloccante
     assert res.edge_pct < 0.04
     assert not res.passed_edge
+    assert any("AVVISO EDGE" in r for r in res.rejection_reasons)
 
 
 def test_strict_pipeline_labels_leg_below_72_percent_probability():
@@ -111,6 +114,29 @@ def test_strict_pipeline_accepts_leg_meeting_both_edge_and_probability_floor():
     assert rep.stage_failed is None
     assert rep.real_probability >= 0.72
     assert rep.mathematical_edge >= 0.04
+
+
+def test_strict_pipeline_negative_edge_is_warning_not_block():
+    pipeline = StrictTicketPipeline()
+    # Quota compressa → edge negativo, ma il mercato resta approvabile
+    candidate = MarketCandidate(
+        match_name="Home FC vs Away FC",
+        tournament="UEFA Nations League",
+        market_name="Over 1.5",
+        bookmaker_odd=1.05,
+        xg_home=1.8,
+        xg_away=1.6,
+        sixth_sense_analysis="Volume offensivo alto ma quota Netwin gia mangiata dall aggio.",
+        home_matches_played=3,
+        away_matches_played=3,
+        kickoff_time="2026-10-10 20:45 CEST",
+    )
+
+    rep = pipeline.validate_candidate(candidate)
+    assert rep.passed
+    assert rep.mathematical_edge < 0.04
+    assert rep.edge_warning is not None
+    assert "AVVISO EDGE INFORMATIVO" in rep.edge_warning
 
 
 def test_strict_pipeline_gate_0_05_anti_time_travel():

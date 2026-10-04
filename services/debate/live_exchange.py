@@ -76,7 +76,10 @@ def blocking_objections(measurement: Dict[str, Any]) -> List[Dict[str, str]]:
     if engine_p is not None and odd is not None:
         edge = float(engine_p) * float(odd) - 1.0
         if edge < MIN_EDGE:
-            add("EDGE_BELOW_4", f"Edge del motore {edge:+.1%} sotto +4% a quota {float(odd):.2f}.")
+            add(
+                "EDGE_BELOW_4_WARN",
+                f"[AVVISO] Edge del motore {edge:+.1%} sotto +4% a quota {float(odd):.2f} (non bloccante).",
+            )
     if odd is not None and float(odd) < TRAP_ODD:
         add("TRAP_ODD", f"Quota {float(odd):.2f} sotto 1.22.")
     if measurement.get("dna_prohibited"):

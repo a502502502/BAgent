@@ -1,0 +1,12 @@
+---
+description: Edge matematico è solo warning — non decide se considerare una scommessa
+alwaysApply: true
+---
+
+# Edge = warning, non gate decisionale
+
+- Calcola sempre Edge = (P_reale × Quota) − 1 e mostralo (stella ≥5%, occhio >0% e <5%, croce ≤0%).
+- Edge sotto +4% o negativo → **AVVISO INFORMATIVO** sul ticket/report.
+- **Vietato** escludere, bocciare o non proporre una selezione **solo** perché l’edge è basso/negativo.
+- La giocabilità resta sui gate strutturali (Gate 0, DNA, kickoff, xG/motore, Sesto Senso, money management).
+- Nelle scan/ticket builder non usare filtri tipo `if edge < 0.04: skip`.

@@ -9,7 +9,7 @@ Fase 2: Verifica Infortuni & Squalifiche (API /injuries — Anti-Indisponibili)
 Fase 3: Verifica Distinte Ufficiali Titolari (API /fixtures/lineups — Anti-Panchina)
 Fase 4: Audit di Sesto Senso & Contesto Tattico (OBBLIGATORIO: rassegna stampa, motivazione, spogliatoio, trappole)
 Fase 5: Calcolo Probabilità Reale Coniugata & Tempi (Poisson Bivariata ponderata da Sesto Senso)
-Fase 6: Filtro Edge Matematico Reale (Edge = P_real * Quota - 1 >= +4.0%)
+Fase 6: Edge Matematico Reale (informativo: Edge = P_real * Quota - 1; sotto +4% = WARNING, mai bocciatura)
 Fase 7: Filtro Strutturale di Mercato (Mercati 1° Tempo pienamente ammessi da quota >= 1.20 via Poisson)
 Fase 8: Staking Scientifico & Money Management (Kelly Frazionario: Max 5-8% cassa per ticket)
 """
@@ -265,7 +265,7 @@ class StrictTicketPipeline:
     Pipeline di validazione a 8 stadi con Sesto Senso integrato obbligatorio.
     """
 
-    MIN_EDGE_THRESHOLD = 0.04       # Minimo +4.0% di edge reale sul bookmaker
+    MIN_EDGE_THRESHOLD = 0.04       # Soglia informativa +4.0%: sotto = WARNING, non blocca la giocata
     MIN_LEG_PROBABILITY_THRESHOLD = 0.72 # Minimo 72.0% di probabilità per singola gamba di multipla
     MAX_SESSION_BANKROLL_PCT = 0.15 # Max 15% del capitale totale investito in una sessione
     MAX_TICKET_BANKROLL_PCT = 0.08  # Max 8% del capitale su singolo ticket
@@ -987,15 +987,15 @@ class StrictTicketPipeline:
         fair_odd = 1.0 / max(0.001, p_real)
 
         # =====================================================================
-        # FASE 6: VALUTAZIONE EDGE ED AGGIO (INFORMATIVO / WARNING ONLY)
+        # FASE 6: VALUTAZIONE EDGE ED AGGIO (SOLO WARNING — NON DECISIONALE)
         # =====================================================================
-        # Su direttiva utente, l'edge negativo non boccia la schedina ma funge
-        # solo da informazione aggiuntiva di avviso di rischio (warning).
+        # L'edge non decide se considerare la scommessa: etichetta stella/occhio/croce
+        # e warning informativo. Mai passed=False per edge basso o negativo.
         edge_warning = None
         if edge < self.MIN_EDGE_THRESHOLD:
             edge_warning = (
-                f"[AVVISO EDGE INFORMATIVO] Edge calcolato {edge*100:+.1f}% inferiore alla soglia (+{self.MIN_EDGE_THRESHOLD*100:.1f}%). "
-                f"Quota bookmaker @{candidate.bookmaker_odd:.2f} vs Quota equa stimata @{fair_odd:.2f}."
+                f"[AVVISO EDGE INFORMATIVO] Edge {edge*100:+.1f}% sotto +{self.MIN_EDGE_THRESHOLD*100:.1f}% "
+                f"(non bloccante). Quota @{candidate.bookmaker_odd:.2f} vs fair @{fair_odd:.2f}."
             )
 
         if p_real < self.MIN_LEG_PROBABILITY_THRESHOLD:
