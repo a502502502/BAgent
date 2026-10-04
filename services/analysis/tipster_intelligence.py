@@ -64,6 +64,7 @@ CANONICAL_FAMILIES = {
     "TEAM_CORNERS_VOLUME": {"name": "Corner Squadra Favorita (Assedio)", "base_prior": 1.20},
     "TEAM_CARDS_VOLUME": {"name": "Cartellini Squadra Sfavorita/Fisica", "base_prior": 1.20},
     "TOTAL_SHOTS_ON_TARGET": {"name": "Tiri in Porta Totali (Volume Balistico)", "base_prior": 1.20},
+    "PLAYER_PROPS_COMBO": {"name": "Marcatore / Sostituto / Legno (Player Props)", "base_prior": 1.25},
     "CHANCE_MIX": {"name": "Chance Mix (X o GG, 1X o Over 1.5)", "base_prior": 1.20},
     "DC_PLUS_GOALS": {"name": "Doppia Chance + MultiGol/Over aperto", "base_prior": 1.15},
     "FIRST_HALF_MULTIGOL": {"name": "MultiGol 1° Tempo (0-1 o 1-3)", "base_prior": 1.15},
@@ -81,14 +82,18 @@ def classify_market_family(market_name: str) -> str:
     """Classifica automaticamente qualsiasi stringa di mercato nella famiglia canonica."""
     m = market_name.lower().strip()
     
+    # 0. Player props / Marcatore / Palo o Traversa / Tiri Giocatore
+    if any(w in m for w in ["segna o colpisce", "marcatore", "palo/trav", "palo", "traversa", "tiri giocatore"]):
+        return "PLAYER_PROPS_COMBO"
+
     # 1. MultiGol Tempi (0-2 1°T + 1-3 2°T o varianti)
     if ("1°tempo" in m or "1° tempo" in m or "1°t" in m) and ("2°tempo" in m or "2° tempo" in m or "2°t" in m):
         return "TIME_SPLIT_MULTIGOL"
     if "multigol" in m and ("1°t" in m and "2°t" in m):
         return "TIME_SPLIT_MULTIGOL"
         
-    # 2. Gol entrambi i tempi
-    if "entrambi i tempi" in m or "ov 1°t + ov 2°t" in m:
+    # 2. Gol entrambi i tempi / Squadra segna in entrambi i tempi
+    if "entrambi i tempi" in m or "ov 1°t + ov 2°t" in m or "entrambi tempi" in m:
         return "BOTH_HALVES_GOALS"
         
     # 3. Corner Squadra
@@ -107,8 +112,8 @@ def classify_market_family(market_name: str) -> str:
     if "chance mix" in m or (" o " in m and any(w in m for w in ["gg", "gol", "nogol", "over", "under"])):
         return "CHANCE_MIX"
         
-    # 7. Doppia Chance + Gol/MultiGol
-    if ("1x +" in m or "x2 +" in m or "1x+" in m or "x2+" in m) and any(w in m for w in ["multigol", "over", "under"]):
+    # 7. Doppia Chance + Gol/MultiGol / Over / Under
+    if ("1x +" in m or "x2 +" in m or "1x+" in m or "x2+" in m or "1x + u/o" in m or "x2 + u/o" in m) and any(w in m for w in ["multigol", "over", "under", "ov", "un"]):
         return "DC_PLUS_GOALS"
         
     # 8. Primo Tempo MultiGol / Under / Over
@@ -125,7 +130,7 @@ def classify_market_family(market_name: str) -> str:
     if m in ["1x", "x2", "12", "doppia chance 1x", "doppia chance x2"]:
         return "DOPPIA_CHANCE"
         
-    # 11. MultiGol aperti
+    # 11. MultiGol aperti (compresi MultiGol Casa/Ospite 2-5)
     if "multigol" in m:
         return "OPEN_MULTIGOL"
         

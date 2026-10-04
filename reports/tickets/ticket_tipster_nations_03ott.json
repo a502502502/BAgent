@@ -1,0 +1,78 @@
+{
+  "ticket_id": "TICKET_TIPSTER_NATIONS_03OCT",
+  "name": "Tipster 3 - Cinquina Special Nations League (@8.63)",
+  "title": "Tipster 3 - Cinquina Special Nations League (@8.63)",
+  "created_at": "2026-10-03 17:30:00",
+  "date_created": "2026-10-03 17:30:00",
+  "stake": 10.0,
+  "stake_eur": 10.0,
+  "total_odds": 8.63,
+  "potential_win": 86.30,
+  "potential_payout_eur": 86.30,
+  "profit_loss_eur": 76.30,
+  "status": "WON",
+  "strategy": "TIPSTER_INTELLIGENCE_HYBRID_FLOW",
+  "notes": "Schedina vincente tipster acquisita per l'addestramento empirico di BAgent: combo marcatori/legno, DC+flussi, MultiGol casa e gol tempi",
+  "legs": [
+    {
+      "match": "Croazia vs Inghilterra",
+      "tournament": "UEFA Nations League",
+      "market": "Kane, Harry o Sostituto Segna o Colpisce Palo/Trav.",
+      "pick": "SI",
+      "odds": 2.10,
+      "netwin_odds": 2.10,
+      "status": "WON",
+      "result": "WON",
+      "kickoff": "2026-10-03 18:00 CEST",
+      "date_time": "2026-10-03 18:00 CEST"
+    },
+    {
+      "match": "Islanda vs Bulgaria",
+      "tournament": "UEFA Nations League",
+      "market": "1X + Over 1.5",
+      "pick": "1X + Over 1.5",
+      "odds": 1.38,
+      "netwin_odds": 1.38,
+      "status": "WON",
+      "result": "WON",
+      "kickoff": "2026-10-03 18:00 CEST",
+      "date_time": "2026-10-03 18:00 CEST"
+    },
+    {
+      "match": "Macedonia Del Nord vs Scozia",
+      "tournament": "UEFA Nations League",
+      "market": "X2 + Under 3.5",
+      "pick": "X2 + Under 3.5",
+      "odds": 1.43,
+      "netwin_odds": 1.43,
+      "status": "WON",
+      "result": "WON",
+      "kickoff": "2026-10-03 20:45 CEST",
+      "date_time": "2026-10-03 20:45 CEST"
+    },
+    {
+      "match": "Svizzera vs Slovenia",
+      "tournament": "UEFA Nations League",
+      "market": "MultiGol 2-5 Casa",
+      "pick": "SI",
+      "odds": 1.52,
+      "netwin_odds": 1.52,
+      "status": "WON",
+      "result": "WON",
+      "kickoff": "2026-10-03 20:45 CEST",
+      "date_time": "2026-10-03 20:45 CEST"
+    },
+    {
+      "match": "Spagna vs Repubblica Ceca",
+      "tournament": "UEFA Nations League",
+      "market": "Casa Segna in Entrambi i Tempi",
+      "pick": "SI",
+      "odds": 1.37,
+      "netwin_odds": 1.37,
+      "status": "WON",
+      "result": "WON",
+      "kickoff": "2026-10-03 20:45 CEST",
+      "date_time": "2026-10-03 20:45 CEST"
+    }
+  ]
+}

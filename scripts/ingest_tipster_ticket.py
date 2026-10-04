@@ -167,6 +167,63 @@ def bootstrap_tonight_tickets():
     print(f"✅ Inserite selezioni perse di confronto (ID: {t3_id}) per calibrare i pesi penalizzanti.")
 
 
+def ingest_october_03_ticket():
+    engine = TipsterIntelligenceEngine()
+    print("🚀 Ingestion Schedina Vincente del 03/10/2026 (Media: media_1791133950921)...")
+
+    ticket_3 = TipsterTicketInput(
+        tipster_name="Tipster 3 - Cinquina Nations Special",
+        ticket_date="2026-10-03",
+        total_odds=8.63,
+        status="WON",
+        source="SCREENSHOT_MEDIA_1791133950921",
+        legs=[
+            TipsterLegInput(
+                match_name="Croazia vs Inghilterra",
+                tournament="Nations League",
+                kickoff_time="2026-10-03 18:00 CEST",
+                market_name="Kane, Harry (Inghilterra) o Sostituto Segna o Colpisce Palo/Trav. : SI",
+                odds=2.10,
+                outcome="WON",
+            ),
+            TipsterLegInput(
+                match_name="Islanda vs Bulgaria",
+                tournament="Nations League",
+                kickoff_time="2026-10-03 18:00 CEST",
+                market_name="1X + U/O 1.5 : 1X + OV",
+                odds=1.38,
+                outcome="WON",
+            ),
+            TipsterLegInput(
+                match_name="Macedonia del Nord vs Scozia",
+                tournament="Nations League",
+                kickoff_time="2026-10-03 20:45 CEST",
+                market_name="X2 + U/O 3.5 : X2 + UN",
+                odds=1.43,
+                outcome="WON",
+            ),
+            TipsterLegInput(
+                match_name="Svizzera vs Slovenia",
+                tournament="Nations League",
+                kickoff_time="2026-10-03 20:45 CEST",
+                market_name="MultiGol 2-5 Casa : SI",
+                odds=1.52,
+                outcome="WON",
+            ),
+            TipsterLegInput(
+                match_name="Spagna vs Repubblica Ceca",
+                tournament="Nations League",
+                kickoff_time="2026-10-03 20:45 CEST",
+                market_name="Casa Segna in Entrambi i Tempi : SI",
+                odds=1.37,
+                outcome="WON",
+            ),
+        ],
+    )
+    t_id = engine.ingest_ticket(ticket_3)
+    print(f"✅ Inserito Ticket #3 (ID: {t_id}) con 5 selezioni vincenti (@8.63).")
+
+
 def print_summary():
     engine = TipsterIntelligenceEngine()
     summary = engine.get_intelligence_summary()
@@ -198,10 +255,14 @@ def main():
     parser = argparse.ArgumentParser(description="Tipster Intelligence CLI")
     parser.add_argument("--summary", action="store_true", help="Mostra riepilogo pesi ed efficacia mercati")
     parser.add_argument("--bootstrap-october-01", action="store_true", help="Ingerisci le schedine del 01/10/2026")
+    parser.add_argument("--ingest-october-03", action="store_true", help="Ingerisci la schedina vincente del 03/10/2026")
     args = parser.parse_args()
 
     if args.bootstrap_october_01:
         bootstrap_tonight_tickets()
+        print_summary()
+    elif args.ingest_october_03:
+        ingest_october_03_ticket()
         print_summary()
     elif args.summary:
         print_summary()
