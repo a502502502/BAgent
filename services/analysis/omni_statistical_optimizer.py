@@ -54,6 +54,24 @@ class MatchDossier:
     # Dizionario o lista mercati quotati con quote reali del bookmaker
     catalog_source: Optional[str] = None
 
+    # --- INTELLIGENZA TATTICA, SESTO SENSO E DINAMICHE CAUSALI ---
+    # Profilo tattico allenatore: 'dominante_verticale' | 'possesso_orizzontale' | 'corto_muso' | 'transizione_rapida'
+    coach_profile_home: str = "possesso_orizzontale"
+    coach_profile_away: str = "transizione_rapida"
+    # Intensità di gioco sulle corsie laterali (0.0=centrale puro -> pochissimi corner, 1.0=cross continuo)
+    wing_play_intensity_home: float = 0.50
+    wing_play_intensity_away: float = 0.50
+    # Comportamento della favorita in vantaggio:
+    # 'cruise_control' (congela il ritmo, pochi corner e falli) vs 'relentless' (continua ad assediare)
+    game_state_behavior: str = "cruise_control"
+    # Tensione del match (1=amichevole/passerella, 3=girone normale, 5=derby/dentro-fuori acceso)
+    match_tension: int = 3
+    # Rischio blocco 0-0 tombale (True = penalizza mercati che forzano gol nella ripresa come MG 1-3 2°T)
+    rebound_00_risk: bool = False
+    # Fattore campo ambientale: 'standard' | 'caldo_balcanico' | 'caucasico_ostile' | 'nordico_disciplinato'
+    environmental_context: str = "standard"
+
+
 
 class OmniStatisticalPricer:
     """Prezzatore statistico universale per tutte le categorie di mercato calcistico."""
@@ -253,6 +271,56 @@ class OmniStatisticalPricer:
                     prob = self.xg_engine.goal_market_probability(dossier.xg_home, dossier.xg_away, market_name)
                 if prob is None:
                     prob = self.xg_engine.goal_market_probability(dossier.xg_home, dossier.xg_away, selection)
+
+        if prob is None or prob <= 0.0 or prob >= 1.0:
+            return None
+
+        # --- MODULAZIONE CAUSALE & TATTICA DELLE PROBABILITA' ---
+        # 1. Tattica Corner: se attacco orizzontale/centrale (wing_play basso), riduci la probabilità di Over Corner alti
+        if family == "TEAM_CORNERS_VOLUME":
+            is_home_corner = "squadra 1" in m_lower or "casa" in m_lower or "team 1" in s_upper.lower()
+            wing_intensity = dossier.wing_play_intensity_home if is_home_corner else dossier.wing_play_intensity_away
+            coach_prof = dossier.coach_profile_home if is_home_corner else dossier.coach_profile_away
+            
+            # Penalizzazione corner per squadre a possesso orizzontale o gioco centrale
+            if coach_prof == "possesso_orizzontale" or wing_intensity < 0.40:
+                if "over" in s_upper.lower() or "prima a" in m_lower:
+                    prob = max(0.10, prob * 0.82)  # Sconto del 18% sul volume da corsia
+            elif coach_prof == "dominante_verticale" and wing_intensity >= 0.70:
+                if "over" in s_upper.lower():
+                    prob = min(0.95, prob * 1.10)  # Boost del 10% per crossatori seriali
+
+            # Vincolo Game-State Cruise Control: se la favorita ha quota bassa (<= 1.45) e va in crociera,
+            # l'Over Corner di squadra >= 4.5 crolla
+            if dossier.game_state_behavior == "cruise_control" and dossier.xg_home >= 1.70:
+                if any(thresh in m_lower for thresh in ["4.5", "5.5", "6.5", "7.5"]) and "over" in s_upper.lower():
+                    prob = max(0.10, prob * 0.78)
+
+        # 2. Tattica Disciplinari & Tensione Ambientale
+        elif family == "TEAM_CARDS_VOLUME":
+            tension_mult = 1.0 + (dossier.match_tension - 3) * 0.08  # es. tensione 5 -> +16% cartellini
+            if dossier.environmental_context in ["caldo_balcanico", "caucasico_ostile"]:
+                tension_mult += 0.07
+            elif dossier.environmental_context == "nordico_disciplinato":
+                tension_mult -= 0.12
+            
+            if "over" in s_upper.lower():
+                prob = min(0.95, max(0.10, prob * tension_mult))
+            elif "under" in s_upper.lower():
+                prob = min(0.95, max(0.10, prob * (2.0 - tension_mult)))
+
+        # 3. Flussi Tempi & Rischio 0-0 Tombale
+        elif "tempo" in m_lower or "dc tempo" in m_lower:
+            # Se la partita ha rivalità o squadre che sbloccano presto, boost DC 1°T (12)
+            if "12" in s_upper and ("1 tempo" in m_lower or "1° tempo" in m_lower or "1t" in m_lower):
+                if dossier.coach_profile_home == "dominante_verticale" or dossier.coach_profile_away == "dominante_verticale":
+                    prob = min(0.92, prob * 1.08)
+
+        # 4. Penalizzazione MultiGol 2° Tempo su Rischio Rebound 0-0
+        if dossier.rebound_00_risk:
+            if "1-3 2" in m_lower or "1-3 2°t" in m_lower or "1-4 2" in m_lower or "0-2 1°t + 1-3 2°t" in m_lower:
+                # Partita che rischia di morire sullo 0-0: penalizza fortemente mercati che forzano gol nella ripresa
+                prob = max(0.10, prob * 0.75)
 
         if prob is None or prob <= 0.0 or prob >= 1.0:
             return None

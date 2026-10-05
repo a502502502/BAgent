@@ -25,7 +25,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-ROOT = Path("C:/Project/BAgent")
+ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from services.analysis.omni_statistical_optimizer import (
@@ -121,6 +121,14 @@ STATISTICAL_DOSSIERS = {
         corners_away=6.8,
         cards_home=2.7,
         cards_away=1.6,
+        coach_profile_home="transizione_rapida",
+        coach_profile_away="dominante_verticale",
+        wing_play_intensity_home=0.45,
+        wing_play_intensity_away=0.80,
+        game_state_behavior="relentless",
+        match_tension=4,
+        rebound_00_risk=False,
+        environmental_context="caldo_balcanico",
         players={
             "yamal": {"xg_90": 0.52, "fouls_avg": 0.9, "minutes": 80}
         }
@@ -134,6 +142,14 @@ STATISTICAL_DOSSIERS = {
         corners_away=2.2,
         cards_home=1.4,
         cards_away=2.9,
+        coach_profile_home="dominante_verticale",
+        coach_profile_away="corto_muso",
+        wing_play_intensity_home=0.85,
+        wing_play_intensity_away=0.30,
+        game_state_behavior="cruise_control",
+        match_tension=3,
+        rebound_00_risk=False,
+        environmental_context="standard",
         players={
             "gordon": {"xg_90": 0.50, "fouls_avg": 0.8, "minutes": 70},
             "bellingham": {"xg_90": 0.48, "fouls_avg": 1.4, "minutes": 85}
@@ -147,7 +163,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=6.1,
         corners_away=2.9,
         cards_home=1.8,
-        cards_away=2.6
+        cards_away=2.6,
+        coach_profile_home="possesso_orizzontale",
+        coach_profile_away="corto_muso",
+        wing_play_intensity_home=0.55,
+        wing_play_intensity_away=0.35,
+        game_state_behavior="cruise_control",
+        match_tension=3,
+        rebound_00_risk=False,
+        environmental_context="nordico_disciplinato"
     ),
     "albania-san-marino.json": MatchDossier(
         match_name="Albania vs San Marino",
@@ -157,7 +181,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=8.5,
         corners_away=1.2,
         cards_home=1.2,
-        cards_away=3.1
+        cards_away=3.1,
+        coach_profile_home="dominante_verticale",
+        coach_profile_away="corto_muso",
+        wing_play_intensity_home=0.75,
+        wing_play_intensity_away=0.10,
+        game_state_behavior="relentless",
+        match_tension=2,
+        rebound_00_risk=False,
+        environmental_context="caldo_balcanico"
     ),
     "kazakistan-isole-far-oer.json": MatchDossier(
         match_name="Kazakistan vs Isole Far Oer",
@@ -167,7 +199,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=5.1,
         corners_away=3.6,
         cards_home=2.2,
-        cards_away=2.3
+        cards_away=2.3,
+        coach_profile_home="possesso_orizzontale",
+        coach_profile_away="corto_muso",
+        wing_play_intensity_home=0.45,
+        wing_play_intensity_away=0.40,
+        game_state_behavior="cruise_control",
+        match_tension=3,
+        rebound_00_risk=True,
+        environmental_context="caucasico_ostile"
     ),
     "moldova-slovacchia.json": MatchDossier(
         match_name="Moldova vs Slovacchia",
@@ -177,7 +217,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=2.7,
         corners_away=6.4,
         cards_home=2.8,
-        cards_away=1.9
+        cards_away=1.9,
+        coach_profile_home="corto_muso",
+        coach_profile_away="dominante_verticale",
+        wing_play_intensity_home=0.30,
+        wing_play_intensity_away=0.70,
+        game_state_behavior="cruise_control",
+        match_tension=3,
+        rebound_00_risk=False,
+        environmental_context="standard"
     ),
     "bielorussia-finlandia.json": MatchDossier(
         match_name="Bielorussia vs Finlandia",
@@ -187,7 +235,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=3.6,
         corners_away=5.3,
         cards_home=2.7,
-        cards_away=1.8
+        cards_away=1.8,
+        coach_profile_home="corto_muso",
+        coach_profile_away="possesso_orizzontale",
+        wing_play_intensity_home=0.40,
+        wing_play_intensity_away=0.50,
+        game_state_behavior="cruise_control",
+        match_tension=3,
+        rebound_00_risk=True,
+        environmental_context="nordico_disciplinato"
     ),
     "lussemburgo-bulgaria.json": MatchDossier(
         match_name="Lussemburgo vs Bulgaria",
@@ -197,7 +253,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=5.4,
         corners_away=4.1,
         cards_home=2.3,
-        cards_away=2.5
+        cards_away=2.5,
+        coach_profile_home="possesso_orizzontale",
+        coach_profile_away="transizione_rapida",
+        wing_play_intensity_home=0.50,
+        wing_play_intensity_away=0.45,
+        game_state_behavior="cruise_control",
+        match_tension=3,
+        rebound_00_risk=False,
+        environmental_context="standard"
     ),
     "scozia-slovenia.json": MatchDossier(
         match_name="Scozia vs Slovenia",
@@ -207,7 +271,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=6.5,
         corners_away=3.4,
         cards_home=2.0,
-        cards_away=2.4
+        cards_away=2.4,
+        coach_profile_home="dominante_verticale",
+        coach_profile_away="corto_muso",
+        wing_play_intensity_home=0.80,
+        wing_play_intensity_away=0.35,
+        game_state_behavior="relentless",
+        match_tension=4,
+        rebound_00_risk=False,
+        environmental_context="standard"
     ),
     "estonia-islanda.json": MatchDossier(
         match_name="Estonia vs Islanda",
@@ -217,7 +289,15 @@ STATISTICAL_DOSSIERS = {
         corners_home=3.5,
         corners_away=5.8,
         cards_home=2.6,
-        cards_away=2.0
+        cards_away=2.0,
+        coach_profile_home="corto_muso",
+        coach_profile_away="dominante_verticale",
+        wing_play_intensity_home=0.35,
+        wing_play_intensity_away=0.75,
+        game_state_behavior="cruise_control",
+        match_tension=3,
+        rebound_00_risk=False,
+        environmental_context="nordico_disciplinato"
     )
 }
 
