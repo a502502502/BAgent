@@ -96,20 +96,20 @@ def classify_market_family(market_name: str) -> str:
     if "entrambi i tempi" in m or "ov 1°t + ov 2°t" in m or "entrambi tempi" in m:
         return "BOTH_HALVES_GOALS"
         
-    # 3. Corner Squadra
-    if "corner" in m and any(w in m for w in ["squadra", "casa", "ospite", "team"]):
+    # 3. Calci d'Angolo (qualsiasi mercato corner)
+    if any(k in m for k in ["corner", "calci angolo", "calci d'angolo", "angoli"]):
         return "TEAM_CORNERS_VOLUME"
         
-    # 4. Cartellini Squadra
-    if ("cartellin" in m or "card" in m or "ammoniz" in m) and any(w in m for w in ["squadra", "casa", "ospite", "team"]):
+    # 4. Cartellini e Falli (qualsiasi mercato disciplinare)
+    if any(k in m for k in ["cartellin", "card", "ammoniz", "falli", "punti cartellini"]):
         return "TEAM_CARDS_VOLUME"
         
     # 5. Tiri in porta
     if "tiri in porta" in m or "shots on target" in m or "tiri specchio" in m:
         return "TOTAL_SHOTS_ON_TARGET"
         
-    # 6. Chance Mix
-    if "chance mix" in m or (" o " in m and any(w in m for w in ["gg", "gol", "nogol", "over", "under"])):
+    # 6. Chance Mix / Combo Chance
+    if "chance mix" in m or "combo chance" in m or (" o " in m and any(w in m for w in ["gg", "gol", "nogol", "nogoal", "over", "under"])):
         return "CHANCE_MIX"
         
     # 7. Doppia Chance + Gol/MultiGol / Over / Under

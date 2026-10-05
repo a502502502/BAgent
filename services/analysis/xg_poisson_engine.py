@@ -13,7 +13,10 @@ _NON_GOAL_TOKENS = ("corner", "cartellin", "tiri", "falli")
 _COMPOUND_PERIOD_MARKET = re.compile(r"entrambi i tempi")
 _FIRST_HALF_REGEX = re.compile(r"\b(?:1\s*°?\s*tempo|1\s*°?\s*t|primo\s+tempo|1h)\b", re.IGNORECASE)
 _SECOND_HALF_REGEX = re.compile(r"\b(?:2\s*°?\s*tempo|2\s*°?\s*t|secondo\s+tempo|2h)\b", re.IGNORECASE)
-_CLAUSE_PREFIX = re.compile(r"^(?:chance mix|doppia chance|esito finale|dc)\s+")
+_CLAUSE_PREFIX = re.compile(
+    r"^(?:combo chance|chance mix|doppia chance|esito finale|combo|dc)\s*:?\s*",
+    re.IGNORECASE,
+)
 _SIDE_WORDS = re.compile(
     r"\b(?:casa|ospite|home|away|squadra\s*[12]|squadra|gol|totali|partita|match)\b"
 )
@@ -122,7 +125,7 @@ def _goal_clause_mask(clause: str, home: np.ndarray, away: np.ndarray, total: np
         if side != "total":
             return None
         return (home >= 1) & (away >= 1)
-    if clause in {"no gol", "nogol", "ng"}:
+    if clause in {"no gol", "nogol", "nogoal", "no-goal", "ng"}:
         return ~((home >= 1) & (away >= 1))
 
     core = re.sub(r"\s+", " ", _SIDE_WORDS.sub(" ", clause)).strip()
