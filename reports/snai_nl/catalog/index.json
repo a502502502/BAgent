@@ -1,0 +1,94 @@
+[
+  {
+    "event_id": "36411-8232",
+    "match": "Cipro - Lettonia",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8238",
+    "match": "Bosnia Erzegovina - Polonia",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8237",
+    "match": "Italia - Turchia",
+    "kickoff_time": "2026-10-05 20:45 CEST",
+    "market_count": 2173,
+    "file": "reports/snai_nl/catalog/italia---turchia.json"
+  },
+  {
+    "event_id": "36411-8236",
+    "match": "Francia - Belgio",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  },
+  {
+    "event_id": "36411-8234",
+    "match": "Irlanda del Nord - Georgia",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  },
+  {
+    "event_id": "36411-8233",
+    "match": "Romania - Svezia",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8231",
+    "match": "Ucraina - Ungheria",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8235",
+    "match": "Montenegro - Armenia",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8239",
+    "match": "Kazakistan - Isole Far Oer",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  },
+  {
+    "event_id": "36411-8242",
+    "match": "Bielorussia - Finlandia",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  },
+  {
+    "event_id": "36411-8241",
+    "match": "Albania - San Marino",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8246",
+    "match": "Estonia - Islanda",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8243",
+    "match": "Lussemburgo - Bulgaria",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  },
+  {
+    "event_id": "36411-8245",
+    "match": "Croazia - Spagna",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  },
+  {
+    "event_id": "36411-8244",
+    "match": "Moldova - Slovacchia",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-15596",
+    "match": "Inghilterra - Repubblica Ceca",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  },
+  {
+    "event_id": "36411-8248",
+    "match": "Scozia - Slovenia",
+    "error": "The read operation timed out"
+  },
+  {
+    "event_id": "36411-8240",
+    "match": "Svizzera - Macedonia",
+    "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  }
+]

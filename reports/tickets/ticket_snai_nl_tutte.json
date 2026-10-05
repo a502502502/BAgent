@@ -1,0 +1,286 @@
+{
+  "bankroll_reference": 100.0,
+  "session_stake": 12.5,
+  "playable": false,
+  "groq_audit": "ESEGUITO",
+  "tickets": [
+    {
+      "id": "TICKET_SNAI_NL_TUTTE_1",
+      "stake": 2.5,
+      "total_odds": 2.95,
+      "passed": true,
+      "rejection_reasons": [],
+      "legs": [
+        {
+          "match_name": "Cipro vs Lettonia",
+          "kickoff_time": "2026-10-05 18:00 CEST",
+          "market_name": "MultiGol 2-5",
+          "bookmaker_odd": 1.42,
+          "probability": 0.672,
+          "fair_odd": 1.49,
+          "edge": -0.046,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Bosnia Erzegovina vs Polonia",
+          "kickoff_time": "2026-10-05 20:45 CEST",
+          "market_name": "Chance Mix: 2 o Gol",
+          "bookmaker_odd": 1.23,
+          "probability": 0.79,
+          "fair_odd": 1.27,
+          "edge": -0.029,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Italia vs Turchia",
+          "kickoff_time": "2026-10-05 20:45 CEST",
+          "market_name": "MultiGol 2-5",
+          "bookmaker_odd": 1.3,
+          "probability": 0.729,
+          "fair_odd": 1.37,
+          "edge": -0.053,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Francia vs Belgio",
+          "kickoff_time": "2026-10-05 20:45 CEST",
+          "market_name": "MultiGol 2-5",
+          "bookmaker_odd": 1.3,
+          "probability": 0.725,
+          "fair_odd": 1.38,
+          "edge": -0.058,
+          "passed": true,
+          "rejection": null
+        }
+      ],
+      "groq": {
+        "success": true,
+        "approved": false,
+        "model_used": "openai/gpt-oss-120b",
+        "error": null,
+        "critique": "**AUDIT – TICKET ‘TICKET_SNAI_NL_TUTTE_1’**  \nBankroll: €100  | Quota totale: 2.95  \n\n---\n\n## 1. Analisi Matematica (EV per leg)\n\n| Leg | Mercato | P (probabilità) | Quota Netwin | EV = P·Q‑1 | Edge dichiarato |\n|-----|---------|----------------|--------------|-----------|-----------------|\n| 1 | MultiGol 2‑5 (Cipro‑Lettonia) | 0.672 | 1.42 | **‑4.6 %** | –4.6 % |\n| 2 | Chance Mix 2 o Gol (Bosnia‑Polonia) | 0.790 | 1.23 | **‑2.8 %** | –2.9 % |\n| 3 | MultiGol 2‑5 (Italia‑Turchia) | 0.729 | 1.30 | **‑5.2 %** | –5.3 % |\n| 4 | MultiGol 2‑5 (Francia‑Belgio) | 0.725 | 1.30 | **‑5.8 %** | –5.8 % |\n\n*Calcolo EV*: EV = P × Quota – 1.  \nTutte le leg hanno **EV negativo** (‑2.8 % → ‑5.8 %).  \n\n### EV complessivo del ticket\n- Probabilità combinata (indipendente):  \n  0.672 × 0.790 × 0.729 × 0.725 ≈ 0.281  (28.1 %).\n- Ritorno atteso: 0.281 × 2.95 ≈ 0.829 → **‑17.1 %** di edge totale.  \n\n**Conclusione**: il ticket è fortemente *negative‑EV*; il valore atteso è di circa €0.83 per ogni €1 scommesso.\n\n---\n\n## 2. Analisi “Trappole” Bookmaker  \n\n| Leg | Mercato | Come vince il bookmaker (scenario di perdita) |\n|-----|---------|-----------------------------------------------|\n| 1 | **MultiGol 2‑5** (Cipro‑Lettonia) | Perde se il match termina con **0‑1 gol** (under 1.5) **o** con **6 + gol**. La quota 1.42 è inferiore al fair 1.49, quindi il bookmaker “premia” le due estremità (0‑1 e 6+), riducendo il payout. |\n| 2 | **Chance Mix 2 o Gol** (Bosnia‑Polonia) | Vince se **(a)** il totale è ≥ 2 gol **oppure** (b) entrambe le squadre segnano. Perde solo in caso di **0‑1 gol** *e* almeno una squadra a zero. La quota 1.23 è sotto il fair 1.27, quindi il bookmaker penalizza la combinazione più probabile (0‑1 gol con una squadra a zero). |\n| 3 | **MultiGol 2‑5** (Italia‑Turchia) | Stessa dinamica della leg 1: perde con **0‑1 gol** o con **≥ 6 gol**. La quota 1.30 è inferiore al fair 1.37, indicando una sovrastima della probabilità di “out‑of‑range” (0‑1 o 6+). |\n| 4 | **MultiGol 2‑5** (Francia‑Belgio) | Identico alle leg 1 & 3. La quota 1.30 < fair 1.38, quindi il bookmaker “scommette” su un eccesso di partite a basso punteggio o su partite a gol estremi, riducendo il valore reale. |\n\n**Pattern comune**: tutti i mercati “MultiGol 2‑5” hanno una **sottovalutazione della zona centrale (2‑5 gol)** e una **sovrastima delle code** (0‑1 e 6+). Il bookmaker sfrutta la tendenza dei scommettitori a temere i gol “troppi alti”, offrendo quote più basse rispetto al fair.  \n\n---\n\n## 3. Verdetto Finale  \n\n**BOCCIATA**  \n\n- **Motivo**: ogni singola leg è negative‑EV; il ticket complessivo ha un edge di circa **‑17 %**.  \n- **Rischio occulto**: le quote sono state “compresse” per sfruttare la psicologia del punteggio (paura di partite a molti gol) e la modellazione “lambda da baseline di torneo” non tiene conto delle differenze di forza tra le nazionali, creando un bias sistematico a favore del bookmaker.  \n\n### Raccomandazione di stake (solo a scopo illustrativo)\nSe, per qualche ragione, si volesse comunque puntare, la massima esposizione consigliata è **≤ 0.5 % del bankroll** (≤ €0,50) – ma la strategia è **sconsigliata** perché il valore atteso è negativo.  \n\n---  \n\n*Audit concluso.*"
+      }
+    },
+    {
+      "id": "TICKET_SNAI_NL_TUTTE_2",
+      "stake": 2.5,
+      "total_odds": 3.6,
+      "passed": true,
+      "rejection_reasons": [],
+      "legs": [
+        {
+          "match_name": "Irlanda del Nord vs Georgia",
+          "kickoff_time": "2026-10-05 20:45 CEST",
+          "market_name": "Chance Mix: 2 o Gol",
+          "bookmaker_odd": 1.52,
+          "probability": 0.677,
+          "fair_odd": 1.48,
+          "edge": 0.029,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Romania vs Svezia",
+          "kickoff_time": "2026-10-05 20:45 CEST",
+          "market_name": "X2 + MultiGol 1-5",
+          "bookmaker_odd": 1.3,
+          "probability": 0.762,
+          "fair_odd": 1.31,
+          "edge": -0.01,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Ucraina vs Ungheria",
+          "kickoff_time": "2026-10-05 20:45 CEST",
+          "market_name": "Chance Mix: 2 o Gol",
+          "bookmaker_odd": 1.4,
+          "probability": 0.725,
+          "fair_odd": 1.38,
+          "edge": 0.014,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Montenegro vs Armenia",
+          "kickoff_time": "2026-10-05 20:45 CEST",
+          "market_name": "MultiGol 2-5",
+          "bookmaker_odd": 1.3,
+          "probability": 0.713,
+          "fair_odd": 1.4,
+          "edge": -0.073,
+          "passed": true,
+          "rejection": null
+        }
+      ],
+      "groq": {
+        "success": true,
+        "approved": false,
+        "model_used": "openai/gpt-oss-120b",
+        "error": null,
+        "critique": "**AUDIT DEL TICKET ‘TICKET_SNAI_NL_TUTTE_2’**  \nBankroll: €100 – Quota totale: 3.60  \n\n---\n\n## 1. Analisi Matematica (EV per leg)\n\n| Leg | Mercato | Quota Netwin | Quota Fair | Prob. fair (p = 1/Quota) | EV = p·Q‑1 | Edge dichiarato |\n|-----|----------|--------------|------------|--------------------------|-----------|-----------------|\n| 1 | Chance Mix : 2 o Gol | 1.52 | 1.48 | 0.6757 | **+ 2.7 %** | +2.9 % |\n| 2 | X2 + MultiGol 1‑5 | 1.30 | 1.31 | 0.7634 | **‑0.8 %** | –1.0 % |\n| 3 | Chance Mix : 2 o Gol | 1.40 | 1.38 | 0.7246 | **+1.4 %** | +1.4 % |\n| 4 | MultiGol 2‑5 | 1.30 | 1.40 | 0.7143 | **‑7.1 %** | –7.3 % |\n\n**Calcolo EV complessivo**  \n\n- Probabilità di vincere **tutto** = 0.6757 × 0.7634 × 0.7246 × 0.7143 ≈ **0.267 (26.7 %)**  \n- Quota totale = 1.52 × 1.30 × 1.40 × 1.30 ≈ **3.60**  \n\n\\[\n\\text{EV ticket} = 0.267 \\times 3.60 - 1 = -0.0388 \\;\\; \\Rightarrow \\;\\; **‑3.9 %** \n\\]\n\n> **Il ticket è negativo di quasi 4 % rispetto al valore atteso.**  \n\n---\n\n## 2. Analisi delle “trappole” del bookmaker\n\n| Leg | Scenari di perdita (più probabili) | Perché è una trappola |\n|-----|-----------------------------------|-----------------------|\n| **1 – Chance Mix 2 o Gol** | Nessuno praticabile: l’unica perdita sarebbe “casa vince 0‑0”, evento quasi impossibile. | Edge positivo ma molto ridotto; il mercato è quasi “sure‑thing” e il margine è minimo. |\n| **2 – X2 + MultiGol 1‑5** | • Casa vince (qualunque risultato)  <br>• Totale 0 gol  <br>• Totale ≥ 6 gol | Richiede **due condizioni** (X2 *e* 1‑5). La combinazione riduce la probabilità reale rispetto alla singola quota X2 (≈ 76 %). Il margine negativo indica che il bookmaker ha sovrastimato la probabilità di “X2 + gol medio”. |\n| **3 – Chance Mix 2 o Gol** | Come leg 1, perdita solo con “casa vince 0‑0”. | Margine positivo ma limitato; il valore è quasi neutro. |\n| **4 – MultiGol 2‑5** | • Totale 0‑1 gol (probabilità alta in partite con difese solide) <br>• Totale ≥ 6 gol (raro) | Il bookmaker ha **sottovalutato** la frequenza di partite a 0‑1 gol (p≈ 71 % vs fair p≈ 71 % → EV ‑7 %). È la “trappola” più pesante del ticket. |\n\n**Sintesi:** le due leg con EV negativo (2 e 4) annullano i piccoli +EV delle leg 1 e 3. La leg 4 è particolarmente pericolosa perché il margine è ampio (‑7 %) e la probabilità di 0‑1 gol è tipica in molte nazionali di Nations League.\n\n---\n\n## 3. Verdetto Finale\n\n**BOCCIATA**  \n\n- Il ticket ha un valore atteso complessivo negativo (‑3.9 %).  \n- La presenza di una leg con forte svantaggio (MultiGol 2‑5) rende il rischio sproporzionato rispetto al potenziale guadagno.  \n- Anche la leg 2, seppur marginale, è negativa e riduce ulteriormente la robustezza del parlay.\n\n**Stake consigliato:** 0 % (non scommettere).  \n\n---  \n\n*Nota per il risk‑manager:* se si volesse comunque includere le leg 1 e 3 (che hanno +EV), sarebbe più prudente trasformarle in scommesse singole con stake 2‑5 % del bankroll ciascuna, evitando la combinazione con le leg negative."
+      }
+    },
+    {
+      "id": "TICKET_SNAI_NL_TUTTE_3",
+      "stake": 2.5,
+      "total_odds": 3.51,
+      "passed": true,
+      "rejection_reasons": [],
+      "legs": [
+        {
+          "match_name": "Kazakistan vs Isole Far Oer",
+          "kickoff_time": "2026-10-06 16:00 CEST",
+          "market_name": "Chance Mix: 2 o Gol",
+          "bookmaker_odd": 1.47,
+          "probability": 0.693,
+          "fair_odd": 1.44,
+          "edge": 0.018,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Bielorussia vs Finlandia",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "MultiGol 1-4 Ospite",
+          "bookmaker_odd": 1.33,
+          "probability": 0.774,
+          "fair_odd": 1.29,
+          "edge": 0.029,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Albania vs San Marino",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "1X + MultiGol 2-5",
+          "bookmaker_odd": 1.3,
+          "probability": 0.714,
+          "fair_odd": 1.4,
+          "edge": -0.072,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Estonia vs Islanda",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "X2 + Over 1.5",
+          "bookmaker_odd": 1.38,
+          "probability": 0.699,
+          "fair_odd": 1.43,
+          "edge": -0.035,
+          "passed": true,
+          "rejection": null
+        }
+      ],
+      "groq": {
+        "success": true,
+        "approved": false,
+        "model_used": "openai/gpt-oss-120b",
+        "error": null,
+        "critique": "**AUDIT – TICKET ‘TICKET_SNAI_NL_TUTTE_3’**  \nBankroll: €100  – Quota totale: 3.51  \n\n---\n\n## 1. Analisi matematica (EV per leg)\n\n| Leg | Quota Netwin | Quota Fair | p (fair)=1/Quota Fair | EV (p·(Netwin‑1)‑(1‑p)) | % Edge* |\n|-----|--------------|------------|----------------------|------------------------|----------|\n| 1 – Kaz vs Far Oer | 1.47 | 1.44 | 0.6944 | **+2.08 %** | +1.8 % |\n| 2 – Biel vs Fin | 1.33 | 1.29 | 0.7752 | **+3.10 %** | +2.9 % |\n| 3 – Albania vs San Marino | 1.30 | 1.40 | 0.7143 | **‑7.14 %** | –7.2 % |\n| 4 – Estonia vs Islanda | 1.38 | 1.43 | 0.6993 | **‑3.50 %** | –3.5 % |\n\n\\*L’**Edge** indicato dal bookmaker coincide con il valore EV calcolato (≈ p·(quota‑1) ‑ (1‑p)).\n\n### EV complessivo del parlay\n\\[\n\\text{Rendimento atteso}= \\prod_{i=1}^{4}\\bigl(p_i \\times \\text{quota}_i\\bigr)=\n1.0207 \\times 1.0310 \\times 0.9286 \\times 0.9640 = **0.9415**\n\\]\n\n**EV totale = –5.85 %** (per ogni €1 scommesso ci si attende di perdere €0,0585).  \nIl ticket è quindi **negativo** dal punto di vista matematico.\n\n---\n\n## 2. Trappole del bookmaker (scenario di perdita)\n\n| Leg | Mercato | Come si vince | Come si perde (scenario più probabile) |\n|-----|---------|---------------|----------------------------------------|\n| **1** | **Chance Mix : 2 o Gol** | • Vittoria della squadra ospite (2) – *qualunque risultato* <br>• In caso di pareggio, entrambe le squadre devono segnare | **Perdita** se la squadra di casa vince (qualunque punteggio). La quota è bassa (1.47) ma la probabilità di una vittoria casalinga è ancora intorno al 30 % (p ≈ 0.30). |\n| **2** | **MultiGol 1‑4 Ospite** | L’ospite segna **1, 2, 3 o 4** gol. | **Perdita** se l’ospite segna **0** o **≥5** gol. In una partita di Nations League con squadre di livello simile, il rischio di “0 gol” è non trascurabile (≈ 15‑20 %). |\n| **3** | **1X + MultiGol 2‑5** (doppia combinata) | • Risultato finale **1 (casa vince) o X (pareggio)** **e** l’ospite segna **2‑5** gol. | **Perdita** in tre casi: <br>1. Vittoria della squadra ospite (esclude 1X). <br>2. Casa vince ma l’ospite segna < 2 o > 5 gol. <br>3. Pareggio ma l’ospite segna < 2 o > 5 gol. <br>Questa è la **leg più rischiosa**: la quota è inferiore al fair (1.30 vs 1.40) e l’EV è –7 %. |\n| **4** | **X2 + Over 1.5** | • Pareggio o vittoria ospite **e** totale gol > 1.5. | **Perdita** se la casa vince **o** se il match termina 0‑0, 1‑0 o 0‑1 (qualsiasi risultato con ≤ 1.5 gol). Con tre squadre di livello medio‑basso, la probabilità di un risultato “≤ 1.5” è intorno al 30 %, rendendo la leg vulnerabile. |\n\n**Osservazione generale:** le due ultime leg (3 e 4) hanno **edge negativo** e includono condizioni “AND” che riducono drasticamente la probabilità di vincita rispetto alla semplice quota indicata. Il bookmaker sfrutta la combinazione di *double chance* con *over/under* o *range di gol* per far apparire una quota “attraente” (1.38‑1.40) quando in realtà la probabilità reale è inferiore.\n\n---\n\n## 3. Verdetto finale\n\n**BOCCIATA**  \n\n- L’EV complessivo è **‑5.85 %**.  \n- Due leg hanno edge negativo (‑7 % e ‑3.5 %).  \n- Le combinazioni “Mix” e “X2 + Over 1.5” aumentano il rischio di perdita in maniera non evidente a prima vista.  \n\n**Consiglio di stake:** **0 %** del bankroll (non scommettere).  \n\nSe si volesse comunque mantenere una parte del ticket, l’unica strategia prudente sarebbe **escludere le leg 3 e 4** e ricalcolare un parlay con le prime due leg (EV complessivo +2.6 %). In tal caso, una puntata del **2‑3 %** del bankroll sarebbe ragionevole.  \n\n---  \n\n*Audit concluso.*"
+      }
+    },
+    {
+      "id": "TICKET_SNAI_NL_TUTTE_4",
+      "stake": 2.5,
+      "total_odds": 3.34,
+      "passed": true,
+      "rejection_reasons": [],
+      "legs": [
+        {
+          "match_name": "Lussemburgo vs Bulgaria",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "MultiGol 1-4 Ospite",
+          "bookmaker_odd": 1.57,
+          "probability": 0.671,
+          "fair_odd": 1.49,
+          "edge": 0.053,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Croazia vs Spagna",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "X2 + MultiGol 1-4",
+          "bookmaker_odd": 1.3,
+          "probability": 0.706,
+          "fair_odd": 1.42,
+          "edge": -0.082,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Moldova vs Slovacchia",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "MultiGol 2-5",
+          "bookmaker_odd": 1.33,
+          "probability": 0.724,
+          "fair_odd": 1.38,
+          "edge": -0.037,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Inghilterra vs Repubblica Ceca",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "1X + MultiGol 2-5",
+          "bookmaker_odd": 1.23,
+          "probability": 0.719,
+          "fair_odd": 1.39,
+          "edge": -0.116,
+          "passed": true,
+          "rejection": null
+        }
+      ],
+      "groq": {
+        "success": true,
+        "approved": false,
+        "model_used": "openai/gpt-oss-120b",
+        "error": null,
+        "critique": "**AUDIT DEL TICKET “TICKET_SNAI_NL_TUTTE_4”**  \nBankroll: €100 – Quota totale Netwin: 3.34  \n\n---\n\n## 1. Analisi Matematica (EV per leg)\n\n| Leg | Mercato | Prob. (P) | Quota Netwin | EV = P·Q‑1 | Edge dichiarato |\n|-----|---------|-----------|--------------|-----------|-----------------|\n| 1 | **MultiGol 1‑4 Ospite** | 0.671 | 1.57 | **+0.053  (+5.3 %)** | +5.3 % |\n| 2 | **X2 + MultiGol 1‑4** | 0.706 | 1.30 | **‑0.082  (‑8.2 %)** | –8.2 % |\n| 3 | **MultiGol 2‑5** | 0.724 | 1.33 | **‑0.038  (‑3.8 %)** | –3.7 % |\n| 4 | **1X + MultiGol 2‑5** | 0.719 | 1.23 | **‑0.116  (‑11.6 %)** | –11.6 % |\n\n**Valore atteso complessivo**  \n\n\\[\n\\text{Rendimento atteso} = \\prod_i (P_i \\times Q_i) = 0.823\n\\]\n\n→ **‑17.7 % di EV** (per ogni €1 scommesso ci si aspetta di ricevere €0,823).  \nIl ticket è quindi **negativo** dal punto di vista statistico.\n\n---\n\n## 2. Trappole tipiche del Bookmaker\n\n| Leg | Trappola / Rischio occulto |\n|-----|----------------------------|\n| **1 – MultiGol 1‑4 Ospite** | Il range “1‑4” include anche 1 gol, ma la probabilità di “0 gol” è stata esclusa. In nazionali di bassa classifica (Lussemburgo‑Bulgaria) la distribuzione dei gol è spesso **over‑dispersa**: la stima del 67 % è ottimistica. |\n| **2 – X2 + MultiGol 1‑4** | Si tratta di una **scommessa combinata** (entrambi gli eventi devono verificarsi). La probabilità reale è **P(X2) × P(MultiGol 1‑4 | X2)**, non semplicemente la media indicata. Il bookmaker ha usato la probabilità “a testa” (70,6 %) senza penalizzare la dipendenza, gonfiando l’EV. |\n| **3 – MultiGol 2‑5** | Il range parte da 2 gol, ma la probabilità di “0‑1 gol” è stata ignorata. In partite con squadre di livello medio‑basso (Moldova‑Slovacchia) la media attesa di gol è spesso **≤1.5**, quindi la quota 1.33 è troppo alta rispetto al reale. |\n| **4 – 1X + MultiGol 2‑5** | Un altro **double‑condition**: occorre (vittoria casa **o** pareggio) **e** (2‑5 gol totali). La probabilità congiunta è notevolmente inferiore a 71,9 % perché la presenza di più gol è più probabile in partite con risultato “vittoria netta”, ma la quota 1.23 non riflette la riduzione di probabilità. |\n| **Correlazione temporale** | Tutte le partite si giocano nello stesso slot (20:45 CEST). Il “lambda da baseline di torneo” indica che il modello ha usato una media di gol del torneo, ma non ha tenuto conto delle **condizioni specifiche di ciascuna squadra** (infortuni, squalifiche, fattore campo). Questo porta a **over‑stima sistematica** delle probabilità. |\n\n---\n\n## 3. Verdetto Finale\n\n**BOCCIATA**  \n\n- Il ticket ha un EV complessivo di **‑17,7 %**.  \n- Tre delle quattro leg sono negative; le due leg con combinazioni (X2 + MultiGol, 1X + MultiGol) nascondono una dipendenza che il bookmaker non ha scontato.  \n- Non vi è alcun margine di sicurezza (edge positivo) sufficiente a compensare il rischio di perdita.\n\n**Consiglio di stake:** **0 %** del bankroll (non scommettere).  \n\n---  \n\n*Nota per il futuro:* concentrati su mercati **singoli** con edge positivo verificato da modelli indipendenti (es. Over/Under, risultato esatto) e evita combinazioni “X2 + MultiGol” o “1X + MultiGol” a meno di non avere una stima robusta della probabilità congiunta."
+      }
+    },
+    {
+      "id": "TICKET_SNAI_NL_TUTTE_5",
+      "stake": 2.5,
+      "total_odds": 1.75,
+      "passed": true,
+      "rejection_reasons": [],
+      "legs": [
+        {
+          "match_name": "Scozia vs Slovenia",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "MultiGol 2-5",
+          "bookmaker_odd": 1.45,
+          "probability": 0.66,
+          "fair_odd": 1.52,
+          "edge": -0.044,
+          "passed": true,
+          "rejection": null
+        },
+        {
+          "match_name": "Svizzera vs Macedonia",
+          "kickoff_time": "2026-10-06 20:45 CEST",
+          "market_name": "1X + MultiGol 2-5",
+          "bookmaker_odd": 1.21,
+          "probability": 0.72,
+          "fair_odd": 1.39,
+          "edge": -0.129,
+          "passed": true,
+          "rejection": null
+        }
+      ],
+      "groq": {
+        "success": true,
+        "approved": false,
+        "model_used": "openai/gpt-oss-120b",
+        "error": null,
+        "critique": "**TICKET DA ESAMINARE:** ‘TICKET_SNAI_NL_TUTTE_5’  \n**Quota Totale:** 1.75 **Bankroll:** €100,00  \n\n---\n\n## 1. Analisi Matematica (EV)\n\n| Leg | Mercato | Quota Netwin | Probabilità dichiarata (P) | EV = P × Quota – 1 |\n|-----|---------|--------------|----------------------------|-------------------|\n| 1 | **MultiGol 2‑5** (Scozia) | 1.45 | 66 % | 0,66 × 1,45 – 1 = **‑0,043**  → **‑4,3 %** |\n| 2 | **1X + MultiGol 2‑5** (Svizzera) | 1.21 | 72 % | 0,72 × 1,21 – 1 = **‑0,129** → **‑12,9 %** |\n\n**Interpretazione:**  \n- Entrambe le leg hanno **EV negativo** (‑4,3 % e ‑12,9 %).  \n- L’**Edge** indicato dal bookmaker è già negativo (‑4,4 % e ‑12,9 %).  \n- La quota totale teorica di un parlay con queste due leg dovrebbe essere **≤ 1.45 × 1.21 ≈ 1.75**, ma poiché ogni singola scommessa è svantaggiosa, il prodotto non crea valore aggiunto: il parlay eredita la perdita di ciascuna leg.\n\n### Verifica della probabilità “fair”\n\n- **MultiGol 2‑5** (solo squadra) implica che la squadra segni **almeno 2 gol e al massimo 5**.  \n  - In Nations League le medie di gol per squadra sono intorno a **1.1‑1.3**.  \n  - Con una distribuzione di Poisson (λ≈1.2) la probabilità di 2‑5 gol è:  \n    P(2) ≈ 0,216, P(3) ≈ 0,087, P(4) ≈ 0,026, P(5) ≈ 0,006 → **≈ 33 %**.  \n  - La quota “fair” corrispondente sarebbe **1 / 0.33 ≈ 3.03**, ben al di sopra della quota Netwin 1.45.  \n  - La quota “fair” indicata (1.52) è **drasticamente sottostimata**: il modello di base (λ da “baseline di torneo”) è probabilmente errato o basato su un campione troppo piccolo (2 partite chiuse a testa).\n\n- **1X + MultiGol 2‑5** combina una **double‑chance** (probabilità ≈ 0,75) con la stessa scommessa “MultiGol 2‑5”.  \n  - Il risultato è una quota “fair” intorno a **1 / (0.75 × 0.33) ≈ 4.0**.  \n  - La quota Netwin 1.21 è quindi **praticamente nulla** rispetto al rischio.\n\n**Conclusione matematica:** nessuna delle due leg possiede valore atteso positivo; anzi, la stima della probabilità reale è molto più bassa di quella dichiarata dal bookmaker.\n\n---\n\n## 2. Analisi Trappole Bookmaker\n\n| Leg | Trappola / Rischio occulto |\n|-----|----------------------------|\n| 1 | **Sottostima della distribuzione dei gol**: il bookmaker usa λ “da baseline di torneo” basato su sole 2 partite, ignorando la variabilità stagionale e la forza difensiva delle squadre. Il risultato è una quota 1.45 per un evento che, con λ≈1.2, ha probabilità reale ~33 % (quota fair ≈3.0). |\n| 2 | **Double‑chance + MultiGol**: la double‑chance (1X) riduce drasticamente il rischio di perdita, ma il prezzo pagato (quota 1.21) è talmente basso da annullare ogni vantaggio. Inoltre, la combinazione “MultiGol 2‑5” è già una scommessa a bassa probabilità; aggiungere 1X non migliora il valore, ma diluisce la quota. |\n| 1 & 2 | **Effetto “parlay”**: il parlay è presentato con quota totale 1.75, ma poiché entrambe le leg hanno EV negativo, il prodotto delle quote non crea valore. Il rischio di perdita è **quasi certo** (probabilità di vincita complessiva ≤ 0,66 × 0,72 ≈ 0,48 → 48 %). |\n\n---\n\n## 3. Verdetto Finale\n\n**BOCCIATA**  \n\n- **Ragioni:** EV negativo su entrambe le leg, stime di probabilità irrealistiche, quota “fair” molto più alta rispetto a quella offerta, e combinazione di mercati che mascherano il reale rischio.  \n- **Stake consigliata:** **0 %** del bankroll (non scommettere).  \n\n> **Nota operativa:** se si volesse comunque puntare su una singola leg, l’unica opzione “sopravvissuta” sarebbe di cercare un mercato **under/over totale gol** con quota fair ≥ 2.0 e probabilità reale ≥ 50 %, ma non è presente in questo ticket.  \n\n---  \n\n*Audit completato.*"
+      }
+    }
+  ]
+}

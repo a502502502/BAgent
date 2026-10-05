@@ -1,0 +1,59 @@
+{
+  "ticket_id": "TICKET_MASTER_NL_05OCT_ALL_MATCHES",
+  "name": "Schedina Master Nations League 7 Eventi (Mercati Combinati Resilienti)",
+  "kickoff": "2026-10-05T18:45:00Z",
+  "legs_count": 7,
+  "total_odds": 7.13,
+  "combined_probability": 0.1589,
+  "legs": [
+    {
+      "match": "Italia - Turchia",
+      "market": "1X + Multigol 1-4",
+      "odds": 1.33,
+      "probability": 0.775,
+      "tactical_logic": "Italia nettamente superiore nel controllo palla; il Multigol 1-4 copre tutti i successi azzurri (1-0, 2-0, 2-1, 3-0, 3-1) e i pareggi con gol, scartando solo l'improbabile 0-0 e goleade oltre 4 reti."
+    },
+    {
+      "match": "Francia - Belgio",
+      "market": "1X + Over 1.5",
+      "odds": 1.35,
+      "probability": 0.750,
+      "tactical_logic": "La Francia ha maggiore profondita di rosa ma il Belgio ha individualita per colpire in contropiede; combo ideale per risultati tipo 2-0, 1-1, 2-1, 3-1."
+    },
+    {
+      "match": "Bosnia Erzegovina - Polonia",
+      "market": "Multigol 1-3",
+      "odds": 1.36,
+      "probability": 0.720,
+      "tactical_logic": "A Zenica i ritmi sono storicamente spezzettati da duelli a metacampo; fascia gol ristretta 1-3 perfetta per una sfida decisa da episodi (1-0, 0-1, 1-1, 2-0, 0-2, 2-1)."
+    },
+    {
+      "match": "Ucraina - Ungheria",
+      "market": "Under 3.5",
+      "odds": 1.25,
+      "probability": 0.820,
+      "tactical_logic": "Sfida diretta per la classifica in campo neutro; entrambe imposteranno una gara prudente con baricentro basso."
+    },
+    {
+      "match": "Irlanda del Nord - Georgia",
+      "market": "Under 3.5",
+      "odds": 1.22,
+      "probability": 0.829,
+      "tactical_logic": "A Belfast la Georgia trovera un muro difensivo e poche ripartenze pulite; match a basso punteggio previsto da tutti i modelli."
+    },
+    {
+      "match": "Romania - Svezia",
+      "market": "X2 + Multigol 1-5",
+      "odds": 1.32,
+      "probability": 0.765,
+      "tactical_logic": "Svezia con arsenale offensivo superiore (Gyokeres/Isak); la doppia chance con paracadute multigol copre qualsiasi risultato positivo svedese fino a 5 gol totali."
+    },
+    {
+      "match": "Montenegro - Armenia",
+      "market": "1X + Under 3.5",
+      "odds": 1.45,
+      "probability": 0.730,
+      "tactical_logic": "Il Montenegro a Podgorica costruisce le sue fortune difendendosi e colpendo di rimessa contro una Armenia storicamente inoffensiva in trasferta."
+    }
+  ]
+}

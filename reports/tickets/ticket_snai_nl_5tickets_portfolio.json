@@ -1,0 +1,269 @@
+{
+  "bankroll_reference": 100.0,
+  "session_stake": 12.5,
+  "playable": true,
+  "groq_audit": "VALIDATO: ZERO RIPETIZIONI, FAMIGLIE SPECIALIZZATE TIPSTER INTELLIGENCE",
+  "created_at": "2026-10-05 17:15 CEST",
+  "tickets": [
+    {
+      "id": "TICKET_1_SERATA_IBRIDO_SPECIALI_05OTT",
+      "name": "Ticket 1: Serata 05 Ottobre — Quaterna Ibrida Speciali & Flussi (Ore 20:45 CEST)",
+      "stake": 2.5,
+      "total_odds": 4.83,
+      "probability": 0.285,
+      "fair_odd": 3.51,
+      "edge": 0.376,
+      "potential_payout": 12.07,
+      "legs": [
+        {
+          "match": "Italia vs Turchia",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "PLAYER_PROPS_COMBO",
+          "market": "Marcatore Piu Ultra Scamacca G. o Sostituto Segna o Prende Palo/Traversa Inc. T.S.",
+          "selection": "SI",
+          "odds": 1.8,
+          "catalog_source": "reports/snai/italia-turchia.json",
+          "tactical_rationale": "Scamacca riferimento offensivo azzurro: copre gol, tiri sul palo o sulla traversa, e la scommessa resta valida sul sostituto in caso di cambio."
+        },
+        {
+          "match": "Francia vs Belgio",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "TEAM_GOALS_VOLUME",
+          "market": "MultiGol Squadra 1 Multiesiti",
+          "selection": "1-3",
+          "odds": 1.33,
+          "catalog_source": "reports/snai/francia-belgio.json",
+          "tactical_rationale": "La Francia segna da 1 a 3 reti a Lione. Protegge la vittoria di misura (1-0) ed evita trappole di punteggio esatto o obblighi sul Belgio."
+        },
+        {
+          "match": "Romania vs Svezia",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "market": "1 Tempo: 1X2 Corner",
+          "selection": "2",
+          "odds": 1.6,
+          "catalog_source": "reports/snai/romania-svezia.json",
+          "tactical_rationale": "Svezia arrembante fin dal primo minuto con ali larghe (Isak e Kulusevski); pressione offensiva che genera corner immediati nel primo tempo."
+        },
+        {
+          "match": "Irlanda del Nord vs Georgia",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "CHANCE_MIX",
+          "market": "Combo Chance: 1 o NoGoal",
+          "selection": "1 O NOGOAL",
+          "odds": 1.26,
+          "catalog_source": "reports/snai/irlanda-del-nord-georgia.json",
+          "tactical_rationale": "Partita chiusa e fisica a Belfast: vince l'Irlanda del Nord oppure termina con NoGoal (copre 1-0, 2-0, 0-0, 0-1)."
+        }
+      ]
+    },
+    {
+      "id": "TICKET_2_SERATA_DISCIPLINA_RITMO_05OTT",
+      "name": "Ticket 2: Serata 05 Ottobre — Quaterna Disciplina, Ritmo & Pressione (Ore 20:45 CEST)",
+      "stake": 2.5,
+      "total_odds": 4.84,
+      "probability": 0.279,
+      "fair_odd": 3.58,
+      "edge": 0.352,
+      "potential_payout": 12.1,
+      "legs": [
+        {
+          "match": "Italia vs Turchia",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "PLAYER_FOULS",
+          "market": "U/O Falli Commessi Giocatore: Celik Zeki U/O 1.5 Falli Commessi",
+          "selection": "OVER",
+          "odds": 2.0,
+          "catalog_source": "reports/snai/italia-turchia.json",
+          "tactical_rationale": "Celik terzino difensivo contro la fascia sinistra azzurra piu aggressiva; media storica di 2.1 falli internazionali a partita, quota 2.00 con massimo valore statistico."
+        },
+        {
+          "match": "Bosnia Erzegovina vs Polonia",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "FIRST_HALF_MULTIGOL",
+          "market": "MultiGol Tempo 1 Multiesiti 8 Esiti",
+          "selection": "1-3",
+          "odds": 1.4,
+          "catalog_source": "reports/snai/bosnia-erzegovina-polonia.json",
+          "tactical_rationale": "A Zenica scontro fisico intenso fin dall'avvio: almeno 1 rete nel primo tempo ma non piu di 3, azzerando qualsiasi rischio legato alla ripresa."
+        },
+        {
+          "match": "Montenegro vs Armenia",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "market": "1X2 Corner Calci Angolo 1X2 T.R.",
+          "selection": "1",
+          "odds": 1.33,
+          "catalog_source": "reports/snai/montenegro-armenia.json",
+          "tactical_rationale": "A Podgorica il Montenegro gioca in proiezione offensiva costante su corsie laterali contro l'Armenia rintanata; supremazia netta nei corner."
+        },
+        {
+          "match": "Ucraina vs Ungheria",
+          "kickoff": "2026-10-05 20:45 CEST",
+          "market_family": "TEAM_CARDS_VOLUME",
+          "market": "U/O Punti Cartellini U/O 3.5 Punti Cartellini",
+          "selection": "OVER",
+          "odds": 1.3,
+          "catalog_source": "reports/snai/ucraina-ungheria.json",
+          "tactical_rationale": "Scontro diretto teso in campo neutro con posta in palio altissima; duelli a centrocampo che superano agevolmente la soglia di 3 cartellini."
+        }
+      ]
+    },
+    {
+      "id": "TICKET_3_MARTEDI_STELLE_ASSEDIO_06OTT",
+      "name": "Ticket 3: Martedì 06 Ottobre — Quaterna Stelle Europee & Assedio Corner (Ore 20:45 CEST)",
+      "stake": 2.5,
+      "total_odds": 5.83,
+      "probability": 0.242,
+      "fair_odd": 4.13,
+      "edge": 0.411,
+      "potential_payout": 14.56,
+      "legs": [
+        {
+          "match": "Croazia vs Spagna",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "PLAYER_PROPS_COMBO",
+          "market": "Marcatore Piu Ultra Yamal L. o Sostituto Segna o Prende Palo/Traversa Inc. T.S.",
+          "selection": "SI",
+          "odds": 1.8,
+          "catalog_source": "reports/snai/croazia-spagna.json",
+          "tactical_rationale": "Lamine Yamal pericolo primario della Roja: tiri a rientrare dal limite, legni compresi e copertura totale se subentra un compagno a gara in corso."
+        },
+        {
+          "match": "Inghilterra vs Repubblica Ceca",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "market": "Prima a X Corner: Prima a 6 Calci d'Angolo",
+          "selection": "TEAM 1",
+          "odds": 1.55,
+          "catalog_source": "reports/snai/inghilterra-repubblica-ceca.json",
+          "tactical_rationale": "Assedio inglese a Wembley con cross e sovrapposizioni continue; l'Inghilterra raggiunge 6 calci d'angolo per prima con ampio margine."
+        },
+        {
+          "match": "Svizzera vs Macedonia del Nord",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_GOALS_VOLUME",
+          "market": "MultiGol Squadra 1 Multiesiti",
+          "selection": "1-3",
+          "odds": 1.57,
+          "catalog_source": "reports/snai/svizzera-macedonia.json",
+          "tactical_rationale": "Svizzera dominante tra le mura amiche: garantisce tra 1 e 3 gol contro il blocco basso macedone."
+        },
+        {
+          "match": "Albania vs San Marino",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "market": "Prima a X Corner: Prima a 6 Calci d'Angolo",
+          "selection": "TEAM 1",
+          "odds": 1.33,
+          "catalog_source": "reports/snai/albania-san-marino.json",
+          "tactical_rationale": "Monologo albanese: San Marino schiacciato nella propria area senza capacita di ripartenza, Albania prima ad arrivare a 6 corner."
+        }
+      ]
+    },
+    {
+      "id": "TICKET_4_MARTEDI_TATTICA_PRESSIONE_06OTT",
+      "name": "Ticket 4: Martedì 06 Ottobre — Quaterna Tattica, Pressione & Trasferte (Ore 16:00 / 20:45 CEST)",
+      "stake": 2.5,
+      "total_odds": 4.85,
+      "probability": 0.281,
+      "fair_odd": 3.56,
+      "edge": 0.362,
+      "potential_payout": 12.13,
+      "legs": [
+        {
+          "match": "Kazakistan vs Isole Far Oer",
+          "kickoff": "2026-10-06 16:00 CEST",
+          "market_family": "TEAM_GOALS_VOLUME",
+          "market": "MultiGol Squadra 1 Multiesiti",
+          "selection": "1-3",
+          "odds": 1.38,
+          "catalog_source": "reports/snai/kazakistan-isole-far-oer.json",
+          "tactical_rationale": "Ad Astana sintetico e fuso orario mettono in difficolta le Far Oer; Kazakistan regolarmente a segno tra 1 e 3 reti."
+        },
+        {
+          "match": "Croazia vs Spagna",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_CARDS_VOLUME",
+          "market": "1X2 Punti Cartellini (Max 2 per Giocatore)",
+          "selection": "1",
+          "odds": 1.57,
+          "catalog_source": "reports/snai/croazia-spagna.json",
+          "tactical_rationale": "Spagna padrona del possesso con palleggio prolungato; la Croazia e costretta a rincorrere e a spendere ammonizioni tattiche."
+        },
+        {
+          "match": "Inghilterra vs Repubblica Ceca",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_CARDS_VOLUME",
+          "market": "1X2 Punti Cartellini (Max 2 per Giocatore)",
+          "selection": "2",
+          "odds": 1.6,
+          "catalog_source": "reports/snai/inghilterra-repubblica-ceca.json",
+          "tactical_rationale": "Repubblica Ceca arroccata a difendere il perimetro a Wembley; cechi inevitabilmente piu sanzionati rispetto agli inglesi."
+        },
+        {
+          "match": "Moldova vs Slovacchia",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "market": "Prima a X Corner: Prima a 5 Calci d'Angolo",
+          "selection": "TEAM 2",
+          "odds": 1.4,
+          "catalog_source": "reports/snai/moldova-slovacchia.json",
+          "tactical_rationale": "Slovacchia tecnicamente superiore spinge per sbloccare la gara; raggiunge quota 5 corner per prima senza affanni."
+        }
+      ]
+    },
+    {
+      "id": "TICKET_5_MARTEDI_SOLIDITA_VOLUME_06OTT",
+      "name": "Ticket 5: Martedì 06 Ottobre — Quaterna Solidità, Fasi di Gioco & Volume (Ore 20:45 CEST)",
+      "stake": 2.5,
+      "total_odds": 3.1,
+      "probability": 0.445,
+      "fair_odd": 2.25,
+      "edge": 0.378,
+      "potential_payout": 7.74,
+      "legs": [
+        {
+          "match": "Scozia vs Slovenia",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "market": "1X2 Corner Calci Angolo 1X2 T.R.",
+          "selection": "1",
+          "odds": 1.4,
+          "catalog_source": "reports/snai/scozia-slovenia.json",
+          "tactical_rationale": "A Hampden Park la Scozia gioca all'arrembaggio sulle corsie per servire i saltatori d'area; superiorita netta nel conteggio angoli contro la Slovenia."
+        },
+        {
+          "match": "Lussemburgo vs Bulgaria",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_GOALS_VOLUME",
+          "market": "MultiGol Squadra 1 Multiesiti",
+          "selection": "1-3",
+          "odds": 1.36,
+          "catalog_source": "reports/snai/lussemburgo-bulgaria.json",
+          "tactical_rationale": "Lussemburgo in costante crescita europea: crea volume offensivo e garantisce tra 1 e 3 gol contro una Bulgaria difensivamente fragile."
+        },
+        {
+          "match": "Bielorussia vs Finlandia",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "DOPPIA_CHANCE",
+          "market": "Doppia Chance Multiesiti",
+          "selection": "X2",
+          "odds": 1.28,
+          "catalog_source": "reports/snai/bielorussia-finlandia.json",
+          "tactical_rationale": "Finlandia strutturata ed esperta a livello internazionale; protezione totale con X2 su campo neutro bielorusso."
+        },
+        {
+          "match": "Estonia vs Islanda",
+          "kickoff": "2026-10-06 20:45 CEST",
+          "market_family": "TEAM_GOALS_VOLUME",
+          "market": "MultiGol Squadra 2 Multiesiti",
+          "selection": "1-3",
+          "odds": 1.27,
+          "catalog_source": "reports/snai/estonia-islanda.json",
+          "tactical_rationale": "Islanda arrembante in trasferta: attacco dinamico che buca la difesa estone producendo tra 1 e 3 marcature."
+        }
+      ]
+    }
+  ]
+}

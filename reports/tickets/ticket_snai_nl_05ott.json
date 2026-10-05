@@ -1,0 +1,54 @@
+{
+  "id": "TICKET_SNAI_NL_05OTT",
+  "stake": 2.5,
+  "bankroll_reference": 100.0,
+  "total_odds": 2.46,
+  "joint_probability": 0.398,
+  "joint_edge": -0.021,
+  "potential_return": 6.15,
+  "playable": false,
+  "validator_passed": true,
+  "groq_audit": "NON ESEGUITO",
+  "source": "Quote SNAI del 2026-10-05. Lambda baseline-sanity da data/bagent.db, 2 partite FT a testa.",
+  "legs": [
+    {
+      "match_name": "Italia vs Turchia",
+      "kickoff_time": "2026-10-05 20:45 CEST",
+      "market_name": "MultiGol 2-5",
+      "bookmaker_odd": 1.33,
+      "probability": 0.727,
+      "fair_odd": 1.38,
+      "edge": -0.033,
+      "verdict": "croce",
+      "xg_home": 2.14,
+      "xg_away": 0.88,
+      "sample": "2/2"
+    },
+    {
+      "match_name": "Romania vs Svezia",
+      "kickoff_time": "2026-10-05 20:45 CEST",
+      "market_name": "X2 + MultiGol 1-5",
+      "bookmaker_odd": 1.32,
+      "probability": 0.756,
+      "fair_odd": 1.32,
+      "edge": -0.002,
+      "verdict": "croce",
+      "xg_home": 0.80,
+      "xg_away": 2.24,
+      "sample": "2/2"
+    },
+    {
+      "match_name": "Ucraina vs Ungheria",
+      "kickoff_time": "2026-10-05 20:45 CEST",
+      "market_name": "Chance Mix: 2 o Gol",
+      "bookmaker_odd": 1.40,
+      "probability": 0.725,
+      "fair_odd": 1.38,
+      "edge": 0.014,
+      "verdict": "occhio",
+      "xg_home": 0.99,
+      "xg_away": 1.29,
+      "sample": "2/2"
+    }
+  ]
+}
