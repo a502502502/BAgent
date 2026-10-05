@@ -1,5 +1,59 @@
 [
   {
+    "ticket_id": "TICKET_USER_NL_05OCT_REF_DF07EA0A",
+    "ref_code": "DF07EA0A053238102C02",
+    "date_created": "2026-10-05 20:45:00",
+    "stake_eur": 23.0,
+    "total_odds": 6.23,
+    "bonus_eur": 8.59,
+    "potential_payout_eur": 151.85,
+    "status": "OPEN",
+    "strategy": "USER_PLAYED_TICKET_OMNI",
+    "notes": "Multipla 5 selezioni Nations League - Flussi asimmetrici Netwin",
+    "legs": [
+      {
+        "match": "Bosnia Erzegovina vs Polonia",
+        "tournament": "UEFA Nations League, Lega B, Gr. 4",
+        "market": "DOPPIA CHANCE 2° TEMPO: 12",
+        "odds": 1.45,
+        "status": "PENDING",
+        "kickoff": "2026-10-05 20:45 CEST"
+      },
+      {
+        "match": "Italia vs Turchia",
+        "tournament": "UEFA Nations League, Lega A, Gr. 1",
+        "market": "U/O 4.5 Corner Squadra 1 (esc.TS) : OVER",
+        "odds": 1.42,
+        "status": "PENDING",
+        "kickoff": "2026-10-05 20:45 CEST"
+      },
+      {
+        "match": "Francia vs Belgio",
+        "tournament": "UEFA Nations League, Lega A, Gr. 1",
+        "market": "U/O 1.5 Cartellini Squadra 2 : OVER",
+        "odds": 1.4,
+        "status": "PENDING",
+        "kickoff": "2026-10-05 20:45 CEST"
+      },
+      {
+        "match": "Romania vs Svezia",
+        "tournament": "UEFA Nations League, Lega B, Gr. 4",
+        "market": "DOPPIA CHANCE 1° TEMPO: 12",
+        "odds": 1.48,
+        "status": "PENDING",
+        "kickoff": "2026-10-05 20:45 CEST"
+      },
+      {
+        "match": "Montenegro vs Armenia",
+        "tournament": "UEFA Nations League, Lega C, Gr. 2",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
+        "odds": 1.46,
+        "status": "PENDING",
+        "kickoff": "2026-10-05 20:45 CEST"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_NL_MULTIPLA4_01OCT",
     "date_created": "2026-10-01 20:15:00",
     "stake_eur": 15.0,
@@ -7,7 +61,7 @@
     "potential_payout_eur": 52.63,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Bonus 1.53\u20ac",
+    "notes": "Giocata utente Netwin - Bonus 1.53€",
     "legs": [
       {
         "match": "Galles vs Norvegia",
@@ -89,7 +143,7 @@
     "potential_payout_eur": 124.7,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Bonus 11.33\u20ac",
+    "notes": "Giocata utente Netwin - Bonus 11.33€",
     "legs": [
       {
         "match": "Galles vs Norvegia",
@@ -150,7 +204,7 @@
     "potential_payout_eur": 87.67,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Corner 1\u00b0 Tempo",
+    "notes": "Giocata utente Netwin - Corner 1° Tempo",
     "legs": [
       {
         "match": "Azerbaigian vs Liechtenstein",
@@ -229,7 +283,7 @@
     "potential_payout_eur": 146.92,
     "status": "OPEN",
     "strategy": "MULTIPLA_6_TEMPI_COMBO",
-    "notes": "Multipla 6 Netwin - Bonus 13.35\u20ac",
+    "notes": "Multipla 6 Netwin - Bonus 13.35€",
     "legs": [
       {
         "match": "Isole Far Oer vs Slovacchia",
@@ -242,7 +296,7 @@
       {
         "match": "Bosnia Erzegovina vs Svezia",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 1-2 1\u00b0Tempo + 1-4 2\u00b0Tempo",
+        "market": "MultiGol 1-2 1°Tempo + 1-4 2°Tempo",
         "odds": 1.85,
         "status": "PENDING",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -258,7 +312,7 @@
       {
         "match": "Polonia vs Romania",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 1-3 1\u00b0Tempo + 1-4 2\u00b0Tempo",
+        "market": "MultiGol 1-3 1°Tempo + 1-4 2°Tempo",
         "odds": 1.56,
         "status": "PENDING",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -290,7 +344,7 @@
     "potential_payout_eur": 99.23,
     "status": "OPEN",
     "strategy": "MULTIPLA_4_UNDER_CHANCEMIX",
-    "notes": "Multipla 4 Netwin - Bonus 2.88\u20ac - Cashout 17.60\u20ac",
+    "notes": "Multipla 4 Netwin - Bonus 2.88€ - Cashout 17.60€",
     "legs": [
       {
         "match": "Ucraina vs Irlanda del Nord",
@@ -311,7 +365,7 @@
       {
         "match": "Ungheria vs Georgia",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 0-1 1\u00b0Tempo",
+        "market": "MultiGol 0-1 1°Tempo",
         "odds": 1.33,
         "status": "PENDING",
         "kickoff": "2026-10-02 20:45 CEST"
