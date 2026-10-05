@@ -1,5 +1,41 @@
 [
   {
+    "ticket_id": "TICKET_USER_ARG_NOTTE_06OCT",
+    "date_created": "2026-10-05 23:22:00",
+    "stake_eur": 10.0,
+    "total_odds": 3.09,
+    "potential_payout_eur": 30.9,
+    "status": "OPEN",
+    "strategy": "USER_PLAYED_TICKET_ARGENTINA_DNA",
+    "notes": "Tripla Notturna Liga Profesional Argentina - DNA Corto Muso & Tempi Netwin",
+    "legs": [
+      {
+        "match": "Estudiantes vs Gimnasia Y Esgrima Mendoza",
+        "tournament": "Liga Profesional Argentina",
+        "market": "1X + Under 3.5",
+        "odds": 1.47,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 00:00 CEST"
+      },
+      {
+        "match": "Velez Sarsfield vs Platense",
+        "tournament": "Liga Profesional Argentina",
+        "market": "1X + Under 3.5",
+        "odds": 1.4,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 00:00 CEST"
+      },
+      {
+        "match": "Banfield vs Rosario Central",
+        "tournament": "Liga Profesional Argentina",
+        "market": "1° Tempo: MultiGol 0-1",
+        "odds": 1.5,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 02:15 CEST"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_NL_05OCT_REF_DF07EA0A",
     "ref_code": "DF07EA0A053238102C02",
     "date_created": "2026-10-05 20:45:00",
