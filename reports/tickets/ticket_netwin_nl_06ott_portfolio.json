@@ -1,0 +1,289 @@
+{
+  "bankroll_reference": 100.0,
+  "session_stake": 12.5,
+  "playable": true,
+  "optimizer": "OmniStatisticalOptimizer (Multi-Market + Family Diversity)",
+  "ev_policy": "EV negativo: avviso informativo, non bloccante. Bocciatura solo su rischio strutturale.",
+  "tickets": [
+    {
+      "id": "TICKET_1_IBRIDO_SPECIALI",
+      "name": "Ticket 1: Quaterna Ibrida Speciali & Flussi",
+      "stake": 2.5,
+      "total_odds": 3.98,
+      "probability": 0.394,
+      "fair_odd": 2.54,
+      "edge": 0.568,
+      "potential_payout": 9.95,
+      "legs": [
+        {
+          "match": "Svizzera vs Macedonia Del Nord",
+          "market": "Chance Mix: X2 o NoGol [SI]",
+          "market_family": "CHANCE_MIX",
+          "odds": 1.3,
+          "probability": 0.799,
+          "fair_odd": 1.25,
+          "edge": 0.039,
+          "score": 0.862,
+          "verdict": "occhio"
+        },
+        {
+          "match": "Kazakistan vs Isole Far Oer",
+          "market": "1 TEMPO: ESITO 1X2 1 TEMPO [MultiGol 1-4]",
+          "market_family": "OTHER",
+          "odds": 1.55,
+          "probability": 0.811,
+          "fair_odd": 1.23,
+          "edge": 0.257,
+          "score": 0.942,
+          "verdict": "stella"
+        },
+        {
+          "match": "Albania vs San Marino",
+          "market": "1 TEMPO: ESITO 1X2 1 TEMPO [Over 1.5]",
+          "market_family": "OTHER",
+          "odds": 1.53,
+          "probability": 0.797,
+          "fair_odd": 1.25,
+          "edge": 0.22,
+          "score": 0.964,
+          "verdict": "stella"
+        },
+        {
+          "match": "Bielorussia vs Finlandia",
+          "market": "MultiGol 1-5 Ospite [SI]",
+          "market_family": "OPEN_MULTIGOL",
+          "odds": 1.29,
+          "probability": 0.762,
+          "fair_odd": 1.31,
+          "edge": -0.017,
+          "score": 0.802,
+          "verdict": "croce"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_2_DISCIPLINA_RITMO",
+      "name": "Ticket 2: Quaterna Disciplina, Ritmo & Pressione",
+      "stake": 2.5,
+      "total_odds": 4.6,
+      "probability": 0.364,
+      "fair_odd": 2.75,
+      "edge": 0.674,
+      "potential_payout": 11.5,
+      "legs": [
+        {
+          "match": "Kazakistan vs Isole Far Oer",
+          "market": "DOPPIA CHANCE [1X]",
+          "market_family": "OTHER",
+          "odds": 1.34,
+          "probability": 0.792,
+          "fair_odd": 1.26,
+          "edge": 0.061,
+          "score": 0.923,
+          "verdict": "stella"
+        },
+        {
+          "match": "Albania vs San Marino",
+          "market": "MultiGol 1-4 [SI]",
+          "market_family": "OPEN_MULTIGOL",
+          "odds": 1.6,
+          "probability": 0.783,
+          "fair_odd": 1.28,
+          "edge": 0.253,
+          "score": 0.877,
+          "verdict": "stella"
+        },
+        {
+          "match": "Bielorussia vs Finlandia",
+          "market": "1 TEMPO: ESITO 1X2 1 TEMPO [MultiGol 1-4]",
+          "market_family": "OTHER",
+          "odds": 1.49,
+          "probability": 0.809,
+          "fair_odd": 1.24,
+          "edge": 0.206,
+          "score": 0.988,
+          "verdict": "stella"
+        },
+        {
+          "match": "Croazia vs Spagna",
+          "market": "Chance Mix: 1X o NoGol [SI]",
+          "market_family": "CHANCE_MIX",
+          "odds": 1.44,
+          "probability": 0.726,
+          "fair_odd": 1.38,
+          "edge": 0.045,
+          "score": 0.826,
+          "verdict": "occhio"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_3_STELLE_ASSEDIO",
+      "name": "Ticket 3: Quaterna Stelle Europee & Assedio Corner",
+      "stake": 2.5,
+      "total_odds": 3.19,
+      "probability": 0.357,
+      "fair_odd": 2.8,
+      "edge": 0.139,
+      "potential_payout": 7.97,
+      "legs": [
+        {
+          "match": "Kazakistan vs Isole Far Oer",
+          "market": "MultiGol 1-5 Casa [SI]",
+          "market_family": "OPEN_MULTIGOL",
+          "odds": 1.36,
+          "probability": 0.751,
+          "fair_odd": 1.33,
+          "edge": 0.021,
+          "score": 0.873,
+          "verdict": "occhio"
+        },
+        {
+          "match": "Albania vs San Marino",
+          "market": "MultiGol 2-5 [SI]",
+          "market_family": "OPEN_MULTIGOL",
+          "odds": 1.39,
+          "probability": 0.736,
+          "fair_odd": 1.36,
+          "edge": 0.023,
+          "score": 0.849,
+          "verdict": "occhio"
+        },
+        {
+          "match": "Bielorussia vs Finlandia",
+          "market": "DOPPIA CHANCE [X2]",
+          "market_family": "OTHER",
+          "odds": 1.27,
+          "probability": 0.772,
+          "fair_odd": 1.29,
+          "edge": -0.019,
+          "score": 0.782,
+          "verdict": "croce"
+        },
+        {
+          "match": "Croazia vs Spagna",
+          "market": "1 TEMPO: ESITO 1X2 1 TEMPO [12]",
+          "market_family": "OTHER",
+          "odds": 1.33,
+          "probability": 0.836,
+          "fair_odd": 1.2,
+          "edge": 0.111,
+          "score": 0.871,
+          "verdict": "stella"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_4_TATTICA_PRESSIONE",
+      "name": "Ticket 4: Quaterna Tattica, Pressione & Trasferte",
+      "stake": 2.5,
+      "total_odds": 3.63,
+      "probability": 0.33,
+      "fair_odd": 3.03,
+      "edge": 0.198,
+      "potential_payout": 9.07,
+      "legs": [
+        {
+          "match": "Kazakistan vs Isole Far Oer",
+          "market": "Chance Mix: 1 o Gol [SI]",
+          "market_family": "CHANCE_MIX",
+          "odds": 1.34,
+          "probability": 0.753,
+          "fair_odd": 1.33,
+          "edge": 0.009,
+          "score": 0.858,
+          "verdict": "occhio"
+        },
+        {
+          "match": "Bielorussia vs Finlandia",
+          "market": "MultiGol 1-4 Ospite [SI]",
+          "market_family": "OPEN_MULTIGOL",
+          "odds": 1.29,
+          "probability": 0.75,
+          "fair_odd": 1.33,
+          "edge": -0.033,
+          "score": 0.772,
+          "verdict": "croce"
+        },
+        {
+          "match": "Croazia vs Spagna",
+          "market": "MultiGol 1-3 Ospite [SI]",
+          "market_family": "OPEN_MULTIGOL",
+          "odds": 1.42,
+          "probability": 0.727,
+          "fair_odd": 1.38,
+          "edge": 0.032,
+          "score": 0.825,
+          "verdict": "occhio"
+        },
+        {
+          "match": "Estonia vs Islanda",
+          "market": "1 TEMPO: ESITO 1X2 1 TEMPO [12]",
+          "market_family": "OTHER",
+          "odds": 1.48,
+          "probability": 0.803,
+          "fair_odd": 1.25,
+          "edge": 0.189,
+          "score": 0.994,
+          "verdict": "stella"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_5_SOLIDITA_VOLUME",
+      "name": "Ticket 5: Quaterna Solidità, Fasi di Gioco & Volume",
+      "stake": 2.5,
+      "total_odds": 3.01,
+      "probability": 0.36,
+      "fair_odd": 2.78,
+      "edge": 0.084,
+      "potential_payout": 7.52,
+      "legs": [
+        {
+          "match": "Kazakistan vs Isole Far Oer",
+          "market": "Chance Mix: 1 o NoGol [SI]",
+          "market_family": "CHANCE_MIX",
+          "odds": 1.33,
+          "probability": 0.752,
+          "fair_odd": 1.33,
+          "edge": -0.0,
+          "score": 0.84,
+          "verdict": "croce"
+        },
+        {
+          "match": "Bielorussia vs Finlandia",
+          "market": "Chance Mix: 2 o Gol [SI]",
+          "market_family": "CHANCE_MIX",
+          "odds": 1.27,
+          "probability": 0.765,
+          "fair_odd": 1.31,
+          "edge": -0.028,
+          "score": 0.77,
+          "verdict": "croce"
+        },
+        {
+          "match": "Estonia vs Islanda",
+          "market": "1 TEMPO: ESITO 1X2 1 TEMPO [MultiGol 1-4]",
+          "market_family": "OTHER",
+          "odds": 1.36,
+          "probability": 0.805,
+          "fair_odd": 1.24,
+          "edge": 0.094,
+          "score": 0.949,
+          "verdict": "stella"
+        },
+        {
+          "match": "Inghilterra vs Repubblica Ceca",
+          "market": "MultiGol 1-4 [SI]",
+          "market_family": "OPEN_MULTIGOL",
+          "odds": 1.31,
+          "probability": 0.778,
+          "fair_odd": 1.28,
+          "edge": 0.02,
+          "score": 0.865,
+          "verdict": "occhio"
+        }
+      ]
+    }
+  ]
+}
