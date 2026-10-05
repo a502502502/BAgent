@@ -9,11 +9,11 @@
       "id": "TICKET_1_IBRIDO_SPECIALI",
       "name": "Ticket 1: Quaterna Ibrida Speciali & Flussi",
       "stake": 2.5,
-      "total_odds": 4.43,
-      "probability": 0.229,
-      "fair_odd": 4.37,
-      "edge": 0.014,
-      "potential_payout": 11.07,
+      "total_odds": 4.59,
+      "probability": 0.209,
+      "fair_odd": 4.78,
+      "edge": -0.041,
+      "potential_payout": 11.47,
       "legs": [
         {
           "match": "Italia vs Turchia",
@@ -27,13 +27,13 @@
           "verdict": "croce"
         },
         {
-          "match": "Svizzera vs Macedonia del Nord",
-          "market": "PRIMA A X CORNER PRIMA A 9 CALCI D'ANGOLO [NESSUNO]",
+          "match": "Scozia vs Slovenia",
+          "market": "PRIMA A X CORNER PRIMA A 4 CALCI D'ANGOLO [TEAM 1]",
           "market_family": "TEAM_CORNERS_VOLUME",
-          "odds": 1.4,
-          "probability": 0.834,
-          "fair_odd": 1.2,
-          "edge": 0.168,
+          "odds": 1.45,
+          "probability": 0.76,
+          "fair_odd": 1.32,
+          "edge": 0.102,
           "score": 0.946,
           "verdict": "stella"
         },
@@ -59,25 +59,17 @@
           "score": 0.994,
           "verdict": "stella"
         }
-      ],
-      "groq": {
-        "success": true,
-        "model_used": "openai/gpt-oss-120b",
-        "approved": true,
-        "ev_warning": null,
-        "critique": "**1. Analisi Matematica (EV)**  \n\n| Leg | Prob. (P) | Quota Netwin | EV = P·Quota – 1 | Edge (fornita) |\n|-----|-----------|--------------|------------------|----------------|\n| 1 – Italia‑Turchia | 0,467 | 1,55 | **‑0,276  (‑27,6 %)** | –27,7 % |\n| 2 – Svizzera‑Macedonia | 0,834 | 1,40 | **+0,168  (+16,8 %)** | +16,8 % |\n| 3 – Montenegro‑Armenia | 0,733 | 1,38 | **+0,012  (+1,2 %)** | +1,1 % |\n| 4 – Francia‑Belgio | 0,803 | 1,48 | **+0,188  (+18,8 %)** | +18,9 % |\n\n**Parlay (quaterna)**  \n\n- Probabilità complessiva di vincita = 0,467 × 0,834 × 0,733 × 0,803 ≈ **0,229 (22,9 %)**  \n- Quota totale Netwin = 1,55 × 1,40 × 1,38 × 1,48 ≈ **4,43** (coincide con la quota indicata)  \n- EV totale = 0,229 × 4,43 – 1 ≈ **+0,014 ( +1,4 % )**  \n\n> **Interpretazione**: il ticket ha un valore atteso positivo, ma molto marginale (+1,4 %). L’EV negativo della prima selezione è compensato dalle altre tre con edge positivo.\n\n---\n\n**2. Trappole tipiche del bookmaker (scenario di perdita per ogni leg)**  \n\n| Leg | Mercato (descrizione sintetica) | Scenario che fa perdere la scommessa |\n|-----|--------------------------------|--------------------------------------|\n| 1 – Italia‑Turchia | **“UNO O L'ALTRO: GOL O PALO ULTRA INC TS Kerem Akturkoglu M. O Scamacca G. GOAL O PALO O LORO SOST. INC TS”** (player‑prop) | **Qualsiasi risultato diverso da**: <br>‑ Goal di Kerem Akturkoglu <br>‑ Autogol di Kerem Akturkoglu <br>‑ Goal di Scamacca <br>‑ Autogol di Scamacca <br>‑ Goal o “palo” (colpo sul palo) di altri giocatori. In pratica: se il gol è di un altro marcatore, o non c’è gol, la scommessa perde. |\n| 2 – Svizzera‑Macedonia | **“PRIMA A X CORNER PRIMA A 9 CALCI D'ANGOLO”** (primo a 9 corner) | **Perde** se: <br>‑ La squadra X non prende il **primo corner** del match, oppure <br>‑ Qualunque squadra raggiunge **9 corner** prima della X. Qualsiasi deviazione dal “primo corner a X e 9 corner totali a X” annulla la scommessa. |\n| 3 – Montenegro‑Armenia | **“COMBO CHANCE: X O NOGOAL ESITO FINALE X O NOGOAL”** | **Perde** se il risultato finale è una vittoria (casa o trasferta) con almeno un gol. Solo i seguenti esiti vincono: <br>‑ 0‑0 (NOGOAL) <br>‑ 1‑1, 2‑2, … (draw con gol). Qualsiasi vittoria (es. 1‑0, 2‑1, 0‑2, ecc.) è perdita. |\n| 4 – Francia‑Belgio | **“U/O 1.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) – OVER”** (over 1,5 cartellini) | **Perde** se il totale dei cartellini (ammonizioni + espulsioni) è **≤ 1,5**, cioè 0 o 1 cartellino in tutta la partita. Qualsiasi partita con 2 o più cartellini (anche 2 ammonizioni) soddisfa l’over e vince. |\n\n---\n\n**3. Verdetto Finale**\n\n- Nessuna delle quattro selezioni rientra nei criteri di bocciatura obbligatoria (1X2 secco, anti‑fav su “corazzata”, under stretto su “corazzata”, tetto di gol su attacco dominante).  \n- Il ticket presenta un **EV complessivo positivo (+1,4 %)**, quindi **APPROVATA**.\n\n**Stake consigliato:** data la marginalità dell’EV e la presenza di una selezione con EV negativo, si raccomanda **un’allocazione prudente del 2 %–3 % del bankroll** (≈ €2‑€3 su €100).  \n\n---  \n\n*Nota*: l’analisi presuppone indipendenza tra gli eventi; in caso di correlazioni (es. leg 2 e 4 influenzate dallo stesso ritmo di gioco) l’EV reale potrebbe discostarsi leggermente. Mantieni una gestione del bankroll rigida e monitora le statistiche dei player‑prop prima di puntare nuovamente su mercati analoghi.",
-        "total_odd": 4.43
-      }
+      ]
     },
     {
       "id": "TICKET_2_DISCIPLINA_RITMO",
       "name": "Ticket 2: Quaterna Disciplina, Ritmo & Pressione",
       "stake": 2.5,
-      "total_odds": 4.3,
-      "probability": 0.384,
-      "fair_odd": 2.6,
-      "edge": 0.651,
-      "potential_payout": 10.75,
+      "total_odds": 4.03,
+      "probability": 0.401,
+      "fair_odd": 2.49,
+      "edge": 0.616,
+      "potential_payout": 10.08,
       "legs": [
         {
           "match": "Francia vs Belgio",
@@ -88,145 +80,6 @@
           "fair_odd": 1.24,
           "edge": 0.189,
           "score": 0.994,
-          "verdict": "stella"
-        },
-        {
-          "match": "Italia vs Turchia",
-          "market": "PRIMA A X CORNER PRIMA A 4 CALCI D'ANGOLO [TEAM 1]",
-          "market_family": "TEAM_CORNERS_VOLUME",
-          "odds": 1.4,
-          "probability": 0.776,
-          "fair_odd": 1.29,
-          "edge": 0.086,
-          "score": 0.965,
-          "verdict": "stella"
-        },
-        {
-          "match": "Inghilterra vs Repubblica Ceca",
-          "market": "U/O PUNTI CARTELLINI U/O 2.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [OVER]",
-          "market_family": "TEAM_CARDS_VOLUME",
-          "odds": 1.45,
-          "probability": 0.828,
-          "fair_odd": 1.21,
-          "edge": 0.201,
-          "score": 0.973,
-          "verdict": "stella"
-        },
-        {
-          "match": "Romania vs Svezia",
-          "market": "DOPPIA CHANCE TEMPO X DC TEMPO 1 [12]",
-          "market_family": "OTHER",
-          "odds": 1.43,
-          "probability": 0.744,
-          "fair_odd": 1.34,
-          "edge": 0.064,
-          "score": 0.895,
-          "verdict": "stella"
-        }
-      ],
-      "groq": {
-        "success": true,
-        "model_used": "openai/gpt-oss-120b",
-        "approved": true,
-        "ev_warning": null,
-        "critique": "**Audit – Ticket 2: “Quaterna Disciplina, Ritmo & Pressione”**  \n\n| Leg | Mercato (descrizione) | Probabilità (P) | Quota Netwin | EV (P·quota – 1) |\n|-----|-----------------------|----------------|--------------|-----------------|\n| 1 | **UNDER 2.5 punti carta** (totale carte ≤ 2) – Francia vs Belgio | 0,803 | 1,48 | **+0,188  (18,8 %)** |\n| 2 | **PRIMA A 4 CALCI D’ANGOLO** (Italia è la prima squadra a raggiungere 4 calci d’angolo) | 0,776 | 1,40 | **+0,086  (8,6 % )** |\n| 3 | **OVER 2.5 punti carta** (totale carte ≥ 3) – Inghilterra vs Repubblica Ceca | 0,828 | 1,45 | **+0,201  (20,1 % )** |\n| 4 | **DOPPIA CHANCE ½ TEMPO X 12** (a metà‑tempo il risultato è “pareggio o vincita casa”) – Romania vs Svezia | 0,744 | 1,43 | **+0,064  (6,4 % )** |\n\n**EV totale della quaterna**  \n- Probabilità complessiva di vincita (indipendente) = 0,803 × 0,776 × 0,828 × 0,744 ≈ **0,384** (38,4 %).  \n- Quota combinata Netwin = 1,48 × 1,40 × 1,45 × 1,43 ≈ **4,30** (coerente con il ticket).  \n- EV = 0,384 × 4,30 – 1 ≈ **+0,651** (65,1 % di profitto atteso per unità scommessa).  \n\n> **Nota:** L’EV complessivo è molto positivo; le singole leg hanno tutte EV > +4 %, quindi nessun avviso di “bassa marginalità”.\n\n---\n\n### 2. Trappole tipiche del bookmaker (scenario di perdita)\n\n| Leg | Condizione che fa perdere la selezione |\n|-----|----------------------------------------|\n| **1** | **≥ 3 punti carta** totali (es. 3 cartellini, 2 gialli + 1 rosso, o 3 gialli) durante l’intero match. |\n| **2** | La **Turchia** (team 2) raggiunge **4 calci d’angolo** prima dell’Italia. |\n| **3** | **≤ 2 punti carta** totali (es. 0‑2 cartellini) nell’intero match. |\n| **4** | Alla fine del primo tempo la **Svezia** è in vantaggio (esito “2” a metà‑tempo). |\n\n---\n\n### 3. Verdetto finale\n\n- Nessuna delle selezioni rientra nei criteri di **RISCHIO_STRUTTURALE** (non è 1X2 secco, anti‑favorita su corazzata, under stretto su corazzata né tetto di gol su attacco dominante).  \n- Tutti i mercati mostrano EV positivo e le probabilità fornite sono coerenti con le quote.\n\n**Verdetto:** **APPROVATA**  \n\n**Stake consigliata:** **3 % del bankroll** (≈ €3 su €100). Con un EV di +65 % la quota è molto vantaggiosa; una puntata moderata preserva il capitale e consente di capitalizzare il valore.",
-        "total_odd": 4.3
-      }
-    },
-    {
-      "id": "TICKET_3_STELLE_ASSEDIO",
-      "name": "Ticket 3: Quaterna Stelle Europee & Assedio Corner",
-      "stake": 2.5,
-      "total_odds": 4.18,
-      "probability": 0.208,
-      "fair_odd": 4.81,
-      "edge": -0.131,
-      "potential_payout": 10.45,
-      "legs": [
-        {
-          "match": "Italia vs Turchia",
-          "market": "UNO O L'ALTRO: GOL O PALO ULTRA INC TS  AKGUN Y. O SCAMACCA G. GOAL O PALO O LORO SOST. INC TS [SI]",
-          "market_family": "PLAYER_PROPS_COMBO",
-          "odds": 1.55,
-          "probability": 0.467,
-          "fair_odd": 2.14,
-          "edge": -0.277,
-          "score": 0.02,
-          "verdict": "croce"
-        },
-        {
-          "match": "Scozia vs Slovenia",
-          "market": "PRIMA A X CORNER PRIMA A 4 CALCI D'ANGOLO [TEAM 1]",
-          "market_family": "TEAM_CORNERS_VOLUME",
-          "odds": 1.45,
-          "probability": 0.76,
-          "fair_odd": 1.32,
-          "edge": 0.102,
-          "score": 0.946,
-          "verdict": "stella"
-        },
-        {
-          "match": "Montenegro vs Armenia",
-          "market": "PRIMA A X CORNER PRIMA A 4 CALCI D'ANGOLO [TEAM 1]",
-          "market_family": "TEAM_CORNERS_VOLUME",
-          "odds": 1.33,
-          "probability": 0.779,
-          "fair_odd": 1.28,
-          "edge": 0.036,
-          "score": 0.898,
-          "verdict": "occhio"
-        },
-        {
-          "match": "Francia vs Belgio",
-          "market": "DOPPIA CHANCE TEMPO X DC TEMPO 1 [12]",
-          "market_family": "OTHER",
-          "odds": 1.4,
-          "probability": 0.753,
-          "fair_odd": 1.33,
-          "edge": 0.054,
-          "score": 0.911,
-          "verdict": "stella"
-        }
-      ],
-      "groq": {
-        "success": true,
-        "model_used": "openai/gpt-oss-120b",
-        "approved": true,
-        "ev_warning": null,
-        "critique": "**Ticket 3 – “Quaterna Stelle Europee & Assedio Corner”**  \nBankroll = €100, Quota totale = 4.18  \n\n---\n\n## 1. Analisi Matematica (EV)\n\n| Leg | Probabilità (P) | Quota Netwin | **EV %** = P × Quota – 1 |\n|-----|----------------|--------------|--------------------------|\n| 1 – Italia vs Turchia (Goal / Own‑goal) | 46.7 % | 1.55 | **‑27.6 %** |\n| 2 – Scozia vs Slovenia (Prima a 4 corner) | 76.0 % | 1.45 | **+10.2 %** |\n| 3 – Montenegro vs Armenia (Prima a 4 corner) | 77.9 % | 1.33 | **+3.6 %** |\n| 4 – Francia vs Belgio (Doppia Chance ½ tempo) | 75.3 % | 1.40 | **+5.4 %** |\n\n**EV complessivo del parlay**\n\n\\[\n\\text{Rendimento atteso} = \\prod_i (P_i \\times \\text{Quota}_i) \\approx\n0.7239 \\times 1.102 \\times 1.036 \\times 1.054 \\;=\\; 0.87\n\\]\n\n\\[\n\\boxed{\\text{EV totale} = 0.87 - 1 = \\mathbf{-13.0\\%}}\n\\]\n\n> L’EV è negativo, ma è superiore al limite di **‑4 %** previsto per un semplice avviso.\n\n---\n\n## 2. Analisi delle “trappole” del bookmaker  \n\n| Leg | Mercato | Scenario tipico che fa perdere la selezione |\n|-----|---------|--------------------------------------------|\n| **1** | **UNO O L'ALTRO: GOL O PALO (incl. extra‑time)** | L’evento “palo” (autogol) è estremamente raro; la quota 1.55 è troppo bassa rispetto alla reale probabilità (≈ 46 %). Il bookmaker “sovrastima” la probabilità di un gol del giocatore e penalizza l’autogol, creando un **bias di over‑valuation**. |\n| **2** | **PRIMA A 4 CALCI D'ANGOLO (Team 1)** | Il numero di corner è influenzato da fattori aleatori (arbitraggio, decisione arbitrale). La quota 1.45 è basata su una piccola sequenza di “corner‑burst” e può essere facilmente rovesciata da una difesa compatta o da un ritmo di gioco più basso. |\n| **3** | **PRIMA A 4 CALCI D'ANGOLO (Team 1)** | Stessa dinamica del Leg 2, ma con un margine di edge più stretto (+3.6 %). Il rischio di “early‑corner‑freeze” è alto. |\n| **4** | **DOPPIA CHANCE ½ TEMPO (X o 1)** | Il mercato è relativamente “safe”, ma la quota 1.40 è ancora inferiore al fair‑odds 1.33. Il bookmaker guadagna sul 5 % di edge, soprattutto se la partita si chiude con un pareggio al primo tempo. |\n\n**Punto critico:** la prima selezione (Leg 1) ha un **edge negativo di ‑27.7 %** e rappresenta la “trappola” principale del ticket; le altre tre hanno edge positivo ma su mercati ad alta varianza (corner‑burst).\n\n---\n\n## 3. Verdetto Finale  \n\n- Nessuna delle selezioni rientra nei vincoli di **RISCHIO_STRUTTURALE** (1X2 secco, anti‑favorita su corazzata, under stretto su corazzata, tetto di gol su attacco dominante).  \n- Nonostante l’EV complessivo negativo (‑13 %), il ticket non viola le regole di bocciatura.\n\n**APPROVATA**  \n\n### Stake consigliato\nCon un EV negativo moderato e una componente ad alta varianza, si consiglia di **limitare la puntata al 2 %",
-        "total_odd": 4.18
-      }
-    },
-    {
-      "id": "TICKET_4_TATTICA_PRESSIONE",
-      "name": "Ticket 4: Quaterna Tattica, Pressione & Trasferte",
-      "stake": 2.5,
-      "total_odds": 3.81,
-      "probability": 0.414,
-      "fair_odd": 2.42,
-      "edge": 0.577,
-      "potential_payout": 9.53,
-      "legs": [
-        {
-          "match": "Inghilterra vs Repubblica Ceca",
-          "market": "U/O PUNTI CARTELLINI SQUADRA SQUADRA 1: U/O 1.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [UNDER]",
-          "market_family": "TEAM_CARDS_VOLUME",
-          "odds": 1.45,
-          "probability": 0.828,
-          "fair_odd": 1.21,
-          "edge": 0.201,
-          "score": 0.973,
-          "verdict": "stella"
-        },
-        {
-          "match": "Croazia vs Spagna",
-          "market": "U/O PUNTI CARTELLINI SQUADRA SQUADRA 1: U/O 1.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [OVER]",
-          "market_family": "TEAM_CARDS_VOLUME",
-          "odds": 1.4,
-          "probability": 0.828,
-          "fair_odd": 1.21,
-          "edge": 0.159,
-          "score": 0.958,
           "verdict": "stella"
         },
         {
@@ -241,6 +94,17 @@
           "verdict": "stella"
         },
         {
+          "match": "Inghilterra vs Repubblica Ceca",
+          "market": "U/O PUNTI CARTELLINI U/O 2.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [OVER]",
+          "market_family": "TEAM_CARDS_VOLUME",
+          "odds": 1.45,
+          "probability": 0.828,
+          "fair_odd": 1.21,
+          "edge": 0.201,
+          "score": 0.973,
+          "verdict": "stella"
+        },
+        {
           "match": "Italia vs Turchia",
           "market": "DOPPIA CHANCE TEMPO X DC TEMPO 1 [12]",
           "market_family": "OTHER",
@@ -251,36 +115,151 @@
           "score": 0.947,
           "verdict": "stella"
         }
-      ],
-      "groq": {
-        "success": true,
-        "model_used": "openai/gpt-oss-120b",
-        "approved": true,
-        "ev_warning": null,
-        "critique": "**Ticket 4 – Audit**\n\n---\n\n## 1. Analisi Matematica  \n\n| Leg | Probabilità (P) | Quota Netwin | p × quota | EV (p·quota – 1) |\n|-----|----------------|--------------|-----------|-----------------|\n| 1 – Eng vs Cz (UNDER 1.5 punti cartellini) | 0,828 | 1,45 | **1,2006** | **+20,06 %** |\n| 2 – Cro vs Esp (OVER 1.5 punti cartellini) | 0,828 | 1,40 | **1,1592** | **+15,92 %** |\n| 3 – Sco vs Slv (PRIMA A X CORNER) | 0,764 | 1,38 | **1,0543** | **+5,43 %** |\n| 4 – Ita vs Tur (DOPPIA CHANCE ½ X 2) | 0,790 | 1,36 | **1,0744** | **+7,44 %** |\n\n### EV complessivo del parlay  \n\n- **Quota totale**: 1,45 × 1,40 × 1,38 × 1,36 ≈ **3,81** (conferma del ticket).  \n- **Probabilità di vincita congiunta**: 0,828 × 0,828 × 0,764 × 0,790 ≈ **0,414** (41,4 %).  \n- **Ritorno atteso**: 0,414 × 3,81 ≈ **1,576** → **EV = +57,6 %**.  \n\n> L’EV è nettamente positivo (+57 %); anche se inferiore al +4 % di “soglia di allarme”, è comunque un segnale di valore.\n\n---\n\n## 2. Analisi Trappole Bookmaker  \n\n| Leg | Mercato | Scenario che fa perdere la scommessa |\n|-----|---------|--------------------------------------|\n| 1 – Eng vs Cz (UNDER 1.5 punti cartellini) | **UNDER 1.5** – totale punti cartellini ≤ 1 (0 o 1 cartellino). | **≥ 2 punti** (es. 2 cartellini gialli, 1 rosso, o 2 cartellini su lo stesso giocatore). |\n| 2 – Cro vs Esp (OVER 1.5 punti cartellini) | **OVER 1.5** – totale punti cartellini ≥ 2. | **≤ 1 punto** (solo 0 o 1 cartellino in tutta la partita). |\n| 3 – Sco vs Slv (PRIMA A X CORNER) | Prima squadra a totalizzare **X** corner **o** a raggiungere 3 calci d’angolo. | La **Slovenia** ottiene X corner **prima** che la Scozia arrivi a 3 corner, oppure la Scozia non raggiunge i 3 corner prima del primo X corner dell’avversario. |\n| 4 – Ita vs Tur (DOPPIA CHANCE ½ X 2) | Metà tempo risultato **X o 2** (non 1). | **Italia** conduce a fine primo tempo (risultato 1). |\n\n---\n\n## 3. Verdetto Finale  \n\n- Nessun vincolo di **RISCHIO_STRUTTURALE** (non è un 1X2 secco, né un under stretto su “corazzata”, né un tetto di gol su attacco dominante).  \n- **APPROVATA**.\n\n### Stake consigliata  \nCon un EV del +57 % e una probabilità di vincita del 41 %, il ticket è di **moderato‑alto rischio** ma con valore. Si suggerisce di puntare **3 %–4 %** del bankroll (≈ €3‑4 su €100).  \n\n> **Stake consigliata:** **4 %** del bankroll (≈ €4).  \n\n---  \n\n**Conclusione:** il ticket presenta un valore matematico solido, le trappole sono ben identificate e non vi sono segnali di rischio strutturale. Procedere con la puntata indicata.",
-        "total_odd": 3.81
-      }
+      ]
+    },
+    {
+      "id": "TICKET_3_STELLE_ASSEDIO",
+      "name": "Ticket 3: Quaterna Stelle Europee & Assedio Corner",
+      "stake": 2.5,
+      "total_odds": 4.72,
+      "probability": 0.193,
+      "fair_odd": 5.18,
+      "edge": -0.089,
+      "potential_payout": 11.8,
+      "legs": [
+        {
+          "match": "Italia vs Turchia",
+          "market": "UNO O L'ALTRO: GOL O PALO ULTRA INC TS  AKGUN Y. O SCAMACCA G. GOAL O PALO O LORO SOST. INC TS [SI]",
+          "market_family": "PLAYER_PROPS_COMBO",
+          "odds": 1.55,
+          "probability": 0.467,
+          "fair_odd": 2.14,
+          "edge": -0.277,
+          "score": 0.02,
+          "verdict": "croce"
+        },
+        {
+          "match": "Croazia vs Spagna",
+          "market": "PRIMA A X CORNER PRIMA A 5 CALCI D'ANGOLO [TEAM 2]",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "odds": 1.47,
+          "probability": 0.744,
+          "fair_odd": 1.34,
+          "edge": 0.093,
+          "score": 0.894,
+          "verdict": "stella"
+        },
+        {
+          "match": "Inghilterra vs Repubblica Ceca",
+          "market": "1 TEMPO: 1X2 HANDICAP CORNER 1T 1X2 HAND CORNER: DA 0-1",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "odds": 1.48,
+          "probability": 0.737,
+          "fair_odd": 1.36,
+          "edge": 0.09,
+          "score": 0.865,
+          "verdict": "stella"
+        },
+        {
+          "match": "Francia vs Belgio",
+          "market": "DOPPIA CHANCE TEMPO X DC TEMPO 1 [12]",
+          "market_family": "OTHER",
+          "odds": 1.4,
+          "probability": 0.753,
+          "fair_odd": 1.33,
+          "edge": 0.054,
+          "score": 0.911,
+          "verdict": "stella"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_4_TATTICA_PRESSIONE",
+      "name": "Ticket 4: Quaterna Tattica, Pressione & Trasferte",
+      "stake": 2.5,
+      "total_odds": 3.33,
+      "probability": 0.403,
+      "fair_odd": 2.48,
+      "edge": 0.342,
+      "potential_payout": 8.32,
+      "legs": [
+        {
+          "match": "Inghilterra vs Repubblica Ceca",
+          "market": "U/O PUNTI CARTELLINI SQUADRA SQUADRA 1: U/O 1.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [UNDER]",
+          "market_family": "TEAM_CARDS_VOLUME",
+          "odds": 1.45,
+          "probability": 0.828,
+          "fair_odd": 1.21,
+          "edge": 0.201,
+          "score": 0.973,
+          "verdict": "stella"
+        },
+        {
+          "match": "Scozia vs Slovenia",
+          "market": "U/O PUNTI CARTELLINI SQUADRA SQUADRA 1: U/O 2.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [UNDER]",
+          "market_family": "TEAM_CARDS_VOLUME",
+          "odds": 1.38,
+          "probability": 0.772,
+          "fair_odd": 1.29,
+          "edge": 0.066,
+          "score": 0.944,
+          "verdict": "stella"
+        },
+        {
+          "match": "Croazia vs Spagna",
+          "market": "PRIMA A X CORNER PRIMA A 4 CALCI D'ANGOLO [TEAM 2]",
+          "market_family": "TEAM_CORNERS_VOLUME",
+          "odds": 1.3,
+          "probability": 0.799,
+          "fair_odd": 1.25,
+          "edge": 0.039,
+          "score": 0.862,
+          "verdict": "occhio"
+        },
+        {
+          "match": "Italia vs Turchia",
+          "market": "DOPPIA CHANCE TEMPO X DC TEMPO 2 [12]",
+          "market_family": "OTHER",
+          "odds": 1.28,
+          "probability": 0.79,
+          "fair_odd": 1.27,
+          "edge": 0.011,
+          "score": 0.82,
+          "verdict": "occhio"
+        }
+      ]
     },
     {
       "id": "TICKET_5_SOLIDITA_VOLUME",
       "name": "Ticket 5: Quaterna Solidità, Fasi di Gioco & Volume",
       "stake": 2.5,
-      "total_odds": 3.54,
-      "probability": 0.379,
-      "fair_odd": 2.64,
-      "edge": 0.342,
-      "potential_payout": 8.85,
+      "total_odds": 3.46,
+      "probability": 0.426,
+      "fair_odd": 2.35,
+      "edge": 0.474,
+      "potential_payout": 8.65,
       "legs": [
         {
-          "match": "Italia vs Turchia",
-          "market": "PRIMA A X CORNER PRIMA A 3 CALCI D'ANGOLO [TEAM 1]",
+          "match": "Albania vs San Marino",
+          "market": "PRIMA A X CORNER PRIMA A 6 CALCI D'ANGOLO [TEAM 1]",
           "market_family": "TEAM_CORNERS_VOLUME",
           "odds": 1.33,
-          "probability": 0.782,
-          "fair_odd": 1.28,
-          "edge": 0.04,
-          "score": 0.901,
-          "verdict": "occhio"
+          "probability": 0.85,
+          "fair_odd": 1.18,
+          "edge": 0.13,
+          "score": 0.836,
+          "verdict": "stella"
+        },
+        {
+          "match": "Italia vs Turchia",
+          "market": "U/O PUNTI CARTELLINI SQUADRA SQUADRA 2: U/O 1.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [OVER]",
+          "market_family": "TEAM_CARDS_VOLUME",
+          "odds": 1.4,
+          "probability": 0.839,
+          "fair_odd": 1.19,
+          "edge": 0.175,
+          "score": 0.933,
+          "verdict": "stella"
         },
         {
           "match": "Francia vs Belgio",
@@ -295,36 +274,16 @@
         },
         {
           "match": "Romania vs Svezia",
-          "market": "U/O PUNTI CARTELLINI SQUADRA SQUADRA 1: U/O 1.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE) [OVER]",
-          "market_family": "TEAM_CARDS_VOLUME",
-          "odds": 1.42,
-          "probability": 0.839,
-          "fair_odd": 1.19,
-          "edge": 0.192,
-          "score": 0.942,
-          "verdict": "stella"
-        },
-        {
-          "match": "Bosnia Erzegovina vs Polonia",
-          "market": "DOPPIA CHANCE TEMPO X DC TEMPO 2 [12]",
+          "market": "DOPPIA CHANCE TEMPO X DC TEMPO 1 [12]",
           "market_family": "OTHER",
-          "odds": 1.44,
-          "probability": 0.719,
-          "fair_odd": 1.39,
-          "edge": 0.035,
-          "score": 0.794,
-          "verdict": "occhio"
+          "odds": 1.43,
+          "probability": 0.744,
+          "fair_odd": 1.34,
+          "edge": 0.064,
+          "score": 0.895,
+          "verdict": "stella"
         }
-      ],
-      "groq": {
-        "success": true,
-        "model_used": "qwen/qwen3.8-27b",
-        "approved": true,
-        "ev_warning": null,
-        "critique": "Ecco l'audit del Ticket 5.\n\n### 1. Analisi Matematica (EV & Edge)\n\nCalcolo dell'Edge medio ponderato e verifica della coerenza matematica:\n\n*   **Leg 1 (Italia Corner):** Quota 1.33 vs Fair 1.28. Edge dichiarato +4.0%. Matematicamente corretto ($1/1.28 - 1 = 78.1\\%$).\n*   **Leg 2 (Francia Carte):** Quota 1.30 vs Fair 1.24. Edge dichiarato +4.4%. Matematicamente corretto ($1/1.24 - 1 = 80.6\\%$).\n*   **Leg 3 (Romania Carte):** Quota 1.42 vs Fair 1.19. Edge dichiarato +19.2%. **ANOMALIA STATISTICA.** Una quota fair di 1.19 implica una probabilità del 84%. Un edge del 19% su un mercato di carte di una singola squadra è estremamente raro e spesso indica un errore di pricing del modello o una quota \"stale\" non aggiornata. Tuttavia, procediamo con l'analisi qualitativa.\n*   **Leg 4 (Bosnia DC 2°T):** Quota 1.44 vs Fair 1.39. Edge dichiarato +3.5%. Matematicamente corretto ($1/1.39 - 1 = 71.9\\%$).\n\n**Quota Totale Teorica (Fair):** $1.28 \\times 1.24 \\times 1.19 \\times 1.39 \\approx 2.61$\n**Quota Totale Offerta:** 3.54\n**Edge Complessivo del Ticket:** $(3.54 / 2.61) - 1 \\approx +35.6\\%$\n\n*Nota: L'EV è fortemente positivo sulla carta, ma la Leg 3 presenta un rischio di \"trappola di liquidità\" o errore di mercato che va smascherato.*\n\n### 2. Analisi Trappole Bookmaker\n\n**Leg 1: Italia vs Turchia - PRIMA A X CORNER PRIMA A 3 CALCI D'ANGOLO [TEAM 1]**\n*   **Scenario di Perdita:** L'Italia non batte la Turchia sul numero di corner *prima* che la Turchia ne ottenga 3.\n*   **Trappola:** La Turchia, se in svantaggio o per strategia di possesso, potrebbe generare corner in modo rapido. Se la Turchia ottiene 3 corner nei primi 20-30 minuti, la scommessa perde anche se l'Italia poi ne fa 10. È una scommessa sulla *velocità* di dominanza, non solo sul volume. L'Italia tende a controllare il gioco, ma se la Turchia gioca di rimessa aggressiva, i corner ospiti possono arrivare prima.\n\n**Leg 2: Francia vs Belgio - OVER 2.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE)**\n*   **Scenario di Perdita:** Il match termina con un totale di 2 o meno cartellini (sommando i punti, dove giallo=1, rosso=2, ma qui c'è il vincolo \"max 2 per giocatore\" che di solito si riferisce al conteggio dei punti per la squadra o per il singolo giocatore? Il mercato \"Punti Cartellini\" di solito assegna 1 punto per giallo, 2 per rosso. \"Max 2 per giocatore\" è una clausola standard per evitare che un giocatore con 2 gialli (rosso) conti per 3 punti o simili, ma di solito il mercato è sul totale punti della partita).\n*   **Trappola:** Francia e Belgio sono squadre tecnicamente elevate che spesso gestiscono il gioco con pochi falli tattici. Se il match è equilibrato e senza episodi gravi, si rischia di chiudere a 1-2 cartellini totali. L'Over 2.5 richiede almeno 3 cartellini (es. 3 gialli, o 1 giallo + 1 rosso). È un mercato volatile se gli arbitri sono \"soft\".\n\n**Leg 3: Romania vs Svezia - OVER 1.5 PUNTI CARTELLINI SQUADRA 1 (Romania)**\n*   **Scenario di Perdita:** La Romania riceve 0 o 1 cartellino (punti) nell'intera partita.\n*   **Trappola (CRITICA):** L'edge del 19% è un **segnale di allarme rosso**. I bookmaker non lasciano edge così alti su mercati di nicchia come i cartellini di una singola squadra senza motivo.\n    *   *Possibile causa:* La Romania è una squadra che gioca in casa, spesso con un gioco fisico, ma se la Svezia domina il possesso, la Romania potrebbe giocare di rimessa con pochi falli.\n    *   *Rischio Reale:* Se la Romania gioca un match tattico e disciplinato, o se l'arbitro è molto permissivo, 1 cartellino (o nessuno) è un esito molto probabile. La quota di 1.42 per l'Over 1.5 (cioè 2+ cartellini per la Romania) è alta perché il bookmaker sa che è difficile. L'edge \"falso\" del modello potrebbe derivare da dati storici non rappresentativi o da un errore di input. **Non fidarti di questo edge.**\n\n**Leg 4: Bosnia Erzegovina vs Polonia - DC TEMPO 2 [12]**\n*   **Scenario di Perdita:** La Polonia vince il secondo tempo (o l'intera partita) con un margine tale da non essere raggiunta, oppure la partita finisce in parità nel primo tempo e la Polonia vince nel secondo.\n*   **Trappola:** La DC 12 nel secondo tempo significa che la Bosnia non deve perdere nel secondo tempo. Se la Polonia è favorita (come spesso è contro la Bosnia), il rischio è che la Polonia segni nel secondo tempo e vinca. La DC 12 copre solo X e 2 nel *secondo tempo*. Se la Polonia vincerà 0-1 o 0-2 nel secondo tempo, la scommessa perde. È una scommessa contro la forza offensiva della Polonia nella fase finale del match.\n\n### 3. Verdetto Finale\n\n**APPROVATA**\n\n**Motivazione:**\nNon ci sono vincoli di mercato \"strutturali\" (come 1X2 secco su corazzata o under stretto su attacco dominante) che giustifichino una bocciatura automatica. Le selezioni sono su mercati laterali (corner, carte, DC tempo) che hanno una volatilità intrinseca ma non sono trappole logiche impossibili.\n\n**Avvertenza Critica sulla Leg 3:**\nL'edge del 19% sulla Leg 3 è **sospetto**. È molto probabile che la quota fair di 1.19 sia errata o che il mercato sia mal liquidato. Ti consiglio di **ridurre drasticamente lo stake** o di **escludere la Leg 3** e giocare una tripla, oppure di verificare se la Romania ha una tendenza recente a prendere molti cartellini. Se giochi il ticket completo, considera che la Leg 3 è la più rischiosa in termini di \"trappola di pricing\".\n\n**Stake Consigliato:**\nData la volatilità dei mercati di carte e corner, e l'anomalia sulla Leg 3, consiglio uno stake conservativo.\n**Stake: 2% del bankroll (€2.00)**\n\n*Se vuoi massimizzare il valore, valuta di giocare solo la Tripla (Leg 1, 2, 4) con una quota più bassa ma un rischio strutturale inferiore, oppure mantieni la Quaterna ma con stake minimo.*",
-        "total_odd": 3.54
-      }
+      ]
     }
-  ],
-  "groq_audit": "ESEGUITO_CON_SUCCESSO_CON_NUOVA_POLICY"
+  ]
 }
