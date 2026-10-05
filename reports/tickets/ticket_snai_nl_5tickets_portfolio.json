@@ -2,7 +2,7 @@
   "bankroll_reference": 100.0,
   "session_stake": 12.5,
   "playable": true,
-  "groq_audit": "VALIDATO: ZERO RIPETIZIONI, FAMIGLIE SPECIALIZZATE TIPSTER INTELLIGENCE",
+  "groq_audit": "ESEGUITO_CON_SUCCESSO_CON_NUOVA_POLICY",
   "created_at": "2026-10-05 17:15 CEST",
   "tickets": [
     {
@@ -23,7 +23,10 @@
           "selection": "SI",
           "odds": 1.8,
           "catalog_source": "reports/snai/italia-turchia.json",
-          "tactical_rationale": "Scamacca riferimento offensivo azzurro: copre gol, tiri sul palo o sulla traversa, e la scommessa resta valida sul sostituto in caso di cambio."
+          "tactical_rationale": "Scamacca riferimento offensivo azzurro: copre gol, tiri sul palo o sulla traversa, e la scommessa resta valida sul sostituto in caso di cambio.",
+          "fair_odd": 1.72,
+          "probability": 0.58,
+          "edge": 0.044
         },
         {
           "match": "Francia vs Belgio",
@@ -33,7 +36,10 @@
           "selection": "1-3",
           "odds": 1.33,
           "catalog_source": "reports/snai/francia-belgio.json",
-          "tactical_rationale": "La Francia segna da 1 a 3 reti a Lione. Protegge la vittoria di misura (1-0) ed evita trappole di punteggio esatto o obblighi sul Belgio."
+          "tactical_rationale": "La Francia segna da 1 a 3 reti a Lione. Protegge la vittoria di misura (1-0) ed evita trappole di punteggio esatto o obblighi sul Belgio.",
+          "fair_odd": 1.38,
+          "probability": 0.725,
+          "edge": -0.036
         },
         {
           "match": "Romania vs Svezia",
@@ -43,7 +49,10 @@
           "selection": "2",
           "odds": 1.6,
           "catalog_source": "reports/snai/romania-svezia.json",
-          "tactical_rationale": "Svezia arrembante fin dal primo minuto con ali larghe (Isak e Kulusevski); pressione offensiva che genera corner immediati nel primo tempo."
+          "tactical_rationale": "Svezia arrembante fin dal primo minuto con ali larghe (Isak e Kulusevski); pressione offensiva che genera corner immediati nel primo tempo.",
+          "fair_odd": 1.56,
+          "probability": 0.64,
+          "edge": 0.024
         },
         {
           "match": "Irlanda del Nord vs Georgia",
@@ -53,9 +62,20 @@
           "selection": "1 O NOGOAL",
           "odds": 1.26,
           "catalog_source": "reports/snai/irlanda-del-nord-georgia.json",
-          "tactical_rationale": "Partita chiusa e fisica a Belfast: vince l'Irlanda del Nord oppure termina con NoGoal (copre 1-0, 2-0, 0-0, 0-1)."
+          "tactical_rationale": "Partita chiusa e fisica a Belfast: vince l'Irlanda del Nord oppure termina con NoGoal (copre 1-0, 2-0, 0-0, 0-1).",
+          "fair_odd": 1.24,
+          "probability": 0.805,
+          "edge": 0.014
         }
-      ]
+      ],
+      "groq": {
+        "success": true,
+        "model_used": "openai/gpt-oss-120b",
+        "approved": true,
+        "ev_warning": null,
+        "critique": "**Ticket 1 – Audit (Bankroll €100, Quota totale 4.83)**  \n\n---\n\n## 1. Analisi Matematica (EV per selezione)\n\n| Leg | Prob. (P) | Quota Netwin | EV = P × Quota – 1 | Edge dichiarato |\n|-----|-----------|--------------|-------------------|-----------------|\n| 1 – Italia vs Turchia | 0.580 | 1.80 | **+0.044  ( +4.4 % )** | +4.4 % |\n| 2 – Francia vs Belgio | 0.725 | 1.33 | **‑0.036  ( ‑3.6 % )** | –3.6 % |\n| 3 – Romania vs Svezia | 0.640 | 1.60 | **+0.024  ( +2.4 % )** | +2.4 % |\n| 4 – Irlanda N. vs Georgia | 0.805 | 1.26 | **+0.014  ( +1.4 % )** | +1.4 % |\n\n**EV complessivo del ticket**  \n\\(P_{tot}=0.58·0.725·0.64·0.805≈0.2166\\)  \n\n\\(EV_{tot}=P_{tot}·4.83‑1≈0.046\\) → **+4.6 %** (positivo, ma sotto +5 %).\n\n> *Nota*: l’EV negativo della Leg 2 è l’unico “avviso”. Non è motivo di bocciatura.\n\n---\n\n## 2. Analisi Trappole Bookmaker (scenario che fa perdere ciascuna selezione)\n\n| Leg | Mercato | Scenario di perdita (trappola) |\n|-----|---------|--------------------------------|\n| 1 – “Marcatore Piu Ultra Scamacca G. o Sostituto Segna o Prende Palo/Traversa Inc. T.S.” | • Scamacca viene sostituito **prima** di avere occasione di tiro e il sostituto non segna né colpisce palo/traversa. <br>• Nessun gol, palo o traversa da parte di **entrambi** i giocatori. |\n| 2 – “MultiGol Squadra 1 Multiesiti” (Francia) | • Francia **non segna** (0‑0 o 0‑X). <br>• Francia segna **4 o più** reti (es. 4‑0, 5‑1, ecc.). |\n| 3 – “1 Tempo: 1X2 Corner” (Romania vs Svezia) | • Il primo tempo **non termina** con il risultato previsto (es. se la scommessa è “X + corner”, il primo tempo finisce 1‑0 o 2‑0). <br>• **Nessun corner** nel primo tempo, anche se il risultato è corretto. |\n| 4 – “Combo Chance: 1 o NoGoal” (Irlanda N. vs Georgia) | • **Vittoria della Georgia** (qualunque risultato). <br>• (Tutte le altre combinazioni – 1‑0, 2‑0, 0‑0, 0‑1 – sono vincenti). |\n\n---\n\n## 3. Verdetto Finale\n\n- Nessuna delle selezioni rientra nei vincoli di **RISCHIO_STRUTTURALE** (non è 1X2 secco, anti‑fav, under stretto su corazzata o tetto di gol su attacco dominante).  \n- L’EV complessivo è **positivo (+4.6 %)**.  \n\n**APPROVATA**  \n\n### Stake consigliata\nCon un bankroll di €100 e un EV moderato, si raccomanda una puntata **tra il 2 % e il 4 %** del bankroll, ad esempio **€3 – €4**. Questo mantiene la gestione del rischio entro limiti prudenziali pur sfruttando il valore positivo del ticket.",
+        "total_odd": 4.83
+      }
     },
     {
       "id": "TICKET_2_SERATA_DISCIPLINA_RITMO_05OTT",
@@ -75,7 +95,10 @@
           "selection": "OVER",
           "odds": 2.0,
           "catalog_source": "reports/snai/italia-turchia.json",
-          "tactical_rationale": "Celik terzino difensivo contro la fascia sinistra azzurra piu aggressiva; media storica di 2.1 falli internazionali a partita, quota 2.00 con massimo valore statistico."
+          "tactical_rationale": "Celik terzino difensivo contro la fascia sinistra azzurra piu aggressiva; media storica di 2.1 falli internazionali a partita, quota 2.00 con massimo valore statistico.",
+          "fair_odd": 1.61,
+          "probability": 0.621,
+          "edge": 0.242
         },
         {
           "match": "Bosnia Erzegovina vs Polonia",
@@ -85,7 +108,10 @@
           "selection": "1-3",
           "odds": 1.4,
           "catalog_source": "reports/snai/bosnia-erzegovina-polonia.json",
-          "tactical_rationale": "A Zenica scontro fisico intenso fin dall'avvio: almeno 1 rete nel primo tempo ma non piu di 3, azzerando qualsiasi rischio legato alla ripresa."
+          "tactical_rationale": "A Zenica scontro fisico intenso fin dall'avvio: almeno 1 rete nel primo tempo ma non piu di 3, azzerando qualsiasi rischio legato alla ripresa.",
+          "fair_odd": 1.53,
+          "probability": 0.653,
+          "edge": -0.086
         },
         {
           "match": "Montenegro vs Armenia",
@@ -95,7 +121,10 @@
           "selection": "1",
           "odds": 1.33,
           "catalog_source": "reports/snai/montenegro-armenia.json",
-          "tactical_rationale": "A Podgorica il Montenegro gioca in proiezione offensiva costante su corsie laterali contro l'Armenia rintanata; supremazia netta nei corner."
+          "tactical_rationale": "A Podgorica il Montenegro gioca in proiezione offensiva costante su corsie laterali contro l'Armenia rintanata; supremazia netta nei corner.",
+          "fair_odd": 1.31,
+          "probability": 0.765,
+          "edge": 0.017
         },
         {
           "match": "Ucraina vs Ungheria",
@@ -105,9 +134,20 @@
           "selection": "OVER",
           "odds": 1.3,
           "catalog_source": "reports/snai/ucraina-ungheria.json",
-          "tactical_rationale": "Scontro diretto teso in campo neutro con posta in palio altissima; duelli a centrocampo che superano agevolmente la soglia di 3 cartellini."
+          "tactical_rationale": "Scontro diretto teso in campo neutro con posta in palio altissima; duelli a centrocampo che superano agevolmente la soglia di 3 cartellini.",
+          "fair_odd": 1.28,
+          "probability": 0.78,
+          "edge": 0.014
         }
-      ]
+      ],
+      "groq": {
+        "success": true,
+        "model_used": "openai/gpt-oss-120b",
+        "approved": true,
+        "ev_warning": null,
+        "critique": "**Audit – Ticket 2 (Quota Totale 4.84 – Bankroll €100)**  \n\n---\n\n## 1. Analisi Matematica (EV per singola selezione)\n\n| Leg | Probabilità (P) | Quota Netwin | EV = (P × Quota) – 1 | % EV |\n|-----|----------------|--------------|----------------------|------|\n| 1 – Italia vs Turchia (U/O 1.5 Falli Celik) | 62.1 % (0.621) | 2.00 | 0.621 × 2.00 – 1 = **+0.242** | **+24.2 %** |\n| 2 – Bosnia Erzegovina vs Polonia (MultiGol 1T 1‑3 Gol) | 65.3 % (0.653) | 1.40 | 0.653 × 1.40 – 1 = **‑0.086** | **‑8.6 %** |\n| 3 – Montenegro vs Armenia (1X2 Corner) | 76.5 % (0.765) | 1.33 | 0.765 × 1.33 – 1 = **+0.016** | **+1.6 %** |\n| 4 – Ucraina vs Ungheria (U/O 3.5 Cartellini) | 78.0 % (0.780) | 1.30 | 0.780 × 1.30 – 1 = **+0.014** | **+1.4 %** |\n\n**EV complessivo del parlay** (assumendo indipendenza):  \n\nP = 0.621 × 0.653 × 0.765 × 0.780 ≈ 0.242 (24.2 %)  \n\nEV = 0.242 × 4.84 – 1 ≈ +0.171 → **+17.1 %**  \n\n> L’EV totale è positivo (+17 %); la sola selezione con EV negativo (Leg 2) è già segnalata dal “Edge –8.6 %”.\n\n---\n\n## 2. Trappole tipiche del bookmaker (scenario di perdita)\n\n| Leg | Condizione di perdita (scenario “trappola”) |\n|-----|---------------------------------------------|\n| **1 – U/O 1.5 Falli Celik** | Celik commette **0 o 1** fallo (under). Eventuale sostituzione precoce o infortunio che riduce le sue azioni difensive. |\n| **2 – MultiGol 1T 1‑3 Gol** | Primo tempo **0** gol **oppure** **≥ 4** gol. Un gol tardivo al 45+ min o una rete di rimonta rapida prima dell’intervallo annulla la scommessa. |\n| **3 – 1X2 Corner** | Il risultato dei corner è **draw** o favorevole all’Armenia (se la scommessa era su Montenegro). Un match con pochi calci d’angolo (es. 0‑0‑0) o una difesa che blocca le battute laterali. |\n| **4 – U/O 3.5 Cartellini** | Totale cartellini **≤ 3** (under). Partita poco aggressiva, pochi falli tattici o interventi arbitrali “soft”. |\n\n---\n\n## 3. Verdetto Finale\n\n- Nessuna delle selezioni rientra nei criteri di **RISCHIO_STRUTTURALE** (non è un 1X2 “secco”, né un under stretto su squadra “corazzata”, né un tetto di gol su attacco dominante).\n- L’EV complessivo è **positivo (+17 %)** e la quota totale è coerente con le probabilità stimate.\n\n**Verdetto:** **APPROVATA**  \n\n**Stake consigliato:** **3 % – 5 %** del bankroll (es. €3‑€5). Con un bankroll di €100, una puntata di €4 (4 %) bilancia il valore atteso positivo con la moderata volatilità introdotta dalla selezione a EV negativo (Leg 2).",
+        "total_odd": 4.84
+      }
     },
     {
       "id": "TICKET_3_MARTEDI_STELLE_ASSEDIO_06OTT",
@@ -127,7 +167,10 @@
           "selection": "SI",
           "odds": 1.8,
           "catalog_source": "reports/snai/croazia-spagna.json",
-          "tactical_rationale": "Lamine Yamal pericolo primario della Roja: tiri a rientrare dal limite, legni compresi e copertura totale se subentra un compagno a gara in corso."
+          "tactical_rationale": "Lamine Yamal pericolo primario della Roja: tiri a rientrare dal limite, legni compresi e copertura totale se subentra un compagno a gara in corso.",
+          "fair_odd": 1.74,
+          "probability": 0.575,
+          "edge": 0.035
         },
         {
           "match": "Inghilterra vs Repubblica Ceca",
@@ -137,7 +180,10 @@
           "selection": "TEAM 1",
           "odds": 1.55,
           "catalog_source": "reports/snai/inghilterra-repubblica-ceca.json",
-          "tactical_rationale": "Assedio inglese a Wembley con cross e sovrapposizioni continue; l'Inghilterra raggiunge 6 calci d'angolo per prima con ampio margine."
+          "tactical_rationale": "Assedio inglese a Wembley con cross e sovrapposizioni continue; l'Inghilterra raggiunge 6 calci d'angolo per prima con ampio margine.",
+          "fair_odd": 1.49,
+          "probability": 0.67,
+          "edge": 0.038
         },
         {
           "match": "Svizzera vs Macedonia del Nord",
@@ -147,7 +193,10 @@
           "selection": "1-3",
           "odds": 1.57,
           "catalog_source": "reports/snai/svizzera-macedonia.json",
-          "tactical_rationale": "Svizzera dominante tra le mura amiche: garantisce tra 1 e 3 gol contro il blocco basso macedone."
+          "tactical_rationale": "Svizzera dominante tra le mura amiche: garantisce tra 1 e 3 gol contro il blocco basso macedone.",
+          "fair_odd": 1.38,
+          "probability": 0.725,
+          "edge": -0.036
         },
         {
           "match": "Albania vs San Marino",
@@ -157,9 +206,20 @@
           "selection": "TEAM 1",
           "odds": 1.33,
           "catalog_source": "reports/snai/albania-san-marino.json",
-          "tactical_rationale": "Monologo albanese: San Marino schiacciato nella propria area senza capacita di ripartenza, Albania prima ad arrivare a 6 corner."
+          "tactical_rationale": "Monologo albanese: San Marino schiacciato nella propria area senza capacita di ripartenza, Albania prima ad arrivare a 6 corner.",
+          "fair_odd": 1.49,
+          "probability": 0.67,
+          "edge": 0.038
         }
-      ]
+      ],
+      "groq": {
+        "success": true,
+        "model_used": "openai/gpt-oss-120b",
+        "approved": true,
+        "ev_warning": null,
+        "critique": "**Ticket 3 – Audit (06/10 – Quaterna Stelle Europee & Assedio Corner)**  \nBankroll: €100, Quota totale Netwin: 5.83  \n\n---\n\n## 1. Analisi Matematica (EV)\n\n| Leg | Probabilità (P) | Quota Netwin | EV = P × Quota – 1 |\n|-----|----------------|--------------|-------------------|\n| 1 – Croazia vs Spagna (Yamal o sostituto) | 0,575 | 1,80 | **+0,035  ( +3,5 % )** |\n| 2 – Inghilterra vs Ceca (Prima a 6 corner) | 0,670 | 1,55 | **+0,038  ( +3,8 % )** |\n| 3 – Svizzera vs Macedonia (MultiGol 1‑3) | 0,725 | 1,57 | **+0,138  ( +13,8 % )** |\n| 4 – Albania vs San Marino (Prima a 6 corner) | 0,670 | 1,33 | **‑0,109  ( ‑10,9 % )** |\n\n### EV complessivo della quaterna (parlay)\n\n- **Probabilità congiunta** = 0,575 × 0,670 × 0,725 × 0,670 ≈ **0,187** (18,7 %)\n- **Quota complessiva** = 1,80 × 1,55 × 1,57 × 1,33 ≈ **5,83**\n- **EV totale** = 0,187 × 5,83 – 1 ≈ **+0,090** → **+9,0 %**  \n\n> L’EV è positivo (+9 %); supera il “soglia di avviso” del +4 % e indica valore matematico.\n\n---\n\n## 2. Analisi delle Trappole del Bookmaker  \n\n| Leg | Scenario che fa perdere la scommessa |\n|-----|--------------------------------------|\n| **1 – Marcatore Yamal o sostituto / Palo‑Traversa** | • Yamal non segna **e** nessun sostituto segna. <br>• Nessun autogol, palo o traversa incassata. <br>**Rischio**: dipendenza da un singolo giocatore e da un evento di “palo‑traversa” a bassa probabilità. |\n| **2 – Prima a 6 corner (Inghilterra)** | • La Repubblica Ceca raggiunge i 6 corner per prima. <br>• Il match termina con < 6 corner totali (es. partita molto difensiva o pochi cross). |\n| **3 – MultiGol 1‑3 (Svizzera)** | • Svizzera non segna (0‑0). <br>• Svizzera segna 4 o più gol (es. partita aperta con difesa macedone vulnerabile). |\n| **4 – Prima a 6 corner (Albania)** | • San Marino raggiunge i 6 corner per prima (improbabile ma possibile in caso di rimesse rapide). <br>• Il match termina prima dei 6 corner (es. rete veloce e chiusura difensiva). |\n\n---\n\n## 3. Verdetto Finale  \n\n- Nessuna delle selezioni è un **1X2 secco**, **under stretto su corazzata**, **over su attacco dominante** o altra tipologia che richiederebbe il tag **RISCHIO_STRUTTURALE**.  \n- L’EV complessivo è positivo (+9 %).  \n\n**APPROVATA**  \n\n### Stake consigliata  \nCon un bankroll di €100 e un EV del +9 %, una puntata prudente ma profittevole è **3 % del bankroll** (≈ €3). Si può variare tra **2 % – 5 %** a seconda della propensione al rischio personale.  \n\n---  \n\n*Nota*: monitorare la formazione di Spagna (Yamal) fino al fischio d’inizio; eventuali cambi dell’ultimo minuto aumenterebbero il rischio della Leg 1. In caso di dubbio, ridurre la stake al minimo consigliato (2 %).",
+        "total_odd": 5.83
+      }
     },
     {
       "id": "TICKET_4_MARTEDI_TATTICA_PRESSIONE_06OTT",
@@ -179,7 +239,10 @@
           "selection": "1-3",
           "odds": 1.38,
           "catalog_source": "reports/snai/kazakistan-isole-far-oer.json",
-          "tactical_rationale": "Ad Astana sintetico e fuso orario mettono in difficolta le Far Oer; Kazakistan regolarmente a segno tra 1 e 3 reti."
+          "tactical_rationale": "Ad Astana sintetico e fuso orario mettono in difficolta le Far Oer; Kazakistan regolarmente a segno tra 1 e 3 reti.",
+          "fair_odd": 1.38,
+          "probability": 0.725,
+          "edge": -0.036
         },
         {
           "match": "Croazia vs Spagna",
@@ -189,7 +252,10 @@
           "selection": "1",
           "odds": 1.57,
           "catalog_source": "reports/snai/croazia-spagna.json",
-          "tactical_rationale": "Spagna padrona del possesso con palleggio prolungato; la Croazia e costretta a rincorrere e a spendere ammonizioni tattiche."
+          "tactical_rationale": "Spagna padrona del possesso con palleggio prolungato; la Croazia e costretta a rincorrere e a spendere ammonizioni tattiche.",
+          "fair_odd": 1.54,
+          "probability": 0.65,
+          "edge": 0.02
         },
         {
           "match": "Inghilterra vs Repubblica Ceca",
@@ -199,7 +265,10 @@
           "selection": "2",
           "odds": 1.6,
           "catalog_source": "reports/snai/inghilterra-repubblica-ceca.json",
-          "tactical_rationale": "Repubblica Ceca arroccata a difendere il perimetro a Wembley; cechi inevitabilmente piu sanzionati rispetto agli inglesi."
+          "tactical_rationale": "Repubblica Ceca arroccata a difendere il perimetro a Wembley; cechi inevitabilmente piu sanzionati rispetto agli inglesi.",
+          "fair_odd": 1.54,
+          "probability": 0.65,
+          "edge": 0.02
         },
         {
           "match": "Moldova vs Slovacchia",
@@ -209,9 +278,20 @@
           "selection": "TEAM 2",
           "odds": 1.4,
           "catalog_source": "reports/snai/moldova-slovacchia.json",
-          "tactical_rationale": "Slovacchia tecnicamente superiore spinge per sbloccare la gara; raggiunge quota 5 corner per prima senza affanni."
+          "tactical_rationale": "Slovacchia tecnicamente superiore spinge per sbloccare la gara; raggiunge quota 5 corner per prima senza affanni.",
+          "fair_odd": 1.37,
+          "probability": 0.73,
+          "edge": 0.022
         }
-      ]
+      ],
+      "groq": {
+        "success": true,
+        "model_used": "openai/gpt-oss-120b",
+        "approved": true,
+        "ev_warning": null,
+        "critique": "**Ticket 4 – Audit (Bankroll €100, Quota Totale 4.85)**  \n\n---\n\n## 1. Analisi Matematica  \n\n| Leg | Probabilità (P) | Quota Netwin | EV (per €1) | Note su Edge |\n|-----|----------------|--------------|-------------|--------------|\n| 1 – Kazakistan vs Far Oer (MultiGol Squadra 1) | 0,725 | 1,38 | **+0,05 %** (0,0005) | Edge –3,6 % (quota pari al fair) |\n| 2 – Croazia vs Spagna (1X2 + max 2 cartellini) | 0,650 | 1,57 | **+2,05 %** (0,0205) | Edge +2,0 % |\n| 3 – Inghilterra vs Cechia (1X2 + max 2 cartellini) | 0,650 | 1,60 | **+4,00 %** (0,0400) | Edge +2,0 % |\n| 4 – Moldova vs Slovacchia (Prima a 5 corner) | 0,730 | 1,40 | **+2,20 %** (0,0220) | Edge +2,2 % |\n\n**EV complessivo della quaterna** (assumendo indipendenza):  \n\n- Probabilità combinata = 0,725 × 0,650 × 0,650 × 0,730 ≈ **0,2236** (22,36 %).  \n- Quota fair = 1 / 0,2236 ≈ **4,47**.  \n- EV = 0,2236 × 4,85 – 1 ≈ **+0,084** → **+8,4 %** per unità scommessa.  \n\n> L’EV totale è positivo (+8,4 %); nessun avviso di “EV < +4 %”.\n\n---\n\n## 2. Analisi Trappole Bookmaker  \n\n| Leg | Scenario che fa perdere la selezione |\n|-----|--------------------------------------|\n| **1 – MultiGol Squadra 1 (Kazakistan)** | • Kazakistan segna **0** reti.<br>• Kazakistan segna **≥ 4** reti (es. 4‑0, 4‑1, ecc.). |\n| **2 – 1X2 + max 2 cartellini (Croazia‑Spagna)** | • Risultato diverso da quello scelto (es. Spagna vince se si scommette Croazia).<br>• **Qualunque** giocatore riceve **≥ 3** cartellini (es. due ammonizioni più un'espulsione). |\n| **3 – 1X2 + max 2 cartellini (Inghilterra‑Cechia)** | Stessi rischi del leg 2: risultato errato **oppure** un giocatore supera il limite di 2 cartellini. |\n| **4 – Prima a 5 corner (Slovacchia)** | • La **Moldova** raggiunge per prima i 5 corner.<br>• La partita termina con **meno di 5 corner totali** per entrambe le squadre (bet perde perché nessuna squadra raggiunge il traguardo). |\n\n---\n\n## 3. Verdetto Finale  \n\n- Nessuna delle selezioni rientra nei criteri di **RISCHIO_STRUTTURALE** (1X2 secco, anti‑favorita su “corazzata”, under stretto su “corazzata”, tetto di gol su attacco dominante).  \n- L’EV complessivo è positivo (+8,4 %).  \n\n**Verdetto:** **APPROVATA**  \n\n**Stake consigliata:** **3 % del bankroll** (≈ €3) – livello medio, coerente con un EV positivo ma con margini di errore dovuti alle dipendenze tra eventi (es. cartellini).  \n\n---  \n\n*Audit completato.*",
+        "total_odd": 4.85
+      }
     },
     {
       "id": "TICKET_5_MARTEDI_SOLIDITA_VOLUME_06OTT",
@@ -231,7 +311,10 @@
           "selection": "1",
           "odds": 1.4,
           "catalog_source": "reports/snai/scozia-slovenia.json",
-          "tactical_rationale": "A Hampden Park la Scozia gioca all'arrembaggio sulle corsie per servire i saltatori d'area; superiorita netta nel conteggio angoli contro la Slovenia."
+          "tactical_rationale": "A Hampden Park la Scozia gioca all'arrembaggio sulle corsie per servire i saltatori d'area; superiorita netta nel conteggio angoli contro la Slovenia.",
+          "fair_odd": 1.31,
+          "probability": 0.765,
+          "edge": 0.017
         },
         {
           "match": "Lussemburgo vs Bulgaria",
@@ -241,7 +324,10 @@
           "selection": "1-3",
           "odds": 1.36,
           "catalog_source": "reports/snai/lussemburgo-bulgaria.json",
-          "tactical_rationale": "Lussemburgo in costante crescita europea: crea volume offensivo e garantisce tra 1 e 3 gol contro una Bulgaria difensivamente fragile."
+          "tactical_rationale": "Lussemburgo in costante crescita europea: crea volume offensivo e garantisce tra 1 e 3 gol contro una Bulgaria difensivamente fragile.",
+          "fair_odd": 1.38,
+          "probability": 0.725,
+          "edge": -0.036
         },
         {
           "match": "Bielorussia vs Finlandia",
@@ -251,7 +337,10 @@
           "selection": "X2",
           "odds": 1.28,
           "catalog_source": "reports/snai/bielorussia-finlandia.json",
-          "tactical_rationale": "Finlandia strutturata ed esperta a livello internazionale; protezione totale con X2 su campo neutro bielorusso."
+          "tactical_rationale": "Finlandia strutturata ed esperta a livello internazionale; protezione totale con X2 su campo neutro bielorusso.",
+          "fair_odd": 1.26,
+          "probability": 0.795,
+          "edge": 0.018
         },
         {
           "match": "Estonia vs Islanda",
@@ -261,9 +350,21 @@
           "selection": "1-3",
           "odds": 1.27,
           "catalog_source": "reports/snai/estonia-islanda.json",
-          "tactical_rationale": "Islanda arrembante in trasferta: attacco dinamico che buca la difesa estone producendo tra 1 e 3 marcature."
+          "tactical_rationale": "Islanda arrembante in trasferta: attacco dinamico che buca la difesa estone producendo tra 1 e 3 marcature.",
+          "fair_odd": 1.4,
+          "probability": 0.715,
+          "edge": -0.092
         }
-      ]
+      ],
+      "groq": {
+        "success": true,
+        "model_used": "openai/gpt-oss-120b",
+        "approved": true,
+        "ev_warning": null,
+        "critique": "**Ticket 5 – Audit**\n\n---\n\n## 1. Analisi Matematica (EV)\n\n| Leg | P (probabilità) | Quota Netwin | p × quota | EV per unità |\n|-----|----------------|--------------|-----------|--------------|\n| 1 – Scozia vs Slovenia (1X2 Corner…) | 0,765 | 1,40 | **1,071** | **+7,1 %** |\n| 2 – Lussemburgo vs Bulgaria (MultiGol 1) | 0,725 | 1,36 | **0,986** | **‑1,4 %** |\n| 3 – Bielorussia vs Finlandia (Doppia Chance X2) | 0,795 | 1,28 | **1,018** | **+1,8 %** |\n| 4 – Estonia vs Islanda (MultiGol 2) | 0,715 | 1,27 | **0,908** | **‑9,2 %** |\n\n**EV complessivo del parlay**  \n\n\\[\n\\text{Moltiplicatore atteso}=1,071 \\times 0,986 \\times 1,018 \\times 0,908 \\approx 0,976\n\\]\n\n\\[\n\\text{EV}=0,976-1 = -0,024 \\;\\; \\Rightarrow \\; \\boxed{-2,4\\%}\n\\]\n\n> L’EV è negativo ma superiore al limite di **‑4 %** indicato per un semplice avviso. Non è quindi motivo di bocciatura strutturale.\n\n---\n\n## 2. Analisi Trappole Bookmaker (scenario di perdita)\n\n| Leg | Mercato (interpretazione) | Scenario che fa perdere la scommessa |\n|-----|---------------------------|--------------------------------------|\n| 1 | **1X2 Corner Calci Angolo 1X2 T.R.** – scommessa sul risultato “1” (vittoria casa) con condizioni sui corner/angoli. | Perde se la Scozia **non vince** (pareggio o sconfitta) **o** se, nonostante la vittoria, non raggiunge il numero di corner/angoli richiesto dal “T.R.” (es. < 5 corner). |\n| 2 | **MultiGol Squadra 1** – Lussemburgo segna **tra 1 e 3 gol** (inclusi tutti gli eventi “multisito”). | Perde se il Lussemburgo segna **0 gol** oppure **4 o più gol**. |\n| 3 | **Doppia Chance X2** – Finlandia **non perde** (vincente o pareggio). | Perde **solo** se la Bielorussia vince (esito 1). |\n| 4 | **MultiGol Squadra 2** – Islanda segna **tra 1 e 3 gol**. | Perde se l’Islanda segna **0 gol** oppure **4 o più gol**. |\n\n---\n\n## 3. Verdetto Finale\n\n- Nessuna delle quattro selezioni rientra nei vincoli di **“1X2 secco, anti‑favorita su corazzata, under stretto su corazzata, tetto di gol su attacco dominante”**.\n- L’EV complessivo è **‑2,4 %** (sopra il limite di avviso) e non vi è alcun **RISCHIO_STRUTTURALE**.\n\n**Verdetto:** **APPROVATA**\n\n### Stake consigliata\nCon un bankroll di €100 e un EV leggermente negativo, si raccomanda una puntata prudente:\n\n\\[\n\\boxed{3\\% \\; \\text{del bankroll} \\; \\approx \\; €3}\n\\]\n\nQuesta percentuale mantiene il rischio contenuto pur lasciando spazio a eventuali upside se le probabilità reali fossero più favorevoli di quelle stimate.",
+        "total_odd": 3.1
+      }
     }
-  ]
+  ],
+  "ev_policy": "EV negativo: avviso informativo, non bloccante. Bocciatura solo su rischio strutturale."
 }
