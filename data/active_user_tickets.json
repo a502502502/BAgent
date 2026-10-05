@@ -7,7 +7,7 @@
     "total_odds": 6.23,
     "bonus_eur": 8.59,
     "potential_payout_eur": 151.85,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "USER_PLAYED_TICKET_OMNI",
     "notes": "Multipla 5 selezioni Nations League - Flussi asimmetrici Netwin",
     "legs": [
@@ -16,7 +16,7 @@
         "tournament": "UEFA Nations League, Lega B, Gr. 4",
         "market": "DOPPIA CHANCE 2° TEMPO: 12",
         "odds": 1.45,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-05 20:45 CEST"
       },
       {
@@ -24,7 +24,7 @@
         "tournament": "UEFA Nations League, Lega A, Gr. 1",
         "market": "U/O 4.5 Corner Squadra 1 (esc.TS) : OVER",
         "odds": 1.42,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-05 20:45 CEST"
       },
       {
@@ -32,7 +32,7 @@
         "tournament": "UEFA Nations League, Lega A, Gr. 1",
         "market": "U/O 1.5 Cartellini Squadra 2 : OVER",
         "odds": 1.4,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-05 20:45 CEST"
       },
       {
@@ -40,7 +40,7 @@
         "tournament": "UEFA Nations League, Lega B, Gr. 4",
         "market": "DOPPIA CHANCE 1° TEMPO: 12",
         "odds": 1.48,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-05 20:45 CEST"
       },
       {
@@ -48,10 +48,11 @@
         "tournament": "UEFA Nations League, Lega C, Gr. 2",
         "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
         "odds": 1.46,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-05 20:45 CEST"
       }
-    ]
+    ],
+    "profit_loss_eur": -23.0
   },
   {
     "ticket_id": "TICKET_USER_NL_MULTIPLA4_01OCT",
