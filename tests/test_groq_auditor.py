@@ -1,5 +1,5 @@
 from unittest.mock import MagicMock, patch
-from services.debate.groq_auditor import GroqAuditor
+from services.debate.groq_auditor import GroqAuditor, resolve_audit_verdict
 
 
 def test_groq_auditor_not_configured():
@@ -41,3 +41,19 @@ def test_groq_auditor_mock_audit():
     assert res["success"] is True
     assert res["approved"] is True
     assert "APPROVATA" in res["critique"]
+
+
+def test_negative_ev_is_warning_not_a_block():
+    approved, warning = resolve_audit_verdict(
+        "EV complessivo -17%. Verdetto: BOCCIATA. Stake 0%."
+    )
+    assert approved is True
+    assert warning is not None
+
+
+def test_structural_risk_still_blocks():
+    approved, warning = resolve_audit_verdict(
+        "Under 2.5 sulla corazzata. RISCHIO_STRUTTURALE. Verdetto: BOCCIATA."
+    )
+    assert approved is False
+    assert warning is None

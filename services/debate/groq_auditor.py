@@ -28,6 +28,33 @@ GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions"
 DEFAULT_MODEL = "openai/gpt-oss-120b"
 FALLBACK_MODEL = "qwen/qwen3.8-27b"
 
+# Bocciatura ammessa solo con uno di questi segnali. L'EV negativo non è tra questi.
+_STRUCTURAL_MARKERS = (
+    "RISCHIO_STRUTTURALE",
+    "1X2 SECCO",
+    "SEGNO 1 SECCO",
+    "SEGNO 2 SECCO",
+    "ANTI-FAVORITA",
+    "CORAZZATA",
+    "REGOLA #80",
+    "REGOLA #82",
+)
+
+
+def resolve_audit_verdict(critique: str) -> tuple[bool, Optional[str]]:
+    """L'EV e l'edge non bocciano la scommessa. Restano un avviso.
+
+    approved è False solo se il testo segnala un rischio strutturale.
+    """
+    upper = critique.upper()
+    structural = any(marker in upper for marker in _STRUCTURAL_MARKERS)
+    if structural and "BOCCIATA" in upper:
+        return False, None
+    model_approved = "APPROVATA" in upper and "BOCCIATA" not in upper.split("APPROVATA")[0]
+    if model_approved:
+        return True, None
+    return True, "EV/edge: avviso informativo, non bloccante."
+
 
 class GroqAuditor:
     """Auditor critico indipendente online alimentato da Groq Cloud."""
@@ -82,10 +109,14 @@ class GroqAuditor:
             + "\n\n".join(legs_desc)
             + "\n\n"
             "Istruzioni per l'Audit:\n"
-            "1. Analisi Matematica: valuta l'effettivo valore atteso (+EV) e la coerenza delle quote.\n"
-            "2. Analisi Trappole Bookmaker: identifica lo scenario esatto (o gli scenari) che portano alla perdita per ciascuna leg.\n"
-            "3. Verdetto Finale: 'APPROVATA' o 'BOCCIATA'. Se approvata, indica una percentuale di stake consigliata sul bankroll (es. 2-5%).\n"
-            "Sii conciso, spietato contro i rischi occulti e vai dritto al punto."
+            "1. Analisi Matematica: calcola il valore atteso (EV) e riportalo. "
+            "L'EV negativo o sotto +4% è SOLO un avviso. Non è mai un motivo di bocciatura.\n"
+            "2. Analisi Trappole Bookmaker: identifica lo scenario esatto che fa perdere ciascuna selezione.\n"
+            "3. Verdetto Finale: 'APPROVATA', anche con EV negativo. "
+            "Scrivi 'BOCCIATA' solo insieme alla parola RISCHIO_STRUTTURALE, "
+            "e solo per un vincolo di mercato (1X2 secco, anti-favorita su corazzata, under stretto su corazzata, tetto di gol su attacco dominante). "
+            "Se approvata, indica una percentuale di stake consigliata sul bankroll (es. 2-5%).\n"
+            "Sii conciso e vai dritto al punto."
         )
 
         system_prompt = (
@@ -123,12 +154,13 @@ class GroqAuditor:
 
             result_json = resp.json()
             critique = result_json["choices"][0]["message"]["content"]
-            is_approved = "APPROVATA" in critique.upper() and "BOCCIATA" not in critique.upper().split("APPROVATA")[0]
+            is_approved, ev_warning = resolve_audit_verdict(critique)
 
             return {
                 "success": True,
                 "model_used": payload["model"],
                 "approved": is_approved,
+                "ev_warning": ev_warning,
                 "critique": critique,
                 "total_odd": round(tot_odd, 2),
             }
