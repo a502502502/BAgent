@@ -1,0 +1,47 @@
+{
+  "ticket_id": "TICKET_RADDOPPIO_NATIONS_05OCT",
+  "name": "Raddoppio Alta Probabilità Nations League (Italia + Francia + Ucraina)",
+  "title": "Raddoppio Alta Probabilità Nations League (Italia + Francia + Ucraina)",
+  "created_at": "2026-10-05 11:30:00",
+  "date_created": "2026-10-05 11:30:00",
+  "stake": 10.0,
+  "stake_eur": 10.0,
+  "total_odds": 2.00,
+  "potential_win": 20.00,
+  "potential_payout_eur": 20.00,
+  "status": "PENDING",
+  "strategy": "NATIONS_LEAGUE_VALUE_EDGE",
+  "notes": "Combinazione resiliente su favorite e under controllati. Probabilità combinata 60.45% vs Implied 50.00% (Edge +20.9% EV).",
+  "legs": [
+    {
+      "match": "Italia vs Turchia",
+      "tournament": "UEFA Nations League",
+      "market": "Doppia Chance",
+      "pick": "1X",
+      "odds": 1.23,
+      "model_probability": 0.815,
+      "status": "PENDING",
+      "kickoff": "2026-10-05 20:45 CEST"
+    },
+    {
+      "match": "Francia vs Belgio",
+      "tournament": "UEFA Nations League",
+      "market": "Chance Mix",
+      "pick": "1X o Gol",
+      "odds": 1.25,
+      "model_probability": 0.884,
+      "status": "PENDING",
+      "kickoff": "2026-10-05 20:45 CEST"
+    },
+    {
+      "match": "Ucraina vs Ungheria",
+      "tournament": "UEFA Nations League",
+      "market": "Under/Over",
+      "pick": "Under 3.5",
+      "odds": 1.30,
+      "model_probability": 0.839,
+      "status": "PENDING",
+      "kickoff": "2026-10-05 20:45 CEST"
+    }
+  ]
+}

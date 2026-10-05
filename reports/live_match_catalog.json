@@ -1,0 +1,500 @@
+{
+  "match": "Live Match",
+  "markets_count": 220,
+  "main_markets": {
+    "1X2": {
+      "1": 1.38,
+      "X": 5.0,
+      "2": 8.0
+    },
+    "Doppia Chance": {
+      "1X": 1.38,
+      "X2": 5.0,
+      "12": 8.0
+    },
+    "Under/Over 2.5": {
+      "Under": 2.4,
+      "Over": 1.52
+    },
+    "Goal/NoGoal": {
+      "GG": 1.75,
+      "NG": 1.95
+    }
+  },
+  "player_props": {
+    "ESPOSITO P.": {
+      "raw_odds": [
+        6.25,
+        50.0,
+        130.0
+      ],
+      "marcatore": 6.25,
+      "marcatore_piu": 50.0,
+      "quasi_marcatore": 130.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "SCAMACCA G.": {
+      "raw_odds": [
+        5.5,
+        45.0,
+        120.0
+      ],
+      "marcatore": 5.5,
+      "marcatore_piu": 45.0,
+      "quasi_marcatore": 120.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "ESPOSITO SE.": {
+      "raw_odds": [
+        6.25,
+        50.0,
+        130.0
+      ],
+      "marcatore": 6.25,
+      "marcatore_piu": 50.0,
+      "quasi_marcatore": 130.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "MALDINI D.": {
+      "raw_odds": [
+        9.5,
+        70.0,
+        170.0
+      ],
+      "marcatore": 9.5,
+      "marcatore_piu": 70.0,
+      "quasi_marcatore": 170.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "VERGARA A.": {
+      "raw_odds": [
+        9.5,
+        70.0,
+        170.0
+      ],
+      "marcatore": 9.5,
+      "marcatore_piu": 70.0,
+      "quasi_marcatore": 170.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "FRATTESI D.": {
+      "raw_odds": [
+        12.0,
+        85.0,
+        190.0
+      ],
+      "marcatore": 12.0,
+      "marcatore_piu": 85.0,
+      "quasi_marcatore": 190.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "BARELLA N.": {
+      "raw_odds": [
+        4.5,
+        3.8,
+        4.5,
+        1.4,
+        9.0,
+        25.0,
+        3.75,
+        2.4
+      ],
+      "marcatore": 4.5,
+      "marcatore_piu": 3.8,
+      "quasi_marcatore": 4.5,
+      "cartellino": 1.4,
+      "quasi_cartellino": 9.0,
+      "primo_marcatore": 25.0,
+      "almeno_2_gol": 3.75,
+      "assist": 2.4
+    },
+    "DOUMBIA ISSA": {
+      "raw_odds": [
+        13.5,
+        90.0,
+        200.0
+      ],
+      "marcatore": 13.5,
+      "marcatore_piu": 90.0,
+      "quasi_marcatore": 200.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "TONALI S.": {
+      "raw_odds": [
+        13.5,
+        90.0,
+        200.0
+      ],
+      "marcatore": 13.5,
+      "marcatore_piu": 90.0,
+      "quasi_marcatore": 200.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "AKGUN Y.": {
+      "raw_odds": [
+        40.0,
+        55.0,
+        40.0
+      ],
+      "marcatore": 40.0,
+      "marcatore_piu": 55.0,
+      "quasi_marcatore": 40.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "FAGIOLI N.": {
+      "raw_odds": [
+        15.0,
+        100.0,
+        210.0
+      ],
+      "marcatore": 15.0,
+      "marcatore_piu": 100.0,
+      "quasi_marcatore": 210.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "GUL D.": {
+      "raw_odds": [
+        30.0,
+        40.0,
+        30.0
+      ],
+      "marcatore": 30.0,
+      "marcatore_piu": 40.0,
+      "quasi_marcatore": 30.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "KEREM AKTURKOGLU M.": {
+      "raw_odds": [
+        33.0,
+        45.0,
+        33.0
+      ],
+      "marcatore": 33.0,
+      "marcatore_piu": 45.0,
+      "quasi_marcatore": 33.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "AYDIN O.": {
+      "raw_odds": [
+        40.0,
+        55.0,
+        40.0
+      ],
+      "marcatore": 40.0,
+      "marcatore_piu": 55.0,
+      "quasi_marcatore": 40.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "ROMANO A.": {
+      "raw_odds": [
+        7.5,
+        5.0,
+        16.0,
+        66.0,
+        6.0,
+        4.0
+      ],
+      "marcatore": 7.5,
+      "marcatore_piu": 5.0,
+      "quasi_marcatore": 16.0,
+      "cartellino": 66.0,
+      "quasi_cartellino": 6.0,
+      "primo_marcatore": 4.0,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "BASTONI A.": {
+      "raw_odds": [
+        16.0,
+        13.0,
+        4.5,
+        1.55,
+        33.0,
+        100.0,
+        4.5,
+        4.0
+      ],
+      "marcatore": 16.0,
+      "marcatore_piu": 13.0,
+      "quasi_marcatore": 4.5,
+      "cartellino": 1.55,
+      "quasi_cartellino": 33.0,
+      "primo_marcatore": 100.0,
+      "almeno_2_gol": 4.5,
+      "assist": 4.0
+    },
+    "CALAFIORI R.": {
+      "raw_odds": [
+        40.0,
+        200.0,
+        300.0
+      ],
+      "marcatore": 40.0,
+      "marcatore_piu": 200.0,
+      "quasi_marcatore": 300.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "CELIK ZEKI": {
+      "raw_odds": [
+        25.0,
+        20.0,
+        3.5,
+        1.8,
+        50.0,
+        100.0,
+        12.0,
+        9.0
+      ],
+      "marcatore": 25.0,
+      "marcatore_piu": 20.0,
+      "quasi_marcatore": 3.5,
+      "cartellino": 1.8,
+      "quasi_cartellino": 50.0,
+      "primo_marcatore": 100.0,
+      "almeno_2_gol": 12.0,
+      "assist": 9.0
+    },
+    "DEMIRAL M.": {
+      "raw_odds": [
+        25.0,
+        20.0,
+        4.0,
+        2.2,
+        33.0,
+        100.0,
+        25.0,
+        12.0
+      ],
+      "marcatore": 25.0,
+      "marcatore_piu": 20.0,
+      "quasi_marcatore": 4.0,
+      "cartellino": 2.2,
+      "quasi_cartellino": 33.0,
+      "primo_marcatore": 100.0,
+      "almeno_2_gol": 25.0,
+      "assist": 12.0
+    },
+    "DI LORENZO G.": {
+      "raw_odds": [
+        30.0,
+        160.0,
+        275.0
+      ],
+      "marcatore": 30.0,
+      "marcatore_piu": 160.0,
+      "quasi_marcatore": 275.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "ELMALI E.": {
+      "raw_odds": [
+        250.0,
+        275.0,
+        250.0
+      ],
+      "marcatore": 250.0,
+      "marcatore_piu": 275.0,
+      "quasi_marcatore": 250.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "KABAK OZAN": {
+      "raw_odds": [
+        180.0,
+        210.0,
+        190.0
+      ],
+      "marcatore": 180.0,
+      "marcatore_piu": 210.0,
+      "quasi_marcatore": 190.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "KADIOGLU F.": {
+      "raw_odds": [
+        180.0,
+        210.0,
+        190.0
+      ],
+      "marcatore": 180.0,
+      "marcatore_piu": 210.0,
+      "quasi_marcatore": 190.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "KAYODE M.O.": {
+      "raw_odds": [
+        60.0,
+        240.0,
+        325.0
+      ],
+      "marcatore": 60.0,
+      "marcatore_piu": 240.0,
+      "quasi_marcatore": 325.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "MANCINI G.": {
+      "raw_odds": [
+        30.0,
+        160.0,
+        275.0
+      ],
+      "marcatore": 30.0,
+      "marcatore_piu": 160.0,
+      "quasi_marcatore": 275.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "SALIH OZCAN": {
+      "raw_odds": [
+        180.0,
+        210.0,
+        190.0
+      ],
+      "marcatore": 180.0,
+      "marcatore_piu": 210.0,
+      "quasi_marcatore": 190.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "SCALVINI G.": {
+      "raw_odds": [
+        60.0,
+        240.0,
+        325.0
+      ],
+      "marcatore": 60.0,
+      "marcatore_piu": 240.0,
+      "quasi_marcatore": 325.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "YUKSEK I.": {
+      "raw_odds": [
+        180.0,
+        210.0,
+        190.0
+      ],
+      "marcatore": 180.0,
+      "marcatore_piu": 210.0,
+      "quasi_marcatore": 190.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    },
+    "UZUN C.": {
+      "raw_odds": [
+        45.0,
+        60.0,
+        45.0
+      ],
+      "marcatore": 45.0,
+      "marcatore_piu": 60.0,
+      "quasi_marcatore": 45.0,
+      "cartellino": null,
+      "quasi_cartellino": null,
+      "primo_marcatore": null,
+      "almeno_2_gol": null,
+      "assist": null
+    }
+  },
+  "uno_o_altro": {
+    "BARELLA N. O BASTONI A. CARTELLINO O LORO SOST. INC TS": 2.65,
+    "NO BARELLA N. O CALAFIORI R. CARTELLINO O LORO SOST. INC TS": 2.65,
+    "NO BARELLA N. O CELIK ZEKI CARTELLINO O LORO SOST. INC TS": 2.3,
+    "NO BARELLA N. O KABAK OZAN CARTELLINO O LORO SOST. INC TS": 2.25,
+    "NO BASTONI A. O CALAFIORI R. CARTELLINO O LORO SOST. INC TS": 2.5,
+    "NO BASTONI A. O CELIK ZEKI CARTELLINO O LORO SOST. INC TS": 2.25,
+    "NO BASTONI A. O KABAK OZAN CARTELLINO O LORO SOST. INC TS": 2.1,
+    "NO CALAFIORI R. O CELIK ZEKI CARTELLINO O LORO SOST. INC TS": 2.25,
+    "NO CALAFIORI R. O KABAK OZAN CARTELLINO O LORO SOST. INC TS": 2.1,
+    "NO CELIK ZEKI O KABAK OZAN CARTELLINO O LORO SOST. INC TS": 2.0,
+    "PRIMO MARCATORE ESPOSITO P. O ESPOSITO SE. O LORO SOSTITUTI INCL. T.S.": 2.75,
+    "PRIMO MARCATORE KEREM AKTURKOGLU M. O ESPOSITO P. O LORO SOSTITUTI INCL. T.S.": 3.75,
+    "PRIMO MARCATORE KEREM AKTURKOGLU M. O ESPOSITO SE. O LORO SOSTITUTI INCL. T.S.": 3.75
+  },
+  "raw_markets": []
+}

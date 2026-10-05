@@ -37,6 +37,27 @@ def test_team_multigol_uses_the_stated_band():
     assert narrow < wide
 
 
+def test_netwin_combo_labels_match_the_canonical_price():
+    engine = QuantitativeEngine()
+    aliased_over = engine.goal_market_probability(1.7, 1.2, "X2 + U/O 1.5 : X2 + OV")
+    canonical_over = engine.goal_market_probability(1.7, 1.2, "X2 + Over 1.5")
+    aliased_gg = engine.goal_market_probability(1.7, 1.2, "Doppia Chance + GG/NG: 1X + GG")
+    canonical_gg = engine.goal_market_probability(1.7, 1.2, "1X + GG")
+    assert aliased_over == canonical_over
+    assert aliased_gg == canonical_gg
+    assert aliased_over is not None and aliased_gg is not None
+
+
+def test_team_scores_in_both_halves_uses_each_period():
+    engine = QuantitativeEngine()
+    home = engine.goal_market_probability(1.8, 0.9, "Casa Segna in Entrambi i Tempi: SI")
+    away = engine.goal_market_probability(1.8, 0.9, "Ospite Segna in Entrambi i Tempi: SI")
+    total = engine.goal_market_probability(1.8, 0.9, "Gol in entrambi i tempi")
+    assert home is not None and away is not None and total is not None
+    assert away < home < total
+    assert 0.0 < home < 1.0
+
+
 def test_unmapped_result_combo_is_not_guessed():
     engine = QuantitativeEngine()
     assert engine.goal_market_probability(1.7, 1.2, "1X2 + Over 1.5") is None

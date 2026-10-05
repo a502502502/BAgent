@@ -17,6 +17,40 @@ _CLAUSE_PREFIX = re.compile(r"^(?:chance mix|doppia chance|esito finale|dc)\s+")
 _SIDE_WORDS = re.compile(
     r"\b(?:casa|ospite|home|away|squadra\s*[12]|squadra|gol|totali|partita|match)\b"
 )
+_NETWIN_UO_LABEL = re.compile(
+    r"\b(1X|X2|12)\s*\+\s*U/O\s*(\d+(?:[.,]\d+)?)\s*:\s*(1X|X2|12)\s*\+\s*(OV|UN)\b",
+    re.IGNORECASE,
+)
+_NETWIN_GG_LABEL = re.compile(
+    r"(?:doppia\s+chance|dc)\s*\+\s*gg/ng\s*:\s*(1X|X2|12)\s*\+\s*(GG|NG)\b",
+    re.IGNORECASE,
+)
+
+
+def _canonicalize_netwin_combo(market_name: str) -> str:
+    """Porta l'etichetta del coupon Netwin sul nome che la matrice sa leggere."""
+    uo = _NETWIN_UO_LABEL.search(market_name)
+    if uo:
+        line = uo.group(2).replace(",", ".")
+        side = "Over" if uo.group(4).casefold().startswith("ov") else "Under"
+        return f"{uo.group(3).upper()} + {side} {line}"
+    gg = _NETWIN_GG_LABEL.search(market_name)
+    if gg:
+        token = "GG" if gg.group(2).casefold() == "gg" else "NoGol"
+        return f"{gg.group(1).upper()} + {token}"
+    return market_name
+
+
+def _team_scores_both_halves(market_name: str) -> Optional[str]:
+    """Casa/Ospite segna in entrambi i tempi. None se è il gol totale dei due tempi."""
+    raw = re.sub(r"\s*:\s*(?:si|sì|yes)$", "", market_name.lower()).strip()
+    if "entrambi" not in raw or "segn" not in raw:
+        return None
+    if re.search(r"\b(?:casa|home)\b", raw) or re.search(r"squadra\s*1\b", raw):
+        return "home"
+    if re.search(r"\b(?:ospite|away)\b", raw) or re.search(r"squadra\s*2\b", raw):
+        return "away"
+    return None
 
 
 def _clean_period_tokens(market_name: str) -> str:
@@ -118,6 +152,20 @@ def _goal_clause_mask(clause: str, home: np.ndarray, away: np.ndarray, total: np
         "pareggio": home == away,
     }
     return results.get(core)
+
+
+def _half_score_product(first, second, side: str) -> float:
+    """P(la squadra segna nel 1° tempo) × P(segna nel 2°), sui due tempi indipendenti."""
+    p_first = _side_scored(first, side)
+    p_second = _side_scored(second, side)
+    return p_first * p_second
+
+
+def _side_scored(axes, side: str) -> float:
+    matrix, home, away, _total = axes
+    series = home if side == "home" else away
+    mask = np.broadcast_to(series >= 1, matrix.shape)
+    return float(np.sum(matrix[mask]))
 
 
 def _goal_market_mask(
@@ -279,7 +327,13 @@ class QuantitativeEngine:
         """Intersezione di più mercati gol sulla stessa matrice. None se un nome non è mappato."""
         if not market_names:
             return None
+        market_names = [_canonicalize_netwin_combo(name) for name in market_names]
         if len(market_names) == 1:
+            both_halves_side = _team_scores_both_halves(market_names[0])
+            if both_halves_side is not None:
+                first = self._score_axes(xg_home * 0.45, xg_away * 0.45)
+                second = self._score_axes(xg_home * 0.55, xg_away * 0.55)
+                return _half_score_product(first, second, both_halves_side)
             compound = _parse_compound_periods(market_names[0])
             if compound is not None:
                 c1, c2 = compound

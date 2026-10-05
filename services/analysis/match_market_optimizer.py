@@ -337,6 +337,7 @@ class MatchMarketOptimizer:
         full, half = _matrices(lam_home, lam_away, rho)
         corners = _count_axes(corner_home, corner_away, kind="corner")
         cards = _count_axes(card_home, card_away, kind="cards")
+        goal_engine = QuantitativeEngine(rho=rho)
         book = dict(odds)
         for name in _count_catalog():
             book.setdefault(name, None)
@@ -344,7 +345,10 @@ class MatchMarketOptimizer:
         for market, odd in book.items():
             if odd is not None and odd <= 1.0:
                 continue
-            probability = _any_probability(market, full, half, corners, cards)
+            if _CORNER_WORD.search(market) or _CARD_WORD.search(market):
+                probability = _any_probability(market, full, half, corners, cards)
+            else:
+                probability = goal_engine.goal_market_probability(lam_home, lam_away, market)
             if probability is None or probability <= 0.0:
                 continue
             quoted = float(odd) if odd is not None else None
