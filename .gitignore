@@ -40,3 +40,4 @@ reports/receipts/
 
 # Auto-improve local backups (may contain secrets; not source of truth)
 backup_*/
+reports/snai/_probe/

@@ -1,0 +1,372 @@
+{
+  "timestamp": "2026-10-06T21:47:21",
+  "source": "Netwin download for SNAI 07/10 slate",
+  "requested_tournaments": [
+    "MLS",
+    "Amichevoli",
+    "Paraguay",
+    "Division Profesional",
+    "Cile",
+    "Coppa Cile",
+    "Uruguay",
+    "Ecuador",
+    "Serie B Brasiliana",
+    "Brasile Serie B",
+    "CONCACAF",
+    "Nations League",
+    "Giappone",
+    "Coppa dell'Imperatore",
+    "Finlandia",
+    "Veikkausliiga",
+    "Argentina",
+    "Brasile",
+    "Messico",
+    "Colombia",
+    "Perù",
+    "Cile"
+  ],
+  "total_matches": 11,
+  "matches": [
+    {
+      "match_name": "Nations League 2026/27 Lega A Gruppo 1",
+      "raw_name": "Nations League 2026/27 Lega A Gruppo 1",
+      "tournament": "Nations League",
+      "kickoff": "20261117 20:45:00",
+      "palinsesto": 36471,
+      "avvenimento": 7398,
+      "markets": {}
+    },
+    {
+      "match_name": "Nations League 2026/27 Lega A Gruppo 2",
+      "raw_name": "Nations League 2026/27 Lega A Gruppo 2",
+      "tournament": "Nations League",
+      "kickoff": "20261117 20:45:00",
+      "palinsesto": 36471,
+      "avvenimento": 7400,
+      "markets": {}
+    },
+    {
+      "match_name": "Svizzera vs Macedonia Del Nord",
+      "raw_name": "Svizzera - Macedonia Del Nord",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 57699,
+      "markets": {
+        "1X2": {
+          "1": 1.05,
+          "X": 10.25,
+          "2": 64.0
+        },
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.35,
+            "Over": 3.05
+          },
+          "4.5": {
+            "Under": 1.09,
+            "Over": 6.0
+          },
+          "1.5": {
+            "Under": 5.25,
+            "Over": 1.14
+          },
+          "2.5": {
+            "Under": 2.05,
+            "Over": 1.7
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 1.35,
+          "NoGol": 5.25
+        }
+      }
+    },
+    {
+      "match_name": "Inghilterra vs Repubblica Ceca",
+      "raw_name": "Inghilterra - Repubblica Ceca",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 34723,
+      "markets": {
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 2.4,
+            "Over": 1.5
+          },
+          "4.5": {
+            "Under": 1.45,
+            "Over": 2.5
+          },
+          "5.5": {
+            "Under": 1.15,
+            "Over": 5.0
+          },
+          "2.5": {
+            "Under": 6.75,
+            "Over": 1.1
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 1.3,
+          "NoGol": 6.75
+        }
+      }
+    },
+    {
+      "match_name": "Scozia vs Slovenia",
+      "raw_name": "Scozia - Slovenia",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 48198,
+      "markets": {
+        "1X2": {
+          "1": 1.3,
+          "X": 4.5,
+          "2": 13.75
+        },
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.14,
+            "Over": 5.0
+          },
+          "4.5": {
+            "Under": 1.02,
+            "Over": 10.0
+          },
+          "1.5": {
+            "Under": 3.25,
+            "Over": 1.3
+          },
+          "2.5": {
+            "Under": 1.55,
+            "Over": 2.35
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 2.15,
+          "NoGol": 3.25
+        }
+      }
+    },
+    {
+      "match_name": "Moldova vs Slovacchia",
+      "raw_name": "Moldova - Slovacchia",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 46966,
+      "markets": {
+        "1X2": {
+          "1": 88.0,
+          "X": 16.25,
+          "2": 1.02
+        },
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.75,
+            "Over": 2.0
+          },
+          "4.5": {
+            "Under": 1.2,
+            "Over": 4.0
+          },
+          "5.5": {
+            "Under": 1.05,
+            "Over": 9.75
+          },
+          "2.5": {
+            "Under": 3.95,
+            "Over": 1.22
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 3.2,
+          "NoGol": 3.95
+        }
+      }
+    },
+    {
+      "match_name": "Lussemburgo vs Bulgaria",
+      "raw_name": "Lussemburgo - Bulgaria",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 60143,
+      "markets": {
+        "1X2": {
+          "1": 31.0,
+          "X": 9.0,
+          "2": 1.09
+        },
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.65,
+            "Over": 2.1
+          },
+          "4.5": {
+            "Under": 1.18,
+            "Over": 4.4
+          },
+          "5.5": {
+            "Under": 1.04,
+            "Over": 11.0
+          },
+          "2.5": {
+            "Under": 3.7,
+            "Over": 1.25
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 2.2,
+          "NoGol": 3.7
+        }
+      }
+    },
+    {
+      "match_name": "Bielorussia vs Finlandia",
+      "raw_name": "Bielorussia - Finlandia",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 60141,
+      "markets": {
+        "1X2": {
+          "1": 1.8,
+          "X": 3.05,
+          "2": 4.95
+        },
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.12,
+            "Over": 5.25
+          },
+          "4.5": {
+            "Under": 1.02,
+            "Over": 10.0
+          },
+          "1.5": {
+            "Under": 3.3,
+            "Over": 1.3
+          },
+          "2.5": {
+            "Under": 1.55,
+            "Over": 2.35
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 3.85,
+          "NoGol": 3.3
+        }
+      }
+    },
+    {
+      "match_name": "Estonia vs Islanda",
+      "raw_name": "Estonia - Islanda",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 60142,
+      "markets": {
+        "1X2": {
+          "1": 5.0,
+          "X": 2.65,
+          "2": 2.0
+        },
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.04,
+            "Over": 8.5
+          },
+          "1.5": {
+            "Under": 1.7,
+            "Over": 2.05
+          },
+          "2.5": {
+            "Under": 1.18,
+            "Over": 4.2
+          },
+          "0.5": {
+            "Under": 3.75,
+            "Over": 1.22
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 3.35,
+          "NoGol": 3.75
+        }
+      }
+    },
+    {
+      "match_name": "Albania vs San Marino",
+      "raw_name": "Albania - San Marino",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 60140,
+      "markets": {
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.55,
+            "Over": 2.3
+          },
+          "4.5": {
+            "Under": 1.18,
+            "Over": 4.3
+          },
+          "1.5": {
+            "Under": 7.25,
+            "Over": 1.08
+          },
+          "2.5": {
+            "Under": 2.6,
+            "Over": 1.45
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 1.12,
+          "NoGol": 7.25
+        }
+      }
+    },
+    {
+      "match_name": "Croazia vs Spagna",
+      "raw_name": "Croazia - Spagna",
+      "tournament": "Nations League",
+      "kickoff": "20261006 20:45:00",
+      "palinsesto": 36411,
+      "avvenimento": 34789,
+      "markets": {
+        "1X2": {
+          "1": 2.85,
+          "X": 3.05,
+          "2": 2.5
+        },
+        "UNDER_OVER": {
+          "3.5": {
+            "Under": 1.4,
+            "Over": 2.8
+          },
+          "4.5": {
+            "Under": 1.12,
+            "Over": 5.5
+          },
+          "1.5": {
+            "Under": 5.75,
+            "Over": 1.12
+          },
+          "2.5": {
+            "Under": 2.2,
+            "Over": 1.6
+          }
+        },
+        "GOL_NOGOL": {
+          "Gol": 4.55,
+          "NoGol": 5.75
+        }
+      }
+    }
+  ]
+}

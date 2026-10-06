@@ -1,0 +1,87 @@
+[
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/argentina-benin",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/argentina-benin\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/colombia-peru",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/colombia-peru\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/colombia-perù",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/colombia-per%C3%B9\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/stati-uniti-canada",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/stati-uniti-canada\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/messico-cile",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/messico-cile\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/mls/chicago-fire-vancouver-whitecaps",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/mls/chicago-fire-vancouver-whitecaps\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/usa-mls/chicago-fire-vancouver-whitecaps",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/usa-mls/chicago-fire-vancouver-whitecaps\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/par-division-profesional/olimpia-asuncion-club-nacional",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/par-division-profesional/olimpia-asuncion-club-nacional\", waiting until \"domcontentloaded\""
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/paraguay-division-profesional/olimpia-asuncion-club-nacional",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/paraguay-division-profesional/olimpia-asuncion-club-nacional\", waiting until \"domcontentlo"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/coppa-del-cile/colo-colo-puerto-montt",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/coppa-del-cile/colo-colo-puerto-montt\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/chi-coppa-del-cile/colo-colo-puerto-montt",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/chi-coppa-del-cile/colo-colo-puerto-montt\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/ecu-coppa/cd-universidad-catolica-ldu-quito",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/ecu-coppa/cd-universidad-catolica-ldu-quito\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/uru-coppa-auf/cs-cerrito-montevideo-wanderers",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/uru-coppa-auf/cs-cerrito-montevideo-wanderers\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/concacaf-nations-league/antigua-e-barbuda-aruba",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/concacaf-nations-league/antigua-e-barbuda-aruba\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/bra-serie-b/goias-athletic-club-sjdr-mg",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/bra-serie-b/goias-athletic-club-sjdr-mg\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/urawa-reds-omiya-ardija",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/urawa-reds-omiya-ardija\", waiting until \"domcontentloaded\"\n"
+  },
+  {
+    "url": "https://www.snai.it/scommesse/evento/calcio/fin-veikkausliiga/if-gnistan-inter-turku",
+    "ok": false,
+    "error": "Page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.snai.it/scommesse/evento/calcio/fin-veikkausliiga/if-gnistan-inter-turku\", waiting until \"domcontentloaded\"\n"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "source": "SNAI.it paste utente",
+  "day": "2026-10-07",
+  "exported_request_at": "2026-10-06T21:46:00",
+  "matches": [
+    {"kickoff_cest": "2026-10-07 00:15", "competition": "PAR División Profesional", "home": "Olimpia Asuncion", "away": "Club Nacional", "snai_1x2": {"1": 2.20, "X": 3.25, "2": 3.25}},
+    {"kickoff_cest": "2026-10-07 00:30", "competition": "PAR II Divisione", "home": "Deportivo Santani", "away": "Guairena FC", "snai_1x2": {"1": 1.67, "X": 3.60, "2": 4.50}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 01:00", "competition": "INT Amichevoli Nazionali", "home": "Argentina", "away": "Benin", "snai_1x2": {"1": null, "X": 33.00, "2": 50.00}},
+    {"kickoff_cest": "2026-10-07 01:00", "competition": "INT CONCACAF Nations League", "home": "Antigua e Barbuda", "away": "Aruba", "snai_1x2": {"1": 2.15, "X": 3.25, "2": 2.90}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 01:30", "competition": "CHI Coppa del Cile", "home": "Colo Colo", "away": "Puerto Montt", "snai_1x2": {"1": 1.60, "X": 3.75, "2": 5.00}},
+    {"kickoff_cest": "2026-10-07 01:30", "competition": "BRA Serie B", "home": "Goias", "away": "Athletic Club Sjdr MG", "snai_1x2": {"1": 1.85, "X": 3.20, "2": 4.50}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 01:45", "competition": "INT Amichevoli Nazionali", "home": "Colombia", "away": "Perù", "snai_1x2": {"1": 1.40, "X": 4.25, "2": 9.00}},
+    {"kickoff_cest": "2026-10-07 02:00", "competition": "INT Amichevoli Nazionali", "home": "Stati Uniti", "away": "Canada", "snai_1x2": {"1": 1.80, "X": 3.75, "2": 4.00}},
+    {"kickoff_cest": "2026-10-07 02:00", "competition": "BOL Coppa", "home": "Aurora", "away": "Abb", "snai_1x2": {"1": 1.08, "X": 8.50, "2": 19.00}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 02:00", "competition": "COL Liga Antioquena", "home": "CD Semillas de Vida y Paz", "away": "CD Ciclos FC", "snai_1x2": {"1": 1.57, "X": 3.75, "2": 4.50}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 02:00", "competition": "NCA Primera Division", "home": "San Marcos FC", "away": "Diriangen FC", "snai_1x2": {"1": 5.00, "X": 3.75, "2": 1.55}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 02:30", "competition": "USA MLS", "home": "Chicago Fire", "away": "Vancouver Whitecaps", "snai_1x2": {"1": 2.80, "X": 3.75, "2": 2.20}},
+    {"kickoff_cest": "2026-10-07 02:35", "competition": "BRA Serie B", "home": "Ponte Preta SP", "away": "Juventude", "snai_1x2": {"1": 10.00, "X": 4.75, "2": 1.30}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 04:00", "competition": "INT CONCACAF Nations League", "home": "Guyana francese", "away": "Belize", "snai_1x2": {"1": 2.25, "X": 3.10, "2": 3.25}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 04:30", "competition": "INT Amichevoli Nazionali", "home": "Messico", "away": "Cile", "snai_1x2": {"1": 1.57, "X": 4.00, "2": 5.25}},
+    {"kickoff_cest": "2026-10-07 07:30", "competition": "IND Bengal Super League", "home": "Bangalore City FC", "away": "Parikrma FC", "snai_1x2": {"1": 2.15, "X": 3.25, "2": 2.80}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 17:00", "competition": "ECU Coppa", "home": "CD Universidad Catolica", "away": "LDU Quito", "snai_1x2": {"1": 2.60, "X": 3.00, "2": 2.50}},
+    {"kickoff_cest": "2026-10-07 17:45", "competition": "PER Segunda Division", "home": "Academia Cantolao", "away": "Santos Fc Ica", "snai_1x2": {"1": 2.25, "X": 3.20, "2": 2.80}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 18:00", "competition": "FIN Veikkausliiga", "home": "IF Gnistan", "away": "Inter Turku", "snai_1x2": {"1": 3.60, "X": 3.60, "2": 1.90}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 20:30", "competition": "ESP Segunda B", "home": "Cartagena", "away": "Real Murcia CF", "snai_1x2": {"1": 2.50, "X": 3.10, "2": 2.70}, "out_of_perimeter": true},
+    {"kickoff_cest": "2026-10-07 20:30", "competition": "URU Coppa Auf", "home": "CS Cerrito", "away": "Montevideo Wanderers", "snai_1x2": {"1": 2.00, "X": 3.25, "2": 3.40}}
+  ],
+  "note": "Elenco ridotto ai match prioritari del paste; lo scarico Netwin tenterà i tornei copribili. Serie D / riserve / Egypt II / TUR cup minori ecc. sono fuori perimetro BAgent."
+}

@@ -116712,17 +116712,17 @@
   "svizzera vs macedonia del nord::1": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "1",
-    "netwin_odd": 1.09
+    "netwin_odd": 1.05
   },
   "svizzera vs macedonia del nord::x": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "X",
-    "netwin_odd": 9.25
+    "netwin_odd": 10.25
   },
   "svizzera vs macedonia del nord::2": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "2",
-    "netwin_odd": 27.0
+    "netwin_odd": 64.0
   },
   "svizzera vs macedonia del nord::1x": {
     "match": "Svizzera vs Macedonia Del Nord",
@@ -116742,12 +116742,12 @@
   "svizzera vs macedonia del nord::under 2.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Under 2.5",
-    "netwin_odd": 2.72
+    "netwin_odd": 2.05
   },
   "svizzera vs macedonia del nord::over 2.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Over 2.5",
-    "netwin_odd": 1.4
+    "netwin_odd": 1.7
   },
   "svizzera vs macedonia del nord::under 0.5": {
     "match": "Svizzera vs Macedonia Del Nord",
@@ -116762,22 +116762,22 @@
   "svizzera vs macedonia del nord::under 1.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Under 1.5",
-    "netwin_odd": 5.4
+    "netwin_odd": 5.25
   },
   "svizzera vs macedonia del nord::over 1.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Over 1.5",
-    "netwin_odd": 1.12
+    "netwin_odd": 1.14
   },
   "svizzera vs macedonia del nord::under 3.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Under 3.5",
-    "netwin_odd": 1.72
+    "netwin_odd": 1.35
   },
   "svizzera vs macedonia del nord::over 3.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Over 3.5",
-    "netwin_odd": 2.0
+    "netwin_odd": 3.05
   },
   "svizzera vs macedonia del nord::under 5.5": {
     "match": "Svizzera vs Macedonia Del Nord",
@@ -116792,22 +116792,22 @@
   "svizzera vs macedonia del nord::under 4.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Under 4.5",
-    "netwin_odd": 1.3
+    "netwin_odd": 1.09
   },
   "svizzera vs macedonia del nord::over 4.5": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Over 4.5",
-    "netwin_odd": 3.2
+    "netwin_odd": 6.0
   },
   "svizzera vs macedonia del nord::gol": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "Gol",
-    "netwin_odd": 2.75
+    "netwin_odd": 1.35
   },
   "svizzera vs macedonia del nord::nogol": {
     "match": "Svizzera vs Macedonia Del Nord",
     "market": "NoGol",
-    "netwin_odd": 1.4
+    "netwin_odd": 5.25
   },
   "svizzera vs macedonia del nord::1x + under 2.5": {
     "match": "Svizzera vs Macedonia Del Nord",
@@ -117582,17 +117582,17 @@
   "lussemburgo vs bulgaria::1": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "1",
-    "netwin_odd": 2.15
+    "netwin_odd": 31.0
   },
   "lussemburgo vs bulgaria::x": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "X",
-    "netwin_odd": 3.2
+    "netwin_odd": 9.0
   },
   "lussemburgo vs bulgaria::2": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "2",
-    "netwin_odd": 3.45
+    "netwin_odd": 1.09
   },
   "lussemburgo vs bulgaria::1x": {
     "match": "Lussemburgo vs Bulgaria",
@@ -117612,12 +117612,12 @@
   "lussemburgo vs bulgaria::under 2.5": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "Under 2.5",
-    "netwin_odd": 1.5
+    "netwin_odd": 3.7
   },
   "lussemburgo vs bulgaria::over 2.5": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "Over 2.5",
-    "netwin_odd": 2.35
+    "netwin_odd": 1.25
   },
   "lussemburgo vs bulgaria::under 0.5": {
     "match": "Lussemburgo vs Bulgaria",
@@ -117642,32 +117642,32 @@
   "lussemburgo vs bulgaria::under 3.5": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "Under 3.5",
-    "netwin_odd": 1.17
+    "netwin_odd": 1.65
   },
   "lussemburgo vs bulgaria::over 3.5": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "Over 3.5",
-    "netwin_odd": 4.3
+    "netwin_odd": 2.1
   },
   "lussemburgo vs bulgaria::under 4.5": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "Under 4.5",
-    "netwin_odd": 1.04
+    "netwin_odd": 1.18
   },
   "lussemburgo vs bulgaria::over 4.5": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "Over 4.5",
-    "netwin_odd": 7.75
+    "netwin_odd": 4.4
   },
   "lussemburgo vs bulgaria::gol": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "Gol",
-    "netwin_odd": 2.06
+    "netwin_odd": 2.2
   },
   "lussemburgo vs bulgaria::nogol": {
     "match": "Lussemburgo vs Bulgaria",
     "market": "NoGol",
-    "netwin_odd": 1.66
+    "netwin_odd": 3.7
   },
   "lussemburgo vs bulgaria::1x + under 2.5": {
     "match": "Lussemburgo vs Bulgaria",
@@ -118527,17 +118527,17 @@
   "bielorussia vs finlandia::1": {
     "match": "Bielorussia vs Finlandia",
     "market": "1",
-    "netwin_odd": 3.7
+    "netwin_odd": 1.8
   },
   "bielorussia vs finlandia::x": {
     "match": "Bielorussia vs Finlandia",
     "market": "X",
-    "netwin_odd": 3.2
+    "netwin_odd": 3.05
   },
   "bielorussia vs finlandia::2": {
     "match": "Bielorussia vs Finlandia",
     "market": "2",
-    "netwin_odd": 2.05
+    "netwin_odd": 4.95
   },
   "bielorussia vs finlandia::1x": {
     "match": "Bielorussia vs Finlandia",
@@ -118557,12 +118557,12 @@
   "bielorussia vs finlandia::under 2.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Under 2.5",
-    "netwin_odd": 1.54
+    "netwin_odd": 1.55
   },
   "bielorussia vs finlandia::over 2.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Over 2.5",
-    "netwin_odd": 2.27
+    "netwin_odd": 2.35
   },
   "bielorussia vs finlandia::under 0.5": {
     "match": "Bielorussia vs Finlandia",
@@ -118577,42 +118577,42 @@
   "bielorussia vs finlandia::under 1.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Under 1.5",
-    "netwin_odd": 2.62
+    "netwin_odd": 3.3
   },
   "bielorussia vs finlandia::over 1.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Over 1.5",
-    "netwin_odd": 1.41
+    "netwin_odd": 1.3
   },
   "bielorussia vs finlandia::under 3.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Under 3.5",
-    "netwin_odd": 1.18
+    "netwin_odd": 1.12
   },
   "bielorussia vs finlandia::over 3.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Over 3.5",
-    "netwin_odd": 4.05
+    "netwin_odd": 5.25
   },
   "bielorussia vs finlandia::under 4.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Under 4.5",
-    "netwin_odd": 1.05
+    "netwin_odd": 1.02
   },
   "bielorussia vs finlandia::over 4.5": {
     "match": "Bielorussia vs Finlandia",
     "market": "Over 4.5",
-    "netwin_odd": 7.25
+    "netwin_odd": 10.0
   },
   "bielorussia vs finlandia::gol": {
     "match": "Bielorussia vs Finlandia",
     "market": "Gol",
-    "netwin_odd": 2.02
+    "netwin_odd": 3.85
   },
   "bielorussia vs finlandia::nogol": {
     "match": "Bielorussia vs Finlandia",
     "market": "NoGol",
-    "netwin_odd": 1.68
+    "netwin_odd": 3.3
   },
   "bielorussia vs finlandia::1x + under 2.5": {
     "match": "Bielorussia vs Finlandia",
@@ -119472,17 +119472,17 @@
   "estonia vs islanda::1": {
     "match": "Estonia vs Islanda",
     "market": "1",
-    "netwin_odd": 5.4
+    "netwin_odd": 5.0
   },
   "estonia vs islanda::x": {
     "match": "Estonia vs Islanda",
     "market": "X",
-    "netwin_odd": 3.95
+    "netwin_odd": 2.65
   },
   "estonia vs islanda::2": {
     "match": "Estonia vs Islanda",
     "market": "2",
-    "netwin_odd": 1.58
+    "netwin_odd": 2.0
   },
   "estonia vs islanda::1x": {
     "match": "Estonia vs Islanda",
@@ -119502,42 +119502,42 @@
   "estonia vs islanda::under 2.5": {
     "match": "Estonia vs Islanda",
     "market": "Under 2.5",
-    "netwin_odd": 1.84
+    "netwin_odd": 1.18
   },
   "estonia vs islanda::over 2.5": {
     "match": "Estonia vs Islanda",
     "market": "Over 2.5",
-    "netwin_odd": 1.83
+    "netwin_odd": 4.2
   },
   "estonia vs islanda::under 0.5": {
     "match": "Estonia vs Islanda",
     "market": "Under 0.5",
-    "netwin_odd": 7.75
+    "netwin_odd": 3.75
   },
   "estonia vs islanda::over 0.5": {
     "match": "Estonia vs Islanda",
     "market": "Over 0.5",
-    "netwin_odd": 1.04
+    "netwin_odd": 1.22
   },
   "estonia vs islanda::under 1.5": {
     "match": "Estonia vs Islanda",
     "market": "Under 1.5",
-    "netwin_odd": 3.35
+    "netwin_odd": 1.7
   },
   "estonia vs islanda::over 1.5": {
     "match": "Estonia vs Islanda",
     "market": "Over 1.5",
-    "netwin_odd": 1.27
+    "netwin_odd": 2.05
   },
   "estonia vs islanda::under 3.5": {
     "match": "Estonia vs Islanda",
     "market": "Under 3.5",
-    "netwin_odd": 1.32
+    "netwin_odd": 1.04
   },
   "estonia vs islanda::over 3.5": {
     "match": "Estonia vs Islanda",
     "market": "Over 3.5",
-    "netwin_odd": 3.05
+    "netwin_odd": 8.5
   },
   "estonia vs islanda::under 5.5": {
     "match": "Estonia vs Islanda",
@@ -119562,12 +119562,12 @@
   "estonia vs islanda::gol": {
     "match": "Estonia vs Islanda",
     "market": "Gol",
-    "netwin_odd": 1.9
+    "netwin_odd": 3.35
   },
   "estonia vs islanda::nogol": {
     "match": "Estonia vs Islanda",
     "market": "NoGol",
-    "netwin_odd": 1.78
+    "netwin_odd": 3.75
   },
   "estonia vs islanda::1x + under 2.5": {
     "match": "Estonia vs Islanda",
@@ -120462,32 +120462,32 @@
   "albania vs san marino::under 2.5": {
     "match": "Albania vs San Marino",
     "market": "Under 2.5",
-    "netwin_odd": 4.35
+    "netwin_odd": 2.6
   },
   "albania vs san marino::over 2.5": {
     "match": "Albania vs San Marino",
     "market": "Over 2.5",
-    "netwin_odd": 1.16
+    "netwin_odd": 1.45
   },
   "albania vs san marino::under 1.5": {
     "match": "Albania vs San Marino",
     "market": "Under 1.5",
-    "netwin_odd": 8.0
+    "netwin_odd": 7.25
   },
   "albania vs san marino::over 1.5": {
     "match": "Albania vs San Marino",
     "market": "Over 1.5",
-    "netwin_odd": 1.03
+    "netwin_odd": 1.08
   },
   "albania vs san marino::under 3.5": {
     "match": "Albania vs San Marino",
     "market": "Under 3.5",
-    "netwin_odd": 2.52
+    "netwin_odd": 1.55
   },
   "albania vs san marino::over 3.5": {
     "match": "Albania vs San Marino",
     "market": "Over 3.5",
-    "netwin_odd": 1.44
+    "netwin_odd": 2.3
   },
   "albania vs san marino::under 6.5": {
     "match": "Albania vs San Marino",
@@ -120512,12 +120512,12 @@
   "albania vs san marino::under 4.5": {
     "match": "Albania vs San Marino",
     "market": "Under 4.5",
-    "netwin_odd": 1.71
+    "netwin_odd": 1.18
   },
   "albania vs san marino::over 4.5": {
     "match": "Albania vs San Marino",
     "market": "Over 4.5",
-    "netwin_odd": 1.98
+    "netwin_odd": 4.3
   },
   "albania vs san marino::1x + under 2.5": {
     "match": "Albania vs San Marino",
@@ -120982,17 +120982,17 @@
   "scozia vs slovenia::1": {
     "match": "Scozia vs Slovenia",
     "market": "1",
-    "netwin_odd": 1.81
+    "netwin_odd": 1.3
   },
   "scozia vs slovenia::x": {
     "match": "Scozia vs Slovenia",
     "market": "X",
-    "netwin_odd": 3.5
+    "netwin_odd": 4.5
   },
   "scozia vs slovenia::2": {
     "match": "Scozia vs Slovenia",
     "market": "2",
-    "netwin_odd": 4.5
+    "netwin_odd": 13.75
   },
   "scozia vs slovenia::1x": {
     "match": "Scozia vs Slovenia",
@@ -121012,12 +121012,12 @@
   "scozia vs slovenia::under 2.5": {
     "match": "Scozia vs Slovenia",
     "market": "Under 2.5",
-    "netwin_odd": 1.6
+    "netwin_odd": 1.55
   },
   "scozia vs slovenia::over 2.5": {
     "match": "Scozia vs Slovenia",
     "market": "Over 2.5",
-    "netwin_odd": 2.2
+    "netwin_odd": 2.35
   },
   "scozia vs slovenia::under 0.5": {
     "match": "Scozia vs Slovenia",
@@ -121032,22 +121032,22 @@
   "scozia vs slovenia::under 1.5": {
     "match": "Scozia vs Slovenia",
     "market": "Under 1.5",
-    "netwin_odd": 2.75
+    "netwin_odd": 3.25
   },
   "scozia vs slovenia::over 1.5": {
     "match": "Scozia vs Slovenia",
     "market": "Over 1.5",
-    "netwin_odd": 1.4
+    "netwin_odd": 1.3
   },
   "scozia vs slovenia::under 3.5": {
     "match": "Scozia vs Slovenia",
     "market": "Under 3.5",
-    "netwin_odd": 1.21
+    "netwin_odd": 1.14
   },
   "scozia vs slovenia::over 3.5": {
     "match": "Scozia vs Slovenia",
     "market": "Over 3.5",
-    "netwin_odd": 4.0
+    "netwin_odd": 5.0
   },
   "scozia vs slovenia::under 5.5": {
     "match": "Scozia vs Slovenia",
@@ -121062,22 +121062,22 @@
   "scozia vs slovenia::under 4.5": {
     "match": "Scozia vs Slovenia",
     "market": "Under 4.5",
-    "netwin_odd": 1.06
+    "netwin_odd": 1.02
   },
   "scozia vs slovenia::over 4.5": {
     "match": "Scozia vs Slovenia",
     "market": "Over 4.5",
-    "netwin_odd": 7.25
+    "netwin_odd": 10.0
   },
   "scozia vs slovenia::gol": {
     "match": "Scozia vs Slovenia",
     "market": "Gol",
-    "netwin_odd": 2.08
+    "netwin_odd": 2.15
   },
   "scozia vs slovenia::nogol": {
     "match": "Scozia vs Slovenia",
     "market": "NoGol",
-    "netwin_odd": 1.67
+    "netwin_odd": 3.25
   },
   "scozia vs slovenia::1x + under 2.5": {
     "match": "Scozia vs Slovenia",
@@ -122892,12 +122892,12 @@
   "inghilterra vs repubblica ceca::under 2.5": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Under 2.5",
-    "netwin_odd": 3.05
+    "netwin_odd": 6.75
   },
   "inghilterra vs repubblica ceca::over 2.5": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Over 2.5",
-    "netwin_odd": 1.33
+    "netwin_odd": 1.1
   },
   "inghilterra vs repubblica ceca::under 0.5": {
     "match": "Inghilterra vs Repubblica Ceca",
@@ -122922,12 +122922,12 @@
   "inghilterra vs repubblica ceca::under 3.5": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Under 3.5",
-    "netwin_odd": 1.87
+    "netwin_odd": 2.4
   },
   "inghilterra vs repubblica ceca::over 3.5": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Over 3.5",
-    "netwin_odd": 1.84
+    "netwin_odd": 1.5
   },
   "inghilterra vs repubblica ceca::under 5.5": {
     "match": "Inghilterra vs Repubblica Ceca",
@@ -122937,27 +122937,27 @@
   "inghilterra vs repubblica ceca::over 5.5": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Over 5.5",
-    "netwin_odd": 4.7
+    "netwin_odd": 5.0
   },
   "inghilterra vs repubblica ceca::under 4.5": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Under 4.5",
-    "netwin_odd": 1.38
+    "netwin_odd": 1.45
   },
   "inghilterra vs repubblica ceca::over 4.5": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Over 4.5",
-    "netwin_odd": 2.82
+    "netwin_odd": 2.5
   },
   "inghilterra vs repubblica ceca::gol": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "Gol",
-    "netwin_odd": 2.25
+    "netwin_odd": 1.3
   },
   "inghilterra vs repubblica ceca::nogol": {
     "match": "Inghilterra vs Repubblica Ceca",
     "market": "NoGol",
-    "netwin_odd": 1.58
+    "netwin_odd": 6.75
   },
   "inghilterra vs repubblica ceca::1x + under 2.5": {
     "match": "Inghilterra vs Repubblica Ceca",
@@ -123792,17 +123792,17 @@
   "moldova vs slovacchia::1": {
     "match": "Moldova vs Slovacchia",
     "market": "1",
-    "netwin_odd": 7.25
+    "netwin_odd": 88.0
   },
   "moldova vs slovacchia::x": {
     "match": "Moldova vs Slovacchia",
     "market": "X",
-    "netwin_odd": 4.45
+    "netwin_odd": 16.25
   },
   "moldova vs slovacchia::2": {
     "match": "Moldova vs Slovacchia",
     "market": "2",
-    "netwin_odd": 1.41
+    "netwin_odd": 1.02
   },
   "moldova vs slovacchia::1x": {
     "match": "Moldova vs Slovacchia",
@@ -123822,12 +123822,12 @@
   "moldova vs slovacchia::under 2.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Under 2.5",
-    "netwin_odd": 1.93
+    "netwin_odd": 3.95
   },
   "moldova vs slovacchia::over 2.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Over 2.5",
-    "netwin_odd": 1.75
+    "netwin_odd": 1.22
   },
   "moldova vs slovacchia::under 0.5": {
     "match": "Moldova vs Slovacchia",
@@ -123852,42 +123852,42 @@
   "moldova vs slovacchia::under 3.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Under 3.5",
-    "netwin_odd": 1.36
+    "netwin_odd": 1.75
   },
   "moldova vs slovacchia::over 3.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Over 3.5",
-    "netwin_odd": 2.82
+    "netwin_odd": 2.0
   },
   "moldova vs slovacchia::under 5.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Under 5.5",
-    "netwin_odd": 1.03
+    "netwin_odd": 1.05
   },
   "moldova vs slovacchia::over 5.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Over 5.5",
-    "netwin_odd": 8.25
+    "netwin_odd": 9.75
   },
   "moldova vs slovacchia::under 4.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Under 4.5",
-    "netwin_odd": 1.13
+    "netwin_odd": 1.2
   },
   "moldova vs slovacchia::over 4.5": {
     "match": "Moldova vs Slovacchia",
     "market": "Over 4.5",
-    "netwin_odd": 4.95
+    "netwin_odd": 4.0
   },
   "moldova vs slovacchia::gol": {
     "match": "Moldova vs Slovacchia",
     "market": "Gol",
-    "netwin_odd": 1.98
+    "netwin_odd": 3.2
   },
   "moldova vs slovacchia::nogol": {
     "match": "Moldova vs Slovacchia",
     "market": "NoGol",
-    "netwin_odd": 1.7
+    "netwin_odd": 3.95
   },
   "moldova vs slovacchia::1x + under 2.5": {
     "match": "Moldova vs Slovacchia",
@@ -124752,17 +124752,17 @@
   "croazia vs spagna::1": {
     "match": "Croazia vs Spagna",
     "market": "1",
-    "netwin_odd": 9.75
+    "netwin_odd": 2.85
   },
   "croazia vs spagna::x": {
     "match": "Croazia vs Spagna",
     "market": "X",
-    "netwin_odd": 6.4
+    "netwin_odd": 3.05
   },
   "croazia vs spagna::2": {
     "match": "Croazia vs Spagna",
     "market": "2",
-    "netwin_odd": 1.25
+    "netwin_odd": 2.5
   },
   "croazia vs spagna::1x": {
     "match": "Croazia vs Spagna",
@@ -124782,12 +124782,12 @@
   "croazia vs spagna::under 2.5": {
     "match": "Croazia vs Spagna",
     "market": "Under 2.5",
-    "netwin_odd": 2.62
+    "netwin_odd": 2.2
   },
   "croazia vs spagna::over 2.5": {
     "match": "Croazia vs Spagna",
     "market": "Over 2.5",
-    "netwin_odd": 1.43
+    "netwin_odd": 1.6
   },
   "croazia vs spagna::under 0.5": {
     "match": "Croazia vs Spagna",
@@ -124802,22 +124802,22 @@
   "croazia vs spagna::under 1.5": {
     "match": "Croazia vs Spagna",
     "market": "Under 1.5",
-    "netwin_odd": 5.2
+    "netwin_odd": 5.75
   },
   "croazia vs spagna::over 1.5": {
     "match": "Croazia vs Spagna",
     "market": "Over 1.5",
-    "netwin_odd": 1.13
+    "netwin_odd": 1.12
   },
   "croazia vs spagna::under 3.5": {
     "match": "Croazia vs Spagna",
     "market": "Under 3.5",
-    "netwin_odd": 1.67
+    "netwin_odd": 1.4
   },
   "croazia vs spagna::over 3.5": {
     "match": "Croazia vs Spagna",
     "market": "Over 3.5",
-    "netwin_odd": 2.07
+    "netwin_odd": 2.8
   },
   "croazia vs spagna::under 5.5": {
     "match": "Croazia vs Spagna",
@@ -124832,22 +124832,22 @@
   "croazia vs spagna::under 4.5": {
     "match": "Croazia vs Spagna",
     "market": "Under 4.5",
-    "netwin_odd": 1.28
+    "netwin_odd": 1.12
   },
   "croazia vs spagna::over 4.5": {
     "match": "Croazia vs Spagna",
     "market": "Over 4.5",
-    "netwin_odd": 3.35
+    "netwin_odd": 5.5
   },
   "croazia vs spagna::gol": {
     "match": "Croazia vs Spagna",
     "market": "Gol",
-    "netwin_odd": 1.86
+    "netwin_odd": 4.55
   },
   "croazia vs spagna::nogol": {
     "match": "Croazia vs Spagna",
     "market": "NoGol",
-    "netwin_odd": 1.85
+    "netwin_odd": 5.75
   },
   "croazia vs spagna::1x + under 2.5": {
     "match": "Croazia vs Spagna",
@@ -139633,5 +139633,25 @@
     "match": "Bragantino Sp vs Mirassol Fc Sp",
     "market": "Chance Mix: 1X o NoGol",
     "netwin_odd": 1.03
+  },
+  "lussemburgo vs bulgaria::under 5.5": {
+    "match": "Lussemburgo vs Bulgaria",
+    "market": "Under 5.5",
+    "netwin_odd": 1.04
+  },
+  "lussemburgo vs bulgaria::over 5.5": {
+    "match": "Lussemburgo vs Bulgaria",
+    "market": "Over 5.5",
+    "netwin_odd": 11.0
+  },
+  "albania vs san marino::gol": {
+    "match": "Albania vs San Marino",
+    "market": "Gol",
+    "netwin_odd": 1.12
+  },
+  "albania vs san marino::nogol": {
+    "match": "Albania vs San Marino",
+    "market": "NoGol",
+    "netwin_odd": 7.25
   }
 }
