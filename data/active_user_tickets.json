@@ -1,5 +1,41 @@
 [
   {
+    "ticket_id": "TICKET_USER_LIVE_NL_06OCT_TRIPLA_GEMS",
+    "date_created": "2026-10-06 21:42:00",
+    "stake_eur": 5.0,
+    "total_odds": 2.65,
+    "potential_payout_eur": 13.25,
+    "status": "OPEN",
+    "strategy": "IN_PLAY_VALUE_GEMS_06OCT",
+    "notes": "Tripla Live Gemme 2° Tempo Nations League (Spagna gol 2T, Finlandia spinta, Inghilterra cruise)",
+    "legs": [
+      {
+        "match": "Croazia vs Spagna",
+        "tournament": "UEFA Nations League",
+        "market": "Spagna Over 0.5 Gol 2° Tempo",
+        "odds": 1.4,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 20:45 CEST"
+      },
+      {
+        "match": "Bielorussia vs Finlandia",
+        "tournament": "UEFA Nations League",
+        "market": "Over 0.5 Gol 2° Tempo (Spinta Finlandia)",
+        "odds": 1.35,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 20:45 CEST"
+      },
+      {
+        "match": "Inghilterra vs Repubblica Ceca",
+        "tournament": "UEFA Nations League",
+        "market": "Under 2.5 Gol 2° Tempo (Cruise Control)",
+        "odds": 1.4,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 20:45 CEST"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_SNAI_06OTT_QUADRUPLA_MISTA",
     "date_created": "2026-10-06 20:20:00",
     "stake_eur": 5.0,
