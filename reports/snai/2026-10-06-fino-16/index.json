@@ -1,0 +1,362 @@
+[
+  {
+    "match": "Bristol City - Charlton Athletic",
+    "competition": "ENG II Divisione U21",
+    "kickoff_time": "2026-10-06 14:00 CEST",
+    "event_id": "36411-47940",
+    "market_count": 61,
+    "file": "reports/snai/2026-10-06-fino-16/eng-ii-divisione-u21--bristol-city-charlton-athletic.json"
+  },
+  {
+    "match": "Hull City U21 - Wigan U21",
+    "competition": "ENG II Divisione U21",
+    "kickoff_time": "2026-10-06 14:00 CEST",
+    "event_id": "36411-47942",
+    "market_count": 62,
+    "file": "reports/snai/2026-10-06-fino-16/eng-ii-divisione-u21--hull-city-u21-wigan-u21.json"
+  },
+  {
+    "match": "Colchester United U21 - Swansea City U21",
+    "competition": "ENG II Divisione U21",
+    "kickoff_time": "2026-10-06 15:00 CEST",
+    "event_id": "36411-47941",
+    "market_count": 61,
+    "file": "reports/snai/2026-10-06-fino-16/eng-ii-divisione-u21--colchester-united-u21-swansea-city-u21.json"
+  },
+  {
+    "match": "Queens Park Rangers - Coventry City U21",
+    "competition": "ENG II Divisione U21",
+    "kickoff_time": "2026-10-06 14:00 CEST",
+    "event_id": "36411-47943",
+    "market_count": 62,
+    "file": "reports/snai/2026-10-06-fino-16/eng-ii-divisione-u21--queens-park-rangers-coventry-city-u21.json"
+  },
+  {
+    "match": "Binh Phuoc - CS. Dong Thap",
+    "competition": "VIE Coppa di Vietnam",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36412-53599",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/vie-coppa-di-vietnam--binh-phuoc-cs-dong-thap.json"
+  },
+  {
+    "match": "Lam Dong - Sông Lam",
+    "competition": "VIE Coppa di Vietnam",
+    "kickoff_time": "2026-10-06 10:30 CEST",
+    "event_id": "36411-8746",
+    "market_count": 12,
+    "file": "reports/snai/2026-10-06-fino-16/vie-coppa-di-vietnam--lam-dong-sông-lam.json"
+  },
+  {
+    "match": "Pho Hien FC - Huda Hue",
+    "competition": "VIE Coppa di Vietnam",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36411-48131",
+    "market_count": 17,
+    "file": "reports/snai/2026-10-06-fino-16/vie-coppa-di-vietnam--pho-hien-fc-huda-hue.json"
+  },
+  {
+    "match": "Montenegro U19 F  - Cipro U19 F ",
+    "competition": "INT Amichevoli U19 F (Poss. Cambio Format)",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36413-3935",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/int-amichevoli-u19-f-poss-cambio-format--montenegro-u19-f-cipro-u19-f.json"
+  },
+  {
+    "match": "UD Leiria U23 - Santa Clara U23",
+    "competition": "POR Campionato U23",
+    "kickoff_time": "2026-10-06 12:00 CEST",
+    "event_id": "36411-6252",
+    "market_count": 40,
+    "file": "reports/snai/2026-10-06-fino-16/por-campionato-u23--ud-leiria-u23-santa-clara-u23.json"
+  },
+  {
+    "match": "Romania U19 F - Kazakhstan U19 F ",
+    "competition": "INT Campionati Europei U19 F",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36413-3428",
+    "market_count": 17,
+    "file": "reports/snai/2026-10-06-fino-16/int-campionati-europei-u19-f--romania-u19-f-kazakhstan-u19-f.json"
+  },
+  {
+    "match": "Beslidhja Lezhe - Sopoti",
+    "competition": "ALB Coppa di Albania",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-26712",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/alb-coppa-di-albania--beslidhja-lezhe-sopoti.json"
+  },
+  {
+    "match": "Azerbaigian U21 - Gibilterra U21",
+    "competition": "INT Qual. Euro U21",
+    "kickoff_time": "2026-10-06 15:45 CEST",
+    "event_id": "36411-45",
+    "market_count": 65,
+    "file": "reports/snai/2026-10-06-fino-16/int-qual-euro-u21--azerbaigian-u21-gibilterra-u21.json"
+  },
+  {
+    "match": "Moldova U21 - Kazakistan U21",
+    "competition": "INT Qual. Euro U21",
+    "kickoff_time": "2026-10-06 16:00 CEST",
+    "event_id": "36411-26",
+    "market_count": 202,
+    "file": "reports/snai/2026-10-06-fino-16/int-qual-euro-u21--moldova-u21-kazakistan-u21.json"
+  },
+  {
+    "match": "Corea del Sud - Uzbekistan",
+    "competition": "INT Amichevoli Nazionali",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36412-34997",
+    "market_count": 270,
+    "file": "reports/snai/2026-10-06-fino-16/int-amichevoli-nazionali--corea-del-sud-uzbekistan.json"
+  },
+  {
+    "match": "Cina - Tagikistan",
+    "competition": "INT Amichevoli Nazionali",
+    "kickoff_time": "2026-10-06 13:35 CEST",
+    "event_id": "36411-61467",
+    "market_count": 265,
+    "file": "reports/snai/2026-10-06-fino-16/int-amichevoli-nazionali--cina-tagikistan.json"
+  },
+  {
+    "match": "India - Uruguay",
+    "competition": "INT Amichevoli Nazionali",
+    "kickoff_time": "2026-10-06 16:00 CEST",
+    "event_id": "36411-26276",
+    "market_count": 7,
+    "file": "reports/snai/2026-10-06-fino-16/int-amichevoli-nazionali--india-uruguay.json"
+  },
+  {
+    "match": "AS Trencin U19 - Spartak Trnava U19",
+    "competition": "SVK Campionato U19",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36411-2824",
+    "market_count": 22,
+    "file": "reports/snai/2026-10-06-fino-16/svk-campionato-u19--as-trencin-u19-spartak-trnava-u19.json"
+  },
+  {
+    "match": "MFk Zemplin Michalovce - MFk Ruzomberok U19",
+    "competition": "SVK Campionato U19",
+    "kickoff_time": "2026-10-06 15:00 CEST",
+    "event_id": "36411-2821",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/svk-campionato-u19--mfk-zemplin-michalovce-mfk-ruzomberok-u19.json"
+  },
+  {
+    "match": "FC Petrzalka U19 - MFk Kosice U19",
+    "competition": "SVK Campionato U19",
+    "kickoff_time": "2026-10-06 15:00 CEST",
+    "event_id": "36411-2822",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/svk-campionato-u19--fc-petrzalka-u19-mfk-kosice-u19.json"
+  },
+  {
+    "match": "FK Dukla Banska Bystrica U19 - Slovan Bratislava U19",
+    "competition": "SVK Campionato U19",
+    "kickoff_time": "2026-10-06 15:00 CEST",
+    "event_id": "36411-2828",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/svk-campionato-u19--fk-dukla-banska-bystrica-u19-slovan-bratislava-u19.json"
+  },
+  {
+    "match": "Nantong Zhiyun - Shanghai Jiading City Development",
+    "competition": "CHN League One",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-666",
+    "market_count": 59,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-one--nantong-zhiyun-shanghai-jiading-city-development.json"
+  },
+  {
+    "match": "Changchun Yatai - Yanbian Longding",
+    "competition": "CHN League One",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36411-675",
+    "market_count": 59,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-one--changchun-yatai-yanbian-longding.json"
+  },
+  {
+    "match": "Heilongjiang Ice City FC - Meizhou Hakka Fc",
+    "competition": "CHN League One",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-662",
+    "market_count": 61,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-one--heilongjiang-ice-city-fc-meizhou-hakka-fc.json"
+  },
+  {
+    "match": "Hebei Kungfu - Dalian Kuncheng City",
+    "competition": "CHN League One",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-672",
+    "market_count": 59,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-one--hebei-kungfu-dalian-kuncheng-city.json"
+  },
+  {
+    "match": "Wuxi Wuguo - Suzhou Jinfu",
+    "competition": "CHN League One",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36411-664",
+    "market_count": 59,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-one--wuxi-wuguo-suzhou-jinfu.json"
+  },
+  {
+    "match": "Guangdong Mingtu - Dalian Yingbo B",
+    "competition": "CHN League Two",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-7832",
+    "market_count": 37,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-two--guangdong-mingtu-dalian-yingbo-b.json"
+  },
+  {
+    "match": "Langfang Glory City FC - Xi An Ronghai",
+    "competition": "CHN League Two",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-7820",
+    "market_count": 37,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-two--langfang-glory-city-fc-xi-an-ronghai.json"
+  },
+  {
+    "match": "Shenzhen 2028 FC - Shandong Taishan B",
+    "competition": "CHN League Two",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-7819",
+    "market_count": 38,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-two--shenzhen-2028-fc-shandong-taishan-b.json"
+  },
+  {
+    "match": "Guizhou Zhucheng Athletic - Shanghai Port B",
+    "competition": "CHN League Two",
+    "kickoff_time": "2026-10-06 13:30 CEST",
+    "event_id": "36411-7817",
+    "market_count": 37,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-two--guizhou-zhucheng-athletic-shanghai-port-b.json"
+  },
+  {
+    "match": "Wuhan Hongxing - Lanzhou Longyuan Athletic",
+    "competition": "CHN League Two",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36411-7829",
+    "market_count": 37,
+    "file": "reports/snai/2026-10-06-fino-16/chn-league-two--wuhan-hongxing-lanzhou-longyuan-athletic.json"
+  },
+  {
+    "match": "NK Bilje - Jadran Dekani",
+    "competition": "SLO II Divisione",
+    "kickoff_time": "2026-10-06 16:00 CEST",
+    "event_id": "36401-4066",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/slo-ii-divisione--nk-bilje-jadran-dekani.json"
+  },
+  {
+    "match": "CA Villa San Carlos Reserve - Deportivo Laferrere Riserve",
+    "competition": "ARG Camp. Riserve  II Divisione",
+    "kickoff_time": "2026-10-06 15:00 CEST",
+    "event_id": "36412-34188",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/arg-camp-riserve-ii-divisione--ca-villa-san-carlos-reserve-deportivo-laferrere-riserve.json"
+  },
+  {
+    "match": "Danimarca U19 - Olanda U19",
+    "competition": "INT Amichevoli U19 (Poss. Cambio Format)",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36411-62796",
+    "market_count": 24,
+    "file": "reports/snai/2026-10-06-fino-16/int-amichevoli-u19-poss-cambio-format--danimarca-u19-olanda-u19.json"
+  },
+  {
+    "match": "Portogallo - Austria",
+    "competition": "INT Amichevoli U19 (Poss. Cambio Format)",
+    "kickoff_time": "2026-10-06 16:00 CEST",
+    "event_id": "36412-58303",
+    "market_count": 24,
+    "file": "reports/snai/2026-10-06-fino-16/int-amichevoli-u19-poss-cambio-format--portogallo-austria.json"
+  },
+  {
+    "match": "Albion FC Reserve - Nacional de Montevideo",
+    "competition": "URU Camp. Riserve I Div.",
+    "kickoff_time": "2026-10-06 15:30 CEST",
+    "event_id": "36411-34407",
+    "market_count": 40,
+    "file": "reports/snai/2026-10-06-fino-16/uru-camp-riserve-i-div--albion-fc-reserve-nacional-de-montevideo.json"
+  },
+  {
+    "match": "Sportivo Trinidense - Sportivo Luqueno Res.",
+    "competition": "PAR Camp. Riserve I Divisione",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36412-20769",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/par-camp-riserve-i-divisione--sportivo-trinidense-sportivo-luqueno-res.json"
+  },
+  {
+    "match": "Olimpia Asuncion - Nacional Asuncion",
+    "competition": "PAR Camp. Riserve I Divisione",
+    "kickoff_time": "2026-10-06 13:00 CEST",
+    "event_id": "36412-58543",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/par-camp-riserve-i-divisione--olimpia-asuncion-nacional-asuncion.json"
+  },
+  {
+    "match": "Guarani Asuncion - Sportivo San Lorenzo",
+    "competition": "PAR Camp. Riserve I Divisione",
+    "kickoff_time": "2026-10-06 12:30 CEST",
+    "event_id": "36412-781",
+    "market_count": 17,
+    "file": "reports/snai/2026-10-06-fino-16/par-camp-riserve-i-divisione--guarani-asuncion-sportivo-san-lorenzo.json"
+  },
+  {
+    "match": "FK Iskra Danilovgrad - Rudar Pljevlja",
+    "competition": "MNE Druga Liga",
+    "kickoff_time": "2026-10-06 15:00 CEST",
+    "event_id": "36401-4092",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/mne-druga-liga--fk-iskra-danilovgrad-rudar-pljevlja.json"
+  },
+  {
+    "match": "Kazakistan - Isole Far Oer",
+    "competition": "INT Nations League",
+    "kickoff_time": "2026-10-06 16:00 CEST",
+    "event_id": "36411-8239",
+    "market_count": 709,
+    "file": "reports/snai/2026-10-06-fino-16/int-nations-league--kazakistan-isole-far-oer.json"
+  },
+  {
+    "match": "ASC & Center FC - FC Real Bengaluru",
+    "competition": "IND Bengal Super League",
+    "kickoff_time": "2026-10-06 12:30 CEST",
+    "event_id": "36412-53521",
+    "market_count": 24,
+    "file": "reports/snai/2026-10-06-fino-16/ind-bengal-super-league--asc-center-fc-fc-real-bengaluru.json"
+  },
+  {
+    "match": "Bangladesh Police Club - City Club",
+    "competition": "BAN Federation Cup",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36411-36268",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/ban-federation-cup--bangladesh-police-club-city-club.json"
+  },
+  {
+    "match": "Dhaka Wanderers Club - Bashundhara Kings",
+    "competition": "BAN Federation Cup",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36411-36269",
+    "market_count": 17,
+    "file": "reports/snai/2026-10-06-fino-16/ban-federation-cup--dhaka-wanderers-club-bashundhara-kings.json"
+  },
+  {
+    "match": "Mohammedan Sporting Club Dhaka - Arambagh KS",
+    "competition": "BAN Federation Cup",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36411-36270",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-06-fino-16/ban-federation-cup--mohammedan-sporting-club-dhaka-arambagh-ks.json"
+  },
+  {
+    "match": "Saudi Arabia U20 - Armenia U20",
+    "competition": "INT Amichevoli U20 (Poss. Cambio Format)",
+    "kickoff_time": "2026-10-06 11:00 CEST",
+    "event_id": "36413-4036",
+    "market_count": 57,
+    "file": "reports/snai/2026-10-06-fino-16/int-amichevoli-u20-poss-cambio-format--saudi-arabia-u20-armenia-u20.json"
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-10-06 13:40 CEST",
+  "name": "Schedina Gemme Nascoste - Player Props & Speciali",
+  "total_odds": 6.73,
+  "probability": 0.25,
+  "ev": 0.683,
+  "stake_eur": 3.0,
+  "potential_payout_eur": 20.19,
+  "gems": [
+    {
+      "match": "Croazia - Spagna",
+      "category": "GOL O PALO ULTRA",
+      "market": "Uno o l'Altro: Gol o Palo Ultra (Inc. TS)",
+      "selection": "Matanovic I. o Yamal L. Goal o Palo (o loro Sostituti)",
+      "odds": 1.5,
+      "est_p": 0.74,
+      "rationale": "Yamal terminale della Roja con media 1.3 tiri nello specchio e frequenti tiri a giro dal limite; Matanovic ariete d'area croato. La clausola SNAI copre sia il GOL sia il PALO/TRAVERSA di entrambi e dei rispettivi sostituti."
+    },
+    {
+      "match": "Inghilterra - Repubblica Ceca",
+      "category": "QUASI CARTELLINO / FALLI",
+      "market": "Giocatore Quasi Cartellino (Inc. TS)",
+      "selection": "Sadilek M. riceve almeno un cartellino O commette almeno 2 falli",
+      "odds": 1.65,
+      "est_p": 0.7,
+      "rationale": "Sadilek mediano di rottura della Cechia, designato per fermare le transizioni centrali inglesi. La condizione vincente scatta con un'ammonizione OPPURE con soli 2 falli commessi in tutta la partita (media stagionale: 2.6 falli a match)."
+    },
+    {
+      "match": "Croazia - Spagna",
+      "category": "FALLI COMMESSI TEMPO",
+      "market": "Giocatore Commette Almeno 1 Fallo nel 1° Tempo",
+      "selection": "Cucurella M. commette almeno 1 fallo nel 1° Tempo",
+      "odds": 1.7,
+      "est_p": 0.68,
+      "rationale": "Cucurella terzino sinistro spagnolo noto per l'aggressività asfissiante in anticipo. Nei primi 45 minuti affronta i duelli con Kramaric e Stanisic. È sufficiente un singolo fallo per incassare la quota a 1.70."
+    },
+    {
+      "match": "Inghilterra - Repubblica Ceca",
+      "category": "DUETTO TIRI IN PORTA",
+      "market": "Duetto Tiri in Porta Ultra (Inc. TS)",
+      "selection": "Kane H. e Hlozek A. (e Sostituti) almeno 3 tiri in porta in totale",
+      "odds": 1.6,
+      "est_p": 0.71,
+      "rationale": "Kane festeggia la 125ª presenza da record ed è il fulcro di tutte le conclusioni inglesi (media 2.1 tiri nello specchio a gara). Hlozek principale terminale ceco nelle ripartenze. Bastano 3 tiri nello specchio sommati tra i due (e sostituti inclusi)."
+    }
+  ],
+  "groq_verdict": "APPROVATA",
+  "groq_report": "**1. Analisi Matematica (EV)**  \n\n| Leg | Quota Netwin | Probabilità (P) | P × Quota | EV (P·(O‑1)‑(1‑P)) |\n|-----|--------------|----------------|----------|-------------------|\n| 1   | 1.50 | 74 % | 1.11 | **+11 %** |\n| 2   | 1.65 | 70 % | 1.155 | **+15.5 %** |\n| 3   | 1.70 | 68 % | 1.156 | **+15.6 %** |\n| 4   | 1.60 | 71 % | 1.136 | **+13.6 %** |\n\nRitorno atteso della multipla:  \n\n\\[\n\\text{ER} = \\prod_{i=1}^{4} (P_i \\times O_i)=1.11 \\times 1.155 \\times 1.156 \\times 1.136 \\approx 1.68\n\\]\n\nEV totale = **+68 %** (cioè, per ogni €1 scommesso ci si aspetta un ritorno medio di €1,68).  \n> L’EV è ben al di sopra della soglia di +4 % indicata; la scommessa è matematicamente favorevole.\n\n---\n\n**2. Trappole Bookmaker – Scenario che fa perdere ciascuna selezione**\n\n| Leg | Condizione di perdita (scenario “cattivo”) |\n|-----|--------------------------------------------|\n| **1** – *Uno o l’Altro: Gol o Palo Ultra (Matanovic I. o Yamal L.)* | Nessun gol né nessun tiro che colpisca palo/crossbar da parte di Matanovic, Yamal **e** i loro eventuali sostituti. Esempio: 0‑0 o gol esclusivamente di altri giocatori. |\n| **2** – *Giocatore Quasi Cartellino (Sadilek M.)* | Sadilek **non** riceve alcun cartellino **e** commette **0 o 1** fallo in tutta la partita. |\n| **3** – *Cucurella M. commette ≥ 1 fallo nel 1° tempo* | Cucurella non commette alcun fallo nei primi 45 minuti (anche se ne commette in seconda frazione). |\n| **4** – *Duetto Tiri in Porta Ultra (Kane H. + Hlozek A.)* | Il totale di tiri in porta (includendo eventuali sostituti) è **≤ 2**. Qualsiasi combinazione di 0‑2 tiri fa perdere la scommessa. |\n\n---\n\n**3. Verdetto Finale**\n\n- Nessun mercato presente è un “1X2 secco”, “under stretto su corazzata”, “tetto di gol su attacco dominante” o simile che richiederebbe la bocciatura per **RISCHIO_STRUTTURALE**.  \n- Tutti i singoli EV sono positivi e la combinazione porta a un EV complessivo di +68 %.\n\n**Verdetto:** **APPROVATA**  \n\n**Stake consigliata:** **3 % del bankroll** (≈ €3 su €100). Questo livello mantiene una gestione prudente pur sfruttando il valore elevato dell’intera multipla."
+}

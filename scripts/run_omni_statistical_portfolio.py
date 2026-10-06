@@ -303,8 +303,14 @@ STATISTICAL_DOSSIERS = {
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Pipeline di Ottimizzazione Statistica Multi-Mercato")
+    parser.add_argument("--date", default="2026-10-06", help="Filtra partite per data kickoff (default: 2026-10-06)")
+    args = parser.parse_args()
+
     print("==================================================================")
     print("PIPELINE OTTIMIZZAZIONE STATISTICA MULTI-MERCATO (OMNI-OPTIMIZER)")
+    print(f"Data di riferimento: {args.date or 'Tutte le date'}")
     print("==================================================================\n")
 
     snai_dir = ROOT / "reports/snai"
@@ -316,6 +322,8 @@ def main():
 
     print("[1/4] Caricamento cataloghi SNAI e pricing statistico multi-dominio...")
     for filename, dossier in STATISTICAL_DOSSIERS.items():
+        if args.date and args.date not in dossier.kickoff:
+            continue
         file_path = snai_dir / filename
         if not file_path.exists():
             continue

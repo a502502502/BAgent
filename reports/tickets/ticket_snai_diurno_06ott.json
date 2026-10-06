@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-10-06T10:05:00 CEST",
+  "source": "SNAI Palinsesto Giornaliero 06 Ottobre 2026",
+  "bankroll_reference": 100.0,
+  "strategy": "OMNI_2_LEVEL_OPTIMIZED",
+  "tickets": [
+    {
+      "id": "TICKET_DIURNO_1_LUNCH",
+      "name": "Ticket 1 (Mattina/Pranzo 10:30 - 13:00): Coppe Nazionali & U20",
+      "stake_eur": 3.0,
+      "total_odds": 3.01,
+      "probability": 0.416,
+      "edge": 0.253,
+      "potential_payout_eur": 9.03,
+      "groq_verdict": "APPROVATA",
+      "legs": [
+        {
+          "match": "Saudi Arabia U20 vs Armenia U20",
+          "kickoff": "2026-10-06 11:00 CEST",
+          "tournament": "INT Amichevoli U20",
+          "market": "1",
+          "odds": 1.38,
+          "probability": 0.77,
+          "fair_odd": 1.30,
+          "edge": 0.062,
+          "notes": "Arabia Saudita U20 nettamente superiore sul piano tecnico e fisico."
+        },
+        {
+          "match": "Lam Dong vs Song Lam Nghe An",
+          "kickoff": "2026-10-06 10:30 CEST",
+          "tournament": "VIE Coppa di Vietnam",
+          "market": "2",
+          "odds": 1.42,
+          "probability": 0.75,
+          "fair_odd": 1.33,
+          "edge": 0.065,
+          "notes": "Song Lam compagine di V.League 1 di massima divisione contro Lam Dong."
+        },
+        {
+          "match": "Binh Phuoc vs CS Dong Thap",
+          "kickoff": "2026-10-06 13:00 CEST",
+          "tournament": "VIE Coppa di Vietnam",
+          "market": "1",
+          "odds": 1.30,
+          "probability": 0.81,
+          "fair_odd": 1.24,
+          "edge": 0.053,
+          "notes": "Binh Phuoc favorita interna solida con rosa di vertice."
+        },
+        {
+          "match": "Corea del Sud vs Uzbekistan",
+          "kickoff": "2026-10-06 13:00 CEST",
+          "tournament": "INT Amichevoli Nazionali",
+          "market": "1X",
+          "odds": 1.18,
+          "probability": 0.89,
+          "fair_odd": 1.12,
+          "edge": 0.050,
+          "notes": "Corea del Sud padrona di casa a Seul protetta da pareggio a ritmi lenti."
+        }
+      ]
+    },
+    {
+      "id": "TICKET_DIURNO_2_POMERIGGIO",
+      "name": "Ticket 2 (Primo Pomeriggio 13:30 - 15:30): Cina, England U21 & Riserve",
+      "stake_eur": 3.0,
+      "total_odds": 2.42,
+      "probability": 0.518,
+      "edge": 0.254,
+      "potential_payout_eur": 7.26,
+      "groq_verdict": "APPROVATA",
+      "legs": [
+        {
+          "match": "Cina vs Tagikistan",
+          "kickoff": "2026-10-06 13:35 CEST",
+          "tournament": "INT Amichevoli Nazionali",
+          "market": "1X",
+          "odds": 1.20,
+          "probability": 0.88,
+          "fair_odd": 1.14,
+          "edge": 0.056,
+          "notes": "Cina favorita interna su Tagikistan; 1X protegge da blocco tattico."
+        },
+        {
+          "match": "Nantong Zhiyun vs Shanghai Jiading",
+          "kickoff": "2026-10-06 13:30 CEST",
+          "tournament": "CHN League One",
+          "market": "1",
+          "odds": 1.40,
+          "probability": 0.77,
+          "fair_odd": 1.30,
+          "edge": 0.078,
+          "notes": "Nantong corazzata casalinga a quota 1.40 contro 7.00 del Jiading."
+        },
+        {
+          "match": "Colchester United vs Swansea City U21",
+          "kickoff": "2026-10-06 15:00 CEST",
+          "tournament": "ENG II Divisione U21",
+          "market": "X2",
+          "odds": 1.22,
+          "probability": 0.86,
+          "fair_odd": 1.16,
+          "edge": 0.049,
+          "notes": "Swansea U21 favorita esterna a 1.62; X2 copre interamente il pari."
+        },
+        {
+          "match": "Albion FC Reserve vs Nacional de Montevideo Res.",
+          "kickoff": "2026-10-06 15:30 CEST",
+          "tournament": "URU Camp. Riserve I Div.",
+          "market": "X2",
+          "odds": 1.18,
+          "probability": 0.89,
+          "fair_odd": 1.12,
+          "edge": 0.050,
+          "notes": "Nacional Montevideo riserve di massimo livello uruguaiano; X2 blindata."
+        }
+      ]
+    }
+  ]
+}

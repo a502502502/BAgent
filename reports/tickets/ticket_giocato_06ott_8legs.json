@@ -1,0 +1,100 @@
+{
+  "ticket_id": "TICKET_USER_SNAI_06OTT_DAYTIME",
+  "name": "Schedina Diurna Utente SNAI (8 Eventi)",
+  "date_played": "2026-10-06",
+  "bookmaker": "SNAI",
+  "total_odds": 8.47,
+  "stake_eur": 5.00,
+  "potential_payout_eur": 42.33,
+  "status": "IN_PROGRESS",
+  "matches": [
+    {
+      "order": 1,
+      "match": "Lam Dong - Sông Lam",
+      "competition": "VIE Coppa di Vietnam",
+      "kickoff_cest": "2026-10-06 10:30",
+      "market": "1X2 Esito Finale",
+      "selection": "2",
+      "odds": 1.53,
+      "status": "LIVE_1T",
+      "target_desc": "Vittoria esterna del Sông Lam Nghệ An"
+    },
+    {
+      "order": 2,
+      "match": "AS Trencin U19 - Spartak Trnava U19",
+      "competition": "SVK Campionato U19",
+      "kickoff_cest": "2026-10-06 11:00",
+      "market": "Doppia Chance",
+      "selection": "1X",
+      "odds": 1.30,
+      "status": "UPCOMING",
+      "target_desc": "Trencin U19 vince o pareggia"
+    },
+    {
+      "order": 3,
+      "match": "Saudi Arabia U20 - Armenia U20",
+      "competition": "INT Amichevoli U20",
+      "kickoff_cest": "2026-10-06 11:00",
+      "market": "1X2 Esito Finale",
+      "selection": "1",
+      "odds": 1.36,
+      "status": "UPCOMING",
+      "target_desc": "Vittoria casalinga Arabia Saudita U20"
+    },
+    {
+      "order": 4,
+      "match": "UD Leiria U23 - Santa Clara U23",
+      "competition": "POR Campionato U23",
+      "kickoff_cest": "2026-10-06 12:00",
+      "market": "Under/Over 1.5",
+      "selection": "OVER",
+      "odds": 1.25,
+      "status": "UPCOMING",
+      "target_desc": "Almeno 2 gol totali nella partita"
+    },
+    {
+      "order": 5,
+      "match": "Changchun Yatai - Yanbian Longding",
+      "competition": "CHN League One",
+      "kickoff_cest": "2026-10-06 13:00",
+      "market": "Doppia Chance",
+      "selection": "1X",
+      "odds": 1.20,
+      "status": "UPCOMING",
+      "target_desc": "Changchun Yatai vince o pareggia"
+    },
+    {
+      "order": 6,
+      "match": "Pho Hien FC - Huda Hue",
+      "competition": "VIE Coppa di Vietnam",
+      "kickoff_cest": "2026-10-06 13:00",
+      "market": "1X2 Esito Finale",
+      "selection": "1",
+      "odds": 1.06,
+      "status": "UPCOMING",
+      "target_desc": "Vittoria casalinga Pho Hien FC"
+    },
+    {
+      "order": 7,
+      "match": "Binh Phuoc - CS. Dong Thap",
+      "competition": "VIE Coppa di Vietnam",
+      "kickoff_cest": "2026-10-06 13:00",
+      "market": "1X2 Esito Finale",
+      "selection": "1",
+      "odds": 1.30,
+      "status": "UPCOMING",
+      "target_desc": "Vittoria casalinga Binh Phuoc"
+    },
+    {
+      "order": 8,
+      "match": "Nantong Zhiyun - Shanghai Jiading City Development",
+      "competition": "CHN League One",
+      "kickoff_cest": "2026-10-06 13:30",
+      "market": "1X2 Esito Finale",
+      "selection": "1",
+      "odds": 1.40,
+      "status": "UPCOMING",
+      "target_desc": "Vittoria casalinga Nantong Zhiyun"
+    }
+  ]
+}

@@ -59,7 +59,7 @@ def compact_event_detail(detail: dict, source_url: str) -> dict:
         outcomes = []
         for esito in info.get("esitoList") or []:
             raw_odd = esito.get("quota")
-            if not raw_odd:
+            if not raw_odd or raw_odd == 100:
                 continue
             outcomes.append({
                 "selection": esito.get("descrizione") or "",

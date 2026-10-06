@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-10-06 11:34 CEST",
+  "date_target": "2026-10-06",
+  "competition": "UEFA Nations League",
+  "ticket_name": "Quaterna Ibrida d'Elite Nations League (Solo Oggi 06/10)",
+  "stake_eur": 3.0,
+  "total_odds": 3.46,
+  "probability": 0.363,
+  "fair_odd": 2.75,
+  "edge": 0.256,
+  "potential_payout_eur": 10.38,
+  "legs": [
+    {
+      "match": "Kazakistan vs Isole Far Oer",
+      "kickoff": "2026-10-06 16:00 CEST",
+      "competition": "UEFA Nations League",
+      "family": "MULTIGOAL_TEMPI",
+      "market": "MultiGol MultiEsiti [1-3 Gol]",
+      "odds": 1.33,
+      "est_p": 0.765,
+      "tactics": "Partita pomeridiana ad Astana molto tattica e bloccata; il range 1-3 copre l'1-0, 2-0, 1-1, 2-1, 0-1, 0-2 (esclude lo 0-0 sterile e goleade).",
+      "score": 0.933,
+      "fair_odd": 1.31,
+      "edge": 0.017
+    },
+    {
+      "match": "Scozia vs Slovenia",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "competition": "UEFA Nations League",
+      "family": "CORNERS_VOLUME",
+      "market": "Prima a 4 Calci d'Angolo [Team 1 - Scozia]",
+      "odds": 1.45,
+      "est_p": 0.76,
+      "tactics": "Scozia a Hampden Park con forte spinta laterale e cross continui; Slovenia chiusa a protezione della propria area.",
+      "score": 0.934,
+      "fair_odd": 1.32,
+      "edge": 0.102
+    },
+    {
+      "match": "Inghilterra vs Repubblica Ceca",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "competition": "UEFA Nations League",
+      "family": "CARTELLINI_SANZIONI",
+      "market": "Under/Over 2.5 Punti Cartellini [OVER]",
+      "odds": 1.4,
+      "est_p": 0.78,
+      "tactics": "Scontro ad alta intensità fisica con molti contrasti a centrocampo; soglia 2.5 cartellini (minimo 3 cartellini totali) ampiamente coperta.",
+      "score": 0.986,
+      "fair_odd": 1.28,
+      "edge": 0.092
+    },
+    {
+      "match": "Croazia vs Spagna",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "competition": "UEFA Nations League",
+      "family": "STATISTICHE_TIRI",
+      "market": "Under/Over 8.5 Tiri in Porta [OVER]",
+      "odds": 1.28,
+      "est_p": 0.8,
+      "tactics": "Spagna e Croazia sono due formazioni a trazione offensiva e fraseggio rapido; 9 tiri nello specchio complessivi sono ampiamente alla portata.",
+      "score": 0.92,
+      "fair_odd": 1.25,
+      "edge": 0.024
+    }
+  ],
+  "groq_verdict": "APPROVATA",
+  "groq_report": "**1. Analisi Matematica – Valore Atteso (EV)**  \n\n| Leg | Probabilità (P) | Quota Netwin | EV (P·quota – 1) | % EV |\n|-----|----------------|--------------|-----------------|------|\n| 1 – Kazakistan vs Isole Far Oer (1‑3 gol) | 0,765 | 1,33 | **+0,0165** | **+1,6 %** |\n| 2 – Scozia vs Slovenia (Prima a 4 c. d’angolo – Scozia) | 0,760 | 1,45 | **+0,1020** | **+10,2 %** |\n| 3 – Inghilterra vs Repubblica Ceca (OVER 2,5 cartellini) | 0,780 | 1,40 | **+0,0920** | **+9,2 %** |\n| 4 – Croazia vs Spagna (OVER 8,5 tiri in porta) | 0,800 | 1,28 | **+0,0240** | **+2,4 %** |\n\n- **EV totale della quaterna (parlay)**  \n  - Probabilità complessiva (indipendente): 0,765 × 0,760 × 0,780 × 0,800 ≈ 0,363 (36,3 %).  \n  - Quota totale: 3,46.  \n  - EV = 0,363 × 3,46 – 1 ≈ +0,255 → **+25,5 %**.  \n\n> L’EV di ogni singola selezione è positivo; l’EV complessivo supera di gran lunga il +4 % di soglia “avviso”.\n\n---\n\n**2. Trappole Bookmaker – Scenari di perdita**\n\n| Leg | Mercato | Scenario che fa perdere la scommessa |\n|-----|---------|--------------------------------------|\n| 1 | **MultiGol 1‑3 gol** (totale gol nella partita) | **0‑0** (0 gol) **oppure** 4 gol o più (es. 2‑2, 4‑0, 3‑2, ecc.). |\n| 2 | **Prima a 4 calci d’angolo – Scozia** | Scozia **non** raggiunge i 4 c. d’angolo per prima: <br>• Slovenia arriva a 4 c. d’angolo prima, **oppure** <br>• Nessuna squadra raggiunge 4 c. d’angolo entro i 90 min (il mercato si chiude “no winner”). |\n| 3 | **OVER 2,5 cartellini** (totale cartellini) | Totale cartellini **≤ 2** (0, 1 o 2). |\n| 4 | **OVER 8,5 tiri in porta** (tiri totali in porta) | Totale tiri in porta **≤ 8**. |\n\n---\n\n**3. Verdetto Finale**\n\n- Nessuna delle selezioni rientra nei vincoli di “market a rischio strutturale” (1X2 secco, under stretto su corazzata, ecc.).  \n- Tutte le quote mostrano un margine positivo rispetto alle probabilità stimate.\n\n**Verdetto:** **APPROVATA**  \n\n**Stake consigliato:** **3 % del bankroll** (≈ €3 su €100). Questo livello consente di sfruttare l’EV positivo della quaterna senza eccessivo rischio di volatilità."
+}
