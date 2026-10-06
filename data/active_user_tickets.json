@@ -1,5 +1,49 @@
 [
   {
+    "ticket_id": "TICKET_USER_SNAI_06OTT_QUADRUPLA_MISTA",
+    "date_created": "2026-10-06 20:20:00",
+    "stake_eur": 5.0,
+    "total_odds": 4.34,
+    "potential_payout_eur": 21.74,
+    "status": "OPEN",
+    "strategy": "MIXED_SPECIALS_NL_06OTT",
+    "notes": "Quadrupla Mista SNAI (1 Gia Vinta su Kazakistan + 3 in programma ore 20:45)",
+    "legs": [
+      {
+        "match": "Kazakistan vs Isole Far Oer",
+        "tournament": "UEFA Nations League",
+        "market": "MultiGol Squadra 1 (1-3)",
+        "odds": 1.42,
+        "status": "WON",
+        "kickoff": "2026-10-06 16:00 CEST"
+      },
+      {
+        "match": "Scozia vs Slovenia",
+        "tournament": "UEFA Nations League",
+        "market": "Prima a 4 Calci d Angolo: Team 1 (Scozia)",
+        "odds": 1.45,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 20:45 CEST"
+      },
+      {
+        "match": "Inghilterra vs Repubblica Ceca",
+        "tournament": "UEFA Nations League",
+        "market": "Over 2.5 Punti Cartellini",
+        "odds": 1.65,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 20:45 CEST"
+      },
+      {
+        "match": "Croazia vs Spagna",
+        "tournament": "UEFA Nations League",
+        "market": "Over 8.5 Tiri in Porta",
+        "odds": 1.28,
+        "status": "PENDING",
+        "kickoff": "2026-10-06 20:45 CEST"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_SNAI_06OTT_TRIPLA_TIRI_ULTRA",
     "date_created": "2026-10-06 20:20:00",
     "stake_eur": 5.0,

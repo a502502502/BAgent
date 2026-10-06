@@ -1,0 +1,54 @@
+{
+  "ticket_id": "TICKET_USER_SNAI_06OTT_QUADRUPLA_MISTA",
+  "name": "Quadrupla Mista Speciale SNAI Nations League 06 Ottobre",
+  "date_played": "2026-10-06 20:20 CEST",
+  "bookmaker": "SNAI",
+  "status": "OPEN",
+  "stake_eur": 5.0,
+  "odds": 4.34,
+  "potential_payout_eur": 21.74,
+  "legs_summary": "1 VINTA (Kazakistan) + 3 IN ATTESA (ore 20:45 CEST)",
+  "legs": [
+    {
+      "event_code": "36411-8239",
+      "match": "Kazakistan - Isole Far Oer",
+      "kickoff": "2026-10-06 16:00 CEST",
+      "market": "MULTIGOAL SQUADRA 1 MULTIESITI",
+      "selection": "1-3",
+      "odds": 1.42,
+      "status": "WON",
+      "final_score": "2-2",
+      "note": "Kazakistan ha segnato 2 reti, esito 1-3 verificato e VINTA"
+    },
+    {
+      "event_code": "36411-8248",
+      "match": "Scozia - Slovenia",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "market": "PRIMA A 4 CALCI D'ANGOLO",
+      "selection": "TEAM 1 (Scozia)",
+      "odds": 1.45,
+      "status": "PENDING",
+      "rationale": "Scozia a Hampden Park con Robertson e Doak a spingere sui corner contro il blocco 4-4-2 sloveno"
+    },
+    {
+      "event_code": "36411-15596",
+      "match": "Inghilterra - Repubblica Ceca",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "market": "U/O 2.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE)",
+      "selection": "OVER",
+      "odds": 1.65,
+      "status": "PENDING",
+      "rationale": "Soglia minima di 3 cartellini complessivi (o 1 giallo + 1 rosso) con duelli intensi Kral/Sadilek vs Saka/Kane"
+    },
+    {
+      "event_code": "36411-8245",
+      "match": "Croazia - Spagna",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "market": "U/O 8.5 TIRI IN PORTA",
+      "selection": "OVER",
+      "odds": 1.28,
+      "status": "PENDING",
+      "rationale": "Due attacchi di altissima qualita con la Spagna mediamente sopra 6 tiri nello specchio"
+    }
+  ]
+}
