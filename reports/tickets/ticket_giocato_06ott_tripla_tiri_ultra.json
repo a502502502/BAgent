@@ -1,0 +1,54 @@
+{
+  "ticket_id": "TICKET_USER_SNAI_06OTT_TRIPLA_TIRI_ULTRA",
+  "name": "Tripla Speciale Tiri in Porta Ultra (Pali, Traverse e Sostituto Inclusi)",
+  "date_played": "2026-10-06 20:20 CEST",
+  "bookmaker": "SNAI",
+  "status": "OPEN",
+  "stake_eur": 5.0,
+  "odds": 6.48,
+  "potential_payout_eur": 32.40,
+  "lineup_check": {
+    "verified_at": "2026-10-06 20:20 CEST",
+    "all_starters_confirmed": true,
+    "starters": [
+      "John McGinn (Scozia) - TITOLARE CONFERMATO nel 3-5-1-1",
+      "Trent Alexander-Arnold (Inghilterra) - TITOLARE CONFERMATO terzino destro",
+      "Pedri (Spagna) - TITOLARE CONFERMATO centrocampista nel 4-3-3"
+    ]
+  },
+  "legs": [
+    {
+      "event_code": "36411-8248",
+      "match": "Scozia - Slovenia",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "market": "U/O 0.5 Tiri in Porta Ultra Inc Pali Traverse Inc TS",
+      "selection": "MCGINN J. OVER 0.5",
+      "odds": 1.80,
+      "status": "PENDING",
+      "safety_clause": "Paga con tiro nello specchio, palo, traversa o giocata analoga del sostituto.",
+      "starter_confirmed": true
+    },
+    {
+      "event_code": "36411-15596",
+      "match": "Inghilterra - Repubblica Ceca",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "market": "U/O 0.5 Tiri in Porta Ultra Inc Pali Traverse Inc TS",
+      "selection": "ALEXANDER ARNOLD T. OVER 0.5",
+      "odds": 1.80,
+      "status": "PENDING",
+      "safety_clause": "Paga con tiro nello specchio, palo, traversa o giocata analoga del sostituto.",
+      "starter_confirmed": true
+    },
+    {
+      "event_code": "36411-8245",
+      "match": "Croazia - Spagna",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "market": "U/O 0.5 Tiri in Porta Ultra Inc Pali Traverse Inc TS",
+      "selection": "PEDRI OVER 0.5",
+      "odds": 2.00,
+      "status": "PENDING",
+      "safety_clause": "Paga con tiro nello specchio, palo, traversa o giocata analoga del sostituto.",
+      "starter_confirmed": true
+    }
+  ]
+}
