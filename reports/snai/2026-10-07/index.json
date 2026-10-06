@@ -1,1 +1,164 @@
-[]
+[
+  {
+    "match": "Antigua e Barbuda - Aruba",
+    "competition": "",
+    "kickoff_time": "2026-10-07 01:00 CEST",
+    "event_id": "36411-4794",
+    "market_count": 24,
+    "file": "reports/snai/2026-10-07/match--antigua-e-barbuda-aruba.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/concacaf-nations-league/antigua-e-barbuda-aruba"
+  },
+  {
+    "match": "Argentina - Benin",
+    "competition": "",
+    "kickoff_time": "2026-10-07 01:00 CEST",
+    "event_id": "36411-26277",
+    "market_count": 26,
+    "file": "reports/snai/2026-10-07/match--argentina-benin.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/argentina-benin"
+  },
+  {
+    "match": "Avispa Fukuoka - Yokohama FC",
+    "competition": "",
+    "kickoff_time": "2026-10-07 11:30 CEST",
+    "event_id": "36411-7561",
+    "market_count": 193,
+    "file": "reports/snai/2026-10-07/match--avispa-fukuoka-yokohama-fc.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/avispa-fukuoka-yokohama-fc"
+  },
+  {
+    "match": "CD Universidad Catolica - LDU Quito",
+    "competition": "",
+    "kickoff_time": "2026-10-07 17:00 CEST",
+    "event_id": "36411-39687",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-07/match--cd-universidad-catolica-ldu-quito.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/ecu-coppa/cd-universidad-catolica-ldu-quito"
+  },
+  {
+    "match": "Cerezo Osaka - Kagoshima United",
+    "competition": "",
+    "kickoff_time": "2026-10-07 11:30 CEST",
+    "event_id": "36411-7785",
+    "market_count": 198,
+    "file": "reports/snai/2026-10-07/match--cerezo-osaka-kagoshima-united.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/cerezo-osaka-kagoshima-united"
+  },
+  {
+    "match": "Colo Colo - Puerto Montt",
+    "competition": "",
+    "kickoff_time": "2026-10-07 01:30 CEST",
+    "event_id": "36411-27850",
+    "market_count": 22,
+    "file": "reports/snai/2026-10-07/match--colo-colo-puerto-montt.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/chi-coppa-del-cile/colo-colo-puerto-montt"
+  },
+  {
+    "match": "Colombia - Perù",
+    "competition": "",
+    "kickoff_time": "2026-10-07 01:45 CEST",
+    "event_id": "36411-53145",
+    "market_count": 448,
+    "file": "reports/snai/2026-10-07/match--colombia-peru.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/colombia-peru"
+  },
+  {
+    "match": "CS Cerrito - Montevideo Wanderers",
+    "competition": "",
+    "kickoff_time": "2026-10-07 20:30 CEST",
+    "event_id": "36411-39738",
+    "market_count": 23,
+    "file": "reports/snai/2026-10-07/match--cs-cerrito-montevideo-wanderers.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/uru-coppa-auf/cs-cerrito-montevideo-wanderers"
+  },
+  {
+    "match": "FC Tokyo - Shonan Bellmare",
+    "competition": "",
+    "kickoff_time": "2026-10-07 12:00 CEST",
+    "event_id": "36411-7562",
+    "market_count": 197,
+    "file": "reports/snai/2026-10-07/match--fc-tokyo-shonan-bellmare.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/fc-tokyo-shonan-bellmare"
+  },
+  {
+    "match": "Gainare Tottori - Tokyo Verdy",
+    "competition": "",
+    "kickoff_time": "2026-10-07 12:00 CEST",
+    "event_id": "36411-7563",
+    "market_count": 198,
+    "file": "reports/snai/2026-10-07/match--gainare-tottori-tokyo-verdy.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/gainare-tottori-tokyo-verdy"
+  },
+  {
+    "match": "Guyana francese - Belize",
+    "competition": "",
+    "kickoff_time": "2026-10-07 04:00 CEST",
+    "event_id": "36411-53314",
+    "market_count": 48,
+    "file": "reports/snai/2026-10-07/match--guyana-francese-belize.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/concacaf-nations-league/guyana-francese-belize"
+  },
+  {
+    "match": "IF Gnistan - Inter Turku",
+    "competition": "",
+    "kickoff_time": "2026-10-07 18:00 CEST",
+    "event_id": "36411-7542",
+    "market_count": 197,
+    "file": "reports/snai/2026-10-07/match--if-gnistan-inter-turku.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/fin-veikkausliiga/if-gnistan-inter-turku"
+  },
+  {
+    "match": "Messico - Cile",
+    "competition": "",
+    "kickoff_time": "2026-10-07 04:30 CEST",
+    "event_id": "36412-35428",
+    "market_count": 479,
+    "file": "reports/snai/2026-10-07/match--messico-cile.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/messico-cile"
+  },
+  {
+    "match": "Olimpia Asuncion - Club Nacional",
+    "competition": "",
+    "kickoff_time": "2026-10-07 00:15 CEST",
+    "event_id": "36411-4354",
+    "market_count": 53,
+    "file": "reports/snai/2026-10-07/match--olimpia-asuncion-club-nacional.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/par-division-profesional/olimpia-asuncion-club-nacional"
+  },
+  {
+    "match": "Sanfrecce Hiroshima - Iwaki FC",
+    "competition": "",
+    "kickoff_time": "2026-10-07 11:30 CEST",
+    "event_id": "36411-7558",
+    "market_count": 199,
+    "file": "reports/snai/2026-10-07/match--sanfrecce-hiroshima-iwaki-fc.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/sanfrecce-hiroshima-iwaki-fc"
+  },
+  {
+    "match": "Shimizu S-Pulse - V-Varen Nagasaki",
+    "competition": "",
+    "kickoff_time": "2026-10-07 12:00 CEST",
+    "event_id": "36411-7559",
+    "market_count": 195,
+    "file": "reports/snai/2026-10-07/match--shimizu-s-pulse-v-varen-nagasaki.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/shimizu-s-pulse-v-varen-nagasaki"
+  },
+  {
+    "match": "Stati Uniti - Canada",
+    "competition": "",
+    "kickoff_time": "2026-10-07 02:00 CEST",
+    "event_id": "36411-6119",
+    "market_count": 461,
+    "file": "reports/snai/2026-10-07/match--stati-uniti-canada.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/amichevoli-nazionali/stati-uniti-canada"
+  },
+  {
+    "match": "Urawa Reds - Omiya Ardija",
+    "competition": "",
+    "kickoff_time": "2026-10-07 11:00 CEST",
+    "event_id": "36411-7557",
+    "market_count": 197,
+    "file": "reports/snai/2026-10-07/match--urawa-reds-omiya-ardija.json",
+    "page_url": "https://www.snai.it/scommesse/evento/calcio/jpn-coppa-dell-imperatore/urawa-reds-omiya-ardija"
+  }
+]
