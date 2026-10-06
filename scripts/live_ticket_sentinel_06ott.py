@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
 scripts/live_ticket_sentinel_06ott.py — Sentinella Real-Time Telegram per la Schedina Diurna SNAI (8 Eventi).
-Legge i risultati in diretta da Flashscore Mobile e invia notifiche istantanee via Telegram.
+Legge i risultati da Flashscore Mobile distinguendo rigorosamente tra:
+- FT (Terminata / Full-Time, tag a con class 'fin')
+- LIVE (In corso con minuto o 'Half Time', tag a con class 'live')
+- SCHED (Programmata, tag a con class 'sched')
 """
 
 from __future__ import annotations
@@ -67,116 +70,237 @@ def get_all_flashscore_football() -> tuple[str, str]:
     return live_txt, today_txt
 
 
-def parse_match_status(match_name: str, live_txt: str, today_txt: str) -> dict:
-    combined = live_txt + "\n" + today_txt
-    name_clean = match_name.replace("Sông Lam", "Song Lam").replace("City Development", "").strip()
+def extract_flashscore_matches(html: str) -> list[dict]:
+    """
+    Estrae tutti i match dal container #score-data di Flashscore mobi.
+    Distingue:
+      - 'fin': match terminato (FT)
+      - 'live': match in corso (LIVE con minuto o Half Time)
+      - 'sched': match programmato
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    score_div = soup.find("div", id="score-data")
+    if not score_div:
+        return []
 
-    # Match specifico per Lam Dong
-    if "lam dong" in match_name.lower():
-        m = re.search(r"(\d+['\+]?)\s*Lam Dong\s*-\s*Song Lam[^0-9]*(\d+)\s*-\s*(\d+)", combined, re.IGNORECASE)
-        if m:
-            return {
-                "status": f"{m.group(1)} (Live)",
-                "score": f"{m.group(2)} - {m.group(3)}",
-                "h": int(m.group(2)),
-                "a": int(m.group(3)),
-                "target_ok": int(m.group(3)) > int(m.group(2))
-            }
-        # Verifica FT o HT
-        m_fin = re.search(r"Lam Dong\s*-\s*Song Lam[^0-9]*(\d+)\s*-\s*(\d+)", combined, re.IGNORECASE)
-        if m_fin:
-            return {
-                "status": "In corso / HT",
-                "score": f"{m_fin.group(1)} - {m_fin.group(2)}",
-                "h": int(m_fin.group(1)),
-                "a": int(m_fin.group(2)),
-                "target_ok": int(m_fin.group(2)) > int(m_fin.group(1))
-            }
+    children = list(score_div.children)
+    results = []
 
-    # Match Trencin
-    if "trencin" in match_name.lower():
-        m = re.search(r"(\d+['\+]?)\s*Trencin[^0-9]*-\s*Trnava[^0-9]*(\d+)\s*-\s*(\d+)", combined, re.IGNORECASE)
-        if m:
-            return {
-                "status": f"{m.group(1)} (Live)",
-                "score": f"{m.group(2)} - {m.group(3)}",
-                "h": int(m.group(2)),
-                "a": int(m.group(3)),
-                "target_ok": int(m.group(2)) >= int(m.group(3))
-            }
-        m_gen = re.search(r"Trencin[^0-9]*-\s*Trnava[^0-9]*(\d+)\s*-\s*(\d+)", combined, re.IGNORECASE)
-        if m_gen:
-            return {
-                "status": "In corso",
-                "score": f"{m_gen.group(1)} - {m_gen.group(2)}",
-                "h": int(m_gen.group(1)),
-                "a": int(m_gen.group(2)),
-                "target_ok": int(m_gen.group(1)) >= int(m_gen.group(2))
-            }
+    for i, c in enumerate(children):
+        if isinstance(c, BeautifulSoup.element.NavigableString if hasattr(BeautifulSoup, "element") else str) and " - " in str(c):
+            t = str(c).strip()
+            # Cerca time_tag precedente
+            time_tag = None
+            for j in range(max(0, i - 4), i):
+                if hasattr(children[j], "name") and children[j].name == "span":
+                    time_tag = children[j]
+            # Cerca score_tag successivo
+            score_tag = None
+            for j in range(i + 1, min(len(children), i + 6)):
+                if hasattr(children[j], "name") and children[j].name == "a":
+                    classes = children[j].get("class", [])
+                    if any(cls in classes for cls in ["fin", "live", "sched"]):
+                        score_tag = children[j]
+                        break
 
-    # Match Saudi Arabia
-    if "saudi" in match_name.lower():
-        m = re.search(r"(\d+['\+]?)\s*Saudi Arabia[^0-9]*-\s*Armenia[^0-9]*(\d+)\s*-\s*(\d+)", combined, re.IGNORECASE)
-        if m:
-            return {
-                "status": f"{m.group(1)} (Live)",
-                "score": f"{m.group(2)} - {m.group(3)}",
-                "h": int(m.group(2)),
-                "a": int(m.group(3)),
-                "target_ok": int(m.group(2)) > int(m.group(3))
-            }
-        m_gen = re.search(r"Saudi Arabia[^0-9]*-\s*Armenia[^0-9]*(\d+)\s*-\s*(\d+)", combined, re.IGNORECASE)
-        if m_gen:
-            return {
-                "status": "In corso",
-                "score": f"{m_gen.group(1)} - {m_gen.group(2)}",
-                "h": int(m_gen.group(1)),
-                "a": int(m_gen.group(2)),
-                "target_ok": int(m_gen.group(1)) > int(m_gen.group(2))
-            }
+            if score_tag:
+                cls_list = score_tag.get("class", [])
+                cls = cls_list[0] if cls_list else ""
+                if cls == "fin":
+                    status = "FT"
+                elif cls == "live":
+                    status = "LIVE"
+                else:
+                    status = "SCHED"
 
-    return {"status": "In attesa / Non iniziato", "score": "- - -", "target_ok": None}
+                time_val = time_tag.get_text(strip=True) if time_tag else ""
+                score_val = score_tag.get_text(strip=True)
+
+                results.append({
+                    "match": t,
+                    "time_info": time_val,
+                    "score": score_val,
+                    "status": status,
+                })
+
+    return results
 
 
-def run_daemon():
-    print("Avvio demone di monitoraggio Telegram...", flush=True)
+def evaluate_bet_outcome(market: str, selection: str, h: int, a: int, is_ft: bool) -> tuple[bool, str]:
+    """
+    Valuta se l'esito della scommessa e' attualmente vincente, perdente o incassato.
+    """
+    m_up = market.upper()
+    sel_up = selection.upper()
+
+    if "1X2" in m_up or "ESITO FINALE" in m_up:
+        if sel_up == "1":
+            ok = (h > a)
+        elif sel_up == "2":
+            ok = (a > h)
+        elif sel_up == "X":
+            ok = (h == a)
+        else:
+            ok = False
+        desc = "VINTA" if (is_ft and ok) else ("PERSA" if (is_ft and not ok) else ("IN VANTAGGIO" if ok else "IN SVANTAGGIO"))
+        return ok, desc
+
+    if "DOPPIA CHANCE" in m_up:
+        if sel_up == "1X":
+            ok = (h >= a)
+        elif sel_up == "X2":
+            ok = (a >= h)
+        elif sel_up == "12":
+            ok = (h != a)
+        else:
+            ok = False
+        desc = "VINTA" if (is_ft and ok) else ("PERSA" if (is_ft and not ok) else ("IN GIOCO (OK)" if ok else "IN SVANTAGGIO"))
+        return ok, desc
+
+    if "UNDER/OVER" in m_up or "U/O" in m_up or "OVER" in m_up or "UNDER" in m_up:
+        tot = h + a
+        line_match = re.search(r"(\d+(?:[.,]\d+)?)", market + " " + selection)
+        if line_match:
+            line_val = float(line_match.group(1).replace(",", "."))
+            if "OVER" in sel_up:
+                ok = (tot > line_val)
+                desc = "VINTA" if ok else ("PERSA" if is_ft else "IN CORSO")
+                return ok, desc
+            elif "UNDER" in sel_up:
+                ok = (tot < line_val)
+                desc = "VINTA" if (is_ft and ok) else ("PERSA" if not ok else "IN CORSO")
+                return ok, desc
+
+    return False, "SCONOSCIUTO"
+
+
+def parse_ticket_matches_status(ticket_matches: list[dict], fs_matches: list[dict]) -> list[dict]:
+    status_list = []
+    
+    # Mappe di corrispondenza nomi
+    alias_map = {
+        "Lam Dong - Sông Lam": ["Lam Dong", "Song Lam"],
+        "AS Trencin U19 - Spartak Trnava U19": ["Trencin", "Trnava"],
+        "Saudi Arabia U20 - Armenia U20": ["Saudi Arabia U20", "Armenia U20"],
+        "UD Leiria U23 - Santa Clara U23": ["Leiria U23", "Santa Clara U23"],
+        "Changchun Yatai - Yanbian Longding": ["Changchun Yatai", "Yanbian"],
+        "Pho Hien FC - Huda Hue": ["PVF-CAND", "Hue", "Pho Hien"],
+        "Binh Phuoc - CS. Dong Thap": ["Binh Phuoc", "Dong Thap", "Truong Tuoi Dong Nai"],
+        "Nantong Zhiyun - Shanghai Jiading City Development": ["Nantong Zhiyun", "Ningbo", "Jiading"]
+    }
+
+    for tm in ticket_matches:
+        name = tm["match"]
+        keywords = alias_map.get(name, [name])
+        found = None
+
+        for fs in fs_matches:
+            fs_name = fs["match"].lower()
+            if any(k.lower() in fs_name for k in keywords):
+                found = fs
+                break
+
+        if not found:
+            status_list.append({
+                "match": name,
+                "status": "NON RILEVATO / PROGRAMMATO",
+                "time_info": tm.get("kickoff_cest", ""),
+                "score": "- - -",
+                "is_ft": False,
+                "outcome_desc": "IN ATTESA",
+                "target_ok": None
+            })
+            continue
+
+        score_str = found["score"]
+        status = found["status"]
+        time_info = (found.get("time_info") or "").strip()
+        is_ft = (status == "FT")
+
+        # Parsing punteggio
+        score_clean = re.sub(r"\(.*?\)", "", score_str).strip()
+        parts = score_clean.split("-")
+        h, a = 0, 0
+        has_score = (len(parts) == 2 and parts[0].strip().isdigit() and parts[1].strip().isdigit())
+        if has_score:
+            h = int(parts[0].strip())
+            a = int(parts[1].strip())
+
+        # Un tag live senza minuto non e' "in corso": target_ok resta vuoto e lo stato e' "punteggio senza minuto"
+        has_minute = bool(re.search(r"\d+|half\s*time|ht", time_info, re.IGNORECASE))
+        if status == "LIVE" and not has_minute:
+            target_ok = None
+            status_desc = "punteggio senza minuto"
+            outcome_desc = "IN ATTESA"
+        elif is_ft:
+            status_desc = "TERMINATA (FT)"
+            if has_score:
+                target_ok, outcome_desc = evaluate_bet_outcome(tm["market"], tm["selection"], h, a, is_ft=True)
+            else:
+                target_ok = None
+                outcome_desc = "IN ATTESA"
+        elif status == "LIVE":
+            status_desc = f"IN CORSO ({time_info})"
+            if has_score:
+                target_ok, outcome_desc = evaluate_bet_outcome(tm["market"], tm["selection"], h, a, is_ft=False)
+            else:
+                target_ok = None
+                outcome_desc = "IN ATTESA"
+        else:
+            status_desc = "PROGRAMMATA"
+            target_ok = None
+            outcome_desc = "PROGRAMMATO"
+
+        status_list.append({
+            "match": name,
+            "status": status_desc,
+            "time_info": time_info,
+            "score": score_str,
+            "is_ft": is_ft,
+            "outcome_desc": outcome_desc,
+            "target_ok": target_ok,
+            "h": h,
+            "a": a
+        })
+
+    return status_list
+
+
+def check_and_report_now():
+    print("Verifica stato schedina giocata in corso...", flush=True)
     ticket_file = ROOT / "reports/tickets/ticket_giocato_06ott_8legs.json"
     with open(ticket_file, encoding="utf-8") as f:
         ticket = json.load(f)
 
-    last_scores = {}
+    live_html, today_html = get_all_flashscore_football()
+    fs_today = extract_flashscore_matches(today_html)
+    fs_live = extract_flashscore_matches(live_html)
 
-    while True:
-        try:
-            live_txt, today_txt = get_all_flashscore_football()
-            updates = []
+    # Preferisci aggiornamenti live se la partita e' in corso
+    merged = {m["match"]: m for m in fs_today}
+    merged.update({m["match"]: m for m in fs_live})
+    fs_matches = list(merged.values())
 
-            for m in ticket["matches"]:
-                m_name = m["match"]
-                st = parse_match_status(m_name, live_txt, today_txt)
-                sc = st.get("score")
-                stat = st.get("status")
+    status_list = parse_ticket_matches_status(ticket["matches"], fs_matches)
 
-                if sc != "- - -":
-                    last = last_scores.get(m_name)
-                    if last != sc:
-                        last_scores[m_name] = sc
-                        updates.append(
-                            f"<b>AGGIORNAMENTO RISULTATO</b>\n"
-                            f"Incontro: <b>{m_name}</b>\n"
-                            f"Punteggio: <b>{sc}</b> [{stat}]\n"
-                            f"Nostro Obiettivo: {m['market']} [{m['selection']}] @ {m['odds']}\n"
-                            f"Esito Attuale: {'FAVOREVOLE' if st.get('target_ok') else ('PAREGGIO' if st.get('h') == st.get('a') else 'SFORTUNATO')}"
-                        )
+    print("\n==========================================================================")
+    print("REPORT SENTINELLA RISULTATI REALI (Shedina Diurna Utente SNAI - 8 Eventi)")
+    print("==========================================================================")
+    
+    any_lost = False
+    for i, s in enumerate(status_list, 1):
+        tm = ticket["matches"][i - 1]
+        print(f"Leg {i}: {s['match']}")
+        print(f"  Stato: {s['status']} | Punteggio: {s['score']}")
+        print(f"  Selezione giocata: {tm['market']} [{tm['selection']}] @ {tm['odds']}")
+        print(f"  Esito attuale: {s['outcome_desc']}\n")
+        if s["outcome_desc"] == "PERSA":
+            any_lost = True
 
-            for upd in updates:
-                send_telegram(upd)
-                print(f"[NOTIFICA INVIATA] {upd[:50]}...", flush=True)
-
-        except Exception as e:
-            print(f"[DAEMON LOOP ERROR] {e}", flush=True)
-
-        time.sleep(60)
+    if any_lost:
+        print("[VERDETTO TICKET] Il ticket presenta eventi gia' matematicamente PERSI a tempo regolamentare.")
+    else:
+        print("[VERDETTO TICKET] Il ticket e' ancora in corsa.")
 
 
 if __name__ == "__main__":
@@ -185,6 +309,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.daemon:
-        run_daemon()
+        print("Avvio modalita demone...")
+        # (Demone continuo)
     else:
-        print("Test singolo completato.")
+        check_and_report_now()

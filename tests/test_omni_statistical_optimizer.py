@@ -48,43 +48,50 @@ def test_omni_pricer_multi_markets():
         corners_away=3.2,
         cards_home=1.8,
         cards_away=2.6,
+        lineup_confirmed=True,
+        corners_certified=True,
         players={
             "scamacca": {"xg_90": 0.58, "fouls_avg": 1.2, "minutes": 75},
             "celik": {"xg_90": 0.05, "fouls_avg": 2.1, "minutes": 90}
         }
     )
 
-    # 1. Player prop
+    refused = pricer.price_market(
+        MatchDossier(match_name="Italia vs Turchia", players={"scamacca": {"xg_90": 0.58}}),
+        "Marcatore Piu Ultra Scamacca G.",
+        "SI",
+        book_odd=1.80,
+    )
+    assert refused is None
+
     pick_prop = pricer.price_market(dossier, "Marcatore Piu Ultra Scamacca G.", "SI", book_odd=1.80)
     assert pick_prop is not None
     assert pick_prop.blocked is None
     assert pick_prop.score > 0
 
-    # 2. Player fouls
     pick_foul = pricer.price_market(dossier, "U/O Falli Commessi Giocatore: Celik Zeki U/O 1.5", "OVER", book_odd=2.00)
     assert pick_foul is not None
     assert pick_foul.blocked is None
     assert pick_foul.score > 0
 
-    # 3. Corner 1X2
     pick_corner = pricer.price_market(dossier, "Calci Angolo 1X2", "1", book_odd=1.35)
     assert pick_corner is not None
     assert pick_corner.blocked is None
 
-    # 4. MultiGol Squadra 1-3
     pick_mg = pricer.price_market(dossier, "MultiGol Squadra 1 Multiesiti", "1-3", book_odd=1.33)
     assert pick_mg is not None
-    assert pick_mg.blocked is None
+    assert pick_mg.blocked == "tetto su attacco dominante"
 
 
 def test_portfolio_optimizer_diversity():
     pricer = OmniStatisticalPricer()
     optimizer = CombinatorialPortfolioOptimizer(pricer=pricer)
 
-    d1 = MatchDossier("Italia vs Turchia", xg_home=2.0, xg_away=0.8, corners_home=6.5, corners_away=3.2,
+    d1 = MatchDossier("Italia vs Turchia", xg_home=1.6, xg_away=1.1, corners_home=6.5, corners_away=3.2,
+                      lineup_confirmed=True,
                       players={"scamacca": {"xg_90": 0.6, "fouls_avg": 1.0}, "celik": {"xg_90": 0.0, "fouls_avg": 2.1}})
     d2 = MatchDossier("Francia vs Belgio", xg_home=1.8, xg_away=1.0, corners_home=5.5, corners_away=4.0)
-    d3 = MatchDossier("Romania vs Svezia", xg_home=1.1, xg_away=1.6, corners_home=3.5, corners_away=6.0)
+    d3 = MatchDossier("Romania vs Svezia", xg_home=1.1, xg_away=1.6, corners_home=3.5, corners_away=6.0, corners_certified=True)
     d4 = MatchDossier("Irlanda del Nord vs Georgia", xg_home=1.0, xg_away=0.9, corners_home=4.5, corners_away=4.0)
 
     markets_d1 = [

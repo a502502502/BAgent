@@ -1,20 +1,14 @@
-#!/usr/bin/env python3
-"""
-scripts/build_step_by_step_nl_ticket.py — Costruzione Passo-Passo della Schedina Nations League di OGGI (06/10/2026).
+"""Nations League di oggi: una selezione per partita, probabilità dal motore.
 
-Filtro Tassativo di Data:
-Esclude rigorosamente i match giocati ieri (05/10/2026, come Italia-Turchia, Francia-Belgio, ecc.).
-Include solo i 10 match ufficiali di oggi (06/10/2026).
+I cataloghi più vecchi di 12 ore non si usano. Corner, cartellini e props
+non entrano da questo script.
+Validazione hard-gate tramite StrictTicketPipeline e audit Groq Cloud (openai/gpt-oss-120b).
 """
-
 from __future__ import annotations
 
 import json
-import math
-import os
 import sys
-import time
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -25,192 +19,158 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
-from dotenv import load_dotenv
-load_dotenv(ROOT / ".env")
+from services.analysis.match_market_optimizer import MatchMarketOptimizer
+from services.analysis.snai_goal_book import MAX_AGE_HOURS, best_goal_pick, catalog_age_hours, goal_odds_from_catalog
+from services.betting.netwin_cache_reader import CachedMatch
+from services.betting.strict_ticket_pipeline import MarketCandidate, StrictTicketPipeline
 
-from services.debate.groq_auditor import GroqAuditor
+CEST = timezone(timedelta(hours=2))
+TODAY = "2026-10-06"
+OUT = ROOT / "reports" / "tickets" / "ticket_nations_league_passo_passo.json"
+SOURCES = [
+    ROOT / "reports" / "snai" / "2026-10-06-sera",
+    ROOT / "reports" / "snai_nl" / "catalog",
+    ROOT / "reports" / "snai" / "2026-10-06-fino-16",
+    ROOT / "reports" / "snai",
+]
 
 
-def sweet_spot_score(p: float, q: float) -> float:
-    """Calcolo gaussiano Sweet-Spot: centrato su p=0.80, q=1.40."""
-    if q < 1.15 or p <= 0:
-        return 0.0
-    p_term = ((p - 0.80) / 0.12) ** 2
-    q_term = ((math.log(q) - math.log(1.40)) / 0.22) ** 2
-    return float(math.exp(-0.5 * (p_term + q_term)))
-
-
-def main():
-    print("==========================================================================")
-    print("PIPELINE A 2 LIVELLI: NATIONS LEAGUE DI OGGI (06/10/2026) PASSO DOPO PASSO")
-    print("==========================================================================\n")
-
-    nl_catalog_dir = ROOT / "reports/snai_nl/catalog"
-
-    # PASSO 1: INGESTIONE E FILTRO DATA OGGI
-    print("[PASSO 1] INGESTIONE CATALOGHI SNAI & FILTRO DATA ESCLUSIVO OGGI (06/10/2026)")
-    today_matches = []
-    for f in nl_catalog_dir.glob("*.json"):
-        if f.name == "index.json":
+def _catalogs() -> list[dict]:
+    found: dict[str, dict] = {}
+    for folder in SOURCES:
+        if not folder.exists():
             continue
-        with open(f, encoding="utf-8") as fp:
-            d = json.load(fp)
-        ko = d.get("kickoff_time", "")
-        if "2026-10-06" in ko:
-            today_matches.append({
-                "match": d.get("match"),
-                "kickoff": ko,
-                "markets_count": len(d.get("markets", [])),
-                "file": f.name
-            })
+        for path in folder.glob("*.json"):
+            if path.name in {"index.json", "picks.json"}:
+                continue
+            raw = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(raw, dict):
+                continue
+            catalog = raw
+            catalog["_path"] = str(path)
+            kickoff = catalog.get("kickoff_time") or ""
+            match = catalog.get("match") or ""
+            if TODAY not in kickoff or " - " not in match or "GIORNATA" in match:
+                continue
+            competition = str(catalog.get("competition") or "")
+            in_daytime_folder = path.parent.name.startswith("2026-10-06")
+            if in_daytime_folder and "nations" not in competition.lower():
+                continue
+            previous = found.get(match)
+            if previous is None or (catalog_age_hours(catalog) or 99) < (catalog_age_hours(previous) or 99):
+                found[match] = catalog
+    return list(found.values())
 
-    print(f"  - Individuati esattamente {len(today_matches)} incontri di Nations League in programma OGGI (06/10/2026):")
-    for m in sorted(today_matches, key=lambda x: x["kickoff"]):
-        print(f"      * [{m['kickoff']}] {m['match']} ({m['markets_count']} mercati)")
 
-    print("\n  - Bando Tassativo Match di Ieri: Italia-Turchia, Francia-Belgio, Bosnia-Polonia sono state giocate il 05/10 e sono escluse.")
-    print("  - Regole Anti-Trappola applicate:")
-    print("      * BANDO di '1X + Under 3.5' e compound Under restrittivi.")
-    print("      * BANDO della monotonia 'Doppia Chance [12]' (vulnerabile allo 0-0/1-1).")
-    print("      * BANDO dell'1X2 secco contro corazzate.")
+def main() -> None:
+    now = datetime.now(CEST)
+    optimizer = MatchMarketOptimizer()
+    picks = []
+    skipped = []
+    for catalog in _catalogs():
+        age = catalog_age_hours(catalog, now)
+        match = catalog["match"]
+        if age is None or age > MAX_AGE_HOURS:
+            skipped.append({"match": match, "reason": "catalogo più vecchio di 12 ore"})
+            continue
+        kickoff = datetime.strptime(catalog["kickoff_time"], "%Y-%m-%d %H:%M CEST").replace(tzinfo=CEST)
+        if kickoff <= now:
+            skipped.append({"match": match, "reason": "calcio d'inizio già passato"})
+            continue
+        home, away = match.split(" - ", 1)
+        odds = goal_odds_from_catalog(catalog)
+        cached = CachedMatch(
+            match_name=f"{home.strip()} vs {away.strip()}",
+            home_team=home.strip(),
+            away_team=away.strip(),
+            tournament="Nations League",
+            kickoff=catalog["kickoff_time"],
+            odds_dict={key: odds[key] for key in ("1", "X", "2", "Under 2.5", "Over 2.5") if key in odds},
+        )
+        xg_home, xg_away, _rho, source, _hn, _an = optimizer.lambdas_for(cached)
+        pick = best_goal_pick(xg_home, xg_away, catalog)
+        if pick is None:
+            skipped.append({"match": match, "reason": "nessun mercato gol legale"})
+            continue
+        picks.append({
+            "match": match,
+            "kickoff_time": catalog["kickoff_time"],
+            "market": pick.market,
+            "odds": pick.book_odd,
+            "probability": round(pick.probability, 3),
+            "fair_odd": round(pick.fair_odd, 2),
+            "edge": round(pick.edge, 3),
+            "score": round(pick.score, 3),
+            "verdict": pick.verdict,
+            "xg_home": round(xg_home, 2),
+            "xg_away": round(xg_away, 2),
+            "lambda_source": source,
+        })
 
-    # PASSO 2: CANDIDATE SELECTION & SWEET-SPOT SCORING
-    print("\n[PASSO 2] CALCOLO SCORING GAUSSIANO SWEET-SPOT S(p, q)")
-    print("  Formula: S(p, q) = exp( -0.5 * [ ((p - 0.80)/0.12)^2 + ((ln(q) - ln(1.40))/0.22)^2 ] )")
-    print("  Obiettivo: massimizzare il valore nel range q in [1.28, 1.48] con p in [75%, 82%].\n")
+    legs = sorted(picks, key=lambda row: row["score"], reverse=True)[:4]
 
-    candidates = [
-        {
-            "match": "Kazakistan vs Isole Far Oer",
-            "kickoff": "2026-10-06 16:00 CEST",
-            "competition": "UEFA Nations League",
-            "family": "MULTIGOAL_TEMPI",
-            "market": "MultiGol MultiEsiti [1-3 Gol]",
-            "odds": 1.33,
-            "est_p": 0.765,
-            "tactics": "Partita pomeridiana ad Astana molto tattica e bloccata; il range 1-3 copre l'1-0, 2-0, 1-1, 2-1, 0-1, 0-2 (esclude lo 0-0 sterile e goleade)."
-        },
-        {
-            "match": "Scozia vs Slovenia",
-            "kickoff": "2026-10-06 20:45 CEST",
-            "competition": "UEFA Nations League",
-            "family": "CORNERS_VOLUME",
-            "market": "Prima a 4 Calci d'Angolo [Team 1 - Scozia]",
-            "odds": 1.45,
-            "est_p": 0.760,
-            "tactics": "Scozia a Hampden Park con forte spinta laterale e cross continui; Slovenia chiusa a protezione della propria area."
-        },
-        {
-            "match": "Inghilterra vs Repubblica Ceca",
-            "kickoff": "2026-10-06 20:45 CEST",
-            "competition": "UEFA Nations League",
-            "family": "CARTELLINI_SANZIONI",
-            "market": "Under/Over 2.5 Punti Cartellini [OVER]",
-            "odds": 1.40,
-            "est_p": 0.780,
-            "tactics": "Scontro ad alta intensità fisica con molti contrasti a centrocampo; soglia 2.5 cartellini (minimo 3 cartellini totali) ampiamente coperta."
-        },
-        {
-            "match": "Croazia vs Spagna",
-            "kickoff": "2026-10-06 20:45 CEST",
-            "competition": "UEFA Nations League",
-            "family": "STATISTICHE_TIRI",
-            "market": "Under/Over 8.5 Tiri in Porta [OVER]",
-            "odds": 1.28,
-            "est_p": 0.800,
-            "tactics": "Spagna e Croazia sono due formazioni a trazione offensiva e fraseggio rapido; 9 tiri nello specchio complessivi sono ampiamente alla portata."
-        }
-    ]
+    # Validazione con StrictTicketPipeline e GroqAuditor
+    candidates = []
+    for leg in legs:
+        home, away = leg["match"].split(" - ", 1)
+        c = MarketCandidate(
+            match_name=f"{home.strip()} vs {away.strip()}",
+            tournament="UEFA Nations League",
+            market_name=leg["market"],
+            bookmaker_odd=leg["odds"],
+            sixth_sense_analysis=f"Match Nations League. xG {leg['xg_home']:.2f} vs {leg['xg_away']:.2f}. Fonte {leg['lambda_source']}.",
+            xg_home=leg["xg_home"],
+            xg_away=leg["xg_away"],
+            kickoff_time=leg["kickoff_time"],
+        )
+        candidates.append(c)
 
-    for c in candidates:
-        q = c["odds"]
-        p = c["est_p"]
-        score = sweet_spot_score(p, q)
-        fair_odd = round(1.0 / p, 2)
-        edge = round(p * q - 1.0, 3)
-        c["score"] = round(score, 3)
-        c["fair_odd"] = fair_odd
-        c["edge"] = edge
-        print(f"  • [{c['kickoff'][:16]}] {c['match']} | Famiglia: {c['family']}")
-        print(f"    Mercato: {c['market']} @ {q} (P: {p*100:.1f}%, Fair: {fair_odd}, Score: {c['score']})")
+    pipeline = StrictTicketPipeline()
+    report = pipeline.validate_ticket(
+        candidates,
+        current_bankroll=100.0,
+        ticket_title="Nations League 06/10/2026 - 4 Selezioni Certificate",
+        enable_cloud_audit=True,
+    )
 
-    # PASSO 3: COMPOSIZIONE IBRIDA
-    print("\n[PASSO 3] ASSEMBLAGGIO IBRIDO PER FAMIGLIE COMPLEMENTARI")
-    print("  Combinate 4 famiglie distinte su 4 partite di oggi:")
-    print("  1. MULTIGOAL: Kazakistan vs Far Oer (16:00 CEST) -> Inerzia controllata.")
-    print("  2. CORNERS: Scozia vs Slovenia (20:45 CEST) -> Pressione sulle corsie.")
-    print("  3. CARTELLINI: Inghilterra vs Rep. Ceca (20:45 CEST) -> Intensità sanzionatoria.")
-    print("  4. STATISTICHE TIRI: Croazia vs Spagna (20:45 CEST) -> Produzione offensiva nello specchio.")
-
-    # PASSO 4: CALCOLO MATEMATICO DEL TICKET
-    print("\n[PASSO 4] AGGREGAZIONE MATEMATICA DEL TICKET")
     tot_odd = 1.0
-    tot_p = 1.0
-    for c in candidates:
-        tot_odd *= c["odds"]
-        tot_p *= c["est_p"]
+    joint_p = 1.0
+    for leg in legs:
+        tot_odd *= leg["odds"]
+        joint_p *= leg["probability"]
+
     tot_odd = round(tot_odd, 2)
-    tot_p = round(tot_p, 3)
-    ev = round(tot_p * tot_odd - 1.0, 3)
-    stake = 3.0
-    payout = round(stake * tot_odd, 2)
+    joint_p = round(joint_p, 3)
+    joint_edge = round(joint_p * tot_odd - 1.0, 3)
 
-    print(f"  - Quota Moltiplicatore Totale: {tot_odd}")
-    print(f"  - Probabilità Congiunta (Joint P): {tot_p * 100:.1f}%")
-    print(f"  - Fair Odd Complessiva: {round(1.0/tot_p, 2)}")
-    print(f"  - Valore Atteso Stimato (EV): {ev * 100:+.1f}%")
-    print(f"  - Stake Consigliato: {stake:.2f} EUR (3% del bankroll di 100 EUR)")
-    print(f"  - Ritorno Potenziale: {payout:.2f} EUR")
+    cloud_audit = report.cloud_audit or {}
+    groq_approved = bool(cloud_audit.get("approved"))
+    is_playable = bool(report.passed and groq_approved)
 
-    # PASSO 5: AUDIT CRITICO GROQ CLOUD
-    print("\n[PASSO 5] AUDIT CRITICO INDIPENDENTE DI LIVELLO 2 (Groq Cloud LPU - openai/gpt-oss-120b)")
-    auditor = GroqAuditor()
-    audit_payload = [
-        {
-            "match_name": c["match"],
-            "tournament": c["competition"],
-            "market": c["market"],
-            "book_odd": float(c["odds"]),
-            "fair_odd": float(c["fair_odd"]),
-            "probability": float(c["est_p"]),
-            "edge": float(c["edge"]),
-            "notes": f"Kickoff: {c['kickoff']} | Famiglia: {c['family']} | Score: {c['score']} | Tattica: {c['tactics']}"
-        }
-        for c in candidates
-    ]
+    # Stake 2.50 su bankroll 100 se EV congiunto e' negativo, altrimenti stake del validatore (max 2.50)
+    stake = 2.50 if joint_edge <= 0 else min(report.recommended_stake, 2.50)
 
-    ticket_name = "Quaterna Ibrida d'Elite Nations League (Solo Oggi 06/10)"
-    audit_res = auditor.audit_ticket(title=ticket_name, legs=audit_payload, bankroll=100.0)
-    verdict = "APPROVATA" if audit_res.get("approved") else "BOCCIATA"
-    critique = audit_res.get("critique", "")
-
-    print(f"  - Verdetto Finale Audit: {verdict}\n")
-    print("Report di Audit Indipendente Groq:")
-    print("------------------------------------------------------------------")
-    print(critique)
-    print("------------------------------------------------------------------")
-
-    # Salvataggio Ticket Certificato
-    ticket_data = {
-        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M CEST"),
-        "date_target": "2026-10-06",
-        "competition": "UEFA Nations League",
-        "ticket_name": ticket_name,
+    payload = {
+        "playable": is_playable,
+        "name": "Schedina Nations League 4 Eventi Certificata (06/10/2026)",
+        "generated_at": now.strftime("%Y-%m-%d %H:%M CEST"),
+        "date_target": TODAY,
         "stake_eur": stake,
+        "bankroll_reference": 100.0,
         "total_odds": tot_odd,
-        "probability": tot_p,
-        "fair_odd": round(1.0/tot_p, 2),
-        "edge": ev,
-        "potential_payout_eur": payout,
-        "legs": candidates,
-        "groq_verdict": verdict,
-        "groq_report": critique
+        "joint_probability": joint_p,
+        "joint_edge": joint_edge,
+        "potential_return_eur": round(stake * tot_odd, 2),
+        "validator_passed": report.passed,
+        "groq_verdict": "APPROVATA" if groq_approved else "BOCCIATA",
+        "groq_audit_report": cloud_audit.get("critique", ""),
+        "legs": legs,
+        "skipped": skipped,
     }
-
-    out_file = ROOT / "reports/tickets/ticket_nations_league_passo_passo.json"
-    with open(out_file, "w", encoding="utf-8") as f:
-        json.dump(ticket_data, f, indent=2, ensure_ascii=False)
-    print(f"\nTicket salvato con successo in {out_file}!")
+    OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"gambe {len(legs)} | scartate {len(skipped)} | quota {tot_odd} | giocabile {is_playable}")
+    for row in legs:
+        print(f"{row['kickoff_time']} {row['match']} {row['market']} @{row['odds']} p={row['probability']}")
 
 
 if __name__ == "__main__":

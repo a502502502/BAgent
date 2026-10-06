@@ -1,0 +1,67 @@
+{
+  "ticket_id": "TICKET_GEMME_NASCOSTE_06OTT_SNAI",
+  "name": "Schedina Gemme Nascoste - Player Props Speciali & Clausole Ibride SNAI",
+  "date": "2026-10-06",
+  "status": "ANALYZED_AND_AUDITED",
+  "playable_mode": "CONDIZIONATA_A_DISTINTE_19_45_E_PREFERIBILE_IN_SINGOLE",
+  "total_odds": 4.9,
+  "legs_count": 3,
+  "legs": [
+    {
+      "match": "Inghilterra - Repubblica Ceca",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "player": "Sadilek M.",
+      "category": "QUASI CARTELLINO / FALLI",
+      "market": "GIOCATORE QUASI CARTELLINO (Inc. TS)",
+      "selection": "Sadilek M. riceve almeno un cartellino O commette almeno 2 falli",
+      "odds": 1.65,
+      "base_prob": 0.625,
+      "fair_odd": 1.6,
+      "edge": 0.031,
+      "winning_condition": "Vince se riceve un cartellino (giallo/rosso) OPPURE se commette almeno 2 falli nell'incontro (inclusi tempi supplementari).",
+      "tactical_rationale": "Sadilek agisce da mediano frangiflutti ceco davanti alla difesa. Contro il centrocampo inglese (Rice, Bellingham, Rogers/Foden) il volume di contrasti e' altissimo. La clausola ibrida cartellino O 2 falli protegge dal classico caso in cui un singolo fallo tattico viene subito punito con giallo.",
+      "lineup_status": "Pre-distinta (distinte ufficiali ore 19:45 CEST). Giocabile con certezza da titolare."
+    },
+    {
+      "match": "Croazia - Spagna",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "player": "Cucurella M.",
+      "category": "QUASI CARTELLINO / FALLI",
+      "market": "GIOCATORE QUASI CARTELLINO (Inc. TS)",
+      "selection": "Cucurella M. riceve almeno un cartellino O commette almeno 2 falli",
+      "odds": 1.65,
+      "base_prob": 0.605,
+      "fair_odd": 1.65,
+      "edge": 0.0,
+      "winning_condition": "Vince se riceve un cartellino OPPURE se commette almeno 2 falli. Inclusi tempi supplementari.",
+      "tactical_rationale": "Cucurella adotta marcatura aggressiva ad altissima intensita sulla corsia mancina spagnola. Duella contro Stanisic e l'esterno destro croato. Media di 2.1 falli p90 in nazionale. Rischio turnover con Grimaldo: verificare formazione alle 19:45.",
+      "lineup_status": "Ballottaggio Cucurella/Grimaldo. Necessaria conferma titolarita alle 19:45 CEST."
+    },
+    {
+      "match": "Scozia - Slovenia",
+      "kickoff": "2026-10-06 20:45 CEST",
+      "player": "McGinn J.",
+      "category": "TIRI ULTRA (INC PALI/TRAVERSE E SOSTITUTO)",
+      "market": "U/O SOMMA TIRI IN PORTA INC PALI E TRAVERSE E SUO SOST. INCL. T.S.",
+      "selection": "McGinn J. U/O 0.5 Somma Tiri in Porta Ultra -> OVER",
+      "odds": 1.8,
+      "base_prob": 0.64,
+      "fair_odd": 1.56,
+      "edge": 0.152,
+      "winning_condition": "Basta 1 solo tiro nello specchio della porta, OPPURE un palo, OPPURE una traversa. Se McGinn viene sostituito, qualsiasi tiro nello specchio o legno del sostituto e' valido.",
+      "tactical_rationale": "John McGinn a Hampden Park e' il perno offensivo della Scozia con tiri costanti dalla media distanza (2.10 tiri p90, 0.95 nello specchio). La clausola speciale SNAI 'Ultra' annulla il rischio sfortuna (il palo o traversa paga vincente) e annulla il rischio uscita al 65'-70', perche il subentrante eredita la scommessa per il resto della gara.",
+      "lineup_status": "Capitano / titolare certo al 95%. Ottimo profilo di affidabilita."
+    }
+  ],
+  "claude_audit": {
+    "verdict": "BOCCIATA_COME_MULTIPLA_PRE_DISTINTE_APPROVATA_COME_SINGOLE_POST_DISTINTE",
+    "approved": false,
+    "critique": "# AUDIT AVVERSARIALE - TICKET \"SCHEDINA GEMME NASCOSTE\"\n\n## PARAMETRI GENERALI\n- **Quota Totale Dichiarata**: 4.90\n- **Bankroll**: 100.00 EUR\n- **Tipologia**: Tripla su mercati Player Props speciali\n- **Verifica Moltiplicazione Quote**: 1.65 × 1.65 × 1.80 = 4.90 ✓ (coerente)\n\n---\n\n## LEG 1: INGHILTERRA - REPUBBLICA CECA | Sadilek M. - Quasi Cartellino\n\n### Analisi Matematica Probabilità\n- **Quota Bookmaker**: 1.65 → Probabilità implicita 60.6%\n- **Probabilità Modello Dichiarata**: 62.5%\n- **Edge Dichiarato**: +3.1%\n\n**VALUTAZIONE CRITICA**: \nIl margine del +3.1% è plausibile MA estremamente sottile per un mercato esotico. Il metodo \"Poisson ricalibrato su metriche Opta\" è vago. Il Poisson classico modella eventi discreti (gol, tiri), ma per cartellini/falli serve un modello più sofisticato (Negative Binomial o simulazione Monte Carlo con matrice disciplinare arbitro + profilo giocatore).\n\n**RISCHIO LINEUP**: Pre-distinta alle 19:45 CEST. Sadilek è titolare abituale (85%+ probabilità), ma fino a conferma ufficiale esiste rischio 10-15% di non titolarità o cambio modulo.\n\n**SCENARIO DI PERDITA PIÙ FREQUENTE**: \n- Sadilek commette 1 solo fallo tattico senza giallo (perdita secca)\n- Arbitro permissivo che non sanziona contrasti duri\n- Repubblica Ceca gioca difensivo compatto, Sadilek meno esposto a duelli\n\n**TRAPPOLA BOOKMAKER**: La clausola \"O 2 falli\" sembra protettiva, ma SNAI prezza già questa protezione nella quota 1.65. Il vero fair value potrebbe essere 1.70-1.75 SENZA la clausola, quindi con clausola il fair reale è probabilmente 1.62-1.68. Edge dubbio.\n\n---\n\n## LEG 2: CROAZIA - SPAGNA | Cucurella M. - Quasi Cartellino\n\n### Analisi Matematica Probabilità\n- **Quota Bookmaker**: 1.65 → Probabilità implicita 60.6%\n- **Probabilità Modello Dichiarata**: 60.5%\n- **Edge Dichiarato**: 0.0%\n\n**VALUTAZIONE CRITICA SEVERA**: \n**ZERO EDGE DICHIARATO = SCOMMESSA MATEMATICAMENTE NON GIUSTIFICABILE**. In una tripla, ogni leg deve portare valore positivo. Inserire una selezione a edge 0% è matematicamente suicidario perché:\n1. Ignora il margine reale del bookmaker (overround)\n2. Espone al rischio puro senza compensazione\n3. Erode il valore delle altre due leg\n\n**RISCHIO LINEUP CRITICO**: Ballottaggio Cucurella/Grimaldo 50/50. Questo significa:\n- Probabilità effettiva = 60.5% × 50% = **30.25%**\n- Quota fair reale con rischio lineup = 1 / 0.3025 = **3.30**\n- Quota offerta = 1.65\n- **EDGE REALE = -50%** (disastro matematico)\n\n**SCENARIO DI PERDITA PIÙ FREQUENTE**:\n- Grimaldo titolare (50% probabilità)\n- Cucurella entra, ma gioca <30 minuti con pochi duelli\n- Arbitro moderno UEFA che tollera contatto fisico\n\n**TRAPPOLA BOOKMAKER**: SNAI sa del ballottaggio e offre quota apparentemente generosa sapendo che metà degli scommettitori perderanno per mancata titolarità. Questa è una classica \"value trap\".\n\n---\n\n## LEG 3: SCOZIA - SLOVENIA | McGinn J. - U/O Tiri in Porta (Inc. Pali/Traverse/Sostituto)\n\n### Analisi Matematica Probabilità\n- **Quota Bookmaker**: 1.80 → Probabilità implicita 55.6%\n- **Probabilità Modello Dichiarata**: 64.0%\n- **Edge Dichiarato**: +15.2%\n\n**VALUTAZIONE CRITICA**:\nEdge del +15.2% è **sospettosamente alto** per un mercato liquido. O il modello è eccezionale o c'è sovrastima. Analizziamo:\n\n**Dati Dichiarati**: McGinn 2.10 tiri p90, 0.95 nello specchio = 45.2% precisione.\n**Problema**: La soglia esatta non è dichiarata (Over 1.5? 2.5?). Assumendo Over 1.5 tiri in porta:\n- Con media 0.95 e distribuzione Poisson: P(X≥2) ≈ 38-42%\n- Con dispersione maggiore (Negative Binomial): P(X≥2) ≈ 48-52%\n\nAnche con la clausola \"pali/traverse contano\", il 64% sembra **gonfiato del 10-15%**. Probabile fair reale: 55-58%.\n\n**CLAUSOLA SOSTITUTO**: Sembra protettiva, ma introduce varianza imprevedibile. Il sostituto di McGinn (probabilmente Gilmour o Christie) ha profili di tiro completamente diversi.\n\n**SCENARIO DI PERDITA PIÙ FREQUENTE**:\n- Scozia domina possesso ma tira poco (tattica Rodgers paziente)\n- McGinn arretra in fase difensiva contro Slovenia organizzata\n- Sostituito al 70' con Scozia in vantaggio, sostituto gioca conservativo\n\n**RISCHIO LINEUP**: 5% (McGinn capitano, quasi certezza)\n\n---\n\n## ANALISI CORRELAZIONI INTRA-MATCH\n**POSITIVO**: Nessuna selezione multipla sulla stessa partita. Le tre leg sono indipendenti. Moltiplicazione quote è legittima.\n\n---\n\n## CALCOLO EV MULTIPLA CORRETTA\n\n### EV Singole (con correzioni):\n1. **Leg 1**: P_reale ≈ 58% (correzione -4.5% per incertezza modello) → EV = +1.5%\n2. **Leg 2**: P_reale ≈ 30% (correzione -50% per lineup risk) → EV = -50%\n3. **Leg 3**: P_reale ≈ 56% (correzione -8% per gonfiamento) → EV = +0.8%\n\n### EV Multipla:\n**P_combinata_reale** = 0.58 × 0.30 × 0.56 = **9.74%**  \n**Quota Fair Reale** = 1 / 0.0974 = **10.27**  \n**Quota Offerta** = 4.90  \n**EV Multipla** = (4.90 × 0.0974) - 1 = **-52.3%**\n\n---\n\n## TRAPPOLE BOOKMAKER IDENTIFICATE\n\n1. **Value Trap Leg 2**: Ballottaggio non prezzato correttamente, quota \"generosa\" per attirare incauti\n2. **Clausole Protettive Illusorie**: Le clausole (pali/traverse, sostituti, \"quasi cartellino\") sono già prezzate nelle quote, non offrono valore aggiunto reale\n3. **Mercati Esotici Opachi**: Meno liquidi, margini bookmaker più alti, difficile validare fair value\n\n---\n\n## SCENARI TATTICI DI PERDITA (PER FREQUENZA)\n\n1. **Grimaldo titolare** (50% probabilità) → Leg 2 persa\n2. **Arbitri permissivi** → Leg 1 e 2 sottoperformano\n3. **Scozia pragmatica difensiva** → Leg 3 sotto attese\n4. **Combinazione eventi mediani** → Anche con 2 leg vinte, la terza falsa\n\n---\n\n## VERDETTO FINALE\n\n**VERDETTO: BOCCIATA**\n\n### MOTIVAZIONI INDEROGABILI:\n\n1. **LEG 2 MATEMATICAMENTE INACCETTABILE**: Edge 0% dichiarato + lineup risk 50% = EV reale -50%. Questa singola leg distrugge qualsiasi valore della multipla.\n\n2. **EV MULTIPLA NEGATIVO**: -52.3% dopo correzioni realistiche. Scommessa strutturalmente perdente nel lungo periodo.\n\n3. **GONFIAMENTO PROBABILITÀ**: Leg 3 mostra edge +15.2% irrealistico per mercato liquido. Probabile sovrastima modello del 10-12%.\n\n4. **RISCHIO LINEUP NON MITIGATO**: Giocare una multipla con 50% di rischio su una leg singola viola principi basilari di risk management.\n\n5. **TRAPPOLA VALUE ILLUSORIO**: Le clausole protettive sono marketing, non valore matematico reale.\n\n### RACCOMANDAZIONE:\n\n**NON GIOCARE QUESTO TICKET IN NESSUNA CIRCOSTANZA**\n\nSe vuoi operare su questi mercati:\n- **Leg 1**: Giocabile SOLO in singola post-distinte ufficiali, stake max 1% (EV marginale +1.5%)\n- **Leg 2**: EVITARE fino a certezza titolarità (ore 19:45)\n- **Leg 3**: Giocabile in singola con stake 1.5% dopo verifica soglia esatta\n\n**Mai combinare selezioni con edge <5% in multiple**. Il compounding dell'incertezza ti uccide matematicamente."
+  },
+  "risk_management": {
+    "pre_match_advice": "Non giocare come multipla prima delle ore 19:45 CEST a causa del rischio formazione.",
+    "post_lineup_advice": "Con formazioni confermate, la gemma a piu alto valore assoluto e' John McGinn Tiri Ultra Over 0.5 @ 1.80 (edge +15.2%).",
+    "recommended_stake_singles": "1.0% bankroll per selezione singola confermata.",
+    "recommended_stake_combo": "0.5% bankroll solo dopo verifica titolari alle 19:45 CEST."
+  }
+}

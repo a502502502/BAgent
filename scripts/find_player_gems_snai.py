@@ -10,7 +10,7 @@ matches = [
     "svizzera---macedonia.json"
 ]
 
-print("=== RICERCA GEMME NASCOSTE: PLAYER PROPS (SNAI NATIONS LEAGUE) ===")
+print("=== ELENCO QUOTE GIOCATORI SNAI: non è una Hidden Gem e non è una probabilità ===")
 
 for m_file in matches:
     fl = p / m_file

@@ -1,0 +1,42 @@
+{
+  "ticket_id": "TICKET_SNAI_NL_06OTT_CERTIFIED",
+  "name": "Doppia Quantitativa Nations League (RITIRATA)",
+  "date_target": "2026-10-06",
+  "bookmaker": "SNAI",
+  "playable": false,
+  "status": "RITIRATA",
+  "stake_eur": 0.0,
+  "potential_payout_eur": 0.0,
+  "retirement_reason": "Doppia non operativa e ritirata. Kazakistan Over 1.5 a quota 1.52 a catalogo (edge motore -1.2%). Croazia-Spagna Under 3.5 viola Regola #80 (blocco strutturale corazzata in trasferta, quota Spagna 1.27). Nessun calcolo da GoalModel.from_win_prob.",
+  "legs": [
+    {
+      "order": 1,
+      "match": "Kazakistan - Isole Far Oer",
+      "competition": "UEFA Nations League",
+      "kickoff_cest": "2026-10-06 16:00 CEST",
+      "market": "Under/Over 1.5",
+      "selection": "OVER",
+      "odds": 1.52,
+      "probability": 0.650,
+      "fair_odd": 1.54,
+      "edge": -0.012,
+      "lambda_source": "baseline-sanity (lambda_H=0.98, lambda_A=1.21)",
+      "status": "RITIRATA"
+    },
+    {
+      "order": 2,
+      "match": "Croazia - Spagna",
+      "competition": "UEFA Nations League",
+      "kickoff_cest": "2026-10-06 20:45 CEST",
+      "market": "Under/Over 3.5",
+      "selection": "UNDER",
+      "odds": 1.62,
+      "probability": 0.572,
+      "fair_odd": 1.75,
+      "edge": -0.074,
+      "lambda_source": "baseline-sanity (lambda_H=0.49, lambda_A=2.93)",
+      "structural_block": "corazzata in trasferta (Regola #80)",
+      "status": "BLOCCATA_E_RITIRATA"
+    }
+  ]
+}

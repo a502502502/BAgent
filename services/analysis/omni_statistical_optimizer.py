@@ -50,7 +50,12 @@ class MatchDossier:
     cards_away: float = 2.4
     referee_cards_avg: float = 4.2
     # Dizionario giocatore -> {"xg_90": float, "fouls_avg": float, "minutes": int}
+    # Vale solo se lineup_confirmed è True e il nome è nella distinta.
     players: Dict[str, Dict[str, float]] = field(default_factory=dict)
+    lineup_confirmed: bool = False
+    corners_certified: bool = False
+    cards_certified: bool = False
+    tactics_certified: bool = False
     # Dizionario o lista mercati quotati con quote reali del bookmaker
     catalog_source: Optional[str] = None
 
@@ -71,6 +76,16 @@ class MatchDossier:
     # Fattore campo ambientale: 'standard' | 'caldo_balcanico' | 'caucasico_ostile' | 'nordico_disciplinato'
     environmental_context: str = "standard"
 
+
+
+def _named_player(dossier: MatchDossier, market_name: str) -> Optional[Dict[str, float]]:
+    """Il giocatore entra solo se è nella distinta confermata. Nessuna media di riserva."""
+    if not dossier.lineup_confirmed:
+        return None
+    for name, stats in dossier.players.items():
+        if name.lower() in market_name:
+            return stats
+    return None
 
 
 class OmniStatisticalPricer:
@@ -196,33 +211,32 @@ class OmniStatisticalPricer:
         prob: Optional[float] = None
         family = classify_market_family(market_name)
 
-        # 1. Player Props Ultra
-        if "marcatore" in m_lower or "segna o" in m_lower or "palo" in m_lower:
-            # Ricerca giocatore
-            found_player = None
-            for p_name, p_stat in dossier.players.items():
-                if p_name.lower() in m_lower:
-                    found_player = p_stat
-                    break
-            xg_90 = found_player.get("xg_90", 0.55) if found_player else 0.50
-            mins = found_player.get("minutes", 75.0) if found_player else 75.0
-            prob = self.price_player_prop_ultra(xg_90, mins)
+        player_market = "marcatore" in m_lower or "segna o" in m_lower or "palo" in m_lower or "giocatore" in m_lower
+        # 1. Player Props Ultra. Senza distinta confermata non si inventa xG.
+        if player_market and ("marcatore" in m_lower or "segna o" in m_lower or "palo" in m_lower):
+            found_player = _named_player(dossier, m_lower)
+            if found_player is None:
+                return None
+            xg_90 = found_player.get("xg_90")
+            if xg_90 is None:
+                return None
+            mins = found_player.get("minutes", 75.0)
+            prob = self.price_player_prop_ultra(float(xg_90), float(mins))
             family = "PLAYER_PROPS_COMBO"
 
-        # 2. Falli Giocatore
+        # 2. Falli Giocatore. La media non si sostituisce con 2.0.
         elif "falli" in m_lower and "over" in s_upper.lower():
-            found_player = None
-            for p_name, p_stat in dossier.players.items():
-                if p_name.lower() in m_lower:
-                    found_player = p_stat
-                    break
-            fouls_avg = found_player.get("fouls_avg", 2.0) if found_player else 2.0
+            found_player = _named_player(dossier, m_lower)
+            if found_player is None or found_player.get("fouls_avg") is None:
+                return None
             thresh = 1.5 if "1.5" in m_lower else 2.5
-            prob = self.price_player_fouls_over(fouls_avg, thresh)
+            prob = self.price_player_fouls_over(float(found_player["fouls_avg"]), thresh)
             family = "TEAM_CARDS_VOLUME"
 
         # 3. 1X2 Cartellini / Punti Cartellini
         elif "cartellini" in m_lower:
+            if not dossier.cards_certified:
+                return None
             if "1x2" in m_lower:
                 dist = self.price_team_cards_1x2(dossier.cards_home, dossier.cards_away, dossier.referee_cards_avg)
                 prob = dist.get(s_upper)
@@ -233,6 +247,8 @@ class OmniStatisticalPricer:
 
         # 4. Calci d'Angolo: Prima a X Corner
         elif "prima a" in m_lower and any(k in m_lower for k in ["corner", "calci angolo", "calci d'angolo", "angoli"]):
+            if not dossier.corners_certified:
+                return None
             match_x = re.search(r"prima a (\d+)", m_lower)
             target = int(match_x.group(1)) if match_x else 5
             races = self.price_race_to_corners(dossier.corners_home, dossier.corners_away, target)
@@ -241,6 +257,8 @@ class OmniStatisticalPricer:
 
         # 5. Calci d'Angolo: 1X2 Corner (1° Tempo o Finale)
         elif any(k in m_lower for k in ["corner", "calci angolo", "calci d'angolo", "angoli"]) and ("1x2" in m_lower or "esito" in m_lower or m_lower.strip() in ["1x2 corner", "calci angolo 1x2"]):
+            if not dossier.corners_certified:
+                return None
             if "1 tempo" in m_lower or "1° tempo" in m_lower or "1t" in m_lower:
                 dist = self.price_first_half_corners_1x2(dossier.corners_home, dossier.corners_away)
             else:
@@ -275,9 +293,8 @@ class OmniStatisticalPricer:
         if prob is None or prob <= 0.0 or prob >= 1.0:
             return None
 
-        # --- MODULAZIONE CAUSALE & TATTICA DELLE PROBABILITA' ---
-        # 1. Tattica Corner: se attacco orizzontale/centrale (wing_play basso), riduci la probabilità di Over Corner alti
-        if family == "TEAM_CORNERS_VOLUME":
+        # La modulazione tattica si applica solo se il profilo arriva da una fonte, non da un default.
+        if dossier.tactics_certified and family == "TEAM_CORNERS_VOLUME":
             is_home_corner = "squadra 1" in m_lower or "casa" in m_lower or "team 1" in s_upper.lower()
             wing_intensity = dossier.wing_play_intensity_home if is_home_corner else dossier.wing_play_intensity_away
             coach_prof = dossier.coach_profile_home if is_home_corner else dossier.coach_profile_away
@@ -296,8 +313,7 @@ class OmniStatisticalPricer:
                 if any(thresh in m_lower for thresh in ["4.5", "5.5", "6.5", "7.5"]) and "over" in s_upper.lower():
                     prob = max(0.10, prob * 0.78)
 
-        # 2. Tattica Disciplinari & Tensione Ambientale
-        elif family == "TEAM_CARDS_VOLUME":
+        elif dossier.tactics_certified and family == "TEAM_CARDS_VOLUME":
             tension_mult = 1.0 + (dossier.match_tension - 3) * 0.08  # es. tensione 5 -> +16% cartellini
             if dossier.environmental_context in ["caldo_balcanico", "caucasico_ostile"]:
                 tension_mult += 0.07
@@ -309,15 +325,13 @@ class OmniStatisticalPricer:
             elif "under" in s_upper.lower():
                 prob = min(0.95, max(0.10, prob * (2.0 - tension_mult)))
 
-        # 3. Flussi Tempi & Rischio 0-0 Tombale
-        elif "tempo" in m_lower or "dc tempo" in m_lower:
+        elif dossier.tactics_certified and ("tempo" in m_lower or "dc tempo" in m_lower):
             # Se la partita ha rivalità o squadre che sbloccano presto, boost DC 1°T (12)
             if "12" in s_upper and ("1 tempo" in m_lower or "1° tempo" in m_lower or "1t" in m_lower):
                 if dossier.coach_profile_home == "dominante_verticale" or dossier.coach_profile_away == "dominante_verticale":
                     prob = min(0.92, prob * 1.08)
 
-        # 4. Penalizzazione MultiGol 2° Tempo su Rischio Rebound 0-0
-        if dossier.rebound_00_risk:
+        if dossier.tactics_certified and dossier.rebound_00_risk:
             if "1-3 2" in m_lower or "1-3 2°t" in m_lower or "1-4 2" in m_lower or "0-2 1°t + 1-3 2°t" in m_lower:
                 # Partita che rischia di morire sullo 0-0: penalizza fortemente mercati che forzano gol nella ripresa
                 prob = max(0.10, prob * 0.75)
@@ -327,7 +341,7 @@ class OmniStatisticalPricer:
 
         # Controllo blocchi strutturali
         block = structural_block(
-            market_name,
+            f"{market_name} {selection}",
             xg_home=dossier.xg_home,
             xg_away=dossier.xg_away
         )
@@ -531,7 +545,8 @@ class CombinatorialPortfolioOptimizer:
         return {
             "bankroll_reference": bankroll_reference,
             "session_stake": round(stake_per_ticket * len(tickets), 2),
-            "playable": True,
+            "playable": False,
+            "playable_reason": "Il validatore non è stato eseguito su questo portafoglio.",
             "optimizer": "OmniStatisticalOptimizer (Multi-Market + Family Diversity)",
             "ev_policy": "EV negativo: avviso informativo, non bloccante. Bocciatura solo su rischio strutturale.",
             "tickets": tickets

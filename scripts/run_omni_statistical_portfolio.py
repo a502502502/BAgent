@@ -12,7 +12,7 @@ Utilizza il nuovo OmniStatisticalOptimizer per:
 3. Calcolare per ciascun mercato lo Sweet-Spot Score S(p, q) a campana gaussiana centrata su p=80%, q=1.45.
 4. Eseguire l'ottimizzazione combinatoria per costruire 5 ticket diversificati (max 4 leg ciascuno).
 5. Eseguire l'audit indipendente di Seconda AI con Groq Cloud (modello openai/gpt-oss-120b).
-6. Salvare e stampare il portafoglio certificato.
+6. Salvare il portafoglio. Non è giocabile finché non passa strict_validator.
 """
 
 from __future__ import annotations
@@ -28,11 +28,14 @@ sys.stdout.reconfigure(encoding='utf-8')
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from services.analysis.match_market_optimizer import MatchMarketOptimizer
 from services.analysis.omni_statistical_optimizer import (
     MatchDossier,
     OmniStatisticalPricer,
     CombinatorialPortfolioOptimizer
 )
+from services.analysis.snai_goal_book import goal_odds_from_catalog
+from services.betting.netwin_cache_reader import CachedMatch
 from services.debate.groq_auditor import GroqAuditor
 
 
@@ -314,6 +317,7 @@ def main():
     print("==================================================================\n")
 
     snai_dir = ROOT / "reports/snai"
+    model = MatchMarketOptimizer()
     pricer = OmniStatisticalPricer()
     optimizer = CombinatorialPortfolioOptimizer(pricer=pricer)
 
@@ -330,6 +334,27 @@ def main():
         with open(file_path, encoding="utf-8") as f:
             catalog_data = json.load(f)
         
+        dossier.players = {}
+        dossier.lineup_confirmed = False
+        dossier.corners_certified = False
+        dossier.cards_certified = False
+        dossier.tactics_certified = False
+        odds = goal_odds_from_catalog(catalog_data)
+        if not all(key in odds for key in ("1", "X", "2")):
+            print(f"  - {dossier.match_name}: 1X2 assente, partita saltata")
+            continue
+        home, away = dossier.match_name.split(" vs ", 1)
+        xg_home, xg_away, _rho, source, _hn, _an = model.lambdas_for(CachedMatch(
+            match_name=dossier.match_name,
+            home_team=home,
+            away_team=away,
+            tournament="Nations League",
+            kickoff=dossier.kickoff,
+            odds_dict={key: odds[key] for key in ("1", "X", "2", "Under 2.5", "Over 2.5") if key in odds},
+        ))
+        dossier.xg_home = xg_home
+        dossier.xg_away = xg_away
+        print(f"  - lambda {source} {xg_home:.2f}/{xg_away:.2f}")
         markets = catalog_data.get("markets", [])
         picks = optimizer.generate_candidate_picks(dossier, markets)
         candidate_picks_by_match[dossier.match_name] = picks

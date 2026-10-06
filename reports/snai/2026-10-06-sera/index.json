@@ -1,0 +1,79 @@
+[
+  {
+    "match": "Kazakistan - Isole Far Oer",
+    "kickoff_time": "2026-10-06 16:00 CEST",
+    "event_id": "36411-8239",
+    "market_count": 740,
+    "file": "reports/snai/2026-10-06-sera/kazakistan-isole-far-oer.json"
+  },
+  {
+    "match": "Estonia - Islanda",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8246",
+    "market_count": 723,
+    "file": "reports/snai/2026-10-06-sera/estonia-islanda.json"
+  },
+  {
+    "match": "Lussemburgo - Bulgaria",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8243",
+    "market_count": 714,
+    "file": "reports/snai/2026-10-06-sera/lussemburgo-bulgaria.json"
+  },
+  {
+    "match": "Croazia - Spagna",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8245",
+    "market_count": 1873,
+    "file": "reports/snai/2026-10-06-sera/croazia-spagna.json"
+  },
+  {
+    "match": "NATIONS LEAGUE - 4a GIORNATA (SOLO 06/10/2026)",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36412-56761",
+    "market_count": 4,
+    "file": "reports/snai/2026-10-06-sera/nations-league-4a-giornata-solo-06-10-2026.json"
+  },
+  {
+    "match": "Scozia - Slovenia",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8248",
+    "market_count": 1613,
+    "file": "reports/snai/2026-10-06-sera/scozia-slovenia.json"
+  },
+  {
+    "match": "Svizzera - Macedonia",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8240",
+    "market_count": 919,
+    "file": "reports/snai/2026-10-06-sera/svizzera-macedonia.json"
+  },
+  {
+    "match": "Moldova - Slovacchia",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8244",
+    "market_count": 720,
+    "file": "reports/snai/2026-10-06-sera/moldova-slovacchia.json"
+  },
+  {
+    "match": "Inghilterra - Repubblica Ceca",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-15596",
+    "market_count": 1658,
+    "file": "reports/snai/2026-10-06-sera/inghilterra-repubblica-ceca.json"
+  },
+  {
+    "match": "Bielorussia - Finlandia",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8242",
+    "market_count": 785,
+    "file": "reports/snai/2026-10-06-sera/bielorussia-finlandia.json"
+  },
+  {
+    "match": "Albania - San Marino",
+    "kickoff_time": "2026-10-06 20:45 CEST",
+    "event_id": "36411-8241",
+    "market_count": 115,
+    "file": "reports/snai/2026-10-06-sera/albania-san-marino.json"
+  }
+]

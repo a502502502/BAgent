@@ -1,218 +1,200 @@
 {
-  "generated_at": "2026-10-06 10:29 CEST",
-  "total_matches_analyzed": 45,
-  "source": "reports/snai/2026-10-06-fino-16",
-  "bankroll_reference": 100.0,
-  "tickets": [
+  "playable": false,
+  "reason": "Nessuna multipla: il validatore non certifica una selezione isolata di questo script.",
+  "generated_at": "2026-10-06 14:04 CEST",
+  "selections": [
     {
-      "id": "TICKET_SNAI_MATTINA_LUNCH",
-      "name": "Ticket 1: Mattina & Pranzo (11:00 - 13:00 CEST)",
-      "stake_eur": 3.0,
-      "total_odds": 2.83,
-      "probability": 0.291,
-      "fair_odd": 3.44,
-      "edge": -0.176,
-      "potential_payout_eur": 8.49,
-      "legs": [
-        {
-          "match": "Saudi Arabia U20 - Armenia U20",
-          "competition": "INT Amichevoli U20 (Poss. Cambio Format)",
-          "kickoff": "2026-10-06 11:00 CEST",
-          "market_family": "ESITO_FINALE",
-          "market": "Esito Finale 1X2 [1]",
-          "selection": "1",
-          "odds": 1.36,
-          "probability": 0.7,
-          "fair_odd": 1.43,
-          "edge": -0.048,
-          "score": 0.701,
-          "rationale": "Arabia Saudita U20 nettamente superiore per fisicità e continuità; Armenia quotata a 6.50."
-        },
-        {
-          "match": "AS Trencin U19 - Spartak Trnava U19",
-          "competition": "SVK Campionato U19",
-          "kickoff": "2026-10-06 11:00 CEST",
-          "market_family": "DOPPIA_CHANCE",
-          "market": "Doppia Chance [1X]",
-          "selection": "1X",
-          "odds": 1.28,
-          "probability": 0.744,
-          "fair_odd": 1.34,
-          "edge": -0.048,
-          "score": 0.825,
-          "rationale": "Trencin U19 imbattuto in casa; 1X protegge da qualsiasi equilibrio tattico."
-        },
-        {
-          "match": "UD Leiria U23 - Santa Clara U23",
-          "competition": "POR Campionato U23",
-          "kickoff": "2026-10-06 12:00 CEST",
-          "market_family": "UNDER_OVER_MATCH",
-          "market": "Under/Over 1.5 [OVER]",
-          "selection": "OVER",
-          "odds": 1.25,
-          "probability": 0.762,
-          "fair_odd": 1.31,
-          "edge": -0.047,
-          "score": 0.833,
-          "rationale": "Campionato giovanile portoghese con media superiore a 2.8 gol a partita; Over 1.5 offre ampio margine."
-        },
-        {
-          "match": "Binh Phuoc - CS. Dong Thap",
-          "competition": "VIE Coppa di Vietnam",
-          "kickoff": "2026-10-06 13:00 CEST",
-          "market_family": "ESITO_FINALE",
-          "market": "Esito Finale 1X2 [1]",
-          "selection": "1",
-          "odds": 1.3,
-          "probability": 0.733,
-          "fair_odd": 1.36,
-          "edge": -0.047,
-          "score": 0.808,
-          "rationale": "Binh Phuoc netta favorita interna nei 16esimi di Coppa contro Dong Thap (sfavorita a 8.50)."
-        }
-      ],
-      "groq_verdict": "APPROVATA",
-      "groq_report": "**1. Analisi Matematica – Valore Atteso (EV)**  \n\n| Leg | Probabilità (P) | Quota Netwin | EV (P·quota – 1) |\n|-----|----------------|--------------|-----------------|\n| 1 – 1X2 [1] (Saudi U20) | 0,70 | 1,36 | **‑4,8 %** |\n| 2 – Doppia Chance 1X (Trencin U19) | 0,744 | 1,28 | **‑4,8 %** |\n| 3 – Over 1.5 (Leiria U23) | 0,762 | 1,25 | **‑4,7 %** |\n| 4 – 1X2 [1] (Binh Phuoc) | 0,733 | 1,30 | **‑4,7 %** |\n\n*Accumulator*:  \n\\(E[M] = \\prod (P·quota) = 0,952 × 0,9523 × 0,9525 × 0,9529 ≈ 0,822\\)  \n\nEV totale = 0,822 – 1 = **‑17,8 %** sul capitale puntato.  \n> L’EV è negativo, ma rientra nella soglia di “avviso” (‑4 % ≤ EV < 0).\n\n---\n\n**2. Trappole tipiche del bookmaker (scenario di perdita)**  \n\n| Leg | Mercato | Scenario che fa perdere la scommessa |\n|-----|---------|--------------------------------------|\n| 1 | **Esito Finale 1X2 [1]** (vincente casa) | Qualsiasi risultato **diverso da vittoria della Saudi Arabia U20** (pareggio o vittoria dell’Armenia U20). Un eventuale “surprise” dell’Armenia, o un rigore/penalty in tempo supplementare non conteggiato, annulla la quota. |\n| 2 | **Doppia Chance 1X** (casa o pareggio) | **Vittoria della Spartak Trnava U19**. La doppia chance elimina solo draw e sconfitta casa; una vittoria dell’ospite è l’unico modo per perdere. |\n| 3 | **Under/Over 1.5 [OVER]** | **0 o 1 gol totali** nella partita (0‑0, 1‑0 o 0‑1). Un match molto difensivo, condizioni meteo avverse o un’interruzione tattica possono ridurre drasticamente il numero di reti. |\n| 4 | **Esito Finale 1X2 [1]** (vincente casa) | **Pareggio o vittoria della CS. Dong Thap**. Nelle fasi ad eliminazione diretta, un pareggio dopo i 90’ può portare a tempi supplementari/rigori; se il bookmaker registra il risultato a tempo regolamentare, la scommessa è persa. |\n\n---\n\n**3. Verdetto Finale**\n\n- Nessuna delle selezioni rientra nei criteri di **RISCHIO_STRUTTURALE** (1X2 secco su anti‑fav, under stretto su corazzata, tetto di gol su attacco dominante).  \n- Tutti i mercati sono “standard” e le probabilità fornite sono coerenti con le quote.\n\n**Verdetto:** **APPROVATA**  \n\n**Stake consigliata:** **2 % – 3 %** del bankroll (≈ €2‑€3 su €100), data la marginale negatività dell’EV e la composizione di più leg a rischio cumulativo.  \n\n---  \n\n*Nota*: L’EV complessivo è negativo (‑17,8 %). Se si decide di piazzare la scommessa, farlo con una piccola frazione del bankroll e monitorare eventuali variazioni di quota fino all’ultimo minuto."
+      "match": "Kazakistan - Isole Far Oer",
+      "kickoff_time": "2026-10-06 16:00 CEST",
+      "competition": "INT Nations League",
+      "market": "Chance Mix: 2 o Gol",
+      "odds": 1.4,
+      "probability": 0.716,
+      "fair_odd": 1.3975729262563192,
+      "edge": 0.0017366347745317867,
+      "score": 0.7686155829629783,
+      "verdict": "occhio",
+      "xg_home": 1.02,
+      "xg_away": 1.26,
+      "lambda_source": "baseline-sanity"
+    }
+  ],
+  "skipped": [
+    {
+      "match": "Bristol City - Charlton Athletic",
+      "reason": "fuori perimetro (u21)"
     },
     {
-      "id": "TICKET_SNAI_ASIA_AMICHEVOLI",
-      "name": "Ticket 2: Asia, Amichevoli & Cina (13:00 - 13:35 CEST)",
-      "stake_eur": 3.0,
-      "total_odds": 2.86,
-      "probability": 0.288,
-      "fair_odd": 3.47,
-      "edge": -0.176,
-      "potential_payout_eur": 8.58,
-      "legs": [
-        {
-          "match": "Corea del Sud - Uzbekistan",
-          "competition": "INT Amichevoli Nazionali",
-          "kickoff": "2026-10-06 13:00 CEST",
-          "market_family": "DRAW_NO_BET",
-          "market": "Draw No Bet [1]",
-          "selection": "1",
-          "odds": 1.25,
-          "probability": 0.762,
-          "fair_odd": 1.31,
-          "edge": -0.047,
-          "score": 0.833,
-          "rationale": "Corea del Sud con caratura tecnica superiore. In caso di pareggio la selezione viene integralmente rimborsata."
-        },
-        {
-          "match": "Changchun Yatai - Yanbian Longding",
-          "competition": "CHN League One",
-          "kickoff": "2026-10-06 13:00 CEST",
-          "market_family": "DOPPIA_CHANCE",
-          "market": "Doppia Chance [1X]",
-          "selection": "1X",
-          "odds": 1.2,
-          "probability": 0.794,
-          "fair_odd": 1.26,
-          "edge": -0.047,
-          "score": 0.781,
-          "rationale": "Changchun solida tra le mura amiche contro Yanbian; 1X esclude la sconfitta casalinga."
-        },
-        {
-          "match": "Nantong Zhiyun - Shanghai Jiading City Development",
-          "competition": "CHN League One",
-          "kickoff": "2026-10-06 13:30 CEST",
-          "market_family": "ESITO_FINALE",
-          "market": "Esito Finale 1X2 [1]",
-          "selection": "1",
-          "odds": 1.4,
-          "probability": 0.68,
-          "fair_odd": 1.47,
-          "edge": -0.048,
-          "score": 0.607,
-          "rationale": "Nantong retrocessa dalla Super League, nettamente dominante su Shanghai Jiading (quota ospite a 7.00)."
-        },
-        {
-          "match": "Cina - Tagikistan",
-          "competition": "INT Amichevoli Nazionali",
-          "kickoff": "2026-10-06 13:35 CEST",
-          "market_family": "DRAW_NO_BET",
-          "market": "Draw No Bet [1]",
-          "selection": "1",
-          "odds": 1.36,
-          "probability": 0.7,
-          "fair_odd": 1.43,
-          "edge": -0.048,
-          "score": 0.701,
-          "rationale": "Cina favorita in casa; Draw No Bet protegge dal rischio pareggio con rimborso integrale."
-        }
-      ],
-      "groq_verdict": "APPROVATA",
-      "groq_report": "**Ticket 2 – Audit**\n\n---\n\n### 1. Analisi Matematica (EV)\n\n| Leg | Mercato | Prob. stimata (P) | Quota Netwin (decimale) | Profitto unitario (quota‑1) | EV (per €1 di stake) |\n|-----|---------|-------------------|--------------------------|-----------------------------|----------------------|\n| 1 | Draw No Bet [1] – Corea SUD | 0,762 | 1,25 | 0,25 | **‑0,0475  (‑4,75 %)** |\n| 2 | Doppia Chance [1X] – Changchun | 0,794 | 1,20 | 0,20 | **‑0,0472  (‑4,72 %)** |\n| 3 | Esito Finale [1] – Nantong | 0,68  | 1,40 | 0,40 | **‑0,0480  (‑4,80 %)** |\n| 4 | Draw No Bet [1] – Cina | 0,70  | 1,36 | 0,36 | **‑0,0480  (‑4,80 %)** |\n\n**EV complessivo del ticket** (stake totale €1)  \n\n- Probabilità di vincita complessiva = 0,762 × 0,794 × 0,68 × 0,70 ≈ **0,288 (28,8 %)**  \n- Quota totale = **2,86** → profitto netto = 1,86  \n- EV = 0,288 × 1,86 − (1 − 0,288) = **‑0,176 ≈ ‑17,6 %**  \n\n> L’EV è negativo (‑17,6 %); è un avviso, non una causa di bocciatura.\n\n---\n\n### 2. Trappole Bookmaker – Scenario di perdita per ogni selezione  \n\n| Leg | Quando la scommessa perde |\n|-----|----------------------------|\n| 1 – Draw No Bet (Corea SUD) | **Vittoria dell’Uzbekistan** (la scommessa è rimborsata solo in caso di pareggio). |\n| 2 – Doppia Chance 1X (Changchun) | **Vittoria di Yanbian Longding** (qualsiasi sconfitta casalinga annulla la quota). |\n| 3 – Esito Finale 1 (Nantong) | **Pareggio o vittoria di Shanghai Jiading** (solo la vittoria di casa paga). |\n| 4 – Draw No Bet (Cina) | **Vittoria del Tagikistan** (solo la sconfitta della squadra ospite fa perdere). |\n\n---\n\n### 3. Verdetto Finale  \n\n- Nessun mercato proibito (non è 1X2 secco su “corazzata”, né under/over né tetto di gol).  \n- Tutti i mercati sono “protetti” (Draw No Bet, Doppia Chance) o una semplice vittoria di casa.\n\n**APPROVATA**  \n\n**Stake consigliata:** 2 % – 4 % del bankroll per questo ticket (≈ €2‑€4 su €100), data la forte negatività dell’EV.  \n\n---  \n\n*Audit completato.*"
+      "match": "Hull City U21 - Wigan U21",
+      "reason": "fuori perimetro (u21)"
     },
     {
-      "id": "TICKET_SNAI_POMERIGGIO_U21",
-      "name": "Ticket 3: Pomeriggio, England U21 & Qualificazioni (14:00 - 16:00 CEST)",
-      "stake_eur": 3.0,
-      "total_odds": 2.35,
-      "probability": 0.35,
-      "fair_odd": 2.86,
-      "edge": -0.177,
-      "potential_payout_eur": 7.05,
-      "legs": [
-        {
-          "match": "Bristol City - Charlton Athletic",
-          "competition": "ENG II Divisione U21",
-          "kickoff": "2026-10-06 14:00 CEST",
-          "market_family": "UNDER_OVER_MATCH",
-          "market": "Under/Over 2.5 [OVER]",
-          "selection": "OVER",
-          "odds": 1.27,
-          "probability": 0.75,
-          "fair_odd": 1.33,
-          "edge": -0.047,
-          "score": 0.831,
-          "rationale": "Inghilterra U21 a ritmi altissimi; Over 1.5 a 1.05 segnala aspettativa di almeno 3-4 gol complessivi."
-        },
-        {
-          "match": "Colchester United U21 - Swansea City U21",
-          "competition": "ENG II Divisione U21",
-          "kickoff": "2026-10-06 15:00 CEST",
-          "market_family": "DOPPIA_CHANCE",
-          "market": "Doppia Chance [X2]",
-          "selection": "X2",
-          "odds": 1.2,
-          "probability": 0.794,
-          "fair_odd": 1.26,
-          "edge": -0.047,
-          "score": 0.781,
-          "rationale": "Swansea U21 favorita a 1.62 in trasferta; X2 copre pareggio e vittoria corsara."
-        },
-        {
-          "match": "Albion FC Reserve - Nacional de Montevideo",
-          "competition": "URU Camp. Riserve I Div.",
-          "kickoff": "2026-10-06 15:30 CEST",
-          "market_family": "DOPPIA_CHANCE",
-          "market": "Doppia Chance [X2]",
-          "selection": "X2",
-          "odds": 1.16,
-          "probability": 0.821,
-          "fair_odd": 1.22,
-          "edge": -0.048,
-          "score": 0.683,
-          "rationale": "Nacional squadra guida del torneo riserve uruguaiano; X2 protegge su campo ostico."
-        },
-        {
-          "match": "Kazakistan - Isole Far Oer",
-          "competition": "INT Nations League",
-          "kickoff": "2026-10-06 16:00 CEST",
-          "market_family": "MULTIGOAL",
-          "market": "MultiGol [1-3]",
-          "selection": "1-3",
-          "odds": 1.33,
-          "probability": 0.716,
-          "fair_odd": 1.4,
-          "edge": -0.048,
-          "score": 0.762,
-          "rationale": "Scontro equilibrato e chiuso in Nations League; il range 1-3 copre l'1-0, 2-0, 2-1, 1-1, 0-1, 0-2."
-        }
-      ],
-      "groq_verdict": "APPROVATA",
-      "groq_report": "**1. Analisi Matematica – Valore Atteso (EV)**  \n\n| Leg | Probabilità (P) | Quota Netwin | EV = (P × Quota) – 1 |\n|-----|----------------|--------------|----------------------|\n| 1 – Over 2.5 (Bristol City vs Charlton) | 0,750 | 1,27 | **‑4,75 %** |\n| 2 – X2 (Colchester U21 vs Swansea U21) | 0,794 | 1,20 | **‑4,72 %** |\n| 3 – X2 (Albion FC Reserve vs Nacional) | 0,821 | 1,16 | **‑4,76 %** |\n| 4 – MultiGol 1‑3 (Kazakistan vs Isole Far Oer) | 0,716 | 1,33 | **‑4,87 %** |\n\n**EV complessivo del parlay**  \n\n\\[\n\\prod (P_i \\times \\text{Quota}_i)=0,9525 \\times 0,9528 \\times 0,95236 \\times 0,95128 \\approx 0,8222\n\\]\n\n\\[\n\\text{EV totale}=0,8222-1 = \\mathbf{-17,8\\%}\n\\]\n\n> *Nota*: l’EV negativo è solo un avviso, non comporta bocciatura automatica.\n\n---\n\n**2. Trappole Bookmaker – Scenari di perdita**\n\n| Leg | Mercato | Condizione che fa perdere la scommessa |\n|-----|---------|----------------------------------------|\n| 1 | **Over 2.5** | Totale gol ≤ 2 (0‑0, 1‑0, 0‑1, 1‑1, 2‑0, 0‑2, 2‑1, 1‑2, 2‑2). |\n| 2 | **X2** (doppia chance) | Vittoria della squadra di casa (Colchester U21). |\n| 3 | **X2** (doppia chance) | Vittoria della squadra di casa (Albion FC Reserve). |\n| 4 | **MultiGol 1‑3** | Totale gol = 0 **oppure** totale gol ≥ 4 (es. 0‑0, 0‑4, 5‑1, ecc.). |\n\n---\n\n**3. Verdetto Finale**\n\n- Nessun vincolo di mercato “ad alto rischio strutturale” (non è 1X2 secco, né under stretto su squadra “corazzata”, né tetto di gol su attacco dominante).  \n- **APPROVATA**.\n\n**Stake consigliata:** 3 % del bankroll (≈ €3 su €100).  \nQuesto livello mantiene l’esposizione contenuta rispetto al valore atteso negativo, ma consente di sfruttare eventuali errori di pricing del bookmaker."
+      "match": "Colchester United U21 - Swansea City U21",
+      "reason": "fuori perimetro (u21)"
+    },
+    {
+      "match": "Queens Park Rangers - Coventry City U21",
+      "reason": "fuori perimetro (u21)"
+    },
+    {
+      "match": "Binh Phuoc - CS. Dong Thap",
+      "reason": "fuori perimetro (vietnam)"
+    },
+    {
+      "match": "Lam Dong - Sông Lam",
+      "reason": "fuori perimetro (vietnam)"
+    },
+    {
+      "match": "Pho Hien FC - Huda Hue",
+      "reason": "fuori perimetro (vietnam)"
+    },
+    {
+      "match": "Montenegro U19 F  - Cipro U19 F ",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "UD Leiria U23 - Santa Clara U23",
+      "reason": "fuori perimetro (u23)"
+    },
+    {
+      "match": "Romania U19 F - Kazakhstan U19 F ",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "Beslidhja Lezhe - Sopoti",
+      "reason": "fuori perimetro (albania)"
+    },
+    {
+      "match": "Azerbaigian U21 - Gibilterra U21",
+      "reason": "fuori perimetro (u21)"
+    },
+    {
+      "match": "Moldova U21 - Kazakistan U21",
+      "reason": "fuori perimetro (u21)"
+    },
+    {
+      "match": "Corea del Sud - Uzbekistan",
+      "reason": "fuori perimetro (amichevol)"
+    },
+    {
+      "match": "Cina - Tagikistan",
+      "reason": "fuori perimetro (amichevol)"
+    },
+    {
+      "match": "India - Uruguay",
+      "reason": "fuori perimetro (amichevol)"
+    },
+    {
+      "match": "AS Trencin U19 - Spartak Trnava U19",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "MFk Zemplin Michalovce - MFk Ruzomberok U19",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "FC Petrzalka U19 - MFk Kosice U19",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "FK Dukla Banska Bystrica U19 - Slovan Bratislava U19",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "Nantong Zhiyun - Shanghai Jiading City Development",
+      "reason": "fuori perimetro (league one)"
+    },
+    {
+      "match": "Changchun Yatai - Yanbian Longding",
+      "reason": "fuori perimetro (league one)"
+    },
+    {
+      "match": "Heilongjiang Ice City FC - Meizhou Hakka Fc",
+      "reason": "fuori perimetro (league one)"
+    },
+    {
+      "match": "Hebei Kungfu - Dalian Kuncheng City",
+      "reason": "fuori perimetro (league one)"
+    },
+    {
+      "match": "Wuxi Wuguo - Suzhou Jinfu",
+      "reason": "fuori perimetro (league one)"
+    },
+    {
+      "match": "Guangdong Mingtu - Dalian Yingbo B",
+      "reason": "fuori perimetro (league two)"
+    },
+    {
+      "match": "Langfang Glory City FC - Xi An Ronghai",
+      "reason": "fuori perimetro (league two)"
+    },
+    {
+      "match": "Shenzhen 2028 FC - Shandong Taishan B",
+      "reason": "fuori perimetro (league two)"
+    },
+    {
+      "match": "Guizhou Zhucheng Athletic - Shanghai Port B",
+      "reason": "fuori perimetro (league two)"
+    },
+    {
+      "match": "Wuhan Hongxing - Lanzhou Longyuan Athletic",
+      "reason": "fuori perimetro (league two)"
+    },
+    {
+      "match": "NK Bilje - Jadran Dekani",
+      "reason": "fuori perimetro (ii divisione)"
+    },
+    {
+      "match": "CA Villa San Carlos Reserve - Deportivo Laferrere Riserve",
+      "reason": "fuori perimetro (riserv)"
+    },
+    {
+      "match": "Danimarca U19 - Olanda U19",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "Portogallo - Austria",
+      "reason": "fuori perimetro (u19)"
+    },
+    {
+      "match": "Albion FC Reserve - Nacional de Montevideo",
+      "reason": "fuori perimetro (riserv)"
+    },
+    {
+      "match": "Sportivo Trinidense - Sportivo Luqueno Res.",
+      "reason": "fuori perimetro (riserv)"
+    },
+    {
+      "match": "Olimpia Asuncion - Nacional Asuncion",
+      "reason": "fuori perimetro (riserv)"
+    },
+    {
+      "match": "Guarani Asuncion - Sportivo San Lorenzo",
+      "reason": "fuori perimetro (riserv)"
+    },
+    {
+      "match": "FK Iskra Danilovgrad - Rudar Pljevlja",
+      "reason": "fuori perimetro (druga)"
+    },
+    {
+      "match": "ASC & Center FC - FC Real Bengaluru",
+      "reason": "fuori perimetro (bengal)"
+    },
+    {
+      "match": "Bangladesh Police Club - City Club",
+      "reason": "fuori perimetro (bangladesh)"
+    },
+    {
+      "match": "Dhaka Wanderers Club - Bashundhara Kings",
+      "reason": "calcio d'inizio già passato"
+    },
+    {
+      "match": "Mohammedan Sporting Club Dhaka - Arambagh KS",
+      "reason": "calcio d'inizio già passato"
+    },
+    {
+      "match": "Saudi Arabia U20 - Armenia U20",
+      "reason": "fuori perimetro (u20)"
     }
   ]
 }

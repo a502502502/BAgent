@@ -1,0 +1,128 @@
+[
+  {
+    "name": "SNAI NL 6 ott — flusso",
+    "validator_passed": true,
+    "total_odds": 2.88,
+    "stake": 2.5,
+    "playable": true,
+    "ev_warning": null,
+    "legs": [
+      {
+        "match_name": "Kazakistan vs Isole Far Oer",
+        "tournament": "Nations League",
+        "market": "Chance Mix: 2 o Gol",
+        "book_odd": 1.44,
+        "fair_odd": 1.4250616672023115,
+        "probability": 0.7017240186968225,
+        "edge": 0.010482586923424408,
+        "kickoff_time": "2026-10-06 16:00 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      },
+      {
+        "match_name": "Bielorussia vs Finlandia",
+        "tournament": "Nations League",
+        "market": "Chance Mix: 2 o Gol",
+        "book_odd": 1.26,
+        "fair_odd": 1.2471667336000363,
+        "probability": 0.8018174098610121,
+        "edge": 0.01028993642487519,
+        "kickoff_time": "2026-10-06 20:45 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      },
+      {
+        "match_name": "Croazia vs Spagna",
+        "tournament": "Nations League",
+        "market": "X2 + MultiGol 2-5",
+        "book_odd": 1.29,
+        "fair_odd": 1.37625085301553,
+        "probability": 0.7266117203915846,
+        "edge": -0.06267088069485582,
+        "kickoff_time": "2026-10-06 20:45 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      },
+      {
+        "match_name": "Inghilterra vs Repubblica Ceca",
+        "tournament": "Nations League",
+        "market": "1X + MultiGol 2-5",
+        "book_odd": 1.23,
+        "fair_odd": 1.3906287843433156,
+        "probability": 0.7190991666925844,
+        "edge": -0.11550802496812118,
+        "kickoff_time": "2026-10-06 20:45 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      }
+    ],
+    "groq": "**AUDIT DEL TICKET – “SNAI NL 6 ott — flusso”**  \nBankroll: €100, Quota totale: 2.88  \n\n---\n\n## 1. Analisi Matematica (EV)\n\n| Leg | Mercato | Quota Netwin | Probabilità (P) | EV (P·Q‑1) |\n|-----|---------|--------------|-----------------|-----------|\n| 1 | Chance Mix 2 o Gol | 1.44 | 0.702 | **+1.09 %** |\n| 2 | Chance Mix 2 o Gol | 1.26 | 0.802 | **+1.05 %** |\n| 3 | X2 + MultiGol 2‑5 | 1.29 | 0.727 | **‑6.22 %** |\n| 4 | 1X + MultiGol 2‑5 | 1.23 | 0.719 | **‑11.56 %** |\n\n**EV complessivo**  \n\n- Probabilità di vincere l’intero parlay = 0.702 × 0.802 × 0.727 × 0.719 ≈ **0.294  (29.4 %)**  \n- Quota totale = 2.88  \n- EV = 0.294 × 2.88 − 1 ≈ **‑0.153  (‑15.3 %)**\n\n> L’EV totale è negativo (‑15 %). È solo un avviso, non comporta bocciatura automatica.\n\n---\n\n## 2. Trappole del Bookmaker (scenario di perdita per ogni selezione)\n\n| Leg | Mercato | Scenario che fa perdere la scommessa |\n|-----|---------|--------------------------------------|\n| 1 | **Chance Mix 2 o Gol** (Kazakistan vs Isole Far Oer) | **Perde solo se la squadra di casa vince 0‑0**. Qualsiasi vittoria casalinga con almeno un gol (es. 1‑0, 2‑0…) è coperta dal “Gol”. |\n| 2 | **Chance Mix 2 o Gol** (Bielorussia vs Finlandia) | **Perde solo se la Bielorussia vince 0‑0**. |\n| 3 | **X2 + MultiGol 2‑5** (Croazia vs Spagna) | Perde se **qualunque** delle seguenti situazioni si verifica: <br>• **Vittoria casalinga** (Croazia) di qualsiasi punteggio. <br>• **Pareggio o vittoria ospite** ma **totale gol < 2** (0‑0, 1‑0, 0‑1). <br>• **Pareggio o vittoria ospite** ma **totale gol > 5** (6‑0, 4‑2, 5‑2, ecc.). |\n| 4 | **1X + MultiGol 2‑5** (Inghilterra vs Repubblica Ceca) | Perde se **qualunque** delle seguenti situazioni si verifica: <br>• **Vittoria della squadra ospite** (Ceca) di qualsiasi punteggio. <br>• **Vittoria casalinga o pareggio** ma **totale gol < 2** (0‑0, 1‑0, 0‑1). <br>• **Vittoria casalinga o pareggio** ma **totale gol > 5** (6‑0, 4‑2, 5‑2, ecc.). |\n\n---\n\n## 3. Verdetto Finale\n\n- Nessuna delle selezioni rientra nei **vincoli di mercato a rischio strutturale** (1X2 secco, anti‑favorita su corazzata, under stretto su corazzata, tetto di gol su attacco dominante).  \n- Nonostante l’EV complessivo negativo, le singole quote sono coerenti con le probabilità stimate e le “mix” riducono i rischi tipici di under/over.\n\n**Verdetto:** **APPROVATA**  \n\n### Stake consigliato\nData la combinazione di due leg con EV positivo ma due leg fortemente negativi, e l’EV totale di –15 %, si consiglia una puntata **conservativa**:\n\n**Stake = 2 % – 3 % del bankroll** (≈ €2‑€3 per questa schedina).  \n\n---\n\n*Nota:* Monitorare le formazioni ufficiali e le statistiche di tiri/corner prima del fischio; eventuali assenze di giocatori chiave o variazioni tattiche potrebbero alterare significativamente le probabilità di “gol” e di totale gol 2‑5."
+  },
+  {
+    "name": "SNAI NL 6 ott — over aperti",
+    "validator_passed": true,
+    "total_odds": 3.26,
+    "stake": 2.5,
+    "playable": true,
+    "ev_warning": null,
+    "legs": [
+      {
+        "match_name": "Estonia vs Islanda",
+        "tournament": "Nations League",
+        "market": "Over 1.5",
+        "book_odd": 1.27,
+        "fair_odd": 1.322493856182901,
+        "probability": 0.756147180060472,
+        "edge": -0.039693081323200596,
+        "kickoff_time": "2026-10-06 20:45 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      },
+      {
+        "match_name": "Lussemburgo vs Bulgaria",
+        "tournament": "Nations League",
+        "market": "Over 1.5",
+        "book_odd": 1.45,
+        "fair_odd": 1.5168682851520987,
+        "probability": 0.6592530213654829,
+        "edge": -0.0440831190200498,
+        "kickoff_time": "2026-10-06 20:45 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      },
+      {
+        "match_name": "Moldova vs Slovacchia",
+        "tournament": "Nations League",
+        "market": "Over 1.5",
+        "book_odd": 1.22,
+        "fair_odd": 1.277280477632102,
+        "probability": 0.7829133988283129,
+        "edge": -0.04484565342945823,
+        "kickoff_time": "2026-10-06 20:45 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      },
+      {
+        "match_name": "Scozia vs Slovenia",
+        "tournament": "Nations League",
+        "market": "Over 1.5",
+        "book_odd": 1.45,
+        "fair_odd": 1.490762352099072,
+        "probability": 0.6707977288210607,
+        "edge": -0.02734329320946205,
+        "kickoff_time": "2026-10-06 20:45 CEST",
+        "sixth_sense": "Nations League, due partite chiuse a testa nello storico 2026. Nessuna assenza certificata. Formazioni ufficiali non ancora uscite. Niente corner e niente cartellini: non ci sono medie tiri certificate.",
+        "passed": true,
+        "rejection": null
+      }
+    ],
+    "groq": "**1. Analisi Matematica – Valore Atteso (EV)**  \n\n| Leg | P (probabilità) | Quota Netwin | EV = P·Quota – 1 |\n|-----|----------------|--------------|-----------------|\n| 1 – Estonia vs Islanda (Over 1.5) | 75,6 % | 1,27 | **‑3,99 %** |\n| 2 – Lussemburgo vs Bulgaria (Over 1.5) | 65,9 % | 1,45 | **‑4,35 %** |\n| 3 – Moldova vs Slovacchia (Over 1.5) | 78,3 % | 1,22 | **‑4,47 %** |\n| 4 – Scozia vs Slovenia (Over 1.5) | 67,1 % | 1,45 | **‑2,70 %** |\n\n**Parlay (4‑leg)**  \n- Probabilità complessiva ≈ 0,756 × 0,659 × 0,783 × 0,671 = 0,262 → 26,2 %  \n- Quota complessiva ≈ 1,27 × 1,45 × 1,22 × 1,45 = 3,26  \n- **EV totale** = 0,262 × 3,26 − 1 = ‑0,146 → ‑14,6 %  \n\n> L’EV negativo è solo un avviso, non comporta bocciatura automatica.\n\n---\n\n**2. Analisi Trappole Bookmaker – Scenari di perdita**\n\n| Leg | Mercato | Perde se… |\n|-----|---------|-----------|\n| 1 | Over 1.5 | **0‑0, 1‑0 o 0‑1** (meno di 2 gol totali) |\n| 2 | Over 1.5 | **0‑0, 1‑0 o 0‑1** |\n| 3 | Over 1.5 | **0‑0, 1‑0 o 0‑1** |\n| 4 | Over 1.5 | **0‑0, 1‑0 o 0‑1** |\n\n**Potenziali “trappole” del bookmaker**  \n- **Scelta del mercato Over 1.5 su squadre con difese compatte** (es. Estonia, Lussemburgo, Moldova, Scozia) e senza dati sui tiri, corner o cartellini: il bookmaker può sfruttare la mancanza di informazioni per offrire quote leggermente “inflazionate” ma comunque con margine negativo.  \n- **Riferimento a “due partite chiuse a testa nello storico 2026”**: le chiusure recenti (0‑0, 1‑1) tendono a far credere a un trend di pochi gol, ma la piccola dimensione del campione (2 incontri) rende la stima poco robusta.  \n- **Quote Netwin inferiori alla Fair (edge negativo)**: tutti i leg mostrano un edge compreso tra ‑2,7 % e ‑4,5 %, segnale di margine di profitto per il bookmaker.\n\n---\n\n**3. Verdetto Finale**\n\n**APPROVATA**  \n\n- Nessun vincolo di mercato “a rischio strutturale” (non è 1X2 secco, né under su corazzata, né tetto su attacco dominante).  \n- Nonostante l’EV complessivo negativo (‑14,6 %), la selezione è accettabile per un approccio di valore marginale.\n\n**Stake consigliata:** **2 % – 3 %** del bankroll (≈ €2‑€3 su €100).  \nCon un bankroll limitato e EV negativo, è prudente mantenere la puntata nella fascia bassa per contenere la varianza."
+  }
+]
