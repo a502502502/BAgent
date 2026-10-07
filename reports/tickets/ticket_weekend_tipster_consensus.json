@@ -1,0 +1,70 @@
+{
+  "ticket_id": "TICKET_WEEKEND_TIPSTER_CONSENSUS",
+  "title": "Schedina C: Tipster Consensus Oddspedia (Weekend 9-11 Ottobre)",
+  "name": "Schedina C: Tipster Consensus Oddspedia (Weekend 9-11 Ottobre)",
+  "created_at": "2026-10-07T16:20:00+00:00",
+  "status": "PENDING",
+  "strategy": "TIPSTER_CONSENSUS_ODDSPEDIA_UPGRADE",
+  "stake_eur": 3.0,
+  "total_odds": 3.61,
+  "potential_payout_eur": 10.83,
+  "notes": "Pronostici estratti dai Top Tipster Oddspedia (s00n Yield +10.2%, Value Spread Yield +17.4%, andrewdeda Yield +8.0%) e potenziati con mercati protetti SNAI (Regola #80).",
+  "legs": [
+    {
+      "event_code": "36411-2051",
+      "match": "Borussia Dortmund - Werder Brema",
+      "tournament": "GER Bundesliga",
+      "competition": "GER Bundesliga",
+      "market": "COMBO: DC + U/O",
+      "selection": "1X + OVER 2.5",
+      "odds": 1.42,
+      "date_time": "2026-10-09 20:30 CEST",
+      "kickoff": "2026-10-09 20:30 CEST",
+      "status": "PENDING",
+      "bookmaker": "SNAI",
+      "rationale": "Spunto Top Tipster #6 andrewdeda (Ucraina, Yield +8.0%, Win Rate 46.9%). Upgrade BAgent: protezione 1X combinata alla linea Over 2.5 da xG 2026 > 2.2 al Signal Iduna Park."
+    },
+    {
+      "event_code": "36411-1887",
+      "match": "Manchester United - Tottenham",
+      "tournament": "ENG Premier League",
+      "competition": "ENG Premier League",
+      "market": "COMBO: DC + U/O",
+      "selection": "1X + OVER 1.5",
+      "odds": 1.33,
+      "date_time": "2026-10-10 18:30 CEST",
+      "kickoff": "2026-10-10 18:30 CEST",
+      "status": "PENDING",
+      "bookmaker": "SNAI",
+      "rationale": "Spunto Top Tipster #4 s00n (Portogallo, Yield +10.2%, 464 vinte su 940, forma recente WWWWL). Upgrade BAgent: 1X + Over 1.5 assorbe sia pareggi aperti (1-1, 2-2) sia vittorie interne contro la linea difensiva alta degli Spurs."
+    },
+    {
+      "event_code": "36411-2275",
+      "match": "Real Madrid - Villarreal",
+      "tournament": "ESP Liga",
+      "competition": "ESP Liga",
+      "market": "COMBO: DC + U/O",
+      "selection": "1X + OVER 2.5",
+      "odds": 1.32,
+      "date_time": "2026-10-10 21:00 CEST",
+      "kickoff": "2026-10-10 21:00 CEST",
+      "status": "PENDING",
+      "bookmaker": "SNAI",
+      "rationale": "Consenso 88% dei tipster La Liga Oddspedia sulla superiorita del Real Madrid al Bernabeu. Upgrade BAgent: 1X + Over 2.5 per coprire l'eventuale pareggio ad alto volume (2-2)."
+    },
+    {
+      "event_code": "36411-1374",
+      "match": "Cagliari - Juventus",
+      "tournament": "ITA Serie A",
+      "competition": "ITA Serie A",
+      "market": "COMBO: DC + U/O",
+      "selection": "X2 + UNDER 3.5",
+      "odds": 1.45,
+      "date_time": "2026-10-11 20:45 CEST",
+      "kickoff": "2026-10-11 20:45 CEST",
+      "status": "PENDING",
+      "bookmaker": "SNAI",
+      "rationale": "Spunto Top Tipster #3 Value Spread (Italia, Yield +17.4%, 307 vinte su 924): asimmetria difensiva della Juventus di Motta in trasferta (< 0.8 xGA p90) combinata all'atteggiamento guardingo del Cagliari."
+    }
+  ]
+}
