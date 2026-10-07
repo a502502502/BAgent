@@ -400,7 +400,13 @@ class OddspediaSource:
                 )
                 page = context.new_page()
                 page.goto(match_url, wait_until="domcontentloaded", timeout=self.timeout_ms)
-                page.wait_for_timeout(3000)
+                try:
+                    page.wait_for_function(
+                        "() => typeof window.__NUXT__ !== 'undefined' && window.__NUXT__.state && window.__NUXT__.state.event && window.__NUXT__.state.event.event",
+                        timeout=8000,
+                    )
+                except Exception:
+                    page.wait_for_timeout(2000)
 
                 event_state = page.evaluate("""() => {
                     try {
@@ -411,6 +417,7 @@ class OddspediaSource:
                     return null;
                 }""")
                 browser.close()
+
 
                 if not event_state:
                     logger.warning("Impossibile recuperare state.event da %s", match_url)

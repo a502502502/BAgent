@@ -1,0 +1,78 @@
+{
+  "playable": true,
+  "name": "Schedina Certificata SNAI + Oddspedia Insights (07/10/2026 Pomeriggio/Sera)",
+  "generated_at": "2026-10-07T11:37:30.223177+00:00",
+  "strategy": "ODDSPEDIA_EMPIRICAL_INSIGHTS_FILTER",
+  "stake_eur": 3.0,
+  "bankroll_reference": 100.0,
+  "total_odds": 2.13,
+  "potential_payout_eur": 6.39,
+  "legs": [
+    {
+      "event_code": "36411-39687",
+      "match": "CD Universidad Catolica - LDU Quito",
+      "competition": "ECU Coppa",
+      "kickoff_time": "2026-10-07 17:00 CEST",
+      "market": "Under/Over",
+      "selection": "UNDER 3.5",
+      "odds": 1.15,
+      "bookmaker": "SNAI",
+      "rationale": "Scontro a eliminazione diretta in quota ecuadoriana, baricentro difensivo e linea 3.5 protettiva.",
+      "status": "UPCOMING"
+    },
+    {
+      "event_code": "36411-7542",
+      "match": "IF Gnistan - Inter Turku",
+      "competition": "FIN Veikkausliiga",
+      "kickoff_time": "2026-10-07 18:00 CEST",
+      "market": "COMBO: DC + U/O 1.5",
+      "selection": "X2 + OVER 1.5",
+      "odds": 1.48,
+      "bookmaker": "SNAI",
+      "oddspedia_proof": "Inter Turku (WWLWW) in forma superiore, Gnistan subisce gol da 9 partite di fila, entrambe segnano da 6+ turni, 0% rimonte casalinghe Gnistan se va sotto.",
+      "status": "UPCOMING"
+    },
+    {
+      "event_code": "36411-39738",
+      "match": "CS Cerrito - Montevideo Wanderers",
+      "competition": "URU Coppa Auf",
+      "kickoff_time": "2026-10-07 20:30 CEST",
+      "market": "Doppia Chance",
+      "selection": "1X",
+      "odds": 1.25,
+      "bookmaker": "SNAI",
+      "rationale": "Fattore campo coppa nazionale uruguaiana, copertura 2 esiti su 3.",
+      "status": "UPCOMING"
+    }
+  ],
+  "oddspedia_hotbets_live_board": [
+    {
+      "league": "SERBIA U19",
+      "match": "Jedinstvo UB U19 vs Stella Rossa U19 (ore 18:00 CEST)",
+      "market": "Entrambe Segnano (GG)",
+      "streak": "7 su 7 partite (100% win rate)",
+      "odd": 1.44
+    },
+    {
+      "league": "SVIZZERA U19",
+      "match": "Luzern U19 vs Basilea U19 (ore 15:00 CEST)",
+      "market": "Entrambe Segnano (GG)",
+      "streak": "6 su 7 partite (86% win rate)",
+      "odd": 1.29
+    },
+    {
+      "league": "BOLIVIA LFPB CUP",
+      "match": "Guabira Montero vs The Strongest (08/10 ore 02:30 CEST)",
+      "market": "Entrambe Segnano (GG)",
+      "streak": "6/7 e 7/7 partite (86%-100% win rate)",
+      "odd": 1.57
+    }
+  ],
+  "quality_gates": {
+    "player_props_included": false,
+    "micro_timing_corners_included": false,
+    "single_outcome_outrights_included": false,
+    "oddspedia_insights_verified": true,
+    "distinct_matches_verified": true
+  }
+}
