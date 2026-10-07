@@ -11,7 +11,7 @@
   "notes": "Mercati protetti estratti dal palinsesto ufficiale SNAI (Event Detail JSON).",
   "legs": [
     {
-      "event_code": "36411-2051",
+      "event_code": "36411-2485",
       "match": "Borussia Dortmund - Werder Brema",
       "tournament": "GER Bundesliga",
       "competition": "GER Bundesliga",
@@ -25,7 +25,7 @@
       "rationale": "Dortmund dominante al Signal Iduna Park, xG di squadra 2026 > 2.2, linea 2.5 ad alto assorbimento con doppia chance."
     },
     {
-      "event_code": "36411-1970",
+      "event_code": "36411-1448",
       "match": "Lens - Lione",
       "tournament": "FRA Ligue 1",
       "competition": "FRA Ligue 1",
