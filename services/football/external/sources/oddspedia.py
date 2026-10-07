@@ -84,12 +84,30 @@ class OddspediaMatchInsights:
         return asdict(self)
 
 
+@dataclass
+class OddspediaHotBet:
+    """Scommessa ad alta frequenza statistica (streak certificata da Oddspedia)."""
+    match: str
+    league: str
+    market: str
+    streak_count: str
+    win_percentage: float
+    odd: float
+    kickoff: str = ""
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+
 class OddspediaSource:
     """Wrapper di scraping e parsing per le quote e i movimenti di Oddspedia."""
 
     BASE_URL = "https://oddspedia.com"
     DROPPING_URL = "https://oddspedia.com/dropping-odds"
     VALUEBETS_URL = "https://oddspedia.com/valuebets"
+    HOTBETS_URL = "https://oddspedia.com/it/hot-bets"
+
 
     # Principali bookmaker con licenza ADM/AAMS monitorati su Oddspedia
     ADM_BOOKMAKERS = {
@@ -470,4 +488,100 @@ class OddspediaSource:
                 )
 
         return warnings
+
+    def fetch_hot_bets(self, limit: int = 20) -> List[OddspediaHotBet]:
+        """Estrae le 'Hot Bets' (scommesse con serie statistica eccezionale e 74% win rate dichiarato)."""
+        try:
+            from playwright.sync_api import sync_playwright
+
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=self.headless)
+                context = browser.new_context(
+                    user_agent=(
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/126.0.0.0 Safari/537.36"
+                    ),
+                    viewport={"width": 1280, "height": 800},
+                )
+                page = context.new_page()
+                page.goto(self.HOTBETS_URL, wait_until="networkidle", timeout=self.timeout_ms)
+                page.wait_for_timeout(2500)
+
+                raw_rows = page.evaluate("""() => {
+                    const items = [];
+                    const rowEls = document.querySelectorAll('.hot-bets-stats-table-row');
+                    rowEls.forEach(r => {
+                        const league = r.querySelector('.hot-bets-stats-table-row__header')?.innerText.replace(/\\s+/g, ' ').trim() || '';
+                        const market = r.querySelector('.hot-bets-stats-table-row__market-label')?.innerText.replace(/\\s+/g, ' ').trim() || '';
+                        const matchInfo = r.querySelector('.hot-bets-stats-table-row__content-match')?.innerText.replace(/\\s+/g, ' ').trim() || '';
+                        const playedGames = r.querySelector('.hot-bets-stats-table-row__played-games')?.innerText.replace(/\\s+/g, ' ').trim() || '';
+                        const percent = r.querySelector('.hot-bets-stats-table-row__percent')?.innerText.replace(/\\s+/g, ' ').trim() || '';
+                        const odd = r.querySelector('.hot-bets-stats-table-row__odd')?.innerText.replace(/\\s+/g, ' ').trim() || '';
+
+                        items.push({
+                            league,
+                            market,
+                            matchInfo,
+                            playedGames,
+                            percent,
+                            odd
+                        });
+                    });
+                    return items;
+                }""")
+                browser.close()
+
+                return self.parse_hot_bets_rows(raw_rows)[:limit]
+        except Exception as e:
+            logger.error("Errore durante estrazione Hot Bets: %s", e)
+            return []
+
+    def parse_hot_bets_rows(self, raw_rows: List[Dict[str, str]]) -> List[OddspediaHotBet]:
+        """Effettua il parsing e la normalizzazione dei record estratti dalla tabella Hot Bets."""
+        hot_bets: List[OddspediaHotBet] = []
+        for r in raw_rows:
+            raw_market = r.get("market") or ""
+            # Normalizzazione etichetta mercato
+            if "btts" in raw_market.lower():
+                clean_market = "Entrambe le Squadre Segnano: Si (GG)"
+            elif "total_goals_over" in raw_market.lower():
+                clean_market = "Over Gol"
+            elif "total_goals_under" in raw_market.lower():
+                clean_market = "Under Gol"
+            else:
+                clean_market = raw_market
+
+            # Estrazione percentuale
+            pct_str = (r.get("percent") or "0").replace("%", "").strip()
+            try:
+                pct = float(pct_str)
+            except ValueError:
+                pct = 0.0
+
+            # Estrazione quota
+            odd_str = (r.get("odd") or "0").strip()
+            try:
+                odd = float(odd_str)
+            except ValueError:
+                odd = 0.0
+
+            match_text = r.get("matchInfo") or ""
+            league_text = (r.get("league") or "").replace(raw_market, "").strip()
+
+            hot_bets.append(
+                OddspediaHotBet(
+                    match=match_text,
+                    league=league_text,
+                    market=clean_market,
+                    streak_count=r.get("playedGames") or "",
+                    win_percentage=pct,
+                    odd=odd,
+                )
+            )
+
+        # Ordina per percentuale di vittoria decrescente
+        hot_bets.sort(key=lambda x: x.win_percentage, reverse=True)
+        return hot_bets
+
 

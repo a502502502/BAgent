@@ -235,3 +235,38 @@ def test_parse_match_insights_and_warnings():
     assert any("SUPERIOR_MOMENTUM" in w for w in warnings)
     assert any("FORM_ALERT" in w for w in warnings)
 
+
+def test_parse_hot_bets_rows():
+    source = OddspediaSource(headless=True)
+    fake_rows = [
+        {
+            "league": "BOLIVIA LFPB LEAGUE CUP",
+            "market": "btts: words.yes",
+            "matchInfo": "8 ott 02:30 Guabira Montero The Strongest",
+            "playedGames": "6 /7",
+            "percent": "86%",
+            "odd": "1.57",
+        },
+        {
+            "league": "SERBIA U19 LEAGUE",
+            "market": "btts: words.yes",
+            "matchInfo": "7 ott 18:00 Jedinstvo UB U19 Stella Rossa U19",
+            "playedGames": "7 /7",
+            "percent": "100%",
+            "odd": "1.44",
+        },
+    ]
+
+    hot_bets = source.parse_hot_bets_rows(fake_rows)
+    assert len(hot_bets) == 2
+    # Primo elemento per win_percentage decrescente (100% prima di 86%)
+    assert hot_bets[0].win_percentage == 100.0
+    assert "Stella Rossa" in hot_bets[0].match
+    assert "Gol (Entrambe Segnano)" in hot_bets[0].market or "GG" in hot_bets[0].market
+    assert hot_bets[0].odd == 1.44
+
+    assert hot_bets[1].win_percentage == 86.0
+    assert hot_bets[1].odd == 1.57
+    assert hot_bets[1].streak_count == "6 /7"
+
+
