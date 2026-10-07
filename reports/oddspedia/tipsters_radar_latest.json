@@ -1,0 +1,235 @@
+{
+  "scanned_at": "2026-10-07T14:07:45.065427+00:00",
+  "total_tipsters_tracked": 10,
+  "top_tipsters": [
+    {
+      "rank": 1,
+      "name": "deyan76",
+      "country": "Grecia",
+      "profit_eur": 1203.67,
+      "yield_pct": 14.1,
+      "total_tips": 1134,
+      "winning_tips": 434,
+      "avg_odds": 4.12,
+      "recent_form": "WWLLL",
+      "open_tips_count": 44,
+      "profile_url": "https://oddspedia.com/it/u/deyan76",
+      "category": "SATELLITE_GEMME_CANDIDATE",
+      "win_rate_pct": 38.3
+    },
+    {
+      "rank": 2,
+      "name": "Razor7",
+      "country": "Ucraina",
+      "profit_eur": 1174.39,
+      "yield_pct": 24.4,
+      "total_tips": 814,
+      "winning_tips": 241,
+      "avg_odds": 4.94,
+      "recent_form": "VLLLL",
+      "open_tips_count": 30,
+      "profile_url": "https://oddspedia.com/it/u/Razor7",
+      "category": "SATELLITE_GEMME_CANDIDATE",
+      "win_rate_pct": 29.6
+    },
+    {
+      "rank": 3,
+      "name": "Value Spread",
+      "country": "Italia",
+      "profit_eur": 1070.93,
+      "yield_pct": 17.4,
+      "total_tips": 924,
+      "winning_tips": 307,
+      "avg_odds": 4.78,
+      "recent_form": "LLLWW",
+      "open_tips_count": 29,
+      "profile_url": "https://oddspedia.com/it/u/Value Spread",
+      "category": "SATELLITE_GEMME_CANDIDATE",
+      "win_rate_pct": 33.2
+    },
+    {
+      "rank": 4,
+      "name": "s00n",
+      "country": "Portogallo",
+      "profit_eur": 915.16,
+      "yield_pct": 10.2,
+      "total_tips": 940,
+      "winning_tips": 464,
+      "avg_odds": 2.09,
+      "recent_form": "WWWWL",
+      "open_tips_count": 15,
+      "profile_url": "https://oddspedia.com/it/u/s00n",
+      "category": "CORE_CASSAFORTE_CANDIDATE",
+      "win_rate_pct": 49.4
+    },
+    {
+      "rank": 5,
+      "name": "d3n1",
+      "country": "Ungheria",
+      "profit_eur": 843.69,
+      "yield_pct": 14.6,
+      "total_tips": 693,
+      "winning_tips": 347,
+      "avg_odds": 3.62,
+      "recent_form": "WWLLW",
+      "open_tips_count": 26,
+      "profile_url": "https://oddspedia.com/it/u/d3n1",
+      "category": "SATELLITE_GEMME_CANDIDATE",
+      "win_rate_pct": 50.1
+    },
+    {
+      "rank": 6,
+      "name": "andrewdeda",
+      "country": "Ucraina",
+      "profit_eur": 693.43,
+      "yield_pct": 8.0,
+      "total_tips": 911,
+      "winning_tips": 427,
+      "avg_odds": 2.07,
+      "recent_form": "WWLLV",
+      "open_tips_count": 31,
+      "profile_url": "https://oddspedia.com/it/u/andrewdeda",
+      "category": "CORE_CASSAFORTE_CANDIDATE",
+      "win_rate_pct": 46.9
+    },
+    {
+      "rank": 7,
+      "name": "gbwoloszyn",
+      "country": "Brasile",
+      "profit_eur": 585.37,
+      "yield_pct": 9.9,
+      "total_tips": 750,
+      "winning_tips": 296,
+      "avg_odds": 5.32,
+      "recent_form": "LLLLW",
+      "open_tips_count": 26,
+      "profile_url": "https://oddspedia.com/it/u/gbwoloszyn",
+      "category": "UNCLASSIFIED",
+      "win_rate_pct": 39.5
+    },
+    {
+      "rank": 8,
+      "name": "I Am Legend",
+      "country": "Italia",
+      "profit_eur": 561.54,
+      "yield_pct": 12.4,
+      "total_tips": 663,
+      "winning_tips": 230,
+      "avg_odds": 3.67,
+      "recent_form": "LLLLL",
+      "open_tips_count": 29,
+      "profile_url": "https://oddspedia.com/it/u/I Am Legend",
+      "category": "SATELLITE_GEMME_CANDIDATE",
+      "win_rate_pct": 34.7
+    },
+    {
+      "rank": 9,
+      "name": "Colorado TIPS",
+      "country": "Brasile",
+      "profit_eur": 471.02,
+      "yield_pct": 7.7,
+      "total_tips": 923,
+      "winning_tips": 298,
+      "avg_odds": 9.71,
+      "recent_form": "LLWWW",
+      "open_tips_count": 35,
+      "profile_url": "https://oddspedia.com/it/u/Colorado TIPS",
+      "category": "UNCLASSIFIED",
+      "win_rate_pct": 32.3
+    },
+    {
+      "rank": 10,
+      "name": "tehosthyvel1",
+      "country": "Finlandia",
+      "profit_eur": 388.21,
+      "yield_pct": 5.1,
+      "total_tips": 1006,
+      "winning_tips": 401,
+      "avg_odds": 3.45,
+      "recent_form": "WLLLV",
+      "open_tips_count": 88,
+      "profile_url": "https://oddspedia.com/it/u/tehosthyvel1",
+      "category": "UNCLASSIFIED",
+      "win_rate_pct": 39.9
+    }
+  ],
+  "total_open_picks_found": 4,
+  "picks": [
+    {
+      "tipster_name": "fg ramirez",
+      "tipster_yield": 0.0,
+      "match": "Manchester United - Tottenham",
+      "market": "Vince a Zero Vincente a 0",
+      "selection": "Casa",
+      "odds": 3.7,
+      "timestamp": "2026-10-07 14:07:09.091276+00",
+      "source_type": "NUXT_STATE",
+      "bagent_validation": {
+        "cross_check_status": "ANALYZED",
+        "rules_applied": [
+          "STANDARD_MACRO_CHECK",
+          "REGOLA_82_ANTI_STALE_H2H_MANDATORY"
+        ],
+        "bagent_recommendation": "Confrontare con i mercati combinati ufficiali SNAI per individuare asimmetrie rispetto alla quota soft.",
+        "lineup_status": "MACRO_MARKET_EARLY_PLAYABLE"
+      }
+    },
+    {
+      "tipster_name": "maddog254",
+      "tipster_yield": 0.0,
+      "match": "Maghrib A Fes - Raja Casablanca",
+      "market": "Esito Finale Handicap Asiatico",
+      "selection": "Casa",
+      "odds": 1.75,
+      "timestamp": "2026-10-07 14:07:07.740581+00",
+      "source_type": "NUXT_STATE",
+      "bagent_validation": {
+        "cross_check_status": "ANALYZED",
+        "rules_applied": [
+          "STANDARD_MACRO_CHECK",
+          "REGOLA_82_ANTI_STALE_H2H_MANDATORY"
+        ],
+        "bagent_recommendation": "Confrontare con i mercati combinati ufficiali SNAI per individuare asimmetrie rispetto alla quota soft.",
+        "lineup_status": "MACRO_MARKET_EARLY_PLAYABLE"
+      }
+    },
+    {
+      "tipster_name": "Eljefe",
+      "tipster_yield": 0.0,
+      "match": "Rekord Bielsko Biala - Sandecja Nowy Sacz",
+      "market": "Finale Esito",
+      "selection": "Ospite",
+      "odds": 2.2,
+      "timestamp": "2026-10-07 14:06:54.656331+00",
+      "source_type": "NUXT_STATE",
+      "bagent_validation": {
+        "cross_check_status": "ANALYZED",
+        "rules_applied": [
+          "STANDARD_MACRO_CHECK",
+          "REGOLA_82_ANTI_STALE_H2H_MANDATORY"
+        ],
+        "bagent_recommendation": "Confrontare con i mercati combinati ufficiali SNAI per individuare asimmetrie rispetto alla quota soft.",
+        "lineup_status": "MACRO_MARKET_EARLY_PLAYABLE"
+      }
+    },
+    {
+      "tipster_name": "fg ramirez",
+      "tipster_yield": 0.0,
+      "match": "Manchester United - Tottenham",
+      "market": "Finale Goal Totali",
+      "selection": "Meno",
+      "odds": 5.25,
+      "timestamp": "2026-10-07 14:06:52.495198+00",
+      "source_type": "NUXT_STATE",
+      "bagent_validation": {
+        "cross_check_status": "ANALYZED",
+        "rules_applied": [
+          "STANDARD_MACRO_CHECK",
+          "REGOLA_82_ANTI_STALE_H2H_MANDATORY"
+        ],
+        "bagent_recommendation": "Confrontare con i mercati combinati ufficiali SNAI per individuare asimmetrie rispetto alla quota soft.",
+        "lineup_status": "MACRO_MARKET_EARLY_PLAYABLE"
+      }
+    }
+  ]
+}
