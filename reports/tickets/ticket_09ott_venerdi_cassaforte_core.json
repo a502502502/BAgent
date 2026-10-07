@@ -1,0 +1,50 @@
+{
+  "ticket_id": "TICKET_09OTT_VENERDI_CASSAFORTE_CORE",
+  "title": "Schedina A: La Cassaforte Core-Protetta (Venerdi 9 Ottobre)",
+  "name": "Schedina A: La Cassaforte Core-Protetta (Venerdi 9 Ottobre)",
+  "created_at": "2026-10-07T12:45:00+00:00",
+  "status": "PENDING",
+  "strategy": "CORE_CASSAFORTE_MACRO",
+  "stake_eur": 7.0,
+  "total_odds": 2.32,
+  "potential_payout_eur": 16.24,
+  "notes": "Portafoglio Core 70% budget. Macro-mercati protetti per anticipi campionati maggiori.",
+  "legs": [
+    {
+      "match": "Borussia Dortmund vs Werder Bremen",
+      "tournament": "Bundesliga",
+      "competition": "Bundesliga",
+      "market": "1X + Over 1.5",
+      "selection": "1X + Over 1.5",
+      "odds": 1.32,
+      "date_time": "2026-10-09 20:30 CEST",
+      "kickoff": "2026-10-09 20:30 CEST",
+      "status": "PENDING",
+      "rationale": "Dortmund al Signal Iduna Park dominante, lambda offensivo Poisson > 2.1, Werder con difesa aperta."
+    },
+    {
+      "match": "Lens vs Lyon",
+      "tournament": "Ligue 1",
+      "competition": "Ligue 1",
+      "market": "Under 3.5",
+      "selection": "Under 3.5",
+      "odds": 1.35,
+      "date_time": "2026-10-09 21:00 CEST",
+      "kickoff": "2026-10-09 21:00 CEST",
+      "status": "PENDING",
+      "rationale": "Scontro tattico di vertice, Lens con blocco basso casalingo e Lyon guardingo in trasferta."
+    },
+    {
+      "match": "Malaga vs Espanyol",
+      "tournament": "La Liga",
+      "competition": "La Liga",
+      "market": "1X",
+      "selection": "1X",
+      "odds": 1.3,
+      "date_time": "2026-10-09 21:00 CEST",
+      "kickoff": "2026-10-09 21:00 CEST",
+      "status": "PENDING",
+      "rationale": "Fattore campo Rosaleda a favore del Malaga; Espanyol con baricentro conservativo."
+    }
+  ]
+}

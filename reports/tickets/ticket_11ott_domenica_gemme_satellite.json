@@ -1,0 +1,38 @@
+{
+  "ticket_id": "TICKET_11OTT_DOMENICA_GEMME_SATELLITE",
+  "title": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
+  "name": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
+  "created_at": "2026-10-07T12:45:00+00:00",
+  "status": "PENDING",
+  "strategy": "SATELLITE_GEMME_ASYMMETRIC",
+  "stake_eur": 3.0,
+  "total_odds": 3.41,
+  "potential_payout_eur": 10.23,
+  "notes": "Portafoglio Satellite 30% budget. Big Match Anfield con Salah protetto e classica Hot Bet Sassuolo-Milan.",
+  "legs": [
+    {
+      "match": "Liverpool vs Manchester City",
+      "tournament": "Premier League",
+      "competition": "Premier League",
+      "market": "Mohamed Salah: Almeno 1 tiro in porta",
+      "selection": "Mohamed Salah O0.5 Tiri in Porta (Clausola Pali e Sostituto)",
+      "odds": 1.75,
+      "date_time": "2026-10-11 17:30 CEST",
+      "kickoff": "2026-10-11 17:30 CEST",
+      "status": "PENDING",
+      "rationale": "Ad Anfield nei big match Salah accentra le conclusioni (media 3.6 tiri p90), rigorista designato. Copertura da pali e sostituzione attiva."
+    },
+    {
+      "match": "Sassuolo vs Milan",
+      "tournament": "Serie A",
+      "competition": "Serie A",
+      "market": "Goal + Over 2.5",
+      "selection": "Goal + Over 2.5",
+      "odds": 1.95,
+      "date_time": "2026-10-11 15:00 CEST",
+      "kickoff": "2026-10-11 15:00 CEST",
+      "status": "PENDING",
+      "rationale": "Hot Bet H2H storica: 8 degli ultimi 9 precedenti tra Sassuolo e Milan terminati con Goal e Over 2.5 (media 3.4 reti a match)."
+    }
+  ]
+}

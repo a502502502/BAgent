@@ -1,0 +1,38 @@
+{
+  "ticket_id": "TICKET_09OTT_VENERDI_GEMME_SATELLITE",
+  "title": "Schedina B: La Schedina delle Gemme (Venerdi 9 Ottobre)",
+  "name": "Schedina B: La Schedina delle Gemme (Venerdi 9 Ottobre)",
+  "created_at": "2026-10-07T12:45:00+00:00",
+  "status": "PENDING",
+  "strategy": "SATELLITE_GEMME_ASYMMETRIC",
+  "stake_eur": 3.0,
+  "total_odds": 3.15,
+  "potential_payout_eur": 9.45,
+  "notes": "Portafoglio Satellite 30% budget. Player Prop protetta Guirassy e Combo Asimmetrica Lens-Lyon.",
+  "legs": [
+    {
+      "match": "Borussia Dortmund vs Werder Bremen",
+      "tournament": "Bundesliga",
+      "competition": "Bundesliga",
+      "market": "Serhou Guirassy: Almeno 1 tiro in porta",
+      "selection": "Serhou Guirassy O0.5 Tiri in Porta (Clausola Pali e Sostituto)",
+      "odds": 1.7,
+      "date_time": "2026-10-09 20:30 CEST",
+      "kickoff": "2026-10-09 20:30 CEST",
+      "status": "PENDING",
+      "rationale": "Guirassy terminale offensivo di punta, media 3.4 tiri p90 con oltre 1.6 nello specchio, rigorista designato con salvaguardia subentrante."
+    },
+    {
+      "match": "Lens vs Lyon",
+      "tournament": "Ligue 1",
+      "competition": "Ligue 1",
+      "market": "Goal (Entrambe le squadre a segno)",
+      "selection": "Goal (Entrambe segnano)",
+      "odds": 1.85,
+      "date_time": "2026-10-09 21:00 CEST",
+      "kickoff": "2026-10-09 21:00 CEST",
+      "status": "PENDING",
+      "rationale": "Lyon a segno nelle ultime 8 trasferte consecutive; Lens pericoloso in ripartenza casalinga. Disallineamento quota soft/sharp."
+    }
+  ]
+}
