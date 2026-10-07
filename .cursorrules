@@ -56,4 +56,25 @@
   1. *Fattore Livello / Tensione di Categoria*: Le serie minori e le sfide di Lega D (es. Malta vs Gibilterra) presentano ritmi spezzettati e tassi di fallosità strutturalmente più alti (Over 4.5 cartellini naturale).
   2. *Asimmetria Disciplinare da Dribbling*: Squadre dotate di funamboli e velocisti (Musiala, Wirtz, Vinicius) provocano sistematicamente ammonizioni tattiche negli avversari. Scommettere sul segno `2 Cartellini` (più ammonizioni per la sfavorita che difende) o `Over Cartellini Squadra Sfavorita`.
 
+## Regola #82: Divieto Assoluto Motivazioni H2H Obsolete e Vincolo Metriche Contemporanee (Anti-Stale-H2H Bias)
+- **Divieto di Serie Storiche H2H Anacronistiche**:
+  1. È severamente VIETATO basare la motivazione di un pronostico o gemma su precedenti H2H pluriennali (es. "negli ultimi 8 precedenti tra Sassuolo e Milan", "negli ultimi 5 anni") quando le squadre hanno cambiato guida tecnica, rosa, ciclo tattico o categoria.
+  2. I precedenti H2H sono ammessi ed azionabili SOLO se:
+     - Riferiti alla stagione sportiva in corso (2026/27) o agli ultimi 6-9 mesi con continuità tecnica verificata (stesso allenatore e identità di gioco).
+     - Oppure corroborati da parametri quantitativi contemporanei (xG prodotti/concessi p90, PPDA, altezza del baricentro, volume tiri nelle ultime 5-8 gare attuali).
+  3. Le "Hot Bets" estratte da Oddspedia o altri provider non devono mai essere recepite acriticamente: se lo streak copre stagioni remote o campioni diluiti nel tempo, deve essere rigettato o ricalibrato sulle metriche attuali della stagione in corso.
+- **Obbligo di Motivazione Tattica Contemporanea (Stagione Attuale)**:
+  - Ogni selezione proposta deve essere giustificata esclusivamente con dati della stagione in corso: xG prodotti/concessi p90, stili di gioco opposti (es. linea alta e pressing vs transizioni veloci), volume conclusioni dei singoli giocatori e ruolo tattico effettivo nel match.
+
+## Regola #83: Architettura di Portafoglio a Doppio Binario (Core-Satellite 70/30) & Protocollo Gemme
+- **Budget 70/30 Inviolabile**:
+  1. Ogni sessione giornaliera o weekend deve essere strutturata in due ticket coordinati:
+     - **Ticket A: "La Cassaforte" (Core Macro)** — 70% del budget, quota target 2.10 - 2.80, win rate atteso ~45%-55%, solo mercati macro-strutturali protetti (1X, X2, Over 1.5 con Poisson verificato, Under 3.5, MultiGol). ZERO Player Props e zero micro-eventi nel Core.
+     - **Ticket B: "La Schedina delle Gemme" (Satellite Asimmetrico)** — 30% del budget, quota target 2.80 - 4.20, edge asimmetrico.
+- **Protocollo Rigido per le Gemme (Hidden Gems)**:
+  1. **Massimo 2 Selezioni**: Vietato creare schedine delle gemme con 3 o più eventi.
+  2. **Clausola di Salvaguardia Obbligatoria sulle Player Props**: Le scommesse individuali (tiri in porta, assist, marcatori) devono essere giocate esclusivamente su bookmaker/mercati che offrono la clausola "sostituto valido" (la giocata prosegue con il giocatore subentrante) e il conteggio di pali e traverse.
+  3. Le gemme devono fondarsi su asimmetria statistica verificata della stagione in corso (mispricing quota sharp/soft o volume conclusioni contemporaneo), mai su vecchi streak H2H.
+
+
 

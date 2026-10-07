@@ -1,0 +1,14 @@
+---
+description: Regola #82 (Anti-Stale-H2H Bias) e Regola #83 (Architettura Core-Satellite 70/30)
+alwaysApply: true
+---
+
+# Regola #82: Divieto Assoluto Motivazioni H2H Obsolete e Vincolo Metriche Contemporanee
+- Vietato giustificare o proporre pronostici/gemme basandosi su precedenti H2H remoti ("negli ultimi 8 precedenti", "ultimi 5 anni").
+- I dati H2H sono ammessi SOLO se riferiti alla stagione corrente (2026/27) o corroborati da metriche tattiche attuali (xG p90, PPDA, altezza baricentro, volume tiri contemporaneo).
+- Le Hot Bets da Oddspedia o feed esterni devono essere filtrate: se il campione risale a stagioni passate con rose/allenatori differenti, scartare o sostituire con evidenze della stagione in corso.
+
+# Regola #83: Architettura di Portafoglio Core-Satellite (70/30) & Protocollo Gemme
+- **Ticket A ("La Cassaforte")**: 70% budget, quota target 2.10 - 2.80, solo mercati macro-strutturali protetti (1X, X2, Over 1.5 con Poisson, Under 3.5, MultiGol). ZERO Player Props nel Core.
+- **Ticket B ("La Schedina delle Gemme")**: 30% budget, quota target 2.80 - 4.20. Massimo 2 selezioni.
+- Sulle Player Props è OBBLIGATORIA la clausola paracadute (sostituto valido e pali/traverse conteggiati).

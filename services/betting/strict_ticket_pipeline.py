@@ -491,6 +491,40 @@ class StrictTicketPipeline:
                     details=f"kickoff_time privo di orario: '{candidate.kickoff_time}'"
                 )
 
+        # =====================================================================
+        # GATE 0.08: REGOLA #82 - DIVIETO ASSOLUTO MOTIVAZIONI H2H OBSOLETE (Anti-Stale-H2H Bias)
+        # =====================================================================
+        analysis_txt = (candidate.sixth_sense_analysis or "").lower()
+        stale_h2h_patterns = [
+            r"ultim[ie]\s+[6-9]\s+(precedenti|confronti|h2h|scontri)",
+            r"ultim[ie]\s+\d{2,}\s+(precedenti|confronti|h2h|scontri)",
+            r"negli\s+ultimi\s+[2-9]\s+anni",
+            r"storico\s+h2h\s+pluriennale",
+            r"precedenti\s+storici\s+degli\s+ultimi\s+anni",
+        ]
+        contemporary_tokens = [
+            "2026", "2026/27", "questo campionato", "questa stagione", "stagione in corso",
+            "p90", "xg", "ppda", "baricentro", "ultime 5 gare", "ultime 6 gare", "forma attuale",
+            "continuità tecnica", "contemporan"
+        ]
+        has_stale_h2h = any(re.search(pat, analysis_txt) for pat in stale_h2h_patterns)
+        has_contemporary_context = any(tok in analysis_txt for tok in contemporary_tokens)
+
+        if has_stale_h2h and not has_contemporary_context:
+            return ValidationReport(
+                passed=False,
+                candidate=candidate,
+                stage_failed=0,
+                rejection_reason=(
+                    f"[BLOCCATO - REGOLA #82: ANTI-STALE-H2H BIAS] Motivazione basata su precedenti H2H remoti su {candidate.match_name}. "
+                    f"È tassativamente vietato giustificare selezioni o gemme con serie storiche pluriennali "
+                    f"quando rose, staff tecnico e ciclo tattico sono cambiati. "
+                    f"Obbligatorio motivare esclusivamente con parametri tattici e telemetria della stagione in corso (2026): "
+                    f"xG prodotti/concessi p90, PPDA, altezza del baricentro, volume tiri contemporaneo."
+                ),
+                details="Violazione Regola #82: serie storiche H2H pluriennali senza validazione tattica della stagione corrente."
+            )
+
         sample_notice = self._early_sample_warning(candidate)
         if isinstance(sample_notice, ValidationReport):
             return sample_notice
