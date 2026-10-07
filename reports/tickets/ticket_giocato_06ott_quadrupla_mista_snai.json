@@ -3,11 +3,12 @@
   "name": "Quadrupla Mista Speciale SNAI Nations League 06 Ottobre",
   "date_played": "2026-10-06 20:20 CEST",
   "bookmaker": "SNAI",
-  "status": "OPEN",
+  "status": "LOST",
+  "profit_loss_eur": -5.0,
   "stake_eur": 5.0,
   "odds": 4.34,
   "potential_payout_eur": 21.74,
-  "legs_summary": "1 VINTA (Kazakistan) + 3 IN ATTESA (ore 20:45 CEST)",
+  "legs_summary": "2 VINTE (Kazakistan, Inghilterra Cartellini) + 2 PERSE (Scozia Corner, Croazia-Spagna Tiri)",
   "legs": [
     {
       "event_code": "36411-8239",
@@ -18,7 +19,7 @@
       "odds": 1.42,
       "status": "WON",
       "final_score": "2-2",
-      "note": "Kazakistan ha segnato 2 reti, esito 1-3 verificato e VINTA"
+      "note": "Kazakistan ha segnato 2 reti, esito 1-3 verificato e VINTO"
     },
     {
       "event_code": "36411-8248",
@@ -27,8 +28,9 @@
       "market": "PRIMA A 4 CALCI D'ANGOLO",
       "selection": "TEAM 1 (Scozia)",
       "odds": 1.45,
-      "status": "PENDING",
-      "rationale": "Scozia a Hampden Park con Robertson e Doak a spingere sui corner contro il blocco 4-4-2 sloveno"
+      "status": "LOST",
+      "final_stats": "Corner totali: Slovenia 4, Scozia 1. Slovenia arrivata per prima a 4",
+      "rationale": "Slovenia ha condotto le ripartenze conquistando 4 corner prima della Scozia"
     },
     {
       "event_code": "36411-15596",
@@ -37,8 +39,9 @@
       "market": "U/O 2.5 PUNTI CARTELLINI (MAX 2 PER GIOCATORE)",
       "selection": "OVER",
       "odds": 1.65,
-      "status": "PENDING",
-      "rationale": "Soglia minima di 3 cartellini complessivi (o 1 giallo + 1 rosso) con duelli intensi Kral/Sadilek vs Saka/Kane"
+      "status": "WON",
+      "final_stats": "3 cartellini gialli estratti (Sadilek 54', Lewis-Skelly 53', Vitik 68')",
+      "rationale": "Superata la soglia di 2.5 punti cartellini"
     },
     {
       "event_code": "36411-8245",
@@ -47,8 +50,9 @@
       "market": "U/O 8.5 TIRI IN PORTA",
       "selection": "OVER",
       "odds": 1.28,
-      "status": "PENDING",
-      "rationale": "Due attacchi di altissima qualita con la Spagna mediamente sopra 6 tiri nello specchio"
+      "status": "LOST",
+      "final_stats": "Tiri in porta totali: 8 (Croazia 5, Spagna 3). Mancato per 1 solo tiro",
+      "rationale": "La partita si e' chiusa con 8 tiri nello specchio, sotto la soglia di 8.5"
     }
   ]
 }

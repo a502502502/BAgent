@@ -41,9 +41,10 @@
     "stake_eur": 5.0,
     "total_odds": 4.34,
     "potential_payout_eur": 21.74,
-    "status": "OPEN",
+    "status": "LOST",
+    "profit_loss_eur": -5.0,
     "strategy": "MIXED_SPECIALS_NL_06OTT",
-    "notes": "Quadrupla Mista SNAI (1 Gia Vinta su Kazakistan + 3 in programma ore 20:45)",
+    "notes": "Quadrupla Mista SNAI (1 Vinta Kazakistan, 1 Vinta Inghilterra Cartellini, 2 Perse: Scozia Corner, Croazia-Spagna Tiri)",
     "legs": [
       {
         "match": "Kazakistan vs Isole Far Oer",
@@ -58,7 +59,7 @@
         "tournament": "UEFA Nations League",
         "market": "Prima a 4 Calci d Angolo: Team 1 (Scozia)",
         "odds": 1.45,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -66,7 +67,7 @@
         "tournament": "UEFA Nations League",
         "market": "Over 2.5 Punti Cartellini",
         "odds": 1.65,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -74,7 +75,7 @@
         "tournament": "UEFA Nations League",
         "market": "Over 8.5 Tiri in Porta",
         "odds": 1.28,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       }
     ]
@@ -85,16 +86,17 @@
     "stake_eur": 5.0,
     "total_odds": 6.48,
     "potential_payout_eur": 32.4,
-    "status": "OPEN",
+    "status": "LOST",
+    "profit_loss_eur": -5.0,
     "strategy": "GEMS_ULTRA_SHOTS_06OTT",
-    "notes": "Tripla Player Props Tiri in Porta Ultra SNAI (Pali, Traverse e Sostituto Inclusi)",
+    "notes": "Tripla Player Props Tiri in Porta Ultra SNAI (Vinto Alexander-Arnold, Persi McGinn e Pedri)",
     "legs": [
       {
         "match": "Scozia vs Slovenia",
         "tournament": "UEFA Nations League",
         "market": "McGinn Over 0.5 Tiri Ultra (Incluso Sostituto e Legni)",
         "odds": 1.8,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -102,7 +104,7 @@
         "tournament": "UEFA Nations League",
         "market": "Alexander-Arnold Over 0.5 Tiri Ultra (Incluso Sostituto e Legni)",
         "odds": 1.8,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -110,7 +112,7 @@
         "tournament": "UEFA Nations League",
         "market": "Pedri Over 0.5 Tiri Ultra (Incluso Sostituto e Legni)",
         "odds": 2.0,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       }
     ]
@@ -121,16 +123,17 @@
     "stake_eur": 5.0,
     "total_odds": 4.94,
     "potential_payout_eur": 24.71,
-    "status": "OPEN",
+    "status": "LOST",
+    "profit_loss_eur": -5.0,
     "strategy": "GEMS_DISCOVERY_NL_06OTT",
-    "notes": "Schedina Gemme Nascoste SNAI Nations League Sera (1 Prop Protetta + 3 Asimmetriche)",
+    "notes": "Schedina Gemme Nascoste SNAI Nations League Sera (Vinti Albania Under 4.5 e Croazia-Spagna X2+MG, Perso Bijol)",
     "legs": [
       {
         "match": "Scozia vs Slovenia",
         "tournament": "UEFA Nations League",
         "market": "Bijol Quasi Cartellino (Cartellino o 2+ falli)",
         "odds": 1.62,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -138,7 +141,7 @@
         "tournament": "UEFA Nations League",
         "market": "Under 4.5",
         "odds": 1.55,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -146,7 +149,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + MultiGol 2-5",
         "odds": 1.27,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -154,7 +157,7 @@
         "tournament": "UEFA Nations League",
         "market": "Doppia Chance: X2",
         "odds": 1.55,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       }
     ]

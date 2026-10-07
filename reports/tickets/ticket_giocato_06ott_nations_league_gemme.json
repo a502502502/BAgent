@@ -3,7 +3,8 @@
   "name": "Schedina Gemme Nascoste Nations League Sera 06 Ottobre",
   "date_played": "2026-10-06 20:19 CEST",
   "bookmaker": "SNAI",
-  "status": "OPEN",
+  "status": "LOST",
+  "profit_loss_eur": -5.0,
   "stake_eur": 5.0,
   "odds": 4.94,
   "potential_payout_eur": 24.71,
@@ -19,7 +20,8 @@
       "market": "GIOCATORE QUASI CARTELLINO INCL. T.S.",
       "selection": "BIJOL J. RICEVE ALMENO UN CARTELLINO O COMMETTE ALMENO 2 FALLI -> SI",
       "odds": 1.62,
-      "status": "PENDING",
+      "status": "LOST",
+      "final_stats": "0 cartellini ricevuti, meno di 2 falli commessi",
       "safety_clause": "Paga se Bijol riceve un cartellino OPPURE se commette almeno 2 falli",
       "player_confirmed_starter": true
     },
@@ -30,7 +32,8 @@
       "market": "Under/Over 4.5",
       "selection": "UNDER 4.5",
       "odds": 1.55,
-      "status": "PENDING",
+      "status": "WON",
+      "final_score": "2-1",
       "model_probability": 0.785,
       "fair_odds": 1.27,
       "mathematical_edge": 0.216
@@ -42,7 +45,8 @@
       "market": "DC + MultiGol 2-5",
       "selection": "X2 + MULTIGOAL 2-5",
       "odds": 1.27,
-      "status": "PENDING",
+      "status": "WON",
+      "final_score": "1-2",
       "rule": "Regola #80: Protezione corazzata in trasferta, copertura risultati 1-1, 0-2, 1-2, 0-3, 1-3, 2-3"
     },
     {
@@ -52,7 +56,8 @@
       "market": "Doppia Chance",
       "selection": "X2",
       "odds": 1.55,
-      "status": "PENDING",
+      "status": "LOST",
+      "note": "Schedina gia' compromessa dal fallimento della selezione Bijol",
       "model_probability": 0.665,
       "fair_odds": 1.5,
       "mathematical_edge": 0.064
