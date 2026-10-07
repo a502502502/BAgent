@@ -1,59 +1,65 @@
 {
-    "ticket_id": "TICKET_QUATERNA_SESTO_SENSO_02OTT",
-    "name": "Quaterna Sesto Senso Anti-Turnover (@3.81)",
-    "created_at": "2026-10-02 13:30:00",
-    "total_odds": 3.81,
-    "stake": 2.5,
-    "potential_win": 9.52,
-    "conjoint_prob": 0.485,
-    "fair_odds": 2.06,
-    "edge_pct": 84.9,
-    "groq_audit": "APPROVATA",
-    "strategy": "Protezione da turnover e seconde linee. Mercati elastici con coperture su pareggi e Under ampi.",
-    "legs": [
-        {
-            "match": "Ungheria vs Georgia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 24629,
-            "market": "Under / Over",
-            "pick": "Under 3.5",
-            "netwin_odds": 1.25,
-            "rationale": "Ungheria con attacco totalmente decimato (out Varga, Sallai, Redzic, Bolla). Georgia con assetto difensivo 5-3-2 e Mamardashvili. Entrambe a 0 gol fatti in 180 minuti."
-        },
-        {
-            "match": "Ucraina vs Irlanda Del Nord",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 24426,
-            "market": "Combo",
-            "pick": "1X + Under 3.5",
-            "netwin_odds": 1.48,
-            "rationale": "Entrambe a 4 punti ed entrambe con 0 gol subiti nel torneo (1-0 e 0-0 per entrambe). Gara tattica e contratta, 1X copre 0-0, 1-0, 2-0, 1-1."
-        },
-        {
-            "match": "Polonia vs Romania",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 20681,
-            "market": "Combo",
-            "pick": "1X + Over 1.5",
-            "netwin_odds": 1.41,
-            "rationale": "Lewandowski torna titolare dal 1' contro la peggior difesa della Nations League (Romania con 6 gol subiti). Polonia senza Bednarek dietro, probabili almeno 2 gol totali."
-        },
-        {
-            "match": "Francia vs Italia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 14631,
-            "market": "Combo",
-            "pick": "1X + Under 4.5",
-            "netwin_odds": 1.46,
-            "rationale": "Mbappé out per infortunio nella Francia; Raspadori out e Kean non al meglio nell'Italia (favorito Pio Esposito). Francia a 0 gol subiti in 2 gare. Copre fino a 4 gol complessivi."
-        }
-    ]
+  "ticket_id": "TICKET_QUATERNA_SESTO_SENSO_02OTT",
+  "name": "Quaterna Sesto Senso Anti-Turnover (@3.81)",
+  "created_at": "2026-10-02 13:30:00",
+  "total_odds": 3.81,
+  "stake": 2.5,
+  "potential_win": 9.52,
+  "conjoint_prob": 0.485,
+  "fair_odds": 2.06,
+  "edge_pct": 84.9,
+  "groq_audit": "APPROVATA",
+  "strategy": "Protezione da turnover e seconde linee. Mercati elastici con coperture su pareggi e Under ampi.",
+  "legs": [
+    {
+      "match": "Ungheria vs Georgia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 24629,
+      "market": "Under / Over",
+      "pick": "Under 3.5",
+      "netwin_odds": 1.25,
+      "rationale": "Ungheria con attacco totalmente decimato (out Varga, Sallai, Redzic, Bolla). Georgia con assetto difensivo 5-3-2 e Mamardashvili. Entrambe a 0 gol fatti in 180 minuti.",
+      "status": "LOST"
+    },
+    {
+      "match": "Ucraina vs Irlanda Del Nord",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 24426,
+      "market": "Combo",
+      "pick": "1X + Under 3.5",
+      "netwin_odds": 1.48,
+      "rationale": "Entrambe a 4 punti ed entrambe con 0 gol subiti nel torneo (1-0 e 0-0 per entrambe). Gara tattica e contratta, 1X copre 0-0, 1-0, 2-0, 1-1.",
+      "status": "LOST"
+    },
+    {
+      "match": "Polonia vs Romania",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 20681,
+      "market": "Combo",
+      "pick": "1X + Over 1.5",
+      "netwin_odds": 1.41,
+      "rationale": "Lewandowski torna titolare dal 1' contro la peggior difesa della Nations League (Romania con 6 gol subiti). Polonia senza Bednarek dietro, probabili almeno 2 gol totali.",
+      "status": "LOST"
+    },
+    {
+      "match": "Francia vs Italia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 14631,
+      "market": "Combo",
+      "pick": "1X + Under 4.5",
+      "netwin_odds": 1.46,
+      "rationale": "Mbappé out per infortunio nella Francia; Raspadori out e Kean non al meglio nell'Italia (favorito Pio Esposito). Francia a 0 gol subiti in 2 gare. Copre fino a 4 gol complessivi.",
+      "status": "LOST"
+    }
+  ],
+  "status": "LOST",
+  "settled": true
 }

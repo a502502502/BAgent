@@ -5,7 +5,7 @@
   "total_odds": 3.15,
   "stake": 25.0,
   "potential_win": 78.76,
-  "status": "IN_PLAY",
+  "status": "LOST",
   "strategy": "USER_PLAYED_TICKET",
   "notes": "Giocata utente Netwin",
   "legs": [
@@ -15,7 +15,7 @@
       "pick": "Under 3.5",
       "odds": 1.52,
       "date_time": "2026-10-01 20:45 CEST",
-      "status": "PENDING"
+      "status": "LOST"
     },
     {
       "match": "Germania vs Serbia",
@@ -23,7 +23,7 @@
       "pick": "Under 4.5",
       "odds": 1.41,
       "date_time": "2026-10-01 20:45 CEST",
-      "status": "PENDING"
+      "status": "LOST"
     },
     {
       "match": "Grecia vs Olanda",
@@ -31,7 +31,8 @@
       "pick": "Under 3.5",
       "odds": 1.47,
       "date_time": "2026-10-01 20:45 CEST",
-      "status": "PENDING"
+      "status": "LOST"
     }
-  ]
+  ],
+  "settled": true
 }

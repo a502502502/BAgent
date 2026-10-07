@@ -7,9 +7,9 @@
   "stake": 10.0,
   "stake_eur": 10.0,
   "total_odds": 2.22,
-  "potential_win": 22.20,
-  "potential_payout_eur": 22.20,
-  "status": "PENDING",
+  "potential_win": 22.2,
+  "potential_payout_eur": 22.2,
+  "status": "LOST",
   "strategy": "DNA_SUDAMERICA_RESILIENCE_CHANCE_MIX",
   "notes": "Certificato da xg_poisson_engine e match_market_optimizer. Netwin odds live. Nessun range MultiGol stretto, solo protezioni aperte.",
   "legs": [
@@ -22,7 +22,7 @@
       "netwin_odds": 1.21,
       "model_probability": 0.844,
       "edge_pct": 2.1,
-      "status": "PENDING",
+      "status": "LOST",
       "kickoff": "2026-10-05 20:00 CEST"
     },
     {
@@ -34,7 +34,7 @@
       "netwin_odds": 1.36,
       "model_probability": 0.762,
       "edge_pct": 3.6,
-      "status": "PENDING",
+      "status": "LOST",
       "kickoff": "2026-10-05 23:45 CEST"
     },
     {
@@ -46,8 +46,9 @@
       "netwin_odds": 1.35,
       "model_probability": 0.766,
       "edge_pct": 3.4,
-      "status": "PENDING",
+      "status": "LOST",
       "kickoff": "2026-10-05 23:45 CEST"
     }
-  ]
+  ],
+  "settled": true
 }

@@ -1,50 +1,55 @@
 {
-    "ticket_id": "TICKET_PRIMI_TEMPI_NATIONS_01OTT",
-    "name": "Tripla d'Élite 1° Tempo Nations League (@2.47)",
-    "created_at": "2026-09-30 16:15:00",
-    "total_odds": 2.47,
-    "stake": 2.50,
-    "potential_win": 6.18,
-    "conjoint_prob": 0.554,
-    "fair_odds": 1.81,
-    "edge_pct": 36.8,
-    "groq_audit": "APPROVATA",
-    "legs": [
-        {
-            "match": "Germania vs Serbia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-01 20:45 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 33314,
-            "market": "1° Tempo",
-            "pick": "1 1° Tempo",
-            "netwin_odds": 1.57,
-            "potenziale_e_sesto_senso": "La Germania a Monaco vuole azzannare la partita fin dal fischio d'inizio per cancellare subito lo 0-1 con la Grecia. Nagelsmann parte con Musiala e Wirtz a pieni giri. La Serbia concede spazio nei primi 30' (ha già subito gol nel primo tempo contro l'Olanda). Quota eccellente @1.57 per il vantaggio tedesco all'intervallo.",
-            "prob_stimata": 0.68
-        },
-        {
-            "match": "Grecia vs Olanda",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-01 20:45 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 29851,
-            "market": "1° Tempo",
-            "pick": "X2 1° Tempo",
-            "netwin_odds": 1.26,
-            "potenziale_e_sesto_senso": "L'Olanda prende subito il comando del possesso ad Atene. Copertura totale nei primi 45 minuti: paga con lo 0-0 di studio e con qualsiasi vantaggio Oranje (0-1, 0-2, 1-1). La Grecia raramente chiude in vantaggio il primo tempo contro big mondiali.",
-            "prob_stimata": 0.81
-        },
-        {
-            "match": "Danimarca vs Portogallo",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-01 20:45 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 33284,
-            "market": "1° Tempo",
-            "pick": "X2 1° Tempo",
-            "netwin_odds": 1.25,
-            "potenziale_e_sesto_senso": "Scontro d'alta quota al Parken tra due difese solide. Il Portogallo ha una gestione del ritmo magistrale (Vitinha, Bruno Fernandes) e non concede ripartenze precoci. Copre lo 0-0, lo 0-1 e l'1-1 all'intervallo con elevatissima solidità statistica.",
-            "prob_stimata": 0.82
-        }
-    ]
+  "ticket_id": "TICKET_PRIMI_TEMPI_NATIONS_01OTT",
+  "name": "Tripla d'Élite 1° Tempo Nations League (@2.47)",
+  "created_at": "2026-09-30 16:15:00",
+  "total_odds": 2.47,
+  "stake": 2.5,
+  "potential_win": 6.18,
+  "conjoint_prob": 0.554,
+  "fair_odds": 1.81,
+  "edge_pct": 36.8,
+  "groq_audit": "APPROVATA",
+  "legs": [
+    {
+      "match": "Germania vs Serbia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-01 20:45 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 33314,
+      "market": "1° Tempo",
+      "pick": "1 1° Tempo",
+      "netwin_odds": 1.57,
+      "potenziale_e_sesto_senso": "La Germania a Monaco vuole azzannare la partita fin dal fischio d'inizio per cancellare subito lo 0-1 con la Grecia. Nagelsmann parte con Musiala e Wirtz a pieni giri. La Serbia concede spazio nei primi 30' (ha già subito gol nel primo tempo contro l'Olanda). Quota eccellente @1.57 per il vantaggio tedesco all'intervallo.",
+      "prob_stimata": 0.68,
+      "status": "LOST"
+    },
+    {
+      "match": "Grecia vs Olanda",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-01 20:45 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 29851,
+      "market": "1° Tempo",
+      "pick": "X2 1° Tempo",
+      "netwin_odds": 1.26,
+      "potenziale_e_sesto_senso": "L'Olanda prende subito il comando del possesso ad Atene. Copertura totale nei primi 45 minuti: paga con lo 0-0 di studio e con qualsiasi vantaggio Oranje (0-1, 0-2, 1-1). La Grecia raramente chiude in vantaggio il primo tempo contro big mondiali.",
+      "prob_stimata": 0.81,
+      "status": "LOST"
+    },
+    {
+      "match": "Danimarca vs Portogallo",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-01 20:45 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 33284,
+      "market": "1° Tempo",
+      "pick": "X2 1° Tempo",
+      "netwin_odds": 1.25,
+      "potenziale_e_sesto_senso": "Scontro d'alta quota al Parken tra due difese solide. Il Portogallo ha una gestione del ritmo magistrale (Vitinha, Bruno Fernandes) e non concede ripartenze precoci. Copre lo 0-0, lo 0-1 e l'1-1 all'intervallo con elevatissima solidità statistica.",
+      "prob_stimata": 0.82,
+      "status": "LOST"
+    }
+  ],
+  "status": "LOST",
+  "settled": true
 }

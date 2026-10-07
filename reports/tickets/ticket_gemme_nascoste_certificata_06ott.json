@@ -2,7 +2,7 @@
   "ticket_id": "TICKET_GEMME_NASCOSTE_06OTT_SNAI",
   "name": "Schedina Gemme Nascoste - Player Props Speciali & Clausole Ibride SNAI",
   "date": "2026-10-06",
-  "status": "ANALYZED_AND_AUDITED",
+  "status": "LOST",
   "playable_mode": "CONDIZIONATA_A_DISTINTE_19_45_E_PREFERIBILE_IN_SINGOLE",
   "total_odds": 4.9,
   "legs_count": 3,
@@ -20,7 +20,8 @@
       "edge": 0.031,
       "winning_condition": "Vince se riceve un cartellino (giallo/rosso) OPPURE se commette almeno 2 falli nell'incontro (inclusi tempi supplementari).",
       "tactical_rationale": "Sadilek agisce da mediano frangiflutti ceco davanti alla difesa. Contro il centrocampo inglese (Rice, Bellingham, Rogers/Foden) il volume di contrasti e' altissimo. La clausola ibrida cartellino O 2 falli protegge dal classico caso in cui un singolo fallo tattico viene subito punito con giallo.",
-      "lineup_status": "Pre-distinta (distinte ufficiali ore 19:45 CEST). Giocabile con certezza da titolare."
+      "lineup_status": "Pre-distinta (distinte ufficiali ore 19:45 CEST). Giocabile con certezza da titolare.",
+      "status": "LOST"
     },
     {
       "match": "Croazia - Spagna",
@@ -35,7 +36,8 @@
       "edge": 0.0,
       "winning_condition": "Vince se riceve un cartellino OPPURE se commette almeno 2 falli. Inclusi tempi supplementari.",
       "tactical_rationale": "Cucurella adotta marcatura aggressiva ad altissima intensita sulla corsia mancina spagnola. Duella contro Stanisic e l'esterno destro croato. Media di 2.1 falli p90 in nazionale. Rischio turnover con Grimaldo: verificare formazione alle 19:45.",
-      "lineup_status": "Ballottaggio Cucurella/Grimaldo. Necessaria conferma titolarita alle 19:45 CEST."
+      "lineup_status": "Ballottaggio Cucurella/Grimaldo. Necessaria conferma titolarita alle 19:45 CEST.",
+      "status": "LOST"
     },
     {
       "match": "Scozia - Slovenia",
@@ -50,7 +52,8 @@
       "edge": 0.152,
       "winning_condition": "Basta 1 solo tiro nello specchio della porta, OPPURE un palo, OPPURE una traversa. Se McGinn viene sostituito, qualsiasi tiro nello specchio o legno del sostituto e' valido.",
       "tactical_rationale": "John McGinn a Hampden Park e' il perno offensivo della Scozia con tiri costanti dalla media distanza (2.10 tiri p90, 0.95 nello specchio). La clausola speciale SNAI 'Ultra' annulla il rischio sfortuna (il palo o traversa paga vincente) e annulla il rischio uscita al 65'-70', perche il subentrante eredita la scommessa per il resto della gara.",
-      "lineup_status": "Capitano / titolare certo al 95%. Ottimo profilo di affidabilita."
+      "lineup_status": "Capitano / titolare certo al 95%. Ottimo profilo di affidabilita.",
+      "status": "LOST"
     }
   ],
   "claude_audit": {
@@ -63,5 +66,6 @@
     "post_lineup_advice": "Con formazioni confermate, la gemma a piu alto valore assoluto e' John McGinn Tiri Ultra Over 0.5 @ 1.80 (edge +15.2%).",
     "recommended_stake_singles": "1.0% bankroll per selezione singola confermata.",
     "recommended_stake_combo": "0.5% bankroll solo dopo verifica titolari alle 19:45 CEST."
-  }
+  },
+  "settled": true
 }

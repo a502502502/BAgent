@@ -1,34 +1,38 @@
 {
-    "ticket_id": "TICKET_RADDOPPIO_BOMBONERA_GALO_03OTT",
-    "name": "Schedina 3 — Raddoppio Blindato Bombonera & Galo (3 Ottobre)",
-    "period": "Sabato 3 Ottobre 2026",
-    "created_at": "2026-09-29 14:56:00",
-    "total_odds": 2.09,
-    "conjoint_prob": 0.604,
-    "edge_pct": 26.1,
-    "groq_audit": "APPROVATA (Rettifica Dialettica Accolta)",
-    "legs": [
-        {
-            "match": "Boca Juniors vs Union Santa Fe",
-            "tournament": "Primera Division Argentina",
-            "date_time": "2026-10-03 02:30 CEST",
-            "market": "Chance Mix",
-            "pick": "NoGol o Under 2.5",
-            "netwin_odds": 1.32,
-            "prob": 0.835,
-            "edge_pct": 10.2,
-            "rationale": "Bombonera roccaforte difensiva del Boca. Vince con qualsiasi NoGol (0-0, 1-0, 2-0, 0-1) o con qualsiasi Under 2.5."
-        },
-        {
-            "match": "Atletico Mineiro Mg vs Bragantino Sp",
-            "tournament": "Brasile Serie A",
-            "date_time": "2026-10-03 23:30 CEST",
-            "market": "Combo",
-            "pick": "1X + Under 3.5",
-            "netwin_odds": 1.58,
-            "prob": 0.724,
-            "edge_pct": 14.5,
-            "rationale": "Accolta obiezione Groq: rimosso il derby rischioso San-Sao. Combo 1X + Under 3.5 per il Galo all'Arena MRV a quota di reale valore."
-        }
-    ]
+  "ticket_id": "TICKET_RADDOPPIO_BOMBONERA_GALO_03OTT",
+  "name": "Schedina 3 — Raddoppio Blindato Bombonera & Galo (3 Ottobre)",
+  "period": "Sabato 3 Ottobre 2026",
+  "created_at": "2026-09-29 14:56:00",
+  "total_odds": 2.09,
+  "conjoint_prob": 0.604,
+  "edge_pct": 26.1,
+  "groq_audit": "APPROVATA (Rettifica Dialettica Accolta)",
+  "legs": [
+    {
+      "match": "Boca Juniors vs Union Santa Fe",
+      "tournament": "Primera Division Argentina",
+      "date_time": "2026-10-03 02:30 CEST",
+      "market": "Chance Mix",
+      "pick": "NoGol o Under 2.5",
+      "netwin_odds": 1.32,
+      "prob": 0.835,
+      "edge_pct": 10.2,
+      "rationale": "Bombonera roccaforte difensiva del Boca. Vince con qualsiasi NoGol (0-0, 1-0, 2-0, 0-1) o con qualsiasi Under 2.5.",
+      "status": "LOST"
+    },
+    {
+      "match": "Atletico Mineiro Mg vs Bragantino Sp",
+      "tournament": "Brasile Serie A",
+      "date_time": "2026-10-03 23:30 CEST",
+      "market": "Combo",
+      "pick": "1X + Under 3.5",
+      "netwin_odds": 1.58,
+      "prob": 0.724,
+      "edge_pct": 14.5,
+      "rationale": "Accolta obiezione Groq: rimosso il derby rischioso San-Sao. Combo 1X + Under 3.5 per il Galo all'Arena MRV a quota di reale valore.",
+      "status": "LOST"
+    }
+  ],
+  "status": "LOST",
+  "settled": true
 }

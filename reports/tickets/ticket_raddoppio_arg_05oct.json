@@ -1,7 +1,7 @@
 {
   "ticket_id": "TICKET_RADDOPPIO_ARG_05OCT",
   "name": "Raddoppio Sudamerica D'Acciaio (Zero-Netwin Benchmark)",
-  "status": "READY",
+  "status": "LOST",
   "stake_eur": 10.0,
   "total_odds": 2.22,
   "combined_model_prob": 0.506,
@@ -24,7 +24,8 @@
       "fair_odds": 1.26,
       "min_value_odds": 1.3,
       "edge_pct": 4.2,
-      "ev_score": 3.34
+      "ev_score": 3.34,
+      "status": "LOST"
     },
     {
       "match_id": "a918e9889e7c0c7126a1d2bb437d1fbb",
@@ -40,12 +41,13 @@
       "fair_odds": 1.32,
       "min_value_odds": 1.36,
       "edge_pct": 4.2,
-      "ev_score": 3.17
+      "ev_score": 3.17,
+      "status": "LOST"
     },
     {
       "match_id": "e87f6e4beae72a0c9132d3f03543b144",
       "home_team": "Deportivo Riestra",
-      "away_team": "Central C\u00f3rdoba",
+      "away_team": "Central Córdoba",
       "league": "soccer_argentina_primera_division",
       "commence_time": "2026-10-05T19:45:00Z",
       "market": "Under/Over",
@@ -56,7 +58,9 @@
       "fair_odds": 1.19,
       "min_value_odds": 1.23,
       "edge_pct": 3.7,
-      "ev_score": 3.12
+      "ev_score": 3.12,
+      "status": "LOST"
     }
-  ]
+  ],
+  "settled": true
 }

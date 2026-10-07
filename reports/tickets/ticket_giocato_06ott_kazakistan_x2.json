@@ -3,9 +3,9 @@
   "name": "Singola Utente Kazakistan vs Isole Far Oer (X2)",
   "date_played": "2026-10-06",
   "bookmaker": "SNAI",
-  "status": "VINTA",
+  "status": "LOST",
   "final_score": "2-2",
-  "stake_eur": 2.50,
+  "stake_eur": 2.5,
   "odds": 1.47,
   "payout_eur": 3.68,
   "net_profit_eur": 1.18,
@@ -17,5 +17,6 @@
   "model_probability": 0.709,
   "fair_odds": 1.41,
   "mathematical_edge": 0.043,
-  "target_desc": "Isole Far Oer vince o pareggia (vittoria con esiti X o 2)"
+  "target_desc": "Isole Far Oer vince o pareggia (vittoria con esiti X o 2)",
+  "settled": true
 }

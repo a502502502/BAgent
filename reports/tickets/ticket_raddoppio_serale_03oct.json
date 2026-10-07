@@ -9,7 +9,7 @@
   "total_odds": 2.33,
   "potential_win": 23.25,
   "potential_payout_eur": 23.25,
-  "status": "OPEN",
+  "status": "LOST",
   "strategy": "FLOW_ASYMMETRIC_NATIONS",
   "notes": "Raddoppio ore 20:45 certificato da strict_validator: Spagna MultiGol 2-4 (@1.54) + Scozia X2 + Under 3.5 (@1.51)",
   "legs": [
@@ -20,7 +20,7 @@
       "pick": "MultiGol 2-4",
       "odds": 1.54,
       "netwin_odds": 1.54,
-      "status": "PENDING",
+      "status": "LOST",
       "kickoff": "2026-10-03 20:45 CEST",
       "date_time": "2026-10-03 20:45 CEST"
     },
@@ -31,9 +31,10 @@
       "pick": "X2 + Under 3.5",
       "odds": 1.51,
       "netwin_odds": 1.51,
-      "status": "PENDING",
+      "status": "LOST",
       "kickoff": "2026-10-03 20:45 CEST",
       "date_time": "2026-10-03 20:45 CEST"
     }
-  ]
+  ],
+  "settled": true
 }

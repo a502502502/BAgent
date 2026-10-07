@@ -1,69 +1,76 @@
 {
-    "ticket_id": "TICKET_SPECIALIST_TIPSTER_02OTT",
-    "name": "Cinquina Specialist Tipster Volumi & Tempi (@5.47)",
-    "created_at": "2026-10-02 13:30:00",
-    "total_odds": 5.47,
-    "stake": 2.0,
-    "potential_win": 10.94,
-    "conjoint_prob": 0.365,
-    "fair_odds": 2.74,
-    "edge_pct": 99.6,
-    "strategy": "Mercati statistici specialistici indipendenti dall'1X2 classico. Focus su asimmetria volumi e inerzia del 1° tempo.",
-    "legs": [
-        {
-            "match": "Lettonia vs Montenegro",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 18:00 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 61150,
-            "market": "Combo",
-            "pick": "X2 + Under 4.5",
-            "netwin_odds": 1.32,
-            "rationale": "Lettonia con 0 gol fatti in 180' e solo 1.5 corner a gara. Montenegro capolista a punteggio pieno, proietta 8.2 corner vs 2.2 e netto dominio territoriale."
-        },
-        {
-            "match": "Ungheria vs Georgia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 24629,
-            "market": "1° Tempo Under/Over",
-            "pick": "Under 1.5 1° Tempo",
-            "netwin_odds": 1.35,
-            "rationale": "Proiezione statistica di soli 0.25 gol nel 1° tempo. Ungheria priva di Varga e Sallai, Georgia schierata con il 5-3-2 di contenimento."
-        },
-        {
-            "match": "Ucraina vs Irlanda Del Nord",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 24426,
-            "market": "1° Tempo MultiGol",
-            "pick": "MultiGol 0-1 1° Tempo",
-            "netwin_odds": 1.47,
-            "rationale": "Entrambe le difese hanno 0 gol subiti nel torneo. Studio prolungato e ritmo basso nella prima frazione di gioco."
-        },
-        {
-            "match": "Polonia vs Romania",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 20681,
-            "market": "1° Tempo Under/Over",
-            "pick": "Over 0.5 1° Tempo",
-            "netwin_odds": 1.32,
-            "rationale": "Romania con la peggior difesa (subisce in media 2.5 gol/gara già nel primo tempo). Lewandowski parte fortissimo."
-        },
-        {
-            "match": "Bosnia Erzegovina vs Svezia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 24079,
-            "market": "1° Tempo MultiGol",
-            "pick": "MultiGol 1-2 1° Tempo",
-            "netwin_odds": 1.58,
-            "rationale": "Sia Bosnia che Svezia hanno una media di 1.5 gol fatti nel primo tempo. Partita che si sblocca subito nei primi 45 minuti."
-        }
-    ]
+  "ticket_id": "TICKET_SPECIALIST_TIPSTER_02OTT",
+  "name": "Cinquina Specialist Tipster Volumi & Tempi (@5.47)",
+  "created_at": "2026-10-02 13:30:00",
+  "total_odds": 5.47,
+  "stake": 2.0,
+  "potential_win": 10.94,
+  "conjoint_prob": 0.365,
+  "fair_odds": 2.74,
+  "edge_pct": 99.6,
+  "strategy": "Mercati statistici specialistici indipendenti dall'1X2 classico. Focus su asimmetria volumi e inerzia del 1° tempo.",
+  "legs": [
+    {
+      "match": "Lettonia vs Montenegro",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 18:00 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 61150,
+      "market": "Combo",
+      "pick": "X2 + Under 4.5",
+      "netwin_odds": 1.32,
+      "rationale": "Lettonia con 0 gol fatti in 180' e solo 1.5 corner a gara. Montenegro capolista a punteggio pieno, proietta 8.2 corner vs 2.2 e netto dominio territoriale.",
+      "status": "LOST"
+    },
+    {
+      "match": "Ungheria vs Georgia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 24629,
+      "market": "1° Tempo Under/Over",
+      "pick": "Under 1.5 1° Tempo",
+      "netwin_odds": 1.35,
+      "rationale": "Proiezione statistica di soli 0.25 gol nel 1° tempo. Ungheria priva di Varga e Sallai, Georgia schierata con il 5-3-2 di contenimento.",
+      "status": "LOST"
+    },
+    {
+      "match": "Ucraina vs Irlanda Del Nord",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 24426,
+      "market": "1° Tempo MultiGol",
+      "pick": "MultiGol 0-1 1° Tempo",
+      "netwin_odds": 1.47,
+      "rationale": "Entrambe le difese hanno 0 gol subiti nel torneo. Studio prolungato e ritmo basso nella prima frazione di gioco.",
+      "status": "LOST"
+    },
+    {
+      "match": "Polonia vs Romania",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 20681,
+      "market": "1° Tempo Under/Over",
+      "pick": "Over 0.5 1° Tempo",
+      "netwin_odds": 1.32,
+      "rationale": "Romania con la peggior difesa (subisce in media 2.5 gol/gara già nel primo tempo). Lewandowski parte fortissimo.",
+      "status": "LOST"
+    },
+    {
+      "match": "Bosnia Erzegovina vs Svezia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 24079,
+      "market": "1° Tempo MultiGol",
+      "pick": "MultiGol 1-2 1° Tempo",
+      "netwin_odds": 1.58,
+      "rationale": "Sia Bosnia che Svezia hanno una media di 1.5 gol fatti nel primo tempo. Partita che si sblocca subito nei primi 45 minuti.",
+      "status": "LOST"
+    }
+  ],
+  "status": "LOST",
+  "settled": true
 }

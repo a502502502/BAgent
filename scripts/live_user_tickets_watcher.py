@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-scripts/live_user_tickets_watcher.py — Monitoraggio Live 24/7 Schedine Utente e Notifiche.
+scripts/live_user_tickets_watcher.py — Monitoraggio Live Schedine Utente e Notifiche Telegram.
 
-Monitora in tempo reale (feed Flashscore):
-- Germania vs Serbia (20:45 CEST)
-- Galles vs Norvegia (20:45 CEST)
-- Danimarca vs Portogallo (20:45 CEST)
-- Grecia vs Olanda (20:45 CEST)
+Monitora in tempo reale (feed Flashscore) esclusivamente le schedine attive
+e gli eventi odierni, ignorando rigorosamente eventi o ticket conclusi o nel passato.
 
-Aggiorna automaticamente:
-- portal/schedine.html & portal/schedine.json
-- Database bagent.db (ticket_ledger / bet_leg_ledger)
-- Notifiche Telegram istantanee su ogni variazione di punteggio, HT e FT
+Regole applicate:
+- Nessun emoji o simbolo decorativo nei messaggi Telegram o nei log.
+- Filtro temporale rigoroso: eventi con kickoff antecedente a 4 ore fa vengono esclusi dal monitoraggio.
+- Solo ticket con status OPEN, PENDING o WAITING_LINEUPS vengono considerati.
+- Deduplicazione automatica degli alert per prevenire notifiche ripetute.
 """
 
 from __future__ import annotations
 import json
+import re
 import sys
 import time
 from datetime import datetime
@@ -46,11 +45,16 @@ _PHASE_IT = {
 
 def load_state() -> dict:
     if not STATE_FILE.exists():
-        return {}
+        return {"matches": {}, "sent_alerts": []}
     try:
-        return json.loads(STATE_FILE.read_text(encoding="utf-8"))
-    except:
-        return {}
+        data = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            return {"matches": {}, "sent_alerts": []}
+        data.setdefault("matches", {})
+        data.setdefault("sent_alerts", [])
+        return data
+    except Exception:
+        return {"matches": {}, "sent_alerts": []}
 
 
 def save_state(state: dict) -> None:
@@ -58,27 +62,74 @@ def save_state(state: dict) -> None:
     STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def load_user_tickets() -> list[dict]:
+def load_active_user_tickets() -> list[dict]:
     if not TICKETS_FILE.exists():
         return []
     try:
-        return json.loads(TICKETS_FILE.read_text(encoding="utf-8"))
-    except:
+        tickets = json.loads(TICKETS_FILE.read_text(encoding="utf-8"))
+        if not isinstance(tickets, list):
+            return []
+        active_statuses = {"OPEN", "PENDING", "WAITING_LINEUPS"}
+        return [
+            t for t in tickets
+            if t.get("status") in active_statuses and not t.get("settled", False)
+        ]
+    except Exception:
         return []
 
 
+def parse_kickoff(ko_str: str) -> datetime | None:
+    if not ko_str:
+        return None
+    m = re.search(r"(\d{4}-\d{2}-\d{2})[T\s](\d{2}:\d{2})", ko_str)
+    if m:
+        dt_str = f"{m.group(1)} {m.group(2)}"
+        try:
+            return datetime.strptime(dt_str, "%Y-%m-%d %H:%M").replace(tzinfo=ROME)
+        except Exception:
+            pass
+    return None
+
+
+def is_leg_eligible(leg: dict, now: datetime) -> bool:
+    if leg.get("status") in ("WON", "LOST", "VOID"):
+        return False
+    ko_str = leg.get("kickoff") or leg.get("date_time") or leg.get("time") or ""
+    dt = parse_kickoff(ko_str)
+    if dt is None:
+        return True
+    
+    # Eventi giocati prima della data odierna vengono scartati
+    if dt.date() < now.date():
+        return False
+    
+    # Se il kickoff e' passato da piu' di 4 ore, la partita e' conclusa
+    diff_hours = (now - dt).total_seconds() / 3600.0
+    if diff_hours > 4.0:
+        return False
+    
+    return True
+
+
 def run_cycle(engine: FlashscoreLiveEngine, sentinel: TelegramSentinel, state: dict) -> tuple[list[str], dict]:
-    tickets = load_user_tickets()
+    tickets = load_active_user_tickets()
     if not tickets:
         return [], state
 
+    now = datetime.now(ROME)
     feed = engine.fetch_feed() or []
     notifications = []
     has_changes = False
 
+    match_state = state.get("matches", {})
+    sent_alerts = set(state.get("sent_alerts", []))
+
     for ticket in tickets:
-        t_id = ticket.get("ticket_id")
+        t_id = str(ticket.get("ticket_id", "TICKET"))
         for leg in ticket.get("legs", []):
+            if not is_leg_eligible(leg, now):
+                continue
+
             match_name = leg.get("match", "")
             if " vs " not in match_name and " - " not in match_name:
                 continue
@@ -90,58 +141,54 @@ def run_cycle(engine: FlashscoreLiveEngine, sentinel: TelegramSentinel, state: d
                 continue
 
             current_fp = fingerprint(row)
-            old_fp = state.get(match_name)
+            old_fp = match_state.get(match_name)
 
             if old_fp is not None and old_fp != current_fp:
                 has_changes = True
                 score = row.get("score") or "-"
                 phase_code = coarse_phase(str(row.get("status_code") or ""))
                 phase_label = _PHASE_IT.get(phase_code, phase_code)
-                
-                # Formatta alert
-                alert_text = (
-                    f"⚽ <b>AGGIORNAMENTO LIVE BAGENT</b>\n"
-                    f"🏟️ <b>{home} vs {away}</b>\n"
-                    f"📊 Risultato: <b>{score}</b> ({phase_label})\n"
-                    f"🎯 Selezione in gioco: <b>{leg.get('market')}</b> @ {leg.get('odds')}\n"
-                    f"🎟️ Schedina: <code>{t_id}</code>"
-                )
-                notifications.append(alert_text)
 
-            state[match_name] = current_fp
+                alert_key = f"{t_id}:{match_name}:{phase_code}:{score}"
+                if alert_key not in sent_alerts:
+                    alert_text = (
+                        f"AGGIORNAMENTO LIVE BAGENT\n"
+                        f"Partita: {home} vs {away}\n"
+                        f"Risultato: {score} ({phase_label})\n"
+                        f"Selezione: {leg.get('market')} @ {leg.get('odds')}\n"
+                        f"Schedina: {t_id}"
+                    )
+                    notifications.append(alert_text)
+                    sent_alerts.add(alert_key)
+
+            match_state[match_name] = current_fp
+
+    state["matches"] = match_state
+    # Mantieni gli ultimi 200 alert per prevenire crescita infinita
+    state["sent_alerts"] = list(sent_alerts)[-200:]
 
     if has_changes:
-        # Ricostruisci il portale
         try:
             write_slip_archive(ROOT / "portal" / "schedine.html")
-            print(f"[{datetime.now(ROME).strftime('%H:%M:%S')}] 🔄 Portale web aggiornato per variazioni live.")
+            print(f"[{datetime.now(ROME).strftime('%H:%M:%S')}] Portale web aggiornato per variazioni live.")
         except Exception as e:
             print(f"Errore aggiornamento portale: {e}")
 
     return notifications, state
 
 
-def main():
+def main() -> None:
     print("=" * 75)
-    print("🚀 AVVIO LIVE WATCHER & TELEGRAM DISPATCHER (BAGENT)")
+    print("AVVIO LIVE WATCHER & TELEGRAM DISPATCHER (BAGENT)")
     print("=" * 75)
-    
+
     engine = FlashscoreLiveEngine()
     sentinel = TelegramSentinel()
     state = load_state()
 
-    startup_msg = (
-        "🟢 <b>BAgent Sentinel: Live Monitor Attivo</b>\n"
-        "Tutte le 4 schedine di Nations League sono sotto osservazione telemetrica.\n"
-        "Riceverai notifiche istantanee ad ogni gol, cambio tempo o fischio finale."
-    )
-    sent = sentinel.send_message(startup_msg)
-    if sent:
-        print("✅ Notifica di avvio inviata con successo su Telegram!")
-    else:
-        print("⚠️ Telegram non autorizzato o token non valido. Avviso registrato in console.")
-
-    print(f"📡 Monitoraggio attivo su {TICKETS_FILE.name}. Ciclo ogni {PAUSE_SECONDS}s...")
+    active_tickets = load_active_user_tickets()
+    print(f"Monitoraggio attivo su {len(active_tickets)} schedine correnti in {TICKETS_FILE.name}.")
+    print(f"Ciclo di verifica ogni {PAUSE_SECONDS}s...")
 
     while True:
         try:

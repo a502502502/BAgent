@@ -1,78 +1,86 @@
 {
-    "ticket_id": "TICKET_QUOTA_10_NATIONS_01_02OTT",
-    "name": "Sestina d'Élite a Quota 10 (Doppie Chance & MultiGol Protetti) (@10.55)",
-    "created_at": "2026-09-30 16:48:00",
-    "total_odds": 10.55,
-    "stake": 1.5,
-    "potential_win": 15.83,
-    "groq_audit": "APPROVATA",
-    "legs": [
-        {
-            "match": "Germania vs Serbia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-01 20:45 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 33314,
-            "market": "Combo",
-            "pick": "1X + MultiGol 2-4",
-            "netwin_odds": 1.56,
-            "potenziale_e_sesto_senso": "La Germania a Monaco è chiamata al riscatto con Wirtz e Musiala contro una Serbia che ha subito 4 gol in 2 gare. La combo copre tutti i successi tedeschi plausibili (2-0, 2-1, 3-0, 3-1, 4-0) e l'1-1, escludendo lo 0-0 e punteggi da 5+ gol."
-        },
-        {
-            "match": "Grecia vs Olanda",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-01 20:45 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 29851,
-            "market": "Combo",
-            "pick": "X2 + MultiGol 1-5",
-            "netwin_odds": 1.5,
-            "potenziale_e_sesto_senso": "L'Olanda ha una qualità offensiva d'élite (Gakpo, Simons). La Grecia in casa giocherà con coraggio aprendo spazi letali in ripartenza. Doppia chance esterna protetta dal range 1-5 gol (copre 1-1, 0-1, 0-2, 1-2, 1-3, 2-2)."
-        },
-        {
-            "match": "Danimarca vs Portogallo",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-01 20:45 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 33284,
-            "market": "Combo",
-            "pick": "X2 + MultiGol 1-5",
-            "netwin_odds": 1.47,
-            "potenziale_e_sesto_senso": "Il Portogallo (Cristiano Ronaldo, Rafael Leão, Bruno Fernandes) gestisce il possesso e vanta una rosa superiore. Copre sia il pareggio tattico (1-1) sia il colpo esterno (0-1, 0-2, 1-2, 1-3)."
-        },
-        {
-            "match": "Galles vs Norvegia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-01 20:45 CEST",
-            "palinsesto_aams": 36401,
-            "avvenimento_aams": 33286,
-            "market": "Combo",
-            "pick": "X2 + MultiGol 2-5",
-            "netwin_odds": 1.42,
-            "potenziale_e_sesto_senso": "La Norvegia di Erling Haaland produce 17.5 tiri a partita. Con la trazione norvegese e la fragilità gallese il match vedrà almeno 2 reti (copre 0-2, 1-1, 1-2, 0-3, 1-3, 2-2)."
-        },
-        {
-            "match": "Francia vs Italia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 14631,
-            "market": "Combo",
-            "pick": "1X + MultiGol 1-4",
-            "netwin_odds": 1.45,
-            "potenziale_e_sesto_senso": "La Francia in casa con Mbappé e Barcola è favorita su un'Italia in ricostruzione. La combo 1X + MultiGol 1-4 copre 1-0, 2-0, 2-1, 3-0, 3-1 e il pareggio 1-1."
-        },
-        {
-            "match": "Bosnia Erzegovina vs Svezia",
-            "tournament": "UEFA Nations League",
-            "date_time": "2026-10-02 20:45 CEST",
-            "palinsesto_aams": 36403,
-            "avvenimento_aams": 24079,
-            "market": "Combo",
-            "pick": "X2 + MultiGol 1-5",
-            "netwin_odds": 1.49,
-            "potenziale_e_sesto_senso": "La Svezia con la coppia Gyökeres-Isak ha un potenziale d'attacco formidabile. La Bosnia fatica contro avversari veloci in transizione. Copre qualsiasi non sconfitta svedese con gol (1-1, 0-1, 0-2, 1-2, 1-3)."
-        }
-    ],
-    "booking_code": "263834"
+  "ticket_id": "TICKET_QUOTA_10_NATIONS_01_02OTT",
+  "name": "Sestina d'Élite a Quota 10 (Doppie Chance & MultiGol Protetti) (@10.55)",
+  "created_at": "2026-09-30 16:48:00",
+  "total_odds": 10.55,
+  "stake": 1.5,
+  "potential_win": 15.83,
+  "groq_audit": "APPROVATA",
+  "legs": [
+    {
+      "match": "Germania vs Serbia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-01 20:45 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 33314,
+      "market": "Combo",
+      "pick": "1X + MultiGol 2-4",
+      "netwin_odds": 1.56,
+      "potenziale_e_sesto_senso": "La Germania a Monaco è chiamata al riscatto con Wirtz e Musiala contro una Serbia che ha subito 4 gol in 2 gare. La combo copre tutti i successi tedeschi plausibili (2-0, 2-1, 3-0, 3-1, 4-0) e l'1-1, escludendo lo 0-0 e punteggi da 5+ gol.",
+      "status": "LOST"
+    },
+    {
+      "match": "Grecia vs Olanda",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-01 20:45 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 29851,
+      "market": "Combo",
+      "pick": "X2 + MultiGol 1-5",
+      "netwin_odds": 1.5,
+      "potenziale_e_sesto_senso": "L'Olanda ha una qualità offensiva d'élite (Gakpo, Simons). La Grecia in casa giocherà con coraggio aprendo spazi letali in ripartenza. Doppia chance esterna protetta dal range 1-5 gol (copre 1-1, 0-1, 0-2, 1-2, 1-3, 2-2).",
+      "status": "LOST"
+    },
+    {
+      "match": "Danimarca vs Portogallo",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-01 20:45 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 33284,
+      "market": "Combo",
+      "pick": "X2 + MultiGol 1-5",
+      "netwin_odds": 1.47,
+      "potenziale_e_sesto_senso": "Il Portogallo (Cristiano Ronaldo, Rafael Leão, Bruno Fernandes) gestisce il possesso e vanta una rosa superiore. Copre sia il pareggio tattico (1-1) sia il colpo esterno (0-1, 0-2, 1-2, 1-3).",
+      "status": "LOST"
+    },
+    {
+      "match": "Galles vs Norvegia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-01 20:45 CEST",
+      "palinsesto_aams": 36401,
+      "avvenimento_aams": 33286,
+      "market": "Combo",
+      "pick": "X2 + MultiGol 2-5",
+      "netwin_odds": 1.42,
+      "potenziale_e_sesto_senso": "La Norvegia di Erling Haaland produce 17.5 tiri a partita. Con la trazione norvegese e la fragilità gallese il match vedrà almeno 2 reti (copre 0-2, 1-1, 1-2, 0-3, 1-3, 2-2).",
+      "status": "LOST"
+    },
+    {
+      "match": "Francia vs Italia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 14631,
+      "market": "Combo",
+      "pick": "1X + MultiGol 1-4",
+      "netwin_odds": 1.45,
+      "potenziale_e_sesto_senso": "La Francia in casa con Mbappé e Barcola è favorita su un'Italia in ricostruzione. La combo 1X + MultiGol 1-4 copre 1-0, 2-0, 2-1, 3-0, 3-1 e il pareggio 1-1.",
+      "status": "LOST"
+    },
+    {
+      "match": "Bosnia Erzegovina vs Svezia",
+      "tournament": "UEFA Nations League",
+      "date_time": "2026-10-02 20:45 CEST",
+      "palinsesto_aams": 36403,
+      "avvenimento_aams": 24079,
+      "market": "Combo",
+      "pick": "X2 + MultiGol 1-5",
+      "netwin_odds": 1.49,
+      "potenziale_e_sesto_senso": "La Svezia con la coppia Gyökeres-Isak ha un potenziale d'attacco formidabile. La Bosnia fatica contro avversari veloci in transizione. Copre qualsiasi non sconfitta svedese con gol (1-1, 0-1, 0-2, 1-2, 1-3).",
+      "status": "LOST"
+    }
+  ],
+  "booking_code": "263834",
+  "status": "LOST",
+  "settled": true
 }

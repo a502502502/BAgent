@@ -5,7 +5,7 @@
   "total_odds": 3.4,
   "stake": 15.0,
   "potential_win": 52.63,
-  "status": "IN_PLAY",
+  "status": "LOST",
   "strategy": "USER_PLAYED_TICKET",
   "notes": "Giocata utente Netwin - Bonus 1.53€",
   "legs": [
@@ -15,7 +15,7 @@
       "pick": "X2 + Over 1.5",
       "odds": 1.28,
       "date_time": "2026-10-01 20:45 CEST",
-      "status": "PENDING"
+      "status": "LOST"
     },
     {
       "match": "Germania vs Serbia",
@@ -23,7 +23,7 @@
       "pick": "1 + Over 2.5",
       "odds": 1.41,
       "date_time": "2026-10-01 20:45 CEST",
-      "status": "PENDING"
+      "status": "LOST"
     },
     {
       "match": "Isole Far Oer vs Slovacchia",
@@ -31,7 +31,7 @@
       "pick": "X2 + MultiGol 1-5",
       "odds": 1.25,
       "date_time": "2026-10-02 20:45 CEST",
-      "status": "PENDING"
+      "status": "LOST"
     },
     {
       "match": "Francia vs Italia",
@@ -39,7 +39,8 @@
       "pick": "1 + Over 1.5",
       "odds": 1.51,
       "date_time": "2026-10-02 20:45 CEST",
-      "status": "PENDING"
+      "status": "LOST"
     }
-  ]
+  ],
+  "settled": true
 }

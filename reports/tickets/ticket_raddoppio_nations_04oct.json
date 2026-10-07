@@ -7,9 +7,9 @@
   "stake": 10.0,
   "stake_eur": 10.0,
   "total_odds": 2.31,
-  "potential_win": 23.10,
-  "potential_payout_eur": 23.10,
-  "status": "OPEN",
+  "potential_win": 23.1,
+  "potential_payout_eur": 23.1,
+  "status": "LOST",
   "strategy": "FLOW_ASYMMETRIC_NATIONS",
   "notes": "Raddoppio ore 20:45 certificato da strict_validator con lezioni Tipster Intelligence: Olanda MultiGol 2-4 (@1.50) + Portogallo 1X + MultiGol 1-4 (@1.54)",
   "legs": [
@@ -18,9 +18,9 @@
       "tournament": "UEFA Nations League",
       "market": "MultiGol 2-4",
       "pick": "MultiGol 2-4",
-      "odds": 1.50,
-      "netwin_odds": 1.50,
-      "status": "PENDING",
+      "odds": 1.5,
+      "netwin_odds": 1.5,
+      "status": "LOST",
       "kickoff": "2026-10-04 20:45 CEST",
       "date_time": "2026-10-04 20:45 CEST"
     },
@@ -31,9 +31,10 @@
       "pick": "1X + MultiGol 1-4",
       "odds": 1.54,
       "netwin_odds": 1.54,
-      "status": "PENDING",
+      "status": "LOST",
       "kickoff": "2026-10-04 20:45 CEST",
       "date_time": "2026-10-04 20:45 CEST"
     }
-  ]
+  ],
+  "settled": true
 }

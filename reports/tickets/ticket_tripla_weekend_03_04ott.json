@@ -1,48 +1,53 @@
 {
-    "ticket_id": "TICKET_TRIPLA_WEEKEND_03_04OTT",
-    "name": "Tripla Tattica Weekend Sudamerica (3-4 Ottobre)",
-    "period": "Weekend 3-4 Ottobre 2026",
-    "created_at": "2026-09-29 14:15:00",
-    "total_odds": 2.66,
-    "stake": 0.8,
-    "potential_win": 2.13,
-    "conjoint_prob": 0.507,
-    "edge_pct": 34.9,
-    "groq_audit": "APPROVATA (+34.9% EV)",
-    "legs": [
-        {
-            "match": "Independiente vs Instituto Cordoba",
-            "tournament": "Primera Division Argentina",
-            "date_time": "2026-10-03 00:15 CEST",
-            "market": "Doppia Chance",
-            "pick": "1X",
-            "netwin_odds": 1.32,
-            "prob": 0.805,
-            "edge_pct": 6.3,
-            "rationale": "Independiente al Libertadores de America imbattuto nelle ultime uscite interne; Instituto squadra chiusa che raramente vince fuori casa."
-        },
-        {
-            "match": "Argentinos Juniors vs Tigre",
-            "tournament": "Primera Division Argentina",
-            "date_time": "2026-10-04 00:15 CEST",
-            "market": "Primo Tempo",
-            "pick": "MultiGol 0-1 1° Tempo",
-            "netwin_odds": 1.41,
-            "prob": 0.802,
-            "edge_pct": 13.0,
-            "rationale": "A La Paternal il campo stretto favorisce pressing asfissiante e chiusure anticipate. Nei primi 45' la media gol e inferiore a 0.40."
-        },
-        {
-            "match": "Talleres De Cordoba vs Belgrano",
-            "tournament": "Primera Division Argentina",
-            "date_time": "2026-10-04 22:00 CEST",
-            "market": "Primo Tempo",
-            "pick": "MultiGol 0-1 1° Tempo",
-            "netwin_odds": 1.43,
-            "prob": 0.785,
-            "edge_pct": 12.3,
-            "rationale": "Clasico Cordobes: altissima tensione agonistica, fallosita e ritmi bloccati nella prima frazione. Nessuna delle due squadre rischia nei primi 45'."
-        }
-    ],
-    "booking_code": "195589"
+  "ticket_id": "TICKET_TRIPLA_WEEKEND_03_04OTT",
+  "name": "Tripla Tattica Weekend Sudamerica (3-4 Ottobre)",
+  "period": "Weekend 3-4 Ottobre 2026",
+  "created_at": "2026-09-29 14:15:00",
+  "total_odds": 2.66,
+  "stake": 0.8,
+  "potential_win": 2.13,
+  "conjoint_prob": 0.507,
+  "edge_pct": 34.9,
+  "groq_audit": "APPROVATA (+34.9% EV)",
+  "legs": [
+    {
+      "match": "Independiente vs Instituto Cordoba",
+      "tournament": "Primera Division Argentina",
+      "date_time": "2026-10-03 00:15 CEST",
+      "market": "Doppia Chance",
+      "pick": "1X",
+      "netwin_odds": 1.32,
+      "prob": 0.805,
+      "edge_pct": 6.3,
+      "rationale": "Independiente al Libertadores de America imbattuto nelle ultime uscite interne; Instituto squadra chiusa che raramente vince fuori casa.",
+      "status": "LOST"
+    },
+    {
+      "match": "Argentinos Juniors vs Tigre",
+      "tournament": "Primera Division Argentina",
+      "date_time": "2026-10-04 00:15 CEST",
+      "market": "Primo Tempo",
+      "pick": "MultiGol 0-1 1° Tempo",
+      "netwin_odds": 1.41,
+      "prob": 0.802,
+      "edge_pct": 13.0,
+      "rationale": "A La Paternal il campo stretto favorisce pressing asfissiante e chiusure anticipate. Nei primi 45' la media gol e inferiore a 0.40.",
+      "status": "LOST"
+    },
+    {
+      "match": "Talleres De Cordoba vs Belgrano",
+      "tournament": "Primera Division Argentina",
+      "date_time": "2026-10-04 22:00 CEST",
+      "market": "Primo Tempo",
+      "pick": "MultiGol 0-1 1° Tempo",
+      "netwin_odds": 1.43,
+      "prob": 0.785,
+      "edge_pct": 12.3,
+      "rationale": "Clasico Cordobes: altissima tensione agonistica, fallosita e ritmi bloccati nella prima frazione. Nessuna delle due squadre rischia nei primi 45'.",
+      "status": "LOST"
+    }
+  ],
+  "booking_code": "195589",
+  "status": "LOST",
+  "settled": true
 }

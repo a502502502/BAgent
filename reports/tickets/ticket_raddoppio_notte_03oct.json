@@ -9,7 +9,7 @@
   "total_odds": 2.32,
   "potential_win": 23.24,
   "potential_payout_eur": 23.24,
-  "status": "OPEN",
+  "status": "LOST",
   "strategy": "DNA_SUDAMERICA_UNDER35",
   "notes": "Raddoppio ore 22:00 certificato da strict_validator: Tucuman 1X+U3.5 (@1.40) + Newell's 1X+U3.5 (@1.66 con Edge +4.3%)",
   "legs": [
@@ -18,9 +18,9 @@
       "tournament": "Liga Profesional Argentina",
       "market": "1X + Under 3.5",
       "pick": "1X + Under 3.5",
-      "odds": 1.40,
-      "netwin_odds": 1.40,
-      "status": "PENDING",
+      "odds": 1.4,
+      "netwin_odds": 1.4,
+      "status": "LOST",
       "kickoff": "2026-10-03 22:00 CEST",
       "date_time": "2026-10-03 22:00 CEST"
     },
@@ -31,9 +31,10 @@
       "pick": "1X + Under 3.5",
       "odds": 1.66,
       "netwin_odds": 1.66,
-      "status": "PENDING",
+      "status": "LOST",
       "kickoff": "2026-10-03 22:00 CEST",
       "date_time": "2026-10-03 22:00 CEST"
     }
-  ]
+  ],
+  "settled": true
 }

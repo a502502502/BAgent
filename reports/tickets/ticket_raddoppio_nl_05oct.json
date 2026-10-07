@@ -1,7 +1,7 @@
 {
   "ticket_id": "TICKET_RADDOPPIO_NL_05OCT",
   "name": "Raddoppio Nations League Elite (Zero-Netwin Benchmark)",
-  "status": "READY",
+  "status": "LOST",
   "stake_eur": 10.0,
   "total_odds": 2.29,
   "combined_model_prob": 0.5089,
@@ -24,7 +24,8 @@
       "fair_odds": 1.15,
       "min_value_odds": 1.18,
       "edge_pct": 4.3,
-      "ev_score": 3.74
+      "ev_score": 3.74,
+      "status": "LOST"
     },
     {
       "match_id": "2b8ee7414d7336408e155d4f35599d8e",
@@ -40,7 +41,8 @@
       "fair_odds": 1.16,
       "min_value_odds": 1.19,
       "edge_pct": 4.3,
-      "ev_score": 3.71
+      "ev_score": 3.71,
+      "status": "LOST"
     },
     {
       "match_id": "3aad35139730b2026ed3f3601d077546",
@@ -56,7 +58,8 @@
       "fair_odds": 1.18,
       "min_value_odds": 1.22,
       "edge_pct": 4.0,
-      "ev_score": 3.38
+      "ev_score": 3.38,
+      "status": "LOST"
     },
     {
       "match_id": "e979f252ee424cd29028d8f8aa21934a",
@@ -72,7 +75,9 @@
       "fair_odds": 1.24,
       "min_value_odds": 1.28,
       "edge_pct": 2.9,
-      "ev_score": 2.33
+      "ev_score": 2.33,
+      "status": "LOST"
     }
-  ]
+  ],
+  "settled": true
 }

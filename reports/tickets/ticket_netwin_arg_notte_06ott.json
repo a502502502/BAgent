@@ -10,7 +10,7 @@
   "fair_odd": 2.34,
   "edge": 0.235,
   "potential_payout_eur": 14.45,
-  "status": "PROPOSED",
+  "status": "LOST",
   "notes": "Schedina Notturna Argentina DNA Corto Muso & Tempi (Estudiantes, Vélez, Banfield)",
   "legs": [
     {
@@ -20,37 +20,41 @@
       "odds": 1.47,
       "probability": 0.708,
       "fair_odd": 1.41,
-      "edge": 0.040,
+      "edge": 0.04,
       "score": 0.742,
       "verdict": "occhio",
       "market_family": "COMBO_DOUBLE_CHANCE_UO",
-      "notes": "Fattore campo a La Plata; Estudiantes favorito solido, linea Under 3.5 assorbe 1-0, 2-0, 2-1, 1-1, 0-0."
+      "notes": "Fattore campo a La Plata; Estudiantes favorito solido, linea Under 3.5 assorbe 1-0, 2-0, 2-1, 1-1, 0-0.",
+      "status": "LOST"
     },
     {
       "match": "Velez Sarsfield vs Platense",
       "kickoff": "2026-10-06 00:00 CEST",
       "market": "1X + Under 3.5",
-      "odds": 1.40,
+      "odds": 1.4,
       "probability": 0.735,
       "fair_odd": 1.36,
       "edge": 0.029,
       "score": 0.849,
       "verdict": "occhio",
       "market_family": "COMBO_DOUBLE_CHANCE_UO",
-      "notes": "Vélez capolista difensivo a Liniers contro il blocco compatto del Platense; rischio gol bassissimo."
+      "notes": "Vélez capolista difensivo a Liniers contro il blocco compatto del Platense; rischio gol bassissimo.",
+      "status": "LOST"
     },
     {
       "match": "Banfield vs Rosario Central",
       "kickoff": "2026-10-06 02:15 CEST",
       "market": "1° Tempo: MultiGol 0-1",
-      "odds": 1.50,
+      "odds": 1.5,
       "probability": 0.735,
       "fair_odd": 1.36,
       "edge": 0.103,
       "score": 0.852,
       "verdict": "stella",
       "market_family": "HALF_TIME_FLOW",
-      "notes": "Partita da ritmi bassissimi all'intervallo; lo 0-0 o 1-0 al 45' ha probabilità statistica del 73.5% con edge +10.3%."
+      "notes": "Partita da ritmi bassissimi all'intervallo; lo 0-0 o 1-0 al 45' ha probabilità statistica del 73.5% con edge +10.3%.",
+      "status": "LOST"
     }
-  ]
+  ],
+  "settled": true
 }

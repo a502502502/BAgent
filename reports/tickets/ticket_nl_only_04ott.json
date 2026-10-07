@@ -6,7 +6,7 @@
   "created_at": "2026-10-04T20:26:00",
   "date_created": "2026-10-04 20:30:00",
   "played_at": "2026-10-04 20:31:00",
-  "status": "OPEN",
+  "status": "LOST",
   "strict_passed": true,
   "variant_recommended": "TRIPLA",
   "strategy": "NL_ONLY_POST_LINEUP",
@@ -29,7 +29,7 @@
       "netwin_odds": 1.62,
       "p": 0.559,
       "edge": -0.094,
-      "status": "PENDING"
+      "status": "LOST"
     },
     {
       "match": "Portogallo vs Norvegia",
@@ -43,7 +43,7 @@
       "netwin_odds": 1.43,
       "p": 0.658,
       "edge": -0.059,
-      "status": "PENDING"
+      "status": "LOST"
     },
     {
       "match": "Galles vs Danimarca",
@@ -57,7 +57,7 @@
       "netwin_odds": 1.65,
       "p": 0.52,
       "edge": -0.142,
-      "status": "PENDING"
+      "status": "LOST"
     }
   ],
   "alt_doppia": {
@@ -72,5 +72,6 @@
     "Irlanda (campo neutro Serbia)",
     "Olanda MG2-4 (rischio XI)"
   ],
-  "notes": "Giocata dall'utente. Solo Nations League, certificata Strict post-formazioni. Edge warning-only. Nessun nome giocatore nel Sesto Senso (Regola #49)."
+  "notes": "Giocata dall'utente. Solo Nations League, certificata Strict post-formazioni. Edge warning-only. Nessun nome giocatore nel Sesto Senso (Regola #49).",
+  "settled": true
 }

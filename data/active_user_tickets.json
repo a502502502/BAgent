@@ -5,7 +5,7 @@
     "stake_eur": 5.0,
     "total_odds": 2.65,
     "potential_payout_eur": 13.25,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "IN_PLAY_VALUE_GEMS_06OCT",
     "notes": "Tripla Live Gemme 2° Tempo Nations League (Spagna gol 2T, Finlandia spinta, Inghilterra cruise)",
     "legs": [
@@ -14,7 +14,7 @@
         "tournament": "UEFA Nations League",
         "market": "Spagna Over 0.5 Gol 2° Tempo",
         "odds": 1.4,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -22,7 +22,7 @@
         "tournament": "UEFA Nations League",
         "market": "Over 0.5 Gol 2° Tempo (Spinta Finlandia)",
         "odds": 1.35,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       },
       {
@@ -30,10 +30,11 @@
         "tournament": "UEFA Nations League",
         "market": "Under 2.5 Gol 2° Tempo (Cruise Control)",
         "odds": 1.4,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       }
-    ]
+    ],
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_SNAI_06OTT_QUADRUPLA_MISTA",
@@ -78,7 +79,8 @@
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       }
-    ]
+    ],
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_SNAI_06OTT_TRIPLA_TIRI_ULTRA",
@@ -115,7 +117,8 @@
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       }
-    ]
+    ],
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_SNAI_06OTT_NL_GEMME",
@@ -123,7 +126,7 @@
     "stake_eur": 5.0,
     "total_odds": 4.94,
     "potential_payout_eur": 24.71,
-    "status": "WAITING_LINEUPS",
+    "status": "LOST",
     "profit_loss_eur": -5.0,
     "strategy": "GEMS_DISCOVERY_NL_06OTT",
     "notes": "Schedina Gemme Nascoste SNAI Nations League Sera (Vinti Albania Under 4.5 e Croazia-Spagna X2+MG, Perso Bijol) In attesa formazioni ufficiali (T-60m) per conferma titolarita.",
@@ -160,7 +163,8 @@
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
       }
-    ]
+    ],
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_ARG_NOTTE_06OCT",
@@ -168,7 +172,7 @@
     "stake_eur": 10.0,
     "total_odds": 3.09,
     "potential_payout_eur": 30.9,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "USER_PLAYED_TICKET_ARGENTINA_DNA",
     "notes": "Tripla Notturna Liga Profesional Argentina - DNA Corto Muso & Tempi Netwin",
     "legs": [
@@ -177,7 +181,7 @@
         "tournament": "Liga Profesional Argentina",
         "market": "1X + Under 3.5",
         "odds": 1.47,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 00:00 CEST"
       },
       {
@@ -185,7 +189,7 @@
         "tournament": "Liga Profesional Argentina",
         "market": "1X + Under 3.5",
         "odds": 1.4,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 00:00 CEST"
       },
       {
@@ -193,10 +197,11 @@
         "tournament": "Liga Profesional Argentina",
         "market": "1° Tempo: MultiGol 0-1",
         "odds": 1.5,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-06 02:15 CEST"
       }
-    ]
+    ],
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_05OCT_REF_DF07EA0A",
@@ -251,7 +256,8 @@
         "kickoff": "2026-10-05 20:45 CEST"
       }
     ],
-    "profit_loss_eur": -23.0
+    "profit_loss_eur": -23.0,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_MULTIPLA4_01OCT",
@@ -268,7 +274,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + Over 1.5",
         "odds": 1.28,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -276,7 +282,7 @@
         "tournament": "UEFA Nations League",
         "market": "1 + Over 2.5",
         "odds": 1.41,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -284,7 +290,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + MultiGol 1-5",
         "odds": 1.25,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -292,11 +298,12 @@
         "tournament": "UEFA Nations League",
         "market": "1 + Over 1.5",
         "odds": 1.51,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       }
     ],
-    "profit_loss_eur": -15.0
+    "profit_loss_eur": -15.0,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_UNDER3_01OCT",
@@ -313,7 +320,7 @@
         "tournament": "UEFA Nations League",
         "market": "Under 3.5",
         "odds": 1.52,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -321,7 +328,7 @@
         "tournament": "UEFA Nations League",
         "market": "Under 4.5",
         "odds": 1.41,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -329,11 +336,12 @@
         "tournament": "UEFA Nations League",
         "market": "Under 3.5",
         "odds": 1.47,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       }
     ],
-    "profit_loss_eur": -25.0
+    "profit_loss_eur": -25.0,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_COMBO6_01OCT",
@@ -350,7 +358,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + MultiGol 2-5",
         "odds": 1.38,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -358,7 +366,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + MultiGol 1-5",
         "odds": 1.45,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -366,7 +374,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + MultiGol 1-5",
         "odds": 1.48,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -374,7 +382,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X + MultiGol 2-4",
         "odds": 1.6,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -382,7 +390,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + MultiGol 1-5",
         "odds": 1.65,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -390,11 +398,12 @@
         "tournament": "UEFA Nations League",
         "market": "1X + MultiGol 1-4",
         "odds": 1.45,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       }
     ],
-    "profit_loss_eur": -10.0
+    "profit_loss_eur": -10.0,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_CORNER3_01OCT",
@@ -411,7 +420,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X2 Corner Tempo 1: 1",
         "odds": 1.19,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 18:00 CEST"
       },
       {
@@ -419,7 +428,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X2 Corner Tempo 1: 2",
         "odds": 1.97,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       },
       {
@@ -427,11 +436,12 @@
         "tournament": "UEFA Nations League",
         "market": "Over 4.5 Corner Tempo 1",
         "odds": 1.87,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-01 20:45 CEST"
       }
     ],
-    "profit_loss_eur": -20.0
+    "profit_loss_eur": -20.0,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_SINGOLA_OLISE_02OCT",
@@ -439,7 +449,7 @@
     "stake_eur": 5.0,
     "total_odds": 6.0,
     "potential_payout_eur": 30.0,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "PLAYER_PROP_FIRST_SCORER",
     "notes": "Singola Netwin: Michael Olise Primo Marcatore",
     "legs": [
@@ -448,11 +458,12 @@
         "tournament": "UEFA Nations League",
         "market": "Olise Primo Marcatore",
         "odds": 6.0,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       }
     ],
-    "profit_loss_eur": null
+    "profit_loss_eur": null,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_SINGOLA_425_02OCT",
@@ -460,7 +471,7 @@
     "stake_eur": 5.0,
     "total_odds": 4.25,
     "potential_payout_eur": 21.25,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "SINGLE_USER_TICKET",
     "notes": "Singola Netwin Ref. DF07EA0A0231CB2AD60A",
     "legs": [
@@ -469,11 +480,12 @@
         "tournament": "UEFA Nations League",
         "market": "Selezione Singola (Ref. DF07EA0A0231CB2AD60A)",
         "odds": 4.25,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       }
     ],
-    "profit_loss_eur": null
+    "profit_loss_eur": null,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_MULTIPLA6_02OCT",
@@ -481,7 +493,7 @@
     "stake_eur": 5.0,
     "total_odds": 26.71,
     "potential_payout_eur": 146.92,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "MULTIPLA_6_TEMPI_COMBO",
     "notes": "Multipla 6 Netwin - Bonus 13.35€",
     "legs": [
@@ -490,7 +502,7 @@
         "tournament": "UEFA Nations League",
         "market": "X2 + MultiGol 1-3",
         "odds": 1.57,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -498,7 +510,7 @@
         "tournament": "UEFA Nations League",
         "market": "MultiGol 1-2 1°Tempo + 1-4 2°Tempo",
         "odds": 1.85,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -506,7 +518,7 @@
         "tournament": "UEFA Nations League",
         "market": "MultiGol 1-2 Casa + 0-1 Ospite",
         "odds": 1.83,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -514,7 +526,7 @@
         "tournament": "UEFA Nations League",
         "market": "MultiGol 1-3 1°Tempo + 1-4 2°Tempo",
         "odds": 1.56,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -522,7 +534,7 @@
         "tournament": "UEFA Nations League",
         "market": "1 + MultiGol 2-5",
         "odds": 1.78,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -530,11 +542,12 @@
         "tournament": "UEFA Nations League",
         "market": "1X + GG",
         "odds": 1.81,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       }
     ],
-    "profit_loss_eur": null
+    "profit_loss_eur": null,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_MULTIPLA4_02OCT",
@@ -542,7 +555,7 @@
     "stake_eur": 24.0,
     "total_odds": 4.01,
     "potential_payout_eur": 99.23,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "MULTIPLA_4_UNDER_CHANCEMIX",
     "notes": "Multipla 4 Netwin - Bonus 2.88€ - Cashout 17.60€",
     "legs": [
@@ -551,7 +564,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X + Under 3.5",
         "odds": 1.4,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -559,7 +572,7 @@
         "tournament": "UEFA Nations League",
         "market": "MultiGol 0-2 Casa",
         "odds": 1.54,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -567,7 +580,7 @@
         "tournament": "UEFA Nations League",
         "market": "MultiGol 0-1 1°Tempo",
         "odds": 1.33,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -575,11 +588,12 @@
         "tournament": "UEFA Nations League",
         "market": "2 o UN 2.5",
         "odds": 1.4,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       }
     ],
-    "profit_loss_eur": null
+    "profit_loss_eur": null,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_USER_NL_LIVE_MULTIPLA6_02OCT",
@@ -587,7 +601,7 @@
     "stake_eur": 10.0,
     "total_odds": 10.16,
     "potential_payout_eur": 101.65,
-    "status": "OPEN",
+    "status": "LOST",
     "strategy": "LIVE_INPLAY_SNAPSHOT_6",
     "notes": "Multipla 6 Live Netwin giocata al 57-60 minuto",
     "legs": [
@@ -596,7 +610,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X2: X",
         "odds": 2.45,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -604,7 +618,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X2: 1",
         "odds": 1.35,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -612,7 +626,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X2: 2",
         "odds": 1.18,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -620,7 +634,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X2: 2",
         "odds": 1.22,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -628,7 +642,7 @@
         "tournament": "UEFA Nations League",
         "market": "1X2: 1",
         "odds": 1.22,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       },
       {
@@ -636,11 +650,12 @@
         "tournament": "UEFA Nations League",
         "market": "1X2: 1",
         "odds": 1.75,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
       }
     ],
-    "profit_loss_eur": null
+    "profit_loss_eur": null,
+    "settled": true
   },
   {
     "ticket_id": "TICKET_07OTT_CASSAFORTE_CORE",

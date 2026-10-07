@@ -4,9 +4,9 @@
   "date_played": "2026-10-06",
   "bookmaker": "SNAI",
   "total_odds": 8.47,
-  "stake_eur": 5.00,
+  "stake_eur": 5.0,
   "potential_payout_eur": 42.33,
-  "status": "IN_PROGRESS",
+  "status": "LOST",
   "matches": [
     {
       "order": 1,
@@ -16,7 +16,7 @@
       "market": "1X2 Esito Finale",
       "selection": "2",
       "odds": 1.53,
-      "status": "LIVE_1T",
+      "status": "LOST",
       "target_desc": "Vittoria esterna del Sông Lam Nghệ An"
     },
     {
@@ -26,8 +26,8 @@
       "kickoff_cest": "2026-10-06 11:00",
       "market": "Doppia Chance",
       "selection": "1X",
-      "odds": 1.30,
-      "status": "UPCOMING",
+      "odds": 1.3,
+      "status": "LOST",
       "target_desc": "Trencin U19 vince o pareggia"
     },
     {
@@ -38,7 +38,7 @@
       "market": "1X2 Esito Finale",
       "selection": "1",
       "odds": 1.36,
-      "status": "UPCOMING",
+      "status": "LOST",
       "target_desc": "Vittoria casalinga Arabia Saudita U20"
     },
     {
@@ -49,7 +49,7 @@
       "market": "Under/Over 1.5",
       "selection": "OVER",
       "odds": 1.25,
-      "status": "UPCOMING",
+      "status": "LOST",
       "target_desc": "Almeno 2 gol totali nella partita"
     },
     {
@@ -59,8 +59,8 @@
       "kickoff_cest": "2026-10-06 13:00",
       "market": "Doppia Chance",
       "selection": "1X",
-      "odds": 1.20,
-      "status": "UPCOMING",
+      "odds": 1.2,
+      "status": "LOST",
       "target_desc": "Changchun Yatai vince o pareggia"
     },
     {
@@ -71,7 +71,7 @@
       "market": "1X2 Esito Finale",
       "selection": "1",
       "odds": 1.06,
-      "status": "UPCOMING",
+      "status": "LOST",
       "target_desc": "Vittoria casalinga Pho Hien FC"
     },
     {
@@ -81,8 +81,8 @@
       "kickoff_cest": "2026-10-06 13:00",
       "market": "1X2 Esito Finale",
       "selection": "1",
-      "odds": 1.30,
-      "status": "UPCOMING",
+      "odds": 1.3,
+      "status": "LOST",
       "target_desc": "Vittoria casalinga Binh Phuoc"
     },
     {
@@ -92,9 +92,10 @@
       "kickoff_cest": "2026-10-06 13:30",
       "market": "1X2 Esito Finale",
       "selection": "1",
-      "odds": 1.40,
-      "status": "UPCOMING",
+      "odds": 1.4,
+      "status": "LOST",
       "target_desc": "Vittoria casalinga Nantong Zhiyun"
     }
-  ]
+  ],
+  "settled": true
 }
