@@ -75,6 +75,14 @@
   1. **Massimo 2 Selezioni**: Vietato creare schedine delle gemme con 3 o più eventi.
   2. **Clausola di Salvaguardia Obbligatoria sulle Player Props**: Le scommesse individuali (tiri in porta, assist, marcatori) devono essere giocate esclusivamente su bookmaker/mercati che offrono la clausola "sostituto valido" (la giocata prosegue con il giocatore subentrante) e il conteggio di pali e traverse.
   3. Le gemme devono fondarsi su asimmetria statistica verificata della stagione in corso (mispricing quota sharp/soft o volume conclusioni contemporaneo), mai su vecchi streak H2H.
-
-
-
+## Regola #84: Protocollo Formazioni Ufficiali Obbligatorio per le Gemme (Lineup Gate & Anti-Bench Trap)
+- **Stato Provvisorio delle Gemme (Draft Preview)**:
+  1. Le selezioni del Ticket B ("La Schedina delle Gemme") e tutte le Player Props (Marcatori, Tiri in Porta, Assist, Falli) proposte prima dell'uscita delle formazioni ufficiali hanno valore di studio e monitoraggio (`STATUS: WAITING_LINEUPS`).
+  2. È SEVERAMENTE VIETATO piazzare o considerare definitive le gemme individuali prima dell'ufficializzazione delle distinte di gara (rilasciate a T-60 / T-45 minuti dal calcio d'inizio).
+- **Controllo Titolarità e Ruolo Effettivo (Anti-Bench Trap)**:
+  1. Anche in presenza della clausola "sostituto valido", un giocatore che parte dalla panchina subisce un crollo drastico della probabilità attesa (minuti giocati ridotti da ~80-90 a 10-25 minuti finali).
+  2. Se il giocatore designato non è presente nell'XI titolare ufficiale, la selezione viene IMMEDIATAMENTE congelata, scartata o sostituita prima del piazzamento.
+  3. Le formazioni ufficiali devono confermare: presenza da titolare, ruolo tattico coerente (es. non arretrato a braccetto di difesa o terzino), assenza di infortuni nell'ultimo riscaldamento pre-partita.
+- **Workflow Operativo a Doppio Binario**:
+  - Il **Ticket A ("La Cassaforte")** può essere giocato in anticipo (T-24h / T-12h) in quanto i mercati macro-squadra (1X, X2, Over 1.5, Under 3.5, MultiGol) assorbono il normale turnover.
+  - Il **Ticket B ("Le Gemme")** entra in stato di emissione effettiva SOLO a 45-60 minuti dall'evento dopo il check positivo sulle distinte ufficiali.

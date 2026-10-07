@@ -23,7 +23,7 @@ CHECK_SECONDS = 30
 MATCH_WINDOW = timedelta(minutes=120)
 
 _CLOSED = {"WON": "Vinta", "LOST": "Persa", "CASHOUT": "Cashout", "VOID": "Void"}
-_OPEN = {"PENDING", "IN CORSO", "OPEN", "IN_PLAY"}
+_OPEN = {"PENDING", "IN CORSO", "OPEN", "IN_PLAY", "WAITING_LINEUPS"}
 _SECTION_LABEL = {"present": "In corso", "future": "Futura", "past": "Chiusa"}
 
 
@@ -243,7 +243,7 @@ def _settle_slip_legs(slip: Slip, finished: dict[tuple[str, str], dict]) -> None
             if eval_res:
                 res = eval_res
                 score = eval_score
-            else:
+            elif res != "WAITING_LINEUPS":
                 res = "PENDING"
         updated.append(
             SlipLeg(
@@ -377,11 +377,12 @@ _PAGE = r"""<!DOCTYPE html>
   table { width:100%; border-collapse:collapse; font-size:13px; }
   td { padding:6px 0; border-top:1px solid var(--line); vertical-align:top; }
   .pick { color:var(--blue); }
-  .Vinta { color:var(--green); } .Persa { color:var(--red); } .Futura, .In, .corso { color:var(--yellow); }
+  .Vinta { color:var(--green); } .Persa { color:var(--red); } .Futura, .In, .corso, .Attesa { color:var(--yellow); }
   .semaforo { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
   .semaforo-won { background:rgba(34,197,94,0.15); color:var(--green); border:1px solid rgba(34,197,94,0.3); }
   .semaforo-lost { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
   .semaforo-pending { background:rgba(234,179,8,0.15); color:var(--yellow); border:1px solid rgba(234,179,8,0.3); }
+  .semaforo-lineup { background:rgba(56,189,248,0.15); color:var(--blue); border:1px solid rgba(56,189,248,0.3); }
   .semaforo-void { background:rgba(148,163,184,0.15); color:var(--muted); border:1px solid rgba(148,163,184,0.3); }
   .booking-badge { margin:8px 0 4px; padding:8px 10px; border:1px solid var(--yellow); border-radius:8px; background:#1e293b; color:var(--yellow); font-size:14px; }
   .booking-badge strong { color:var(--text); font-size:18px; letter-spacing:0.12em; }
@@ -440,7 +441,7 @@ function card(slip) {
   if (slip.booking_code) {
     const booking = document.createElement("div");
     booking.className = "booking-badge";
-    booking.appendChild(document.createTextNode("🎟️ Prenotazione Netwin: "));
+    booking.appendChild(document.createTextNode("Prenotazione: "));
     const code = document.createElement("strong");
     code.textContent = slip.booking_code;
     booking.appendChild(code);
@@ -462,16 +463,19 @@ function card(slip) {
     const st = (leg.result || "").toUpperCase();
     if (st === "WON" || st === "VINTA" || st === "PRESA") {
       badge.className = "semaforo semaforo-won";
-      badge.textContent = "🟢 Presa" + (leg.score ? " (" + leg.score + ")" : "");
+      badge.textContent = "Presa" + (leg.score ? " (" + leg.score + ")" : "");
     } else if (st === "LOST" || st === "PERSA") {
       badge.className = "semaforo semaforo-lost";
-      badge.textContent = "🔴 Persa" + (leg.score ? " (" + leg.score + ")" : "");
+      badge.textContent = "Persa" + (leg.score ? " (" + leg.score + ")" : "");
     } else if (st === "VOID" || st === "RIMBORSO") {
       badge.className = "semaforo semaforo-void";
-      badge.textContent = "⚪ Void";
+      badge.textContent = "Void";
+    } else if (st === "WAITING_LINEUPS" || st === "ATTESA FORMAZIONI") {
+      badge.className = "semaforo semaforo-lineup";
+      badge.textContent = "Attesa formazioni (T-60m)";
     } else {
       badge.className = "semaforo semaforo-pending";
-      badge.textContent = "🟡 In attesa" + (leg.score ? " (" + leg.score + ")" : "");
+      badge.textContent = "In attesa" + (leg.score ? " (" + leg.score + ")" : "");
     }
     semTd.appendChild(badge);
     row.appendChild(semTd);
@@ -654,7 +658,10 @@ def _slips_from_db(db_path: Path) -> list[Slip]:
 
 
 def _public_slip(slip: Slip, section: str) -> dict:
-    label = _CLOSED.get(slip.status) or _SECTION_LABEL[section]
+    if slip.status == "WAITING_LINEUPS":
+        label = "Attesa formazioni (T-60m)"
+    else:
+        label = _CLOSED.get(slip.status) or _SECTION_LABEL[section]
     return {
         "id": slip.slip_id,
         "title": slip.title,

@@ -3,12 +3,12 @@
   "title": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
   "name": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
   "created_at": "2026-10-07T13:20:00+00:00",
-  "status": "PENDING",
+  "status": "WAITING_LINEUPS",
   "strategy": "SATELLITE_GEMME_ASYMMETRIC_SNAI",
   "stake_eur": 3.0,
   "total_odds": 3.1,
   "potential_payout_eur": 9.3,
-  "notes": "Paracadute Marcatore/Legni Haaland e Combo DC+Over su Como-Roma.",
+  "notes": "Paracadute Marcatore/Legni Haaland e Combo DC+Over su Como-Roma. In attesa formazioni ufficiali (T-60m) per conferma titolarita.",
   "legs": [
     {
       "event_code": "36411-1883",
@@ -20,7 +20,7 @@
       "odds": 1.8,
       "date_time": "2026-10-11 17:30 CEST",
       "kickoff": "2026-10-11 17:30 CEST",
-      "status": "PENDING",
+      "status": "WAITING_LINEUPS",
       "bookmaker": "SNAI",
       "rationale": "Haaland punto focale offensivo del City; clausola paracadute attiva con subentrante e pali/traverse conteggiati vincenti."
     },

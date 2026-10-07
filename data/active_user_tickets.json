@@ -123,10 +123,10 @@
     "stake_eur": 5.0,
     "total_odds": 4.94,
     "potential_payout_eur": 24.71,
-    "status": "LOST",
+    "status": "WAITING_LINEUPS",
     "profit_loss_eur": -5.0,
     "strategy": "GEMS_DISCOVERY_NL_06OTT",
-    "notes": "Schedina Gemme Nascoste SNAI Nations League Sera (Vinti Albania Under 4.5 e Croazia-Spagna X2+MG, Perso Bijol)",
+    "notes": "Schedina Gemme Nascoste SNAI Nations League Sera (Vinti Albania Under 4.5 e Croazia-Spagna X2+MG, Perso Bijol) In attesa formazioni ufficiali (T-60m) per conferma titolarita.",
     "legs": [
       {
         "match": "Scozia vs Slovenia",
@@ -698,12 +698,12 @@
     "title": "Schedina B: La Schedina delle Gemme (7 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (7 Ottobre)",
     "created_at": "2026-10-07T12:30:00+00:00",
-    "status": "PENDING",
+    "status": "WAITING_LINEUPS",
     "strategy": "SATELLITE_GEMME_ASYMMETRIC",
     "stake_eur": 3.0,
     "total_odds": 2.81,
     "potential_payout_eur": 8.43,
-    "notes": "Portafoglio Satellite 30% budget. Hot Bet Oddspedia 100% streak e H2H asimmetrico.",
+    "notes": "Portafoglio Satellite 30% budget. Hot Bet Oddspedia 100% streak e H2H asimmetrico. In attesa formazioni ufficiali (T-60m) per conferma titolarita.",
     "legs": [
       {
         "match": "Jedinstvo UB U19 vs Stella Rossa Belgrado U19",
@@ -736,12 +736,12 @@
     "title": "Schedina B: La Schedina delle Gemme (Sabato 10 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (Sabato 10 Ottobre)",
     "created_at": "2026-10-07T13:20:00+00:00",
-    "status": "PENDING",
+    "status": "WAITING_LINEUPS",
     "strategy": "SATELLITE_GEMME_ASYMMETRIC_SNAI",
     "stake_eur": 3.0,
     "total_odds": 3.2,
     "potential_payout_eur": 9.6,
-    "notes": "Doppio Marcatore Piu Ultra SNAI (valido su sostituto e pali/traverse inclusi).",
+    "notes": "Doppio Marcatore Piu Ultra SNAI (valido su sostituto e pali/traverse inclusi). In attesa formazioni ufficiali (T-60m) per conferma titolarita. In attesa formazioni ufficiali (T-60m) per conferma titolarita.",
     "legs": [
       {
         "event_code": "36411-2275",
@@ -753,7 +753,7 @@
         "odds": 2.0,
         "date_time": "2026-10-10 21:00 CEST",
         "kickoff": "2026-10-10 21:00 CEST",
-        "status": "PENDING",
+        "status": "WAITING_LINEUPS",
         "bookmaker": "SNAI",
         "rationale": "Vinicius accentra oltre 3.5 conclusioni al Bernabeu; quota @2.00 include pali, traverse e subentrante."
       },
@@ -767,7 +767,7 @@
         "odds": 1.6,
         "date_time": "2026-10-10 18:00 CEST",
         "kickoff": "2026-10-10 18:00 CEST",
-        "status": "PENDING",
+        "status": "WAITING_LINEUPS",
         "bookmaker": "SNAI",
         "rationale": "Thuram punto di riferimento nei tagli in area contro la linea alta del Parma. Copertura pali/sostituto inclusa."
       }
@@ -834,12 +834,12 @@
     "title": "Schedina B: La Schedina delle Gemme (Venerdi 9 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (Venerdi 9 Ottobre)",
     "created_at": "2026-10-07T13:20:00+00:00",
-    "status": "PENDING",
+    "status": "WAITING_LINEUPS",
     "strategy": "SATELLITE_GEMME_ASYMMETRIC_SNAI",
     "stake_eur": 3.0,
     "total_odds": 2.92,
     "potential_payout_eur": 8.76,
-    "notes": "Paracadute ufficiale SNAI Marcatore/Legni e Combo DC+Over.",
+    "notes": "Paracadute ufficiale SNAI Marcatore/Legni e Combo DC+Over. In attesa formazioni ufficiali (T-60m) per conferma titolarita. In attesa formazioni ufficiali (T-60m) per conferma titolarita.",
     "legs": [
       {
         "event_code": "36411-2051",
@@ -851,7 +851,7 @@
         "odds": 1.8,
         "date_time": "2026-10-09 20:30 CEST",
         "kickoff": "2026-10-09 20:30 CEST",
-        "status": "PENDING",
+        "status": "WAITING_LINEUPS",
         "bookmaker": "SNAI",
         "rationale": "Attaccante di movimento ad alto volume conclusioni; clausola paracadute attiva su eventuale subentrante e pali/traverse."
       },
@@ -932,12 +932,12 @@
     "title": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
     "created_at": "2026-10-07T13:20:00+00:00",
-    "status": "PENDING",
+    "status": "WAITING_LINEUPS",
     "strategy": "SATELLITE_GEMME_ASYMMETRIC_SNAI",
     "stake_eur": 3.0,
     "total_odds": 3.1,
     "potential_payout_eur": 9.3,
-    "notes": "Paracadute Marcatore/Legni Haaland e Combo DC+Over su Como-Roma.",
+    "notes": "Paracadute Marcatore/Legni Haaland e Combo DC+Over su Como-Roma. In attesa formazioni ufficiali (T-60m) per conferma titolarita. In attesa formazioni ufficiali (T-60m) per conferma titolarita.",
     "legs": [
       {
         "event_code": "36411-1883",
@@ -949,7 +949,7 @@
         "odds": 1.8,
         "date_time": "2026-10-11 17:30 CEST",
         "kickoff": "2026-10-11 17:30 CEST",
-        "status": "PENDING",
+        "status": "WAITING_LINEUPS",
         "bookmaker": "SNAI",
         "rationale": "Haaland punto focale offensivo del City; clausola paracadute attiva con subentrante e pali/traverse conteggiati vincenti."
       },
