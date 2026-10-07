@@ -1,0 +1,102 @@
+{
+  "session_id": "SESSION_DUAL_20261007_122712",
+  "created_at": "2026-10-07T12:27:12.996406+00:00",
+  "total_budget_eur": 10.0,
+  "core_ticket": {
+    "ticket_id": "TICKET_CORE_CASSAFORTE",
+    "name": "Sessione Mercoledi 7 Ottobre - La Cassaforte (Macro-Protetta)",
+    "tier_type": "CORE_CASSAFORTE",
+    "stake_eur": 7.0,
+    "total_odds": 2.13,
+    "potential_payout_eur": 14.91,
+    "target_win_rate_pct": 48.0,
+    "strategy_description": "3-4 mercati macro-strutturali protetti (1X, X2, Over 1.5 con Poisson verificato, Under 3.5). Zero player props e zero micro-timing per preservare e far crescere il capitale.",
+    "legs": [
+      {
+        "match": "CD Universidad Catolica vs LDU Quito",
+        "competition": "Ecuador Serie A",
+        "kickoff_time": "2026-10-07 17:00 CEST",
+        "market": "Under/Over",
+        "selection": "Under 3.5",
+        "odds": 1.15,
+        "bookmaker": "SNAI / Eurobet",
+        "rationale": "LDU Quito con 5 gare consecutive in Under 2.5, scontro diretto di alta classifica con blocco difensivo basso.",
+        "event_code": null,
+        "safety_clause": null,
+        "oddspedia_proof": "Under 2.5 registrato nel 75% dei precedenti stagionali",
+        "status": "UPCOMING"
+      },
+      {
+        "match": "IF Gnistan vs FC Inter Turku",
+        "competition": "Finlandia Veikkausliiga",
+        "kickoff_time": "2026-10-07 18:00 CEST",
+        "market": "Combo Doppia Chance + Over",
+        "selection": "X2 + Over 1.5",
+        "odds": 1.48,
+        "bookmaker": "SNAI",
+        "rationale": "Inter Turku imbattuta negli ultimi 6 confronti diretti. Gnistan ha subito gol in 11 gare consecutive.",
+        "event_code": null,
+        "safety_clause": null,
+        "oddspedia_proof": "Oddspedia H2H Insight: 26 match statements confermano trend X2 e Over 1.5 al 92%",
+        "status": "UPCOMING"
+      },
+      {
+        "match": "CS Cerrito vs Montevideo Wanderers",
+        "competition": "Uruguay Copa Uruguay",
+        "kickoff_time": "2026-10-07 20:30 CEST",
+        "market": "Doppia Chance",
+        "selection": "1X",
+        "odds": 1.25,
+        "bookmaker": "SNAI",
+        "rationale": "Cerrito imbattuto in casa nelle ultime 5 uscite; Wanderers con forte rotazione per impegni di campionato.",
+        "event_code": null,
+        "safety_clause": null,
+        "oddspedia_proof": "Striscia casalinga Cerrito confermata dai dati H2H",
+        "status": "UPCOMING"
+      }
+    ],
+    "quality_gates_passed": true
+  },
+  "gem_ticket": {
+    "ticket_id": "TICKET_SATELLITE_GEMME",
+    "name": "Sessione Mercoledi 7 Ottobre - La Schedina delle Gemme (Asimmetrica)",
+    "tier_type": "SATELLITE_GEMME",
+    "stake_eur": 3.0,
+    "total_odds": 2.81,
+    "potential_payout_eur": 8.43,
+    "target_win_rate_pct": 32.0,
+    "strategy_description": "2-3 selezioni ad alto edge asimmetrico (Player Props con clausole di sicurezza, serie storiche Hot Bets Oddspedia >85%, Value Bets disallineate). Cerca il rendimento elevato senza mettere a rischio il bankroll.",
+    "legs": [
+      {
+        "match": "Jedinstvo UB U19 vs Stella Rossa Belgrado U19",
+        "competition": "Serbia U19 League",
+        "kickoff_time": "2026-10-07 18:00 CEST",
+        "market": "Goal / No Goal",
+        "selection": "Goal (Entrambe segnano)",
+        "odds": 1.44,
+        "bookmaker": "SNAI / Bet365",
+        "rationale": "Striscia aperta del 100% per entrambe le formazioni nel segnare e subire gol.",
+        "event_code": null,
+        "safety_clause": null,
+        "oddspedia_proof": "Oddspedia Hot Bet certificata: 7 su 7 precedenti recenti terminati con entrambe a segno",
+        "status": "UPCOMING"
+      },
+      {
+        "match": "IF Gnistan vs FC Inter Turku",
+        "competition": "Finlandia Veikkausliiga",
+        "kickoff_time": "2026-10-07 18:00 CEST",
+        "market": "Combo Doppia Chance + Goal",
+        "selection": "X2 + Goal",
+        "odds": 1.95,
+        "bookmaker": "SNAI",
+        "rationale": "Inter Turku superiore qualitativamente ma Gnistan sempre a segno in casa pur concedendo costantemente.",
+        "event_code": null,
+        "safety_clause": null,
+        "oddspedia_proof": "Gnistan concede da 11 match; Inter Turku imbattuta ma con soli 2 clean sheet esterni",
+        "status": "UPCOMING"
+      }
+    ],
+    "quality_gates_passed": true
+  },
+  "notes": "Sessione coordinata con architettura Core-Satellite 70/30"
+}
