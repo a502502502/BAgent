@@ -61,6 +61,29 @@ class OddspediaSignal:
         return asdict(self)
 
 
+
+@dataclass
+class OddspediaMatchInsights:
+    """Note qualitative, trend H2H e statistiche estratte dalla scheda partita Oddspedia."""
+    match_id: int
+    home_team: str
+    away_team: str
+    home_form: str = ""
+    away_form: str = ""
+    statements: List[str] = field(default_factory=list)  # Dati di scommesse / note match_keys
+    betting_stats: Dict[str, Any] = field(default_factory=dict)  # goals, btts, corners, cards
+    inplay_status: Optional[str] = None
+    current_time: Optional[int] = None
+    home_score: Optional[int] = None
+    away_score: Optional[int] = None
+    venue: Optional[str] = None
+    referee: Optional[str] = None
+    weather: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
 class OddspediaSource:
     """Wrapper di scraping e parsing per le quote e i movimenti di Oddspedia."""
 
@@ -341,3 +364,110 @@ class OddspediaSource:
         out.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
         logger.info("Segnali Oddspedia esportati con successo in %s", out)
         return out
+
+    def fetch_match_insights(self, match_url: str) -> Optional[OddspediaMatchInsights]:
+        """Apre la pagina del match su Oddspedia ed estrae tutte le note, statistiche e H2H."""
+        try:
+            from playwright.sync_api import sync_playwright
+
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=self.headless)
+                context = browser.new_context(
+                    user_agent=(
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/126.0.0.0 Safari/537.36"
+                    ),
+                    viewport={"width": 1280, "height": 800},
+                )
+                page = context.new_page()
+                page.goto(match_url, wait_until="domcontentloaded", timeout=self.timeout_ms)
+                page.wait_for_timeout(3000)
+
+                event_state = page.evaluate("""() => {
+                    try {
+                        if (typeof window.__NUXT__ !== 'undefined' && window.__NUXT__.state) {
+                            return window.__NUXT__.state.event || null;
+                        }
+                    } catch(e) {}
+                    return null;
+                }""")
+                browser.close()
+
+                if not event_state:
+                    logger.warning("Impossibile recuperare state.event da %s", match_url)
+                    return None
+
+                return self.parse_match_insights_state(event_state)
+        except Exception as e:
+            logger.error("Errore durante estrazione note match da %s: %s", match_url, e)
+            return None
+
+    def parse_match_insights_state(self, event_state: Dict[str, Any]) -> OddspediaMatchInsights:
+        """Effettua il parsing puro di note qualitative e statistiche dallo state dell'evento."""
+        e = event_state.get("event") or {}
+        raw_keys = e.get("match_keys") or []
+        statements: List[str] = []
+        for k in raw_keys:
+            if isinstance(k, dict) and k.get("statement"):
+                stmt = str(k["statement"]).strip()
+                if stmt:
+                    statements.append(stmt)
+            elif isinstance(k, str) and k.strip():
+                statements.append(k.strip())
+
+        # Estrazione statistiche strutturate sulle scommesse (goals, btts, corners, cards)
+        betting_stats_raw = (event_state.get("bettingStats") or {}).get("data") or []
+        structured_stats: Dict[str, Any] = {}
+        for cat in betting_stats_raw:
+            if not isinstance(cat, dict):
+                continue
+            cat_label = cat.get("label") or "unknown"
+            structured_stats[cat_label] = cat.get("data", [])
+
+        # Punteggio ed eventuale live
+        hscore = e.get("hscore")
+        ascore = e.get("ascore")
+
+        return OddspediaMatchInsights(
+            match_id=int(e.get("id") or 0),
+            home_team=str(e.get("ht") or "Home").strip(),
+            away_team=str(e.get("at") or "Away").strip(),
+            home_form=str(e.get("ht_form") or "").replace("?", "").strip(),
+            away_form=str(e.get("at_form") or "").replace("?", "").strip(),
+            statements=statements,
+            betting_stats=structured_stats,
+            inplay_status=e.get("inplay_status"),
+            current_time=e.get("current_time"),
+            home_score=int(hscore) if hscore is not None else None,
+            away_score=int(ascore) if ascore is not None else None,
+            venue=e.get("venue_name"),
+            referee=e.get("referee_name"),
+            weather=e.get("weather_conditions"),
+        )
+
+    def analyze_match_warnings(self, insights: OddspediaMatchInsights) -> List[str]:
+        """Analizza le note e restituisce avvisi precoci su potenziali trappole o segnali."""
+        warnings: List[str] = []
+        for s in insights.statements:
+            s_low = s.lower()
+            if "subito gol in ciascuna" in s_low or "ha subito gol" in s_low:
+                warnings.append(f"CONCESSION_STREAK: {s}")
+            if "vince la partita nel 8" in s_low or "vince la partita nel 9" in s_low:
+                warnings.append(f"DOMINANT_CONVERSION: {s}")
+            if "non ha mai perso" in s_low or "ha perso solo" in s_low:
+                warnings.append(f"H2H_TREND: {s}")
+            if "migliore di quella" in s_low:
+                warnings.append(f"SUPERIOR_MOMENTUM: {s}")
+
+        # Analisi forma se presente
+        if insights.home_form and insights.away_form:
+            h_wins = insights.home_form.count("W")
+            a_wins = insights.away_form.count("W")
+            if a_wins > h_wins + 1:
+                warnings.append(
+                    f"FORM_ALERT: Squadra ospite in forma migliore ({insights.away_form} vs {insights.home_form})"
+                )
+
+        return warnings
+

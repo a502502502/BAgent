@@ -185,3 +185,53 @@ def test_export_signals_to_json(tmp_path, sample_dropping_odds_state):
     assert data["total_signals"] == 2  # Palermo (24.5%) e Barnsley (8.0%)
     assert len(data["signals"]) == 2
     assert data["signals"][0]["home_team"] == "Palermo"
+
+
+def test_parse_match_insights_and_warnings():
+    source = OddspediaSource(headless=True)
+    fake_event_state = {
+        "event": {
+            "id": 15819,
+            "ht": "Avispa Fukuoka",
+            "at": "Yokohama",
+            "ht_form": "LDLLW?",
+            "at_form": "LWDWW?",
+            "hscore": 0,
+            "ascore": 1,
+            "inplay_status": "2T",
+            "current_time": 77,
+            "venue_name": "Best Denki Stadium",
+            "match_keys": [
+                {"statement": "Avispa Fukuoka ha subito gol in ciascuna delle sue ultime 6 partite."},
+                {"statement": "Quando Yokohama si porta in vantaggio per 1-0 nei match in trasferta, poi vince la partita nel 87% dei casi."},
+                {"statement": "La prestazione nelle ultime 5 partite di Yokohama e' migliore di quella di Avispa Fukuoka."},
+            ],
+        },
+        "bettingStats": {
+            "data": [
+                {"label": "goals", "data": [{"label": "total"}]},
+                {"label": "btts", "data": [{"label": "total"}]},
+                {"label": "corners", "data": [{"label": "total"}]},
+                {"label": "cards", "data": [{"label": "total"}]},
+            ]
+        },
+    }
+
+    insights = source.parse_match_insights_state(fake_event_state)
+    assert insights.match_id == 15819
+    assert insights.home_team == "Avispa Fukuoka"
+    assert insights.away_team == "Yokohama"
+    assert insights.home_form == "LDLLW"
+    assert insights.away_form == "LWDWW"
+    assert insights.home_score == 0
+    assert insights.away_score == 1
+    assert len(insights.statements) == 3
+    assert "goals" in insights.betting_stats
+    assert "corners" in insights.betting_stats
+
+    warnings = source.analyze_match_warnings(insights)
+    assert any("CONCESSION_STREAK" in w for w in warnings)
+    assert any("DOMINANT_CONVERSION" in w for w in warnings)
+    assert any("SUPERIOR_MOMENTUM" in w for w in warnings)
+    assert any("FORM_ALERT" in w for w in warnings)
+
