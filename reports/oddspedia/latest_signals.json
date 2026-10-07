@@ -1,298 +1,115 @@
 {
-  "scanned_at": "2026-10-07T08:05:15.389203+00:00",
-  "total_signals": 10,
+  "scanned_at": "2026-10-07T09:58:21.708385+00:00",
+  "total_signals": 5,
   "signals": [
     {
       "signal_type": "DROPPING_ODDS",
-      "match_id": 10241867,
-      "home_team": "Asyut Petroleum",
-      "away_team": "Al Ahly Cairo",
-      "sport": "football",
-      "category": "Egypt",
-      "league": "League Cup",
-      "kickoff_utc": "2026-10-07 14:00:00+00",
-      "market": "Full Time Result 3 Way",
-      "selection": "2 (Trasferta)",
-      "drop_percentage": 59.0,
-      "initial_odd": 3.8,
-      "current_odd": 1.54,
-      "fair_probability_pct": null,
-      "overvalue_pct": null,
-      "best_bookmaker": "BC.Game",
-      "bookmakers_count": 31,
-      "italian_bookmakers": [
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 5.25
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 3.6
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 1.55
-        }
-      ],
-      "raw_info": {
-        "dropBid": 621,
-        "last_change": "2026-10-07 05:39:57"
-      }
-    },
-    {
-      "signal_type": "DROPPING_ODDS",
-      "match_id": 10288796,
-      "home_team": "Seravezza Pozzi",
-      "away_team": "AS Lucchese Libertas 1905",
-      "sport": "football",
-      "category": "Italy",
-      "league": "Serie D Cup",
-      "kickoff_utc": "2026-10-07 13:00:00+00",
-      "market": "Full Time Result 3 Way",
-      "selection": "2 (Trasferta)",
-      "drop_percentage": 58.0,
-      "initial_odd": 6.3,
-      "current_odd": 2.65,
-      "fair_probability_pct": null,
-      "overvalue_pct": null,
-      "best_bookmaker": "Parimatch",
-      "bookmakers_count": 41,
-      "italian_bookmakers": [
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 2.75
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 2.6
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 3.0
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 3.0
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 2.45
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 2.45
-        }
-      ],
-      "raw_info": {
-        "dropBid": 50,
-        "last_change": "2026-10-07 06:41:14"
-      }
-    },
-    {
-      "signal_type": "DROPPING_ODDS",
-      "match_id": 10316669,
-      "home_team": "AE Neapolis",
-      "away_team": "Atsalenios",
-      "sport": "football",
-      "category": "Greece",
-      "league": "Gamma Ethniki",
-      "kickoff_utc": "2026-10-07 13:00:00+00",
-      "market": "Full Time Result 3 Way",
-      "selection": "2 (Trasferta)",
-      "drop_percentage": 48.0,
-      "initial_odd": 3.74,
-      "current_odd": 1.929,
-      "fair_probability_pct": null,
-      "overvalue_pct": null,
-      "best_bookmaker": "Stake.com",
-      "bookmakers_count": 18,
-      "italian_bookmakers": [],
-      "raw_info": {
-        "dropBid": 60,
-        "last_change": "2026-10-07 07:43:26"
-      }
-    },
-    {
-      "signal_type": "DROPPING_ODDS",
-      "match_id": 10241868,
-      "home_team": "Zamalek SC",
-      "away_team": "FC Masr",
-      "sport": "football",
-      "category": "Egypt",
-      "league": "League Cup",
-      "kickoff_utc": "2026-10-07 17:00:00+00",
-      "market": "Full Time Result 3 Way",
-      "selection": "2 (Trasferta)",
-      "drop_percentage": 47.0,
-      "initial_odd": 2.4,
-      "current_odd": 1.28,
-      "fair_probability_pct": null,
-      "overvalue_pct": null,
-      "best_bookmaker": "1xBet",
-      "bookmakers_count": 29,
-      "italian_bookmakers": [
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 7.25
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 4.6
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 1.33
-        }
-      ],
-      "raw_info": {
-        "dropBid": 59,
-        "last_change": "2026-10-07 07:23:19"
-      }
-    },
-    {
-      "signal_type": "DROPPING_ODDS",
-      "match_id": 10316672,
-      "home_team": "AO Tympakiou",
-      "away_team": "AO Giouchtas",
-      "sport": "football",
-      "category": "Greece",
-      "league": "Gamma Ethniki",
-      "kickoff_utc": "2026-10-07 13:00:00+00",
-      "market": "Full Time Result 3 Way",
-      "selection": "2 (Trasferta)",
-      "drop_percentage": 43.0,
-      "initial_odd": 3.44,
-      "current_odd": 1.97,
-      "fair_probability_pct": null,
-      "overvalue_pct": null,
-      "best_bookmaker": "Campobet",
-      "bookmakers_count": 18,
-      "italian_bookmakers": [],
-      "raw_info": {
-        "dropBid": 60,
-        "last_change": "2026-10-07 05:31:17"
-      }
-    },
-    {
-      "signal_type": "DROPPING_ODDS",
-      "match_id": 10301990,
-      "home_team": "Somaspor SK",
-      "away_team": "Kestelspor",
+      "match_id": 10301972,
+      "home_team": "Pazarspor",
+      "away_team": "Erbaaspor",
       "sport": "football",
       "category": "Turkey",
       "league": "Turkish Cup",
       "kickoff_utc": "2026-10-07 11:00:00+00",
       "market": "Full Time Result 3 Way",
-      "selection": "2 (Trasferta)",
+      "selection": "1 (Casa)",
       "drop_percentage": 38.0,
-      "initial_odd": 12.0,
-      "current_odd": 7.5,
+      "initial_odd": 5.0,
+      "current_odd": 3.1,
       "fair_probability_pct": null,
       "overvalue_pct": null,
-      "best_bookmaker": "BetVictor",
-      "bookmakers_count": 44,
+      "best_bookmaker": "DraftKings",
+      "bookmakers_count": 45,
       "italian_bookmakers": [
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 1.27
+          "odd": 3.1
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 1.26
+          "odd": 3.0
         },
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 5.75
+          "odd": 3.5
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 5.25
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 8.5
+          "odd": 3.5
         },
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 8.0
+          "odd": 2.0
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 2.0
         }
       ],
       "raw_info": {
-        "dropBid": 42,
-        "last_change": "2026-10-07 07:17:59"
+        "dropBid": 495,
+        "last_change": "2026-10-07 09:49:33"
       }
     },
     {
       "signal_type": "DROPPING_ODDS",
-      "match_id": 10301976,
-      "home_team": "Bursa Yildirimspor",
-      "away_team": "Yeni Amasyaspor",
+      "match_id": 9823614,
+      "home_team": "Bodo/Glimt",
+      "away_team": "Kristiansund BK",
       "sport": "football",
-      "category": "Turkey",
-      "league": "Turkish Cup",
-      "kickoff_utc": "2026-10-07 11:30:00+00",
+      "category": "Norway",
+      "league": "Tippeligaen",
+      "kickoff_utc": "2026-10-10 14:00:00+00",
       "market": "Full Time Result 3 Way",
       "selection": "2 (Trasferta)",
-      "drop_percentage": 38.0,
-      "initial_odd": 8.0,
-      "current_odd": 5.0,
+      "drop_percentage": 35.0,
+      "initial_odd": 23.0,
+      "current_odd": 15.0,
       "fair_probability_pct": null,
       "overvalue_pct": null,
       "best_bookmaker": "Betsson",
-      "bookmakers_count": 43,
+      "bookmakers_count": 40,
       "italian_bookmakers": [
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 1.5
+          "odd": 1.09
         },
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 1.5
+          "odd": 1.071
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 12.0
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 3.6
+          "odd": 11.5
         },
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 3.6
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 6.5
+          "odd": 21.0
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 6.0
+          "odd": 20.0
         }
       ],
       "raw_info": {
         "dropBid": 42,
-        "last_change": "2026-10-07 07:13:21"
+        "last_change": "2026-10-07 09:29:45"
       }
     },
     {
@@ -306,13 +123,13 @@
       "kickoff_utc": "2026-10-07 12:00:00+00",
       "market": "Full Time Result 3 Way",
       "selection": "1 (Casa)",
-      "drop_percentage": 30.0,
-      "initial_odd": 30.0,
-      "current_odd": 21.0,
+      "drop_percentage": 35.0,
+      "initial_odd": 28.22,
+      "current_odd": 18.44,
       "fair_probability_pct": null,
       "overvalue_pct": null,
-      "best_bookmaker": "ToonieBet",
-      "bookmakers_count": 36,
+      "best_bookmaker": "BC.Game",
+      "bookmakers_count": 37,
       "italian_bookmakers": [
         {
           "name": "Bwin",
@@ -327,76 +144,107 @@
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 1.055
+          "odd": 1.06
         }
       ],
       "raw_info": {
-        "dropBid": 510,
-        "last_change": "2026-10-07 05:09:05"
+        "dropBid": 182,
+        "last_change": "2026-10-07 09:55:40"
       }
     },
     {
       "signal_type": "DROPPING_ODDS",
-      "match_id": 10241868,
-      "home_team": "Zamalek SC",
-      "away_team": "FC Masr",
-      "sport": "football",
-      "category": "Egypt",
-      "league": "League Cup",
-      "kickoff_utc": "2026-10-07 17:00:00+00",
-      "market": "Asian Handicap",
-      "selection": "X (Pareggio)",
-      "drop_percentage": 28.0,
-      "initial_odd": 2.07,
-      "current_odd": 1.49,
-      "fair_probability_pct": null,
-      "overvalue_pct": null,
-      "best_bookmaker": "1xBet",
-      "bookmakers_count": 5,
-      "italian_bookmakers": [],
-      "raw_info": {
-        "dropBid": 144,
-        "last_change": "2026-10-07 06:16:00"
-      }
-    },
-    {
-      "signal_type": "DROPPING_ODDS",
-      "match_id": 10301991,
-      "home_team": "Hatayspor",
-      "away_team": "Sanliurfa Karakopru Belediyespor",
+      "match_id": 10301990,
+      "home_team": "Somaspor SK",
+      "away_team": "Kestelspor",
       "sport": "football",
       "category": "Turkey",
       "league": "Turkish Cup",
       "kickoff_utc": "2026-10-07 11:00:00+00",
       "market": "Full Time Result 3 Way",
       "selection": "2 (Trasferta)",
-      "drop_percentage": 23.0,
-      "initial_odd": 2.15,
-      "current_odd": 1.66,
+      "drop_percentage": 33.0,
+      "initial_odd": 12.0,
+      "current_odd": 8.0,
       "fair_probability_pct": null,
       "overvalue_pct": null,
-      "best_bookmaker": "Interwetten",
-      "bookmakers_count": 28,
+      "best_bookmaker": "BetVictor",
+      "bookmakers_count": 44,
       "italian_bookmakers": [
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 5.5
+          "odd": 1.27
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.25
         },
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 3.9
+          "odd": 5.75
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 5.25
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 9.0
         },
         {
           "name": "bet365",
           "slug": "bet365",
-          "odd": 1.48
+          "odd": 8.0
         }
       ],
       "raw_info": {
-        "dropBid": 146,
-        "last_change": "2026-10-07 08:04:03"
+        "dropBid": 42,
+        "last_change": "2026-10-07 09:56:55"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10241869,
+      "home_team": "Ceramica Cleopatra",
+      "away_team": "Al Masry",
+      "sport": "football",
+      "category": "Egypt",
+      "league": "League Cup",
+      "kickoff_utc": "2026-10-07 17:00:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "2 (Trasferta)",
+      "drop_percentage": 32.0,
+      "initial_odd": 3.3,
+      "current_odd": 2.25,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "Betway",
+      "bookmakers_count": 33,
+      "italian_bookmakers": [
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 2.9
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 2.95
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 2.25
+        }
+      ],
+      "raw_info": {
+        "dropBid": 42,
+        "last_change": "2026-10-07 09:37:56"
       }
     }
   ]
