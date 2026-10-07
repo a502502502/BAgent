@@ -31,6 +31,7 @@ from services.betting.netwin_cache_reader import CachedMatch
 CEST = timezone(timedelta(hours=2))
 OUT_DIR = ROOT / "reports" / "gems"
 SOURCES = [
+    ROOT / "reports" / "snai" / "2026-10-07",
     ROOT / "reports" / "snai" / "2026-10-06-sera",
     ROOT / "reports" / "snai_nl" / "catalog",
 ]
