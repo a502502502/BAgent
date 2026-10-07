@@ -1,0 +1,51 @@
+{
+  "ticket_id": "TICKET_07OTT_CASSAFORTE_CORE",
+  "title": "Schedina A: La Cassaforte Core-Protetta (7 Ottobre)",
+  "name": "Schedina A: La Cassaforte Core-Protetta (7 Ottobre)",
+  "created_at": "2026-10-07T12:30:00+00:00",
+  "status": "PENDING",
+  "strategy": "CORE_CASSAFORTE_MACRO",
+  "stake_eur": 7.0,
+  "total_odds": 2.13,
+  "potential_payout_eur": 14.91,
+  "booking_code": "36411",
+  "notes": "Portafoglio Core 70% budget. Mercati macro protetti senza player props.",
+  "legs": [
+    {
+      "match": "CD Universidad Catolica vs LDU Quito",
+      "tournament": "Ecuador Serie A",
+      "competition": "Ecuador Serie A",
+      "market": "Under 3.5",
+      "selection": "Under 3.5",
+      "odds": 1.15,
+      "date_time": "2026-10-07 17:00 CEST",
+      "kickoff": "2026-10-07 17:00 CEST",
+      "status": "PENDING",
+      "rationale": "LDU Quito 5 gare consecutive Under 2.5; match tattico di alta classifica."
+    },
+    {
+      "match": "IF Gnistan vs Inter Turku",
+      "tournament": "Finlandia Veikkausliiga",
+      "competition": "Finlandia Veikkausliiga",
+      "market": "X2 + Over 1.5",
+      "selection": "X2 + Over 1.5",
+      "odds": 1.48,
+      "date_time": "2026-10-07 18:00 CEST",
+      "kickoff": "2026-10-07 18:00 CEST",
+      "status": "PENDING",
+      "rationale": "Inter Turku imbattuta in 6 H2H recenti; Gnistan subisce da 11 gare consecutive."
+    },
+    {
+      "match": "CS Cerrito vs Montevideo Wanderers",
+      "tournament": "Uruguay Copa Auf",
+      "competition": "Uruguay Copa Auf",
+      "market": "1X",
+      "selection": "1X",
+      "odds": 1.25,
+      "date_time": "2026-10-07 20:30 CEST",
+      "kickoff": "2026-10-07 20:30 CEST",
+      "status": "PENDING",
+      "rationale": "Fattore campo coppa nazionale, Cerrito imbattuto in casa nelle ultime 5 uscite."
+    }
+  ]
+}

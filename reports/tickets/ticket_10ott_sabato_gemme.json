@@ -1,0 +1,38 @@
+{
+  "ticket_id": "TICKET_10OTT_SABATO_GEMME",
+  "title": "Schedina Gemme Sabato Campionati Maggiori (10 Ottobre)",
+  "name": "Schedina Gemme Sabato Campionati Maggiori (10 Ottobre)",
+  "created_at": "2026-10-07T12:30:00+00:00",
+  "status": "PENDING",
+  "strategy": "SATELLITE_GEMME_BIG_LEAGUES",
+  "stake_eur": 3.0,
+  "total_odds": 3.27,
+  "potential_payout_eur": 9.81,
+  "notes": "Player Prop con paracadute sostituto/legni e Hot Bet Bernabeu 100% H2H streak.",
+  "legs": [
+    {
+      "match": "Manchester United vs Tottenham",
+      "tournament": "Premier League",
+      "competition": "Premier League",
+      "market": "Bruno Fernandes: Almeno 1 tiro in porta",
+      "selection": "Bruno Fernandes O0.5 Tiri in Porta (Clausola Pali e Sostituto)",
+      "odds": 1.72,
+      "date_time": "2026-10-10 18:30 CEST",
+      "kickoff": "2026-10-10 18:30 CEST",
+      "status": "PENDING",
+      "rationale": "Fernandes tira punizioni e rigori, media 3.3 tiri p90, 84% presenze con tiro in porta a Old Trafford. Clausola salvaguardia attiva."
+    },
+    {
+      "match": "Real Madrid vs Villarreal",
+      "tournament": "La Liga",
+      "competition": "La Liga",
+      "market": "Goal (Entrambe le squadre a segno)",
+      "selection": "Goal (Entrambe segnano)",
+      "odds": 1.9,
+      "date_time": "2026-10-10 21:00 CEST",
+      "kickoff": "2026-10-10 21:00 CEST",
+      "status": "PENDING",
+      "rationale": "Hot Bet Oddspedia: ultimi 7 precedenti consecutivi al Bernabeu tutti chiusi con entrambe a segno (100% streak)."
+    }
+  ]
+}

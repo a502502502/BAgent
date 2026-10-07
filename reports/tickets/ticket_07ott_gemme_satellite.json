@@ -1,0 +1,38 @@
+{
+  "ticket_id": "TICKET_07OTT_GEMME_SATELLITE",
+  "title": "Schedina B: La Schedina delle Gemme (7 Ottobre)",
+  "name": "Schedina B: La Schedina delle Gemme (7 Ottobre)",
+  "created_at": "2026-10-07T12:30:00+00:00",
+  "status": "PENDING",
+  "strategy": "SATELLITE_GEMME_ASYMMETRIC",
+  "stake_eur": 3.0,
+  "total_odds": 2.81,
+  "potential_payout_eur": 8.43,
+  "notes": "Portafoglio Satellite 30% budget. Hot Bet Oddspedia 100% streak e H2H asimmetrico.",
+  "legs": [
+    {
+      "match": "Jedinstvo UB U19 vs Stella Rossa Belgrado U19",
+      "tournament": "Serbia U19 League",
+      "competition": "Serbia U19 League",
+      "market": "Goal (Entrambe segnano)",
+      "selection": "Goal (Entrambe segnano)",
+      "odds": 1.44,
+      "date_time": "2026-10-07 18:00 CEST",
+      "kickoff": "2026-10-07 18:00 CEST",
+      "status": "PENDING",
+      "rationale": "Oddspedia Hot Bet certificata al 100%: 7 su 7 recenti terminate con entrambe a segno."
+    },
+    {
+      "match": "IF Gnistan vs Inter Turku",
+      "tournament": "Finlandia Veikkausliiga",
+      "competition": "Finlandia Veikkausliiga",
+      "market": "X2 + Goal",
+      "selection": "X2 + Goal",
+      "odds": 1.95,
+      "date_time": "2026-10-07 18:00 CEST",
+      "kickoff": "2026-10-07 18:00 CEST",
+      "status": "PENDING",
+      "rationale": "Inter Turku imbattuta nei precedenti; Gnistan segna in casa ma concede da 11 partite di fila."
+    }
+  ]
+}
