@@ -911,13 +911,13 @@
     "ticket_id": "TICKET_11OTT_DOMENICA_GEMME_SATELLITE",
     "title": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
-    "created_at": "2026-10-07T12:45:00+00:00",
+    "created_at": "2026-10-07T12:50:00+00:00",
     "status": "PENDING",
     "strategy": "SATELLITE_GEMME_ASYMMETRIC",
     "stake_eur": 3.0,
-    "total_odds": 3.41,
-    "potential_payout_eur": 10.23,
-    "notes": "Portafoglio Satellite 30% budget. Big Match Anfield con Salah protetto e classica Hot Bet Sassuolo-Milan.",
+    "total_odds": 3.2,
+    "potential_payout_eur": 9.6,
+    "notes": "Portafoglio Satellite 30% budget. Player Prop protetta Salah ad Anfield e metrica xG attuale 2026 Como-Roma.",
     "legs": [
       {
         "match": "Liverpool vs Manchester City",
@@ -929,19 +929,19 @@
         "date_time": "2026-10-11 17:30 CEST",
         "kickoff": "2026-10-11 17:30 CEST",
         "status": "PENDING",
-        "rationale": "Ad Anfield nei big match Salah accentra le conclusioni (media 3.6 tiri p90), rigorista designato. Copertura da pali e sostituzione attiva."
+        "rationale": "Ad Anfield nei big match Salah accentra le conclusioni (media 3.6 tiri p90 in questo campionato), primo rigorista designato. Copertura da pali e sostituto attiva."
       },
       {
-        "match": "Sassuolo vs Milan",
+        "match": "Como vs Roma",
         "tournament": "Serie A",
         "competition": "Serie A",
-        "market": "Goal + Over 2.5",
-        "selection": "Goal + Over 2.5",
-        "odds": 1.95,
-        "date_time": "2026-10-11 15:00 CEST",
-        "kickoff": "2026-10-11 15:00 CEST",
+        "market": "Goal (Entrambe le squadre a segno)",
+        "selection": "Goal (Entrambe segnano)",
+        "odds": 1.83,
+        "date_time": "2026-10-11 18:00 CEST",
+        "kickoff": "2026-10-11 18:00 CEST",
         "status": "PENDING",
-        "rationale": "Hot Bet H2H storica: 8 degli ultimi 9 precedenti tra Sassuolo e Milan terminati con Goal e Over 2.5 (media 3.4 reti a match)."
+        "rationale": "Dati attuali stagione 2026: Como gioca con baricentro altissimo (54m) e concede 1.68 xG p90, registrando Gol in 5 delle prime 6 gare. Roma sempre a segno in trasferta con transizioni verticali."
       }
     ]
   }
