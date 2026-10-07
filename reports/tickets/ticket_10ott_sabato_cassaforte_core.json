@@ -1,0 +1,56 @@
+{
+  "ticket_id": "TICKET_10OTT_SABATO_CASSAFORTE_CORE",
+  "title": "Schedina A: La Cassaforte Core-Protetta (Sabato 10 Ottobre)",
+  "name": "Schedina A: La Cassaforte Core-Protetta (Sabato 10 Ottobre)",
+  "created_at": "2026-10-07T13:20:00+00:00",
+  "status": "PENDING",
+  "strategy": "CORE_CASSAFORTE_MACRO_SNAI",
+  "stake_eur": 7.0,
+  "total_odds": 2.25,
+  "potential_payout_eur": 15.75,
+  "notes": "Trittico di campionati maggiori protetto da DC + Over/Under da catalogo SNAI.",
+  "legs": [
+    {
+      "event_code": "36411-2275",
+      "match": "Real Madrid - Villarreal",
+      "tournament": "ESP Liga",
+      "competition": "ESP Liga",
+      "market": "COMBO: DC + U/O",
+      "selection": "1X + OVER 2.5",
+      "odds": 1.32,
+      "date_time": "2026-10-10 21:00 CEST",
+      "kickoff": "2026-10-10 21:00 CEST",
+      "status": "PENDING",
+      "bookmaker": "SNAI",
+      "rationale": "Real Madrid dominante al Bernabeu, match ad alto tasso di transizioni contro Villarreal offensivo."
+    },
+    {
+      "event_code": "36411-1373",
+      "match": "Inter - Parma",
+      "tournament": "ITA Serie A",
+      "competition": "ITA Serie A",
+      "market": "COMBO: DC + U/O",
+      "selection": "1X + OVER 2.5",
+      "odds": 1.28,
+      "date_time": "2026-10-10 18:00 CEST",
+      "kickoff": "2026-10-10 18:00 CEST",
+      "status": "PENDING",
+      "bookmaker": "SNAI",
+      "rationale": "Inter a San Siro con volume di occasioni elevato; Parma con atteggiamento sbarazzino che concede spazi."
+    },
+    {
+      "event_code": "36411-1887",
+      "match": "Manchester United - Tottenham",
+      "tournament": "ENG Premier League",
+      "competition": "ENG Premier League",
+      "market": "COMBO: DC + U/O",
+      "selection": "1X + OVER 1.5",
+      "odds": 1.33,
+      "date_time": "2026-10-10 18:30 CEST",
+      "kickoff": "2026-10-10 18:30 CEST",
+      "status": "PENDING",
+      "bookmaker": "SNAI",
+      "rationale": "Old Trafford fattore chiave; Tottenham con linea difensiva alta che assicura gol ma concede contropiedi."
+    }
+  ]
+}
