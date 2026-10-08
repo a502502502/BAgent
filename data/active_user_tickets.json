@@ -1329,13 +1329,13 @@
     "title": "Schedina B: La Schedina delle Gemme (Giovedi 8 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (Giovedi 8 Ottobre)",
     "created_at": "2026-10-08T10:55:00+02:00",
-    "status": "WAITING_LINEUPS",
+    "status": "OPEN",
     "strategy": "SATELLITE_GEMME_ASYMMETRIC",
     "stake_eur": 3.0,
     "total_odds": 5.43,
     "potential_payout_eur": 16.29,
     "potential_win": 16.29,
-    "notes": "Portafoglio Satellite 30% budget (ottimale anche per Freebet ad alto moltiplicatore). Combo dirette a trazione anteriore delle corazzate casalinghe (1 + Over 1.5). Regola #84 applicata: confermare con formazioni ufficiali pre-match.",
+    "notes": "Schedina piazzata dall'utente (08/10/2026 ore 17:14 CEST). Formazione tipo KuPS confermata al 100% con Pennanen, Jyry e Parzyszek titolari dal 1'.",
     "legs": [
       {
         "match": "Kuopion Palloseura vs AC Oulu",
@@ -1346,7 +1346,7 @@
         "odds": 1.95,
         "date_time": "2026-10-08 18:00 CEST",
         "kickoff": "2026-10-08 18:00 CEST",
-        "status": "WAITING_LINEUPS",
+        "status": "OPEN",
         "rationale": "KuPS prima in classifica e macchina da gol interna. Vittoria casalinga con almeno 2 gol totali nel match a quota d'elite 1.95."
       },
       {
@@ -1358,7 +1358,7 @@
         "odds": 1.72,
         "date_time": "2026-10-08 20:00 CEST",
         "kickoff": "2026-10-08 20:00 CEST",
-        "status": "WAITING_LINEUPS",
+        "status": "OPEN",
         "rationale": "AS FAR Rabat con attacco devastante in Botola Pro. Combo 1 + Over 1.5 che massimizza il divario tecnico contro Widad Tamara."
       },
       {
@@ -1370,7 +1370,7 @@
         "odds": 1.62,
         "date_time": "2026-10-08 21:00 CEST",
         "kickoff": "2026-10-08 21:00 CEST",
-        "status": "WAITING_LINEUPS",
+        "status": "OPEN",
         "rationale": "Shamrock Rovers a valanga negli impegni casalinghi contro compagini di fondo classifica. Quota 1.62 per la vittoria con almeno due reti complessive."
       }
     ]
