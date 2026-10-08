@@ -3,7 +3,7 @@
   "title": "Schedina B: La Schedina delle Gemme (Giovedi 8 Ottobre)",
   "name": "Schedina B: La Schedina delle Gemme (Giovedi 8 Ottobre)",
   "created_at": "2026-10-08T10:55:00+02:00",
-  "status": "OPEN",
+  "status": "LOST",
   "strategy": "SATELLITE_GEMME_ASYMMETRIC",
   "stake_eur": 3.0,
   "total_odds": 5.43,
@@ -20,8 +20,10 @@
       "odds": 1.95,
       "date_time": "2026-10-08 18:00 CEST",
       "kickoff": "2026-10-08 18:00 CEST",
-      "status": "OPEN",
-      "rationale": "KuPS prima in classifica e macchina da gol interna. Vittoria casalinga con almeno 2 gol totali nel match a quota d'elite 1.95."
+      "status": "LOST",
+      "rationale": "KuPS prima in classifica e macchina da gol interna. Vittoria casalinga con almeno 2 gol totali nel match a quota d'elite 1.95.",
+      "result": "LOST",
+      "score": "0-1"
     },
     {
       "match": "AS Far Rabat vs Widad Sportive Tamara",
@@ -32,8 +34,10 @@
       "odds": 1.72,
       "date_time": "2026-10-08 20:00 CEST",
       "kickoff": "2026-10-08 20:00 CEST",
-      "status": "OPEN",
-      "rationale": "AS FAR Rabat con attacco devastante in Botola Pro. Combo 1 + Over 1.5 che massimizza il divario tecnico contro Widad Tamara."
+      "status": "LOST",
+      "rationale": "AS FAR Rabat con attacco devastante in Botola Pro. Combo 1 + Over 1.5 che massimizza il divario tecnico contro Widad Tamara.",
+      "result": "LOST",
+      "score": "1-0"
     },
     {
       "match": "Shamrock Rovers vs Drogheda United",
@@ -44,8 +48,12 @@
       "odds": 1.62,
       "date_time": "2026-10-08 21:00 CEST",
       "kickoff": "2026-10-08 21:00 CEST",
-      "status": "OPEN",
-      "rationale": "Shamrock Rovers a valanga negli impegni casalinghi contro compagini di fondo classifica. Quota 1.62 per la vittoria con almeno due reti complessive."
+      "status": "WON",
+      "rationale": "Shamrock Rovers a valanga negli impegni casalinghi contro compagini di fondo classifica. Quota 1.62 per la vittoria con almeno due reti complessive.",
+      "result": "WON",
+      "score": "3-1"
     }
-  ]
+  ],
+  "settled": true,
+  "profit_loss_eur": -3.0
 }

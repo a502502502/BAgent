@@ -3,7 +3,7 @@
   "title": "Schedina A: La Cassaforte Core-Protetta (7 Ottobre)",
   "name": "Schedina A: La Cassaforte Core-Protetta (7 Ottobre)",
   "created_at": "2026-10-07T12:30:00+00:00",
-  "status": "PENDING",
+  "status": "LOST",
   "strategy": "CORE_CASSAFORTE_MACRO",
   "stake_eur": 7.0,
   "total_odds": 2.13,
@@ -20,8 +20,10 @@
       "odds": 1.15,
       "date_time": "2026-10-07 17:00 CEST",
       "kickoff": "2026-10-07 17:00 CEST",
-      "status": "PENDING",
-      "rationale": "LDU Quito 5 gare consecutive Under 2.5; match tattico di alta classifica."
+      "status": "WON",
+      "rationale": "LDU Quito 5 gare consecutive Under 2.5; match tattico di alta classifica.",
+      "result": "WON",
+      "score": "0-0"
     },
     {
       "match": "IF Gnistan vs Inter Turku",
@@ -32,8 +34,10 @@
       "odds": 1.48,
       "date_time": "2026-10-07 18:00 CEST",
       "kickoff": "2026-10-07 18:00 CEST",
-      "status": "PENDING",
-      "rationale": "Inter Turku imbattuta in 6 H2H recenti; Gnistan subisce da 11 gare consecutive."
+      "status": "LOST",
+      "rationale": "Inter Turku imbattuta in 6 H2H recenti; Gnistan subisce da 11 gare consecutive.",
+      "result": "LOST",
+      "score": "0-0"
     },
     {
       "match": "CS Cerrito vs Montevideo Wanderers",
@@ -44,8 +48,12 @@
       "odds": 1.25,
       "date_time": "2026-10-07 20:30 CEST",
       "kickoff": "2026-10-07 20:30 CEST",
-      "status": "PENDING",
-      "rationale": "Fattore campo coppa nazionale, Cerrito imbattuto in casa nelle ultime 5 uscite."
+      "status": "LOST",
+      "rationale": "Fattore campo coppa nazionale, Cerrito imbattuto in casa nelle ultime 5 uscite.",
+      "result": "LOST",
+      "score": "2-3"
     }
-  ]
+  ],
+  "settled": true,
+  "profit_loss_eur": -7.0
 }

@@ -3,7 +3,7 @@
   "title": "Schedina B: La Schedina delle Gemme (7 Ottobre)",
   "name": "Schedina B: La Schedina delle Gemme (7 Ottobre)",
   "created_at": "2026-10-07T12:30:00+00:00",
-  "status": "WAITING_LINEUPS",
+  "status": "LOST",
   "strategy": "SATELLITE_GEMME_ASYMMETRIC",
   "stake_eur": 3.0,
   "total_odds": 2.81,
@@ -19,8 +19,10 @@
       "odds": 1.44,
       "date_time": "2026-10-07 18:00 CEST",
       "kickoff": "2026-10-07 18:00 CEST",
-      "status": "WAITING_LINEUPS",
-      "rationale": "Oddspedia Hot Bet certificata al 100%: 7 su 7 recenti terminate con entrambe a segno."
+      "status": "LOST",
+      "rationale": "Oddspedia Hot Bet certificata al 100%: 7 su 7 recenti terminate con entrambe a segno.",
+      "result": "LOST",
+      "score": "0-4"
     },
     {
       "match": "IF Gnistan vs Inter Turku",
@@ -31,8 +33,12 @@
       "odds": 1.95,
       "date_time": "2026-10-07 18:00 CEST",
       "kickoff": "2026-10-07 18:00 CEST",
-      "status": "WAITING_LINEUPS",
-      "rationale": "Inter Turku imbattuta nei precedenti; Gnistan segna in casa ma concede da 11 partite di fila."
+      "status": "LOST",
+      "rationale": "Inter Turku imbattuta nei precedenti; Gnistan segna in casa ma concede da 11 partite di fila.",
+      "result": "LOST",
+      "score": "0-0"
     }
-  ]
+  ],
+  "settled": true,
+  "profit_loss_eur": -3.0
 }

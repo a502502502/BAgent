@@ -141,7 +141,7 @@ class NetwinAutomator:
             accept_btn = self.page.locator("button:has-text('Accetta tutti'), #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll").first
             accept_btn.wait_for(state="visible", timeout=5000)
             accept_btn.click()
-            logger.info("✅ Banner Cookiebot chiuso.")
+            logger.info("[OK] Banner Cookiebot chiuso.")
             self.page.wait_for_timeout(1000)
         except Exception:
             pass
@@ -190,21 +190,22 @@ class NetwinAutomator:
             clean_name = re.sub(r"[^a-zA-Z0-9 ]", "", team_name).strip()
             first_word = clean_name.split()[0] if clean_name.split() else clean_name
             wanted = {clean_name.casefold(), first_word.casefold()}
-            names = self.page.locator("p")
-            for index in range(names.count()):
-                name = names.nth(index)
-                try:
-                    if not name.is_visible():
+            for scope in (".contenitoreRiga p", "p"):
+                names = self.page.locator(scope)
+                for index in range(names.count()):
+                    name = names.nth(index)
+                    try:
+                        if not name.is_visible():
+                            continue
+                        text = " ".join(name.inner_text().split()).casefold()
+                    except Exception:
                         continue
-                    text = " ".join(name.inner_text().split()).casefold()
-                except Exception:
-                    continue
-                if text not in wanted:
-                    continue
-                name.click()
-                logger.info(f"Riga match '{text}' cliccata per aprire i mercati.")
-                self.page.wait_for_timeout(1500)
-                return True
+                    if text not in wanted:
+                        continue
+                    name.click()
+                    logger.info(f"Riga match '{text}' cliccata per aprire i mercati.")
+                    self.page.wait_for_timeout(1500)
+                    return True
         except Exception as e:
             logger.warning(f"Impossibile cliccare riga match '{team_name}': {e}")
         return False
@@ -227,17 +228,27 @@ class NetwinAutomator:
                 and action.combo_result in {"1X", "X2", "12"}
             ):
                 if self._click_dc_multigol(action):
-                    logger.info(f"✅ Combo {action.combo_result} + MultiGol {action.combo_multigol_range} selezionata.")
+                    logger.info(f"[OK] Combo {action.combo_result} + MultiGol {action.combo_multigol_range} selezionata.")
                     return True
                 logger.warning(f"Combo DC+MG non selezionata per {pick!r}.")
-                return False
+
+            if (
+                action is not None
+                and action.family == "COMBO"
+                and action.combo_type == "OU"
+                and action.combo_result in {"1", "X", "2"}
+            ):
+                if self._click_result_ou(action):
+                    logger.info(f"[OK] Combo {action.combo_result} + {action.combo_ou_side} {action.combo_ou_line:g} selezionata.")
+                    return True
+                logger.warning(f"Combo 1X2+U/O non selezionata per {pick!r}.")
 
             if action is not None and _needs_secondary_panel(action):
                 self._open_market_panel(action)
-                if self._click_exact_odd(target_odd, action):
-                    logger.info(f"✅ Quota secondaria {action.family} selezionata @{target_odd}.")
+                if self._click_exact_odd(target_odd, action) or self._click_by_hint(action):
+                    logger.info(f"[OK] Quota secondaria {action.family} selezionata per {pick!r}.")
                     return True
-                logger.warning(f"Pannello {action.family} aperto, quota {target_odd} non trovata per {pick!r}.")
+                logger.warning(f"Pannello {action.family} aperto, selezione non trovata per {pick!r}.")
                 return False
 
             # 1. Mercato 1X2
@@ -247,7 +258,7 @@ class NetwinAutomator:
                 odds = self.page.locator(".contenitoreSingolaQuota").all()
                 if len(odds) >= 3:
                     odds[col_index].click()
-                    logger.info(f"✅ Quota 1X2 ({pick_clean}) selezionata con successo.")
+                    logger.info(f"[OK] Quota 1X2 ({pick_clean}) selezionata con successo.")
                     self.page.wait_for_timeout(800)
                     return True
 
@@ -257,7 +268,7 @@ class NetwinAutomator:
                 odds = self.page.locator(".contenitoreSingolaQuota").all()
                 if len(odds) >= 6:
                     odds[dc_index].click()
-                    logger.info(f"✅ Doppia Chance ({pick_clean}) selezionata con successo.")
+                    logger.info(f"[OK] Doppia Chance ({pick_clean}) selezionata con successo.")
                     self.page.wait_for_timeout(800)
                     return True
 
@@ -273,13 +284,13 @@ class NetwinAutomator:
                 odds = self.page.locator(".contenitoreSingolaQuota").all()
                 if len(odds) >= 10:
                     odds[gng_target].click()
-                    logger.info(f"✅ Quota Gol/NoGol ({pick_clean}) selezionata con successo.")
+                    logger.info(f"[OK] Quota Gol/NoGol ({pick_clean}) selezionata con successo.")
                     self.page.wait_for_timeout(800)
                     return True
 
             # 5. Fallback: cerca per valore di quota se fornito
             if self._click_exact_odd(target_odd):
-                logger.info(f"✅ Quota trovata per valore esatto @{float(target_odd):.2f}.")
+                logger.info(f"[OK] Quota trovata per valore esatto @{float(target_odd):.2f}.")
                 return True
 
         except Exception as e:
@@ -315,6 +326,31 @@ class NetwinAutomator:
                 return True
         except Exception as exc:
             logger.warning(f"Tab Netwin '{pattern}' non aperto: {exc}")
+        return False
+
+    def _click_by_hint(self, action: NetwinMarketAction) -> bool:
+        """Clicca la quota del mercato anche se il prezzo SNAI non è quello Netwin."""
+        if self.page is None:
+            return False
+        hints = [hint.lower() for hint in outcome_search_texts(action) if len(hint) >= 5]
+        hints.sort(key=len, reverse=True)
+        buttons = self.page.locator(".contenitoreSingolaQuota")
+        try:
+            count = buttons.count()
+        except Exception:
+            return False
+        for hint in hints:
+            for index in range(count):
+                button = buttons.nth(index)
+                try:
+                    blob = " ".join(button.inner_text().split()).lower()
+                    if hint not in blob or not button.is_visible():
+                        continue
+                    button.click()
+                    self.page.wait_for_timeout(800)
+                    return True
+                except Exception:
+                    continue
         return False
 
     def _click_exact_odd(self, target_odd: Optional[float], action: Optional[NetwinMarketAction] = None) -> bool:
@@ -393,7 +429,15 @@ class NetwinAutomator:
         if token:
             rows = rows.filter(has_text=token[0])
         if opponent:
-            rows = rows.filter(has_text=opponent[0])
+            narrowed = None
+            for word in sorted(opponent, key=len, reverse=True):
+                candidate = rows.filter(has_text=word)
+                if candidate.count():
+                    narrowed = candidate
+                    break
+            if narrowed is None:
+                return False
+            rows = narrowed
         if rows.count() == 0:
             return False
         row = rows.first
@@ -421,6 +465,68 @@ class NetwinAutomator:
         visible[column].click(timeout=3000)
         self.page.wait_for_timeout(800)
         return True
+
+    def _click_result_ou(self, action: NetwinMarketAction) -> bool:
+        """Apre Combo 1X2 → 1X2+U/O e clicca 1/X/2 + Over o Under sulla linea."""
+        if (
+            self.page is None
+            or action.combo_ou_line is None
+            or action.combo_result not in {"1", "X", "2"}
+            or action.combo_ou_side not in {"OVER", "UNDER"}
+        ):
+            return False
+        if not self._click_visible_text("Combo 1X2") or not self._click_visible_text("1X2 + U/O"):
+            return False
+        row = self._event_row()
+        if row is None:
+            return False
+        line_label = f"{action.combo_ou_line:g}"
+        toggle = row.locator("button.dropdown-toggle").first
+        try:
+            current = " ".join(toggle.inner_text().split()) if toggle.count() else ""
+        except Exception:
+            current = ""
+        if toggle.count() and line_label not in current:
+            toggle.click(timeout=3000)
+            self.page.wait_for_timeout(400)
+            self.page.locator(".dropdown-menu.show").get_by_text(line_label, exact=True).first.click(timeout=3000)
+            self.page.wait_for_timeout(400)
+        slot = {"1": 0, "X": 2, "2": 4}[action.combo_result]
+        if action.combo_ou_side == "OVER":
+            slot += 1
+        visible = []
+        quotes = row.locator(".contenitoreSingolaQuota")
+        for index in range(quotes.count()):
+            quote = quotes.nth(index)
+            try:
+                if quote.is_visible():
+                    visible.append(quote)
+            except Exception:
+                continue
+        if len(visible) <= slot:
+            return False
+        visible[slot].click(timeout=3000)
+        self.page.wait_for_timeout(800)
+        return True
+
+    def _event_row(self):
+        token = re.sub(r"[^a-zA-Z0-9 ]", "", getattr(self, "_row_team", "")).split()
+        opponent = re.sub(r"[^a-zA-Z0-9 ]", "", getattr(self, "_row_opponent", "")).split()
+        rows = self.page.locator(".contenitoreRiga")
+        if token:
+            rows = rows.filter(has_text=token[0])
+        if opponent:
+            narrowed = None
+            for word in sorted(opponent, key=len, reverse=True):
+                candidate = rows.filter(has_text=word)
+                if candidate.count():
+                    narrowed = candidate
+                    break
+            if narrowed is not None:
+                rows = narrowed
+        if rows.count() == 0:
+            return None
+        return rows.first
 
     def _click_visible_text(self, label: str) -> bool:
         if self.page is None:
@@ -508,7 +614,7 @@ class NetwinAutomator:
                     code = match.group(1)
                     res["success"] = True
                     res["booking_code"] = code
-                    logger.info(f"🎯 CODICE PRENOTAZIONE NETWIN GENERATO: {code}")
+                    logger.info(f"[OK] CODICE PRENOTAZIONE NETWIN GENERATO: {code}")
 
                     # Salva ricevuta JSON
                     log_file = RECEIPTS_DIR / f"netwin_booking_{code}.json"
@@ -528,7 +634,7 @@ class NetwinAutomator:
                 code = matches[-1]
                 res["success"] = True
                 res["booking_code"] = code
-                logger.info(f"🎯 Codice trovato via fallback: {code}")
+                logger.info(f"[OK] Codice trovato via fallback: {code}")
                 return res
 
             res["error"] = "Codice a 6 cifre non rilevato dopo il click su PRENOTA."
