@@ -1,0 +1,52 @@
+{
+  "ticket_id": "TICKET_08OTT_FREEBET_AFTERNOON",
+  "title": "Schedina Pomeriggio: Freebet & Combinazioni Protette (8 Ottobre)",
+  "name": "Schedina Pomeriggio: Freebet & Combinazioni Protette (8 Ottobre)",
+  "created_at": "2026-10-08T10:35:00+02:00",
+  "status": "OPEN",
+  "strategy": "FREEBET_OPTIMIZER_COMBINAZIONI",
+  "stake_eur": 10.0,
+  "total_odds": 2.65,
+  "potential_payout_eur": 26.54,
+  "potential_win": 26.54,
+  "net_profit_eur": 16.54,
+  "notes": "Costruita su catalogo ufficiale SNAI e Oddspedia Radar con le nuove regole di combinazione e ottimizzazione Freebet. Mercati macro protetti a trazione anteriore senza player props.",
+  "legs": [
+    {
+      "match": "Al Ain vs Al Ittihad Kalba",
+      "tournament": "UAE Coppa di Lega",
+      "competition": "UAE Coppa di Lega",
+      "market": "1 + Over 1.5",
+      "selection": "1 + Over 1.5",
+      "odds": 1.33,
+      "date_time": "2026-10-08 15:10 CEST",
+      "kickoff": "2026-10-08 15:10 CEST",
+      "status": "OPEN",
+      "rationale": "Al Ain corazzata di casa e campione d'Asia in carica; in coppa nazionale produce un volume offensivo dominante (xG > 2.4). Quota secca compressa a 1.24 agganciata a Over 1.5 per trazione anteriore protetta (Regola #80)."
+    },
+    {
+      "match": "Shabab Al Ahli vs United",
+      "tournament": "UAE Coppa di Lega",
+      "competition": "UAE Coppa di Lega",
+      "market": "1 + Over 1.5",
+      "selection": "1 + Over 1.5",
+      "odds": 1.33,
+      "date_time": "2026-10-08 15:10 CEST",
+      "kickoff": "2026-10-08 15:10 CEST",
+      "status": "OPEN",
+      "rationale": "Shabab Al Ahli capolista del massimo campionato contro United FC (club di serie inferiore). Divario tecnico e atletico netto, garanzia di volume gol nel match."
+    },
+    {
+      "match": "Denizli Idman Yurdu vs Serik Belediyespor",
+      "tournament": "TUR Coppa di Turchia",
+      "competition": "TUR Coppa di Turchia",
+      "market": "X2 + MultiGol 2-4",
+      "selection": "X2 + MultiGol 2-4",
+      "odds": 1.50,
+      "date_time": "2026-10-08 16:00 CEST",
+      "kickoff": "2026-10-08 16:00 CEST",
+      "status": "OPEN",
+      "rationale": "Sfida di coppa nazionale tra compagine dilettantistica BAL e club professionistico di 2. Lig (Serik). La combo X2 + MultiGol 2-4 copre sia la vittoria esterna (0-2, 0-3, 1-2, 1-3) sia l'eventuale pareggio con gol, validata con esito positivo al 100% dal motore Dixon-Coles."
+    }
+  ]
+}
