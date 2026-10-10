@@ -530,3 +530,4 @@ class QuantitativeEngine:
 
 # Alias per retrocompatibilità
 XgPoissonEngine = QuantitativeEngine
+XGPoissonEngine = QuantitativeEngine

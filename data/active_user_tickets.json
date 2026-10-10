@@ -41,7 +41,10 @@
         "status": "LOST",
         "note": "HT 0-0 (0 gol nel 1\u00b0 tempo)"
       }
-    ]
+    ],
+    "settled": true,
+    "profit_loss_eur": -30.0,
+    "notes": "Ticket chiuso LOST per HT 0-0 di Real Madrid-Villarreal."
   },
   {
     "ticket_id": "TICKET_USER_QUINTINA_BIG_LEAGUES_UCL_10EUR_10OTT",
@@ -121,14 +124,14 @@
     "name": "Schedina Reale Utente: Schedina #1 Pomeriggio Anticipi (@ 2.93)",
     "created_at": "2026-10-10T13:59:00+00:00",
     "date_created": "2026-10-10 13:59:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "CORE_POMERIGGIO_ANTICIPINI_OFFICIAL",
     "stake_eur": 20.0,
     "total_odds": 2.93,
     "potential_payout_eur": 58.56,
-    "profit_loss_eur": 0.0,
-    "settled": false,
-    "notes": "Ticket reale giocato dall utente su Schedina #1: Arsenal 1X+MG2-5, Bayern X2+MG2-5, Leverkusen X2+MG1-5.",
+    "profit_loss_eur": -20.0,
+    "settled": true,
+    "notes": "Ticket chiuso LOST per 7 gol totali in Mainz-Leverkusen (3-4).",
     "legs": [
       {
         "match": "Arsenal vs Leeds",
@@ -140,7 +143,7 @@
         "kickoff": "2026-10-10 13:30 CEST",
         "date_time": "2026-10-10 13:30 CEST",
         "rationale": "Arsenal dominante all Emirates; linea 2-5 con 1X a quota @ 1.45 maggiorata.",
-        "final_score": "2-1",
+        "final_score": "2-1 (FT)",
         "notes": "CENTRATA! Arsenal 2-1 (1X e 3 gol totali perfettamente nel 2-5)."
       },
       {
@@ -149,10 +152,11 @@
         "market": "X2 + MultiGol 2-5",
         "selection": "X2 + MultiGol 2-5: SI",
         "odds": 1.32,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 15:30 CEST",
         "date_time": "2026-10-10 15:30 CEST",
-        "rationale": "Bayern con Kane e Saibari; linea 2-5 assorbe vittorie rotonde senza handicap rischiosi."
+        "rationale": "Bayern con Kane e Saibari; linea 2-5 assorbe vittorie rotonde senza handicap rischiosi.",
+        "final_score": "2-2 (FT)"
       },
       {
         "match": "Mainz vs Bayer Leverkusen",
@@ -160,10 +164,11 @@
         "market": "X2 + MultiGol 1-5",
         "selection": "X2 + MultiGol 1-5: SI",
         "odds": 1.53,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-10 15:30 CEST",
         "date_time": "2026-10-10 15:30 CEST",
-        "rationale": "Leverkusen al completo offensivo; Mainz privo del portiere Zentner e Kohr."
+        "rationale": "Leverkusen al completo offensivo; Mainz privo del portiere Zentner e Kohr.",
+        "final_score": "3-4 (FT)"
       }
     ]
   },
@@ -178,9 +183,9 @@
     "stake_eur": 10.0,
     "total_odds": 3.25,
     "potential_payout_eur": 32.46,
-    "profit_loss_eur": 0.0,
-    "settled": false,
-    "notes": "Ticket reale giocato dall utente sui micro-mercati specialistici: Over Tiri in Porta ad alta quota e Corner nei Primi 10 Minuti.",
+    "profit_loss_eur": -10.0,
+    "settled": true,
+    "notes": "Ticket chiuso LOST per assenza di corner nei primi 10 min di Inter-Parma.",
     "legs": [
       {
         "match": "Arsenal vs Leeds",
@@ -192,7 +197,7 @@
         "kickoff": "2026-10-10 13:30 CEST",
         "date_time": "2026-10-10 13:30 CEST",
         "rationale": "Arsenal all Emirates con alto volume nello specchio; Leeds concede transizioni continue.",
-        "final_score": "2-1 (11 Tiri in Porta)",
+        "final_score": "11 tiri in porta (FT)",
         "notes": "CENTRATA! 11 tiri in porta totali (6 Arsenal + 5 Leeds) superando agilmente la linea 7.5."
       },
       {
@@ -201,10 +206,11 @@
         "market": "U/O 8.5 Tiri in Porta",
         "selection": "OVER 8.5 Tiri in Porta",
         "odds": 1.58,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 16:00 CEST",
         "date_time": "2026-10-10 16:00 CEST",
-        "rationale": "Quota maggiorata @ 1.58 sulla linea 8.5 a Stamford Bridge con ritmi alti."
+        "rationale": "Quota maggiorata @ 1.58 sulla linea 8.5 a Stamford Bridge con ritmi alti.",
+        "final_score": "10 tiri in porta (FT)"
       },
       {
         "match": "Inter vs Parma",
@@ -212,10 +218,11 @@
         "market": "Corner entro 10\u00b0Min: SI",
         "selection": "Corner entro 10\u00b0Min: SI",
         "odds": 1.5,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-10 18:00 CEST",
         "date_time": "2026-10-10 18:00 CEST",
-        "rationale": "Micro-mercato a San Siro con spinta aggressiva iniziale dei quinti nerazzurri."
+        "rationale": "Micro-mercato a San Siro con spinta aggressiva iniziale dei quinti nerazzurri.",
+        "final_score": "0 corner al 10 minuto (FT)"
       }
     ]
   },
@@ -225,14 +232,14 @@
     "name": "Schedina Reale Utente: Multipla Protetta 7 Match (@ 7.15)",
     "created_at": "2026-10-10T13:59:00+00:00",
     "date_created": "2026-10-10 13:59:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "MULTIPLA_LUNGA_PROTETTA_7MATCH",
     "stake_eur": 10.0,
     "total_odds": 7.15,
     "potential_payout_eur": 78.61,
-    "profit_loss_eur": 0.0,
-    "settled": false,
-    "notes": "Genoa-Fiorentina ancora IN CORSO nel 2\u00b0 tempo (Flashscore live feed).",
+    "profit_loss_eur": -10.0,
+    "settled": true,
+    "notes": "Ticket chiuso LOST per esito 2-1 di Genoa-Fiorentina e 2-0 di Barracas-Huracan.",
     "legs": [
       {
         "match": "Genoa vs Fiorentina",
@@ -240,11 +247,11 @@
         "market": "X2 (Doppia Chance)",
         "selection": "X2",
         "odds": 1.33,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-10 15:00 CEST",
         "date_time": "2026-10-10 15:00 CEST",
         "rationale": "Doppia chance esterna pura per la Fiorentina a Marassi.",
-        "final_score": "2-0 (Live 2T)"
+        "final_score": "2-1 (FT)"
       },
       {
         "match": "Paderborn vs Stoccarda",
@@ -252,10 +259,11 @@
         "market": "X2 + Over 1.5",
         "selection": "X2 + Over 1.5",
         "odds": 1.28,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 15:30 CEST",
         "date_time": "2026-10-10 15:30 CEST",
-        "rationale": "Stoccarda superiore e linea 1.5 minima che copre vittorie e 1-1."
+        "rationale": "Stoccarda superiore e linea 1.5 minima che copre vittorie e 1-1.",
+        "final_score": "0-2 (FT)"
       },
       {
         "match": "Chelsea vs Bournemouth",
@@ -263,10 +271,11 @@
         "market": "1X + Over 1.5",
         "selection": "1X + Over 1.5",
         "odds": 1.43,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 16:00 CEST",
         "date_time": "2026-10-10 16:00 CEST",
-        "rationale": "Stamford Bridge fortino e almeno 2 reti complessive."
+        "rationale": "Stamford Bridge fortino e almeno 2 reti complessive.",
+        "final_score": "5-1 (FT)"
       },
       {
         "match": "Aston Villa vs Brentford",
@@ -274,10 +283,11 @@
         "market": "1X (Doppia Chance)",
         "selection": "1X",
         "odds": 1.48,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 16:00 CEST",
         "date_time": "2026-10-10 16:00 CEST",
-        "rationale": "Doppia chance interna al Villa Park senza vincoli sui gol."
+        "rationale": "Doppia chance interna al Villa Park senza vincoli sui gol.",
+        "final_score": "2-2 (FT)"
       },
       {
         "match": "Lipsia vs Eintracht Francoforte",
@@ -285,10 +295,11 @@
         "market": "1X + Over 1.5",
         "selection": "1X + Over 1.5",
         "odds": 1.27,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 18:30 CEST",
         "date_time": "2026-10-10 18:30 CEST",
-        "rationale": "Linea 1.5 protetta che copre l 1-1 e il 2-0 casalingo del Lipsia."
+        "rationale": "Linea 1.5 protetta che copre l 1-1 e il 2-0 casalingo del Lipsia.",
+        "final_score": "5-0 (FT)"
       },
       {
         "match": "Barracas Central vs Huracan",
@@ -296,10 +307,11 @@
         "market": "X2 (Doppia Chance)",
         "selection": "X2",
         "odds": 1.37,
-        "status": "PENDING",
+        "status": "LOST",
         "kickoff": "2026-10-10 20:45 CEST",
         "date_time": "2026-10-10 20:45 CEST",
-        "rationale": "Doppia chance esterna pulita senza rischio Under per Huracan."
+        "rationale": "Doppia chance esterna pulita senza rischio Under per Huracan.",
+        "final_score": "2-0 (FT)"
       },
       {
         "match": "Cr Vasco Da Gama Rj vs Clube Do Remo",
@@ -307,10 +319,11 @@
         "market": "1X + MultiGol 1-5",
         "selection": "1X + MultiGol 1-5",
         "odds": 1.14,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 23:00 CEST",
         "date_time": "2026-10-10 23:00 CEST",
-        "rationale": "Vasco a Sao Januario con forte spinta interna; linea 1-5 che copre fino a 5 reti."
+        "rationale": "Vasco a Sao Januario con forte spinta interna; linea 1-5 che copre fino a 5 reti.",
+        "final_score": "0-0 (FT)"
       }
     ]
   },
@@ -325,9 +338,9 @@
     "stake_eur": 20.0,
     "total_odds": 2.83,
     "potential_payout_eur": 56.65,
-    "profit_loss_eur": 0.0,
-    "settled": false,
-    "notes": "Genoa-Fiorentina ancora IN CORSO nel 2\u00b0 tempo (Flashscore live feed).",
+    "profit_loss_eur": 36.65,
+    "settled": true,
+    "notes": "TUTTE E 3 LE SELEZIONI VINTE! Cassa incassata di 56.65 EUR.",
     "legs": [
       {
         "match": "Genoa vs Fiorentina",
@@ -335,11 +348,11 @@
         "market": "MultiGol 1-3 Ospite",
         "selection": "MultiGol 1-3 Ospite: SI",
         "odds": 1.34,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 15:00 CEST",
         "date_time": "2026-10-10 15:00 CEST",
         "rationale": "La Fiorentina di Palladino segna con grande regolarita da 1 a 3 reti contro la difesa del Genoa a Marassi.",
-        "final_score": "2-0 (Live 2T)"
+        "final_score": "2-1 (FT)"
       },
       {
         "match": "Inter vs Parma",
@@ -347,10 +360,11 @@
         "market": "MultiGol 2-5 Casa + 0-1 Ospite",
         "selection": "MultiGol 2-5 Casa + 0-1 Ospite: SI",
         "odds": 1.4,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 18:00 CEST",
         "date_time": "2026-10-10 18:00 CEST",
-        "rationale": "Inter a San Siro produce da 2 a 5 gol (Lautaro-Thuram), mentre il Parma viene contenuto a massimo 1 rete (2-0, 2-1, 3-0, 3-1)."
+        "rationale": "Inter a San Siro produce da 2 a 5 gol (Lautaro-Thuram), mentre il Parma viene contenuto a massimo 1 rete (2-0, 2-1, 3-0, 3-1).",
+        "final_score": "3-0 (FT)"
       },
       {
         "match": "Napoli vs Frosinone",
@@ -358,10 +372,11 @@
         "market": "MultiGol 1-3 1\u00b0T + 1-4 2\u00b0T",
         "selection": "MultiGol 1-3 1\u00b0T + 1-4 2\u00b0T: SI",
         "odds": 1.51,
-        "status": "PENDING",
+        "status": "WON",
         "kickoff": "2026-10-10 20:45 CEST",
         "date_time": "2026-10-10 20:45 CEST",
-        "rationale": "Mercato sui tempi perfetto: gol sbloccato nel primo tempo (1-3 gol) e gestione con continuita nella ripresa (1-4 gol)."
+        "rationale": "Mercato sui tempi perfetto: gol sbloccato nel primo tempo (1-3 gol) e gestione con continuita nella ripresa (1-4 gol).",
+        "final_score": "3-0 (FT: HT 1-0, 2T 2-0)"
       }
     ]
   },
