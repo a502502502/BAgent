@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "booking_code": "439115",
+  "error": null,
+  "events_added": 3,
+  "total_events": 3,
+  "stake": 5.0,
+  "screenshot": "/Users/flashmac/Projects/BAgent/reports/receipts/prenotazione_opzione1_09ott_439115.png",
+  "legs": [
+    {
+      "match": "PSV Eindhoven vs SC Heerenveen",
+      "home": "PSV",
+      "away": "Heerenveen",
+      "market": "COMBO",
+      "pick": "1 + Over 1.5",
+      "netwin_odds": 1.95,
+      "kickoff_time": "2026-10-09 20:00 CEST",
+      "original_pick": "1 + Til Marcatore @1.95"
+    },
+    {
+      "match": "Borussia Dortmund vs Werder Brema",
+      "home": "Dortmund",
+      "away": "Werder",
+      "market": "COMBO",
+      "pick": "1X + Over 2.5",
+      "netwin_odds": 1.42,
+      "kickoff_time": "2026-10-09 20:30 CEST"
+    },
+    {
+      "match": "Sporting Braga vs Sporting CP",
+      "home": "Sporting Braga",
+      "away": "Sporting CP",
+      "market": "COMBO",
+      "pick": "X2 + Over 1.5",
+      "netwin_odds": 1.57,
+      "kickoff_time": "2026-10-09 21:15 CEST"
+    }
+  ],
+  "created_at": "2026-10-09 16:59 CEST",
+  "note": "PSV: 1+Til non automatizzabile su Netwin → 1 + Over 1.5. Braga cercata come Sporting Braga."
+}

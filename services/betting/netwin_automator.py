@@ -15,6 +15,7 @@ from typing import Optional, Any, Dict, List
 
 from playwright.sync_api import sync_playwright, Page, BrowserContext
 
+from config.settings import NETWIN_SESSION_DIR
 from services.betting.netwin_market_parser import (
     NetwinMarketAction,
     UnsupportedNetwinMarket,
@@ -25,7 +26,7 @@ from services.betting.netwin_market_parser import (
 
 logger = logging.getLogger("NetwinAutomator")
 
-_SECONDARY_FAMILIES = frozenset({"COMBO", "MULTIGOL", "CORNER", "NEXT_GOAL"})
+_SECONDARY_FAMILIES = frozenset({"COMBO", "MULTIGOL", "CORNER", "NEXT_GOAL", "CHANCE_MIX"})
 
 
 def _parsed_action(market: str, pick: str) -> Optional[NetwinMarketAction]:
@@ -88,8 +89,10 @@ class NetwinAutomator:
             "Chrome/128.0.0.0 Safari/537.36"
         )
 
+        session_dir = NETWIN_SESSION_DIR
+        session_dir.mkdir(parents=True, exist_ok=True)
         self._context = self._playwright.chromium.launch_persistent_context(
-            user_data_dir=str(ROOT_DIR / "data" / "netwin_profile"),
+            user_data_dir=str(session_dir),
             headless=self.headless,
             viewport={"width": 1440, "height": 900},
             user_agent=user_agent,
@@ -184,12 +187,66 @@ class NetwinAutomator:
             logger.error(f"Errore ricerca '{team_name}': {e}")
             return False
 
-    def click_match_row(self, team_name: str) -> bool:
-        """Clicca il nome squadra visibile. I primi nodi omonimi sono div nascosti."""
+    def click_match_row(self, team_name: str, opponent: str = "") -> bool:
+        """Clicca la riga del match. Se c'è l'avversario, preferisce quella riga (evita omonimi)."""
         try:
             clean_name = re.sub(r"[^a-zA-Z0-9 ]", "", team_name).strip()
             first_word = clean_name.split()[0] if clean_name.split() else clean_name
             wanted = {clean_name.casefold(), first_word.casefold()}
+            opp_words = [
+                w for w in re.sub(r"[^a-zA-Z0-9 ]", "", opponent or "").split() if len(w) >= 3
+            ]
+
+            rows = self.page.locator(".contenitoreRiga")
+            if first_word:
+                rows = rows.filter(has_text=re.compile(first_word, re.I))
+            if opp_words:
+                for word in sorted(opp_words, key=len, reverse=True):
+                    narrowed = rows.filter(has_text=re.compile(word, re.I))
+                    if narrowed.count():
+                        rows = narrowed
+                        break
+
+            if rows.count():
+                # Scegli la prima riga visibile (alcune omonime restano hidden nel DOM)
+                row = None
+                for i in range(rows.count()):
+                    candidate = rows.nth(i)
+                    try:
+                        if candidate.is_visible():
+                            row = candidate
+                            break
+                    except Exception:
+                        continue
+                if row is None:
+                    row = rows.first
+                try:
+                    row.scroll_into_view_if_needed(timeout=3000)
+                except Exception:
+                    pass
+                # Preferisci il <p> con il nome casa dentro la riga giusta
+                names = row.locator("p")
+                for index in range(names.count()):
+                    name = names.nth(index)
+                    try:
+                        if not name.is_visible():
+                            continue
+                        text = " ".join(name.inner_text().split()).casefold()
+                    except Exception:
+                        continue
+                    if text not in wanted and first_word.casefold() not in text:
+                        continue
+                    name.click()
+                    logger.info(f"Riga match '{text}' cliccata (opp={opponent!r}).")
+                    self.page.wait_for_timeout(1500)
+                    return True
+                # Fallback: click sulla riga intera
+                row.click(force=True)
+                logger.info(f"Riga match click fallback per '{team_name}' (opp={opponent!r}).")
+                self.page.wait_for_timeout(1500)
+                return True
+
+            # Ultimo fallback: comportamento storico su tutti i <p>
             for scope in (".contenitoreRiga p", "p"):
                 names = self.page.locator(scope)
                 for index in range(names.count()):
@@ -232,6 +289,12 @@ class NetwinAutomator:
                     return True
                 logger.warning(f"Combo DC+MG non selezionata per {pick!r}.")
 
+            if action is not None and action.family == "MULTIGOL" and action.multigol_range:
+                if self._click_plain_multigol(action):
+                    logger.info(f"[OK] MultiGol {action.multigol_range} selezionato.")
+                    return True
+                logger.warning(f"MultiGol {action.multigol_range} non selezionato per {pick!r}.")
+
             if (
                 action is not None
                 and action.family == "COMBO"
@@ -242,6 +305,20 @@ class NetwinAutomator:
                     logger.info(f"[OK] Combo {action.combo_result} + {action.combo_ou_side} {action.combo_ou_line:g} selezionata.")
                     return True
                 logger.warning(f"Combo 1X2+U/O non selezionata per {pick!r}.")
+
+            if (
+                action is not None
+                and action.family == "COMBO"
+                and action.combo_type == "OU"
+                and action.combo_result in {"1X", "X2", "12"}
+            ):
+                if self._click_dc_ou(action):
+                    logger.info(
+                        f"[OK] Combo {action.combo_result} + "
+                        f"{action.combo_ou_side} {action.combo_ou_line:g} selezionata."
+                    )
+                    return True
+                logger.warning(f"Combo DC+U/O non selezionata per {pick!r}.")
 
             if action is not None and _needs_secondary_panel(action):
                 self._open_market_panel(action)
@@ -403,19 +480,81 @@ class NetwinAutomator:
         market = match_info.get("market", "1X2")
         pick = match_info.get("pick", "1")
         odd = match_info.get("netwin_odds") or match_info.get("real_odd")
+        search_term = str(match_info.get("search") or home_team).strip() or home_team
 
         logger.info(f"Inserimento: {home_team} | Mercato: {market} | Esito: {pick} (@{odd})")
 
-        if not self.search_match(home_team):
+        if not self.search_match(search_term):
             return False
 
         self._row_team = home_team
         match = str(match_info.get("match") or "")
-        self._row_opponent = match.split(" vs ", 1)[1].strip() if " vs " in match else ""
-        self.click_match_row(home_team)
+        away = str(match_info.get("away") or "")
+        self._row_opponent = (
+            away
+            or (match.split(" vs ", 1)[1].strip() if " vs " in match else "")
+        )
+        if not self.click_match_row(home_team, opponent=self._row_opponent):
+            # Retry: a volte la query casa nasconde la riga; cerca l'ospite
+            if self._row_opponent and search_term.casefold() != self._row_opponent.casefold():
+                logger.info(f"Retry ricerca con avversario '{self._row_opponent}'...")
+                if self.search_match(self._row_opponent):
+                    self.click_match_row(home_team, opponent=self._row_opponent)
 
         success = self.select_outcome(market=market, pick=pick, target_odd=odd)
         return success
+
+    def _click_plain_multigol(self, action: NetwinMarketAction) -> bool:
+        """Apre MultiGol, sceglie il range nel dropdown (es. 2/5) e clicca la quota SI."""
+        if self.page is None or not action.multigol_range:
+            return False
+        opened = False
+        for label in ("MultiGol", "Multigol", "Multi Gol", "MULTIGOL"):
+            if self._click_visible_text(label):
+                opened = True
+                break
+        if not opened and not self._click_tab("MULTIGOL|MultiGol"):
+            return False
+        row = self._event_row()
+        if row is None:
+            return False
+        slash = action.multigol_range.replace("-", "/")
+        toggle = row.locator("button.dropdown-toggle").first
+        try:
+            current = " ".join(toggle.inner_text().split()) if toggle.count() else ""
+        except Exception:
+            current = ""
+        if toggle.count() and slash not in current and action.multigol_range not in current:
+            toggle.click(timeout=3000)
+            self.page.wait_for_timeout(400)
+            menu = self.page.locator(".dropdown-menu.show")
+            picked = False
+            for opt in (slash, action.multigol_range, action.multigol_range.replace("-", " / ")):
+                item = menu.get_by_text(opt, exact=True)
+                if item.count() == 0:
+                    item = menu.get_by_text(opt, exact=False)
+                if item.count():
+                    item.first.click(timeout=3000)
+                    picked = True
+                    self.page.wait_for_timeout(500)
+                    break
+            if not picked:
+                return False
+        # Quota SI del MultiGol: di solito l'unica (o la prima) .contenitoreSingolaQuota visibile in riga
+        visible = []
+        quotes = row.locator(".contenitoreSingolaQuota")
+        for index in range(quotes.count()):
+            quote = quotes.nth(index)
+            try:
+                if quote.is_visible():
+                    visible.append(quote)
+            except Exception:
+                continue
+        if not visible:
+            return False
+        visible[0].click(timeout=3000)
+        self.page.wait_for_timeout(800)
+        return True
 
     def _click_dc_multigol(self, action: NetwinMarketAction) -> bool:
         """Apre Combo 1X2 → DC+MG, sceglie il range (2/4) e clicca la quota della colonna."""
@@ -477,10 +616,57 @@ class NetwinAutomator:
             return False
         if not self._click_visible_text("Combo 1X2") or not self._click_visible_text("1X2 + U/O"):
             return False
+        return self._click_ou_combo_slot(
+            action.combo_result,
+            action.combo_ou_side,
+            action.combo_ou_line,
+            slot_map={"1": 0, "X": 2, "2": 4},
+        )
+
+    def _click_dc_ou(self, action: NetwinMarketAction) -> bool:
+        """Apre Doppia Chance + U/O e clicca 1X/X2/12 + Over o Under sulla linea."""
+        if (
+            self.page is None
+            or action.combo_ou_line is None
+            or action.combo_result not in {"1X", "X2", "12"}
+            or action.combo_ou_side not in {"OVER", "UNDER"}
+        ):
+            return False
+        opened = False
+        for label in (
+            "Doppia Chance + U/O",
+            "Doppia Chance + Under/Over",
+            "DC + U/O",
+            "Combo 1X2",
+        ):
+            if self._click_visible_text(label):
+                opened = True
+                break
+        if not opened:
+            return False
+        # Se siamo sul menu Combo 1X2, apri il sotto-tab DC+U/O
+        for label in ("Doppia Chance + U/O", "Doppia Chance + Under/Over", "DC + U/O"):
+            if self._click_visible_text(label):
+                break
+        return self._click_ou_combo_slot(
+            action.combo_result,
+            action.combo_ou_side,
+            action.combo_ou_line,
+            slot_map={"1X": 0, "X2": 2, "12": 4},
+        )
+
+    def _click_ou_combo_slot(
+        self,
+        result: str,
+        side: str,
+        line: float,
+        *,
+        slot_map: Dict[str, int],
+    ) -> bool:
         row = self._event_row()
         if row is None:
             return False
-        line_label = f"{action.combo_ou_line:g}"
+        line_label = f"{line:g}"
         toggle = row.locator("button.dropdown-toggle").first
         try:
             current = " ".join(toggle.inner_text().split()) if toggle.count() else ""
@@ -491,8 +677,8 @@ class NetwinAutomator:
             self.page.wait_for_timeout(400)
             self.page.locator(".dropdown-menu.show").get_by_text(line_label, exact=True).first.click(timeout=3000)
             self.page.wait_for_timeout(400)
-        slot = {"1": 0, "X": 2, "2": 4}[action.combo_result]
-        if action.combo_ou_side == "OVER":
+        slot = slot_map[result]
+        if side == "OVER":
             slot += 1
         visible = []
         quotes = row.locator(".contenitoreSingolaQuota")

@@ -1,0 +1,53 @@
+{
+  "ticket_id": "TICKET_MASTER_NIGHT_10OCT_SUDAM",
+  "title": "Schedina Master Notturna Sudamerica (Triangolazione Forebet + Oddspedia + BAgent)",
+  "name": "Schedina Master Notturna Sudamerica (Triangolazione Forebet + Oddspedia + BAgent)",
+  "date_created": "2026-10-09 23:45:00",
+  "created_at": "2026-10-09T21:45:00+00:00",
+  "status": "PENDING",
+  "strategy": "TRIANGULATION_FOREBET_ODDSPEDIA_BAGENT",
+  "stake_eur": 3.0,
+  "total_odds": 4.65,
+  "potential_payout_eur": 13.95,
+  "profit_loss_eur": 0.0,
+  "settled": false,
+  "notes": "Ticket Master da 4 selezioni certificato da strict_validator con Forebet predicted scores e Oddspedia consensus.",
+  "legs": [
+    {
+      "match": "Instituto C\u00f3rdoba vs Boca Juniors",
+      "tournament": "Argentina Liga Profesional",
+      "market": "X2 + Under 3.5",
+      "odds": 1.51,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 00:30 CEST",
+      "notes": "Forebet 0-1, Oddspedia X2 streak Boca, corto muso argentino"
+    },
+    {
+      "match": "Deportivo Maldonado vs Liverpool Montevideo",
+      "tournament": "Uruguay Primera Divisi\u00f3n",
+      "market": "MultiGol 2-5",
+      "odds": 1.4,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 01:00 CEST",
+      "notes": "Forebet 2-2, Oddspedia Liverpool dominante ma match aperto"
+    },
+    {
+      "match": "Once Caldas vs Llaneros",
+      "tournament": "Colombia Primera A",
+      "market": "1X + Under 3.5",
+      "odds": 1.42,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 01:10 CEST",
+      "notes": "Forebet 1-1 / Under 2.5, altitudine Manizales 2150m, blocco Llaneros"
+    },
+    {
+      "match": "Uni\u00f3n Santa Fe vs Defensa y Justicia",
+      "tournament": "Argentina Liga Profesional",
+      "market": "X2 + Under 4.5",
+      "odds": 1.55,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 02:45 CEST",
+      "notes": "Forebet 1-2, Oddspedia Defensa streak vs Uni\u00f3n in crisi (3L)"
+    }
+  ]
+}

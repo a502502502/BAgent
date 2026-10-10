@@ -6,9 +6,9 @@
   "status": "PENDING",
   "strategy": "CORE_CASSAFORTE_MACRO_SNAI",
   "stake_eur": 7.0,
-  "total_odds": 2.73,
-  "potential_payout_eur": 19.11,
-  "notes": "Mercati protetti estratti dal palinsesto ufficiale SNAI (Event Detail JSON).",
+  "total_odds": 2.68,
+  "potential_payout_eur": 18.76,
+  "notes": "Mercati macro protetti estratti dal palinsesto ufficiale dei campionati solidi (Bundesliga, Ligue 1, Eredivisie).",
   "legs": [
     {
       "event_code": "36411-2485",
@@ -39,18 +39,18 @@
       "rationale": "Scontro tattico di vertice: copertura doppia su pareggio oppure punteggio a basso volume (<= 3 gol)."
     },
     {
-      "event_code": "36411-2278",
-      "match": "Malaga - Espanyol",
-      "tournament": "ESP Liga",
-      "competition": "ESP Liga",
-      "market": "COMBO: DC + U/O",
-      "selection": "1X + UNDER 4.5",
-      "odds": 1.48,
-      "date_time": "2026-10-09 21:00 CEST",
-      "kickoff": "2026-10-09 21:00 CEST",
+      "event_code": "36411-1464",
+      "match": "PSV Eindhoven - Heerenveen",
+      "tournament": "NED Eredivisie",
+      "competition": "NED Eredivisie",
+      "market": "COMBO: DC + MULTIGOAL",
+      "selection": "1X + MULTIGOAL 2-5",
+      "odds": 1.45,
+      "date_time": "2026-10-09 20:00 CEST",
+      "kickoff": "2026-10-09 20:00 CEST",
       "status": "PENDING",
       "bookmaker": "SNAI",
-      "rationale": "Fattore campo Rosaleda a favore del Malaga; linea Under 4.5 difensiva contro Espanyol guardingo."
+      "rationale": "PSV rullo compressore al Philips Stadion; DNA olandese a volume aperto con protezione 1X abbinata alla finestra 2-5 reti."
     }
   ]
 }

@@ -1,0 +1,94 @@
+{
+  "ticket_id": "TICKET_USER_LUNGA_PROTETTA_10EUR_10OTT",
+  "title": "Schedina Reale Utente: Multipla Protetta 7 Match (@ 7.15)",
+  "name": "Schedina Reale Utente: Multipla Protetta 7 Match (@ 7.15)",
+  "created_at": "2026-10-10T13:59:00+00:00",
+  "date_created": "2026-10-10 13:59:00",
+  "status": "PENDING",
+  "strategy": "MULTIPLA_LUNGA_PROTETTA_7MATCH",
+  "stake_eur": 10.0,
+  "total_odds": 7.15,
+  "potential_payout_eur": 78.61,
+  "profit_loss_eur": 0.0,
+  "settled": false,
+  "notes": "Ticket reale giocato dall utente su 7 selezioni protette ad assorbimento di varianza con bonus bookmaker.",
+  "legs": [
+    {
+      "match": "Genoa vs Fiorentina",
+      "tournament": "Serie A",
+      "market": "X2 (Doppia Chance)",
+      "selection": "X2",
+      "odds": 1.33,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 15:00 CEST",
+      "date_time": "2026-10-10 15:00 CEST",
+      "rationale": "Doppia chance esterna pura per la Fiorentina a Marassi."
+    },
+    {
+      "match": "Paderborn vs Stoccarda",
+      "tournament": "Bundesliga",
+      "market": "X2 + Over 1.5",
+      "selection": "X2 + Over 1.5",
+      "odds": 1.28,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 15:30 CEST",
+      "date_time": "2026-10-10 15:30 CEST",
+      "rationale": "Stoccarda superiore e linea 1.5 minima che copre vittorie e 1-1."
+    },
+    {
+      "match": "Chelsea vs Bournemouth",
+      "tournament": "Premier League",
+      "market": "1X + Over 1.5",
+      "selection": "1X + Over 1.5",
+      "odds": 1.43,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 16:00 CEST",
+      "date_time": "2026-10-10 16:00 CEST",
+      "rationale": "Stamford Bridge fortino e almeno 2 reti complessive."
+    },
+    {
+      "match": "Aston Villa vs Brentford",
+      "tournament": "Premier League",
+      "market": "1X (Doppia Chance)",
+      "selection": "1X",
+      "odds": 1.48,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 16:00 CEST",
+      "date_time": "2026-10-10 16:00 CEST",
+      "rationale": "Doppia chance interna al Villa Park senza vincoli sui gol."
+    },
+    {
+      "match": "Lipsia vs Eintracht Francoforte",
+      "tournament": "Bundesliga",
+      "market": "1X + Over 1.5",
+      "selection": "1X + Over 1.5",
+      "odds": 1.27,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 18:30 CEST",
+      "date_time": "2026-10-10 18:30 CEST",
+      "rationale": "Linea 1.5 protetta che copre l 1-1 e il 2-0 casalingo del Lipsia."
+    },
+    {
+      "match": "Barracas Central vs Huracan",
+      "tournament": "Argentina",
+      "market": "X2 (Doppia Chance)",
+      "selection": "X2",
+      "odds": 1.37,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 20:45 CEST",
+      "date_time": "2026-10-10 20:45 CEST",
+      "rationale": "Doppia chance esterna pulita senza rischio Under per Huracan."
+    },
+    {
+      "match": "Cr Vasco Da Gama Rj vs Clube Do Remo",
+      "tournament": "Brasile",
+      "market": "1X + MultiGol 1-5",
+      "selection": "1X + MultiGol 1-5",
+      "odds": 1.14,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 23:00 CEST",
+      "date_time": "2026-10-10 23:00 CEST",
+      "rationale": "Vasco a Sao Januario con forte spinta interna; linea 1-5 che copre fino a 5 reti."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "booking_code": "579572",
+  "error": null,
+  "events_added": 3,
+  "total_events": 3,
+  "stake": 5.0,
+  "screenshot": "/Users/flashmac/Projects/BAgent/reports/receipts/prenotazione_tripla_psv_bvb_lens_09ott_579572.png",
+  "legs": [
+    {
+      "match": "PSV Eindhoven vs SC Heerenveen",
+      "home": "PSV",
+      "away": "Heerenveen",
+      "market": "COMBO",
+      "pick": "1X + MultiGol 2-5",
+      "netwin_odds": 1.45,
+      "kickoff_time": "2026-10-09 20:00 CEST"
+    },
+    {
+      "match": "Borussia Dortmund vs Werder Brema",
+      "home": "Dortmund",
+      "away": "Werder",
+      "market": "COMBO",
+      "pick": "1X + Over 2.5",
+      "netwin_odds": 1.42,
+      "kickoff_time": "2026-10-09 20:30 CEST"
+    },
+    {
+      "match": "RC Lens vs Olympique Lione",
+      "home": "Lens",
+      "away": "Lione",
+      "search": "Lione",
+      "market": "CHANCE MIX",
+      "pick": "X o Under 3.5",
+      "netwin_odds": 1.3,
+      "kickoff_time": "2026-10-09 20:45 CEST"
+    }
+  ],
+  "created_at": "2026-10-09 17:02 CEST",
+  "name": "Tripla PSV 1X+MG2-5 / BVB 1X+O2.5 / Lens X o U3.5",
+  "combined_odds_snai": 2.68
+}

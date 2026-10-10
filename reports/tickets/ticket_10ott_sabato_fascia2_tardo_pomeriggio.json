@@ -1,0 +1,50 @@
+{
+  "ticket_id": "TICKET_10OTT_SABATO_FASCIA2_TARDO_POMERIGGIO",
+  "title": "Schedina #2: Tardo Pomeriggio Big Match (Sabato 10 Ottobre)",
+  "name": "Schedina #2: Tardo Pomeriggio Big Match (Sabato 10 Ottobre)",
+  "created_at": "2026-10-10T00:30:00+00:00",
+  "date_created": "2026-10-10 00:30:00",
+  "status": "PENDING",
+  "strategy": "CORE_TARDO_POMERIGGIO_BIG_MATCH",
+  "stake_eur": 5.0,
+  "total_odds": 3.27,
+  "potential_payout_eur": 16.35,
+  "profit_loss_eur": 0.0,
+  "settled": false,
+  "notes": "Big Match Europei: Corto muso Simeone X2+U3.5, Inter a San Siro e Old Trafford fortress.",
+  "legs": [
+    {
+      "match": "Alaves vs Atletico Madrid",
+      "tournament": "LaLiga",
+      "market": "X2 + Under 3.5",
+      "selection": "X2 + Under 3.5",
+      "odds": 1.73,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 16:15 CEST",
+      "date_time": "2026-10-10 16:15 CEST",
+      "rationale": "DNA Simeone: controllo dei ritmi e blocco basso a Vitoria (Forebet: 0-1 / 1-1, Under 2.5 72%)."
+    },
+    {
+      "match": "Inter vs Parma",
+      "tournament": "Serie A",
+      "market": "1X + Over 2.5",
+      "selection": "1X + Over 2.5",
+      "odds": 1.37,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 18:00 CEST",
+      "date_time": "2026-10-10 18:00 CEST",
+      "rationale": "Inter a San Siro xG > 2.4 p90; Parma propositivo che non parcheggia il bus (Forebet: 3-1)."
+    },
+    {
+      "match": "Manchester United vs Tottenham",
+      "tournament": "Premier League",
+      "market": "1X + Over 1.5",
+      "selection": "1X + Over 1.5",
+      "odds": 1.38,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 18:30 CEST",
+      "date_time": "2026-10-10 18:30 CEST",
+      "rationale": "Old Trafford fortino; Tottenham linea altissima garantisce gol ma espone a contropiedi."
+    }
+  ]
+}

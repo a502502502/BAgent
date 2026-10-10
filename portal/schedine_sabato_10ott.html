@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAgent — Dashboard Ufficiale Sabato 10 Ottobre 2026</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #131b2e;
+      --card-border: #1e293b;
+      --accent: #38bdf8;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --accent-warning: #f97316;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text-main); padding: 24px 16px; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 28px; padding: 22px; background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%); border-radius: 16px; border: 1px solid var(--card-border); }
+    h1 { font-size: 26px; color: #fff; margin-bottom: 6px; }
+    .subtitle { color: var(--accent); font-weight: 500; font-size: 15px; }
+    .badge-bar { display: flex; justify-content: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .badge { padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .badge-green { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-blue { background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-gold { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-warning { background: rgba(249, 115, 22, 0.18); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 24px; }
+    @media (max-width: 650px) { .grid { grid-template-columns: 1fr; } }
+    .card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--card-border); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: transform 0.2s; }
+    .card:hover { border-color: rgba(56, 189, 248, 0.4); }
+    .card-header { padding: 18px 20px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); }
+    .card-title-group { display: flex; flex-direction: column; gap: 4px; }
+    .card-title { font-size: 18px; font-weight: 700; color: #fff; }
+    .card-odds-box { text-align: right; }
+    .card-odds { font-size: 22px; font-weight: 800; color: var(--accent-gold); }
+    .card-odds-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+    .match-row { padding-bottom: 14px; border-bottom: 1px dashed rgba(255,255,255,0.08); }
+    .match-row:last-child { padding-bottom: 0; border-bottom: none; }
+    .match-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .match-name { font-weight: 600; font-size: 15px; color: #f8fafc; }
+    .match-time { font-size: 12px; color: var(--accent); background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+    .market-badge { display: flex; align-items: center; justify-content: space-between; width: 100%; background: #0f172a; padding: 8px 12px; border-radius: 8px; border: 1px solid #1e293b; margin-top: 4px; }
+    .market-name { font-size: 13px; font-weight: 600; color: #38bdf8; }
+    .market-odd { font-size: 14px; font-weight: 800; color: #fbbf24; }
+    .rationale { font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.45; }
+    .card-footer { padding: 14px 20px; background: rgba(0,0,0,0.25); border-top: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    .stake-box { color: var(--text-muted); }
+    .payout-box { font-weight: 700; color: var(--accent-green); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>BAgent Quantitative — Palinsesto Sabato 10 Ottobre 2026</h1>
+    <div class="subtitle">Strategia Certificata Core-Satellite: 3 Fasce Orarie Principali + 1 Ticket Micro-Mercati Specialistico</div>
+    <div class="badge-bar">
+      <span class="badge badge-green">Audit 10:30: VERIFICATO</span>
+      <span class="badge badge-blue">Quote Ufficiali: Netwin / SNAI</span>
+      <span class="badge badge-gold">Formazioni Ufficiali Mattutine Integrate</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <!-- TICKET 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-title">☀️ Schedina #1: Pomeriggio Anticipi</div>
+          <div><span class="badge badge-green">Certificato PASSED</span></div>
+        </div>
+        <div class="card-odds-box">
+          <div class="card-odds">@ 2.86</div>
+          <div class="card-odds-label">Quota Totale</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Arsenal vs Leeds</span>
+            <span class="match-time">13:30 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">1X + MultiGol 2-5</span>
+            <span class="market-odd">1.39</span>
+          </div>
+          <div class="rationale">Arsenal dominante all Emirates con Saka e Odegaard titolari (xG 2.10); Leeds con assenze pesanti in difesa (Rodon e James out) che assicurano almeno 2 reti.</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Mainz vs Bayer Leverkusen</span>
+            <span class="match-time">15:30 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">X2 + MultiGol 1-5</span>
+            <span class="market-odd">1.56</span>
+          </div>
+          <div class="rationale">Leverkusen con attacco titolare; Mainz senza il portiere Zentner e Kohr a centrocampo, vulnerabile in ripartenza.</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Augsburg vs Bayern Monaco</span>
+            <span class="match-time">15:30 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">X2 + MultiGol 2-5</span>
+            <span class="market-odd">1.32</span>
+          </div>
+          <div class="rationale">Bayern travolgente nel derby bavarese con Kane e Saibari; linea 2-5 assorbe vittorie rotonde senza trappole handicap.</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="stake-box">Stake consigliato: <strong>€ 5.00</strong></div>
+        <div class="payout-box">Vincita potenziale: € 14.30</div>
+      </div>
+    </div>
+
+    <!-- TICKET 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-title">⛅ Schedina #2: Tardo Pomeriggio Big Match</div>
+          <div><span class="badge badge-green">Certificato PASSED</span></div>
+        </div>
+        <div class="card-odds-box">
+          <div class="card-odds">@ 3.27</div>
+          <div class="card-odds-label">Quota Totale</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Alavés vs Atlético Madrid</span>
+            <span class="match-time">16:15 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">X2 + Under 3.5</span>
+            <span class="market-odd">1.73</span>
+          </div>
+          <div class="rationale">DNA Corto Muso Simeone a Mendizorrotza: controllo dei ritmi, blocco compatto dei Colchoneros e quota ad altissimo valore (Under 2.5 al 72%).</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Inter vs Parma</span>
+            <span class="match-time">18:00 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">1X + Over 2.5</span>
+            <span class="market-odd">1.37</span>
+          </div>
+          <div class="rationale">Inter con Lautaro e Thuram confermati da Gazzetta/Sky (xG > 2.45 a San Siro); Parma sbarazzino che concede transizioni.</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Manchester United vs Tottenham</span>
+            <span class="match-time">18:30 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">1X + Over 1.5</span>
+            <span class="market-odd">1.38</span>
+          </div>
+          <div class="rationale">Fattore Old Trafford; Spurs di De Zerbi in crisi con linea difensiva altissima che assicura gol ma concede ripartenze letali.</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="stake-box">Stake consigliato: <strong>€ 5.00</strong></div>
+        <div class="payout-box">Vincita potenziale: € 16.35</div>
+      </div>
+    </div>
+
+    <!-- TICKET 3 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-title">🌙 Schedina #3: Serale di Vertice</div>
+          <div><span class="badge badge-green">Certificato PASSED</span></div>
+        </div>
+        <div class="card-odds-box">
+          <div class="card-odds">@ 2.59</div>
+          <div class="card-odds-label">Quota Totale</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Barcellona vs Getafe</span>
+            <span class="match-time">18:30 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">1X + MultiGol 2-5</span>
+            <span class="market-odd">1.34</span>
+          </div>
+          <div class="rationale">Flick a Montjuïc con tridente titolare Yamal-Jesus-Adeyemi; volume di gioco altissimo contro il blocco Getafe.</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Napoli vs Frosinone</span>
+            <span class="match-time">20:45 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">1X + MultiGol 1-5</span>
+            <span class="market-odd">1.35</span>
+          </div>
+          <div class="rationale">Applicazione rigorosa Regola Corto Muso #51: copre sia la goleada sia il classico 1-0 di gestione pragmatica senza trappole.</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Real Madrid vs Villarreal</span>
+            <span class="match-time">21:00 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">1X + Over 2.5</span>
+            <span class="market-odd">1.43</span>
+          </div>
+          <div class="rationale">Telemetria 2026 pura (Regola #82): Real Madrid al Bernabéu produce xG 2.50 p90 con oltre 17 tiri; Villarreal a baricentro medio genera 1.30 xG concedendo spazi.</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="stake-box">Stake consigliato: <strong>€ 5.00</strong></div>
+        <div class="payout-box">Vincita potenziale: € 12.95</div>
+      </div>
+    </div>
+
+
+        <!-- TICKET 5: LUNGA QUOTA ALTA -->
+    <div class="card" style="grid-column: 1 / -1; border-color: rgba(245, 158, 11, 0.4); background: linear-gradient(180deg, #182238 0%, #131b2e 100%);">
+      <div class="card-header" style="background: rgba(245, 158, 11, 0.05); border-bottom-color: rgba(245, 158, 11, 0.2);">
+        <div class="card-title-group">
+          <div class="card-title" style="color: #fbbf24;">🛡️ Schedina #5: La Lunga Protetta del Sabato (Quota @ 8.20 – 11.20)</div>
+          <div><span class="badge badge-gold">Versione Ammorbidita & Resa Più Sicura</span></div>
+        </div>
+        <div class="card-odds-box">
+          <div class="card-odds" style="color: #f59e0b; font-size: 26px;">@ 8.17</div>
+          <div class="card-odds-label">Quota Complessiva</div>
+        </div>
+      </div>
+      <div class="card-body" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <div class="match-row" style="border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2);">
+          <div class="match-header"><span class="match-name">Genoa vs Fiorentina</span><span class="match-time">15:00 CEST</span></div>
+          <div class="market-badge"><span class="market-name">X2 (Doppia Chance)</span><span class="market-odd">1.35</span></div>
+          <div class="rationale">Doppia chance esterna pura senza Under: Fiorentina con qualità superiore e controllo possesso.</div>
+        </div>
+        <div class="match-row" style="border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2);">
+          <div class="match-header"><span class="match-name">Paderborn vs Stoccarda</span><span class="match-time">15:30 CEST</span></div>
+          <div class="market-badge"><span class="market-name">X2 + Over 1.5</span><span class="market-odd">1.30</span></div>
+          <div class="rationale">Stoccarda ad altissima produzione gol; linea 1.5 minima che assorbe vittorie o pareggi 1-1.</div>
+        </div>
+        <div class="match-row" style="border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2);">
+          <div class="match-header"><span class="match-name">Aston Villa vs Brentford</span><span class="match-time">16:00 CEST</span></div>
+          <div class="market-badge"><span class="market-name">1X (Doppia Chance)</span><span class="market-odd">1.48</span></div>
+          <div class="rationale">1X pulita al Villa Park: tolto qualsiasi vincolo sui gol, copre pareggi e vittorie di misura.</div>
+        </div>
+        <div class="match-row" style="border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2);">
+          <div class="match-header"><span class="match-name">Chelsea vs Bournemouth</span><span class="match-time">16:00 CEST</span></div>
+          <div class="market-badge"><span class="market-name">1X + Over 1.5</span><span class="market-odd">1.37</span></div>
+          <div class="rationale">Stamford Bridge fortino e almeno 2 reti totali; Bournemouth concede ampi spazi.</div>
+        </div>
+        <div class="match-row" style="border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2);">
+          <div class="match-header"><span class="match-name">Lipsia vs Eintracht Francoforte</span><span class="match-time">18:30 CEST</span></div>
+          <div class="market-badge"><span class="market-name">1X + Over 1.5</span><span class="market-odd">1.26</span></div>
+          <div class="rationale">Ammorbidito l Over 2.5: con la linea 1.5 proteggiamo sia il pareggio 1-1 sia il 2-0 casalingo.</div>
+        </div>
+        <div class="match-row" style="border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2);">
+          <div class="match-header"><span class="match-name">Barracas Central vs Huracán</span><span class="match-time">19:45 CEST</span></div>
+          <div class="market-badge"><span class="market-name">X2 (Doppia Chance)</span><span class="market-odd">1.38</span></div>
+          <div class="rationale">Doppia chance esterna pulita senza rischio Under: Huracán solido in trasferta.</div>
+        </div>
+        <div class="match-row" style="border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2);">
+          <div class="match-header"><span class="match-name">Vasco da Gama vs Clube do Remo</span><span class="match-time">22:00 CEST</span></div>
+          <div class="market-badge"><span class="market-name">1X + MultiGol 1-5</span><span class="market-odd">1.32</span></div>
+          <div class="rationale">Vasco a São Januário dominante; linea 1-5 ultra-ampia che copre fino a 5 reti.</div>
+        </div>
+      </div>
+      <div class="card-footer" style="background: rgba(0,0,0,0.35);">
+        <div class="stake-box">Stake consigliato: <strong>€ 3.00</strong></div>
+        <div class="payout-box" style="font-size: 15px; color: #34d399;">Vincita potenziale: € 24.51 (o € 33.80 con l opzione a 8 match)</div>
+      </div>
+    </div>
+
+    <!-- TICKET 4: GEMME -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-title">💎 Schedina #4: Le Gemme (Tiri & Corner)</div>
+          <div><span class="badge badge-warning">Micro-Mercati Specialistici</span></div>
+        </div>
+        <div class="card-odds-box">
+          <div class="card-odds">@ 2.83</div>
+          <div class="card-odds-label">Quota Totale</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Arsenal vs Leeds</span>
+            <span class="match-time">13:30 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">Over 7.5 Tiri in Porta Totali</span>
+            <span class="market-odd">1.42</span>
+          </div>
+          <div class="rationale">Arsenal produce 6.5 tiri nello specchio p90 all Emirates; Leeds concede volume elevato senza parcheggiare il bus.</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Chelsea vs Bournemouth</span>
+            <span class="match-time">16:00 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">Over 7.5 Tiri in Porta Totali</span>
+            <span class="market-odd">1.33</span>
+          </div>
+          <div class="rationale">Blues a 6.1 tiri nello specchio a Stamford Bridge; linea superata nell 85% delle gare casalinghe.</div>
+        </div>
+        <div class="match-row">
+          <div class="match-header">
+            <span class="match-name">Inter vs Parma</span>
+            <span class="match-time">18:00 CEST</span>
+          </div>
+          <div class="market-badge">
+            <span class="market-name">Corner nei Primi 10 Minuti: SI</span>
+            <span class="market-odd">1.50</span>
+          </div>
+          <div class="rationale">Micro-mercato sui corner: l Inter spinge a tutta sui quinti (Dimarco/Dumfries) con deviazione d angolo immediata.</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="stake-box">Stake ridotto prudenziale: <strong>€ 2.50 – 3.00</strong></div>
+        <div class="payout-box">Vincita potenziale: € 8.50</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

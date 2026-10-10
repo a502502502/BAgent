@@ -1,0 +1,47 @@
+{
+  "ticket_id": "TICKET-NIGHT-20261010-SUDAM",
+  "title": "Schedina Notturna Sudamerica (Triangolazione Forebet + Oddspedia + BAgent)",
+  "date": "2026-10-10",
+  "selections": [
+    {
+      "match": "Instituto C\u00f3rdoba vs Boca Juniors",
+      "league": "Argentina Liga Profesional",
+      "kickoff_time": "2026-10-10 00:30 CEST",
+      "market": "X2 + Under 3.5",
+      "odds": 1.51,
+      "forebet_score": "0-1",
+      "oddspedia_trend": "Value X2 / Boca streak",
+      "prob": 0.611,
+      "xg_home": 0.85,
+      "xg_away": 1.25
+    },
+    {
+      "match": "Deportivo Maldonado vs Liverpool Montevideo",
+      "league": "Uruguay Primera Divisi\u00f3n",
+      "kickoff_time": "2026-10-10 01:00 CEST",
+      "market": "MultiGol 2-5",
+      "odds": 1.4,
+      "forebet_score": "2-2",
+      "oddspedia_trend": "Over flow / Liverpool Top",
+      "prob": 0.721,
+      "xg_home": 1.15,
+      "xg_away": 1.55
+    },
+    {
+      "match": "Uni\u00f3n Santa Fe vs Defensa y Justicia",
+      "league": "Argentina Liga Profesional",
+      "kickoff_time": "2026-10-10 02:45 CEST",
+      "market": "X2 + Under 4.5",
+      "odds": 1.55,
+      "forebet_score": "1-2",
+      "oddspedia_trend": "Uni\u00f3n 3L streak / Defensa resilient",
+      "prob": 0.649,
+      "xg_home": 0.95,
+      "xg_away": 1.2
+    }
+  ],
+  "total_odds": 3.28,
+  "recommended_stake": 3.0,
+  "bankroll": 100.0,
+  "status": "APPROVED"
+}

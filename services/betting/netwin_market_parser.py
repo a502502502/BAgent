@@ -247,9 +247,17 @@ def _parse_chance_mix(text: str) -> Optional[NetwinMarketAction]:
     )
     if not m:
         return None
-    left, right = m.group(1), m.group(2).replace(" ", "")
-    if right in ("GG", "GOL"):
+    left, right_raw = m.group(1), m.group(2).strip()
+    if right_raw in ("GG", "GOL"):
         right = "GG"
+    elif right_raw.upper().startswith("UNDER"):
+        num = re.search(r"(\d+(?:\.\d+)?)", right_raw)
+        right = f"Under {num.group(1)}" if num else right_raw
+    elif right_raw.upper().startswith("OVER"):
+        num = re.search(r"(\d+(?:\.\d+)?)", right_raw)
+        right = f"Over {num.group(1)}" if num else right_raw
+    else:
+        right = right_raw.replace(" ", "")
     mix = f"{left} o {right}"
     return NetwinMarketAction(
         family="CHANCE_MIX",
@@ -501,12 +509,17 @@ def outcome_search_texts(action: NetwinMarketAction) -> list[str]:
             texts.extend(["Nessun Altro Gol", "No Goal"])
     if action.family == "CHANCE_MIX" and action.chance_mix:
         mix = action.chance_mix
+        compact = mix.replace(" ", "")
         texts.extend(
             [
                 mix,
                 mix.replace(" o ", " O "),
                 mix.replace("GG", "Gol"),
                 mix.replace(" o ", "+"),
+                compact,
+                compact.replace("o", " O "),
+                mix.replace("Under", "U"),
+                mix.replace("Over", "O"),
             ]
         )
     return texts

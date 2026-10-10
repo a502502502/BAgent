@@ -1,0 +1,50 @@
+{
+  "ticket_id": "TICKET_USER_POMERIGGIO_ANTICIPINI_20EUR_10OTT",
+  "title": "Schedina Reale Utente: Schedina #1 Pomeriggio Anticipi (@ 2.93)",
+  "name": "Schedina Reale Utente: Schedina #1 Pomeriggio Anticipi (@ 2.93)",
+  "created_at": "2026-10-10T13:59:00+00:00",
+  "date_created": "2026-10-10 13:59:00",
+  "status": "PENDING",
+  "strategy": "CORE_POMERIGGIO_ANTICIPINI_OFFICIAL",
+  "stake_eur": 20.0,
+  "total_odds": 2.93,
+  "potential_payout_eur": 58.56,
+  "profit_loss_eur": 0.0,
+  "settled": false,
+  "notes": "Ticket reale giocato dall utente su Schedina #1: Arsenal 1X+MG2-5, Bayern X2+MG2-5, Leverkusen X2+MG1-5.",
+  "legs": [
+    {
+      "match": "Arsenal vs Leeds",
+      "tournament": "Premier League",
+      "market": "1X + MultiGol 2-5",
+      "selection": "1X + MultiGol 2-5: SI",
+      "odds": 1.45,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 13:30 CEST",
+      "date_time": "2026-10-10 13:30 CEST",
+      "rationale": "Arsenal dominante all Emirates; linea 2-5 con 1X a quota @ 1.45 maggiorata."
+    },
+    {
+      "match": "Augsburg vs Bayern Monaco",
+      "tournament": "Bundesliga",
+      "market": "X2 + MultiGol 2-5",
+      "selection": "X2 + MultiGol 2-5: SI",
+      "odds": 1.32,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 15:30 CEST",
+      "date_time": "2026-10-10 15:30 CEST",
+      "rationale": "Bayern con Kane e Saibari; linea 2-5 assorbe vittorie rotonde senza handicap rischiosi."
+    },
+    {
+      "match": "Mainz vs Bayer Leverkusen",
+      "tournament": "Bundesliga",
+      "market": "X2 + MultiGol 1-5",
+      "selection": "X2 + MultiGol 1-5: SI",
+      "odds": 1.53,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 15:30 CEST",
+      "date_time": "2026-10-10 15:30 CEST",
+      "rationale": "Leverkusen al completo offensivo; Mainz privo del portiere Zentner e Kohr."
+    }
+  ]
+}

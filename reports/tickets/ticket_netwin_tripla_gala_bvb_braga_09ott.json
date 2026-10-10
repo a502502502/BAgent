@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "booking_code": "547833",
+  "error": null,
+  "events_added": 3,
+  "total_events": 3,
+  "stake": 5.0,
+  "screenshot": "/Users/flashmac/Projects/BAgent/reports/receipts/prenotazione_tripla_gala_bvb_braga_09ott_547833.png",
+  "legs": [
+    {
+      "match": "Galatasaray vs Kasimpasa",
+      "home": "Galatasaray",
+      "away": "Kasimpasa",
+      "market": "COMBO",
+      "pick": "1X + Over 2.5",
+      "netwin_odds": 1.38,
+      "kickoff_time": "2026-10-09 19:00 CEST"
+    },
+    {
+      "match": "Borussia Dortmund vs Werder Brema",
+      "home": "Dortmund",
+      "away": "Werder",
+      "market": "MULTIGOL",
+      "pick": "MultiGol 2-5",
+      "netwin_odds": 1.3,
+      "kickoff_time": "2026-10-09 20:30 CEST"
+    },
+    {
+      "match": "Sporting Braga vs Sporting CP",
+      "home": "Sporting Braga",
+      "away": "Sporting CP",
+      "market": "COMBO",
+      "pick": "X2 + Over 1.5",
+      "netwin_odds": 1.57,
+      "kickoff_time": "2026-10-09 21:15 CEST"
+    }
+  ],
+  "created_at": "2026-10-09 17:05 CEST",
+  "name": "Tripla Gala 1X+O2.5 / BVB MG2-5 / Braga X2+O1.5",
+  "combined_odds_snai": 2.82
+}

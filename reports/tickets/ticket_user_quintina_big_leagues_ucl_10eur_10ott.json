@@ -1,0 +1,72 @@
+{
+  "ticket_id": "TICKET_USER_QUINTINA_BIG_LEAGUES_UCL_10EUR_10OTT",
+  "title": "Schedina Reale Utente: Quintina Big Leagues & Champions League (@ 6.86)",
+  "name": "Schedina Reale Utente: Quintina Big Leagues & Champions League (@ 6.86)",
+  "created_at": "2026-10-10T16:04:00+00:00",
+  "date_created": "2026-10-10 16:04:00",
+  "status": "PENDING",
+  "strategy": "CORE_TARDO_POMERIGGIO_UCL_HYBRID",
+  "stake_eur": 10.0,
+  "total_odds": 6.86,
+  "potential_payout_eur": 72.71,
+  "profit_loss_eur": 0.0,
+  "settled": false,
+  "notes": "Ticket reale giocato dall utente su 5 selezioni con Alaves-Atletico X2+U3.5, Inter 1X+O2.5, Yamal marcatore/palo con clausola sostituto, Man United 1X+O1.5 e Champions League Lipsia-PSV 1X+O1.5.",
+  "legs": [
+    {
+      "match": "Alaves vs Atletico Madrid",
+      "tournament": "LaLiga",
+      "market": "X2 + Under 3.5",
+      "selection": "X2 + Under 3.5",
+      "odds": 1.62,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 16:15 CEST",
+      "date_time": "2026-10-10 16:15 CEST",
+      "rationale": "Corto Muso Simeone: Atletico compatto e gestione ritmi con quota di altissimo valore."
+    },
+    {
+      "match": "Inter vs Parma",
+      "tournament": "Serie A",
+      "market": "1X + Over 2.5",
+      "selection": "1X + Over 2.5",
+      "odds": 1.4,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 18:00 CEST",
+      "date_time": "2026-10-10 18:00 CEST",
+      "rationale": "Inter a San Siro con Lautaro e Thuram; Parma propositivo che concede spazi."
+    },
+    {
+      "match": "Barcellona vs Getafe",
+      "tournament": "LaLiga",
+      "market": "Yamal (o Sostituto) Segna o Legno",
+      "selection": "Yamal Segna / Colpisce Palo/Traversa (o Sostituto)",
+      "odds": 1.49,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 18:30 CEST",
+      "date_time": "2026-10-10 18:30 CEST",
+      "rationale": "Gemma con clausola di salvaguardia sostituto: Lamine Yamal terminale offensivo di Flick con tiri e punizioni."
+    },
+    {
+      "match": "Manchester United vs Tottenham",
+      "tournament": "Premier League",
+      "market": "1X + Over 1.5",
+      "selection": "1X + Over 1.5",
+      "odds": 1.4,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 18:30 CEST",
+      "date_time": "2026-10-10 18:30 CEST",
+      "rationale": "Old Trafford fortress; Tottenham con linea difensiva altissima che garantisce gol."
+    },
+    {
+      "match": "Lipsia vs PSV Eindhoven",
+      "tournament": "UEFA Champions League",
+      "market": "1X + Over 1.5",
+      "selection": "1X + Over 1.5",
+      "odds": 1.45,
+      "status": "PENDING",
+      "kickoff": "2026-10-13 21:00 CEST",
+      "date_time": "2026-10-13 21:00 CEST",
+      "rationale": "Red Bull Arena fattore chiave in Champions League contro il PSV ad assetto offensivo olandese."
+    }
+  ]
+}

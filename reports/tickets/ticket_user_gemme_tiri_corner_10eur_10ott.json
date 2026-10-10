@@ -1,0 +1,50 @@
+{
+  "ticket_id": "TICKET_USER_GEMME_TIRI_CORNER_10EUR_10OTT",
+  "title": "Schedina Reale Utente: Le Gemme Tiri & Corner (@ 3.25)",
+  "name": "Schedina Reale Utente: Le Gemme Tiri & Corner (@ 3.25)",
+  "created_at": "2026-10-10T13:59:00+00:00",
+  "date_created": "2026-10-10 13:59:00",
+  "status": "PENDING",
+  "strategy": "SATELLITE_GEMME_TIRI_CORNER",
+  "stake_eur": 10.0,
+  "total_odds": 3.25,
+  "potential_payout_eur": 32.46,
+  "profit_loss_eur": 0.0,
+  "settled": false,
+  "notes": "Ticket reale giocato dall utente sui micro-mercati specialistici: Over Tiri in Porta ad alta quota e Corner nei Primi 10 Minuti.",
+  "legs": [
+    {
+      "match": "Arsenal vs Leeds",
+      "tournament": "Premier League",
+      "market": "U/O 7.5 Tiri in Porta",
+      "selection": "OVER 7.5 Tiri in Porta",
+      "odds": 1.37,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 13:30 CEST",
+      "date_time": "2026-10-10 13:30 CEST",
+      "rationale": "Arsenal all Emirates con alto volume nello specchio; Leeds concede transizioni continue."
+    },
+    {
+      "match": "Chelsea vs Bournemouth",
+      "tournament": "Premier League",
+      "market": "U/O 8.5 Tiri in Porta",
+      "selection": "OVER 8.5 Tiri in Porta",
+      "odds": 1.58,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 16:00 CEST",
+      "date_time": "2026-10-10 16:00 CEST",
+      "rationale": "Quota maggiorata @ 1.58 sulla linea 8.5 a Stamford Bridge con ritmi alti."
+    },
+    {
+      "match": "Inter vs Parma",
+      "tournament": "Serie A",
+      "market": "Corner entro 10\u00b0Min: SI",
+      "selection": "Corner entro 10\u00b0Min: SI",
+      "odds": 1.5,
+      "status": "PENDING",
+      "kickoff": "2026-10-10 18:00 CEST",
+      "date_time": "2026-10-10 18:00 CEST",
+      "rationale": "Micro-mercato a San Siro con spinta aggressiva iniziale dei quinti nerazzurri."
+    }
+  ]
+}

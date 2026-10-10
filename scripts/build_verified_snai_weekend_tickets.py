@@ -26,9 +26,9 @@ fri_core = {
     "status": "PENDING",
     "strategy": "CORE_CASSAFORTE_MACRO_SNAI",
     "stake_eur": 7.0,
-    "total_odds": 2.73,
-    "potential_payout_eur": 19.11,
-    "notes": "Mercati protetti estratti dal palinsesto ufficiale SNAI (Event Detail JSON).",
+    "total_odds": 2.68,
+    "potential_payout_eur": 18.76,
+    "notes": "Mercati macro protetti estratti dal palinsesto ufficiale dei campionati solidi (Bundesliga, Ligue 1, Eredivisie).",
     "legs": [
         {
             "event_code": "36411-2485",
@@ -59,18 +59,18 @@ fri_core = {
             "rationale": "Scontro tattico di vertice: copertura doppia su pareggio oppure punteggio a basso volume (<= 3 gol)."
         },
         {
-            "event_code": "36411-2278",
-            "match": "Malaga - Espanyol",
-            "tournament": "ESP Liga",
-            "competition": "ESP Liga",
-            "market": "COMBO: DC + U/O",
-            "selection": "1X + UNDER 4.5",
-            "odds": 1.48,
-            "date_time": "2026-10-09 21:00 CEST",
-            "kickoff": "2026-10-09 21:00 CEST",
+            "event_code": "36411-1464",
+            "match": "PSV Eindhoven - Heerenveen",
+            "tournament": "NED Eredivisie",
+            "competition": "NED Eredivisie",
+            "market": "COMBO: DC + MULTIGOAL",
+            "selection": "1X + MULTIGOAL 2-5",
+            "odds": 1.45,
+            "date_time": "2026-10-09 20:00 CEST",
+            "kickoff": "2026-10-09 20:00 CEST",
             "status": "PENDING",
             "bookmaker": "SNAI",
-            "rationale": "Fattore campo Rosaleda a favore del Malaga; linea Under 4.5 difensiva contro Espanyol guardingo."
+            "rationale": "PSV rullo compressore al Philips Stadion; DNA olandese a volume aperto con protezione 1X abbinata alla finestra 2-5 reti."
         }
     ]
 }
@@ -81,53 +81,53 @@ fri_gem = {
     "name": "Schedina B: La Schedina delle Gemme (Venerdi 9 Ottobre)",
     "created_at": "2026-10-07T17:10:00+00:00",
     "status": "PENDING",
-    "strategy": "SATELLITE_GEMME_MICRO_MARKETS_SNAI",
+    "strategy": "SATELLITE_GEMME_PRIME_DIVISIONS",
     "stake_eur": 3.0,
-    "total_odds": 2.68,
-    "potential_payout_eur": 8.03,
-    "notes": "Micro-mercati asimmetrici SNAI: Corner e Tiri in Porta ad alto assorbimento statistico.",
+    "total_odds": 2.82,
+    "potential_payout_eur": 8.46,
+    "notes": "Gemme asimmetriche su prime divisioni europee (Superlig, Primeira Liga, Bundesliga) certificate dal validatore.",
     "legs": [
+        {
+            "event_code": "36411-3395",
+            "match": "Galatasaray - Kasimpasa",
+            "tournament": "TUR Superlig",
+            "competition": "TUR Superlig",
+            "market": "COMBO: DC + U/O",
+            "selection": "1X + OVER 2.5",
+            "odds": 1.38,
+            "date_time": "2026-10-09 19:00 CEST",
+            "kickoff": "2026-10-09 19:00 CEST",
+            "status": "PENDING",
+            "bookmaker": "SNAI",
+            "rationale": "Galatasaray capolista a Istanbul con xG > 2.5; Kasimpasa concede spazi in transizione, match da almeno 3 reti protetto da 1X."
+        },
+        {
+            "event_code": "36411-2648",
+            "match": "Braga - Sporting Lisbona",
+            "tournament": "POR Primeira Liga",
+            "competition": "POR Primeira Liga",
+            "market": "COMBO: DC + U/O",
+            "selection": "X2 + OVER 1.5",
+            "odds": 1.57,
+            "date_time": "2026-10-09 21:15 CEST",
+            "kickoff": "2026-10-09 21:15 CEST",
+            "status": "PENDING",
+            "bookmaker": "SNAI",
+            "rationale": "Sporting dominante in Portogallo in testa alla classifica; big match contro Braga che garantisce volume di gol (>= 2 reti) con copertura esterna."
+        },
         {
             "event_code": "36411-2485",
             "match": "Borussia Dortmund - Werder Brema",
             "tournament": "GER Bundesliga",
             "competition": "GER Bundesliga",
-            "market": "PRIMA A X CORNER",
-            "selection": "PRIMA A 5 CALCI D'ANGOLO: TEAM 1",
-            "odds": 1.48,
+            "market": "MULTIGOAL",
+            "selection": "MULTIGOAL 2-5",
+            "odds": 1.30,
             "date_time": "2026-10-09 20:30 CEST",
             "kickoff": "2026-10-09 20:30 CEST",
             "status": "PENDING",
             "bookmaker": "SNAI",
-            "rationale": "Dortmund dominante al Signal Iduna Park con media di 6.8 corner a partita contro 3.1 del Werder. Pressione costante nei primi 60'."
-        },
-        {
-            "event_code": "36411-1448",
-            "match": "Lens - Lione",
-            "tournament": "FRA Ligue 1",
-            "competition": "FRA Ligue 1",
-            "market": "U/O TIRI IN PORTA",
-            "selection": "U/O 8.5 TIRI IN PORTA: OVER",
-            "odds": 1.36,
-            "date_time": "2026-10-09 20:45 CEST",
-            "kickoff": "2026-10-09 20:45 CEST",
-            "status": "PENDING",
-            "bookmaker": "SNAI",
-            "rationale": "Match a baricentro alto: Lens e Lione sommano 10.2 conclusioni nello specchio p90. Soglia 8.5 ampiamente protetta."
-        },
-        {
-            "event_code": "36411-2032",
-            "match": "West Ham - QPR",
-            "tournament": "ENG Championship",
-            "competition": "ENG Championship",
-            "market": "PRIMA A X CORNER",
-            "selection": "PRIMA A 4 CALCI D'ANGOLO: TEAM 1",
-            "odds": 1.33,
-            "date_time": "2026-10-09 21:00 CEST",
-            "kickoff": "2026-10-09 21:00 CEST",
-            "status": "PENDING",
-            "bookmaker": "SNAI",
-            "rationale": "Fattore campo al London Stadium; West Ham attacca con cross continui dei terzini, costringendo il QPR a deviare sul fondo."
+            "rationale": "Flusso statistico robusto al Signal Iduna Park: fascia 2-5 reti con altissima convergenza nei precedenti contemporanei e nei modelli di lega."
         }
     ]
 }
