@@ -56,6 +56,18 @@ def _team_scores_both_halves(market_name: str) -> Optional[str]:
     return None
 
 
+def _team_wins_both_halves(market_name: str) -> Optional[str]:
+    """Casa/Ospite vince entrambi i tempi. None se non corrisponde."""
+    raw = re.sub(r"\s*:\s*(?:si|sì|yes)$", "", market_name.lower()).strip()
+    if "entrambi" not in raw or ("vinc" not in raw and "vince" not in raw):
+        return None
+    if re.search(r"\b(?:casa|home)\b", raw) or re.search(r"squadra\s*1\b", raw):
+        return "home"
+    if re.search(r"\b(?:ospite|away)\b", raw) or re.search(r"squadra\s*2\b", raw):
+        return "away"
+    return None
+
+
 def _clean_period_tokens(market_name: str) -> str:
     cleaned = _FIRST_HALF_REGEX.sub("", market_name)
     cleaned = _SECOND_HALF_REGEX.sub("", cleaned)
@@ -137,7 +149,7 @@ def _goal_clause_mask(clause: str, home: np.ndarray, away: np.ndarray, total: np
         band = series > line if over else series < line
         return np.broadcast_to(band, total.shape)
 
-    multigol = re.fullmatch(r"multigol\s*(\d+)\s*-\s*(\d+)", core)
+    multigol = re.fullmatch(r"(?:multigol\s*)?(\d+)\s*-\s*(\d+)", core)
     if multigol:
         low, high = int(multigol.group(1)), int(multigol.group(2))
         band = (series >= low) & (series <= high)
@@ -337,6 +349,15 @@ class QuantitativeEngine:
                 first = self._score_axes(xg_home * 0.45, xg_away * 0.45)
                 second = self._score_axes(xg_home * 0.55, xg_away * 0.55)
                 return _half_score_product(first, second, both_halves_side)
+            both_halves_win_side = _team_wins_both_halves(market_names[0])
+            if both_halves_win_side is not None:
+                m_1h, h_1h, a_1h, _ = self._score_axes(xg_home * 0.45, xg_away * 0.45)
+                m_2h, h_2h, a_2h, _ = self._score_axes(xg_home * 0.55, xg_away * 0.55)
+                mask_1 = h_1h > a_1h if both_halves_win_side == "home" else a_1h > h_1h
+                mask_2 = h_2h > a_2h if both_halves_win_side == "home" else a_2h > h_2h
+                p_1 = float(np.sum(m_1h[mask_1]))
+                p_2 = float(np.sum(m_2h[mask_2]))
+                return p_1 * p_2
             compound = _parse_compound_periods(market_names[0])
             if compound is not None:
                 c1, c2 = compound
