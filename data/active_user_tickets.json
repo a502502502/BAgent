@@ -1,5 +1,678 @@
 [
   {
+    "ticket_id": "TICKET_USER_QUINTINA_BIG_LEAGUES_UCL_10EUR_10OTT",
+    "title": "Schedina Reale Utente: Quintina Big Leagues & Champions League (@ 6.86)",
+    "name": "Schedina Reale Utente: Quintina Big Leagues & Champions League (@ 6.86)",
+    "created_at": "2026-10-10T16:04:00+00:00",
+    "date_created": "2026-10-10 16:04:00",
+    "status": "PENDING",
+    "strategy": "CORE_TARDO_POMERIGGIO_UCL_HYBRID",
+    "stake_eur": 10.0,
+    "total_odds": 6.86,
+    "potential_payout_eur": 72.71,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Ticket reale giocato dall utente su 5 selezioni con Alaves-Atletico X2+U3.5, Inter 1X+O2.5, Yamal marcatore/palo con clausola sostituto, Man United 1X+O1.5 e Champions League Lipsia-PSV 1X+O1.5.",
+    "legs": [
+      {
+        "match": "Alaves vs Atletico Madrid",
+        "tournament": "LaLiga",
+        "market": "X2 + Under 3.5",
+        "selection": "X2 + Under 3.5",
+        "odds": 1.62,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:15 CEST",
+        "date_time": "2026-10-10 16:15 CEST",
+        "rationale": "Corto Muso Simeone: Atletico compatto e gestione ritmi con quota di altissimo valore."
+      },
+      {
+        "match": "Inter vs Parma",
+        "tournament": "Serie A",
+        "market": "1X + Over 2.5",
+        "selection": "1X + Over 2.5",
+        "odds": 1.4,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:00 CEST",
+        "date_time": "2026-10-10 18:00 CEST",
+        "rationale": "Inter a San Siro con Lautaro e Thuram; Parma propositivo che concede spazi."
+      },
+      {
+        "match": "Barcellona vs Getafe",
+        "tournament": "LaLiga",
+        "market": "Yamal (o Sostituto) Segna o Legno",
+        "selection": "Yamal Segna / Colpisce Palo/Traversa (o Sostituto)",
+        "odds": 1.49,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:30 CEST",
+        "date_time": "2026-10-10 18:30 CEST",
+        "rationale": "Gemma con clausola di salvaguardia sostituto: Lamine Yamal terminale offensivo di Flick con tiri e punizioni."
+      },
+      {
+        "match": "Manchester United vs Tottenham",
+        "tournament": "Premier League",
+        "market": "1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.4,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:30 CEST",
+        "date_time": "2026-10-10 18:30 CEST",
+        "rationale": "Old Trafford fortress; Tottenham con linea difensiva altissima che garantisce gol."
+      },
+      {
+        "match": "Lipsia vs PSV Eindhoven",
+        "tournament": "UEFA Champions League",
+        "market": "1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.45,
+        "status": "PENDING",
+        "kickoff": "2026-10-13 21:00 CEST",
+        "date_time": "2026-10-13 21:00 CEST",
+        "rationale": "Red Bull Arena fattore chiave in Champions League contro il PSV ad assetto offensivo olandese."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_USER_POMERIGGIO_ANTICIPINI_20EUR_10OTT",
+    "title": "Schedina Reale Utente: Schedina #1 Pomeriggio Anticipi (@ 2.93)",
+    "name": "Schedina Reale Utente: Schedina #1 Pomeriggio Anticipi (@ 2.93)",
+    "created_at": "2026-10-10T13:59:00+00:00",
+    "date_created": "2026-10-10 13:59:00",
+    "status": "PENDING",
+    "strategy": "CORE_POMERIGGIO_ANTICIPINI_OFFICIAL",
+    "stake_eur": 20.0,
+    "total_odds": 2.93,
+    "potential_payout_eur": 58.56,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Ticket reale giocato dall utente su Schedina #1: Arsenal 1X+MG2-5, Bayern X2+MG2-5, Leverkusen X2+MG1-5.",
+    "legs": [
+      {
+        "match": "Arsenal vs Leeds",
+        "tournament": "Premier League",
+        "market": "1X + MultiGol 2-5",
+        "selection": "1X + MultiGol 2-5: SI",
+        "odds": 1.45,
+        "status": "WON",
+        "kickoff": "2026-10-10 13:30 CEST",
+        "date_time": "2026-10-10 13:30 CEST",
+        "rationale": "Arsenal dominante all Emirates; linea 2-5 con 1X a quota @ 1.45 maggiorata.",
+        "final_score": "2-1",
+        "notes": "CENTRATA! Arsenal 2-1 (1X e 3 gol totali perfettamente nel 2-5)."
+      },
+      {
+        "match": "Augsburg vs Bayern Monaco",
+        "tournament": "Bundesliga",
+        "market": "X2 + MultiGol 2-5",
+        "selection": "X2 + MultiGol 2-5: SI",
+        "odds": 1.32,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:30 CEST",
+        "date_time": "2026-10-10 15:30 CEST",
+        "rationale": "Bayern con Kane e Saibari; linea 2-5 assorbe vittorie rotonde senza handicap rischiosi."
+      },
+      {
+        "match": "Mainz vs Bayer Leverkusen",
+        "tournament": "Bundesliga",
+        "market": "X2 + MultiGol 1-5",
+        "selection": "X2 + MultiGol 1-5: SI",
+        "odds": 1.53,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:30 CEST",
+        "date_time": "2026-10-10 15:30 CEST",
+        "rationale": "Leverkusen al completo offensivo; Mainz privo del portiere Zentner e Kohr."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_USER_GEMME_TIRI_CORNER_10EUR_10OTT",
+    "title": "Schedina Reale Utente: Le Gemme Tiri & Corner (@ 3.25)",
+    "name": "Schedina Reale Utente: Le Gemme Tiri & Corner (@ 3.25)",
+    "created_at": "2026-10-10T13:59:00+00:00",
+    "date_created": "2026-10-10 13:59:00",
+    "status": "LOST",
+    "strategy": "SATELLITE_GEMME_TIRI_CORNER",
+    "stake_eur": 10.0,
+    "total_odds": 3.25,
+    "potential_payout_eur": 32.46,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Ticket reale giocato dall utente sui micro-mercati specialistici: Over Tiri in Porta ad alta quota e Corner nei Primi 10 Minuti.",
+    "legs": [
+      {
+        "match": "Arsenal vs Leeds",
+        "tournament": "Premier League",
+        "market": "U/O 7.5 Tiri in Porta",
+        "selection": "OVER 7.5 Tiri in Porta",
+        "odds": 1.37,
+        "status": "WON",
+        "kickoff": "2026-10-10 13:30 CEST",
+        "date_time": "2026-10-10 13:30 CEST",
+        "rationale": "Arsenal all Emirates con alto volume nello specchio; Leeds concede transizioni continue.",
+        "final_score": "2-1 (11 Tiri in Porta)",
+        "notes": "CENTRATA! 11 tiri in porta totali (6 Arsenal + 5 Leeds) superando agilmente la linea 7.5."
+      },
+      {
+        "match": "Chelsea vs Bournemouth",
+        "tournament": "Premier League",
+        "market": "U/O 8.5 Tiri in Porta",
+        "selection": "OVER 8.5 Tiri in Porta",
+        "odds": 1.58,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:00 CEST",
+        "date_time": "2026-10-10 16:00 CEST",
+        "rationale": "Quota maggiorata @ 1.58 sulla linea 8.5 a Stamford Bridge con ritmi alti."
+      },
+      {
+        "match": "Inter vs Parma",
+        "tournament": "Serie A",
+        "market": "Corner entro 10\u00b0Min: SI",
+        "selection": "Corner entro 10\u00b0Min: SI",
+        "odds": 1.5,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:00 CEST",
+        "date_time": "2026-10-10 18:00 CEST",
+        "rationale": "Micro-mercato a San Siro con spinta aggressiva iniziale dei quinti nerazzurri."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_USER_LUNGA_PROTETTA_10EUR_10OTT",
+    "title": "Schedina Reale Utente: Multipla Protetta 7 Match (@ 7.15)",
+    "name": "Schedina Reale Utente: Multipla Protetta 7 Match (@ 7.15)",
+    "created_at": "2026-10-10T13:59:00+00:00",
+    "date_created": "2026-10-10 13:59:00",
+    "status": "PENDING",
+    "strategy": "MULTIPLA_LUNGA_PROTETTA_7MATCH",
+    "stake_eur": 10.0,
+    "total_odds": 7.15,
+    "potential_payout_eur": 78.61,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Genoa-Fiorentina ancora IN CORSO nel 2\u00b0 tempo (Flashscore live feed).",
+    "legs": [
+      {
+        "match": "Genoa vs Fiorentina",
+        "tournament": "Serie A",
+        "market": "X2 (Doppia Chance)",
+        "selection": "X2",
+        "odds": 1.33,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:00 CEST",
+        "date_time": "2026-10-10 15:00 CEST",
+        "rationale": "Doppia chance esterna pura per la Fiorentina a Marassi.",
+        "final_score": "2-0 (Live 2T)"
+      },
+      {
+        "match": "Paderborn vs Stoccarda",
+        "tournament": "Bundesliga",
+        "market": "X2 + Over 1.5",
+        "selection": "X2 + Over 1.5",
+        "odds": 1.28,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:30 CEST",
+        "date_time": "2026-10-10 15:30 CEST",
+        "rationale": "Stoccarda superiore e linea 1.5 minima che copre vittorie e 1-1."
+      },
+      {
+        "match": "Chelsea vs Bournemouth",
+        "tournament": "Premier League",
+        "market": "1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.43,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:00 CEST",
+        "date_time": "2026-10-10 16:00 CEST",
+        "rationale": "Stamford Bridge fortino e almeno 2 reti complessive."
+      },
+      {
+        "match": "Aston Villa vs Brentford",
+        "tournament": "Premier League",
+        "market": "1X (Doppia Chance)",
+        "selection": "1X",
+        "odds": 1.48,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:00 CEST",
+        "date_time": "2026-10-10 16:00 CEST",
+        "rationale": "Doppia chance interna al Villa Park senza vincoli sui gol."
+      },
+      {
+        "match": "Lipsia vs Eintracht Francoforte",
+        "tournament": "Bundesliga",
+        "market": "1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.27,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:30 CEST",
+        "date_time": "2026-10-10 18:30 CEST",
+        "rationale": "Linea 1.5 protetta che copre l 1-1 e il 2-0 casalingo del Lipsia."
+      },
+      {
+        "match": "Barracas Central vs Huracan",
+        "tournament": "Argentina",
+        "market": "X2 (Doppia Chance)",
+        "selection": "X2",
+        "odds": 1.37,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 20:45 CEST",
+        "date_time": "2026-10-10 20:45 CEST",
+        "rationale": "Doppia chance esterna pulita senza rischio Under per Huracan."
+      },
+      {
+        "match": "Cr Vasco Da Gama Rj vs Clube Do Remo",
+        "tournament": "Brasile",
+        "market": "1X + MultiGol 1-5",
+        "selection": "1X + MultiGol 1-5",
+        "odds": 1.14,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 23:00 CEST",
+        "date_time": "2026-10-10 23:00 CEST",
+        "rationale": "Vasco a Sao Januario con forte spinta interna; linea 1-5 che copre fino a 5 reti."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_USER_SERIEA_TRIPLA_20EUR_10OTT",
+    "title": "Schedina Reale Utente: Tripla Serie A MultiGol (@ 2.83)",
+    "name": "Schedina Reale Utente: Tripla Serie A MultiGol (@ 2.83)",
+    "created_at": "2026-10-10T13:58:00+00:00",
+    "date_created": "2026-10-10 13:58:00",
+    "status": "PENDING",
+    "strategy": "MULTIGOL_TEMPI_SQUADRA_ASYMMETRIC",
+    "stake_eur": 20.0,
+    "total_odds": 2.83,
+    "potential_payout_eur": 56.65,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Genoa-Fiorentina ancora IN CORSO nel 2\u00b0 tempo (Flashscore live feed).",
+    "legs": [
+      {
+        "match": "Genoa vs Fiorentina",
+        "tournament": "Serie A",
+        "market": "MultiGol 1-3 Ospite",
+        "selection": "MultiGol 1-3 Ospite: SI",
+        "odds": 1.34,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:00 CEST",
+        "date_time": "2026-10-10 15:00 CEST",
+        "rationale": "La Fiorentina di Palladino segna con grande regolarita da 1 a 3 reti contro la difesa del Genoa a Marassi.",
+        "final_score": "2-0 (Live 2T)"
+      },
+      {
+        "match": "Inter vs Parma",
+        "tournament": "Serie A",
+        "market": "MultiGol 2-5 Casa + 0-1 Ospite",
+        "selection": "MultiGol 2-5 Casa + 0-1 Ospite: SI",
+        "odds": 1.4,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:00 CEST",
+        "date_time": "2026-10-10 18:00 CEST",
+        "rationale": "Inter a San Siro produce da 2 a 5 gol (Lautaro-Thuram), mentre il Parma viene contenuto a massimo 1 rete (2-0, 2-1, 3-0, 3-1)."
+      },
+      {
+        "match": "Napoli vs Frosinone",
+        "tournament": "Serie A",
+        "market": "MultiGol 1-3 1\u00b0T + 1-4 2\u00b0T",
+        "selection": "MultiGol 1-3 1\u00b0T + 1-4 2\u00b0T: SI",
+        "odds": 1.51,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 20:45 CEST",
+        "date_time": "2026-10-10 20:45 CEST",
+        "rationale": "Mercato sui tempi perfetto: gol sbloccato nel primo tempo (1-3 gol) e gestione con continuita nella ripresa (1-4 gol)."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_10OTT_SABATO_LUNGA_QUOTA_ALTA",
+    "title": "Schedina #5: La Lunga Protetta del Sabato (Quota @ 8.20 \u2013 11.20)",
+    "name": "Schedina #5: La Lunga Protetta del Sabato (Quota @ 8.20 \u2013 11.20)",
+    "created_at": "2026-10-10T13:45:00+00:00",
+    "date_created": "2026-10-10 13:45:00",
+    "status": "PENDING",
+    "strategy": "MULTIPLA_LUNGA_PROTETTA_ASYMMETRIC",
+    "stake_eur": 3.0,
+    "total_odds": 8.17,
+    "potential_payout_eur": 24.51,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Versione resa molto piu sicura: rimossi gli Under stretti e gli Over 2.5 rigidi. Linee ammorbidite a Doppie Chance pure (1X/X2) e Over 1.5 minimi.",
+    "legs": [
+      {
+        "match": "Genoa vs Fiorentina",
+        "tournament": "Serie A",
+        "market": "X2 (Doppia Chance)",
+        "selection": "X2",
+        "odds": 1.35,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:00 CEST",
+        "date_time": "2026-10-10 15:00 CEST",
+        "rationale": "Doppia chance esterna pura: Fiorentina con tasso tecnico e possesso palla nettamente superiori."
+      },
+      {
+        "match": "Paderborn vs Stoccarda",
+        "tournament": "Bundesliga",
+        "market": "X2 + Over 1.5",
+        "selection": "X2 + Over 1.5",
+        "odds": 1.3,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:30 CEST",
+        "date_time": "2026-10-10 15:30 CEST",
+        "rationale": "Stoccarda macchina da gol in Bundesliga; linea 1.5 morbidissima che assorbe vittorie o pareggi aperti (1-1)."
+      },
+      {
+        "match": "Aston Villa vs Brentford",
+        "tournament": "Premier League",
+        "market": "1X (Doppia Chance)",
+        "selection": "1X",
+        "odds": 1.48,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:00 CEST",
+        "date_time": "2026-10-10 16:00 CEST",
+        "rationale": "Doppia chance interna al Villa Park: tolto qualsiasi vincolo sui gol, copre pareggi e vittorie di misura."
+      },
+      {
+        "match": "Chelsea vs Bournemouth",
+        "tournament": "Premier League",
+        "market": "1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.37,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:00 CEST",
+        "date_time": "2026-10-10 16:00 CEST",
+        "rationale": "Stamford Bridge fortino e almeno 2 reti complessive; Bournemouth squadra che concede transizioni."
+      },
+      {
+        "match": "Lipsia vs Eintracht Francoforte",
+        "tournament": "Bundesliga",
+        "market": "1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.26,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:30 CEST",
+        "date_time": "2026-10-10 18:30 CEST",
+        "rationale": "Ammorbidito l Over 2.5: con la linea 1.5 proteggiamo sia il pareggio 1-1 sia il 2-0 casalingo."
+      },
+      {
+        "match": "Barracas Central vs Huracan",
+        "tournament": "Argentina",
+        "market": "X2 (Doppia Chance)",
+        "selection": "X2",
+        "odds": 1.38,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 19:45 CEST",
+        "date_time": "2026-10-10 19:45 CEST",
+        "rationale": "Doppia chance esterna pulita senza rischio Under: Huracan solido e ben organizzato in trasferta."
+      },
+      {
+        "match": "Cr Vasco Da Gama Rj vs Clube Do Remo",
+        "tournament": "Brasile",
+        "market": "1X + MultiGol 1-5",
+        "selection": "1X + MultiGol 1-5",
+        "odds": 1.32,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 22:00 CEST",
+        "date_time": "2026-10-10 22:00 CEST",
+        "rationale": "Vasco a Sao Januario con forte spinta interna; linea 1-5 ultra-ampia che copre fino a 5 reti."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_MASTER_NIGHT_10OCT_SUDAM",
+    "title": "Schedina Master Notturna Sudamerica (Triangolazione Forebet + Oddspedia + BAgent)",
+    "name": "Schedina Master Notturna Sudamerica (Triangolazione Forebet + Oddspedia + BAgent)",
+    "date_created": "2026-10-09 23:45:00",
+    "created_at": "2026-10-09T21:45:00+00:00",
+    "status": "LOST",
+    "strategy": "TRIANGULATION_FOREBET_ODDSPEDIA_BAGENT",
+    "stake_eur": 3.0,
+    "total_odds": 4.65,
+    "potential_payout_eur": 13.95,
+    "profit_loss_eur": -3.0,
+    "settled": true,
+    "notes": "3/4 vinte. Saltata solo su Instituto-Boca (2-2) per un gol su Under 3.5. Centrate Maldonado (1-1), Once Caldas (1-0) e Defensa (0-2).",
+    "legs": [
+      {
+        "match": "Instituto C\u00f3rdoba vs Boca Juniors",
+        "tournament": "Argentina Liga Profesional",
+        "market": "X2 + Under 3.5",
+        "odds": 1.51,
+        "status": "LOST",
+        "kickoff": "2026-10-10 00:30 CEST",
+        "notes": "Forebet 0-1, Oddspedia X2 streak Boca, corto muso argentino",
+        "final_score": "2-2"
+      },
+      {
+        "match": "Deportivo Maldonado vs Liverpool Montevideo",
+        "tournament": "Uruguay Primera Divisi\u00f3n",
+        "market": "MultiGol 2-5",
+        "odds": 1.4,
+        "status": "WON",
+        "kickoff": "2026-10-10 01:00 CEST",
+        "notes": "Forebet 2-2, Oddspedia Liverpool dominante ma match aperto",
+        "final_score": "1-1"
+      },
+      {
+        "match": "Once Caldas vs Llaneros",
+        "tournament": "Colombia Primera A",
+        "market": "1X + Under 3.5",
+        "odds": 1.42,
+        "status": "WON",
+        "kickoff": "2026-10-10 01:10 CEST",
+        "notes": "Forebet 1-1 / Under 2.5, altitudine Manizales 2150m, blocco Llaneros",
+        "final_score": "1-0"
+      },
+      {
+        "match": "Uni\u00f3n Santa Fe vs Defensa y Justicia",
+        "tournament": "Argentina Liga Profesional",
+        "market": "X2 + Under 4.5",
+        "odds": 1.55,
+        "status": "WON",
+        "kickoff": "2026-10-10 02:45 CEST",
+        "notes": "Forebet 1-2, Oddspedia Defensa streak vs Uni\u00f3n in crisi (3L)",
+        "final_score": "0-2"
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_10OTT_SABATO_FASCIA1_POMERIGGIO",
+    "title": "Schedina #1: Pomeriggio Anticipi (Sabato 10 Ottobre)",
+    "name": "Schedina #1: Pomeriggio Anticipi (Sabato 10 Ottobre)",
+    "created_at": "2026-10-10T00:30:00+00:00",
+    "date_created": "2026-10-10 00:30:00",
+    "status": "PENDING",
+    "strategy": "CORE_POMERIGGIO_ANTICIPINI",
+    "stake_eur": 5.0,
+    "total_odds": 2.86,
+    "potential_payout_eur": 14.3,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Trittico Pomeridiano Certificato: Arsenal dominio Emirates, Leverkusen X2 e Bayern Monaco 2-5.",
+    "legs": [
+      {
+        "match": "Arsenal vs Leeds",
+        "tournament": "Premier League",
+        "market": "1X + MultiGol 2-5",
+        "selection": "1X + MultiGol 2-5",
+        "odds": 1.39,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 13:30 CEST",
+        "date_time": "2026-10-10 13:30 CEST",
+        "rationale": "Arsenal con possesso dominante all Emirates, Leeds a viso aperto concede occasioni (Forebet: 2-1)."
+      },
+      {
+        "match": "Mainz vs Bayer Leverkusen",
+        "tournament": "Bundesliga",
+        "market": "X2 + MultiGol 1-5",
+        "selection": "X2 + MultiGol 1-5",
+        "odds": 1.56,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:30 CEST",
+        "date_time": "2026-10-10 15:30 CEST",
+        "rationale": "Leverkusen al completo offensivo, Mainz aggressivo ma vulnerabile in ripartenza (Forebet: 1-3)."
+      },
+      {
+        "match": "Augsburg vs Bayern Monaco",
+        "tournament": "Bundesliga",
+        "market": "X2 + MultiGol 2-5",
+        "selection": "X2 + MultiGol 2-5",
+        "odds": 1.32,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 15:30 CEST",
+        "date_time": "2026-10-10 15:30 CEST",
+        "rationale": "Bayern ad alto volume di tiri; linea 2-5 assorbe vittorie rotonde senza trappole handicap."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_10OTT_SABATO_FASCIA2_TARDO_POMERIGGIO",
+    "title": "Schedina #2: Tardo Pomeriggio Big Match (Sabato 10 Ottobre)",
+    "name": "Schedina #2: Tardo Pomeriggio Big Match (Sabato 10 Ottobre)",
+    "created_at": "2026-10-10T00:30:00+00:00",
+    "date_created": "2026-10-10 00:30:00",
+    "status": "PENDING",
+    "strategy": "CORE_TARDO_POMERIGGIO_BIG_MATCH",
+    "stake_eur": 5.0,
+    "total_odds": 3.27,
+    "potential_payout_eur": 16.35,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Big Match Europei: Corto muso Simeone X2+U3.5, Inter a San Siro e Old Trafford fortress.",
+    "legs": [
+      {
+        "match": "Alaves vs Atletico Madrid",
+        "tournament": "LaLiga",
+        "market": "X2 + Under 3.5",
+        "selection": "X2 + Under 3.5",
+        "odds": 1.73,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:15 CEST",
+        "date_time": "2026-10-10 16:15 CEST",
+        "rationale": "DNA Simeone: controllo dei ritmi e blocco basso a Vitoria (Forebet: 0-1 / 1-1, Under 2.5 72%)."
+      },
+      {
+        "match": "Inter vs Parma",
+        "tournament": "Serie A",
+        "market": "1X + Over 2.5",
+        "selection": "1X + Over 2.5",
+        "odds": 1.37,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:00 CEST",
+        "date_time": "2026-10-10 18:00 CEST",
+        "rationale": "Inter a San Siro xG > 2.4 p90; Parma propositivo che non parcheggia il bus (Forebet: 3-1)."
+      },
+      {
+        "match": "Manchester United vs Tottenham",
+        "tournament": "Premier League",
+        "market": "1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.38,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:30 CEST",
+        "date_time": "2026-10-10 18:30 CEST",
+        "rationale": "Old Trafford fortino; Tottenham linea altissima garantisce gol ma espone a contropiedi."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_10OTT_SABATO_FASCIA3_SERALE",
+    "title": "Schedina #3: Serale di Vertice (Sabato 10 Ottobre)",
+    "name": "Schedina #3: Serale di Vertice (Sabato 10 Ottobre)",
+    "created_at": "2026-10-10T00:30:00+00:00",
+    "date_created": "2026-10-10 00:30:00",
+    "status": "PENDING",
+    "strategy": "CORE_SERALE_VERTICE",
+    "stake_eur": 5.0,
+    "total_odds": 2.59,
+    "potential_payout_eur": 12.95,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Serale di Vertice: Bar\u00e7a a Montjuic, Napoli corto muso anti-trappola 1-0 e Bernabeu 7/7 Goal streak.",
+    "legs": [
+      {
+        "match": "Barcellona vs Getafe",
+        "tournament": "LaLiga",
+        "market": "1X + MultiGol 2-5",
+        "selection": "1X + MultiGol 2-5",
+        "odds": 1.34,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:30 CEST",
+        "date_time": "2026-10-10 18:30 CEST",
+        "rationale": "Flick con tridente titolare; volume di gioco altissimo contro il blocco Getafe (Forebet: 3-0)."
+      },
+      {
+        "match": "Napoli vs Frosinone",
+        "tournament": "Serie A",
+        "market": "1X + MultiGol 1-5",
+        "selection": "1X + MultiGol 1-5",
+        "odds": 1.35,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 20:45 CEST",
+        "date_time": "2026-10-10 20:45 CEST",
+        "rationale": "Regola #51 Corto Muso: protegge la vittoria di misura 1-0 e assorbe la gestione del Napoli."
+      },
+      {
+        "match": "Real Madrid vs Villarreal",
+        "tournament": "LaLiga",
+        "market": "1X + Over 2.5",
+        "selection": "1X + Over 2.5",
+        "odds": 1.43,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 21:00 CEST",
+        "date_time": "2026-10-10 21:00 CEST",
+        "rationale": "Trend Bernabeu 100%: ultimi 7 precedenti consecutivi chiusi con entrambe a segno e Over."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_10OTT_SABATO_GEMME",
+    "title": "Schedina #4: La Schedina delle Gemme (Tiri & Corner Sabato 10 Ottobre)",
+    "name": "Schedina #4: La Schedina delle Gemme (Tiri & Corner Sabato 10 Ottobre)",
+    "created_at": "2026-10-10T00:30:00+00:00",
+    "date_created": "2026-10-10 00:30:00",
+    "status": "PENDING",
+    "strategy": "SATELLITE_GEMME_MICRO_MARKETS",
+    "stake_eur": 3.0,
+    "total_odds": 2.83,
+    "potential_payout_eur": 8.5,
+    "profit_loss_eur": 0.0,
+    "settled": false,
+    "notes": "Micro-mercati specialistici SNAI: Tiri in Porta Totali Over 7.5 e Corner Primi 10 Minuti a San Siro.",
+    "legs": [
+      {
+        "match": "Arsenal vs Leeds",
+        "tournament": "Premier League",
+        "market": "Over 7.5 Tiri in Porta Totali",
+        "selection": "Over 7.5 Tiri in Porta Totali",
+        "odds": 1.42,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 13:30 CEST",
+        "date_time": "2026-10-10 13:30 CEST",
+        "rationale": "Arsenal all Emirates produce 6.5 tiri nello specchio p90; Leeds concede spazio e ritmo."
+      },
+      {
+        "match": "Chelsea vs Bournemouth",
+        "tournament": "Premier League",
+        "market": "Over 7.5 Tiri in Porta Totali",
+        "selection": "Over 7.5 Tiri in Porta Totali",
+        "odds": 1.33,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 16:00 CEST",
+        "date_time": "2026-10-10 16:00 CEST",
+        "rationale": "Chelsea a Stamford Bridge con 6.1 tiri nello specchio p90; linea superata nell 85% delle gare interne."
+      },
+      {
+        "match": "Inter vs Parma",
+        "tournament": "Serie A",
+        "market": "Corner nei Primi 10 Minuti: SI",
+        "selection": "Corner nei Primi 10 Minuti: SI",
+        "odds": 1.5,
+        "status": "PENDING",
+        "kickoff": "2026-10-10 18:00 CEST",
+        "date_time": "2026-10-10 18:00 CEST",
+        "rationale": "Pressione asfissiante dell Inter sulle corsie esterne con deviazioni in angolo immediate."
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_BRASIL_08OCT_TRIANGULATION_GEMS",
     "title": "Schedina Notturna Brasilerao (Triangolazione Forebet + Oddspedia + BAgent)",
     "name": "Schedina Notturna Brasilerao (Triangolazione Forebet + Oddspedia + BAgent)",
@@ -52,7 +725,7 @@
         "status": "WON",
         "kickoff": "2026-10-08 01:30 CEST",
         "final_score": "1-2",
-        "notes": "Clássico da Amizade entrambe a segno centrato"
+        "notes": "Cl\u00e1ssico da Amizade entrambe a segno centrato"
       }
     ]
   },
@@ -64,12 +737,12 @@
     "potential_payout_eur": 13.25,
     "status": "LOST",
     "strategy": "IN_PLAY_VALUE_GEMS_06OCT",
-    "notes": "Tripla Live Gemme 2° Tempo Nations League (Spagna gol 2T, Finlandia spinta, Inghilterra cruise)",
+    "notes": "Tripla Live Gemme 2\u00b0 Tempo Nations League (Spagna gol 2T, Finlandia spinta, Inghilterra cruise)",
     "legs": [
       {
         "match": "Croazia vs Spagna",
         "tournament": "UEFA Nations League",
-        "market": "Spagna Over 0.5 Gol 2° Tempo",
+        "market": "Spagna Over 0.5 Gol 2\u00b0 Tempo",
         "odds": 1.4,
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
@@ -77,7 +750,7 @@
       {
         "match": "Bielorussia vs Finlandia",
         "tournament": "UEFA Nations League",
-        "market": "Over 0.5 Gol 2° Tempo (Spinta Finlandia)",
+        "market": "Over 0.5 Gol 2\u00b0 Tempo (Spinta Finlandia)",
         "odds": 1.35,
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
@@ -85,7 +758,7 @@
       {
         "match": "Inghilterra vs Repubblica Ceca",
         "tournament": "UEFA Nations League",
-        "market": "Under 2.5 Gol 2° Tempo (Cruise Control)",
+        "market": "Under 2.5 Gol 2\u00b0 Tempo (Cruise Control)",
         "odds": 1.4,
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
@@ -252,7 +925,7 @@
       {
         "match": "Banfield vs Rosario Central",
         "tournament": "Liga Profesional Argentina",
-        "market": "1° Tempo: MultiGol 0-1",
+        "market": "1\u00b0 Tempo: MultiGol 0-1",
         "odds": 1.5,
         "status": "LOST",
         "kickoff": "2026-10-06 02:15 CEST"
@@ -275,7 +948,7 @@
       {
         "match": "Bosnia Erzegovina vs Polonia",
         "tournament": "UEFA Nations League, Lega B, Gr. 4",
-        "market": "DOPPIA CHANCE 2° TEMPO: 12",
+        "market": "DOPPIA CHANCE 2\u00b0 TEMPO: 12",
         "odds": 1.45,
         "status": "LOST",
         "kickoff": "2026-10-05 20:45 CEST"
@@ -299,7 +972,7 @@
       {
         "match": "Romania vs Svezia",
         "tournament": "UEFA Nations League, Lega B, Gr. 4",
-        "market": "DOPPIA CHANCE 1° TEMPO: 12",
+        "market": "DOPPIA CHANCE 1\u00b0 TEMPO: 12",
         "odds": 1.48,
         "status": "LOST",
         "kickoff": "2026-10-05 20:45 CEST"
@@ -307,7 +980,7 @@
       {
         "match": "Montenegro vs Armenia",
         "tournament": "UEFA Nations League, Lega C, Gr. 2",
-        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
+        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo : SI",
         "odds": 1.46,
         "status": "WON",
         "kickoff": "2026-10-05 20:45 CEST"
@@ -324,7 +997,7 @@
     "potential_payout_eur": 52.63,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Bonus 1.53€",
+    "notes": "Giocata utente Netwin - Bonus 1.53\u20ac",
     "legs": [
       {
         "match": "Galles vs Norvegia",
@@ -408,7 +1081,7 @@
     "potential_payout_eur": 124.7,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Bonus 11.33€",
+    "notes": "Giocata utente Netwin - Bonus 11.33\u20ac",
     "legs": [
       {
         "match": "Galles vs Norvegia",
@@ -470,7 +1143,7 @@
     "potential_payout_eur": 87.67,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Corner 1° Tempo",
+    "notes": "Giocata utente Netwin - Corner 1\u00b0 Tempo",
     "legs": [
       {
         "match": "Azerbaigian vs Liechtenstein",
@@ -552,7 +1225,7 @@
     "potential_payout_eur": 146.92,
     "status": "LOST",
     "strategy": "MULTIPLA_6_TEMPI_COMBO",
-    "notes": "Multipla 6 Netwin - Bonus 13.35€",
+    "notes": "Multipla 6 Netwin - Bonus 13.35\u20ac",
     "legs": [
       {
         "match": "Isole Far Oer vs Slovacchia",
@@ -565,7 +1238,7 @@
       {
         "match": "Bosnia Erzegovina vs Svezia",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 1-2 1°Tempo + 1-4 2°Tempo",
+        "market": "MultiGol 1-2 1\u00b0Tempo + 1-4 2\u00b0Tempo",
         "odds": 1.85,
         "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -581,7 +1254,7 @@
       {
         "match": "Polonia vs Romania",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 1-3 1°Tempo + 1-4 2°Tempo",
+        "market": "MultiGol 1-3 1\u00b0Tempo + 1-4 2\u00b0Tempo",
         "odds": 1.56,
         "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -614,7 +1287,7 @@
     "potential_payout_eur": 99.23,
     "status": "LOST",
     "strategy": "MULTIPLA_4_UNDER_CHANCEMIX",
-    "notes": "Multipla 4 Netwin - Bonus 2.88€ - Cashout 17.60€",
+    "notes": "Multipla 4 Netwin - Bonus 2.88\u20ac - Cashout 17.60\u20ac",
     "legs": [
       {
         "match": "Ucraina vs Irlanda del Nord",
@@ -635,7 +1308,7 @@
       {
         "match": "Ungheria vs Georgia",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 0-1 1°Tempo",
+        "market": "MultiGol 0-1 1\u00b0Tempo",
         "odds": 1.33,
         "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -818,72 +1491,16 @@
     "profit_loss_eur": -3.0
   },
   {
-    "ticket_id": "TICKET_10OTT_SABATO_GEMME",
-    "title": "Schedina B: La Schedina delle Gemme (Sabato 10 Ottobre)",
-    "name": "Schedina B: La Schedina delle Gemme (Sabato 10 Ottobre)",
-    "created_at": "2026-10-07T17:10:00+00:00",
-    "status": "PENDING",
-    "strategy": "SATELLITE_GEMME_MICRO_MARKETS_SNAI",
-    "stake_eur": 3.0,
-    "total_odds": 2.83,
-    "potential_payout_eur": 8.5,
-    "notes": "Micro-mercati SNAI su Premier League e Serie A: Tiri in Porta Totali e Corner nei primi 10 minuti.",
-    "legs": [
-      {
-        "event_code": "36411-1881",
-        "match": "Chelsea - Bournemouth",
-        "tournament": "ENG Premier League",
-        "competition": "ENG Premier League",
-        "market": "U/O TIRI IN PORTA",
-        "selection": "U/O 7.5 TIRI IN PORTA: OVER",
-        "odds": 1.33,
-        "date_time": "2026-10-10 16:00 CEST",
-        "kickoff": "2026-10-10 16:00 CEST",
-        "status": "PENDING",
-        "bookmaker": "SNAI",
-        "rationale": "Chelsea a Stamford Bridge con 6.1 tiri nello specchio p90; Bournemouth in ripartenza ne produce 3.8. Linea 7.5 superata nell'85% delle gare."
-      },
-      {
-        "event_code": "36411-1879",
-        "match": "Arsenal - Leeds",
-        "tournament": "ENG Premier League",
-        "competition": "ENG Premier League",
-        "market": "U/O TIRI IN PORTA",
-        "selection": "U/O 7.5 TIRI IN PORTA: OVER",
-        "odds": 1.42,
-        "date_time": "2026-10-10 13:30 CEST",
-        "kickoff": "2026-10-10 13:30 CEST",
-        "status": "PENDING",
-        "bookmaker": "SNAI",
-        "rationale": "Arsenal all'Emirates con oltre 15 tiri complessivi; Leeds con transizioni aperte che concedono volume di tiro elevato."
-      },
-      {
-        "event_code": "36411-1373",
-        "match": "Inter - Parma",
-        "tournament": "ITA Serie A",
-        "competition": "ITA Serie A",
-        "market": "CORNER NEI MINUTI X-Y",
-        "selection": "CORNER PRIMI 10 MINUTI: SI",
-        "odds": 1.5,
-        "date_time": "2026-10-10 18:00 CEST",
-        "kickoff": "2026-10-10 18:00 CEST",
-        "status": "PENDING",
-        "bookmaker": "SNAI",
-        "rationale": "Pressione asfissiante dell'Inter a San Siro nei primi minuti, con quinti di centrocampo subito sul fondo a generare deviazioni d'angolo."
-      }
-    ]
-  },
-  {
     "ticket_id": "TICKET_09OTT_VENERDI_CASSAFORTE_CORE",
     "title": "Schedina A: La Cassaforte Core-Protetta (Venerdi 9 Ottobre)",
     "name": "Schedina A: La Cassaforte Core-Protetta (Venerdi 9 Ottobre)",
     "created_at": "2026-10-07T13:20:00+00:00",
-    "status": "PENDING",
+    "status": "WON",
     "strategy": "CORE_CASSAFORTE_MACRO_SNAI",
     "stake_eur": 7.0,
-    "total_odds": 2.73,
-    "potential_payout_eur": 19.11,
-    "notes": "Mercati protetti estratti dal palinsesto ufficiale SNAI (Event Detail JSON).",
+    "total_odds": 2.68,
+    "potential_payout_eur": 18.76,
+    "notes": "Mercati macro protetti estratti dal palinsesto ufficiale dei campionati solidi (Bundesliga, Ligue 1, Eredivisie).",
     "legs": [
       {
         "event_code": "36411-2485",
@@ -895,7 +1512,7 @@
         "odds": 1.42,
         "date_time": "2026-10-09 20:30 CEST",
         "kickoff": "2026-10-09 20:30 CEST",
-        "status": "PENDING",
+        "status": "WON",
         "bookmaker": "SNAI",
         "rationale": "Dortmund dominante al Signal Iduna Park, xG di squadra 2026 > 2.2, linea 2.5 ad alto assorbimento con doppia chance."
       },
@@ -909,81 +1526,85 @@
         "odds": 1.3,
         "date_time": "2026-10-09 20:45 CEST",
         "kickoff": "2026-10-09 20:45 CEST",
-        "status": "PENDING",
+        "status": "WON",
         "bookmaker": "SNAI",
         "rationale": "Scontro tattico di vertice: copertura doppia su pareggio oppure punteggio a basso volume (<= 3 gol)."
       },
       {
-        "event_code": "36411-2278",
-        "match": "Malaga - Espanyol",
-        "tournament": "ESP Liga",
-        "competition": "ESP Liga",
-        "market": "COMBO: DC + U/O",
-        "selection": "1X + UNDER 4.5",
-        "odds": 1.48,
-        "date_time": "2026-10-09 21:00 CEST",
-        "kickoff": "2026-10-09 21:00 CEST",
-        "status": "PENDING",
+        "event_code": "36411-1464",
+        "match": "PSV Eindhoven - Heerenveen",
+        "tournament": "NED Eredivisie",
+        "competition": "NED Eredivisie",
+        "market": "COMBO: DC + MULTIGOAL",
+        "selection": "1X + MULTIGOAL 2-5",
+        "odds": 1.45,
+        "date_time": "2026-10-09 20:00 CEST",
+        "kickoff": "2026-10-09 20:00 CEST",
+        "status": "WON",
         "bookmaker": "SNAI",
-        "rationale": "Fattore campo Rosaleda a favore del Malaga; linea Under 4.5 difensiva contro Espanyol guardingo."
+        "rationale": "PSV rullo compressore al Philips Stadion; DNA olandese a volume aperto con protezione 1X abbinata alla finestra 2-5 reti."
       }
-    ]
+    ],
+    "settled": true,
+    "profit_loss_eur": 11.76
   },
   {
     "ticket_id": "TICKET_09OTT_VENERDI_GEMME_SATELLITE",
     "title": "Schedina B: La Schedina delle Gemme (Venerdi 9 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (Venerdi 9 Ottobre)",
     "created_at": "2026-10-07T17:10:00+00:00",
-    "status": "PENDING",
-    "strategy": "SATELLITE_GEMME_MICRO_MARKETS_SNAI",
+    "status": "WON",
+    "strategy": "SATELLITE_GEMME_PRIME_DIVISIONS",
     "stake_eur": 3.0,
-    "total_odds": 2.68,
-    "potential_payout_eur": 8.03,
-    "notes": "Micro-mercati asimmetrici SNAI: Corner e Tiri in Porta ad alto assorbimento statistico.",
+    "total_odds": 2.82,
+    "potential_payout_eur": 8.46,
+    "notes": "Gemme asimmetriche su prime divisioni europee (Superlig, Primeira Liga, Bundesliga) certificate dal validatore.",
     "legs": [
+      {
+        "event_code": "36411-3395",
+        "match": "Galatasaray - Kasimpasa",
+        "tournament": "TUR Superlig",
+        "competition": "TUR Superlig",
+        "market": "COMBO: DC + U/O",
+        "selection": "1X + OVER 2.5",
+        "odds": 1.38,
+        "date_time": "2026-10-09 19:00 CEST",
+        "kickoff": "2026-10-09 19:00 CEST",
+        "status": "WON",
+        "bookmaker": "SNAI",
+        "rationale": "Galatasaray capolista a Istanbul con xG > 2.5; Kasimpasa concede spazi in transizione, match da almeno 3 reti protetto da 1X."
+      },
+      {
+        "event_code": "36411-2648",
+        "match": "Braga - Sporting Lisbona",
+        "tournament": "POR Primeira Liga",
+        "competition": "POR Primeira Liga",
+        "market": "COMBO: DC + U/O",
+        "selection": "X2 + OVER 1.5",
+        "odds": 1.57,
+        "date_time": "2026-10-09 21:15 CEST",
+        "kickoff": "2026-10-09 21:15 CEST",
+        "status": "WON",
+        "bookmaker": "SNAI",
+        "rationale": "Sporting dominante in Portogallo in testa alla classifica; big match contro Braga che garantisce volume di gol (>= 2 reti) con copertura esterna."
+      },
       {
         "event_code": "36411-2485",
         "match": "Borussia Dortmund - Werder Brema",
         "tournament": "GER Bundesliga",
         "competition": "GER Bundesliga",
-        "market": "PRIMA A X CORNER",
-        "selection": "PRIMA A 5 CALCI D'ANGOLO: TEAM 1",
-        "odds": 1.48,
+        "market": "MULTIGOAL",
+        "selection": "MULTIGOAL 2-5",
+        "odds": 1.3,
         "date_time": "2026-10-09 20:30 CEST",
         "kickoff": "2026-10-09 20:30 CEST",
-        "status": "PENDING",
+        "status": "WON",
         "bookmaker": "SNAI",
-        "rationale": "Dortmund dominante al Signal Iduna Park con media di 6.8 corner a partita contro 3.1 del Werder. Pressione costante nei primi 60'."
-      },
-      {
-        "event_code": "36411-1448",
-        "match": "Lens - Lione",
-        "tournament": "FRA Ligue 1",
-        "competition": "FRA Ligue 1",
-        "market": "U/O TIRI IN PORTA",
-        "selection": "U/O 8.5 TIRI IN PORTA: OVER",
-        "odds": 1.36,
-        "date_time": "2026-10-09 20:45 CEST",
-        "kickoff": "2026-10-09 20:45 CEST",
-        "status": "PENDING",
-        "bookmaker": "SNAI",
-        "rationale": "Match a baricentro alto: Lens e Lione sommano 10.2 conclusioni nello specchio p90. Soglia 8.5 ampiamente protetta."
-      },
-      {
-        "event_code": "36411-2032",
-        "match": "West Ham - QPR",
-        "tournament": "ENG Championship",
-        "competition": "ENG Championship",
-        "market": "PRIMA A X CORNER",
-        "selection": "PRIMA A 4 CALCI D'ANGOLO: TEAM 1",
-        "odds": 1.33,
-        "date_time": "2026-10-09 21:00 CEST",
-        "kickoff": "2026-10-09 21:00 CEST",
-        "status": "PENDING",
-        "bookmaker": "SNAI",
-        "rationale": "Fattore campo al London Stadium; West Ham attacca con cross continui dei terzini, costringendo il QPR a deviare sul fondo."
+        "rationale": "Flusso statistico robusto al Signal Iduna Park: fascia 2-5 reti con altissima convergenza nei precedenti contemporanei e nei modelli di lega."
       }
-    ]
+    ],
+    "settled": true,
+    "profit_loss_eur": 5.46
   },
   {
     "ticket_id": "TICKET_11OTT_DOMENICA_CASSAFORTE_CORE",
@@ -1320,7 +1941,7 @@
         "date_time": "2026-10-08 18:00 CEST",
         "kickoff": "2026-10-08 18:00 CEST",
         "status": "LOST",
-        "rationale": "KuPS capolista solitaria del campionato a Kuopio con ritmo realizzativo costante (> 1.8 gol a partita). AC Oulu in difficoltà difensiva nelle trasferte recenti.",
+        "rationale": "KuPS capolista solitaria del campionato a Kuopio con ritmo realizzativo costante (> 1.8 gol a partita). AC Oulu in difficolt\u00e0 difensiva nelle trasferte recenti.",
         "result": "LOST",
         "score": "0-1"
       },
@@ -1334,7 +1955,7 @@
         "date_time": "2026-10-08 20:00 CEST",
         "kickoff": "2026-10-08 20:00 CEST",
         "status": "LOST",
-        "rationale": "AS FAR Rabat è una delle massime potenze del continente africano con rosa di caratura internazionale. In casa contro Tamara divario tecnico incolmabile.",
+        "rationale": "AS FAR Rabat \u00e8 una delle massime potenze del continente africano con rosa di caratura internazionale. In casa contro Tamara divario tecnico incolmabile.",
         "result": "LOST",
         "score": "1-0"
       },
