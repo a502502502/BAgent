@@ -1,5 +1,111 @@
 [
   {
+    "ticket_id": "TICKET_USER_DOPPIA_NOTTURNA_34EUR_12OTT",
+    "name": "Multipla (2) Doppia Notturna Sudamericana 12 Ottobre",
+    "bookmaker": "Netwin",
+    "type": "Multipla (2)",
+    "status": "IN_PROGRESS",
+    "placed_at": "2026-10-11 23:50 CEST",
+    "stake": 34.0,
+    "total_odds": 2.06,
+    "potential_win": 70.0,
+    "bonus": 0.0,
+    "selections": [
+      {
+        "match": "Racing vs Belgrano",
+        "tournament": "Argentina | Liga Profesional",
+        "kickoff": "2026-10-12 00:15 CEST",
+        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo",
+        "selection": "SI",
+        "quota": 1.42,
+        "status": "PENDING",
+        "score": "0-0",
+        "minute": "PRE",
+        "note": "Kickoff 00:15. Flusso asimmetrico: 0-2 al 1\u00b0T e 1-3 nella ripresa per intercettare i 2/3 gol previsti."
+      },
+      {
+        "match": "Bahia BA vs Mirassol FC SP",
+        "tournament": "Brasile | Serie A Brasiliana",
+        "kickoff": "2026-10-12 00:30 CEST",
+        "market": "1X + Under 4.5",
+        "selection": "SI",
+        "quota": 1.45,
+        "status": "PENDING",
+        "score": "0-0",
+        "minute": "PRE",
+        "note": "Kickoff 00:30. Arena Fonte Nova: fattore campo Bahia + protezione Under 4.5 (assorbe anche il 2-2 Forebet)."
+      }
+    ],
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Doppia notturna ad alta tenuta asimmetrica a raddoppio pieno (@ 2.06)."
+  },
+  {
+    "ticket_id": "TICKET_USER_QUADRUPLA_AMERICAS_20EUR_12OTT",
+    "name": "Multipla (4) Americhe Notturna 12 Ottobre",
+    "bookmaker": "Netwin",
+    "type": "Multipla (4)",
+    "status": "IN_PROGRESS",
+    "placed_at": "2026-10-11 23:50 CEST",
+    "stake": 20.0,
+    "bonus": 2.48,
+    "total_odds": 4.14,
+    "potential_win": 85.3,
+    "selections": [
+      {
+        "match": "Concepcion vs La Calera",
+        "tournament": "Cile | Primera Division",
+        "kickoff": "2026-10-11 22:30 CEST",
+        "market": "1X2: 1",
+        "selection": "1",
+        "quota": 1.25,
+        "status": "IN_PROGRESS",
+        "score": "1-0",
+        "minute": "57'",
+        "note": "Live 1-0 al 57'."
+      },
+      {
+        "match": "Racing vs Belgrano",
+        "tournament": "Argentina | Liga Profesional",
+        "kickoff": "2026-10-12 00:15 CEST",
+        "market": "U/O 8.5 Corner: OVER",
+        "selection": "OVER",
+        "quota": 1.74,
+        "status": "PENDING",
+        "score": "0-0",
+        "minute": "PRE",
+        "note": "Almeno 9 corner al Cilindro."
+      },
+      {
+        "match": "Bahia BA vs Mirassol FC SP",
+        "tournament": "Brasile | Serie A Brasiliana",
+        "kickoff": "2026-10-12 00:30 CEST",
+        "market": "1X + Over 1.5",
+        "selection": "SI",
+        "quota": 1.4,
+        "status": "PENDING",
+        "score": "0-0",
+        "minute": "PRE",
+        "note": "Bahia imbattuto con almeno 2 gol totali."
+      },
+      {
+        "match": "Saint Louis City SC vs LA Galaxy",
+        "tournament": "Stati Uniti | Major League Soccer",
+        "kickoff": "2026-10-12 01:00 CEST",
+        "market": "Over 2.5",
+        "selection": "OVER",
+        "quota": 1.36,
+        "status": "PENDING",
+        "score": "0-0",
+        "minute": "PRE",
+        "note": "MLS festival gol, piena compatibilit\u00e0 DNA lega."
+      }
+    ],
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Multipla (4) mista Americhe a quota 4.14."
+  },
+  {
     "ticket_id": "TICKET_USER_SESTINA_CHANCEMIX_5EUR_11OTT",
     "name": "Multipla (6) Chance Mix e Statistiche 11 Ottobre",
     "bookmaker": "Netwin",
