@@ -1542,5 +1542,34 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 ---
 
-*Ultimo aggiornamento: 21 settembre 2026 ore 22:58 — BAgent (Bankroll Ufficiale: 164.18 € | Benchmark 72h Registrato | SportsBERT Attivo | Telegram Sincronizzato)*
+*Ultimo aggiornamento precedente: 21 settembre 2026 ore 22:58 — BAgent*
+
+---
+
+### 🚀 SESSIONE DIURNA 11 OTTOBRE 2026 — ANALISI MERCATI ASIMMETRICI & AUDIT SCHEDINE TIPSTER
+1. **Validazione Schedina Pomeridiana Asimmetrica (11 Ottobre 2026)**:
+   - Schedina tripla certificata con `scripts/strict_validator.py` (@ 2.64, Stake €7.00 - 7% bankroll):
+     * Como vs Roma (12:30 CEST): `MultiGol 1-3 Ospite` @ 1.31 (P=70.6%)
+     * Lazio vs Monza (15:00 CEST): `1X + MultiGol 1-4` @ 1.36 (P=69.1%)
+     * Colonia vs Borussia M'gladbach (15:30 CEST): `1X + MultiGol 1-5` @ 1.48 (P=61.3%)
+   - Piena aderenza a Regole #76 (kickoff certificato), #82 (zero 1X2 rigido, priorità asimmetrica) e #83 (triangolazione Forebet + Oddspedia + Dixon-Coles).
+
+2. **Audit Approfondito su 5 Ticket Tipster**:
+   - Decomposte 5 schedine dei tipster su mercati innovativi di flusso:
+     * Validata la convergenza dei tipster sui mercati composti installati nel nostro motore (`MultiGol 0-2 1°T + 1-3 2°T`, `OV 1°T + OV 2°T 0.5 0.5`, `MultiGol 0-1 Casa + 1-3 Ospite`).
+     * Smascherata trappola bookmaker: `Rennes - Auxerre 1X2: 1 @ 1.43` (Ligue 1, favorita compressa a rischio pareggio).
+     * Smascherati rischi Player Props (Rabiot, Wirtz, Araujo, Robinson) prima della consegna delle distinte ufficiali.
+
+3. **Studio Tattico Liverpool vs Man City & Alternative Protette**:
+   - Evidenziato il rischio del `Gol (BTTS) @ 1.48` dovuto alla miglior difesa della Premier del Liverpool (clean sheet ad Anfield) e alle gare a scacchi di Guardiola.
+   - Individuate le alternative asimmetriche: `Chance Mix: X o Gol` @ 1.37 (salva lo 0-0), `MultiGol 2-5` @ 1.25 (salva il 2-0/0-2), `MultiGol 1-3 Liverpool` @ 1.30.
+
+4. **Studio Cagliari vs Juventus**:
+   - Analisi H2H: evidenziato il 100% di cassa storico di `MultiGol 0-2 1°T + 1-3 2°T` @ 1.45 e `MultiGol 1-3 Juventus` @ 1.30 negli ultimi 3 precedenti (1-1, 2-2, 2-1).
+   - Analisi Corner: media 4.25 corner della Juventus nelle ultime 4 partite (8 contro il Cagliari in casa, ma 2 a Lipsia, 3 a Genova, 4 contro il Napoli).
+
+---
+
+*Ultimo aggiornamento: 11 ottobre 2026 ore 15:00 — BAgent (Working tree allineato | Sesto Senso & Validatore Attivi)*
+
 
