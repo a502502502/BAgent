@@ -89,20 +89,12 @@
     },
     {
       "id": "TICKET_12OTT_SATELLITE_MINORI",
-      "title": "Schedina 2: Il Satellite Moltiplicatore Minori (Lunedì 12 Ottobre)",
+      "title": "Schedina 2: Il Satellite Top League / Elite (Lunedì 12 Ottobre)",
       "label": "In corso",
       "stake": "7.00 €",
       "odds": "6.06×",
       "booking_code": null,
       "legs": [
-        {
-          "when": "10-12 14:00",
-          "match": "Real Valladolid vs Albacete",
-          "pick": "Combo: 1X + Under 3.5",
-          "odd": "1.48",
-          "result": "PENDING",
-          "score": ""
-        },
         {
           "when": "10-12 18:00",
           "match": "Al Wasl vs Al Ahli SC",
@@ -120,10 +112,10 @@
           "score": ""
         },
         {
-          "when": "10-12 20:30",
-          "match": "Pescara vs Guidonia",
-          "pick": "Combo: 1X + Under 3.5",
-          "odd": "1.38",
+          "when": "10-12 21:00",
+          "match": "Levante vs Sevilla",
+          "pick": "Chance Mix: X o Gol",
+          "odd": "1.44",
           "result": "PENDING",
           "score": ""
         },
@@ -131,6 +123,14 @@
           "when": "10-12 21:00",
           "match": "Coventry vs Newcastle",
           "pick": "Combo: X2 + Under 4.5",
+          "odd": "1.42",
+          "result": "PENDING",
+          "score": ""
+        },
+        {
+          "when": "10-12 21:15",
+          "match": "Famalicao vs Alverca",
+          "pick": "Combo: 1X + Under 3.5",
           "odd": "1.42",
           "result": "PENDING",
           "score": ""
