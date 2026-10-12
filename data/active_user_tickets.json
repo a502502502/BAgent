@@ -1,5 +1,77 @@
 [
   {
+    "ticket_id": "TICKET_USER_MULTIPLA4_SERA_20EUR_12OTT",
+    "title": "Schedina Reale Utente: Multipla (4) Serale (@ 2.89)",
+    "name": "Schedina Reale Utente: Multipla (4) Serale (@ 2.89)",
+    "bookmaker": "Netwin",
+    "type": "Multipla (4)",
+    "placed_at": "2026-10-12 18:20 CEST",
+    "created_at": "2026-10-12T18:20:00+02:00",
+    "date_created": "2026-10-12 18:20:00",
+    "status": "IN_PROGRESS",
+    "strategy": "USER_PLAYED_TICKET_EVENING_QUAD",
+    "stake": 20.0,
+    "stake_eur": 20.0,
+    "bonus": 0.0,
+    "total_odds": 2.89,
+    "potential_win": 57.9,
+    "potential_payout_eur": 57.9,
+    "net_profit_eur": 37.9,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Schedina reale giocata dall utente su Netwin. Importo 20 EUR, vincita potenziale 57.90 EUR.",
+    "legs": [
+      {
+        "match": "Atalanta vs Venezia",
+        "tournament": "Italia Serie A",
+        "competition": "Italia Serie A",
+        "kickoff": "2026-10-12 18:30 CEST",
+        "market": "1X + U/O 4.5: 1X + UN",
+        "selection": "1X + UN",
+        "odds": 1.48,
+        "status": "WON",
+        "score": "3-1 (FT)",
+        "minute": "FT"
+      },
+      {
+        "match": "Elfsborg vs Halmstads",
+        "tournament": "Svezia Allsvenskan",
+        "competition": "Svezia Allsvenskan",
+        "kickoff": "2026-10-12 19:00 CEST",
+        "market": "1X2: 1",
+        "selection": "1",
+        "odds": 1.37,
+        "status": "WON",
+        "score": "4-0 (FT)",
+        "minute": "FT"
+      },
+      {
+        "match": "Malmoe vs Kalmar FF",
+        "tournament": "Svezia Allsvenskan",
+        "competition": "Svezia Allsvenskan",
+        "kickoff": "2026-10-12 19:00 CEST",
+        "market": "Doppia Chance: 1X",
+        "selection": "1X",
+        "odds": 1.2,
+        "status": "WON",
+        "score": "1-0 (FT)",
+        "minute": "FT"
+      },
+      {
+        "match": "Torino vs Udinese",
+        "tournament": "Italia Serie A",
+        "competition": "Italia Serie A",
+        "kickoff": "2026-10-12 20:45 CEST",
+        "market": "U/O 1.5 Cartellini: OVER",
+        "selection": "OVER",
+        "odds": 1.19,
+        "status": "PENDING",
+        "score": "1-1 (2T)",
+        "minute": "2T"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_MULTIPLA5_MATTINA_10EUR_12OTT",
     "title": "Schedina Reale Utente: Multipla (5) Primo Pomeriggio (@ 6.66)",
     "name": "Schedina Reale Utente: Multipla (5) Primo Pomeriggio (@ 6.66)",
@@ -8,7 +80,7 @@
     "placed_at": "2026-10-12 10:33 CEST",
     "created_at": "2026-10-12T10:33:00+02:00",
     "date_created": "2026-10-12 10:33:00",
-    "status": "IN_PROGRESS",
+    "status": "LOST",
     "strategy": "USER_PLAYED_TICKET_ASIAN_EASTERN_MIX",
     "stake": 10.0,
     "stake_eur": 10.0,
@@ -17,8 +89,8 @@
     "potential_win": 70.67,
     "potential_payout_eur": 70.67,
     "net_profit_eur": 60.67,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -10.0,
     "notes": "Schedina reale giocata dall'utente su Netwin. Importo 10 EUR, bonus 4.00 EUR, vincita potenziale 70.67 EUR.",
     "legs": [
       {
