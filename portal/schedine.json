@@ -1,8 +1,58 @@
 {
-  "generated_at": "2026-10-12T09:43:45.793768",
+  "generated_at": "2026-10-12T10:33:45.285078",
   "check_seconds": 30,
   "profit_label": "-123.55 €",
   "present": [
+    {
+      "id": "TICKET_USER_MULTIPLA5_MATTINA_10EUR_12OTT",
+      "title": "Schedina Reale Utente: Multipla (5) Primo Pomeriggio (@ 6.66)",
+      "label": "In corso",
+      "stake": "10.00 €",
+      "odds": "6.66×",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "10-12 12:00",
+          "match": "Fardu Ferghana vs FC Kattaqorgon",
+          "pick": "1",
+          "odd": "1.44",
+          "result": "PENDING",
+          "score": "0-0"
+        },
+        {
+          "when": "10-12 12:00",
+          "match": "FC Livyi Bereh Kyiv vs Zorya Luhansk",
+          "pick": "X2 + Under 3.5",
+          "odd": "1.9",
+          "result": "PENDING",
+          "score": "0-0"
+        },
+        {
+          "when": "10-12 13:00",
+          "match": "FK Vojvodina Novi Sad vs FK Jedinstvo Ub",
+          "pick": "1",
+          "odd": "1.31",
+          "result": "PENDING",
+          "score": "0-0"
+        },
+        {
+          "when": "10-12 13:30",
+          "match": "Hougang United FC vs Balestier Khalsa FC",
+          "pick": "Over 2.5",
+          "odd": "1.31",
+          "result": "PENDING",
+          "score": "0-0"
+        },
+        {
+          "when": "10-12 13:45",
+          "match": "Panionios vs PAOK Thessaloniki B",
+          "pick": "1X + Under 3.5",
+          "odd": "1.42",
+          "result": "PENDING",
+          "score": "0-0"
+        }
+      ]
+    },
     {
       "id": "TICKET_12OTT_CORE_ROCKET",
       "title": "Schedina 1: Il Core Rocket (Lunedì 12 Ottobre)",
