@@ -54,10 +54,44 @@
       ]
     },
     {
-      "id": "TICKET_12OTT_CORE_ROCKET",
-      "title": "Schedina 1: Il Core Rocket (Lunedì 12 Ottobre)",
-      "label": "In corso",
-      "stake": "25.00 €",
+      "id": "TICKET_12OTT_CORE_PENGWIN",
+      "title": "Schedina 1: Trazione Pengwin (Speciali & Flusso)",
+      "label": "In attesa",
+      "stake": "10.00 €",
+      "odds": "2.87×",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "10-12 18:30",
+          "match": "Atalanta vs Venezia",
+          "pick": "Ospite Over 1.5 Cartellini",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": ""
+        },
+        {
+          "when": "10-12 19:00",
+          "match": "Malmo FF vs Kalmar",
+          "pick": "Combo: 1X + MultiGol 1-5",
+          "odd": "1.32",
+          "result": "PENDING",
+          "score": ""
+        },
+        {
+          "when": "10-12 20:45",
+          "match": "Torino vs Udinese",
+          "pick": "MultiGol Ospite 1-3",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": ""
+        }
+      ]
+    },
+    {
+      "id": "TICKET_12OTT_CORE_BAGENT",
+      "title": "Schedina 2: Trazione BAgent (Copertura Asimmetrica & 0-0)",
+      "label": "In attesa",
+      "stake": "15.00 €",
       "odds": "2.58×",
       "booking_code": null,
       "legs": [
@@ -80,58 +114,8 @@
         {
           "when": "10-12 20:45",
           "match": "Torino vs Udinese",
-          "pick": "MultiGol Tempi: 0-2 1°T + 1-3 2°T",
-          "odd": "1.44",
-          "result": "PENDING",
-          "score": ""
-        }
-      ]
-    },
-    {
-      "id": "TICKET_12OTT_SATELLITE_MINORI",
-      "title": "Schedina 2: Il Satellite Top League / Elite (Lunedì 12 Ottobre)",
-      "label": "In corso",
-      "stake": "7.00 €",
-      "odds": "6.06×",
-      "booking_code": null,
-      "legs": [
-        {
-          "when": "10-12 18:00",
-          "match": "Al Wasl vs Al Ahli SC",
-          "pick": "Combo: X2 + Over 1.5",
-          "odd": "1.45",
-          "result": "PENDING",
-          "score": ""
-        },
-        {
-          "when": "10-12 20:00",
-          "match": "Universitatea Cluj vs Rapid Bucuresti",
           "pick": "Chance Mix: X o Gol",
           "odd": "1.44",
-          "result": "PENDING",
-          "score": ""
-        },
-        {
-          "when": "10-12 21:00",
-          "match": "Levante vs Sevilla",
-          "pick": "Chance Mix: X o Gol",
-          "odd": "1.44",
-          "result": "PENDING",
-          "score": ""
-        },
-        {
-          "when": "10-12 21:00",
-          "match": "Coventry vs Newcastle",
-          "pick": "Combo: X2 + Under 4.5",
-          "odd": "1.42",
-          "result": "PENDING",
-          "score": ""
-        },
-        {
-          "when": "10-12 21:15",
-          "match": "Famalicao vs Alverca",
-          "pick": "Combo: 1X + Under 3.5",
-          "odd": "1.42",
           "result": "PENDING",
           "score": ""
         }

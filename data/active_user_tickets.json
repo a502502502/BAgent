@@ -146,32 +146,32 @@
     ]
   },
   {
-    "ticket_id": "TICKET_12OTT_CORE_ROCKET",
-    "title": "Schedina 1: Il Core Rocket (Lunedì 12 Ottobre)",
-    "name": "Schedina 1: Il Core Rocket (Lunedì 12 Ottobre)",
-    "created_at": "2026-10-12T09:40:00+02:00",
-    "date_created": "2026-10-12 09:40:00",
+    "ticket_id": "TICKET_12OTT_CORE_PENGWIN",
+    "title": "Schedina 1: Trazione Pengwin (Speciali & Flusso)",
+    "name": "Schedina 1: Trazione Pengwin (Speciali & Flusso)",
+    "created_at": "2026-10-12T16:10:00+02:00",
+    "date_created": "2026-10-12 16:10:00",
     "status": "PENDING",
-    "strategy": "CORE_ROCKET_POWER_GROWTH",
-    "stake_eur": 25.0,
-    "total_odds": 2.58,
-    "potential_payout_eur": 64.5,
-    "potential_win": 64.5,
-    "net_profit_eur": 39.5,
+    "strategy": "PENGWIN_MARKET_SPECIALS",
+    "stake_eur": 10.0,
+    "total_odds": 2.87,
+    "potential_payout_eur": 28.7,
+    "potential_win": 28.7,
+    "net_profit_eur": 18.7,
     "settled": false,
     "profit_loss_eur": 0.0,
-    "notes": "Asse portante del piano a medio rischio (8.3% del budget 300 EUR). Tripla asimmetrica a protezione rinforzata su Serie A e Allsvenskan.",
+    "notes": "Prima ala del sistema serale: integra i mercati specialistici di Kristian Pengwin (Cartellini Venezia e MG Udinese).",
     "legs": [
       {
         "match": "Atalanta vs Venezia",
         "tournament": "Italia Serie A",
         "competition": "Italia Serie A",
-        "market": "Combo: 1X + Under 4.5",
-        "selection": "1X + Under 4.5",
-        "odds": 1.36,
+        "market": "U/O 1.5 Cartellini Ospite",
+        "selection": "OVER 1.5",
+        "odds": 1.5,
         "kickoff": "2026-10-12 18:30 CEST",
         "status": "PENDING",
-        "rationale": "Dea superiore al Gewiss Stadium. Copre tutte le vittorie standard (1-0, 2-0, 2-1, 3-0, 3-1) e pareggio 1-1/0-0. Consenso Oddspedia Under 3.5 e Forebet 2-0."
+        "rationale": "Venezia arroccato in trincea a Bergamo; arbitra Tremolada (media > 4.2 cartellini). Bastano 2 sanzioni agli ospiti."
       },
       {
         "match": "Malmo FF vs Kalmar",
@@ -182,155 +182,70 @@
         "odds": 1.32,
         "kickoff": "2026-10-12 19:00 CEST",
         "status": "PENDING",
-        "rationale": "Malmo in volata vertice contro il fanalino Kalmar. La protezione MultiGol 1-5 assorbe la vittoria con qualsiasi scarto ed evita la trappola dell'Over 1.5 in caso di 1-0 stretto."
+        "rationale": "Malmo dominante in casa contro Kalmar fanalino di coda."
       },
       {
         "match": "Torino vs Udinese",
         "tournament": "Italia Serie A",
         "competition": "Italia Serie A",
-        "market": "MultiGol Tempi: 0-2 1°T + 1-3 2°T",
-        "selection": "MultiGol 0-2 1°T + 1-3 2°T (SI)",
+        "market": "MultiGol Ospite 1-3",
+        "selection": "1-3 Gol Udinese",
+        "odds": 1.45,
+        "kickoff": "2026-10-12 20:45 CEST",
+        "status": "PENDING",
+        "rationale": "Torino concede gol da 6 gare consecutive (0 clean sheet); Udinese a segno con regolarita."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_12OTT_CORE_BAGENT",
+    "title": "Schedina 2: Trazione BAgent (Copertura Asimmetrica & 0-0)",
+    "name": "Schedina 2: Trazione BAgent (Copertura Asimmetrica & 0-0)",
+    "created_at": "2026-10-12T16:10:00+02:00",
+    "date_created": "2026-10-12 16:10:00",
+    "status": "PENDING",
+    "strategy": "BAGENT_ASYMMETRIC_HEDGING",
+    "stake_eur": 15.0,
+    "total_odds": 2.58,
+    "potential_payout_eur": 38.7,
+    "potential_win": 38.7,
+    "net_profit_eur": 23.7,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Seconda ala del sistema: protezione totale che copre l1-0 dellAtalanta e il pareggio 0-0 del Torino con profitto netto.",
+    "legs": [
+      {
+        "match": "Atalanta vs Venezia",
+        "tournament": "Italia Serie A",
+        "competition": "Italia Serie A",
+        "market": "Combo: 1X + Under 4.5",
+        "selection": "1X + Under 4.5",
+        "odds": 1.36,
+        "kickoff": "2026-10-12 18:30 CEST",
+        "status": "PENDING",
+        "rationale": "Protegge la vittoria atalantina (1-0, 2-0, 2-1, 3-0, 3-1, 4-0) e pareggio 0-0/1-1."
+      },
+      {
+        "match": "Malmo FF vs Kalmar",
+        "tournament": "Svezia Allsvenskan",
+        "competition": "Svezia Allsvenskan",
+        "market": "Combo: 1X + MultiGol 1-5",
+        "selection": "1X + MultiGol 1-5",
+        "odds": 1.32,
+        "kickoff": "2026-10-12 19:00 CEST",
+        "status": "PENDING",
+        "rationale": "Malmo dominante in casa contro Kalmar fanalino di coda."
+      },
+      {
+        "match": "Torino vs Udinese",
+        "tournament": "Italia Serie A",
+        "competition": "Italia Serie A",
+        "market": "Chance Mix: X o Gol",
+        "selection": "X o Gol",
         "odds": 1.44,
         "kickoff": "2026-10-12 20:45 CEST",
         "status": "PENDING",
-        "rationale": "Posticipo tattico Vanoli vs Runjaic. Primo tempo guardingo (0-2 gol) e ripresa aperta con concessione (1-3 gol). Intercetta l'1-2 di Forebet e il Gol di Oddspedia."
-      }
-    ]
-  },
-  {
-    "ticket_id": "TICKET_12OTT_SATELLITE_MINORI",
-    "title": "Schedina 2: Il Satellite Top League / Elite (Lunedì 12 Ottobre)",
-    "name": "Schedina 2: Il Satellite Top League / Elite (Lunedì 12 Ottobre)",
-    "created_at": "2026-10-12T09:40:00+02:00",
-    "date_created": "2026-10-12 09:40:00",
-    "status": "PENDING",
-    "strategy": "SATELLITE_TOP_LEAGUE_ELITE",
-    "stake_eur": 7.0,
-    "total_odds": 6.06,
-    "potential_payout_eur": 42.42,
-    "potential_win": 42.42,
-    "net_profit_eur": 35.42,
-    "settled": false,
-    "profit_loss_eur": 0.0,
-    "notes": "Satellite epurato da Serie B e C: composto solo da massimi campionati (Premier League, LaLiga, Liga Portugal, Romania Superliga) e AFC Champions League Elite.",
-    "legs": [
-      {
-        "match": "Al Wasl vs Al Ahli SC",
-        "tournament": "AFC Champions League",
-        "competition": "AFC Champions League",
-        "market": "Combo: X2 + Over 1.5",
-        "selection": "X2 + Over 1.5",
-        "odds": 1.45,
-        "kickoff": "2026-10-12 18:00 CEST",
-        "status": "PENDING",
-        "rationale": "Superiorità tecnica netta dei sauditi (Mahrez, Firmino, Toney) contro la difesa vulnerabile dell'Al Wasl."
-      },
-      {
-        "match": "Universitatea Cluj vs Rapid Bucuresti",
-        "tournament": "Romania Superliga",
-        "competition": "Romania Superliga",
-        "market": "Chance Mix: X o Gol",
-        "selection": "X o Gol",
-        "odds": 1.44,
-        "kickoff": "2026-10-12 20:00 CEST",
-        "status": "PENDING",
-        "rationale": "Scontro diretto di vertice nella massima divisione romena: alta frequenza di pareggio o gol reciproco."
-      },
-      {
-        "match": "Levante vs Sevilla",
-        "tournament": "Spagna LaLiga",
-        "competition": "Spagna LaLiga",
-        "market": "Chance Mix: X o Gol",
-        "selection": "X o Gol",
-        "odds": 1.44,
-        "kickoff": "2026-10-12 21:00 CEST",
-        "status": "PENDING",
-        "rationale": "Top league spagnola. Partita storicamente da Gol con alta media reti (3.4) e Oddspedia tip Gol. Copre pareggi e reti condivise."
-      },
-      {
-        "match": "Coventry vs Newcastle",
-        "tournament": "Inghilterra Premier League",
-        "competition": "Inghilterra Premier League",
-        "market": "Combo: X2 + Under 4.5",
-        "selection": "X2 + Under 4.5",
-        "odds": 1.42,
-        "kickoff": "2026-10-12 21:00 CEST",
-        "status": "PENDING",
-        "rationale": "Magpies di caratura superiore in Premier League; Coventry difende a blocco basso. Protezione Under 4.5 molto profonda."
-      },
-      {
-        "match": "Famalicao vs Alverca",
-        "tournament": "Portogallo Liga Portugal",
-        "competition": "Portogallo Liga Portugal",
-        "market": "Combo: 1X + Under 3.5",
-        "selection": "1X + Under 3.5",
-        "odds": 1.42,
-        "kickoff": "2026-10-12 21:15 CEST",
-        "status": "PENDING",
-        "rationale": "Massima divisione portoghese. Famalicao solida e imbattuta in casa (1-1 con lo Sporting); Alverca segna con il contagocce."
-      }
-    ]
-  },
-  {
-    "ticket_id": "TICKET_12OTT_SATELLITE_MATTINA",
-    "title": "Schedina 3: Satellite Anticipi Mattutini (Lunedì 12 Ottobre)",
-    "name": "Schedina 3: Satellite Anticipi Mattutini (Lunedì 12 Ottobre)",
-    "created_at": "2026-10-12T09:40:00+02:00",
-    "date_created": "2026-10-12 09:40:00",
-    "status": "PENDING",
-    "strategy": "SATELLITE_MORNING_EARLY_KICKOFF",
-    "stake_eur": 5.0,
-    "total_odds": 3.55,
-    "potential_payout_eur": 17.75,
-    "potential_win": 17.75,
-    "net_profit_eur": 12.75,
-    "settled": false,
-    "profit_loss_eur": 0.0,
-    "notes": "Micro-satellite di copertura fascia 12:00 - 14:00 (1.6% budget). Selezioni certificate da triangolazione Forebet + Oddspedia.",
-    "legs": [
-      {
-        "match": "Livyi Bereg vs Zorya Luhansk",
-        "tournament": "Ucraina Premier League",
-        "competition": "Ucraina Premier League",
-        "market": "Combo: X2 + Under 3.5",
-        "selection": "X2 + Under 3.5",
-        "odds": 1.45,
-        "kickoff": "2026-10-12 12:00 CEST",
-        "status": "PENDING",
-        "rationale": "Zorya club esperto contro neopromossa da catenaccio (< 0.8 gol p90). Forebet ex. score 1-1, X2 all'82%."
-      },
-      {
-        "match": "Dynamo Kyiv U21 vs Karpaty U21",
-        "tournament": "Ucraina Premier League U21",
-        "competition": "Ucraina Premier League U21",
-        "market": "Combo: 1X + Over 1.5",
-        "selection": "1X + Over 1.5",
-        "odds": 1.35,
-        "kickoff": "2026-10-12 12:00 CEST",
-        "status": "PENDING",
-        "rationale": "Primavera Dinamo Kiev imbattuta con media > 2.8 gol segnati a partita."
-      },
-      {
-        "match": "Hougang vs Balestier Khalsa",
-        "tournament": "Singapore Premier League",
-        "competition": "Singapore Premier League",
-        "market": "Totale Gol",
-        "selection": "Over 2.5",
-        "odds": 1.38,
-        "kickoff": "2026-10-12 13:30 CEST",
-        "status": "PENDING",
-        "rationale": "Lega con la media gol più alta d'Asia (4.1 gol p90). Forebet ex. score 2-1 (avg 3.53)."
-      },
-      {
-        "match": "Panionios vs PAOK B",
-        "tournament": "Grecia Super League 2",
-        "competition": "Grecia Super League 2",
-        "market": "Combo: 1X + Under 3.5",
-        "selection": "1X + Under 3.5",
-        "odds": 1.32,
-        "kickoff": "2026-10-12 13:45 CEST",
-        "status": "PENDING",
-        "rationale": "Panionios ermetico ad Atene (0.4 gol concessi p90). Forebet ex. score 1-0 (avg 0.63)."
+        "rationale": "La cassaforte che salva lo 0-0 e vince su qualsiasi partita con entrambe a segno (1-1, 2-1, 1-2, 2-2)."
       }
     ]
   },
