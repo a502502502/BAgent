@@ -1,10 +1,199 @@
 [
   {
+    "ticket_id": "TICKET_12OTT_CORE_ROCKET",
+    "title": "Schedina 1: Il Core Rocket (Lunedì 12 Ottobre)",
+    "name": "Schedina 1: Il Core Rocket (Lunedì 12 Ottobre)",
+    "created_at": "2026-10-12T09:40:00+02:00",
+    "date_created": "2026-10-12 09:40:00",
+    "status": "PENDING",
+    "strategy": "CORE_ROCKET_POWER_GROWTH",
+    "stake_eur": 25.0,
+    "total_odds": 2.58,
+    "potential_payout_eur": 64.5,
+    "potential_win": 64.5,
+    "net_profit_eur": 39.5,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Asse portante del piano a medio rischio (8.3% del budget 300 EUR). Tripla asimmetrica a protezione rinforzata su Serie A e Allsvenskan.",
+    "legs": [
+      {
+        "match": "Atalanta vs Venezia",
+        "tournament": "Italia Serie A",
+        "competition": "Italia Serie A",
+        "market": "Combo: 1X + Under 4.5",
+        "selection": "1X + Under 4.5",
+        "odds": 1.36,
+        "kickoff": "2026-10-12 18:30 CEST",
+        "status": "PENDING",
+        "rationale": "Dea superiore al Gewiss Stadium. Copre tutte le vittorie standard (1-0, 2-0, 2-1, 3-0, 3-1) e pareggio 1-1/0-0. Consenso Oddspedia Under 3.5 e Forebet 2-0."
+      },
+      {
+        "match": "Malmo FF vs Kalmar",
+        "tournament": "Svezia Allsvenskan",
+        "competition": "Svezia Allsvenskan",
+        "market": "Combo: 1X + MultiGol 1-5",
+        "selection": "1X + MultiGol 1-5",
+        "odds": 1.32,
+        "kickoff": "2026-10-12 19:00 CEST",
+        "status": "PENDING",
+        "rationale": "Malmo in volata vertice contro il fanalino Kalmar. La protezione MultiGol 1-5 assorbe la vittoria con qualsiasi scarto ed evita la trappola dell'Over 1.5 in caso di 1-0 stretto."
+      },
+      {
+        "match": "Torino vs Udinese",
+        "tournament": "Italia Serie A",
+        "competition": "Italia Serie A",
+        "market": "MultiGol Tempi: 0-2 1°T + 1-3 2°T",
+        "selection": "SI",
+        "odds": 1.44,
+        "kickoff": "2026-10-12 20:45 CEST",
+        "status": "PENDING",
+        "rationale": "Posticipo tattico Vanoli vs Runjaic. Primo tempo guardingo (0-2 gol) e ripresa aperta con concessione (1-3 gol). Intercetta l'1-2 di Forebet e il Gol di Oddspedia."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_12OTT_SATELLITE_MINORI",
+    "title": "Schedina 2: Il Satellite Moltiplicatore Minori (Lunedì 12 Ottobre)",
+    "name": "Schedina 2: Il Satellite Moltiplicatore Minori (Lunedì 12 Ottobre)",
+    "created_at": "2026-10-12T09:40:00+02:00",
+    "date_created": "2026-10-12 09:40:00",
+    "status": "PENDING",
+    "strategy": "SATELLITE_MULTIPLIER_MINOR_LEAGUES",
+    "stake_eur": 7.0,
+    "total_odds": 6.06,
+    "potential_payout_eur": 42.42,
+    "potential_win": 42.42,
+    "net_profit_eur": 35.42,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Leva asimmetrica a micro-stake (2.3% del budget 300 EUR). Pentaleg su campionati minori e coppe internazionali con quote di valore protette.",
+    "legs": [
+      {
+        "match": "Real Valladolid vs Albacete",
+        "tournament": "Spagna LaLiga 2",
+        "competition": "Spagna LaLiga 2",
+        "market": "Combo: 1X + Under 3.5",
+        "selection": "1X + Under 3.5",
+        "odds": 1.48,
+        "kickoff": "2026-10-12 14:00 CEST",
+        "status": "PENDING",
+        "rationale": "Valladolid solidissimo al José Zorrilla (< 0.9 xG concessi p90). Forebet 2-1 (82% 1X)."
+      },
+      {
+        "match": "Al Wasl vs Al Ahli SC",
+        "tournament": "AFC Champions League",
+        "competition": "AFC Champions League",
+        "market": "Combo: X2 + Over 1.5",
+        "selection": "X2 + Over 1.5",
+        "odds": 1.45,
+        "kickoff": "2026-10-12 18:00 CEST",
+        "status": "PENDING",
+        "rationale": "Superiorità tecnica netta dei sauditi (Mahrez, Firmino, Toney) contro la difesa vulnerabile dell'Al Wasl."
+      },
+      {
+        "match": "Universitatea Cluj vs Rapid Bucuresti",
+        "tournament": "Romania Superliga",
+        "competition": "Romania Superliga",
+        "market": "Chance Mix: X o Gol",
+        "selection": "X o Gol",
+        "odds": 1.44,
+        "kickoff": "2026-10-12 20:00 CEST",
+        "status": "PENDING",
+        "rationale": "Scontro diretto di vertice romeno: alta frequenza di pareggio o reazione reciproca."
+      },
+      {
+        "match": "Pescara vs Guidonia",
+        "tournament": "Italia Serie C Girone B",
+        "competition": "Italia Serie C Girone B",
+        "market": "Combo: 1X + Under 3.5",
+        "selection": "1X + Under 3.5",
+        "odds": 1.38,
+        "kickoff": "2026-10-12 20:30 CEST",
+        "status": "PENDING",
+        "rationale": "Pescara capolista all'Adriatico contro neopromossa organizzata. Divario di passo evidente."
+      },
+      {
+        "match": "Coventry vs Newcastle",
+        "tournament": "Inghilterra Premier League",
+        "competition": "Inghilterra Premier League",
+        "market": "Combo: X2 + Under 4.5",
+        "selection": "X2 + Under 4.5",
+        "odds": 1.42,
+        "kickoff": "2026-10-12 21:00 CEST",
+        "status": "PENDING",
+        "rationale": "Magpies di caratura superiore ma Coventry difende a blocco basso. Protezione Under 4.5 molto profonda."
+      }
+    ]
+  },
+  {
+    "ticket_id": "TICKET_12OTT_SATELLITE_MATTINA",
+    "title": "Schedina 3: Satellite Anticipi Mattutini (Lunedì 12 Ottobre)",
+    "name": "Schedina 3: Satellite Anticipi Mattutini (Lunedì 12 Ottobre)",
+    "created_at": "2026-10-12T09:40:00+02:00",
+    "date_created": "2026-10-12 09:40:00",
+    "status": "PENDING",
+    "strategy": "SATELLITE_MORNING_EARLY_KICKOFF",
+    "stake_eur": 5.0,
+    "total_odds": 3.55,
+    "potential_payout_eur": 17.75,
+    "potential_win": 17.75,
+    "net_profit_eur": 12.75,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Micro-satellite di copertura fascia 12:00 - 14:00 (1.6% budget). Selezioni certificate da triangolazione Forebet + Oddspedia.",
+    "legs": [
+      {
+        "match": "Livyi Bereg vs Zorya Luhansk",
+        "tournament": "Ucraina Premier League",
+        "competition": "Ucraina Premier League",
+        "market": "Combo: X2 + Under 3.5",
+        "selection": "X2 + Under 3.5",
+        "odds": 1.45,
+        "kickoff": "2026-10-12 12:00 CEST",
+        "status": "PENDING",
+        "rationale": "Zorya club esperto contro neopromossa da catenaccio (< 0.8 gol p90). Forebet ex. score 1-1, X2 all'82%."
+      },
+      {
+        "match": "Dynamo Kyiv U21 vs Karpaty U21",
+        "tournament": "Ucraina Premier League U21",
+        "competition": "Ucraina Premier League U21",
+        "market": "Combo: 1X + Over 1.5",
+        "selection": "1X + Over 1.5",
+        "odds": 1.35,
+        "kickoff": "2026-10-12 12:00 CEST",
+        "status": "PENDING",
+        "rationale": "Primavera Dinamo Kiev imbattuta con media > 2.8 gol segnati a partita."
+      },
+      {
+        "match": "Hougang vs Balestier Khalsa",
+        "tournament": "Singapore Premier League",
+        "competition": "Singapore Premier League",
+        "market": "Totale Gol",
+        "selection": "Over 2.5",
+        "odds": 1.38,
+        "kickoff": "2026-10-12 13:30 CEST",
+        "status": "PENDING",
+        "rationale": "Lega con la media gol più alta d'Asia (4.1 gol p90). Forebet ex. score 2-1 (avg 3.53)."
+      },
+      {
+        "match": "Panionios vs PAOK B",
+        "tournament": "Grecia Super League 2",
+        "competition": "Grecia Super League 2",
+        "market": "Combo: 1X + Under 3.5",
+        "selection": "1X + Under 3.5",
+        "odds": 1.32,
+        "kickoff": "2026-10-12 13:45 CEST",
+        "status": "PENDING",
+        "rationale": "Panionios ermetico ad Atene (0.4 gol concessi p90). Forebet ex. score 1-0 (avg 0.63)."
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_DOPPIA_NOTTURNA_34EUR_12OTT",
     "name": "Multipla (2) Doppia Notturna Sudamericana 12 Ottobre",
     "bookmaker": "Netwin",
     "type": "Multipla (2)",
-    "status": "IN_PROGRESS",
+    "status": "WON",
     "placed_at": "2026-10-11 23:50 CEST",
     "stake": 34.0,
     "total_odds": 2.06,
@@ -15,13 +204,13 @@
         "match": "Racing vs Belgrano",
         "tournament": "Argentina | Liga Profesional",
         "kickoff": "2026-10-12 00:15 CEST",
-        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo",
         "selection": "SI",
         "quota": 1.42,
-        "status": "PENDING",
-        "score": "0-0",
-        "minute": "PRE",
-        "note": "Kickoff 00:15. Flusso asimmetrico: 0-2 al 1\u00b0T e 1-3 nella ripresa per intercettare i 2/3 gol previsti."
+        "status": "WON",
+        "score": "0-2 (0-1 HT)",
+        "minute": "FT",
+        "note": "Kickoff 00:15. Flusso asimmetrico: 0-2 al 1°T e 1-3 nella ripresa per intercettare i 2/3 gol previsti."
       },
       {
         "match": "Bahia BA vs Mirassol FC SP",
@@ -30,14 +219,14 @@
         "market": "1X + Under 4.5",
         "selection": "SI",
         "quota": 1.45,
-        "status": "PENDING",
-        "score": "0-0",
-        "minute": "PRE",
+        "status": "WON",
+        "score": "1-0",
+        "minute": "FT",
         "note": "Kickoff 00:30. Arena Fonte Nova: fattore campo Bahia + protezione Under 4.5 (assorbe anche il 2-2 Forebet)."
       }
     ],
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": 36.0,
     "notes": "Doppia notturna ad alta tenuta asimmetrica a raddoppio pieno (@ 2.06)."
   },
   {
@@ -45,7 +234,7 @@
     "name": "Multipla (4) Americhe Notturna 12 Ottobre",
     "bookmaker": "Netwin",
     "type": "Multipla (4)",
-    "status": "IN_PROGRESS",
+    "status": "LOST",
     "placed_at": "2026-10-11 23:50 CEST",
     "stake": 20.0,
     "bonus": 2.48,
@@ -59,9 +248,9 @@
         "market": "1X2: 1",
         "selection": "1",
         "quota": 1.25,
-        "status": "IN_PROGRESS",
-        "score": "1-0",
-        "minute": "57'",
+        "status": "LOST",
+        "score": "1-1",
+        "minute": "FT",
         "note": "Live 1-0 al 57'."
       },
       {
@@ -72,8 +261,8 @@
         "selection": "OVER",
         "quota": 1.74,
         "status": "PENDING",
-        "score": "0-0",
-        "minute": "PRE",
+        "score": "0-2",
+        "minute": "FT",
         "note": "Almeno 9 corner al Cilindro."
       },
       {
@@ -83,9 +272,9 @@
         "market": "1X + Over 1.5",
         "selection": "SI",
         "quota": 1.4,
-        "status": "PENDING",
-        "score": "0-0",
-        "minute": "PRE",
+        "status": "LOST",
+        "score": "1-0",
+        "minute": "FT",
         "note": "Bahia imbattuto con almeno 2 gol totali."
       },
       {
@@ -95,14 +284,14 @@
         "market": "Over 2.5",
         "selection": "OVER",
         "quota": 1.36,
-        "status": "PENDING",
-        "score": "0-0",
-        "minute": "PRE",
-        "note": "MLS festival gol, piena compatibilit\u00e0 DNA lega."
+        "status": "WON",
+        "score": "6-2",
+        "minute": "FT",
+        "note": "MLS festival gol, piena compatibilità DNA lega."
       }
     ],
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -20.0,
     "notes": "Multipla (4) mista Americhe a quota 4.14."
   },
   {
@@ -110,7 +299,7 @@
     "name": "Multipla (6) Chance Mix e Statistiche 11 Ottobre",
     "bookmaker": "Netwin",
     "type": "Multipla (6)",
-    "status": "IN_PROGRESS",
+    "status": "LOST",
     "placed_at": "2026-10-11 12:25 CEST",
     "stake": 5.0,
     "bonus": 4.4,
@@ -133,13 +322,13 @@
         "match": "Lecce vs Bologna",
         "tournament": "Italia | Serie A",
         "kickoff": "2026-10-11 15:00 CEST",
-        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo",
         "selection": "SI",
         "quota": 1.43,
         "status": "IN_PROGRESS",
         "score": "0-1",
         "minute": "45'",
-        "note": "1\u00b0 Tempo chiuso 0-1: 0-2 1\u00b0T gi\u00e0 centrato! Serve 1-3 gol nella ripresa."
+        "note": "1° Tempo chiuso 0-1: 0-2 1°T già centrato! Serve 1-3 gol nella ripresa."
       },
       {
         "match": "Colonia vs Borussia Mgladbach",
@@ -169,7 +358,7 @@
         "match": "Sassuolo vs Milan",
         "tournament": "Italia | Serie A",
         "kickoff": "2026-10-11 18:00 CEST",
-        "market": "Ospite Segna 2\u00b0T",
+        "market": "Ospite Segna 2°T",
         "selection": "SI",
         "quota": 1.48,
         "status": "PENDING",
@@ -190,9 +379,9 @@
         "note": "Tiri totali Betis in casa."
       }
     ],
-    "settled": false,
-    "profit_loss_eur": 0.0,
-    "notes": "Ticket 6 con Como-Roma X o GG gi\u00e0 vinto 0-0."
+    "settled": true,
+    "profit_loss_eur": -5.0,
+    "notes": "Ticket 6 con Como-Roma X o GG già vinto 0-0."
   },
   {
     "ticket_id": "TICKET_USER_TRIPLA_ASYMMETRIC_33EUR_11OTT",
@@ -222,30 +411,30 @@
         "match": "Colonia vs Borussia Mgladbach",
         "tournament": "Germania | Bundesliga",
         "kickoff": "2026-10-11 15:30 CEST",
-        "market": "OV 1\u00b0T + OV 2\u00b0T 0.5 0.5",
+        "market": "OV 1°T + OV 2°T 0.5 0.5",
         "selection": "SI",
         "quota": 1.48,
         "status": "WON",
         "score": "2-1 FT",
         "minute": "14'",
-        "note": "HT 1-1 (Over 0.5 1\u00b0T), FT 2-1 (Over 0.5 2\u00b0T)"
+        "note": "HT 1-1 (Over 0.5 1°T), FT 2-1 (Over 0.5 2°T)"
       },
       {
         "match": "Sassuolo vs Milan",
         "tournament": "Italia | Serie A",
         "kickoff": "2026-10-11 18:00 CEST",
-        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo",
         "selection": "SI",
         "quota": 1.47,
         "status": "WON",
         "score": "1-1 FT",
         "minute": "PRE",
-        "note": "HT 0-0 (MultiGol 0-2 1\u00b0T), 2T 1-1 (MultiGol 1-3 2\u00b0T)"
+        "note": "HT 0-0 (MultiGol 0-2 1°T), 2T 1-1 (MultiGol 1-3 2°T)"
       }
     ],
     "settled": true,
     "profit_loss_eur": 70.38,
-    "notes": "TICKET VINTO! Tutte le 3 selezioni asimmetriche centrate perfettamente. Cassa: \u20ac103.38 (Profitto netto: +\u20ac70.38)."
+    "notes": "TICKET VINTO! Tutte le 3 selezioni asimmetriche centrate perfettamente. Cassa: €103.38 (Profitto netto: +€70.38)."
   },
   {
     "ticket_id": "TICKET_USER_SESTINA_ASYMMETRIC_5EUR_11OTT",
@@ -281,7 +470,7 @@
         "status": "WON",
         "score": "1-2 FT",
         "minute": "44'",
-        "note": "Bologna avanti 0-1 a fine 1\u00b0 tempo. Copre X2 e fino a 5 gol totali."
+        "note": "Bologna avanti 0-1 a fine 1° tempo. Copre X2 e fino a 5 gol totali."
       },
       {
         "match": "Friburgo vs Schalke",
@@ -311,7 +500,7 @@
         "match": "Sassuolo vs Milan",
         "tournament": "Italia | Serie A",
         "kickoff": "2026-10-11 18:00 CEST",
-        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo",
         "selection": "SI",
         "quota": 1.47,
         "status": "WON",
@@ -323,7 +512,7 @@
         "match": "Cagliari vs Juventus",
         "tournament": "Italia | Serie A",
         "kickoff": "2026-10-11 20:45 CEST",
-        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo",
         "selection": "SI",
         "quota": 1.45,
         "status": "PENDING",
@@ -341,7 +530,7 @@
     "name": "Multipla (4) Player Props 11 Ottobre",
     "bookmaker": "Netwin",
     "type": "Multipla (4)",
-    "status": "IN_PROGRESS",
+    "status": "LOST",
     "placed_at": "2026-10-11 15:00 CEST",
     "stake": 10.0,
     "bonus": 2.14,
@@ -382,7 +571,7 @@
         "status": "PENDING",
         "score": "0-0",
         "minute": "PRE",
-        "note": "Big match ad alta intensit\u00e0 difensiva."
+        "note": "Big match ad alta intensità difensiva."
       },
       {
         "match": "Sassuolo vs Milan",
@@ -397,8 +586,8 @@
         "note": "Kickoff ore 18:00."
       }
     ],
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -10.0,
     "notes": "Ticket Player Props (tiri in porta e falli/cartellini) a quota 7.16."
   },
   {
@@ -417,7 +606,7 @@
         "match": "Hull City vs Everton",
         "tournament": "Inghilterra | Premier League",
         "kickoff": "2026-10-11 15:00 CEST",
-        "market": "Ospite Segna 2\u00b0T",
+        "market": "Ospite Segna 2°T",
         "selection": "SI",
         "quota": 1.65,
         "status": "WON",
@@ -459,7 +648,7 @@
         "status": "WON",
         "score": "3-1 FT",
         "minute": "45'",
-        "note": "Lazio gi\u00e0 avanti 2-0! L'Over 1.5 \u00e8 gi\u00e0 matematicamente centrato, basta mantenere l'1X."
+        "note": "Lazio già avanti 2-0! L'Over 1.5 è già matematicamente centrato, basta mantenere l'1X."
       },
       {
         "match": "Liverpool vs Manchester City",
@@ -495,7 +684,7 @@
     "name": "Multipla (6) Combo Tempi & Ligue 1 11 Ottobre",
     "bookmaker": "Netwin",
     "type": "Multipla (6)",
-    "status": "IN_PROGRESS",
+    "status": "LOST",
     "placed_at": "2026-10-11 15:00 CEST",
     "stake": 5.0,
     "bonus": 4.85,
@@ -518,19 +707,19 @@
         "match": "Crystal Palace vs Nottingham Forest",
         "tournament": "Inghilterra | Premier League",
         "kickoff": "2026-10-11 15:00 CEST",
-        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo",
         "selection": "SI",
         "quota": 1.44,
         "status": "WON",
         "score": "3-1 FT",
         "minute": "47'",
-        "note": "1\u00b0 Tempo chiuso 1-1: MultiGol 0-2 1\u00b0T gi\u00e0 centrato! Serve 1-3 gol nella ripresa."
+        "note": "1° Tempo chiuso 1-1: MultiGol 0-2 1°T già centrato! Serve 1-3 gol nella ripresa."
       },
       {
         "match": "Colonia vs Borussia Mgladbach",
         "tournament": "Germania | Bundesliga",
         "kickoff": "2026-10-11 15:30 CEST",
-        "market": "OV 1\u00b0T + OV 2\u00b0T 0.5 0.5",
+        "market": "OV 1°T + OV 2°T 0.5 0.5",
         "selection": "SI",
         "quota": 1.5,
         "status": "WON",
@@ -554,7 +743,7 @@
         "match": "Troyes vs Marsiglia",
         "tournament": "Francia | Ligue 1",
         "kickoff": "2026-10-11 20:45 CEST",
-        "market": "OV 1\u00b0T + OV 2\u00b0T 0.5 0.5",
+        "market": "OV 1°T + OV 2°T 0.5 0.5",
         "selection": "SI",
         "quota": 1.53,
         "status": "PENDING",
@@ -575,8 +764,8 @@
         "note": "Kickoff serale ore 20:45."
       }
     ],
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -5.0,
     "notes": "Ticket Combo Tempi e Ligue 1 a quota 9.71."
   },
   {
@@ -595,31 +784,31 @@
         "match": "Napoli vs Frosinone",
         "tournament": "Italia | Serie A",
         "kickoff": "2026-10-10 20:45 CEST",
-        "market": "MultiGol 1-3 1\u00b0Tempo",
+        "market": "MultiGol 1-3 1°Tempo",
         "selection": "SI",
         "quota": 1.31,
         "status": "WON",
-        "note": "HT 2-0 (MultiGol 1-3 1\u00b0T centrato)"
+        "note": "HT 2-0 (MultiGol 1-3 1°T centrato)"
       },
       {
         "match": "Ajax vs Nijmegen",
         "tournament": "Olanda | Eredivisie",
         "kickoff": "2026-10-10 21:00 CEST",
-        "market": "MultiGol 1-3 1\u00b0Tempo",
+        "market": "MultiGol 1-3 1°Tempo",
         "selection": "SI",
         "quota": 1.28,
         "status": "WON",
-        "note": "HT 1-1 (MultiGol 1-3 1\u00b0T centrato)"
+        "note": "HT 1-1 (MultiGol 1-3 1°T centrato)"
       },
       {
         "match": "Real Madrid vs Villarreal",
         "tournament": "Spagna | LaLiga",
         "kickoff": "2026-10-10 21:00 CEST",
-        "market": "MultiGol 1-3 1\u00b0Tempo",
+        "market": "MultiGol 1-3 1°Tempo",
         "selection": "SI",
         "quota": 1.3,
         "status": "LOST",
-        "note": "HT 0-0 (0 gol nel 1\u00b0 tempo)"
+        "note": "HT 0-0 (0 gol nel 1° tempo)"
       }
     ],
     "settled": true,
@@ -632,13 +821,13 @@
     "name": "Schedina Reale Utente: Quintina Big Leagues & Champions League (@ 6.86)",
     "created_at": "2026-10-10T16:04:00+00:00",
     "date_created": "2026-10-10 16:04:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "CORE_TARDO_POMERIGGIO_UCL_HYBRID",
     "stake_eur": 10.0,
     "total_odds": 6.86,
     "potential_payout_eur": 72.71,
-    "profit_loss_eur": 0.0,
-    "settled": false,
+    "profit_loss_eur": -10.0,
+    "settled": true,
     "notes": "Ticket reale giocato dall utente su 5 selezioni con Alaves-Atletico X2+U3.5, Inter 1X+O2.5, Yamal marcatore/palo con clausola sostituto, Man United 1X+O1.5 e Champions League Lipsia-PSV 1X+O1.5.",
     "legs": [
       {
@@ -795,8 +984,8 @@
       {
         "match": "Inter vs Parma",
         "tournament": "Serie A",
-        "market": "Corner entro 10\u00b0Min: SI",
-        "selection": "Corner entro 10\u00b0Min: SI",
+        "market": "Corner entro 10°Min: SI",
+        "selection": "Corner entro 10°Min: SI",
         "odds": 1.5,
         "status": "LOST",
         "kickoff": "2026-10-10 18:00 CEST",
@@ -949,8 +1138,8 @@
       {
         "match": "Napoli vs Frosinone",
         "tournament": "Serie A",
-        "market": "MultiGol 1-3 1\u00b0T + 1-4 2\u00b0T",
-        "selection": "MultiGol 1-3 1\u00b0T + 1-4 2\u00b0T: SI",
+        "market": "MultiGol 1-3 1°T + 1-4 2°T",
+        "selection": "MultiGol 1-3 1°T + 1-4 2°T: SI",
         "odds": 1.51,
         "status": "WON",
         "kickoff": "2026-10-10 20:45 CEST",
@@ -962,17 +1151,17 @@
   },
   {
     "ticket_id": "TICKET_10OTT_SABATO_LUNGA_QUOTA_ALTA",
-    "title": "Schedina #5: La Lunga Protetta del Sabato (Quota @ 8.20 \u2013 11.20)",
-    "name": "Schedina #5: La Lunga Protetta del Sabato (Quota @ 8.20 \u2013 11.20)",
+    "title": "Schedina #5: La Lunga Protetta del Sabato (Quota @ 8.20 – 11.20)",
+    "name": "Schedina #5: La Lunga Protetta del Sabato (Quota @ 8.20 – 11.20)",
     "created_at": "2026-10-10T13:45:00+00:00",
     "date_created": "2026-10-10 13:45:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "MULTIPLA_LUNGA_PROTETTA_ASYMMETRIC",
     "stake_eur": 3.0,
     "total_odds": 8.17,
     "potential_payout_eur": 24.51,
-    "profit_loss_eur": 0.0,
-    "settled": false,
+    "profit_loss_eur": -3.0,
+    "settled": true,
     "notes": "Versione resa molto piu sicura: rimossi gli Under stretti e gli Over 2.5 rigidi. Linee ammorbidite a Doppie Chance pure (1X/X2) e Over 1.5 minimi.",
     "legs": [
       {
@@ -1070,7 +1259,7 @@
     "notes": "3/4 vinte. Saltata solo su Instituto-Boca (2-2) per un gol su Under 3.5. Centrate Maldonado (1-1), Once Caldas (1-0) e Defensa (0-2).",
     "legs": [
       {
-        "match": "Instituto C\u00f3rdoba vs Boca Juniors",
+        "match": "Instituto Córdoba vs Boca Juniors",
         "tournament": "Argentina Liga Profesional",
         "market": "X2 + Under 3.5",
         "odds": 1.51,
@@ -1081,7 +1270,7 @@
       },
       {
         "match": "Deportivo Maldonado vs Liverpool Montevideo",
-        "tournament": "Uruguay Primera Divisi\u00f3n",
+        "tournament": "Uruguay Primera División",
         "market": "MultiGol 2-5",
         "odds": 1.4,
         "status": "WON",
@@ -1100,13 +1289,13 @@
         "final_score": "1-0"
       },
       {
-        "match": "Uni\u00f3n Santa Fe vs Defensa y Justicia",
+        "match": "Unión Santa Fe vs Defensa y Justicia",
         "tournament": "Argentina Liga Profesional",
         "market": "X2 + Under 4.5",
         "odds": 1.55,
         "status": "WON",
         "kickoff": "2026-10-10 02:45 CEST",
-        "notes": "Forebet 1-2, Oddspedia Defensa streak vs Uni\u00f3n in crisi (3L)",
+        "notes": "Forebet 1-2, Oddspedia Defensa streak vs Unión in crisi (3L)",
         "final_score": "0-2"
       }
     ]
@@ -1117,13 +1306,13 @@
     "name": "Schedina #1: Pomeriggio Anticipi (Sabato 10 Ottobre)",
     "created_at": "2026-10-10T00:30:00+00:00",
     "date_created": "2026-10-10 00:30:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "CORE_POMERIGGIO_ANTICIPINI",
     "stake_eur": 5.0,
     "total_odds": 2.86,
     "potential_payout_eur": 14.3,
-    "profit_loss_eur": 0.0,
-    "settled": false,
+    "profit_loss_eur": -5.0,
+    "settled": true,
     "notes": "Trittico Pomeridiano Certificato: Arsenal dominio Emirates, Leverkusen X2 e Bayern Monaco 2-5.",
     "legs": [
       {
@@ -1167,13 +1356,13 @@
     "name": "Schedina #2: Tardo Pomeriggio Big Match (Sabato 10 Ottobre)",
     "created_at": "2026-10-10T00:30:00+00:00",
     "date_created": "2026-10-10 00:30:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "CORE_TARDO_POMERIGGIO_BIG_MATCH",
     "stake_eur": 5.0,
     "total_odds": 3.27,
     "potential_payout_eur": 16.35,
-    "profit_loss_eur": 0.0,
-    "settled": false,
+    "profit_loss_eur": -5.0,
+    "settled": true,
     "notes": "Big Match Europei: Corto muso Simeone X2+U3.5, Inter a San Siro e Old Trafford fortress.",
     "legs": [
       {
@@ -1217,14 +1406,14 @@
     "name": "Schedina #3: Serale di Vertice (Sabato 10 Ottobre)",
     "created_at": "2026-10-10T00:30:00+00:00",
     "date_created": "2026-10-10 00:30:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "CORE_SERALE_VERTICE",
     "stake_eur": 5.0,
     "total_odds": 2.59,
     "potential_payout_eur": 12.95,
-    "profit_loss_eur": 0.0,
-    "settled": false,
-    "notes": "Serale di Vertice: Bar\u00e7a a Montjuic, Napoli corto muso anti-trappola 1-0 e Bernabeu 7/7 Goal streak.",
+    "profit_loss_eur": -5.0,
+    "settled": true,
+    "notes": "Serale di Vertice: Barça a Montjuic, Napoli corto muso anti-trappola 1-0 e Bernabeu 7/7 Goal streak.",
     "legs": [
       {
         "match": "Barcellona vs Getafe",
@@ -1267,13 +1456,13 @@
     "name": "Schedina #4: La Schedina delle Gemme (Tiri & Corner Sabato 10 Ottobre)",
     "created_at": "2026-10-10T00:30:00+00:00",
     "date_created": "2026-10-10 00:30:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "SATELLITE_GEMME_MICRO_MARKETS",
     "stake_eur": 3.0,
     "total_odds": 2.83,
     "potential_payout_eur": 8.5,
-    "profit_loss_eur": 0.0,
-    "settled": false,
+    "profit_loss_eur": -3.0,
+    "settled": true,
     "notes": "Micro-mercati specialistici SNAI: Tiri in Porta Totali Over 7.5 e Corner Primi 10 Minuti a San Siro.",
     "legs": [
       {
@@ -1364,7 +1553,7 @@
         "status": "WON",
         "kickoff": "2026-10-08 01:30 CEST",
         "final_score": "1-2",
-        "notes": "Cl\u00e1ssico da Amizade entrambe a segno centrato"
+        "notes": "Clássico da Amizade entrambe a segno centrato"
       }
     ]
   },
@@ -1376,12 +1565,12 @@
     "potential_payout_eur": 13.25,
     "status": "LOST",
     "strategy": "IN_PLAY_VALUE_GEMS_06OCT",
-    "notes": "Tripla Live Gemme 2\u00b0 Tempo Nations League (Spagna gol 2T, Finlandia spinta, Inghilterra cruise)",
+    "notes": "Tripla Live Gemme 2° Tempo Nations League (Spagna gol 2T, Finlandia spinta, Inghilterra cruise)",
     "legs": [
       {
         "match": "Croazia vs Spagna",
         "tournament": "UEFA Nations League",
-        "market": "Spagna Over 0.5 Gol 2\u00b0 Tempo",
+        "market": "Spagna Over 0.5 Gol 2° Tempo",
         "odds": 1.4,
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
@@ -1389,7 +1578,7 @@
       {
         "match": "Bielorussia vs Finlandia",
         "tournament": "UEFA Nations League",
-        "market": "Over 0.5 Gol 2\u00b0 Tempo (Spinta Finlandia)",
+        "market": "Over 0.5 Gol 2° Tempo (Spinta Finlandia)",
         "odds": 1.35,
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
@@ -1397,7 +1586,7 @@
       {
         "match": "Inghilterra vs Repubblica Ceca",
         "tournament": "UEFA Nations League",
-        "market": "Under 2.5 Gol 2\u00b0 Tempo (Cruise Control)",
+        "market": "Under 2.5 Gol 2° Tempo (Cruise Control)",
         "odds": 1.4,
         "status": "LOST",
         "kickoff": "2026-10-06 20:45 CEST"
@@ -1564,7 +1753,7 @@
       {
         "match": "Banfield vs Rosario Central",
         "tournament": "Liga Profesional Argentina",
-        "market": "1\u00b0 Tempo: MultiGol 0-1",
+        "market": "1° Tempo: MultiGol 0-1",
         "odds": 1.5,
         "status": "LOST",
         "kickoff": "2026-10-06 02:15 CEST"
@@ -1587,7 +1776,7 @@
       {
         "match": "Bosnia Erzegovina vs Polonia",
         "tournament": "UEFA Nations League, Lega B, Gr. 4",
-        "market": "DOPPIA CHANCE 2\u00b0 TEMPO: 12",
+        "market": "DOPPIA CHANCE 2° TEMPO: 12",
         "odds": 1.45,
         "status": "LOST",
         "kickoff": "2026-10-05 20:45 CEST"
@@ -1611,7 +1800,7 @@
       {
         "match": "Romania vs Svezia",
         "tournament": "UEFA Nations League, Lega B, Gr. 4",
-        "market": "DOPPIA CHANCE 1\u00b0 TEMPO: 12",
+        "market": "DOPPIA CHANCE 1° TEMPO: 12",
         "odds": 1.48,
         "status": "LOST",
         "kickoff": "2026-10-05 20:45 CEST"
@@ -1619,7 +1808,7 @@
       {
         "match": "Montenegro vs Armenia",
         "tournament": "UEFA Nations League, Lega C, Gr. 2",
-        "market": "MultiGol 0-2 1\u00b0Tempo + 1-3 2\u00b0Tempo : SI",
+        "market": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
         "odds": 1.46,
         "status": "WON",
         "kickoff": "2026-10-05 20:45 CEST"
@@ -1636,7 +1825,7 @@
     "potential_payout_eur": 52.63,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Bonus 1.53\u20ac",
+    "notes": "Giocata utente Netwin - Bonus 1.53€",
     "legs": [
       {
         "match": "Galles vs Norvegia",
@@ -1720,7 +1909,7 @@
     "potential_payout_eur": 124.7,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Bonus 11.33\u20ac",
+    "notes": "Giocata utente Netwin - Bonus 11.33€",
     "legs": [
       {
         "match": "Galles vs Norvegia",
@@ -1782,7 +1971,7 @@
     "potential_payout_eur": 87.67,
     "status": "LOST",
     "strategy": "USER_PLAYED_TICKET",
-    "notes": "Giocata utente Netwin - Corner 1\u00b0 Tempo",
+    "notes": "Giocata utente Netwin - Corner 1° Tempo",
     "legs": [
       {
         "match": "Azerbaigian vs Liechtenstein",
@@ -1864,7 +2053,7 @@
     "potential_payout_eur": 146.92,
     "status": "LOST",
     "strategy": "MULTIPLA_6_TEMPI_COMBO",
-    "notes": "Multipla 6 Netwin - Bonus 13.35\u20ac",
+    "notes": "Multipla 6 Netwin - Bonus 13.35€",
     "legs": [
       {
         "match": "Isole Far Oer vs Slovacchia",
@@ -1877,7 +2066,7 @@
       {
         "match": "Bosnia Erzegovina vs Svezia",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 1-2 1\u00b0Tempo + 1-4 2\u00b0Tempo",
+        "market": "MultiGol 1-2 1°Tempo + 1-4 2°Tempo",
         "odds": 1.85,
         "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -1893,7 +2082,7 @@
       {
         "match": "Polonia vs Romania",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 1-3 1\u00b0Tempo + 1-4 2\u00b0Tempo",
+        "market": "MultiGol 1-3 1°Tempo + 1-4 2°Tempo",
         "odds": 1.56,
         "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -1926,7 +2115,7 @@
     "potential_payout_eur": 99.23,
     "status": "LOST",
     "strategy": "MULTIPLA_4_UNDER_CHANCEMIX",
-    "notes": "Multipla 4 Netwin - Bonus 2.88\u20ac - Cashout 17.60\u20ac",
+    "notes": "Multipla 4 Netwin - Bonus 2.88€ - Cashout 17.60€",
     "legs": [
       {
         "match": "Ucraina vs Irlanda del Nord",
@@ -1947,7 +2136,7 @@
       {
         "match": "Ungheria vs Georgia",
         "tournament": "UEFA Nations League",
-        "market": "MultiGol 0-1 1\u00b0Tempo",
+        "market": "MultiGol 0-1 1°Tempo",
         "odds": 1.33,
         "status": "LOST",
         "kickoff": "2026-10-02 20:45 CEST"
@@ -2250,7 +2439,7 @@
     "title": "Schedina A: La Cassaforte Core-Protetta (Domenica 11 Ottobre)",
     "name": "Schedina A: La Cassaforte Core-Protetta (Domenica 11 Ottobre)",
     "created_at": "2026-10-07T13:20:00+00:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "CORE_CASSAFORTE_MACRO_SNAI",
     "stake_eur": 7.0,
     "total_odds": 2.19,
@@ -2299,14 +2488,16 @@
         "bookmaker": "SNAI",
         "rationale": "Big match ad altissimo indice xG combinato (> 3.4 xG attesi); Chance Mix centrata se c'e Gol oppure Over 2.5."
       }
-    ]
+    ],
+    "settled": true,
+    "profit_loss_eur": -7.0
   },
   {
     "ticket_id": "TICKET_11OTT_DOMENICA_GEMME_SATELLITE",
     "title": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
     "name": "Schedina B: La Schedina delle Gemme (Domenica 11 Ottobre)",
     "created_at": "2026-10-07T17:10:00+00:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "SATELLITE_GEMME_MICRO_MARKETS_SNAI",
     "stake_eur": 3.0,
     "total_odds": 3.64,
@@ -2355,14 +2546,16 @@
         "bookmaker": "SNAI",
         "rationale": "Lunch match ad avvio rapido: il Como gioca con linea altissima e la Roma riparte immediatamente in profondita creando subito angoli."
       }
-    ]
+    ],
+    "settled": true,
+    "profit_loss_eur": -3.0
   },
   {
     "ticket_id": "TICKET_10OTT_SABATO_CASSAFORTE_CORE",
     "title": "Schedina A: La Cassaforte Core-Protetta (Sabato 10 Ottobre)",
     "name": "Schedina A: La Cassaforte Core-Protetta (Sabato 10 Ottobre)",
     "created_at": "2026-10-07T13:20:00+00:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "CORE_CASSAFORTE_MACRO_SNAI",
     "stake_eur": 7.0,
     "total_odds": 2.25,
@@ -2411,14 +2604,16 @@
         "bookmaker": "SNAI",
         "rationale": "Old Trafford fattore chiave; Tottenham con linea difensiva alta che assicura gol ma concede contropiedi."
       }
-    ]
+    ],
+    "settled": true,
+    "profit_loss_eur": -7.0
   },
   {
     "ticket_id": "TICKET_WEEKEND_TIPSTER_CONSENSUS",
     "title": "Schedina C: Tipster Consensus Oddspedia (Weekend 9-11 Ottobre)",
     "name": "Schedina C: Tipster Consensus Oddspedia (Weekend 9-11 Ottobre)",
     "created_at": "2026-10-07T16:20:00+00:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "TIPSTER_CONSENSUS_ODDSPEDIA_UPGRADE",
     "stake_eur": 3.0,
     "total_odds": 3.61,
@@ -2481,7 +2676,9 @@
         "bookmaker": "SNAI",
         "rationale": "Spunto Top Tipster #3 Value Spread (Italia, Yield +17.4%, 307 vinte su 924): asimmetria difensiva della Juventus di Motta in trasferta (< 0.8 xGA p90) combinata all'atteggiamento guardingo del Cagliari."
       }
-    ]
+    ],
+    "settled": true,
+    "profit_loss_eur": -3.0
   },
   {
     "ticket_id": "TICKET_08OTT_FREEBET_AFTERNOON",
@@ -2580,7 +2777,7 @@
         "date_time": "2026-10-08 18:00 CEST",
         "kickoff": "2026-10-08 18:00 CEST",
         "status": "LOST",
-        "rationale": "KuPS capolista solitaria del campionato a Kuopio con ritmo realizzativo costante (> 1.8 gol a partita). AC Oulu in difficolt\u00e0 difensiva nelle trasferte recenti.",
+        "rationale": "KuPS capolista solitaria del campionato a Kuopio con ritmo realizzativo costante (> 1.8 gol a partita). AC Oulu in difficoltà difensiva nelle trasferte recenti.",
         "result": "LOST",
         "score": "0-1"
       },
@@ -2594,7 +2791,7 @@
         "date_time": "2026-10-08 20:00 CEST",
         "kickoff": "2026-10-08 20:00 CEST",
         "status": "LOST",
-        "rationale": "AS FAR Rabat \u00e8 una delle massime potenze del continente africano con rosa di caratura internazionale. In casa contro Tamara divario tecnico incolmabile.",
+        "rationale": "AS FAR Rabat è una delle massime potenze del continente africano con rosa di caratura internazionale. In casa contro Tamara divario tecnico incolmabile.",
         "result": "LOST",
         "score": "1-0"
       },
