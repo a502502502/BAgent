@@ -1572,4 +1572,37 @@ L'utente ha incollato la pagina FootyStats reale di Dinamo Tbilisi-Gagra: tutti 
 
 *Ultimo aggiornamento: 11 ottobre 2026 ore 15:00 — BAgent (Working tree allineato | Sesto Senso & Validatore Attivi)*
 
+---
+
+### 🚀 SESSIONE CHAMPIONS LEAGUE 13 OTTOBRE 2026 — RETROSPETTIVA QUANTITATIVA & DE-TRAPPING
+
+#### 1. Bilancio Finanziario & Schedine Settled
+- **TICKET_USER_TRIPLA_GEMME_PROPS_10EUR_13OTT**: **VINCENTE (+49.43 € incassati, netto +39.43 €)**.
+  - *Højlund e Sostituto ≥ 1 tiri porta*: WON.
+  - *Lisandro Martínez o Sostituto cartellino o ≥ 2 falli*: WON.
+  - *Yann Sommer (Club Brugge) Over 3.5 parate @ 1.50*: WON (Sommer portiere del Brugge a San Siro contro 16 tiri dell'Inter).
+- **TICKET_USER_MULTIPLA6_UCL_20EUR_13OTT (Power Growth @ 8.12)**: **LOST (-20.00 €)** (4/6 prese: Galatasaray cartellini, Napoli gol, Arsenal 1X+O1.5, Atletico 1X+O1.5; caduta su Lipsia 0-0 HT e Inter 5 gol nel 2°T).
+- **TICKET_USER_TRIPLA_ANTICIPATA_30EUR_13OTT (@ 3.32)**: **LOST (-30.00 €)** (Lens-Sporting preso @ 1.85, caduto su Sabah-Slavia 2-0 e Viking-Bayern 3-3).
+- **TICKET_USER_MULTIPLA6_TOP_MATCHES_10EUR_13OTT**: **LOST (-10.00 €)** (presi Gol a Villarreal e Istanbul, 1X+O1.5 Atletico).
+- **TICKET_USER_TRIPLA_ALTAQUOTA_5EUR_13OTT**: **LOST (-5.00 €)** (preso 2+GG Barcellona @ 1.93).
+
+#### 2. Le 4 Trappole Sistemiche Rilevate Oggi
+1. **La Quota Civetta a 1.12 del Bayern Monaco (3-3 a Stavanger)**:
+   - Il Bayern ha pareggiato 3-3 in Norvegia. Ennesima conferma del divieto assoluto sulle quote < 1.20: aumentano il rischio esponenzialmente senza aggiungere valore.
+2. **La Trasferta Caucasica ad Alto Rischio (Sabah - Slavia 2-0)**:
+   - Slavia superiore nei numeri ma battuto 2-0 a Baku. Regola del manifesto confermata: mai 2 o X2 in trasferta nelle coppe europee in leghe orientali opache.
+3. **La Rigidità Temporale dei Primi Tempi (Lipsia Over 0.5 1°T)**:
+   - Finita 0-0 al 45' nonostante rigore fallito al 19'. I mercati vincolati ai soli primi 45' non offrono il cuscinetto per assorbire la sfortuna.
+4. **La Grandinata Imprevista e i Tetti di Gol (Inter 3-4 Brugge)**:
+   - Partita impazzita nella ripresa con 5 gol nel 2°T, superando il tetto del MultiGol 1-3 2°T. Per sfide aperte privilegiare mercati aperti (`Over 0.5 tempi`, `Chance Mix`, `Over 1.5`).
+
+#### 3. Risoluzione Strutturale dell'Allucinazione Anagrafica (Regola #84)
+- **Root Cause**: Errore del modello che associava Sommer all'Inter (memoria 2023/24) invece di leggere il feed Netwin `Sommer, Yann (Club Brugge)`.
+- **Soluzione Implementata**: Creato `services/football/player_registry_resolver.py` e introdotta nel manifesto `GEMINI.md` la **Regola #84 (Verifica Anagrafica Giocatori & Rispetto Assoluto Feed Bookmaker)**. Il sistema estrae programmaticamente squadra, giocatore e clausole sostituto senza fare affidamento sulla memoria pregressa.
+
+#### 4. Azioni Inviolabili per Mercoledì 14 Ottobre 2026
+1. **Priorità assoluta alle Player Props con clausola salvaguardia** (`e Sostituto` / `o Sostituto`), rivelatesi l'asset più redditizio della sessione.
+2. **Nessun mercato vincolato rigidamente ai primi 45 minuti** nel Core Rocket.
+3. **Core Rocket calibrato a 3 selezioni asimmetriche a quota @ 3.10 – 3.50** (Man City vs PSG, Bodø/Glimt vs Dortmund, Roma vs Real Madrid).
+
 
