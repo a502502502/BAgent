@@ -1,0 +1,21 @@
+---
+description: Regola #85 (Verifica Reale delle Rose, Anti-Fantasy Bias e Reality Gate)
+alwaysApply: true
+---
+
+# Regola #85: Verifica Reale delle Rose e Divieto Assoluto di Fonti Spazzatura o Simulate (Reality Gate & Anti-Fantasy Bias)
+
+## Divieto Tassativo di Query Temporali che Generano Simulazioni
+1. E severamente vietato lanciare ricerche web generiche con date future o stringhe che indicizzano simulazioni di videogiochi (Football Manager, EA Sports FC, carriere virtuali) o articoli SEO autogenerati.
+2. E tassativamente vietato riportare calciatori, allenatori, infortuni o trasferimenti non corrispondenti alla realta oggettiva dei club (vietato associare Sommer al Brugge, De Bruyne o Hojlund al Napoli, Stones o Akanji all'Inter).
+
+## Le Tre Sole Fonti Ufficiali Ammesse per Rose e Tesseramenti
+1. **Transfermarkt** (transfermarkt.it): unico database certificato per appartenenza del giocatore, rosa reale, contratti e infortuni ufficiali.
+2. **UEFA.com / Lega Serie A**: per liste depositate ufficiali della competizione (Lista A e Lista B).
+3. **Flashscore.it / Diretta.it / SofaScore**: per tabellini delle gare reali recenti e formazioni ufficiali a T-60 minuti.
+
+## Divieto Assoluto di Attribuzione Falsa della Fonte
+1. E severamente vietato dichiarare all'utente di aver consultato Transfermarkt, UEFA.com o altre fonti certificate se tali pagine non sono state effettivamente e direttamente verificate tramite chiamata mirata (read_url_content o search_web con site:transfermarkt.it).
+
+## Reality Check Obbligatorio Pre-Emissione
+1. Prima di proporre qualsiasi analisi, gemma, marcatore o pronostico, l'agente deve verificare la corrispondenza con la realta oggettiva calcistica. In caso di minima discrepanza, l'evento viene bloccato finche la distinta ufficiale non e verificata.

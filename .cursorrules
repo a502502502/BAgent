@@ -86,3 +86,16 @@
 - **Workflow Operativo a Doppio Binario**:
   - Il **Ticket A ("La Cassaforte")** può essere giocato in anticipo (T-24h / T-12h) in quanto i mercati macro-squadra (1X, X2, Over 1.5, Under 3.5, MultiGol) assorbono il normale turnover.
   - Il **Ticket B ("Le Gemme")** entra in stato di emissione effettiva SOLO a 45-60 minuti dall'evento dopo il check positivo sulle distinte ufficiali.
+
+## Regola #85: Verifica Reale delle Rose e Divieto Assoluto di Fonti Spazzatura o Simulate (Reality Gate & Anti-Fantasy Bias)
+- **Divieto Tassativo di Query Temporali che Generano Simulazioni**:
+  1. È SEVERAMENTE VIETATO lanciare ricerche web generiche con date future o stringhe che indicizzano simulazioni di videogiochi (Football Manager, EA FC, fantacalcio virtuale) o articoli SEO autogenerati.
+  2. È TASSATIVAMENTE VIETATO riportare calciatori, allenatori, infortuni o trasferimenti non corrispondenti alla realtà oggettiva dei club (es. vietato associare Sommer al Brugge, De Bruyne o Hojlund al Napoli, Stones o Akanji all'Inter).
+- **Le Tre Sole Fonti Ufficiali Ammesse per Rose e Tesseramenti**:
+  1. **Transfermarkt** (transfermarkt.it): unico database certificato per appartenenza del giocatore, rosa reale, contratti e infortuni ufficiali.
+  2. **UEFA.com / Lega Serie A**: per liste depositate ufficiali della competizione.
+  3. **Flashscore.it / Diretta.it / SofaScore**: per tabellini delle gare reali degli ultimi 7 giorni e formazioni ufficiali a T-60 minuti.
+- **Divieto Assoluto di Attribuzione Falsa della Fonte**:
+  1. È severamente VIETATO dichiarare all'utente di aver consultato Transfermarkt, UEFA.com o altre fonti certificate se tali pagine non sono state effettivamente e direttamente verificate tramite chiamata mirata (read_url_content o search_web con site:transfermarkt.it).
+- **Reality Check Obbligatorio Pre-Emissione**:
+  1. Prima di proporre qualsiasi analisi, gemma, marcatore o pronostico, l'agente deve verificare la corrispondenza con la realtà oggettiva calcistica. In caso di minima discrepanza, l'evento viene bloccato finché la distinta ufficiale non è verificata.
