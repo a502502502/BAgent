@@ -264,7 +264,7 @@ def build_today_champions_ofp() -> OFPEngine:
 
     # 6. Atletico Madrid vs Manchester United (21:00)
     engine.add_match(OFPMatchAnalysis(
-        match="Atlético Madrid vs Manchester United",
+        match="Atletico Madrid vs Manchester United",
         kickoff="13-10 21:00",
         tournament="UEFA Champions League",
         home_manager="Diego Simeone",
