@@ -1,8 +1,43 @@
 {
-  "generated_at": "2026-10-13T16:59:39.123412",
+  "generated_at": "2026-10-13T17:01:04.947348",
   "check_seconds": 30,
   "profit_label": "+41.61 € (Saldo Netto 12 Ott)",
   "present": [
+    {
+      "id": "TICKET_USER_TRIPLA_GEMME_PROPS_10EUR_13OTT",
+      "title": "Schedina Reale Utente 3: Tripla Gemme Props & Parate Sommer (@ 4.94)",
+      "label": "In attesa",
+      "stake": "10.00 €",
+      "odds": "4.94×",
+      "potential_win": "49.43 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "10-13 21:00",
+          "match": "Villarreal vs Napoli",
+          "pick": "Hojlund, Rasmus (Napoli) e Sostituto in Totale Almeno 1 Tiri in Porta : SI",
+          "odd": "1.54",
+          "result": "PENDING",
+          "score": ""
+        },
+        {
+          "when": "10-13 21:00",
+          "match": "Atletico Madrid vs Manchester United",
+          "pick": "Martinez, Lisandro (Manchester United) o Sostituto Cartellino o almeno 2 Falli Commessi : SI",
+          "odd": "2.14",
+          "result": "PENDING",
+          "score": ""
+        },
+        {
+          "when": "10-13 21:00",
+          "match": "Inter vs Club Brugge",
+          "pick": "U/O Sommer, Yann (Club Brugge) Parate 3.5 : OVER",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": ""
+        }
+      ]
+    },
     {
       "id": "TICKET_USER_MULTIPLA6_TOP_MATCHES_10EUR_13OTT",
       "title": "Schedina Reale Utente 2: Multipla (6) Top Match UCL (@ 9.22)",
