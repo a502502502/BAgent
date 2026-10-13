@@ -1,8 +1,43 @@
 {
-  "generated_at": "2026-10-13T17:01:04.947348",
+  "generated_at": "2026-10-13T17:02:30.802935",
   "check_seconds": 30,
   "profit_label": "+41.61 € (Saldo Netto 12 Ott)",
   "present": [
+    {
+      "id": "TICKET_USER_TRIPLA_ALTAQUOTA_5EUR_13OTT",
+      "title": "Schedina Reale Utente 4: Tripla Alta Quota Combo UCL (@ 11.30)",
+      "label": "In attesa",
+      "stake": "5.00 €",
+      "odds": "11.30×",
+      "potential_win": "56.54 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "10-13 21:00",
+          "match": "Villarreal vs Napoli",
+          "pick": "Doppia Chance + GG/NG: X2 + GG",
+          "odd": "2.57",
+          "result": "PENDING",
+          "score": ""
+        },
+        {
+          "when": "10-13 21:00",
+          "match": "Galatasaray vs Barcellona",
+          "pick": "1X2 + GG/NG: 2 + GG",
+          "odd": "1.93",
+          "result": "PENDING",
+          "score": ""
+        },
+        {
+          "when": "10-13 21:00",
+          "match": "Inter vs Club Brugge",
+          "pick": "1X2 + GG/NG: 1 + NG",
+          "odd": "2.28",
+          "result": "PENDING",
+          "score": ""
+        }
+      ]
+    },
     {
       "id": "TICKET_USER_TRIPLA_GEMME_PROPS_10EUR_13OTT",
       "title": "Schedina Reale Utente 3: Tripla Gemme Props & Parate Sommer (@ 4.94)",

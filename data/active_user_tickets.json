@@ -1,5 +1,68 @@
 [
   {
+    "ticket_id": "TICKET_USER_TRIPLA_ALTAQUOTA_5EUR_13OTT",
+    "title": "Schedina Reale Utente 4: Tripla Alta Quota Combo UCL (@ 11.30)",
+    "name": "Schedina Reale Utente 4: Tripla Alta Quota Combo UCL (@ 11.30)",
+    "bookmaker": "Netwin",
+    "type": "Multipla (3)",
+    "placed_at": "2026-10-13 16:53 CEST",
+    "created_at": "2026-10-13T16:53:51+02:00",
+    "date_created": "2026-10-13 16:53:51",
+    "status": "PENDING",
+    "strategy": "USER_PLAYED_TICKET_HIGH_ODDS_COMBO",
+    "stake": 5.0,
+    "stake_eur": 5.0,
+    "bonus": 0.0,
+    "total_odds": 11.3,
+    "potential_win": 56.54,
+    "potential_payout_eur": 56.54,
+    "net_profit_eur": 51.54,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "notes": "Schedina reale giocata dall utente su Netwin: Tripla Alta Quota Combo UCL. Importo 5.00 EUR, Quota 11.30, Vincita potenziale 56.54 EUR. Kickoff 13/10/2026 ore 21:00 CEST.",
+    "legs": [
+      {
+        "match": "Villarreal vs Napoli",
+        "tournament": "UEFA Champions League",
+        "competition": "UEFA Champions League",
+        "kickoff": "2026-10-13 21:00 CEST",
+        "market": "Doppia Chance + GG/NG: X2 + GG",
+        "selection": "X2 + GG",
+        "odds": 2.57,
+        "status": "PENDING",
+        "score": "-",
+        "minute": "PRE",
+        "rationale": "Il Napoli di Allegri solido all Estadio de la Ceramica: copre il pareggio con gol (1-1, 2-2) e la vittoria azzurra con rete dei padroni di casa (1-2, 1-3)."
+      },
+      {
+        "match": "Galatasaray vs Barcellona",
+        "tournament": "UEFA Champions League",
+        "competition": "UEFA Champions League",
+        "kickoff": "2026-10-13 21:00 CEST",
+        "market": "1X2 + GG/NG: 2 + GG",
+        "selection": "2 + GG",
+        "odds": 1.93,
+        "status": "PENDING",
+        "score": "-",
+        "minute": "PRE",
+        "rationale": "Vittoria del Barcellona di Flick al RAMS Park con gol dei turchi: Lewandowski, Yamal e Raphinha superiori, ma l attacco del Gala (Osimhen, Leao) punge con regolarita."
+      },
+      {
+        "match": "Inter vs Club Brugge",
+        "tournament": "UEFA Champions League",
+        "competition": "UEFA Champions League",
+        "kickoff": "2026-10-13 21:00 CEST",
+        "market": "1X2 + GG/NG: 1 + NG",
+        "selection": "1 + NG",
+        "odds": 2.28,
+        "status": "PENDING",
+        "score": "-",
+        "minute": "PRE",
+        "rationale": "Vittoria nerazzurra a San Siro con clean sheet: retroguardia di Chivu (Bastoni, Stones, Akanji, Provedel) ermetica contro il Brugge (finali 1-0, 2-0, 3-0)."
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_TRIPLA_GEMME_PROPS_10EUR_13OTT",
     "title": "Schedina Reale Utente 3: Tripla Gemme Props & Parate Sommer (@ 4.94)",
     "name": "Schedina Reale Utente 3: Tripla Gemme Props & Parate Sommer (@ 4.94)",
