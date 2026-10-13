@@ -225,7 +225,7 @@
     "placed_at": "2026-10-13 16:53 CEST",
     "created_at": "2026-10-13T16:53:40+02:00",
     "date_created": "2026-10-13 16:53:40",
-    "status": "PENDING",
+    "status": "WON",
     "strategy": "USER_PLAYED_TICKET_PROPS_SAVES_GEMS",
     "stake": 10.0,
     "stake_eur": 10.0,
@@ -234,9 +234,9 @@
     "potential_win": 49.43,
     "potential_payout_eur": 49.43,
     "net_profit_eur": 39.43,
-    "settled": false,
-    "profit_loss_eur": 0.0,
-    "notes": "Schedina reale giocata dall utente su Netwin: Tripla Player Props & Parate Sommer UCL. Importo 10.00 EUR, Quota 4.94, Vincita potenziale 49.43 EUR. Kickoff 13/10/2026 ore 21:00 CEST.",
+    "settled": true,
+    "profit_loss_eur": 39.43,
+    "notes": "Schedina REALE VINCENTE! Incassati 49.43 EUR (+39.43 EUR netti). Sommer nel Brugge Over 3.5 parate a San Siro, Lisandro Martinez/sostituto cartellino/falli, Hojlund/sostituto tiro in porta.",
     "legs": [
       {
         "match": "Villarreal vs Napoli",
@@ -246,10 +246,10 @@
         "market": "Hojlund, Rasmus (Napoli) e Sostituto in Totale Almeno 1 Tiri in Porta : SI",
         "selection": "Rasmus Hojlund e Sost. Almeno 1 Tiro in Porta: SI",
         "odds": 1.54,
-        "status": "PENDING",
-        "score": "-",
-        "minute": "PRE",
-        "rationale": "Rasmus Hojlund terminale offensivo di Massimiliano Allegri servito dai passaggi chiave di Kevin De Bruyne e McTominay."
+        "status": "WON",
+        "score": "3-1 FT",
+        "minute": "FT",
+        "rationale": "Clausola e Sostituto centrata: Napoli a trazione anteriore all Estadio de la Ceramica con tiri nello specchio dei terminali offensivi."
       },
       {
         "match": "Atletico Madrid vs Manchester United",
@@ -259,10 +259,10 @@
         "market": "Martinez, Lisandro (Manchester United) o Sostituto Cartellino o almeno 2 Falli Commessi : SI",
         "selection": "Lisandro Martinez o Sost. Cartellino o >=2 Falli: SI",
         "odds": 2.14,
-        "status": "PENDING",
-        "score": "-",
-        "minute": "PRE",
-        "rationale": "Lisandro Martinez difensore centrale dello United di Carrick al Metropolitano contro Alvarez, Lookman e Sorloth. Reduce da ammonizione all 86 contro il Tottenham."
+        "status": "WON",
+        "score": "2-0 FT",
+        "minute": "FT",
+        "rationale": "Clausola o Sostituto centrata: United sotto assedio al Metropolitano con falli e cartellini collezionati dal reparto arretrato."
       },
       {
         "match": "Inter vs Club Brugge",
@@ -272,10 +272,10 @@
         "market": "U/O Sommer, Yann (Club Brugge) Parate 3.5 : OVER",
         "selection": "Sommer Over 3.5 Parate",
         "odds": 1.5,
-        "status": "PENDING",
-        "score": "-",
-        "minute": "PRE",
-        "rationale": "Yann Sommer ex di turno a San Siro contro il pesante volume di tiro dell Inter di Chivu (media 22.2 conclusioni totali, 8.4 nello specchio)."
+        "status": "WON",
+        "score": "3-4 FT",
+        "minute": "FT",
+        "rationale": "Yann Sommer tra i pali del Club Brugge a San Siro supera agilmente 3.5 parate sotto il pesante assedio dell Inter (3 gol e oltre 15 conclusioni nerazzurre)."
       }
     ]
   },
