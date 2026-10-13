@@ -1,12 +1,14 @@
 {
-  "generated_at": "2026-10-12T21:45:00.000000",
+  "generated_at": "2026-10-13T09:00:00.000000",
   "check_seconds": 30,
-  "profit_label": "+109.51 € (potenziale doppio)",
-  "present": [
+  "profit_label": "+41.61 € (Saldo Netto 12 Ott)",
+  "present": [],
+  "future": [],
+  "past": [
     {
       "id": "TICKET_USER_MULTIPLA4_PENGWIN_15EUR_12OTT",
       "title": "Schedina Reale Utente 2: Multipla Asimmetrica Pengwin (@ 5.60)",
-      "label": "In corso (3/4 Vinte - Udinese in finestra gol)",
+      "label": "Vinta (+86.61 €)",
       "stake": "15.00 €",
       "bonus": "2.52 €",
       "odds": "5.60×",
@@ -42,15 +44,15 @@
           "match": "Torino vs Udinese",
           "pick": "MultiGol 1-3 Ospite: SI",
           "odd": "1.42",
-          "result": "PENDING",
-          "score": "1-1 (2°T) [Udinese 1 Gol]"
+          "result": "WON",
+          "score": "2-1 (FT)"
         }
       ]
     },
     {
       "id": "TICKET_USER_MULTIPLA4_SERA_20EUR_12OTT",
       "title": "Schedina Reale Utente 1: Multipla Copertura Cartellini (@ 2.89)",
-      "label": "In corso (3/4 Vinte)",
+      "label": "Persa",
       "stake": "20.00 €",
       "bonus": "0.00 €",
       "odds": "2.89×",
@@ -86,14 +88,11 @@
           "match": "Torino vs Udinese",
           "pick": "U/O 1.5 Cartellini Totali: OVER",
           "odd": "1.19",
-          "result": "PENDING",
-          "score": "1-1 (2°T)"
+          "result": "LOST",
+          "score": "2-1 (Cards: 0-1) (FT)"
         }
       ]
-    }
-  ],
-  "future": [],
-  "past": [
+    },
     {
       "id": "TICKET_USER_MULTIPLA5_MATTINA_10EUR_12OTT",
       "title": "Schedina Reale Utente: Multipla (5) Primo Pomeriggio (@ 6.66)",
