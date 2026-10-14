@@ -1,5 +1,51 @@
 [
   {
+    "ticket_id": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
+    "name": "Ticket Personale: La Doppia Diamante UCL (Wirtz + Como Corner)",
+    "title": "Ticket Personale: La Doppia Diamante UCL (Como Corner + Wirtz Gol/Assist) (@ 3.72)",
+    "bookmaker": "Netwin",
+    "type": "Doppia Diamante Player Props & Flussi Asimmetrici",
+    "status": "PENDING",
+    "placed_at": "2026-10-14 18:45 CEST",
+    "created_at": "2026-10-14T16:48:00+02:00",
+    "date_created": "2026-10-14 16:48:00",
+    "stake": 20.0,
+    "stake_eur": 20.0,
+    "bonus": 0.0,
+    "total_odds": 3.72,
+    "potential_win": 74.48,
+    "potential_payout_eur": 74.48,
+    "net_profit_eur": 54.48,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "booking_code": "DF07EA0A0E3260137E01",
+    "netwin_ticket_id": "DF07EA0A0E3260137E01",
+    "netwin_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A0E3260137E01",
+    "notes": "Doppia Diamante a massimo EV: Como Over 4.5 Corner @ 1.96 (EV +31.3%) + Wirtz Gol o Assist @ 1.90 (EV +21.6%). EV Combinato +59.5%.",
+    "legs": [
+      {
+        "match": "Feyenoord vs Como",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 18:45 CEST",
+        "market": "U/O 4.5 Corner Squadra 2 (esc.TS) : OVER",
+        "selection": "OVER",
+        "odds": 1.96,
+        "status": "PENDING",
+        "score": "EV: +31.3% | Media Como: 7.8 Corner | Prob: 67.0% [DIAMOND]"
+      },
+      {
+        "match": "LASK Linz vs Liverpool",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 18:45 CEST",
+        "market": "Wirtz, Florian (Liverpool) o Sostituto Segna o Fa Assist : SI",
+        "selection": "SI",
+        "odds": 1.9,
+        "status": "PENDING",
+        "score": "EV: +21.6% | Isak/Gakpo/Szoboszlai Out | Prob: 64.0% [DIAMOND]"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_A_CASSAFORTE_UCL_14EUR_14OTT",
     "name": "Ticket A: La Cassaforte UCL 14 Ottobre",
     "title": "Ticket A: La Cassaforte UCL (Core Macro 70% - Incrocio OFP) (@ 2.31)",

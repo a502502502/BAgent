@@ -1,8 +1,35 @@
 {
-  "generated_at": "2026-10-14T13:38:46.811045",
+  "generated_at": "2026-10-14T16:50:58.081336",
   "check_seconds": 30,
   "profit_label": "+6.61 € (Saldo Netto Aggiornato)",
   "present": [
+    {
+      "id": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
+      "title": "Ticket Personale: La Doppia Diamante UCL (Como Corner + Wirtz Gol/Assist) (@ 3.72)",
+      "label": "In Corso (Stasera)",
+      "stake": "20.00 €",
+      "odds": "3.72×",
+      "potential_win": "74.48 €",
+      "booking_code": "DF07EA0A0E3260137E01",
+      "legs": [
+        {
+          "when": "2026-10-14 18:45 CEST",
+          "match": "Feyenoord vs Como",
+          "pick": "Como Over 4.5 Corner (esc.TS)",
+          "odd": "1.96",
+          "result": "PENDING",
+          "score": "EV: +31.3% | Media Como: 7.8 Corner | Prob: 67.0% [DIAMOND]"
+        },
+        {
+          "when": "2026-10-14 18:45 CEST",
+          "match": "LASK Linz vs Liverpool",
+          "pick": "Wirtz (o Sostituto) Gol o Assist",
+          "odd": "1.90",
+          "result": "PENDING",
+          "score": "EV: +21.6% | Isak/Gakpo Out | Prob: 64.0% [DIAMOND]"
+        }
+      ]
+    },
     {
       "id": "TICKET_A_CASSAFORTE_UCL_14EUR_14OTT",
       "title": "Ticket A: La Cassaforte UCL (Core Macro 70% - Incrocio OFP) (@ 2.31)",

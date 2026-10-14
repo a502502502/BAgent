@@ -236,7 +236,7 @@ class RealityGateGuardian:
 
         # 3. Controllo Ex Squadre Giocatori Trasferiti (Anti-Memory Bias)
         for norm_player, formers in self.former_team_map.items():
-            player_surname = norm_player.split()[-1]
+            player_surname = norm_player.split(",")[0].strip() if "," in norm_player else norm_player.split()[-1].strip()
             if len(player_surname) >= 4 and re.search(rf"\b{re.escape(player_surname)}\b", norm_txt):
                 actual_team = self.player_teams.get(norm_player, "")
                 for former in formers:
@@ -250,7 +250,7 @@ class RealityGateGuardian:
 
         # 4. Controllo Associazione Giocatore-Squadra Esplicita (es. 'Sommer (Club Brugge)' o 'Leao (Galatasaray)')
         for norm_player, actual_team in self.player_teams.items():
-            player_surname = norm_player.split()[-1]
+            player_surname = norm_player.split(",")[0].strip() if "," in norm_player else norm_player.split()[-1].strip()
             if len(player_surname) < 4:
                 continue
             # Fast substring filter: se il cognome non compare affatto nel testo, salta all'istante

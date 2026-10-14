@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-10-14T14:06:31.398000+00:00",
+  "timestamp_utc": "2026-10-14T14:52:12.143672+00:00",
   "date": "2026-10-14",
   "integrity_status": "VIOLATIONS_DETECTED",
   "database_sync": {
@@ -19,9 +19,16 @@
     "cleaned_files": []
   },
   "active_tickets_audit": {
-    "total_tickets_audited": 61,
-    "violations_found": 22,
+    "total_tickets_audited": 62,
+    "violations_found": 28,
     "tickets": [
+      {
+        "ticket_id": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
+        "label": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
       {
         "ticket_id": "TICKET_A_CASSAFORTE_UCL_14EUR_14OTT",
         "label": "TICKET_A_CASSAFORTE_UCL_14EUR_14OTT",
@@ -78,8 +85,11 @@
           "ALLUCINAZIONE ATTRIBUZIONE: 'Hojlund, Rasmus' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Inigo Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Josep' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Lautaro' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Emiliano' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Yann Sommer' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Sommer, Yann' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Inter'!"
         ],
@@ -102,9 +112,13 @@
         "violations": [
           "ALLUCINAZIONE ATTRIBUZIONE: 'Inigo Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Josep' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Lautaro' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Emiliano' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Rafael Leao' e associato a 'Galatasaray', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e associato a 'Galatasaray', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Rafael Leao' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
           "ALLUCINAZIONE ALLENATORE: Il testo menziona 'Allegri' associato a 'Napoli'. L'allenatore ufficiale per la stagione 2026/27 e 'Antonio Conte'. 'Allegri' non siede piu sulla panchina di questa squadra!",
@@ -188,7 +202,6 @@
         "label": "TICKET_USER_PROPS_QUADRUPLA_10EUR_11OTT",
         "status": "REALITY_VIOLATION_BLOCKED",
         "violations": [
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Flecker, Florian' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'LASK'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Ronald Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!"
         ],
         "certified_entities": []
