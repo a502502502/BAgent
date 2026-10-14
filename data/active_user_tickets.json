@@ -2,7 +2,7 @@
   {
     "ticket_id": "TICKET_A_CASSAFORTE_UCL_14EUR_14OTT",
     "name": "Ticket A: La Cassaforte UCL 14 Ottobre",
-    "title": "Ticket A: La Cassaforte (Core Macro 70% - Regola #82/#83) (@ 2.41)",
+    "title": "Ticket A: La Cassaforte UCL (Core Macro 70% - Incrocio OFP) (@ 2.41)",
     "bookmaker": "Netwin",
     "type": "Tripla Core Macro",
     "status": "PENDING",
@@ -28,7 +28,7 @@
         "selection": "SI",
         "odds": 1.42,
         "status": "PENDING",
-        "score": "Prob OFP: 75.4% | Edge: +7.07% [STAR]"
+        "score": "OFP: AAA | Forebet 1-3 | Prob: 75.4% | Edge: +7.07% [STAR]"
       },
       {
         "match": "Feyenoord vs Como",
@@ -38,7 +38,7 @@
         "selection": "SI",
         "odds": 1.25,
         "status": "PENDING",
-        "score": "Prob OFP: 86.2% | Edge: +7.75% [STAR]"
+        "score": "OFP: AAA | Forebet 2-1 | Prob: 86.2% | Edge: +7.75% [STAR]"
       },
       {
         "match": "Aston Villa vs Fenerbahçe",
@@ -48,14 +48,14 @@
         "selection": "SI",
         "odds": 1.36,
         "status": "PENDING",
-        "score": "Prob OFP: 78.5% | Edge: +6.76% [STAR]"
+        "score": "OFP: AAA | Forebet 2-1 | Prob: 78.5% | Edge: +6.76% [STAR]"
       }
     ]
   },
   {
     "ticket_id": "TICKET_B_GEMME_UCL_6EUR_14OTT",
     "name": "Ticket B: Le Gemme UCL 14 Ottobre",
-    "title": "Ticket B: Le Gemme (Satellite Asimmetrico 30% - Max 2 Selezioni) (@ 2.19)",
+    "title": "Ticket B: Le Gemme UCL (Satellite 30% - Incrocio OFP Max 2 Leg) (@ 2.19)",
     "bookmaker": "Netwin",
     "type": "Doppia Satellite Asimmetrico",
     "status": "PENDING",
@@ -81,7 +81,7 @@
         "selection": "SI",
         "odds": 1.44,
         "status": "PENDING",
-        "score": "Prob OFP: 76.8% | Edge: +10.59% [STAR]"
+        "score": "OFP: AAA | Forebet 2-2 | Prob: 76.8% | Edge: +10.59% [STAR]"
       },
       {
         "match": "Manchester City vs PSG",
@@ -91,7 +91,7 @@
         "selection": "SI",
         "odds": 1.52,
         "status": "PENDING",
-        "score": "Prob OFP: 71.5% | Edge: +8.68% [STAR]"
+        "score": "OFP: AA | Forebet 2-1 | Prob: 71.5% | Edge: +8.68% [STAR]"
       }
     ]
   },
