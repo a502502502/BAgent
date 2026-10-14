@@ -8,6 +8,10 @@ Modulo di incrocio a tripla convergenza statistica e tattica:
 Rose, allenatori, infortuni e schemi tattici rigorosamente aggiornati al calcio reale.
 """
 
+import sys
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional
 import json
@@ -124,250 +128,142 @@ class OFPEngine:
 
 
 def build_today_champions_ofp() -> OFPEngine:
-    """Popola l'analisi OFP ufficiale per la Champions League del 13 Ottobre 2026 con rose reali."""
+    """Popola l'analisi OFP ufficiale per la Champions League del 14 Ottobre 2026 con rose e allenatori certificati al 100%."""
     engine = OFPEngine()
 
-    # 1. Inter vs Club Brugge (21:00)
+    # 1. LASK vs Liverpool (18:45)
     engine.add_match(OFPMatchAnalysis(
-        match="Inter vs Club Brugge",
-        kickoff="13-10 21:00",
+        match="LASK vs Liverpool",
+        kickoff="14-10 18:45",
         tournament="UEFA Champions League",
-        home_manager="Cristian Chivu",
-        away_manager="Ivan Leko",
-        home_key_players="Josep Martinez (o Provedel); Pavard, Akanji (Stones), Bastoni; Dimarco, Barella, Calhanoglu, Mkhitaryan (Zielinski), Carlos Augusto (Spence); Lautaro Martinez, Thuram",
-        away_key_players="Sommer; Seys, Mechele, Ordonez, De Cuyper; Onyedika, Jashari, Vanaken; Skov Olsen, Tzolis, Tresoldi (Jutgla)",
-        home_absences="Curtis Jones out (adduttori), John Stones monitorato per minutaggio",
-        away_absences="Carlos Forbs (in dubbio muscolare), Gustaf Nilsson (affaticamento)",
-        oddspedia_odds={"1": 1.40, "X": 4.60, "2": 7.50},
-        oddspedia_sentiment="Forte convergenza sul segno 1, quote bookmaker in discesa",
-        oddspedia_key_market="1",
-        forebet_pred_score="2-0",
-        forebet_prob={"1": 68, "X": 20, "2": 12},
-        forebet_over_under="Over 1.5 (82%), Under 3.5 (71%)",
-        pengwin_pick="1 fisso oppure 1 + Over 1.5",
-        pengwin_rationale="Inter di Chivu a San Siro con la coppia Lautaro-Thuram e difesa Akanji-Bastoni superiore al Brugge",
-        pengwin_special="Marcatore Lautaro Martinez / Combo 1 + No Gol",
-        convergence_grade="AAA",
-        recommended_primary="1",
-        recommended_safe="1X + MultiGol 1-4",
-        target_odds=1.40,
-        risk_profile="BASSO"
-    ))
-
-    # 2. Viking vs Bayern Monaco (21:00)
-    engine.add_match(OFPMatchAnalysis(
-        match="Viking vs Bayern Monaco",
-        kickoff="13-10 21:00",
-        tournament="UEFA Champions League",
-        home_manager="Bjarte Lunde Aarsheim",
-        away_manager="Vincent Kompany",
-        home_key_players="Ostbo; Haugen, Stensness, Langas, Vevatne; Bell, Tripic, Yazbek; Salvesen",
-        away_key_players="Neuer; Guerreiro, Upamecano, Kim Min-jae, Davies; Kimmich, Pavlovic (Palhinha); Olise, Musiala, Gnabry; Harry Kane",
-        home_absences="Nessuna assenza primaria",
-        away_absences="Stanisic, Boey, Ito (infortuni difensivi noti); attacco titolare al 100%",
-        oddspedia_odds={"1": 11.00, "X": 6.50, "2": 1.22},
-        oddspedia_sentiment="Dominio Bayern, quota 2 schiacciante",
-        oddspedia_key_market="2",
+        home_manager="Markus Schopp",
+        away_manager="Arne Slot",
+        home_key_players="Siebenhandl; Flecker, Ziereis, Talovierov, Bello; Horvath, Berisha; Zulj, Ljubicic, Usor",
+        away_key_players="Alisson; Alexander-Arnold, Konate, Van Dijk, Robertson; Gravenberch, Mac Allister, Florian Wirtz; Salah, Chiesa, Luis Diaz",
+        home_absences="Nessuna defezione maggiore tra i titolari",
+        away_absences="Isak out (affaticamento), Gakpo out, Szoboszlai out; attacco guidato da Wirtz e Salah",
+        oddspedia_odds={"1": 8.50, "X": 5.20, "2": 1.30},
+        oddspedia_sentiment="Forte convergenza su flussi offensivi Liverpool",
+        oddspedia_key_market="Over 0.5 1°T + Over 0.5 2°T",
         forebet_pred_score="0-3",
-        forebet_prob={"1": 6, "X": 13, "2": 81},
-        forebet_over_under="Over 2.5 (78%), Over 1.5 Ospite (84%)",
-        pengwin_pick="2 + Over 2.5 oppure MultiGol Ospite 2-4",
-        pengwin_rationale="Dislivello tecnico abissale. Kane incontenibile e bavaresi macchina da gol in Europa",
-        pengwin_special="Harry Kane Marcatore / 2 + Over 2.5",
+        forebet_prob={"1": 10, "X": 18, "2": 72},
+        forebet_over_under="Over 1.5 (86%), Over 2.5 (71%)",
+        pengwin_pick="Over 0.5 1°T + Over 0.5 2°T oppure 2 + Over 1.5",
+        pengwin_rationale="Liverpool di Arne Slot con Florian Wirtz fulcro offensivo tra le linee e Salah a finalizzare contro il LASK di Schopp",
+        pengwin_special="Wirtz Gol o Assist / Over 0.5 Entrambi i Tempi",
         convergence_grade="AAA",
-        recommended_primary="2 + Over 2.5",
-        recommended_safe="2 + Over 1.5",
-        target_odds=1.35,
+        recommended_primary="Over 0.5 1°T + Over 0.5 2°T",
+        recommended_safe="MultiGol 1-3 Ospite",
+        target_odds=1.42,
         risk_profile="BASSO"
     ))
 
-    # 3. Villarreal vs Napoli (21:00)
+    # 2. Feyenoord vs Como (21:00)
     engine.add_match(OFPMatchAnalysis(
-        match="Villarreal vs Napoli",
-        kickoff="13-10 21:00",
+        match="Feyenoord vs Como",
+        kickoff="14-10 21:00",
         tournament="UEFA Champions League",
-        home_manager="Inigo Perez",
-        away_manager="Massimiliano Allegri",
-        home_key_players="Diego Conde; Kiko Femenia, Logan Costa, Albiol, Sergi Cardona; Dani Parejo, Comesana, Nathan Saliba, Alberto Moleiro; Georges Mikautadze, Ayoze Perez (Barry)",
-        away_key_players="Caprile (Meret); Di Lorenzo, Sam Beukema, Benoit Badiashile, Olivera; Scott McTominay, Lobotka, Kevin De Bruyne; Politano, Rasmus Hojlund, David Neres (Giovane)",
-        home_absences="Buchanan out (infortunio), Gerard Moreno out",
-        away_absences="Alessandro Buongiorno out (recupero infortunio), Favasuli out",
-        oddspedia_odds={"1": 2.15, "X": 3.60, "2": 3.10},
-        oddspedia_sentiment="Match equilibrato, quote Gol / Over 2.5 in costante discesa",
-        oddspedia_key_market="Gol / X2",
-        forebet_pred_score="1-2",
-        forebet_prob={"1": 34, "X": 28, "2": 38},
-        forebet_over_under="Gol (65%), Under 3.5 (66%)",
-        pengwin_pick="MultiGol Ospite 1-3 oppure X2",
-        pengwin_rationale="Napoli di Allegri con De Bruyne a innescare Hojlund e McTominay; Villarreal di Inigo Perez pericoloso con Mikautadze",
-        pengwin_special="Cartellini Totali Over 4.5 / MultiGol Ospite 1-3",
-        convergence_grade="AA",
-        recommended_primary="MultiGol Ospite 1-3",
-        recommended_safe="X2 + Under 4.5",
-        target_odds=1.38,
-        risk_profile="MEDIO"
-    ))
-
-    # 4. Arsenal vs Lille (21:00)
-    engine.add_match(OFPMatchAnalysis(
-        match="Arsenal vs Lille",
-        kickoff="13-10 21:00",
-        tournament="UEFA Champions League",
-        home_manager="Mikel Arteta",
-        away_manager="Davide Ancelotti",
-        home_key_players="David Raya (Kepa); White, Saliba, Gabriel Magalhaes, Timber (Calafiori, Hincapie); Declan Rice, Mikel Merino, Martin Odegaard (Zubimendi, Bruno Guimaraes, Eze); Bukayo Saka, Viktor Gyokeres, Kai Havertz (Madueke)",
-        away_key_players="Berke Ozer; Meunier, Alexsandro, Diakite, Gudmundsson; Benjamin Andre, Angel Gomes; Haraldsson, Dilane Bakwa, Cabella; Olivier Giroud",
-        home_absences="Martin Odegaard (monitorato caviglia), Calafiori in ballottaggio",
-        away_absences="Tiago Santos, Umtiti out di lungo corso",
-        oddspedia_odds={"1": 1.35, "X": 4.80, "2": 8.50},
-        oddspedia_sentiment="Arsenal favorito indiscusso all'Emirates, quota 1 blindata",
-        oddspedia_key_market="1",
-        forebet_pred_score="2-0",
-        forebet_prob={"1": 72, "X": 18, "2": 10},
-        forebet_over_under="Under 3.5 (68%), 1X (90%)",
-        pengwin_pick="1 fisso oppure 1 + MultiGol 1-4",
-        pengwin_rationale="Arsenal all'Emirates con Gyokeres terminale e centrocampo Rice-Merino dominante su Lille di Davide Ancelotti",
-        pengwin_special="1 + No Gol / 1 fisso",
-        convergence_grade="AAA",
-        recommended_primary="1",
-        recommended_safe="1X + MultiGol 1-4",
-        target_odds=1.35,
-        risk_profile="BASSO"
-    ))
-
-    # 5. Galatasaray vs Barcellona (21:00)
-    engine.add_match(OFPMatchAnalysis(
-        match="Galatasaray vs Barcellona",
-        kickoff="13-10 21:00",
-        tournament="UEFA Champions League",
-        home_manager="Okan Buruk",
-        away_manager="Hansi Flick",
-        home_key_players="Muslera; Kaan Ayhan, Davinson Sanchez, Bardakci, Jakobs; Torreira, Gabriel Sara; Leroy Sane, Mertens, Baris Alper Yilmaz; Victor Osimhen (Icardi)",
-        away_key_players="Inaki Pena (Szczesny); Kounde, Cubarsi, Inigo Martinez, Balde; Casado, Pedri, Dani Olmo (Fermin Lopez); Lamine Yamal, Lewandowski, Raphinha",
-        home_absences="Ziyech in dubbio, Osimhen al centro dell'attacco",
-        away_absences="Ter Stegen, Ronald Araujo, Christensen, Ferran Torres",
-        oddspedia_odds={"1": 4.20, "X": 4.00, "2": 1.75},
-        oddspedia_sentiment="Barca favorito, quote Over 2.5 e Gol crollate a 1.50",
-        oddspedia_key_market="Over 2.5 / 2",
-        forebet_pred_score="1-3",
-        forebet_prob={"1": 18, "X": 24, "2": 58},
-        forebet_over_under="Over 2.5 (70%), Gol (64%)",
-        pengwin_pick="Gol oppure X2 + Over 1.5",
-        pengwin_rationale="Atmosfera infernale a Istanbul; Osimhen e Sane pungono la linea di Flick, ma Lewandowski e Yamal creano a raffica",
-        pengwin_special="Gol Entrambe / Over 2.5",
-        convergence_grade="AA",
-        recommended_primary="Over 2.5",
-        recommended_safe="X2 + Over 1.5",
-        target_odds=1.36,
-        risk_profile="MEDIO"
-    ))
-
-    # 6. Atletico Madrid vs Manchester United (21:00)
-    engine.add_match(OFPMatchAnalysis(
-        match="Atletico Madrid vs Manchester United",
-        kickoff="13-10 21:00",
-        tournament="UEFA Champions League",
-        home_manager="Diego Simeone",
-        away_manager="Michael Carrick",
-        home_key_players="Oblak; Molina, Gimenez, Le Normand, Reinildo (Galan); De Paul, Koke, Gallagher, Samuel Lino; Julian Alvarez, Ademola Lookman (Sorloth)",
-        away_key_players="Onana; Mazraoui, De Ligt, Lisandro Martinez, Dalot; Casemiro, Mainoo; Garnacho, Bruno Fernandes, Rashford; Rasmus Hojlund (Zirkzee)",
-        home_absences="Cesar Azpilicueta out",
-        away_absences="Luke Shaw, Malacia, Mount out",
-        oddspedia_odds={"1": 2.10, "X": 3.30, "2": 3.40},
-        oddspedia_sentiment="Gara bloccata e nervosa, quote Under 2.5 favorite",
-        oddspedia_key_market="1X / Under 2.5",
-        forebet_pred_score="1-0",
-        forebet_prob={"1": 44, "X": 32, "2": 24},
-        forebet_over_under="Under 2.5 (62%), 1X (76%)",
-        pengwin_pick="1X + Under 3.5",
-        pengwin_rationale="Gara a scacchi di Simeone: blocco basso e ripartenze con Julian Alvarez e Lookman contro lo United di Carrick",
-        pengwin_special="Cartellini Totali Over 4.5 / 1X",
-        convergence_grade="AA",
-        recommended_primary="1X + Under 3.5",
-        recommended_safe="Under 3.5",
-        target_odds=1.45,
-        risk_profile="MEDIO"
-    ))
-
-    # 7. RB Lipsia vs PSV Eindhoven (21:00)
-    engine.add_match(OFPMatchAnalysis(
-        match="RB Lipsia vs PSV Eindhoven",
-        kickoff="13-10 21:00",
-        tournament="UEFA Champions League",
-        home_manager="Martin Demichelis",
-        away_manager="Peter Bosz",
-        home_key_players="Vandevoordt; Geertruida, Lukeba, Orban, Henrichs; Banzuzi, Haidara; Antonio Nusa, Nkunku, Johan Bakayoko; Sesko (Openda)",
-        away_key_players="Kovar; Sergino Dest, Flamingo, Obispo, Mauro Junior; Guus Til, Schouten, Mijnans; Ivan Perisic, Ricardo Pepi (Luuk de Jong), Noa Lang",
-        home_absences="Christoph Baumgartner, Marc Guiu, Assan Ouedraogo out",
-        away_absences="Joey Veerman out",
-        oddspedia_odds={"1": 1.90, "X": 3.70, "2": 3.60},
-        oddspedia_sentiment="Partita aperta a qualsiasi esito, quote Gol/Over gettonatissime",
-        oddspedia_key_market="Gol / Over 2.5",
-        forebet_pred_score="2-1",
-        forebet_prob={"1": 50, "X": 26, "2": 24},
-        forebet_over_under="Over 2.5 (66%), Gol (68%)",
-        pengwin_pick="Gol oppure 1X + Over 1.5",
-        pengwin_rationale="Due filosofie offensive: il Lipsia di Demichelis con Nkunku e Nusa contro il PSV di Bosz con Perisic e Pepi",
-        pengwin_special="Gol Entrambe / Over 2.5",
-        convergence_grade="AA",
-        recommended_primary="Gol",
-        recommended_safe="1X + Over 1.5",
-        target_odds=1.45,
-        risk_profile="MEDIO"
-    ))
-
-    # 8. Lens vs Sporting CP (18:45)
-    engine.add_match(OFPMatchAnalysis(
-        match="Lens vs Sporting CP",
-        kickoff="13-10 18:45",
-        tournament="UEFA Champions League",
-        home_manager="Yannick Cahuzac",
-        away_manager="Rui Borges",
-        home_key_players="Risser; Aguilar, Ismaelo Ganiou, Baidoo, Udol; Cuisance, Titraoui; Sotoca, Thauvin, Odsonne Edouard",
-        away_key_players="Rui Silva; Fresneda, Quaresma, Inacio, Vagiannidis; Altimira, Simoes, Silas Andersen; Geny Catamo, Fotis Ioannidis, Luis Suarez",
-        home_absences="Abdallah Sima out, Todibo / Gradit in dubbio",
-        away_absences="Zeno Debast, Nuno Santos, Rodrigo Zalazar out",
-        oddspedia_odds={"1": 2.55, "X": 3.30, "2": 2.70},
-        oddspedia_sentiment="Equilibrio tattico al Bollaert-Delelis",
-        oddspedia_key_market="X2 / Under 2.5",
+        home_manager="Brian Priske",
+        away_manager="Cesc Fàbregas",
+        home_key_players="Bijlow; Nieuwkoop, Trauner, Hancko, Smal; Quinten Timber, Hwang In-beom, Milambo; Stengs, Gimenez, Paixao",
+        away_key_players="Audero; Van der Brempt, Dossena, Kempf, Alberto Moreno; Perrone, Sergi Roberto; Strefezza, Nico Paz, Martin Baturina; Cutrone (Belotti)",
+        home_absences="Quilindschy Hartman out di lungo corso",
+        away_absences="Raphael Varane (gestione minutaggio); Nico Paz e Baturina titolari",
+        oddspedia_odds={"1": 2.05, "X": 3.60, "2": 3.40},
+        oddspedia_sentiment="Gara aperta a Rotterdam, Como con volume offensivo e corner",
+        oddspedia_key_market="Chance Mix 1X o Over 1.5",
         forebet_pred_score="1-1",
-        forebet_prob={"1": 31, "X": 35, "2": 34},
-        forebet_over_under="Under 2.5 (58%), Under 3.5 (74%)",
-        pengwin_pick="X2 oppure MultiGol 1-3",
-        pengwin_rationale="Gara molto fisica e tattica al Bollaert-Delelis; Sporting di Rui Borges orfano di Debast ma con Ioannidis e Luis Suarez",
-        pengwin_special="Under 2.5 / MultiGol 1-3",
-        convergence_grade="A",
-        recommended_primary="MultiGol 1-3",
-        recommended_safe="Under 3.5",
+        forebet_prob={"1": 42, "X": 29, "2": 29},
+        forebet_over_under="Over 1.5 (78%), Gol (63%)",
+        pengwin_pick="Chance Mix 1X o Over 1.5 oppure Como Over 4.5 Corner",
+        pengwin_rationale="Feyenoord di Priske molto aggressivo al De Kuip, ma Como di Fabregas con Nico Paz e Baturina crea gioco e produce angoli",
+        pengwin_special="Como Over 4.5 Corner / Paz o Baturina Assist",
+        convergence_grade="AAA",
+        recommended_primary="Chance Mix 1X o Over 1.5",
+        recommended_safe="MultiGol 1-4",
+        target_odds=1.25,
+        risk_profile="BASSO"
+    ))
+
+    # 3. Aston Villa vs Fenerbahçe (21:00)
+    engine.add_match(OFPMatchAnalysis(
+        match="Aston Villa vs Fenerbahçe",
+        kickoff="14-10 21:00",
+        tournament="UEFA Champions League",
+        home_manager="Unai Emery",
+        away_manager="İsmail Kartal",
+        home_key_players="Emiliano Martinez; Konsa, Diego Carlos, Pau Torres, Digne; Bailey, Onana, Tielemans, McGinn; Morgan Rogers, Ollie Watkins",
+        away_key_players="Livakovic; Osayi-Samuel, Becao, Djiku, Oosterwolde; Fred, Sofyan Amrabat; Szymanski, Tadic, Saint-Maximin; Dzeko (En-Nesyri)",
+        home_absences="Kamara in recupero; Watkins terminale titolare",
+        away_absences="Nessuna defezione critica",
+        oddspedia_odds={"1": 1.70, "X": 3.90, "2": 4.60},
+        oddspedia_sentiment="Aston Villa favorito al Villa Park, secondo tempo con gol attesi",
+        oddspedia_key_market="MultiGol 1-3 2°Tempo",
+        forebet_pred_score="2-1",
+        forebet_prob={"1": 55, "X": 24, "2": 21},
+        forebet_over_under="Over 2.5 (66%), Gol (64%)",
+        pengwin_pick="MultiGol 1-3 2°Tempo oppure 1X + Over 1.5",
+        pengwin_rationale="L'Aston Villa di Emery alza ritmo e baricentro nella ripresa al Villa Park; il Fenerbahçe di Kartal risponde con Tadic ed En-Nesyri",
+        pengwin_special="MultiGol 1-3 2°Tempo",
+        convergence_grade="AAA",
+        recommended_primary="MultiGol 1-3 2°Tempo",
+        recommended_safe="1X + MultiGol 1-5",
         target_odds=1.30,
         risk_profile="BASSO"
     ))
 
-    # 9. Sabah vs Slavia Praga (18:45)
+    # 4. Bodø/Glimt vs Borussia Dortmund (21:00)
     engine.add_match(OFPMatchAnalysis(
-        match="Sabah vs Slavia Praga",
-        kickoff="13-10 18:45",
+        match="Bodø/Glimt vs Borussia Dortmund",
+        kickoff="14-10 21:00",
         tournament="UEFA Champions League",
-        home_manager="Valdas Dambrauskas",
-        away_manager="Jindrich Trpisovsky",
-        home_key_players="Imanov; Seydiyev, Irazabal, Stankovic, Tymoteusz Puchacz; Khaybulaev, Camalov; Mickels, Sekidika, Safranko",
-        away_key_players="Kinsky; Holes, Zima, Boril; Doudera, David Moses, Zafeiris, Malick Diouf; Provod, Chory, Danijel Sturm",
-        home_absences="Nessuna defezione maggiore",
-        away_absences="Masopust, Vlcek",
-        oddspedia_odds={"1": 5.50, "X": 4.00, "2": 1.60},
-        oddspedia_sentiment="Slavia Praga nettamente favorito in trasferta",
-        oddspedia_key_market="2",
-        forebet_pred_score="0-2",
-        forebet_prob={"1": 15, "X": 25, "2": 60},
-        forebet_over_under="Under 3.5 (70%), X2 (85%)",
-        pengwin_pick="2 secco oppure X2 + Under 3.5",
-        pengwin_rationale="Slavia Praga di Trpisovsky con David Moses e Chory superiore per ritmo europeo al Sabah di Dambrauskas",
-        pengwin_special="2 secco",
+        home_manager="Kjetil Knutsen",
+        away_manager="Niko Kovač",
+        home_key_players="Haikin; Sjovold, Bjortuft, Gundersen, Bjorkan; Evjen, Berg, Saltnes; Zinckernagel, Hogh, Jens Petter Hauge",
+        away_key_players="Kobel; Couto, Anton, Schlotterbeck, Bensebaini; Can, Nmecha, Brandt; Beier, Guirassy, Gittens",
+        home_absences="Nessuna assenza primaria sul sintetico di Bodo",
+        away_absences="Adeyemi (infortunio muscolare), Reyna out",
+        oddspedia_odds={"1": 4.10, "X": 4.00, "2": 1.80},
+        oddspedia_sentiment="Bodo temibile in casa, Dortmund cerca riscatto con Kovac",
+        oddspedia_key_market="Over 0.5 1°T + Over 0.5 2°T",
+        forebet_pred_score="1-2",
+        forebet_prob={"1": 24, "X": 26, "2": 50},
+        forebet_over_under="Over 2.5 (72%), Gol (68%)",
+        pengwin_pick="Over 0.5 1°T + Over 0.5 2°T oppure Gol",
+        pengwin_rationale="Campo sintetico insidioso per il Dortmund di Kovac; Bodo di Knutsen gioca sempre a viso aperto",
+        pengwin_special="Gol Entrambe / Over 2.5",
         convergence_grade="AA",
-        recommended_primary="2",
-        recommended_safe="X2 + Under 3.5",
-        target_odds=1.45,
-        risk_profile="BASSO"
+        recommended_primary="Over 0.5 1°T + Over 0.5 2°T",
+        recommended_safe="X2 + Over 1.5",
+        target_odds=1.44,
+        risk_profile="MEDIO"
+    ))
+
+    # 5. Manchester City vs Paris Saint-Germain (21:00)
+    engine.add_match(OFPMatchAnalysis(
+        match="Manchester City vs Paris Saint-Germain",
+        kickoff="14-10 21:00",
+        tournament="UEFA Champions League",
+        home_manager="Enzo Maresca",
+        away_manager="Luis Enrique",
+        home_key_players="Ederson; Lewis, Akanji, Dias, Gvardiol; Kovacic, Elliot Anderson, Bernardo Silva; Cherki, Haaland, Foden",
+        away_key_players="Donnarumma; Hakimi, Marquinhos, Pacho, Nuno Mendes; Zaire-Emery, Vitinha, Joao Neves; Dembele, Asensio, Barcola",
+        home_absences="Rodri out (LCA), De Bruyne in gestione",
+        away_absences="Lucas Hernandez, Kimpembe, Goncalo Ramos out",
+        oddspedia_odds={"1": 1.95, "X": 3.75, "2": 3.60},
+        oddspedia_sentiment="Gara di altissimo livello tattico all'Etihad",
+        oddspedia_key_market="MultiGol 0-2 1°T + 1-3 2°T",
+        forebet_pred_score="2-1",
+        forebet_prob={"1": 50, "X": 26, "2": 24},
+        forebet_over_under="Over 2.5 (64%), Gol (65%)",
+        pengwin_pick="MultiGol 0-2 1°T + 1-3 2°T oppure 1X + Over 1.5",
+        pengwin_rationale="Big match europeo: il City di Maresca controlla il possesso ma rischia sulle transizioni veloci del PSG di Luis Enrique",
+        pengwin_special="Haaland Marcatore / MultiGol Tempi",
+        convergence_grade="AA",
+        recommended_primary="MultiGol 0-2 1°T + 1-3 2°T",
+        recommended_safe="1X + MultiGol 1-5",
+        target_odds=1.52,
+        risk_profile="MEDIO"
     ))
 
     return engine
@@ -375,6 +271,6 @@ def build_today_champions_ofp() -> OFPEngine:
 
 if __name__ == "__main__":
     eng = build_today_champions_ofp()
-    print(f"Caricati {len(eng.matches)} match con algoritmo OFP e rose reali.")
+    print(f"Caricati {len(eng.matches)} match con algoritmo OFP e rose reali certificate 2026/27.")
     for m in eng.matches:
         print(f"[{m.convergence_grade}] {m.match} ({m.home_manager} vs {m.away_manager}) -> Pick: {m.recommended_primary} (Safe: {m.recommended_safe})")

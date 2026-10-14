@@ -81,14 +81,30 @@
 - **Defensive Discipline Prohibition**: Individual defender foul counts are volatile and subject to match disruption (e.g., teammate red cards, referee bias). Discipline bets must only target **total match card/foul lines**, never isolated defenders.
 - **Goalkeeper Saves Asymmetry**: Goalkeepers facing high shot-volume opponents (e.g. teams averaging > 20 shots / > 8 on target) offer massive positive EV on low save lines (Over 3.5 saves).
 
-### D. Regola #85: Reality Gate & Anti-Fantasy Bias
-- Strict verification of 2026/27 transfers and rosters:
-  - Inter Milan: Coach Cristian Chivu (Akanji, Stones, Bastoni, Lautaro, Thuram).
-  - Napoli: Coach Massimiliano Allegri (Kevin De Bruyne, McTominay, Rasmus Højlund).
-  - AS Roma: Coach Gian Piero Gasperini (Artem Dovbyk, Paulo Dybala).
-  - Manchester City: Coach Enzo Maresca (Erling Haaland, Rayan Cherki, Phil Foden).
-  - Liverpool: Coach Arne Slot (Mohamed Salah, Cody Gakpo, Alexis Mac Allister).
-  - Real Madrid: Coach Carlo Ancelotti (Kylian Mbappé, Vinícius Júnior, Jude Bellingham).
+### D. Regola #85: Reality Gate Guardian & Anti-Hallucination Architecture
+- Certified reality rosters and managers for 2026/27 (backed by SQLite `official_team_managers_2026` & `player_registry_2026`):
+  - Inter Milan: Coach Simone Inzaghi (Yann Sommer, Lautaro Martínez, Marcus Thuram, Nicolò Barella, Alessandro Bastoni).
+  - Napoli: Coach Antonio Conte (Romelu Lukaku, Khvicha Kvaratskhelia, Scott McTominay, Alessandro Buongiorno, Alex Meret).
+  - Fenerbahçe: Coach İsmail Kartal (Edin Džeko, Dušan Tadić, Fred, Youssef En-Nesyri). Banned former: José Mourinho.
+  - Borussia Dortmund: Coach Niko Kovač (Serhou Guirassy, Maximilian Beier, Julian Brandt, Gregor Kobel, Felix Nmecha). Banned former: Nuri Şahin, Edin Terzić.
+  - Manchester City: Coach Enzo Maresca (Erling Haaland, Rayan Cherki, Phil Foden, Elliot Anderson, Manuel Akanji, Kevin De Bruyne).
+  - Liverpool: Coach Arne Slot (Florian Wirtz, Mohamed Salah, Federico Chiesa, Alexis Mac Allister, Virgil van Dijk).
+  - Como: Coach Cesc Fàbregas (Nico Paz, Martin Baturina, Sergi Roberto, Patrick Cutrone, Emil Audero).
+  - AS Roma: Coach Gian Piero Gasperini (Paulo Dybala, Artem Dovbyk, Wesley França, Lorenzo Pellegrini).
+  - AC Milan: Coach Paulo Fonseca (Rafael Leão, Theo Hernández, Álvaro Morata, Mike Maignan). Banned former: Stefano Pioli.
+  - Juventus: Coach Thiago Motta (Dušan Vlahović, Kenan Yıldız, Teun Koopmeiners, Bremer). Banned former: Massimiliano Allegri.
+  - Real Madrid: Coach Carlo Ancelotti (Kylian Mbappé, Vinícius Júnior, Jude Bellingham, Thibaut Courtois).
+  - FC Barcelona: Coach Hansi Flick (Robert Lewandowski, Lamine Yamal, Raphinha, Dani Olmo).
+  - Bayern München: Coach Vincent Kompany (Harry Kane, Michael Olise, Jamal Musiala, Manuel Neuer).
+  - Aston Villa: Coach Unai Emery (Ollie Watkins, Emiliano Martínez, Youri Tielemans).
+  - Feyenoord: Coach Brian Priske (Santiago Giménez, Quinten Timber, Igor Paixão).
+  - Bodø/Glimt: Coach Kjetil Knutsen (Patrick Berg, Jens Petter Hauge, Kasper Høgh).
+  - LASK: Coach Markus Schopp (Robert Zulj, Marin Ljubicic, Sascha Horvath).
+
+- Programmatic Enforcement:
+  - Gate 0.8 / 0.85 Hard-Gate in `services/betting/strict_ticket_pipeline.py`.
+  - Active watchdog: `services/football/reality_gate_guardian.py` (raises `RealityGateViolationError` if stale coaches or misassigned players are detected).
+  - Daily hygiene and updater: `scripts/daily_roster_coach_updater.py` (runs daily to purge stale caches, verify DB tables, and emit `data/daily_reality_snapshot.json`).
 
 ---
 

@@ -24,6 +24,8 @@ DB_PATH = ROOT / "data" / "bagent.db"
 if not DB_PATH.exists():
     DB_PATH = ROOT / "storage" / "database" / "bagent.db"
 
+from services.football.reality_gate_guardian import RealityGateGuardian
+
 # Caricamento credenziali da .env
 env_path = ROOT / ".env"
 if env_path.exists():
@@ -88,6 +90,7 @@ class SquadAbsenceChecker:
 
     def __init__(self, db_path: Path = DB_PATH, api_key: Optional[str] = None):
         self.db_path = db_path
+        self.guardian = RealityGateGuardian(db_paths=[self.db_path])
         self.api_key = api_key or os.getenv("API_FOOTBALL_KEY", "")
         self.headers = {
             "x-rapidapi-host": API_HOST,
@@ -107,38 +110,62 @@ class SquadAbsenceChecker:
         return []
 
     def check_player_in_db(self, player_name: str) -> List[Dict[str, Any]]:
-        """Cerca il giocatore nel database SQLite locale."""
+        """Cerca il giocatore nel database SQLite locale (prima player_registry_2026, poi players)."""
         if not self.db_path.exists():
             return []
+
+        norm_p = normalize(player_name)
+        results = []
 
         try:
             with sqlite3.connect(self.db_path) as con:
                 con.create_function("NORM", 1, normalize)
                 cur = con.cursor()
-                norm_p = normalize(player_name)
 
+                # 1. Priorita assoluta al Registro Ufficiale 2026/27
+                try:
+                    cur.execute("""
+                        SELECT canonical_name, display_name, team_name, role, number, source, last_verified
+                        FROM player_registry_2026
+                        WHERE NORM(canonical_name) LIKE ? OR NORM(display_name) LIKE ?
+                    """, (f"%{norm_p}%", f"%{norm_p}%"))
+                    for r in cur.fetchall():
+                        results.append({
+                            "player_id": None,
+                            "name": r[0],
+                            "display_name": r[1],
+                            "team_name": r[2],
+                            "position": r[3] or "N/D",
+                            "number": r[4],
+                            "source": r[5],
+                            "season": "2026/27",
+                            "last_updated": r[6]
+                        })
+                    if results:
+                        return results
+                except sqlite3.OperationalError:
+                    pass
+
+                # 2. Fallback alla tabella players storica con le colonne reali
                 cur.execute("""
-                    SELECT player_id, name, number, position, age, team_id, team_name, league_name, last_updated
+                    SELECT id, full_name, current_club, position, age, league, season
                     FROM players
-                    WHERE NORM(name) LIKE ? OR NORM(name) LIKE ?
-                """, (f"%{norm_p}%", f"{norm_p}%"))
-                rows = cur.fetchall()
-
-                results = []
-                for r in rows:
+                    WHERE NORM(full_name) LIKE ?
+                """, (f"%{norm_p}%",))
+                for r in cur.fetchall():
                     results.append({
                         "player_id": r[0],
                         "name": r[1],
-                        "number": r[2],
-                        "position": r[3],
+                        "team_name": r[2],
+                        "position": r[3] or "N/D",
                         "age": r[4],
-                        "team_id": r[5],
-                        "team_name": r[6],
-                        "league_name": r[7],
-                        "last_updated": r[8]
+                        "league_name": r[5],
+                        "season": r[6],
+                        "source": "DB_PLAYERS_HISTORICAL"
                     })
                 return results
-        except sqlite3.OperationalError:
+        except Exception as e:
+            print(f"[SquadAbsenceChecker] Avviso ricerca DB per {player_name}: {e}")
             return []
 
     def verify_player_roster(self, player_name: str, team_name: str) -> Tuple[bool, str, Dict[str, Any]]:
@@ -390,9 +417,9 @@ class SquadAbsenceChecker:
         away_team: Optional[str] = None
     ) -> Tuple[bool, List[str]]:
         """
-        Regola #49: Zero Parametric Memory Gate.
+        Regola #49, #84, #85: Reality Gate Guardian Audit.
         Scansiona il testo del Sesto Senso / motivazione per identificare allucinazioni
-        di giocatori trasferiti, indisponibili o non appartenenti alle due squadre in campo.
+        di allenatori obsoleti o giocatori non appartenenti alla rosa 2026/27.
         Ritorna: (passed, list_of_violations)
         """
         if not text or not text.strip():
@@ -413,51 +440,9 @@ class SquadAbsenceChecker:
         home_t = home_team or ""
         away_t = away_team or ""
 
-        violations = []
-
-        # 1. Controllo figure storiche notoriamente cedute o fuori rosa
-        known_outdated = {
-            'lukaku': ("Romelu Lukaku", "Non presente nella rosa del Napoli 2026/27"),
-            'osimhen': ("Victor Osimhen", "Ceduto dal Napoli"),
-            'zielinski': ("Piotr Zieliński", "Non milita più nel Napoli (trasferito all'Inter)"),
-            'giroud': ("Olivier Giroud", "Non milita più in Serie A (MLS)"),
-            'rabiot': ("Adrien Rabiot", "Non milita più nella Juventus"),
-            'chiesa': ("Federico Chiesa", "Trasferito al Liverpool, non milita nella Juventus"),
-        }
-
-        for token, (name, note) in known_outdated.items():
-            if re.search(rf"\b{re.escape(token)}\b", norm_text):
-                # Se è citato a sproposito in un match correlato alla sua vecchia squadra
-                if "napoli" in (home_t + away_t).lower() and token in ['lukaku', 'osimhen', 'zielinski']:
-                    violations.append(f"Citazione anagrafica errata: '{name}' per il Napoli ({note}).")
-                elif "juve" in (home_t + away_t).lower() and token in ['chiesa', 'rabiot']:
-                    violations.append(f"Citazione anagrafica errata: '{name}' per la Juventus ({note}).")
-                elif "milan" in (home_t + away_t).lower() and token in ['giroud']:
-                    violations.append(f"Citazione anagrafica errata: '{name}' per il Milan ({note}).")
-
-        # 2. Controllo allenatori non verificati o cambiati rispetto alle stagioni precedenti
-        outdated_coaches = {
-            'conte': ("Antonio Conte", "Non verificato o non più presente come guida tecnica del Napoli 2026/27"),
-            'italiano': ("Vincenzo Italiano", "Non verificato o non più presente come guida tecnica del Bologna 2026/27"),
-            'pioli': ("Stefano Pioli", "Non allena il Milan nel 2026/27"),
-            'allegri': ("Massimiliano Allegri", "Non allena la Juventus nel 2026/27"),
-            'sarri': ("Maurizio Sarri", "Non allena la Lazio nel 2026/27"),
-            'mourinho': ("José Mourinho", "Non allena il Fenerbahçe né la Roma nel 2026/27 (Memoria parametrica vietata)"),
-            'juric': ("Ivan Jurić", "Non verificato come guida tecnica nel 2026/27"),
-            'tudor': ("Igor Tudor", "Non verificato come guida tecnica nel 2026/27"),
-        }
-        for token, (name, note) in outdated_coaches.items():
-            if re.search(rf"\b{re.escape(token)}\b", norm_text):
-                if "napoli" in (home_t + away_t).lower() and token == 'conte':
-                    violations.append(f"Guida tecnica errata/non confermata: '{name}' per il Napoli ({note}).")
-                elif "bologna" in (home_t + away_t).lower() and token == 'italiano':
-                    violations.append(f"Guida tecnica errata/non confermata: '{name}' per il Bologna ({note}).")
-                elif "milan" in (home_t + away_t).lower() and token == 'pioli':
-                    violations.append(f"Guida tecnica errata: '{name}' per il Milan ({note}).")
-                elif "juve" in (home_t + away_t).lower() and token == 'allegri':
-                    violations.append(f"Guida tecnica errata: '{name}' per la Juventus ({note}).")
-                elif token == 'mourinho':
-                    violations.append(f"Guida tecnica errata/non confermata: '{name}' ({note}).")
+        # 1. Audit autoritativo via RealityGateGuardian
+        guardian_res = self.guardian.audit_text(text, home_team=home_t, away_team=away_t)
+        violations = list(guardian_res.violations)
 
         # 2. Controllo incrociato su cognomi DB 2026/27
         surnames_index = self.get_all_surnames_index()

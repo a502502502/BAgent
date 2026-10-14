@@ -64,11 +64,11 @@ class PlayerRegistryResolver:
     def parse_market_string(self, market_text: str) -> Optional[ParsedPlayerProp]:
         """
         Analizza pattern bookmaker come:
-        - "U/O Sommer, Yann (Club Brugge) Parate 3.5 : OVER"
-        - "Hojlund, Rasmus (Napoli) e Sostituto in Totale Almeno 1 Tiri in Porta : SI"
+        - "U/O Sommer, Yann (Inter) Parate 3.5 : OVER"
+        - "Hojlund, Rasmus (Manchester United) e Sostituto in Totale Almeno 1 Tiri in Porta : SI"
         - "Martinez, Lisandro (Manchester United) o Sostituto Cartellino o almeno 2 Falli Commessi : SI"
-        - "Sabbe, Kyriani (Club Brugge) o Sostituto Cartellino o almeno 2 Falli Commessi : SI"
-        - "Leao, Rafael (Galatasaray) e Sostituto in Totale Almeno 1 Tiri in Porta : SI"
+        - "Mignolet, Simon (Club Brugge) o Sostituto Cartellino o almeno 2 Falli Commessi : SI"
+        - "Leao, Rafael (AC Milan) e Sostituto in Totale Almeno 1 Tiri in Porta : SI"
         """
         text = market_text.strip()
         # Pattern estrazione giocatore e squadra tra parentesi: "Cognome, Nome (Squadra)"

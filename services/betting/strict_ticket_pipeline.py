@@ -794,12 +794,12 @@ class StrictTicketPipeline:
         # =====================================================================
         # GATE 0.85: REGOLA #51 - FILTRO "CORTO MUSO" & DIVIETO OVER 1.5 SU SQUADRE PRAGMATICHE
         # =====================================================================
-        pragmatic_keywords = ["allegri", "corto muso", "simeone", "gestione corta", "blocco basso"]
+        pragmatic_keywords = ["corto muso", "simeone", "gestione corta", "blocco basso", "pragmatismo difensivo"]
         is_pragmatic_context = any(pk in (candidate.sixth_sense_analysis or "").lower() for pk in pragmatic_keywords)
         
         team_lower = (candidate.team_name or candidate.match_name or "").lower()
-        # Napoli 2026/27 con Allegri o squadre ad alta vocazione pragmatica/corto muso
-        if "napoli" in team_lower or is_pragmatic_context:
+        # Squadre ad alta vocazione pragmatica/corto muso (es. Atlético Madrid di Simeone, o contesti blocco basso)
+        if "atletico" in team_lower or is_pragmatic_context:
             m_upper = candidate.market_name.upper()
             if "OVER 1.5" in m_upper or "OV 1.5" in m_upper or "+ OVER 1.5" in m_upper:
                 return ValidationReport(
@@ -807,9 +807,9 @@ class StrictTicketPipeline:
                     candidate=candidate,
                     stage_failed=0,
                     rejection_reason=(
-                        f"[BLOCCATO - REGOLA #51: FILTRO CORTO MUSO (ALLEGRI/PRAGMATISMO)] Il mercato '{candidate.market_name}' "
+                        f"[BLOCCATO - REGOLA #51: FILTRO CORTO MUSO (SIMEONE/PRAGMATISMO)] Il mercato '{candidate.market_name}' "
                         f"su '{candidate.match_name}' impone la condizione Over 1.5, escludendo l'1-0 o lo 0-1. "
-                        f"Sotto la guida di tecnici pragmatici (come Allegri al Napoli o Simeone), una volta in vantaggio "
+                        f"Sotto la guida di tecnici pragmatici (come Simeone all'Atlético), una volta in vantaggio "
                         f"la squadra abbassa il ritmo e congela il minimo scarto (frequenza 1-0/0-1 oltre il 25%). "
                         f"Obbligo tassativo di sostituire con mercati resilienti che coprono l'1-0: "
                         f"'1X + MultiGol 1-5', '1 Fisso', 'MultiGol 1-3 Squadra' o '1X + Under 3.5'!"
