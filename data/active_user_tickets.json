@@ -46,6 +46,92 @@
     ]
   },
   {
+    "ticket_id": "TICKET_USER_MULTIPLA6_UCL_10EUR_14OTT",
+    "name": "Ticket Personale: La Multipla 6 UCL (@ 6.46)",
+    "title": "Ticket Personale: La Multipla 6 UCL (6 Eventi 21:00 CEST) (@ 6.46)",
+    "bookmaker": "Netwin",
+    "type": "Multipla 6 UCL Valore & Macro",
+    "status": "PENDING",
+    "placed_at": "2026-10-14 21:00 CEST",
+    "created_at": "2026-10-14T16:50:00+02:00",
+    "date_created": "2026-10-14 16:50:00",
+    "stake": 10.0,
+    "stake_eur": 10.0,
+    "bonus": 3.88,
+    "total_odds": 6.46,
+    "potential_win": 68.53,
+    "potential_payout_eur": 68.53,
+    "net_profit_eur": 58.53,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "booking_code": null,
+    "netwin_ticket_id": null,
+    "netwin_url": "",
+    "notes": "Multipla a 6 eventi giocata dall'utente: 3 gemme a forte EV+ (Porto Over 1.5 Cartellini +9.9%, Shakhtar Over 3.5 Corner +5.6%, Villa Over 4.5 Tiri Porta +2.1%) con City-PSG Gol, Slovan-Stuttgart MultiGol 1-4 Ospite e Roma-Real Madrid X2+Over 1.5.",
+    "legs": [
+      {
+        "match": "Slovan Bratislava vs Stoccarda",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 21:00 CEST",
+        "market": "MultiGol 1-4 Ospite : SI",
+        "selection": "SI",
+        "odds": 1.18,
+        "status": "PENDING",
+        "score": "Prob Stimata: 87.5% | Stoccarda atteso 1-3 gol"
+      },
+      {
+        "match": "Aston Villa vs Fenerbahce",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 21:00 CEST",
+        "market": "U/O 4.5 Tiri in Porta Squadra 1 : OVER",
+        "selection": "OVER",
+        "odds": 1.37,
+        "status": "PENDING",
+        "score": "EV: +2.1% | Media Aston Villa al Villa Park: 5.9 Tiri in Porta | Prob: 74.5%"
+      },
+      {
+        "match": "Roma vs Real Madrid",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 21:00 CEST",
+        "market": "X2 + U/O 1.5 : X2 + OV",
+        "selection": "X2 + OV",
+        "odds": 1.5,
+        "status": "PENDING",
+        "score": "Combo Real Madrid doppia chance + Over 1.5"
+      },
+      {
+        "match": "Shakhtar Donetsk vs AEK Atene",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 21:00 CEST",
+        "market": "U/O 3.5 Corner Squadra 1 (esc.TS) : OVER",
+        "selection": "OVER",
+        "odds": 1.38,
+        "status": "PENDING",
+        "score": "EV: +5.6% | Shakhtar Donetsk dominante sulle fasce, media 5.4 Corner | Prob: 76.5%"
+      },
+      {
+        "match": "Manchester City vs PSG",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 21:00 CEST",
+        "market": "G/NG : Gol",
+        "selection": "Gol",
+        "odds": 1.38,
+        "status": "PENDING",
+        "score": "Prob Stimata: 74.0% | Big match Etihad, potenziale offensivo d'élite"
+      },
+      {
+        "match": "Real Betis vs Porto",
+        "tournament": "Club Internazionali | UEFA Champions League",
+        "kickoff": "2026-10-14 21:00 CEST",
+        "market": "U/O 1.5 Cartellini Squadra 2 : OVER",
+        "selection": "OVER",
+        "odds": 1.4,
+        "status": "PENDING",
+        "score": "EV: +9.9% | Porto media 2.75 Cartellini trasferta | Prob: 78.5% [VALORE ELEVATO]"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_A_CASSAFORTE_UCL_14EUR_14OTT",
     "name": "Ticket A: La Cassaforte UCL 14 Ottobre",
     "title": "Ticket A: La Cassaforte UCL (Core Macro 70% - Incrocio OFP) (@ 2.31)",

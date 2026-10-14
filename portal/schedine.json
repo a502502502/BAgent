@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T16:50:58.081336",
+  "generated_at": "2026-10-14T16:56:04.290691",
   "check_seconds": 30,
   "profit_label": "+6.61 € (Saldo Netto Aggiornato)",
   "present": [
@@ -27,6 +27,66 @@
           "odd": "1.90",
           "result": "PENDING",
           "score": "EV: +21.6% | Isak/Gakpo Out | Prob: 64.0% [DIAMOND]"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_USER_MULTIPLA6_UCL_10EUR_14OTT",
+      "title": "Ticket Personale: La Multipla 6 UCL (@ 6.46)",
+      "label": "In Corso (Stasera ore 21:00)",
+      "stake": "10.00 €",
+      "bonus": "3.88 €",
+      "odds": "6.46×",
+      "potential_win": "68.53 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-14 21:00 CEST",
+          "match": "Slovan Bratislava vs Stoccarda",
+          "pick": "MultiGol 1-4 Ospite (Stoccarda)",
+          "odd": "1.18",
+          "result": "PENDING",
+          "score": "Prob: 87.5% | Stoccarda 1-4 Gol"
+        },
+        {
+          "when": "2026-10-14 21:00 CEST",
+          "match": "Aston Villa vs Fenerbahce",
+          "pick": "Aston Villa Over 4.5 Tiri in Porta",
+          "odd": "1.37",
+          "result": "PENDING",
+          "score": "EV: +2.1% | Media Casa: 5.9 Tiri in Porta"
+        },
+        {
+          "when": "2026-10-14 21:00 CEST",
+          "match": "Roma vs Real Madrid",
+          "pick": "X2 + Over 1.5",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": "Combo Doppia Chance Real Madrid + Over 1.5"
+        },
+        {
+          "when": "2026-10-14 21:00 CEST",
+          "match": "Shakhtar Donetsk vs AEK Atene",
+          "pick": "Shakhtar Over 3.5 Corner",
+          "odd": "1.38",
+          "result": "PENDING",
+          "score": "EV: +5.6% | Media Corner Shakhtar: 5.4"
+        },
+        {
+          "when": "2026-10-14 21:00 CEST",
+          "match": "Manchester City vs PSG",
+          "pick": "Goal / Entrambe Segnano",
+          "odd": "1.38",
+          "result": "PENDING",
+          "score": "Big Match Etihad | Entrambe a Segno"
+        },
+        {
+          "when": "2026-10-14 21:00 CEST",
+          "match": "Real Betis vs Porto",
+          "pick": "Porto Over 1.5 Cartellini",
+          "odd": "1.40",
+          "result": "PENDING",
+          "score": "EV: +9.9% | Media Cartellini Porto: 2.75"
         }
       ]
     },
