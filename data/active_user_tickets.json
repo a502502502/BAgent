@@ -183,8 +183,8 @@
         "market": "Doppia Chance + GG/NG: X2 + GG",
         "selection": "X2 + GG",
         "odds": 2.57,
-        "status": "PENDING",
-        "score": "-",
+        "status": "LOST",
+        "score": "3-1 (FT)",
         "minute": "PRE",
         "rationale": "Il Napoli di Allegri solido all Estadio de la Ceramica: copre il pareggio con gol (1-1, 2-2) e la vittoria azzurra con rete dei padroni di casa (1-2, 1-3)."
       },
@@ -196,8 +196,8 @@
         "market": "1X2 + GG/NG: 2 + GG",
         "selection": "2 + GG",
         "odds": 1.93,
-        "status": "PENDING",
-        "score": "-",
+        "status": "WON",
+        "score": "1-4 (FT)",
         "minute": "PRE",
         "rationale": "Vittoria del Barcellona di Flick al RAMS Park con gol dei turchi: Lewandowski, Yamal e Raphinha superiori, ma l attacco del Gala (Osimhen, Leao) punge con regolarita."
       },
@@ -209,8 +209,8 @@
         "market": "1X2 + GG/NG: 1 + NG",
         "selection": "1 + NG",
         "odds": 2.28,
-        "status": "PENDING",
-        "score": "-",
+        "status": "LOST",
+        "score": "3-4 (FT)",
         "minute": "PRE",
         "rationale": "Vittoria nerazzurra a San Siro con clean sheet: retroguardia di Chivu (Bastoni, Stones, Akanji, Provedel) ermetica contro il Brugge (finali 1-0, 2-0, 3-0)."
       }
@@ -225,7 +225,7 @@
     "placed_at": "2026-10-13 16:53 CEST",
     "created_at": "2026-10-13T16:53:40+02:00",
     "date_created": "2026-10-13 16:53:40",
-    "status": "WON",
+    "status": "LOST",
     "strategy": "USER_PLAYED_TICKET_PROPS_SAVES_GEMS",
     "stake": 10.0,
     "stake_eur": 10.0,
@@ -235,7 +235,7 @@
     "potential_payout_eur": 49.43,
     "net_profit_eur": 39.43,
     "settled": true,
-    "profit_loss_eur": 39.43,
+    "profit_loss_eur": -10.0,
     "notes": "Schedina REALE VINCENTE! Incassati 49.43 EUR (+39.43 EUR netti). Sommer nel Brugge Over 3.5 parate a San Siro, Lisandro Martinez/sostituto cartellino/falli, Hojlund/sostituto tiro in porta.",
     "legs": [
       {
@@ -247,7 +247,7 @@
         "selection": "Rasmus Hojlund e Sost. Almeno 1 Tiro in Porta: SI",
         "odds": 1.54,
         "status": "WON",
-        "score": "3-1 FT",
+        "score": "1 Tiro in Porta (81')",
         "minute": "FT",
         "rationale": "Clausola e Sostituto centrata: Napoli a trazione anteriore all Estadio de la Ceramica con tiri nello specchio dei terminali offensivi."
       },
@@ -259,8 +259,8 @@
         "market": "Martinez, Lisandro (Manchester United) o Sostituto Cartellino o almeno 2 Falli Commessi : SI",
         "selection": "Lisandro Martinez o Sost. Cartellino o >=2 Falli: SI",
         "odds": 2.14,
-        "status": "WON",
-        "score": "2-0 FT",
+        "status": "LOST",
+        "score": "1 Fallo (26'), 0 Card",
         "minute": "FT",
         "rationale": "Clausola o Sostituto centrata: United sotto assedio al Metropolitano con falli e cartellini collezionati dal reparto arretrato."
       },
@@ -273,7 +273,7 @@
         "selection": "Sommer Over 3.5 Parate",
         "odds": 1.5,
         "status": "WON",
-        "score": "3-4 FT",
+        "score": "9 Parate (FT)",
         "minute": "FT",
         "rationale": "Yann Sommer tra i pali del Club Brugge a San Siro supera agilmente 3.5 parate sotto il pesante assedio dell Inter (3 gol e oltre 15 conclusioni nerazzurre)."
       }
@@ -309,8 +309,8 @@
         "market": "G/NG: Gol",
         "selection": "Gol",
         "odds": 1.56,
-        "status": "PENDING",
-        "score": "-",
+        "status": "WON",
+        "score": "3-1 (FT)",
         "minute": "PRE",
         "rationale": "Scontro aperto all Estadio de la Ceramica: Mikautadze e Moleiro contro Hojlund, De Bruyne e McTominay."
       },
@@ -322,8 +322,8 @@
         "market": "U/O 15.5 Tiri Totali Squadra 1 : OVER",
         "selection": "Arsenal Over 15.5 Tiri Totali",
         "odds": 1.4,
-        "status": "PENDING",
-        "score": "-",
+        "status": "WON",
+        "score": "3-0 (21 Tiri) (FT)",
         "minute": "PRE",
         "rationale": "Arsenal di Arteta con ritmo arrembante all Emirates Stadium (media > 18.2 tiri interni)."
       },
@@ -335,8 +335,8 @@
         "market": "1X + U/O 1.5 : 1X + OV",
         "selection": "1X + Over 1.5",
         "odds": 1.54,
-        "status": "PENDING",
-        "score": "-",
+        "status": "WON",
+        "score": "2-0 (FT)",
         "minute": "PRE",
         "rationale": "Atletico imbattuto al Metropolitano con Alvarez, Lookman e Sorloth. Copertura su 1-1, 2-0, 2-1, 3-1, 2-2."
       },
@@ -348,8 +348,8 @@
         "market": "Casa Segna 1°T: SI",
         "selection": "Lipsia Segna 1°T: SI",
         "odds": 1.38,
-        "status": "PENDING",
-        "score": "-",
+        "status": "LOST",
+        "score": "0-0 1°T (1-0 FT 75')",
         "minute": "PRE",
         "rationale": "Lipsia aggressivo nei primi 45' alla Red Bull Arena contro la difesa aperta del PSV di Bosz."
       },
@@ -361,8 +361,8 @@
         "market": "G/NG: Gol",
         "selection": "Gol",
         "odds": 1.4,
-        "status": "PENDING",
-        "score": "-",
+        "status": "WON",
+        "score": "1-4 (FT)",
         "minute": "PRE",
         "rationale": "Spettacolo al RAMS Park: Osimhen e Leao contro Yamal, Lewandowski e Raphinha. Entrambe a segno ad altissima probabilita."
       },
@@ -374,8 +374,8 @@
         "market": "MultiGol 1-3 1°Tempo + 1-4 2°Tempo : SI",
         "selection": "MG 1-3 1°T + 1-4 2°T",
         "odds": 1.42,
-        "status": "PENDING",
-        "score": "-",
+        "status": "LOST",
+        "score": "1-1 1°T, 2-3 2°T (3-4 FT)",
         "minute": "PRE",
         "rationale": "Inter a San Siro a caccia del riscatto europeo. Copre le principali vittorie (1-0, 2-0, 2-1, 3-0, 3-1, 4-1) con gol nel primo tempo."
       }
@@ -390,7 +390,7 @@
     "placed_at": "2026-10-13 16:50 CEST",
     "created_at": "2026-10-13T16:50:00+02:00",
     "date_created": "2026-10-13 16:50:00",
-    "status": "PENDING",
+    "status": "LOST",
     "strategy": "USER_PLAYED_TICKET_PROPS_FOULS_SHOTS",
     "stake": 10.0,
     "stake_eur": 10.0,
@@ -399,8 +399,8 @@
     "potential_win": 101.39,
     "potential_payout_eur": 101.39,
     "net_profit_eur": 91.39,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -10.0,
     "notes": "Schedina reale giocata dall utente su Netwin: Multipla (4) Player Props UCL. Importo 10.00 EUR, Bonus 2.95 EUR, Quota 9.84, Vincita potenziale 101.39 EUR. Kickoff 13/10/2026 ore 21:00 CEST.",
     "legs": [
       {
@@ -411,8 +411,8 @@
         "market": "Sabbe, Kyriani (Club Brugge) o Sostituto Cartellino o almeno 2 Falli Commessi : SI",
         "selection": "Sabbe o Sost. Cartellino o >=2 Falli: SI",
         "odds": 2.06,
-        "status": "PENDING",
-        "score": "-",
+        "status": "LOST",
+        "score": "0 Falli, 0 Card (Out 72')",
         "minute": "PRE",
         "rationale": "Kyriani Sabbe (terzino destro Club Brugge) contro la catena mancina dell Inter (Dimarco / Carlos Augusto). Alta frequenza di falli e duelli 1vs1."
       },
@@ -424,8 +424,8 @@
         "market": "Martinez, Lisandro (Manchester United) o Sostituto Cartellino o almeno 2 Falli Commessi : SI",
         "selection": "Lisandro Martinez o Sost. Cartellino o >=2 Falli: SI",
         "odds": 2.14,
-        "status": "PENDING",
-        "score": "-",
+        "status": "LOST",
+        "score": "1 Fallo (26'), 0 Card",
         "minute": "PRE",
         "rationale": "Lisandro Martinez (difensore United) contro Julian Alvarez, Lookman e Sorloth al Metropolitano. Reduce da ammonizione all 86 contro il Tottenham."
       },
@@ -437,8 +437,8 @@
         "market": "Leao, Rafael (Galatasaray) e Sostituto in Totale Almeno 1 Tiri in Porta : SI",
         "selection": "Rafael Leao e Sost. Almeno 1 Tiro in Porta: SI",
         "odds": 1.45,
-        "status": "PENDING",
-        "score": "-",
+        "status": "LOST",
+        "score": "0 Tiri in Porta (1 Assist)",
         "minute": "PRE",
         "rationale": "Rafael Leao nel tridente del Galatasaray al RAMS Park contro la linea difensiva altissima del Barcellona di Flick."
       },
@@ -450,8 +450,8 @@
         "market": "Hojlund, Rasmus (Napoli) e Sostituto in Totale Almeno 1 Tiri in Porta : SI",
         "selection": "Rasmus Hojlund e Sost. Almeno 1 Tiro in Porta: SI",
         "odds": 1.54,
-        "status": "PENDING",
-        "score": "-",
+        "status": "WON",
+        "score": "1 Tiro in Porta (81')",
         "minute": "PRE",
         "rationale": "Rasmus Hojlund centravanti del Napoli di Allegri servito da Kevin De Bruyne e McTominay al Madrigal."
       }
