@@ -4,6 +4,93 @@
   "profit_label": "+6.61 € (Saldo Netto Aggiornato)",
   "present": [
     {
+      "id": "TICKET_CORE_ROCKET_UEL_UECL_20EUR_15OTT",
+      "title": "Ticket Core Rocket: La Tripla d Acciaio UEL & UECL (@ 3.09)",
+      "label": "In Programma (Oggi ore 18:45)",
+      "stake": "20.00 €",
+      "odds": "3.09×",
+      "potential_win": "61.80 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-15 18:45 CEST",
+          "match": "Salisburgo vs AC Milan",
+          "pick": "X2 + MultiGol 1-4",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": "Milan con assetto solido a Salisburgo; copre 1-1, 0-1, 1-2, 0-2, 1-3. Elimina il rischio pareggio."
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Atalanta vs Pafos",
+          "pick": "1X + MultiGol 2-5",
+          "odd": "1.42",
+          "result": "PENDING",
+          "score": "Dea dominante al Gewiss Stadium contro il Pafos; copre 2-0, 3-0, 2-1, 3-1, 4-1, 1-1."
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "SL Benfica vs Celtic FC",
+          "pick": "1X + Over 1.5",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "Benfica imbattuto all Estadio da Luz con almeno 2 reti totali contro la difesa scozzese del Celtic."
+        }
+      ]
+    },
+    {
+      "id": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
+      "title": "Ticket Satellite Moltiplicatore: Quintina Flussi UEL & UECL (@ 6.45)",
+      "label": "In Programma (Oggi ore 18:45)",
+      "stake": "5.00 €",
+      "bonus": "3.23 €",
+      "odds": "6.45×",
+      "potential_win": "35.48 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-15 18:45 CEST",
+          "match": "Salisburgo vs AC Milan",
+          "pick": "MultiGol 1-3 Ospite",
+          "odd": "1.35",
+          "result": "PENDING",
+          "score": "Milan a segno da 1 a 3 reti alla Red Bull Arena di Salisburgo, svincolato da 1X2."
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Hoffenheim vs Beşiktaş",
+          "pick": "Gol",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "Due difese aperte con ritmi altissimi alla PreZero Arena."
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "SL Benfica vs Celtic FC",
+          "pick": "1X + Over 1.5",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "Benfica a protezione del fattore campo a Lisbona con almeno 2 gol totali."
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Lech Poznań vs Bayer Leverkusen",
+          "pick": "X2 + Over 1.5",
+          "odd": "1.35",
+          "result": "PENDING",
+          "score": "Bayer Leverkusen nettamente superiore sul piano tecnico in Polonia."
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Atalanta vs Pafos",
+          "pick": "Atalanta Over 1.5 Gol",
+          "odd": "1.25",
+          "result": "PENDING",
+          "score": "Almeno due reti segnate dall attacco nerazzurro a Bergamo."
+        }
+      ]
+    },
+    {
       "id": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
       "title": "Ticket Personale: La Doppia Diamante UCL (Como Corner + Wirtz Gol/Assist) (@ 3.72)",
       "label": "In Corso (Stasera)",
