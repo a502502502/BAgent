@@ -5,7 +5,7 @@
     "title": "Ticket Personale: La Doppia Diamante UCL (Como Corner + Wirtz Gol/Assist) (@ 3.72)",
     "bookmaker": "Netwin",
     "type": "Doppia Diamante Player Props & Flussi Asimmetrici",
-    "status": "PENDING",
+    "status": "LOST",
     "placed_at": "2026-10-14 18:45 CEST",
     "created_at": "2026-10-14T16:48:00+02:00",
     "date_created": "2026-10-14 16:48:00",
@@ -16,8 +16,8 @@
     "potential_win": 74.48,
     "potential_payout_eur": 74.48,
     "net_profit_eur": 54.48,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -20.0,
     "booking_code": "DF07EA0A0E3260137E01",
     "netwin_ticket_id": "DF07EA0A0E3260137E01",
     "netwin_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A0E3260137E01",
@@ -30,8 +30,8 @@
         "market": "U/O 4.5 Corner Squadra 2 (esc.TS) : OVER",
         "selection": "OVER",
         "odds": 1.96,
-        "status": "PENDING",
-        "score": "EV: +31.3% | Media Como: 7.8 Corner | Prob: 67.0% [DIAMOND]"
+        "status": "LOST",
+        "score": "3-2 FT (1 Corner Como)"
       },
       {
         "match": "LASK Linz vs Liverpool",
@@ -40,8 +40,8 @@
         "market": "Wirtz, Florian (Liverpool) o Sostituto Segna o Fa Assist : SI",
         "selection": "SI",
         "odds": 1.9,
-        "status": "PENDING",
-        "score": "EV: +21.6% | Isak/Gakpo/Szoboszlai Out | Prob: 64.0% [DIAMOND]"
+        "status": "WON",
+        "score": "3-6 FT (Assist Wirtz 37')"
       }
     ]
   },
@@ -51,7 +51,7 @@
     "title": "Ticket Personale: La Multipla 6 UCL (6 Eventi 21:00 CEST) (@ 6.46)",
     "bookmaker": "Netwin",
     "type": "Multipla 6 UCL Valore & Macro",
-    "status": "PENDING",
+    "status": "LOST",
     "placed_at": "2026-10-14 21:00 CEST",
     "created_at": "2026-10-14T16:50:00+02:00",
     "date_created": "2026-10-14 16:50:00",
@@ -62,8 +62,8 @@
     "potential_win": 68.53,
     "potential_payout_eur": 68.53,
     "net_profit_eur": 58.53,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -10.0,
     "booking_code": null,
     "netwin_ticket_id": null,
     "netwin_url": "",
@@ -76,8 +76,8 @@
         "market": "MultiGol 1-4 Ospite : SI",
         "selection": "SI",
         "odds": 1.18,
-        "status": "PENDING",
-        "score": "Prob Stimata: 87.5% | Stoccarda atteso 1-3 gol"
+        "status": "WON",
+        "score": "0-3 FT"
       },
       {
         "match": "Aston Villa vs Fenerbahce",
@@ -86,8 +86,8 @@
         "market": "U/O 4.5 Tiri in Porta Squadra 1 : OVER",
         "selection": "OVER",
         "odds": 1.37,
-        "status": "PENDING",
-        "score": "EV: +2.1% | Media Aston Villa al Villa Park: 5.9 Tiri in Porta | Prob: 74.5%"
+        "status": "WON",
+        "score": "6-0 FT (5 Tiri Porta)"
       },
       {
         "match": "Roma vs Real Madrid",
@@ -96,8 +96,8 @@
         "market": "X2 + U/O 1.5 : X2 + OV",
         "selection": "X2 + OV",
         "odds": 1.5,
-        "status": "PENDING",
-        "score": "Combo Real Madrid doppia chance + Over 1.5"
+        "status": "WON",
+        "score": "3-4 FT"
       },
       {
         "match": "Shakhtar Donetsk vs AEK Atene",
@@ -106,8 +106,8 @@
         "market": "U/O 3.5 Corner Squadra 1 (esc.TS) : OVER",
         "selection": "OVER",
         "odds": 1.38,
-        "status": "PENDING",
-        "score": "EV: +5.6% | Shakhtar Donetsk dominante sulle fasce, media 5.4 Corner | Prob: 76.5%"
+        "status": "LOST",
+        "score": "3-1 FT (2 Corner Shakhtar)"
       },
       {
         "match": "Manchester City vs PSG",
@@ -116,8 +116,8 @@
         "market": "G/NG : Gol",
         "selection": "Gol",
         "odds": 1.38,
-        "status": "PENDING",
-        "score": "Prob Stimata: 74.0% | Big match Etihad, potenziale offensivo d'élite"
+        "status": "WON",
+        "score": "2-4 FT"
       },
       {
         "match": "Real Betis vs Porto",
@@ -126,8 +126,8 @@
         "market": "U/O 1.5 Cartellini Squadra 2 : OVER",
         "selection": "OVER",
         "odds": 1.4,
-        "status": "PENDING",
-        "score": "EV: +9.9% | Porto media 2.75 Cartellini trasferta | Prob: 78.5% [VALORE ELEVATO]"
+        "status": "WON",
+        "score": "3-2 FT (3 Cartellini Porto)"
       }
     ]
   },
