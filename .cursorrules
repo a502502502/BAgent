@@ -99,3 +99,11 @@
   1. È severamente VIETATO dichiarare all'utente di aver consultato Transfermarkt, UEFA.com o altre fonti certificate se tali pagine non sono state effettivamente e direttamente verificate tramite chiamata mirata (read_url_content o search_web con site:transfermarkt.it).
 - **Reality Check Obbligatorio Pre-Emissione**:
   1. Prima di proporre qualsiasi analisi, gemma, marcatore o pronostico, l'agente deve verificare la corrispondenza con la realtà oggettiva calcistica. In caso di minima discrepanza, l'evento viene bloccato finché la distinta ufficiale non è verificata.
+
+## Regola #86: Vincolo di Ortogonalità del Portafoglio & Zero Single-Point-of-Failure
+- **Divieto di Overlap tra Ticket della Stessa Sessione**:
+  1. È severamente vietato inserire la stessa partita o la stessa Player Prop in più di un ticket nella medesima sessione.
+  2. Ogni ticket del portafoglio (Core 70% vs Satellite 30%) deve contenere eventi rigorosamente e statisticamente indipendenti.
+- **Protezione da Single-Point-of-Failure**:
+  1. Nessun singolo evento, errore arbitrale o episodio isolato (es. espulsione precoce, autogol, crollo della favorita) deve poter compromettere simultaneamente entrambi i ticket.
+  2. Se un evento fa parte del Ticket A ("La Cassaforte"), è categoricamente escluso da qualsiasi iterazione o mercato speciale del Ticket B ("Le Gemme" / Satellite) e viceversa.

@@ -84,10 +84,10 @@ Minuto e punteggio solo dal feed Flashscore. Trigger: assedio se la sfavorita (f
      - Pattern Vittoria con gol subito (`2-1`) $\rightarrow$ `1X + MultiGol 1-5`, `1X o Over 1.5` o `Over 0.5 1°T + Over 0.5 2°T`.
   3) **Allineamento a Stella**: Quando Forebet (predicted score / Under-Over), Oddspedia (probabilità stimata e value alert) e BAgent (Dixon-Coles con Edge $> 4\%$) convergono tutti e 3 sullo stesso flusso (es. Under 3.5 Bragantino vs Mirassol), la selezione assume priorità assoluta (Top Value Gem).
 - **Regola #84 (Verifica Anagrafica Giocatori & Rispetto Assoluto Feed Bookmaker)**:
-  È tassativamente vietato attribuire a un giocatore una squadra basandosi sulla memoria pregressa di stagioni passate. La squadra certificata del giocatore nella stagione 2026/27 è SEMPRE e RIGOROSAMENTE quella indicata tra parentesi dal bookmaker (`services/football/player_registry_resolver.py`, es. `Sommer, Yann (Club Brugge)` milita nel Brugge, NON nell'Inter; `Martinez, Josep` milita nell'Inter). Prima di emettere qualsiasi commento, analisi o settlement su una player prop:
+  È tassativamente vietato attribuire a un giocatore una squadra basandosi sulla memoria pregressa di stagioni passate. La squadra certificata del giocatore nella stagione 2026/27 è SEMPRE e RIGOROSAMENTE quella indicata tra parentesi dal bookmaker (`services/football/player_registry_resolver.py`, verificando sempre la corrispondenza con Transfermarkt.it e liste ufficiali UEFA (Regola #85 Reality Gate)). Prima di emettere qualsiasi commento, analisi o settlement su una player prop:
   1) Il resolver estrae programmaticamente la squadra dichiarata e la memorizza nella tabella `player_registry_2026` in `data/bagent.db`.
   2) Si verifica la corretta attribuzione (casa vs trasferta) rispetto al match in programma.
   3) Si applica rigorosamente la clausola di salvaguardia del bookmaker (`e Sostituto`, `o Sostituto`, `Cartellino o ≥ 2 Falli`), verificando se il titolare o il subentrato hanno centrato il bersaglio. Non dare mai per assente o void un giocatore prima di aver controllato se la clausola sostituto copre la selezione.
 
-
-
+- **Regola #86 (Vincolo di Ortogonalità del Portafoglio & Zero Single-Point-of-Failure)**:
+  È severamente vietato inserire la stessa partita o la stessa Player Prop in più di un ticket nella medesima sessione. Ogni ticket del portafoglio (Core 70% vs Satellite 30%) deve contenere eventi rigorosamente e statisticamente indipendenti per eliminare correlazioni negative e single-point-of-failure.
