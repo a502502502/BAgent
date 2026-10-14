@@ -1,190 +1,150 @@
 {
-  "scanned_at": "2026-10-07T09:58:21.708385+00:00",
-  "total_signals": 5,
+  "scanned_at": "2026-10-14T09:25:28.870959+00:00",
+  "total_signals": 20,
   "signals": [
     {
       "signal_type": "DROPPING_ODDS",
-      "match_id": 10301972,
-      "home_team": "Pazarspor",
-      "away_team": "Erbaaspor",
+      "match_id": 10243833,
+      "home_team": "Svay Rieng FC",
+      "away_team": "Shanghai Greenland Shenhua",
       "sport": "football",
-      "category": "Turkey",
-      "league": "Turkish Cup",
-      "kickoff_utc": "2026-10-07 11:00:00+00",
+      "category": "Asia",
+      "league": "AFC Champions League Two",
+      "kickoff_utc": "2026-10-15 12:15:00+00",
       "market": "Full Time Result 3 Way",
       "selection": "1 (Casa)",
-      "drop_percentage": 38.0,
-      "initial_odd": 5.0,
-      "current_odd": 3.1,
+      "drop_percentage": 71.0,
+      "initial_odd": 15.5,
+      "current_odd": 4.5,
       "fair_probability_pct": null,
       "overvalue_pct": null,
-      "best_bookmaker": "DraftKings",
-      "bookmakers_count": 45,
+      "best_bookmaker": "Megapari",
+      "bookmakers_count": 36,
       "italian_bookmakers": [
         {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 3.1
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.5
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 3.0
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 3.5
+          "odd": 4.2
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 3.5
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 2.0
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 2.0
+          "odd": 1.51
         }
       ],
       "raw_info": {
-        "dropBid": 495,
-        "last_change": "2026-10-07 09:49:33"
+        "dropBid": 13,
+        "last_change": "2026-10-14 08:24:34"
       }
     },
     {
       "signal_type": "DROPPING_ODDS",
-      "match_id": 9823614,
-      "home_team": "Bodo/Glimt",
-      "away_team": "Kristiansund BK",
+      "match_id": 10243833,
+      "home_team": "Svay Rieng FC",
+      "away_team": "Shanghai Greenland Shenhua",
       "sport": "football",
-      "category": "Norway",
-      "league": "Tippeligaen",
-      "kickoff_utc": "2026-10-10 14:00:00+00",
+      "category": "Asia",
+      "league": "AFC Champions League Two",
+      "kickoff_utc": "2026-10-15 12:15:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "X (Pareggio)",
+      "drop_percentage": 44.0,
+      "initial_odd": 7.5,
+      "current_odd": 4.2,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "Megapari",
+      "bookmakers_count": 36,
+      "italian_bookmakers": [
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.5
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.2
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.51
+        }
+      ],
+      "raw_info": {
+        "dropBid": 56,
+        "last_change": "2026-10-14 08:24:38"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10229260,
+      "home_team": "Trujillanos",
+      "away_team": "Deportivo Rayo Zuliano",
+      "sport": "football",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 20:00:00+00",
       "market": "Full Time Result 3 Way",
       "selection": "2 (Trasferta)",
-      "drop_percentage": 35.0,
-      "initial_odd": 23.0,
-      "current_odd": 15.0,
+      "drop_percentage": 43.0,
+      "initial_odd": 4.4,
+      "current_odd": 2.5,
       "fair_probability_pct": null,
       "overvalue_pct": null,
-      "best_bookmaker": "Betsson",
-      "bookmakers_count": 40,
+      "best_bookmaker": "Betway",
+      "bookmakers_count": 32,
       "italian_bookmakers": [
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 1.09
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 1.071
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 12.0
+          "odd": 2.35
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 11.5
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 21.0
+          "odd": 3.4
         },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 20.0
+          "odd": 2.5
         }
       ],
       "raw_info": {
-        "dropBid": 42,
-        "last_change": "2026-10-07 09:29:45"
+        "dropBid": 26,
+        "last_change": "2026-10-14 08:12:40"
       }
     },
     {
       "signal_type": "DROPPING_ODDS",
-      "match_id": 10306974,
-      "home_team": "Klepp Women",
-      "away_team": "Viking Women",
+      "match_id": 10229263,
+      "home_team": "Monagas SC",
+      "away_team": "Dynamo Puerto FC",
       "sport": "football",
-      "category": "Norway",
-      "league": "Norway Cup Women",
-      "kickoff_utc": "2026-10-07 12:00:00+00",
-      "market": "Full Time Result 3 Way",
-      "selection": "1 (Casa)",
-      "drop_percentage": 35.0,
-      "initial_odd": 28.22,
-      "current_odd": 18.44,
-      "fair_probability_pct": null,
-      "overvalue_pct": null,
-      "best_bookmaker": "BC.Game",
-      "bookmakers_count": 37,
-      "italian_bookmakers": [
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 23.0
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 11.0
-        },
-        {
-          "name": "Bwin",
-          "slug": "bwin",
-          "odd": 1.06
-        }
-      ],
-      "raw_info": {
-        "dropBid": 182,
-        "last_change": "2026-10-07 09:55:40"
-      }
-    },
-    {
-      "signal_type": "DROPPING_ODDS",
-      "match_id": 10301990,
-      "home_team": "Somaspor SK",
-      "away_team": "Kestelspor",
-      "sport": "football",
-      "category": "Turkey",
-      "league": "Turkish Cup",
-      "kickoff_utc": "2026-10-07 11:00:00+00",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 22:00:00+00",
       "market": "Full Time Result 3 Way",
       "selection": "2 (Trasferta)",
-      "drop_percentage": 33.0,
-      "initial_odd": 12.0,
-      "current_odd": 8.0,
+      "drop_percentage": 43.0,
+      "initial_odd": 19.25,
+      "current_odd": 11.0,
       "fair_probability_pct": null,
       "overvalue_pct": null,
-      "best_bookmaker": "BetVictor",
-      "bookmakers_count": 44,
+      "best_bookmaker": "Megapari",
+      "bookmakers_count": 36,
       "italian_bookmakers": [
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 1.27
-        },
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 1.25
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 5.75
+          "odd": 1.23
         },
         {
           "name": "Bwin",
@@ -194,42 +154,452 @@
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 9.0
-        },
-        {
-          "name": "bet365",
-          "slug": "bet365",
-          "odd": 8.0
+          "odd": 10.0
         }
       ],
       "raw_info": {
-        "dropBid": 42,
-        "last_change": "2026-10-07 09:56:55"
+        "dropBid": 59,
+        "last_change": "2026-10-14 09:06:47"
       }
     },
     {
       "signal_type": "DROPPING_ODDS",
-      "match_id": 10241869,
-      "home_team": "Ceramica Cleopatra",
-      "away_team": "Al Masry",
+      "match_id": 10229263,
+      "home_team": "Monagas SC",
+      "away_team": "Dynamo Puerto FC",
       "sport": "football",
-      "category": "Egypt",
-      "league": "League Cup",
-      "kickoff_utc": "2026-10-07 17:00:00+00",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 22:00:00+00",
       "market": "Full Time Result 3 Way",
-      "selection": "2 (Trasferta)",
-      "drop_percentage": 32.0,
-      "initial_odd": 3.3,
-      "current_odd": 2.25,
+      "selection": "X (Pareggio)",
+      "drop_percentage": 33.0,
+      "initial_odd": 9.0,
+      "current_odd": 6.0,
       "fair_probability_pct": null,
       "overvalue_pct": null,
-      "best_bookmaker": "Betway",
-      "bookmakers_count": 33,
+      "best_bookmaker": "Megapari",
+      "bookmakers_count": 36,
       "italian_bookmakers": [
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 2.9
+          "odd": 1.23
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 5.25
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 10.0
+        }
+      ],
+      "raw_info": {
+        "dropBid": 26,
+        "last_change": "2026-10-14 09:10:31"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10308341,
+      "home_team": "UD Santarem",
+      "away_team": "Gil Vicente",
+      "sport": "football",
+      "category": "Portugal",
+      "league": "Portugal Cup",
+      "kickoff_utc": "2026-10-14 18:00:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "1 (Casa)",
+      "drop_percentage": 33.0,
+      "initial_odd": 11.5,
+      "current_odd": 7.7,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "1xBet",
+      "bookmakers_count": 42,
+      "italian_bookmakers": [
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 7.0
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 6.5
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.2
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 3.9
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.41
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 1.4
+        }
+      ],
+      "raw_info": {
+        "dropBid": 60,
+        "last_change": "2026-10-14 07:52:47"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10229263,
+      "home_team": "Monagas SC",
+      "away_team": "Dynamo Puerto FC",
+      "sport": "football",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 22:00:00+00",
+      "market": "Asian Handicap",
+      "selection": "X (Pareggio)",
+      "drop_percentage": 31.0,
+      "initial_odd": 2.42,
+      "current_odd": 1.68,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "Goldenbet",
+      "bookmakers_count": 10,
+      "italian_bookmakers": [],
+      "raw_info": {
+        "dropBid": 181,
+        "last_change": "2026-10-14 09:19:02"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10315318,
+      "home_team": "Spartakos Kitiou",
+      "away_team": "Digenis Ypsonas",
+      "sport": "football",
+      "category": "Cyprus",
+      "league": "Cyprus Cup",
+      "kickoff_utc": "2026-10-14 15:00:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "2 (Trasferta)",
+      "drop_percentage": 31.0,
+      "initial_odd": 2.34,
+      "current_odd": 1.61,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "1Bet",
+      "bookmakers_count": 36,
+      "italian_bookmakers": [
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 4.333
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.2
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 3.75
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 3.5
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.68
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 1.667
+        }
+      ],
+      "raw_info": {
+        "dropBid": 59,
+        "last_change": "2026-10-14 08:05:27"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10266310,
+      "home_team": "Brighton",
+      "away_team": "Kauno Zalgiris",
+      "sport": "football",
+      "category": "Europe",
+      "league": "Europa Conference League",
+      "kickoff_utc": "2026-10-15 19:00:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "2 (Trasferta)",
+      "drop_percentage": 31.0,
+      "initial_odd": 81.0,
+      "current_odd": 56.0,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "Mostbet",
+      "bookmakers_count": 41,
+      "italian_bookmakers": [
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 1.025
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.02
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 21.0
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 19.0
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 46.0
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 41.0
+        }
+      ],
+      "raw_info": {
+        "dropBid": 88,
+        "last_change": "2026-10-14 09:01:53"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10243845,
+      "home_team": "Gangwon",
+      "away_team": "Phnom Penh Crown",
+      "sport": "football",
+      "category": "Asia",
+      "league": "AFC Champions League Two",
+      "kickoff_utc": "2026-10-15 10:00:00+00",
+      "market": "Asian Handicap",
+      "selection": "X (Pareggio)",
+      "drop_percentage": 30.0,
+      "initial_odd": 2.7,
+      "current_odd": 1.88,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "Parimatch",
+      "bookmakers_count": 12,
+      "italian_bookmakers": [],
+      "raw_info": {
+        "dropBid": 139,
+        "last_change": "2026-10-14 09:06:19"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10243845,
+      "home_team": "Gangwon",
+      "away_team": "Phnom Penh Crown",
+      "sport": "football",
+      "category": "Asia",
+      "league": "AFC Champions League Two",
+      "kickoff_utc": "2026-10-15 10:00:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "2 (Trasferta)",
+      "drop_percentage": 30.0,
+      "initial_odd": 7.5,
+      "current_odd": 5.25,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "FanDuel",
+      "bookmakers_count": 28,
+      "italian_bookmakers": [
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.47
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.0
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 5.25
+        }
+      ],
+      "raw_info": {
+        "dropBid": 17,
+        "last_change": "2026-10-14 09:18:43"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10243833,
+      "home_team": "Svay Rieng FC",
+      "away_team": "Shanghai Greenland Shenhua",
+      "sport": "football",
+      "category": "Asia",
+      "league": "AFC Champions League Two",
+      "kickoff_utc": "2026-10-15 12:15:00+00",
+      "market": "Full Time BTTS",
+      "selection": "1 (Casa)",
+      "drop_percentage": 29.0,
+      "initial_odd": 2.12,
+      "current_odd": 1.51,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "FanDuel",
+      "bookmakers_count": 14,
+      "italian_bookmakers": [],
+      "raw_info": {
+        "dropBid": 122,
+        "last_change": "2026-10-14 08:03:17"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10229258,
+      "home_team": "Aragua",
+      "away_team": "Caracas",
+      "sport": "football",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 19:30:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "1 (Casa)",
+      "drop_percentage": 25.0,
+      "initial_odd": 2.12,
+      "current_odd": 1.6,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "1xBet",
+      "bookmakers_count": 34,
+      "italian_bookmakers": [
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.62
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 3.5
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.6
+        }
+      ],
+      "raw_info": {
+        "dropBid": 585,
+        "last_change": "2026-10-14 08:10:02"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10229263,
+      "home_team": "Monagas SC",
+      "away_team": "Dynamo Puerto FC",
+      "sport": "football",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 22:00:00+00",
+      "market": "Asian Handicap",
+      "selection": "X (Pareggio)",
+      "drop_percentage": 25.0,
+      "initial_odd": 2.875,
+      "current_odd": 2.17,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "Goldenbet",
+      "bookmakers_count": 9,
+      "italian_bookmakers": [],
+      "raw_info": {
+        "dropBid": 124,
+        "last_change": "2026-10-14 09:07:40"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10229263,
+      "home_team": "Monagas SC",
+      "away_team": "Dynamo Puerto FC",
+      "sport": "football",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 22:00:00+00",
+      "market": "Asian Handicap",
+      "selection": "X (Pareggio)",
+      "drop_percentage": 25.0,
+      "initial_odd": 2.626,
+      "current_odd": 1.959,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "N1Bet",
+      "bookmakers_count": 9,
+      "italian_bookmakers": [],
+      "raw_info": {
+        "dropBid": 124,
+        "last_change": "2026-10-14 09:07:40"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10314895,
+      "home_team": "Sagan Tosu",
+      "away_team": "Avispa Fukuoka",
+      "sport": "football",
+      "category": "Japan",
+      "league": "J League Cup",
+      "kickoff_utc": "2026-10-14 10:00:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "1 (Casa)",
+      "drop_percentage": 25.0,
+      "initial_odd": 4.0,
+      "current_odd": 3.0,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "BetUK",
+      "bookmakers_count": 46,
+      "italian_bookmakers": [
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 2.6
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 2.55
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 3.2
         },
         {
           "name": "Bwin",
@@ -239,12 +609,145 @@
         {
           "name": "Bwin",
           "slug": "bwin",
-          "odd": 2.25
+          "odd": 2.5
+        },
+        {
+          "name": "bet365",
+          "slug": "bet365",
+          "odd": 2.45
+        }
+      ],
+      "raw_info": {
+        "dropBid": 3,
+        "last_change": "2026-10-14 08:30:25"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10243799,
+      "home_team": "Al Faisaly Amman",
+      "away_team": "Al Nahda",
+      "sport": "football",
+      "category": "Asia",
+      "league": "AFC Champions League Two",
+      "kickoff_utc": "2026-10-14 18:15:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "2 (Trasferta)",
+      "drop_percentage": 23.0,
+      "initial_odd": 3.9,
+      "current_odd": 3.0,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "Betway",
+      "bookmakers_count": 31,
+      "italian_bookmakers": [],
+      "raw_info": {
+        "dropBid": 184,
+        "last_change": "2026-10-14 08:41:25"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10293359,
+      "home_team": "FC Lokomotiva Kosice",
+      "away_team": "AS Trencin",
+      "sport": "football",
+      "category": "Slovakia",
+      "league": "Slovakia Cup",
+      "kickoff_utc": "2026-10-14 12:30:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "1 (Casa)",
+      "drop_percentage": 21.0,
+      "initial_odd": 7.0,
+      "current_odd": 5.5,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "LeoVegas Sport",
+      "bookmakers_count": 42,
+      "italian_bookmakers": [
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 5.5
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 4.2
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 1.44
+        }
+      ],
+      "raw_info": {
+        "dropBid": 13,
+        "last_change": "2026-10-14 08:07:46"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10229256,
+      "home_team": "Atletico El Vigia",
+      "away_team": "Zamora FC",
+      "sport": "football",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 19:30:00+00",
+      "market": "Full Time Result 3 Way",
+      "selection": "1 (Casa)",
+      "drop_percentage": 20.0,
+      "initial_odd": 3.5,
+      "current_odd": 2.8,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "TonyBet",
+      "bookmakers_count": 37,
+      "italian_bookmakers": [
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 3.0
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 3.5
+        },
+        {
+          "name": "Bwin",
+          "slug": "bwin",
+          "odd": 2.0
         }
       ],
       "raw_info": {
         "dropBid": 42,
-        "last_change": "2026-10-07 09:37:56"
+        "last_change": "2026-10-14 09:17:48"
+      }
+    },
+    {
+      "signal_type": "DROPPING_ODDS",
+      "match_id": 10229256,
+      "home_team": "Atletico El Vigia",
+      "away_team": "Zamora FC",
+      "sport": "football",
+      "category": "Venezuela",
+      "league": "Copa Venezuela",
+      "kickoff_utc": "2026-10-14 19:30:00+00",
+      "market": "Asian Handicap",
+      "selection": "1 (Casa)",
+      "drop_percentage": 19.0,
+      "initial_odd": 2.27,
+      "current_odd": 1.85,
+      "fair_probability_pct": null,
+      "overvalue_pct": null,
+      "best_bookmaker": "22Bet",
+      "bookmakers_count": 9,
+      "italian_bookmakers": [],
+      "raw_info": {
+        "dropBid": 116,
+        "last_change": "2026-10-14 09:08:06"
       }
     }
   ]
