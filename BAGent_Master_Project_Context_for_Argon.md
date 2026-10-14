@@ -121,8 +121,8 @@
 2. **LASK vs Liverpool** *(18:45 CEST, Raiffeisen Arena)*: Arne Slot's Reds (Salah, Díaz, Mac Allister) heavily favored away.
 3. **Manchester City vs Paris Saint-Germain** *(21:00 CEST, Etihad Stadium)*: Heavyweight clash. Haaland & Cherki vs Dembélé & Kvaratskhelia.
 4. **AS Roma vs Real Madrid** *(21:00 CEST, Stadio Olimpico)*: Gian Piero Gasperini's Roma (Dovbyk, Dybala) vs Carlo Ancelotti's Real Madrid (Mbappé, Vinícius Jr).
-5. **Aston Villa vs Fenerbahçe** *(21:00 CEST, Villa Park)*: Unai Emery vs José Mourinho tactical duel.
-6. **Bodø/Glimt vs Borussia Dortmund** *(21:00 CEST, Aspmyra Stadion)*: Arctic artificial pitch. Serhou Guirassy leading Dortmund's attack.
+5. **Aston Villa vs Fenerbahçe** *(21:00 CEST, Villa Park)*: Unai Emery vs İsmail Kartal tactical duel.
+6. **Bodø/Glimt vs Borussia Dortmund** *(21:00 CEST, Aspmyra Stadion)*: Arctic artificial pitch. Serhou Guirassy leading Dortmund's attack under Niko Kovač.
 7. **Slovan Bratislava vs VfB Stuttgart** *(21:00 CEST)*: Sebastian Hoeneß's Stuttgart facing a fragile Slovan defense.
 8. **Real Betis vs FC Porto** *(21:00 CEST, Benito Villamarín)*: Open, high-tempo Iberian clash.
 9. **Shakhtar Donetsk vs AEK Athens** *(21:00 CEST, Neutral ground Gelsenkirchen)*: Balanced European encounter.
@@ -141,7 +141,7 @@
 - **LASK vs Liverpool (18:45)**: `Portiere LASK (Lawal/Siebenhandl) Over 3.5 Parate` (@ 1.55) *(Sommer model replica)*
 - **Manchester City vs PSG (21:00)**: `Haaland, Erling Almeno 1 Tiro in Porta` (@ 1.32)
 - **Bodø/Glimt vs Dortmund (21:00)**: `Guirassy, Serhou Almeno 1 Tiro in Porta` (@ 1.45)
-- **Aston Villa vs Fenerbahçe (21:00)**: `U/O Cartellini Totali Match Over 4.5` (@ 1.62) *(Emery vs Mourinho)*
+- **Aston Villa vs Fenerbahçe (21:00)**: `U/O Cartellini Totali Match Over 4.5` (@ 1.62) *(Emery vs Kartal)*
 - *Total Odds*: **4.80x** · *Stake*: 10.00 EUR · *Potential Win*: **48.00 EUR**
 
 ### Ticket C: "Satellite Top Match UCL" (High Multiplier @ 11.56x)
