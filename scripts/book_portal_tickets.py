@@ -188,6 +188,17 @@ MARKET_TAB_MAP: Dict[str, Tuple[str, str]] = {
 }
 
 
+def extract_search_keyword(name: str) -> str:
+    cleaned = re.sub(r"^(SL|AFC|AC|FC|AS|Olympique|RSC|FK|SK|CF|BC)\s+", "", name, flags=re.I).strip()
+    words = cleaned.split()
+    if words:
+        for w in words:
+            if len(w) >= 4 and w.upper() not in ("CLUB", "CITY", "REAL", "SPORTING"):
+                return w
+        return words[0]
+    return name
+
+
 class NetwinBookingEngine:
     def __init__(self, headless: bool = True):
         self.headless = headless
@@ -231,10 +242,11 @@ class NetwinBookingEngine:
 
     async def add_selection_to_cart(self, page: Page, match_name: str, pick_name: str, target_odd: str) -> bool:
         home_team = match_name.split(" vs ")[0].strip()
+        search_kw = extract_search_keyword(home_team)
         clean_pick = pick_name.replace(" : SI", "").strip()
         tab_name, outcome_label = MARKET_TAB_MAP.get(clean_pick, ("TUTTI", clean_pick))
 
-        print(f"  [SEARCH] Cerco '{match_name}' -> [{tab_name}] '{outcome_label}' (@{target_odd})...")
+        print(f"  [SEARCH] Cerco '{match_name}' (kw: '{search_kw}') -> [{tab_name}] '{outcome_label}' (@{target_odd})...")
         try:
             search_input = page.locator(
                 "input[placeholder*='Cerca'], input[type='search'], input[name*='search'], .search-input input"
@@ -242,21 +254,26 @@ class NetwinBookingEngine:
             await search_input.wait_for(state="visible", timeout=8000)
             await search_input.click()
             await search_input.fill("")
-            await search_input.fill(home_team)
+            await search_input.fill(search_kw)
             await search_input.press("Enter")
             await page.wait_for_timeout(1800)
 
-            match_row = page.locator(f"text=/{re.escape(home_team)}/i").first
+            match_row = page.locator(f"text=/{re.escape(search_kw)}/i").first
             await match_row.click()
             await page.wait_for_timeout(1800)
 
             if tab_name != "PRINCIPALI":
-                tab_loc = page.locator(
-                    f"text=/^{re.escape(tab_name)}$/i, a:has-text('{tab_name}'), button:has-text('{tab_name}')"
+                tab_loc = page.locator("button, a, [role='tab'], .tabItem, .menuItem, span").filter(
+                    has_text=re.compile(rf"^{re.escape(tab_name)}$", re.I)
                 ).first
-                if await tab_loc.is_visible(timeout=3000):
+                if await tab_loc.is_visible(timeout=2500):
                     await tab_loc.click()
                     await page.wait_for_timeout(1000)
+                else:
+                    fallback_tab = page.locator(f"text='{tab_name}'").first
+                    if await fallback_tab.is_visible(timeout=1500):
+                        await fallback_tab.click()
+                        await page.wait_for_timeout(1000)
 
             outcome_loc = page.locator(
                 f"//*[contains(translate(text(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), '{outcome_label.upper()}')]"
