@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T13:22:51.945758",
+  "generated_at": "2026-10-15T13:53:04.493830",
   "check_seconds": 30,
   "profit_label": "+45.14 € (Saldo Netto Aggiornato)",
   "present": [
@@ -199,6 +199,84 @@
           "odd": "1.40",
           "result": "PENDING",
           "score": "OFP AAA | Argon Certified | Duello equilibrato e serrato: copre 1-1, 2-1, 1-2, 0-0"
+        }
+      ]
+    },
+    {
+      "id": "SCHEDINA_6_TRIPLA_BALISTICA_UECL_15OTT",
+      "title": "Schedina 6: La Tripla Balistica UECL (Tiri in Porta & Corner @ 3.05x)",
+      "label": "In Programma (Oggi ore 21:00)",
+      "stake": "5.00 €",
+      "odds": "3.05×",
+      "potential_win": "15.25 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Atalanta vs Pafos FC",
+          "pick": "Atalanta Over 4.5 Tiri in Porta",
+          "odd": "1.40",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Gewiss Stadium ad alto volume balistico (media 6.8 tiri nello specchio)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "AFC Bournemouth vs Sturm Graz",
+          "pick": "Bournemouth Over 5.5 Tiri in Porta",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Pressing asfissiante e transizioni rapide della Premier contro blocco statico"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Brighton vs Kauno Zalgiris",
+          "pick": "Brighton Over 6.5 Corner",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Ampiezza estrema sulle fasce contro blocco basso lituano (>7 corner interni)"
+        }
+      ]
+    },
+    {
+      "id": "SCHEDINA_7_CORE_FLUSSI_UECL_15OTT",
+      "title": "Schedina 7: Core Blindato UECL (Spina Dorsale Flussi @ 4.12x)",
+      "label": "In Programma (Oggi ore 18:45)",
+      "stake": "5.00 €",
+      "odds": "4.12×",
+      "potential_win": "20.60 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-15 18:45 CEST",
+          "match": "AZ Alkmaar vs Hapoel Be'er Sheva",
+          "pick": "Over 0.5 1°T + Over 0.5 2°T",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Flusso olandese costante ad alto volume offensivo (1+ rete per tempo)"
+        },
+        {
+          "when": "2026-10-15 18:45 CEST",
+          "match": "Sparta Praga vs Lillestrom",
+          "pick": "Sparta Praga Over 1.5 Gol",
+          "odd": "1.38",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Media interna ceca >2.10 reti; difesa norvegese vulnerabile"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "NEC Nijmegen vs Levski Sofia",
+          "pick": "1X + Over 1.5",
+          "odd": "1.42",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Pressione dinamica olandese contro blocco basso bulgaro"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Jagiellonia vs Ararat-Armenia",
+          "pick": "Jagiellonia Over 1.5 Gol",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Rettifica anti-soffitto (eliminato MultiGol 1-4); polacchi travolgenti in casa"
         }
       ]
     }

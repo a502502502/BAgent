@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-10-15T11:22:58.307162+00:00",
+  "timestamp_utc": "2026-10-15T11:53:11.001092+00:00",
   "date": "2026-10-15",
   "integrity_status": "VIOLATIONS_DETECTED",
   "database_sync": {
@@ -19,7 +19,7 @@
     "cleaned_files": []
   },
   "active_tickets_audit": {
-    "total_tickets_audited": 69,
+    "total_tickets_audited": 71,
     "violations_found": 25,
     "tickets": [
       {
@@ -53,6 +53,20 @@
       {
         "ticket_id": "SCHEDINA_5_SATELLITE_GOL_OVER_15OTT",
         "label": "SCHEDINA_5_SATELLITE_GOL_OVER_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "SCHEDINA_6_TRIPLA_BALISTICA_UECL_15OTT",
+        "label": "SCHEDINA_6_TRIPLA_BALISTICA_UECL_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "SCHEDINA_7_CORE_FLUSSI_UECL_15OTT",
+        "label": "SCHEDINA_7_CORE_FLUSSI_UECL_15OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
         "certified_entities": []

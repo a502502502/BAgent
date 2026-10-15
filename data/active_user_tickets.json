@@ -300,6 +300,124 @@
     ]
   },
   {
+    "ticket_id": "SCHEDINA_6_TRIPLA_BALISTICA_UECL_15OTT",
+    "name": "Schedina 6: La Tripla Balistica UECL (Tiri in Porta & Corner @ 3.05x)",
+    "title": "Schedina 6: La Tripla Balistica UECL (Tiri in Porta & Corner @ 3.05x)",
+    "bookmaker": "Netwin",
+    "type": "Special UECL (Tiri in Porta & Corner)",
+    "status": "PENDING",
+    "placed_at": "2026-10-15 21:00 CEST",
+    "created_at": "2026-10-15T13:52:00+02:00",
+    "date_created": "2026-10-15 13:52:00",
+    "stake": 5.0,
+    "stake_eur": 5.0,
+    "bonus": 0.0,
+    "total_odds": 3.05,
+    "potential_win": 15.25,
+    "potential_payout_eur": 15.25,
+    "net_profit_eur": 10.25,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "booking_code": null,
+    "notes": "OFP AAA + Argon Certified. 100% Conference League: solo mercati balistici e corner asimmetrici, immuni da turnover e punteggio.",
+    "legs": [
+      {
+        "match": "Atalanta vs Pafos FC",
+        "tournament": "Club Internazionali | UEFA Conference League",
+        "kickoff": "2026-10-15 21:00 CEST",
+        "market": "U/O 4.5 Tiri in Porta Squadra 1 : OVER",
+        "selection": "OVER",
+        "odds": 1.4,
+        "status": "PENDING",
+        "score": "OFP AAA | Argon Certified | Gewiss Stadium ad alto volume balistico (media 6.8 tiri nello specchio)"
+      },
+      {
+        "match": "AFC Bournemouth vs Sturm Graz",
+        "tournament": "Club Internazionali | UEFA Conference League",
+        "kickoff": "2026-10-15 21:00 CEST",
+        "market": "U/O 5.5 Tiri in Porta Squadra 1 : OVER",
+        "selection": "OVER",
+        "odds": 1.45,
+        "status": "PENDING",
+        "score": "OFP AAA | Argon Certified | Pressing asfissiante e transizioni rapide della Premier contro blocco statico"
+      },
+      {
+        "match": "Brighton vs Kauno Zalgiris",
+        "tournament": "Club Internazionali | UEFA Conference League",
+        "kickoff": "2026-10-15 21:00 CEST",
+        "market": "U/O 6.5 Corner Squadra 1 (esc.TS) : OVER",
+        "selection": "OVER",
+        "odds": 1.5,
+        "status": "PENDING",
+        "score": "OFP AAA | Argon Certified | Ampiezza estrema sulle fasce contro blocco basso lituano (>7 corner interni)"
+      }
+    ]
+  },
+  {
+    "ticket_id": "SCHEDINA_7_CORE_FLUSSI_UECL_15OTT",
+    "name": "Schedina 7: Core Blindato UECL (Spina Dorsale Flussi @ 4.12x)",
+    "title": "Schedina 7: Core Blindato UECL (Spina Dorsale Flussi @ 4.12x)",
+    "bookmaker": "Netwin",
+    "type": "Core UECL Flussi (Gol & Doppia Chance)",
+    "status": "PENDING",
+    "placed_at": "2026-10-15 18:45 CEST",
+    "created_at": "2026-10-15T13:52:00+02:00",
+    "date_created": "2026-10-15 13:52:00",
+    "stake": 5.0,
+    "stake_eur": 5.0,
+    "bonus": 0.0,
+    "total_odds": 4.12,
+    "potential_win": 20.6,
+    "potential_payout_eur": 20.6,
+    "net_profit_eur": 15.6,
+    "settled": false,
+    "profit_loss_eur": 0.0,
+    "booking_code": null,
+    "notes": "OFP AAA + Argon Certified. Spina dorsale 100% Conference League: flusso costante 18:45 e solidita casalinga 21:00 senza tetti restrittivi.",
+    "legs": [
+      {
+        "match": "AZ Alkmaar vs Hapoel Be'er Sheva",
+        "tournament": "Club Internazionali | UEFA Conference League",
+        "kickoff": "2026-10-15 18:45 CEST",
+        "market": "Over 0.5 1°T + Over 0.5 2°T : SI",
+        "selection": "SI",
+        "odds": 1.45,
+        "status": "PENDING",
+        "score": "OFP AAA | Argon Certified | Flusso olandese costante ad alto volume offensivo (1+ rete per tempo)"
+      },
+      {
+        "match": "Sparta Praga vs Lillestrom",
+        "tournament": "Club Internazionali | UEFA Conference League",
+        "kickoff": "2026-10-15 18:45 CEST",
+        "market": "U/O 1.5 Squadra 1 : OVER",
+        "selection": "OVER",
+        "odds": 1.38,
+        "status": "PENDING",
+        "score": "OFP AAA | Argon Certified | Media interna ceca >2.10 reti; difesa norvegese vulnerabile"
+      },
+      {
+        "match": "NEC Nijmegen vs Levski Sofia",
+        "tournament": "Club Internazionali | UEFA Conference League",
+        "kickoff": "2026-10-15 21:00 CEST",
+        "market": "1X + U/O 1.5 : 1X + OV",
+        "selection": "1X + OV",
+        "odds": 1.42,
+        "status": "PENDING",
+        "score": "OFP AAA | Argon Certified | Pressione dinamica olandese contro blocco basso bulgaro"
+      },
+      {
+        "match": "Jagiellonia vs Ararat-Armenia",
+        "tournament": "Club Internazionali | UEFA Conference League",
+        "kickoff": "2026-10-15 21:00 CEST",
+        "market": "U/O 1.5 Squadra 1 : OVER",
+        "selection": "OVER",
+        "odds": 1.45,
+        "status": "PENDING",
+        "score": "OFP AAA | Argon Certified | Rettifica anti-soffitto (eliminato MultiGol 1-4); polacchi travolgenti in casa"
+      }
+    ]
+  },
+  {
     "ticket_id": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
     "name": "Ticket Personale: La Doppia Diamante UCL (Wirtz + Como Corner)",
     "title": "Ticket Personale: La Doppia Diamante UCL (Como Corner + Wirtz Gol/Assist) (@ 3.72)",
