@@ -1,0 +1,11 @@
+{
+  "verdict": "WARNING",
+  "orthogonality_passed": true,
+  "bankroll_exposure_eur": 85.0,
+  "total_active_tickets": 8,
+  "anomalies_found": [
+    "Avviso Quota: Quota @1.18 sotto soglia ottimale 1.20 su 'Slovan Bratislava vs Stoccarda' (MultiGol 1-4 Ospite (Stoccarda))."
+  ],
+  "optimization_advice": "Mantenere l'esposizione entro l'8% di bankroll e rispettare le quote minime >= 1.20.",
+  "source": "LOCAL_DETERMINISTIC_ENGINE"
+}
