@@ -1,12 +1,14 @@
 {
-  "generated_at": "2026-10-15T20:47:48.671176",
+  "generated_at": "2026-10-15T23:14:57.614489",
   "check_seconds": 30,
-  "profit_label": "+45.14 € (Saldo Netto Aggiornato)",
-  "present": [
+  "profit_label": "+2.32 € (Saldo Netto Aggiornato)",
+  "present": [],
+  "future": [],
+  "past": [
     {
       "id": "TICKET_USER_TRIPLA_NETWIN_10EUR_15OTT",
       "title": "Ticket 2: Tripla di Ferro (@ 2.96)",
-      "label": "In Corso (1/3 Vinte)",
+      "label": "Vinta (+29.61 €)",
       "stake": "10.00 €",
       "odds": "2.96×",
       "potential_win": "29.61 €",
@@ -18,30 +20,31 @@
           "pick": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
           "odd": "1.47",
           "result": "WON",
-          "score": "0-4 (FT) ✅ (HT 0-2, 2°T 0-2)"
+          "score": "0-4 (FT) ✅"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Celta Vigo vs Juventus",
           "pick": "X2 + U/O 4.5 : X2 + UN",
           "odd": "1.38",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "1-2 (FT) ✅ (X2 + Under 4.5)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Dinamo Zagabria vs Anderlecht",
           "pick": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
           "odd": "1.46",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "1-0 (FT) ✅ (HT 0-0, 2°T 1-0)"
         }
-      ]
+      ],
+      "status": "WON"
     },
     {
       "id": "TICKET_USER_MULTIPLA7_ALTAQUOTA_NETWIN_6_90EUR_15OTT",
       "title": "Ticket 4: Multipla (7) Alta Quota (@ 15.76)",
-      "label": "In Corso (1/7 Vinte)",
+      "label": "Persa (4/7 Vinte)",
       "stake": "6.90 €",
       "bonus": "14.14 €",
       "odds": "15.76×",
@@ -54,62 +57,63 @@
           "pick": "MultiGol 1-3 Casa + 1-3 Ospite : SI",
           "odd": "1.69",
           "result": "WON",
-          "score": "3-2 (FT) ✅ (Lione 3, Palace 2)"
+          "score": "3-2 (FT) ✅"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Bournemouth vs Sturm Graz",
           "pick": "MultiGol 1-3 1°Tempo : SI",
           "odd": "1.28",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "3-0 (HT 2-0) ✅"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Celta Vigo vs Juventus",
           "pick": "X2 + MultiGol 1-5 : SI",
           "odd": "1.50",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "1-2 (FT) ✅"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Benfica vs Celtic",
           "pick": "U/O 9.5 Corner (esc.TS) : OVER",
           "odd": "1.46",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "LOST",
+          "score": "6 Corner Totali ❌ (Linea 9.5)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Dinamo Zagabria vs Anderlecht",
           "pick": "X o GG : SI",
           "odd": "1.47",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "LOST",
+          "score": "1-0 (FT 96') ❌"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Marsiglia vs Olympiacos",
           "pick": "U/O 3.5 Cartellini : OVER",
           "odd": "1.53",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "LOST",
+          "score": "2 Gialli Totali ❌ (Linea 3.5)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Rennes vs OFI Creta",
           "pick": "MultiGol 2-4 Casa : SI",
           "odd": "1.48",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "2-1 (FT) ✅"
         }
-      ]
+      ],
+      "status": "LOST"
     },
     {
       "id": "TICKET_USER_MULTIPLA4_NETWIN_10EUR_15OTT",
       "title": "Ticket 1: Multipla (4) Top Flussi (@ 6.88)",
-      "label": "In Programma (Ore 21:00)",
+      "label": "Persa",
       "stake": "10.00 €",
       "bonus": "2.06 €",
       "odds": "6.88×",
@@ -121,39 +125,40 @@
           "match": "Brighton vs FK Kauno Zalgiris",
           "pick": "U/O 9.5 Corner (esc.TS) : OVER",
           "odd": "1.65",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "LOST",
+          "score": "6 Corner (FT) ❌ (Linea 9.5)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Atalanta vs Pafos",
           "pick": "U/O 5.5 Tiri in Porta Squadra 1 : OVER",
           "odd": "1.47",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "LOST",
+          "score": "2 Tiri in Porta (FT) ❌"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Marsiglia vs Olympiacos",
           "pick": "G/NG: Gol",
           "odd": "1.67",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "LOST",
+          "score": "0-1 (FT) ❌ (No Gol)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Hoffenheim vs Besiktas",
           "pick": "U/O 2.5 + GG/NG: GG+OV",
           "odd": "1.70",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "2-3 (FT) ✅ (GG + Over 2.5)"
         }
-      ]
+      ],
+      "status": "LOST"
     },
     {
       "id": "TICKET_USER_TRIPLA_ASYM_NETWIN_7EUR_15OTT",
       "title": "Ticket 3: Tripla Asimmetrica (@ 3.87)",
-      "label": "In Programma (Ore 21:00)",
+      "label": "Persa",
       "stake": "7.00 €",
       "odds": "3.87×",
       "potential_win": "27.14 €",
@@ -164,30 +169,28 @@
           "match": "Dinamo Zagabria vs Anderlecht",
           "pick": "X o GG : SI",
           "odd": "1.46",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "LOST",
+          "score": "1-0 (FT 96' pen) ❌"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Atalanta vs Pafos",
           "pick": "U/O 0.5 Squadra 2 : OVER",
           "odd": "1.66",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "3-1 (FT) ✅ (Pafos Gol)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Jagiellonia Bialystok vs FC Ararat-Armenia",
           "pick": "U/O 0.5 Squadra 2 : OVER",
           "odd": "1.60",
-          "result": "PENDING",
-          "score": "Kickoff ore 21:00"
+          "result": "WON",
+          "score": "3-1 (FT) ✅ (Ararat Gol)"
         }
-      ]
-    }
-  ],
-  "future": [],
-  "past": [
+      ],
+      "status": "LOST"
+    },
     {
       "id": "SCHEDINA_1_CORE_APERTURA_1845_15OTT",
       "title": "Schedina 1: Core Blindato Apertura (18:45 CEST @ 2.96x)",

@@ -5,7 +5,7 @@
     "title": "Ticket 3: Tripla Asimmetrica (@ 3.87)",
     "bookmaker": "Netwin",
     "type": "Multipla Reale Piazzata",
-    "status": "ACTIVE",
+    "status": "LOST",
     "placed_at": "2026-10-15 20:45 CEST",
     "created_at": "2026-10-15T20:47:48.683017",
     "date_created": "2026-10-15 20:47:48",
@@ -15,8 +15,8 @@
     "total_odds": 3.87,
     "potential_win": 27.14,
     "potential_payout_eur": 27.14,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -7.0,
     "booking_code": "NETWIN_PLACED",
     "legs": [
       {
@@ -51,7 +51,7 @@
     "title": "Ticket 1: Multipla (4) Top Flussi (@ 6.88)",
     "bookmaker": "Netwin",
     "type": "Multipla Reale Piazzata",
-    "status": "ACTIVE",
+    "status": "LOST",
     "placed_at": "2026-10-15 20:45 CEST",
     "created_at": "2026-10-15T20:47:48.683003",
     "date_created": "2026-10-15 20:47:48",
@@ -61,8 +61,8 @@
     "total_odds": 6.88,
     "potential_win": 70.92,
     "potential_payout_eur": 70.92,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -10.0,
     "booking_code": "NETWIN_PLACED",
     "legs": [
       {
@@ -105,7 +105,7 @@
     "title": "Ticket 4: Multipla (7) Alta Quota (@ 15.76)",
     "bookmaker": "Netwin",
     "type": "Multipla Reale Piazzata",
-    "status": "ACTIVE",
+    "status": "LOST",
     "placed_at": "2026-10-15 20:45 CEST",
     "created_at": "2026-10-15T20:47:48.682972",
     "date_created": "2026-10-15 20:47:48",
@@ -115,8 +115,8 @@
     "total_odds": 15.76,
     "potential_win": 122.95,
     "potential_payout_eur": 122.95,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": -6.9,
     "booking_code": "NETWIN_PLACED",
     "legs": [
       {
@@ -183,7 +183,7 @@
     "title": "Ticket 2: Tripla di Ferro (@ 2.96)",
     "bookmaker": "Netwin",
     "type": "Multipla Reale Piazzata",
-    "status": "ACTIVE",
+    "status": "WON",
     "placed_at": "2026-10-15 20:45 CEST",
     "created_at": "2026-10-15T20:47:48.682659",
     "date_created": "2026-10-15 20:47:48",
@@ -193,8 +193,8 @@
     "total_odds": 2.96,
     "potential_win": 29.61,
     "potential_payout_eur": 29.61,
-    "settled": false,
-    "profit_loss_eur": 0.0,
+    "settled": true,
+    "profit_loss_eur": 19.61,
     "booking_code": "NETWIN_PLACED",
     "legs": [
       {
