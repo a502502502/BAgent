@@ -1,6 +1,6 @@
 {
-  "timestamp_utc": "2026-10-14T15:28:52.845434+00:00",
-  "date": "2026-10-14",
+  "timestamp_utc": "2026-10-15T07:36:10.313496+00:00",
+  "date": "2026-10-15",
   "integrity_status": "VIOLATIONS_DETECTED",
   "database_sync": {
     "data\\bagent.db": {
@@ -10,7 +10,7 @@
     },
     "storage\\database\\bagent.db": {
       "official_managers": 37,
-      "player_registry": 505,
+      "player_registry": 506,
       "status": "SYNCED"
     }
   },
@@ -19,9 +19,23 @@
     "cleaned_files": []
   },
   "active_tickets_audit": {
-    "total_tickets_audited": 64,
+    "total_tickets_audited": 66,
     "violations_found": 28,
     "tickets": [
+      {
+        "ticket_id": "TICKET_CORE_ROCKET_UEL_UECL_20EUR_15OTT",
+        "label": "TICKET_CORE_ROCKET_UEL_UECL_20EUR_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
+        "label": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
       {
         "ticket_id": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
         "label": "TICKET_USER_DOPPIA_DIAMANTE_20EUR_14OTT",
