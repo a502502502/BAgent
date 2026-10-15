@@ -185,6 +185,8 @@ MARKET_TAB_MAP: Dict[str, Tuple[str, str]] = {
     "Over 4.5 Cartellini Totali": ("CARTELLINI", "Over 4.5"),
     "Gol + Over 2.5": ("COMBO", "Gol + Over 2.5"),
     "Over 2.5": ("UNDER/OVER", "Over 2.5"),
+    "Casa Segna 1° Tempo": ("1° TEMPO", "Casa Segna 1°T"),
+    "NEC Nijmegen Over 1.5 Gol": ("CASA/OSPITE", "Over 1.5"),
 }
 
 

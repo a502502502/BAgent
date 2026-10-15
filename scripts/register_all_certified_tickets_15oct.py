@@ -385,10 +385,10 @@ TICKET_6_TRIPLA_BALISTICA_UECL = {
 
 TICKET_7_CORE_FLUSSI_UECL = {
     "ticket_id": "SCHEDINA_7_CORE_FLUSSI_UECL_15OTT",
-    "name": "Schedina 7: Core Blindato UECL (Spina Dorsale Flussi @ 4.12x)",
-    "title": "Schedina 7: Core Blindato UECL (Spina Dorsale Flussi @ 4.12x)",
+    "name": "Schedina 7: Core Blindato UECL (Mercati Differenziati @ 3.91x)",
+    "title": "Schedina 7: Core Blindato UECL (Mercati Differenziati @ 3.91x)",
     "bookmaker": "Netwin",
-    "type": "Core UECL Flussi (Gol & Doppia Chance)",
+    "type": "Core UECL Flussi (Differenziata Anti-Correlazione)",
     "status": "PENDING",
     "placed_at": "2026-10-15 18:45 CEST",
     "created_at": "2026-10-15T13:52:00+02:00",
@@ -396,54 +396,54 @@ TICKET_7_CORE_FLUSSI_UECL = {
     "stake": 5.0,
     "stake_eur": 5.0,
     "bonus": 0.0,
-    "total_odds": 4.12,
-    "potential_win": 20.60,
-    "potential_payout_eur": 20.60,
-    "net_profit_eur": 15.60,
+    "total_odds": 3.91,
+    "potential_win": 19.55,
+    "potential_payout_eur": 19.55,
+    "net_profit_eur": 14.55,
     "settled": False,
     "profit_loss_eur": 0.0,
     "booking_code": None,
-    "notes": "OFP AAA + Argon Certified. Spina dorsale 100% Conference League: flusso costante 18:45 e solidita casalinga 21:00 senza tetti restrittivi.",
+    "notes": "OFP AAA + Argon Certified. Differenziazione mercati UECL per prevenire cluster risk e correlazione negativa.",
     "legs": [
         {
             "match": "AZ Alkmaar vs Hapoel Be'er Sheva",
             "tournament": "Club Internazionali | UEFA Conference League",
             "kickoff": "2026-10-15 18:45 CEST",
-            "market": "Over 0.5 1°T + Over 0.5 2°T : SI",
+            "market": "Casa Segna 1° Tempo : SI",
             "selection": "SI",
-            "odds": 1.45,
+            "odds": 1.42,
             "status": "PENDING",
-            "score": "OFP AAA | Argon Certified | Flusso olandese costante ad alto volume offensivo (1+ rete per tempo)"
+            "score": "OFP AAA | Argon Certified | Pressione olandese immediata fin dal fischio d'inizio"
         },
         {
             "match": "Sparta Praga vs Lillestrom",
             "tournament": "Club Internazionali | UEFA Conference League",
             "kickoff": "2026-10-15 18:45 CEST",
-            "market": "U/O 1.5 Squadra 1 : OVER",
-            "selection": "OVER",
-            "odds": 1.38,
+            "market": "1X + U/O 1.5 : 1X + OV",
+            "selection": "1X + OV",
+            "odds": 1.33,
             "status": "PENDING",
-            "score": "OFP AAA | Argon Certified | Media interna ceca >2.10 reti; difesa norvegese vulnerabile"
+            "score": "OFP AAA | Argon Certified | Copertura totale fattore Letna con almeno due reti nel match"
         },
         {
             "match": "NEC Nijmegen vs Levski Sofia",
             "tournament": "Club Internazionali | UEFA Conference League",
             "kickoff": "2026-10-15 21:00 CEST",
-            "market": "1X + U/O 1.5 : 1X + OV",
-            "selection": "1X + OV",
-            "odds": 1.42,
+            "market": "U/O 1.5 Squadra 1 : OVER",
+            "selection": "OVER",
+            "odds": 1.48,
             "status": "PENDING",
-            "score": "OFP AAA | Argon Certified | Pressione dinamica olandese contro blocco basso bulgaro"
+            "score": "OFP AAA | Argon Certified | Volume offensivo interno dei padroni di casa contro blocco bulgaro"
         },
         {
             "match": "Jagiellonia vs Ararat-Armenia",
             "tournament": "Club Internazionali | UEFA Conference League",
             "kickoff": "2026-10-15 21:00 CEST",
-            "market": "U/O 1.5 Squadra 1 : OVER",
-            "selection": "OVER",
-            "odds": 1.45,
+            "market": "1X + MultiGol 2-5 : 1X + 2-5",
+            "selection": "1X + 2-5",
+            "odds": 1.40,
             "status": "PENDING",
-            "score": "OFP AAA | Argon Certified | Rettifica anti-soffitto (eliminato MultiGol 1-4); polacchi travolgenti in casa"
+            "score": "OFP AAA | Argon Certified | Solidita polacca a Bialystok con cluster compreso tra 2 e 5 reti complessive"
         }
     ]
 }
@@ -698,41 +698,41 @@ PORTAL_CARDS = [
         "title": TICKET_7_CORE_FLUSSI_UECL["title"],
         "label": "In Programma (Oggi ore 18:45)",
         "stake": "5.00 €",
-        "odds": "4.12×",
-        "potential_win": "20.60 €",
+        "odds": "3.91×",
+        "potential_win": "19.55 €",
         "booking_code": None,
         "legs": [
             {
                 "when": "2026-10-15 18:45 CEST",
                 "match": "AZ Alkmaar vs Hapoel Be'er Sheva",
-                "pick": "Over 0.5 1°T + Over 0.5 2°T",
-                "odd": "1.45",
+                "pick": "Casa Segna 1° Tempo",
+                "odd": "1.42",
                 "result": "PENDING",
-                "score": "OFP AAA | Argon Certified | Flusso olandese costante ad alto volume offensivo (1+ rete per tempo)"
+                "score": "OFP AAA | Argon Certified | Pressione olandese immediata fin dal fischio d'inizio"
             },
             {
                 "when": "2026-10-15 18:45 CEST",
                 "match": "Sparta Praga vs Lillestrom",
-                "pick": "Sparta Praga Over 1.5 Gol",
-                "odd": "1.38",
+                "pick": "1X + Over 1.5",
+                "odd": "1.33",
                 "result": "PENDING",
-                "score": "OFP AAA | Argon Certified | Media interna ceca >2.10 reti; difesa norvegese vulnerabile"
+                "score": "OFP AAA | Argon Certified | Copertura totale fattore Letna con almeno due reti nel match"
             },
             {
                 "when": "2026-10-15 21:00 CEST",
                 "match": "NEC Nijmegen vs Levski Sofia",
-                "pick": "1X + Over 1.5",
-                "odd": "1.42",
+                "pick": "NEC Nijmegen Over 1.5 Gol",
+                "odd": "1.48",
                 "result": "PENDING",
-                "score": "OFP AAA | Argon Certified | Pressione dinamica olandese contro blocco basso bulgaro"
+                "score": "OFP AAA | Argon Certified | Volume offensivo interno dei padroni di casa contro blocco bulgaro"
             },
             {
                 "when": "2026-10-15 21:00 CEST",
                 "match": "Jagiellonia vs Ararat-Armenia",
-                "pick": "Jagiellonia Over 1.5 Gol",
-                "odd": "1.45",
+                "pick": "1X + MultiGol 2-5",
+                "odd": "1.40",
                 "result": "PENDING",
-                "score": "OFP AAA | Argon Certified | Rettifica anti-soffitto (eliminato MultiGol 1-4); polacchi travolgenti in casa"
+                "score": "OFP AAA | Argon Certified | Solidita polacca a Bialystok con cluster compreso tra 2 e 5 reti complessive"
             }
         ]
     }
