@@ -21,6 +21,9 @@ from typing import Dict, List, Optional, Tuple
 
 from playwright.async_api import async_playwright, Page, Response
 
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 ROOT = Path(__file__).resolve().parent.parent
 SCHEDINE_PATH = ROOT / "portal" / "schedine.json"
 NETWIN_ODDS_PATH = ROOT / "data" / "netwin_live_odds.json"
@@ -50,7 +53,7 @@ def load_dotenv_safe():
 def send_telegram_message(text: str) -> bool:
     """Invia un messaggio formattato Markdown sul canale/chat Telegram di BAgent."""
     load_dotenv_safe()
-    token = os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("BOT_TOKEN")
+    token = os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("TELEGRAM_TOKEN") or os.getenv("BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID") or os.getenv("CHAT_ID")
     if not token or not chat_id:
         print("  [TELEGRAM WARN] TELEGRAM_BOT_TOKEN o TELEGRAM_CHAT_ID mancanti in .env")
@@ -76,7 +79,7 @@ def send_telegram_message(text: str) -> bool:
 def send_telegram_photo(photo_path: Path, caption: str) -> bool:
     """Invia lo screenshot della modale di prenotazione Netwin direttamente su Telegram."""
     load_dotenv_safe()
-    token = os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("BOT_TOKEN")
+    token = os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("TELEGRAM_TOKEN") or os.getenv("BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID") or os.getenv("CHAT_ID")
     if not token or not chat_id or not photo_path.exists():
         return False
@@ -219,7 +222,7 @@ class NetwinBookingEngine:
         clean_pick = pick_name.replace(" : SI", "").strip()
         tab_name, outcome_label = MARKET_TAB_MAP.get(clean_pick, ("TUTTI", clean_pick))
 
-        print(f"  🔎 Cerco '{match_name}' -> [{tab_name}] '{outcome_label}' (@{target_odd})...")
+        print(f"  [SEARCH] Cerco '{match_name}' -> [{tab_name}] '{outcome_label}' (@{target_odd})...")
         try:
             search_input = page.locator(
                 "input[placeholder*='Cerca'], input[type='search'], input[name*='search'], .search-input input"
@@ -254,10 +257,10 @@ class NetwinBookingEngine:
                 await fallback_loc.click(timeout=4000)
 
             await page.wait_for_timeout(1000)
-            print(f"  ✅ Aggiunta al carrello: {match_name} -> {outcome_label}")
+            print(f"  [OK] Aggiunta al carrello: {match_name} -> {outcome_label}")
             return True
         except Exception as e:
-            print(f"  ⚠️ Impossibile cliccare automaticamente {match_name} ({clean_pick}): {e}")
+            print(f"  [WARN] Impossibile cliccare automaticamente {match_name} ({clean_pick}): {e}")
             return False
 
     async def finalize_booking_and_extract_code(self, page: Page, stake_str: str, ticket_id: str) -> Tuple[Optional[str], Path]:
@@ -296,7 +299,7 @@ class NetwinBookingEngine:
                     (REPORTS_DIR / f"prenotata_{code}.html").write_text(await page.content(), encoding="utf-8")
                     return code, shot_path
         except Exception as e:
-            print(f"  ❌ Errore in fase di finalizzazione prenotazione: {e}")
+            print(f"  [ERROR] Errore in fase di finalizzazione prenotazione: {e}")
 
         return None, shot_path
 
@@ -320,10 +323,10 @@ class NetwinBookingEngine:
         pending = [t for t in present_tickets if not t.get("booking_code")]
 
         if not pending:
-            print("✅ Tutte le schedine in 'present' hanno già un codice di prenotazione!")
+            print("[OK] Tutte le schedine in 'present' hanno gia un codice di prenotazione!")
             return
 
-        print(f"🚀 Trovate {len(pending)} schedine da prenotare su Netwin...")
+        print(f"[START] Trovate {len(pending)} schedine da prenotare su Netwin...")
 
         async with async_playwright() as p:
             browser = await p.chromium.launch(headless=self.headless)
@@ -334,7 +337,7 @@ class NetwinBookingEngine:
             page = await context.new_page()
             page.on("response", self._handle_network_response)
 
-            print("🌐 Apertura portale Scommesse Netwin...")
+            print("[NETWIN] Apertura portale Scommesse Netwin...")
             await page.goto("https://www.netwin.it/scommesse", wait_until="domcontentloaded", timeout=45000)
             await page.wait_for_timeout(3000)
             await self.accept_cookies_and_popups(page)
@@ -345,7 +348,7 @@ class NetwinBookingEngine:
                 t_id = ticket.get("id", "TICKET")
                 t_title = ticket.get("title", t_id)
                 print(f"\n==========================================")
-                print(f"🎫 Elaborazione: {t_title}")
+                print(f"[TICKET] Elaborazione: {t_title}")
                 print(f"==========================================")
 
                 await self.clear_cart(page)
@@ -368,25 +371,25 @@ class NetwinBookingEngine:
                     if code:
                         ticket["booking_code"] = code
                         booked_count += 1
-                        print(f"🎉 PRENOTAZIONE COMPLETATA! Codice Netwin: [{code}]")
+                        print(f"[BOOKED] PRENOTAZIONE COMPLETATA! Codice Netwin: [{code}]")
 
                         # Invio immediato su Telegram (Foto + Testo con codice copiabile)
                         tg_caption = format_ticket_telegram_alert(ticket, code)
                         sent_photo = send_telegram_photo(shot_path, tg_caption)
                         if not sent_photo:
                             send_telegram_message(tg_caption)
-                        print(f"📲 Notifica Telegram inviata per il codice [{code}]!")
+                        print(f"[TELEGRAM] Notifica Telegram inviata per il codice [{code}]!")
                     else:
-                        print(f"⚠️ Impossibile leggere il codice prenotazione per {t_id}.")
+                        print(f"[WARN] Impossibile leggere il codice prenotazione per {t_id}.")
                 else:
-                    print(f"⚠️ Alcune selezioni di {t_id} non sono state trovate: prenotazione saltata.")
+                    print(f"[WARN] Alcune selezioni di {t_id} non sono state trovate: prenotazione saltata.")
 
             await browser.close()
 
         if booked_count > 0:
             data["generated_at"] = datetime.now().isoformat()
             SCHEDINE_PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
-            print(f"\n✅ Salvati {booked_count} nuovi codici in portal/schedine.json!")
+            print(f"\n[OK] Salvati {booked_count} nuovi codici in portal/schedine.json!")
 
 
 def send_existing_codes_to_telegram():
@@ -394,12 +397,19 @@ def send_existing_codes_to_telegram():
     if not SCHEDINE_PATH.exists():
         return
     data = json.loads(SCHEDINE_PATH.read_text(encoding="utf-8"))
-    for t in data.get("present", []):
+    all_tickets = data.get("present", []) + data.get("future", []) + data.get("past", [])
+    sent_any = False
+    for t in all_tickets:
         code = t.get("booking_code")
         if code:
             msg = format_ticket_telegram_alert(t, code)
-            send_telegram_message(msg)
-            print(f"📲 Inviato su Telegram codice esistente: {code}")
+            ok = send_telegram_message(msg)
+            if ok:
+                print(f"[TELEGRAM] Inviato su Telegram codice esistente: {code} ({t.get('title')})")
+                sent_any = True
+                break
+    if not sent_any:
+        print("Nessun codice di prenotazione trovato nei ticket del portale.")
 
 
 if __name__ == "__main__":
