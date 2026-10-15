@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-15T20:16:43.182552",
+  "generated_at": "2026-10-15T20:38:32.550038",
   "check_seconds": 30,
   "profit_label": "+45.14 € (Saldo Netto Aggiornato)",
   "present": [
     {
       "id": "SCHEDINA_2_CORE_NOTTURNA_2100_15OTT",
       "title": "Schedina 2: Core Blindato Notturna (21:00 CEST @ 4.24x)",
-      "label": "In Programma (Oggi ore 21:00)",
+      "label": "In Programma (Ore 21:00)",
       "stake": "10.00 €",
       "odds": "4.24×",
       "potential_win": "42.40 €",
@@ -49,7 +49,7 @@
     {
       "id": "SCHEDINA_3_TRIPLA_CHIRURGICA_TIRI_15OTT",
       "title": "Schedina 3: La Tripla Chirurgica (Tiri in Porta @ 3.25x — TOP GEM)",
-      "label": "In Programma (Oggi ore 21:00)",
+      "label": "In Programma (Ore 21:00)",
       "stake": "10.00 €",
       "odds": "3.25×",
       "potential_win": "32.50 €",
@@ -84,10 +84,10 @@
     {
       "id": "SCHEDINA_4_SPECIALS_CORNER_CARTELLINI_15OTT",
       "title": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.59x)",
-      "label": "In Programma (Oggi ore 21:00)",
+      "label": "In Programma (Ore 21:00)",
       "stake": "6.00 €",
       "odds": "4.59×",
-      "potential_win": "27.55 €",
+      "potential_win": "27.54 €",
       "booking_code": null,
       "legs": [
         {
@@ -127,10 +127,10 @@
     {
       "id": "SCHEDINA_5_SATELLITE_GOL_OVER_15OTT",
       "title": "Schedina 5: Satellite Alto Flusso (Gol & Over @ 6.55x)",
-      "label": "In Programma (Oggi ore 21:00)",
+      "label": "In Programma (Ore 21:00)",
       "stake": "4.00 €",
-      "odds": "6.55×",
-      "potential_win": "26.20 €",
+      "odds": "4.04×",
+      "potential_win": "16.16 €",
       "booking_code": null,
       "legs": [
         {
@@ -140,14 +140,6 @@
           "odd": "1.75",
           "result": "PENDING",
           "score": "OFP AAA | Argon Certified | PreZero Arena, ritmi altissimi e difese scoperte (massimo xG combinato)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Lech Poznan vs Bayer Leverkusen",
-          "pick": "Over 2.5",
-          "odd": "1.62",
-          "result": "WON",
-          "score": "0-3 (FT) ✅ (Over 2.5 Preso)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
@@ -170,10 +162,10 @@
     {
       "id": "SCHEDINA_6_TRIPLA_BALISTICA_UECL_15OTT",
       "title": "Schedina 6: La Tripla Balistica UECL (Tiri in Porta & Corner @ 3.05x)",
-      "label": "In Programma (Oggi ore 21:00)",
+      "label": "In Programma (Ore 21:00)",
       "stake": "5.00 €",
-      "odds": "3.05×",
-      "potential_win": "15.25 €",
+      "odds": "3.04×",
+      "potential_win": "15.20 €",
       "booking_code": null,
       "legs": [
         {

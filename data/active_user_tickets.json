@@ -248,9 +248,9 @@
     "stake": 4.0,
     "stake_eur": 4.0,
     "bonus": 0.0,
-    "total_odds": 6.55,
-    "potential_win": 26.2,
-    "potential_payout_eur": 26.2,
+    "total_odds": 4.04,
+    "potential_win": 16.17,
+    "potential_payout_eur": 16.17,
     "net_profit_eur": 22.2,
     "settled": false,
     "profit_loss_eur": 0.0,
@@ -266,16 +266,6 @@
         "odds": 1.75,
         "status": "PENDING",
         "score": "OFP AAA | Argon Certified | PreZero Arena, ritmi altissimi e difese scoperte (massimo xG combinato)"
-      },
-      {
-        "match": "Lech Poznan vs Bayer Leverkusen",
-        "tournament": "Club Internazionali | UEFA Europa League",
-        "kickoff": "2026-10-15 21:00 CEST",
-        "market": "U/O 2.5 : OVER",
-        "selection": "OVER",
-        "odds": 1.62,
-        "status": "PENDING",
-        "score": "OFP AAA | Argon Certified | Transizioni continue e campo pesante, slegato da 1X2"
       },
       {
         "match": "Olympique Marsiglia vs Olympiacos",
