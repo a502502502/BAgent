@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-10-15T07:38:43.605046+00:00",
+  "timestamp_utc": "2026-10-15T08:21:36.206431+00:00",
   "date": "2026-10-15",
   "integrity_status": "VIOLATIONS_DETECTED",
   "database_sync": {
@@ -19,7 +19,7 @@
     "cleaned_files": []
   },
   "active_tickets_audit": {
-    "total_tickets_audited": 66,
+    "total_tickets_audited": 67,
     "violations_found": 28,
     "tickets": [
       {
@@ -32,6 +32,13 @@
       {
         "ticket_id": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
         "label": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "TICKET_TRIPLA_CHIRURGICA_GEMS_10EUR_15OTT",
+        "label": "TICKET_TRIPLA_CHIRURGICA_GEMS_10EUR_15OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
         "certified_entities": []

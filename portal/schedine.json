@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T09:38:37.458643",
+  "generated_at": "2026-10-15T10:21:32.443112",
   "check_seconds": 30,
   "profit_label": "+45.14 € (Saldo Netto Aggiornato)",
   "present": [
@@ -70,6 +70,41 @@
           "odd": "1.62",
           "result": "PENDING",
           "score": "OFP: AA | Argon Certified | 100% Ortogonale da Core, Johan Cruijff Arena dominante"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_TRIPLA_CHIRURGICA_GEMS_10EUR_15OTT",
+      "title": "Ticket Precisione: La Tripla Chirurgica UEL & UECL (Tiri & Corner) (@ 3.09)",
+      "label": "In Programma (Oggi ore 21:00)",
+      "stake": "10.00 €",
+      "odds": "3.09×",
+      "potential_win": "30.91 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Atalanta vs Pafos",
+          "pick": "Atalanta Over 4.5 Tiri in Porta",
+          "odd": "1.40",
+          "result": "PENDING",
+          "score": "OFP: AAA | Volume balistico Gewiss (media 6.8 tiri nello specchio)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "SL Benfica vs Celtic FC",
+          "pick": "Benfica Over 4.5 Corner",
+          "odd": "1.38",
+          "result": "PENDING",
+          "score": "OFP: AAA | Asimmetria corsie esterne Da Luz (>5 corner nel 78% dei match europei)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Ajax vs Maccabi Tel Aviv",
+          "pick": "Ajax Over 5.5 Tiri in Porta",
+          "odd": "1.60",
+          "result": "PENDING",
+          "score": "OFP: AAA | Gemma Chirurgica Farioli (media 7.8 tiri in porta)"
         }
       ]
     }
