@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T13:53:04.493830",
+  "generated_at": "2026-10-15T16:26:28.210862",
   "check_seconds": 30,
   "profit_label": "+45.14 € (Saldo Netto Aggiornato)",
   "present": [
@@ -118,11 +118,11 @@
     },
     {
       "id": "SCHEDINA_4_SPECIALS_CORNER_CARTELLINI_15OTT",
-      "title": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.65x)",
+      "title": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.59x)",
       "label": "In Programma (Oggi ore 21:00)",
       "stake": "6.00 €",
-      "odds": "4.65×",
-      "potential_win": "27.90 €",
+      "odds": "4.59×",
+      "potential_win": "27.55 €",
       "booking_code": null,
       "legs": [
         {
@@ -144,10 +144,10 @@
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Olympique Marsiglia vs Olympiacos",
-          "pick": "Over 4.5 Cartellini Totali",
-          "odd": "1.55",
+          "pick": "Over 3.5 Cartellini Totali",
+          "odd": "1.53",
           "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo"
+          "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo (linea ottimizzata a 3.5)"
         },
         {
           "when": "2026-10-15 21:00 CEST",

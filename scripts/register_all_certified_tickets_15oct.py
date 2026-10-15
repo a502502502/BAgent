@@ -199,8 +199,8 @@ TICKET_3_CHIRURGICA = {
 
 TICKET_4_SPECIALS = {
     "ticket_id": "SCHEDINA_4_SPECIALS_CORNER_CARTELLINI_15OTT",
-    "name": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.65x)",
-    "title": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.65x)",
+    "name": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.59x)",
+    "title": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.59x)",
     "bookmaker": "Netwin",
     "type": "Specials Asimmetrici (Stake 6 EUR)",
     "status": "PENDING",
@@ -210,10 +210,10 @@ TICKET_4_SPECIALS = {
     "stake": 6.0,
     "stake_eur": 6.0,
     "bonus": 0.0,
-    "total_odds": 4.65,
-    "potential_win": 27.90,
-    "potential_payout_eur": 27.90,
-    "net_profit_eur": 21.90,
+    "total_odds": 4.59,
+    "potential_win": 27.55,
+    "potential_payout_eur": 27.55,
+    "net_profit_eur": 21.55,
     "settled": False,
     "profit_loss_eur": 0.0,
     "booking_code": None,
@@ -243,11 +243,11 @@ TICKET_4_SPECIALS = {
             "match": "Olympique Marsiglia vs Olympiacos",
             "tournament": "Club Internazionali | UEFA Europa League",
             "kickoff": "2026-10-15 21:00 CEST",
-            "market": "U/O 4.5 Cartellini Totali (esc.TS) : OVER",
+            "market": "U/O 3.5 Cartellini Totali (esc.TS) : OVER",
             "selection": "OVER",
-            "odds": 1.55,
+            "odds": 1.53,
             "status": "PENDING",
-            "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo"
+            "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo (linea ottimizzata a 3.5)"
         },
         {
             "match": "Union SG vs Real Sociedad",
@@ -577,8 +577,8 @@ PORTAL_CARDS = [
         "title": TICKET_4_SPECIALS["title"],
         "label": "In Programma (Oggi ore 21:00)",
         "stake": "6.00 €",
-        "odds": "4.65×",
-        "potential_win": "27.90 €",
+        "odds": "4.59×",
+        "potential_win": "27.55 €",
         "booking_code": None,
         "legs": [
             {
@@ -600,10 +600,10 @@ PORTAL_CARDS = [
             {
                 "when": "2026-10-15 21:00 CEST",
                 "match": "Olympique Marsiglia vs Olympiacos",
-                "pick": "Over 4.5 Cartellini Totali",
-                "odd": "1.55",
+                "pick": "Over 3.5 Cartellini Totali",
+                "odd": "1.53",
                 "result": "PENDING",
-                "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo"
+                "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo (linea ottimizzata a 3.5)"
             },
             {
                 "when": "2026-10-15 21:00 CEST",
@@ -818,6 +818,8 @@ def main():
         update_portal(MIRROR, is_mirror=True)
 
     try:
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
         from scripts.build_android_portal import build as build_android
         build_android()
     except Exception as e:
