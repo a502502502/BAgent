@@ -1,16 +1,16 @@
 {
-  "timestamp_utc": "2026-10-15T08:21:36.206431+00:00",
+  "timestamp_utc": "2026-10-15T11:22:58.307162+00:00",
   "date": "2026-10-15",
   "integrity_status": "VIOLATIONS_DETECTED",
   "database_sync": {
     "data\\bagent.db": {
-      "official_managers": 37,
-      "player_registry": 505,
+      "official_managers": 43,
+      "player_registry": 502,
       "status": "SYNCED"
     },
     "storage\\database\\bagent.db": {
-      "official_managers": 37,
-      "player_registry": 506,
+      "official_managers": 43,
+      "player_registry": 503,
       "status": "SYNCED"
     }
   },
@@ -19,26 +19,40 @@
     "cleaned_files": []
   },
   "active_tickets_audit": {
-    "total_tickets_audited": 67,
-    "violations_found": 28,
+    "total_tickets_audited": 69,
+    "violations_found": 25,
     "tickets": [
       {
-        "ticket_id": "TICKET_CORE_ROCKET_UEL_UECL_20EUR_15OTT",
-        "label": "TICKET_CORE_ROCKET_UEL_UECL_20EUR_15OTT",
+        "ticket_id": "SCHEDINA_1_CORE_APERTURA_1845_15OTT",
+        "label": "SCHEDINA_1_CORE_APERTURA_1845_15OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
         "certified_entities": []
       },
       {
-        "ticket_id": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
-        "label": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
+        "ticket_id": "SCHEDINA_2_CORE_NOTTURNA_2100_15OTT",
+        "label": "SCHEDINA_2_CORE_NOTTURNA_2100_15OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
         "certified_entities": []
       },
       {
-        "ticket_id": "TICKET_TRIPLA_CHIRURGICA_GEMS_10EUR_15OTT",
-        "label": "TICKET_TRIPLA_CHIRURGICA_GEMS_10EUR_15OTT",
+        "ticket_id": "SCHEDINA_3_TRIPLA_CHIRURGICA_TIRI_15OTT",
+        "label": "SCHEDINA_3_TRIPLA_CHIRURGICA_TIRI_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "SCHEDINA_4_SPECIALS_CORNER_CARTELLINI_15OTT",
+        "label": "SCHEDINA_4_SPECIALS_CORNER_CARTELLINI_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "SCHEDINA_5_SATELLITE_GOL_OVER_15OTT",
+        "label": "SCHEDINA_5_SATELLITE_GOL_OVER_15OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
         "certified_entities": []
@@ -88,11 +102,8 @@
       {
         "ticket_id": "TICKET_USER_TRIPLA_ALTAQUOTA_5EUR_13OTT",
         "label": "TICKET_USER_TRIPLA_ALTAQUOTA_5EUR_13OTT",
-        "status": "REALITY_VIOLATION_BLOCKED",
-        "violations": [
-          "ALLUCINAZIONE ALLENATORE: Il testo menziona 'Allegri' associato a 'Napoli'. L'allenatore ufficiale per la stagione 2026/27 e 'Antonio Conte'. 'Allegri' non siede piu sulla panchina di questa squadra!",
-          "ALLUCINAZIONE ALLENATORE: Il testo menziona 'Chivu' associato a 'Inter'. L'allenatore ufficiale per la stagione 2026/27 e 'Simone Inzaghi'. 'Chivu' non siede piu sulla panchina di questa squadra!"
-        ],
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
         "certified_entities": [
           "Allenatore certificato: Hansi Flick"
         ]
@@ -142,7 +153,6 @@
           "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e associato a 'Galatasaray', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Rafael Leao' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
-          "ALLUCINAZIONE ALLENATORE: Il testo menziona 'Allegri' associato a 'Napoli'. L'allenatore ufficiale per la stagione 2026/27 e 'Antonio Conte'. 'Allegri' non siede piu sulla panchina di questa squadra!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Rasmus Hojlund' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Hojlund, Rasmus' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!"
         ],
@@ -541,20 +551,26 @@
       }
     ]
   },
-  "total_official_managers": 37,
-  "total_certified_players": 677,
+  "total_official_managers": 43,
+  "total_certified_players": 671,
   "certified_managers_directory": {
     "AC Milan": {
       "manager": "Paulo Fonseca",
       "banned_former": [
         "Stefano Pioli",
-        "Pioli",
-        "Gennaro Gattuso",
-        "Vincenzo Montella",
-        "Massimiliano Allegri"
+        "Pioli"
       ],
       "formation": "4-2-3-1",
       "contract_until": "2027-06-30"
+    },
+    "Ajax": {
+      "manager": "Francesco Farioli",
+      "banned_former": [
+        "John van 't Schip",
+        "Maurice Steijn"
+      ],
+      "formation": "4-3-3",
+      "contract_until": ""
     },
     "Arsenal": {
       "manager": "Mikel Arteta",
@@ -571,14 +587,8 @@
       "banned_former": [
         "Daniele De Rossi",
         "De Rossi",
-        "Ivan Jurić",
         "Ivan Juric",
-        "Juric",
-        "José Mourinho",
-        "Jose Mourinho",
-        "Mourinho",
-        "Paulo Fonseca",
-        "Claudio Ranieri"
+        "Jose Mourinho"
       ],
       "formation": "3-4-2-1",
       "contract_until": "2028-06-30"
@@ -613,9 +623,7 @@
     "Bayer Leverkusen": {
       "manager": "Xabi Alonso",
       "banned_former": [
-        "Gerardo Seoane",
-        "Peter Bosz",
-        "Heiko Herrlich"
+        "Gerardo Seoane"
       ],
       "formation": "3-4-2-1",
       "contract_until": "2026-06-30"
@@ -624,10 +632,7 @@
       "manager": "Vincent Kompany",
       "banned_former": [
         "Thomas Tuchel",
-        "Julian Nagelsmann",
-        "Hansi Flick",
-        "Niko Kovač",
-        "Niko Kovac"
+        "Julian Nagelsmann"
       ],
       "formation": "4-2-3-1",
       "contract_until": "2027-06-30"
@@ -635,9 +640,7 @@
     "Benfica": {
       "manager": "Bruno Lage",
       "banned_former": [
-        "Roger Schmidt",
-        "Nelson Verissimo",
-        "Jorge Jesus"
+        "Roger Schmidt"
       ],
       "formation": "4-2-3-1",
       "contract_until": "2026-06-30"
@@ -662,27 +665,36 @@
     "Borussia Dortmund": {
       "manager": "Niko Kovač",
       "banned_former": [
-        "Nuri Şahin",
         "Nuri Sahin",
-        "Sahin",
-        "Edin Terzić",
         "Edin Terzic",
-        "Terzic",
-        "Marco Rose",
-        "Peter Bosz",
-        "Thomas Tuchel",
-        "Jürgen Klopp"
+        "Marco Rose"
       ],
       "formation": "4-3-3",
       "contract_until": "2029-06-30"
+    },
+    "Bournemouth": {
+      "manager": "Andoni Iraola",
+      "banned_former": [
+        "Gary O'Neil"
+      ],
+      "formation": "4-3-3",
+      "contract_until": ""
+    },
+    "Brighton": {
+      "manager": "Fabian Hürzeler",
+      "banned_former": [
+        "Roberto De Zerbi",
+        "De Zerbi",
+        "Graham Potter"
+      ],
+      "formation": "4-3-3",
+      "contract_until": ""
     },
     "Chelsea": {
       "manager": "Kieran McKenna",
       "banned_former": [
         "Mauricio Pochettino",
-        "Graham Potter",
-        "Thomas Tuchel",
-        "Frank Lampard"
+        "Thomas Tuchel"
       ],
       "formation": "4-2-3-1",
       "contract_until": "2029-06-30"
@@ -708,6 +720,14 @@
       "formation": "4-2-3-1",
       "contract_until": "2028-06-30"
     },
+    "Crystal Palace": {
+      "manager": "Oliver Glasner",
+      "banned_former": [
+        "Roy Hodgson"
+      ],
+      "formation": "4-3-3",
+      "contract_until": ""
+    },
     "FC Barcelona": {
       "manager": "Hansi Flick",
       "banned_former": [
@@ -723,8 +743,7 @@
     "FC Porto": {
       "manager": "Vítor Bruno",
       "banned_former": [
-        "Sérgio Conceição",
-        "Sergio Conceicao"
+        "Sérgio Conceição"
       ],
       "formation": "4-2-3-1",
       "contract_until": "2026-06-30"
@@ -775,13 +794,8 @@
     "Inter": {
       "manager": "Simone Inzaghi",
       "banned_former": [
-        "Cristian Chivu",
-        "Chivu",
         "Antonio Conte",
-        "Luciano Spalletti",
-        "Stefano Pioli",
-        "Frank de Boer",
-        "Roberto Mancini"
+        "Luciano Spalletti"
       ],
       "formation": "3-5-2",
       "contract_until": "2026-06-30"
@@ -790,9 +804,7 @@
       "manager": "Thiago Motta",
       "banned_former": [
         "Massimiliano Allegri",
-        "Allegri",
-        "Andrea Pirlo",
-        "Maurizio Sarri"
+        "Allegri"
       ],
       "formation": "4-2-3-1",
       "contract_until": "2027-06-30"
@@ -845,9 +857,7 @@
       "manager": "Enzo Maresca",
       "banned_former": [
         "Pep Guardiola",
-        "Guardiola",
-        "Manuel Pellegrini",
-        "Roberto Mancini"
+        "Guardiola"
       ],
       "formation": "4-3-3",
       "contract_until": "2029-06-30"
@@ -857,13 +867,7 @@
       "banned_former": [
         "Erik ten Hag",
         "Ten Hag",
-        "Ruud van Nistelrooy",
-        "Ralf Rangnick",
-        "Ole Gunnar Solskjaer",
-        "Michael Carrick",
-        "Carrick",
-        "José Mourinho",
-        "Mourinho"
+        "Ruud van Nistelrooy"
       ],
       "formation": "3-4-2-1",
       "contract_until": "2027-06-30"
@@ -871,17 +875,24 @@
     "Napoli": {
       "manager": "Antonio Conte",
       "banned_former": [
-        "Massimiliano Allegri",
-        "Allegri",
         "Francesco Calzona",
         "Walter Mazzarri",
         "Rudi Garcia",
-        "Luciano Spalletti",
-        "Gennaro Gattuso",
-        "Carlo Ancelotti"
+        "Luciano Spalletti"
       ],
       "formation": "3-5-2",
       "contract_until": "2027-06-30"
+    },
+    "Olympique de Marseille": {
+      "manager": "Bruno Génésio",
+      "banned_former": [
+        "Roberto De Zerbi",
+        "De Zerbi",
+        "Igor Tudor",
+        "Gattuso"
+      ],
+      "formation": "4-3-3",
+      "contract_until": ""
     },
     "Paris Saint-Germain": {
       "manager": "Luis Enrique",
@@ -930,8 +941,7 @@
       "manager": "João Pereira",
       "banned_former": [
         "Rúben Amorim",
-        "Ruben Amorim",
-        "Amorim"
+        "Ruben Amorim"
       ],
       "formation": "3-4-2-1",
       "contract_until": "2027-06-30"
@@ -947,6 +957,16 @@
       ],
       "formation": "3-5-2",
       "contract_until": "2026-06-30"
+    },
+    "Tottenham Hotspur": {
+      "manager": "Roberto De Zerbi",
+      "banned_former": [
+        "Ange Postecoglou",
+        "Antonio Conte",
+        "Jose Mourinho"
+      ],
+      "formation": "4-3-3",
+      "contract_until": ""
     },
     "Villarreal": {
       "manager": "Marcelino García Toral",

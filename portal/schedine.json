@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-10-15T10:21:32.443112",
+  "generated_at": "2026-10-15T13:22:51.945758",
   "check_seconds": 30,
   "profit_label": "+45.14 € (Saldo Netto Aggiornato)",
   "present": [
     {
-      "id": "TICKET_CORE_ROCKET_UEL_UECL_20EUR_15OTT",
-      "title": "Ticket Core Blindato: La Tripla d Acciaio UEL & UECL (@ 2.96)",
+      "id": "SCHEDINA_1_CORE_APERTURA_1845_15OTT",
+      "title": "Schedina 1: Core Blindato Apertura (18:45 CEST @ 2.96x)",
       "label": "In Programma (Oggi ore 18:45)",
-      "stake": "20.00 €",
+      "stake": "10.00 €",
       "odds": "2.96×",
-      "potential_win": "59.20 €",
+      "potential_win": "29.60 €",
       "booking_code": null,
       "legs": [
         {
@@ -18,33 +18,154 @@
           "pick": "X2 + Over 1.5",
           "odd": "1.48",
           "result": "PENDING",
-          "score": "OFP: AAA | Argon Certified | Elimina ceiling 4 gol, copre pareggio e vittoria esterna"
+          "score": "OFP AAA | Argon Certified | Salisburgo concede 1.55 xGA; copre pareggio e vittoria esterna senza ceiling"
         },
         {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Atalanta vs Pafos",
-          "pick": "1 + Over 1.5",
+          "when": "2026-10-15 18:45 CEST",
+          "match": "AZ Alkmaar vs Hapoel Be'er Sheva",
+          "pick": "Over 0.5 1°T + Over 0.5 2°T",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Flusso olandese costante ad alto volume offensivo (1+ rete per tempo)"
+        },
+        {
+          "when": "2026-10-15 18:45 CEST",
+          "match": "Sparta Praga vs Lillestrom",
+          "pick": "Sparta Praga Over 1.5 Gol",
           "odd": "1.38",
           "result": "PENDING",
-          "score": "OFP: AAA | Argon Certified | Gewiss Stadium, Dea vince con almeno 2 gol totali"
-        },
+          "score": "OFP AAA | Argon Certified | Media interna ceca >2.10 reti; difesa norvegese vulnerabile"
+        }
+      ]
+    },
+    {
+      "id": "SCHEDINA_2_CORE_NOTTURNA_2100_15OTT",
+      "title": "Schedina 2: Core Blindato Notturna (21:00 CEST @ 4.24x)",
+      "label": "In Programma (Oggi ore 21:00)",
+      "stake": "10.00 €",
+      "odds": "4.24×",
+      "potential_win": "42.40 €",
+      "booking_code": null,
+      "legs": [
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "SL Benfica vs Celtic FC",
           "pick": "1X + Over 1.5",
           "odd": "1.45",
           "result": "PENDING",
-          "score": "OFP: AAA | Argon Certified | Fattore Da Luz, imbattuto in casa con almeno 2 reti"
+          "score": "OFP AAA | Argon Certified | Fattore Da Luz fortino europeo; Celtic vulnerabile in trasferta europea"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Celta Vigo vs Juventus",
+          "pick": "Chance Mix: X2 o Under 2.5",
+          "odd": "1.42",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Gestione del possesso e ritmo controllato; copre 0-0, 1-1, 0-1, 0-2, 1-0"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "NEC Nijmegen vs Levski Sofia",
+          "pick": "1X + Over 1.5",
+          "odd": "1.42",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Pressione dinamica olandese contro blocco basso bulgaro"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Jagiellonia vs Ararat-Armenia",
+          "pick": "Jagiellonia Over 1.5 Gol",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Rettifica anti-soffitto (eliminato MultiGol 1-4); polacchi travolgenti in casa"
         }
       ]
     },
     {
-      "id": "TICKET_SATELLITE_MOLTIPLICATORE_UEL_5EUR_15OTT",
-      "title": "Ticket Satellite Ortogonale: Tripla Alta Quota UEL & UECL (@ 4.60)",
+      "id": "SCHEDINA_3_TRIPLA_CHIRURGICA_TIRI_15OTT",
+      "title": "Schedina 3: La Tripla Chirurgica (Tiri in Porta @ 3.25x — TOP GEM)",
       "label": "In Programma (Oggi ore 21:00)",
-      "stake": "5.00 €",
-      "odds": "4.60×",
-      "potential_win": "23.00 €",
+      "stake": "10.00 €",
+      "odds": "3.25×",
+      "potential_win": "32.50 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Atalanta vs Pafos FC",
+          "pick": "Atalanta Over 4.5 Tiri in Porta",
+          "odd": "1.40",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Gewiss Stadium ad alto volume balistico (media 6.8 tiri nello specchio)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Ajax vs Maccabi Tel Aviv",
+          "pick": "Ajax Over 5.5 Tiri in Porta",
+          "odd": "1.60",
+          "result": "PENDING",
+          "score": "OFP AAA | Top Gem Argon | Pressione costante sulle fasce e accentramento (media interna 7.8 tiri specchio)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "AFC Bournemouth vs Sturm Graz",
+          "pick": "Bournemouth Over 5.5 Tiri in Porta",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Pressing asfissiante e transizioni rapide della Premier contro blocco statico"
+        }
+      ]
+    },
+    {
+      "id": "SCHEDINA_4_SPECIALS_CORNER_CARTELLINI_15OTT",
+      "title": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.65x)",
+      "label": "In Programma (Oggi ore 21:00)",
+      "stake": "6.00 €",
+      "odds": "4.65×",
+      "potential_win": "27.90 €",
+      "booking_code": null,
+      "legs": [
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Brighton vs Kauno Zalgiris",
+          "pick": "Brighton Over 6.5 Corner",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Ampiezza estrema sulle fasce contro blocco basso lituano (>7 corner interni)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "SL Benfica vs Celtic FC",
+          "pick": "Benfica Over 4.5 Corner",
+          "odd": "1.38",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Asimmetria corsie esterne Da Luz (>5 corner nel 78% dei match europei)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Olympique Marsiglia vs Olympiacos",
+          "pick": "Over 4.5 Cartellini Totali",
+          "odd": "1.55",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Union SG vs Real Sociedad",
+          "pick": "Over 3.5 Cartellini Totali",
+          "odd": "1.45",
+          "result": "PENDING",
+          "score": "OFP AAA | Argon Certified | Scontro fisico a Bruxelles ad alta intensita di falli tattici"
+        }
+      ]
+    },
+    {
+      "id": "SCHEDINA_5_SATELLITE_GOL_OVER_15OTT",
+      "title": "Schedina 5: Satellite Alto Flusso (Gol & Over @ 6.55x)",
+      "label": "In Programma (Oggi ore 21:00)",
+      "stake": "4.00 €",
+      "odds": "6.55×",
+      "potential_win": "26.20 €",
       "booking_code": null,
       "legs": [
         {
@@ -53,7 +174,7 @@
           "pick": "Gol + Over 2.5",
           "odd": "1.75",
           "result": "PENDING",
-          "score": "OFP: AAA | Argon Certified | PreZero Arena, ritmi alti e difese scoperte"
+          "score": "OFP AAA | Argon Certified | PreZero Arena, ritmi altissimi e difese scoperte (massimo xG combinato)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
@@ -61,50 +182,23 @@
           "pick": "Over 2.5",
           "odd": "1.62",
           "result": "PENDING",
-          "score": "OFP: AAA | Argon Certified | Leverkusen all attacco, slegato da 1X2 su campo pesante"
+          "score": "OFP AAA | Argon Certified | Transizioni continue e campo pesante, slegato da 1X2"
         },
         {
           "when": "2026-10-15 21:00 CEST",
-          "match": "Ajax vs Maccabi Tel Aviv",
-          "pick": "1X + MultiGol 2-5",
-          "odd": "1.62",
+          "match": "Olympique Marsiglia vs Olympiacos",
+          "pick": "G/NG: Gol",
+          "odd": "1.65",
           "result": "PENDING",
-          "score": "OFP: AA | Argon Certified | 100% Ortogonale da Core, Johan Cruijff Arena dominante"
-        }
-      ]
-    },
-    {
-      "id": "TICKET_TRIPLA_CHIRURGICA_GEMS_10EUR_15OTT",
-      "title": "Ticket Precisione: La Tripla Chirurgica UEL & UECL (Tiri & Corner) (@ 3.09)",
-      "label": "In Programma (Oggi ore 21:00)",
-      "stake": "10.00 €",
-      "odds": "3.09×",
-      "potential_win": "30.91 €",
-      "booking_code": null,
-      "legs": [
+          "score": "OFP AAA | Argon Certified | Marsiglia aggressivo ma vulnerabile alle ripartenze elleniche"
+        },
         {
           "when": "2026-10-15 21:00 CEST",
-          "match": "Atalanta vs Pafos",
-          "pick": "Atalanta Over 4.5 Tiri in Porta",
+          "match": "Olympique Lione vs Crystal Palace",
+          "pick": "Chance Mix: X o GG",
           "odd": "1.40",
           "result": "PENDING",
-          "score": "OFP: AAA | Volume balistico Gewiss (media 6.8 tiri nello specchio)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "SL Benfica vs Celtic FC",
-          "pick": "Benfica Over 4.5 Corner",
-          "odd": "1.38",
-          "result": "PENDING",
-          "score": "OFP: AAA | Asimmetria corsie esterne Da Luz (>5 corner nel 78% dei match europei)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Ajax vs Maccabi Tel Aviv",
-          "pick": "Ajax Over 5.5 Tiri in Porta",
-          "odd": "1.60",
-          "result": "PENDING",
-          "score": "OFP: AAA | Gemma Chirurgica Farioli (media 7.8 tiri in porta)"
+          "score": "OFP AAA | Argon Certified | Duello equilibrato e serrato: copre 1-1, 2-1, 1-2, 0-0"
         }
       ]
     }

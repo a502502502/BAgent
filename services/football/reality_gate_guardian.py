@@ -132,6 +132,7 @@ class RealityGateGuardian:
         self.banned_manager_map: Dict[str, List[Tuple[str, str]]] = {}  # banned_name -> [(team, actual_manager)]
         self.player_teams: Dict[str, str] = {}  # norm_player_name -> team_name
         self.former_team_map: Dict[str, List[str]] = {}  # norm_player_name -> [former_teams]
+        self.departed_players: List[Tuple[str, str]] = []  # (norm_player_name, norm_former_club)
 
         # Carica da DB primario
         db_path = self.db_paths[0] if self.db_paths and self.db_paths[0].exists() else None
@@ -185,6 +186,13 @@ class RealityGateGuardian:
                     if formers:
                         self.former_team_map[norm_c] = formers
 
+                # 3. Departed Players Blacklist (Regola #87)
+                cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='departed_players_blacklist'")
+                if cur.fetchone():
+                    d_rows = cur.execute("SELECT player_name, former_club FROM departed_players_blacklist").fetchall()
+                    for p_name, f_club in d_rows:
+                        self.departed_players.append((normalize_text(p_name), normalize_text(f_club)))
+
         except Exception as e:
             print(f"[RealityGateGuardian] Avviso caricamento cache DB: {e}")
 
@@ -233,6 +241,23 @@ class RealityGateGuardian:
             mgr_surname = normalize_text(prof.manager_name.split()[-1])
             if re.search(rf"\b{re.escape(mgr_surname)}\b", norm_txt) or re.search(rf"\b{re.escape(norm_mgr)}\b", norm_txt):
                 certified[prof.team_name] = f"Allenatore certificato: {prof.manager_name}"
+
+        # 2b. Controllo Blacklist Giocatori Ceduti (Regola #87)
+        for norm_p, norm_club in self.departed_players:
+            if re.search(rf"\b{re.escape(norm_p)}\b", norm_txt):
+                is_club_present = False
+                if home_team and norm_club in normalize_text(home_team):
+                    is_club_present = True
+                elif away_team and norm_club in normalize_text(away_team):
+                    is_club_present = True
+                elif norm_club in norm_txt:
+                    is_club_present = True
+
+                if is_club_present:
+                    violations.append(
+                        f"ALLUCINAZIONE GIOCATORE CEDUTO (Regola #87): '{norm_p.title()}' e associato a '{norm_club.title()}', "
+                        f"ma e un ex giocatore ceduto nelle stagioni passate e non fa parte della rosa 2026/27!"
+                    )
 
         # 3. Controllo Ex Squadre Giocatori Trasferiti (Anti-Memory Bias)
         for norm_player, formers in self.former_team_map.items():

@@ -91,3 +91,8 @@ Minuto e punteggio solo dal feed Flashscore. Trigger: assedio se la sfavorita (f
 
 - **Regola #86 (Vincolo di Ortogonalità del Portafoglio & Zero Single-Point-of-Failure)**:
   È severamente vietato inserire la stessa partita o la stessa Player Prop in più di un ticket nella medesima sessione. Ogni ticket del portafoglio (Core 70% vs Satellite 30%) deve contenere eventi rigorosamente e statisticamente indipendenti per eliminare correlazioni negative e single-point-of-failure.
+
+- **Regola #87 (Divieto Assoluto di Citazione Nominale Non Certificata nei Commenti di Squadra & Departed Players Blacklist)**:
+  1) È severamente proibito citare a memoria o da snippet web non certificati nomi di singoli calciatori all'interno delle giustificazioni tattiche di mercati collettivi (1X2, Doppie Chance, Over/Under, MultiGol, Corner, Cartellini). L'analisi di squadra deve basarsi unicamente su metriche aggregate (xG, xGA, volumi di tiro complessivi, baricentro, transizioni e allenatore ufficiale).
+  2) I giocatori ceduti nelle stagioni passate sono tracciati permanentemente nella tabella `departed_players_blacklist` in `data/bagent.db`. Il `RealityGateGuardian` intercetta e blocca all'istante qualsiasi testo che associ un calciatore ceduto (es. Morata o Theo Hernández al Milan, Mbappé al PSG, Osimhen al Napoli) alla sua ex squadra.
+  3) I singoli calciatori possono essere citati esclusivamente se oggetto di una specifica Player Prop certificata a referto ufficiale (-60 min) tramite `verify_squad_control.py`.
