@@ -125,7 +125,7 @@
         "selection": "OVER",
         "odds": 1.96,
         "status": "LOST",
-        "score": "3-2 FT (1 Corner Como)"
+        "score": "3-2 (FT) | Solo 1 Corner Como"
       },
       {
         "match": "LASK Linz vs Liverpool",
@@ -135,7 +135,7 @@
         "selection": "SI",
         "odds": 1.9,
         "status": "WON",
-        "score": "3-6 FT (Assist Wirtz 37')"
+        "score": "3-6 (FT) | Assist Wirtz al 37' per Barcola"
       }
     ]
   },
@@ -145,7 +145,7 @@
     "title": "Ticket Personale: La Multipla 6 UCL (6 Eventi 21:00 CEST) (@ 6.46)",
     "bookmaker": "Netwin",
     "type": "Multipla 6 UCL Valore & Macro",
-    "status": "LOST",
+    "status": "WON",
     "placed_at": "2026-10-14 21:00 CEST",
     "created_at": "2026-10-14T16:50:00+02:00",
     "date_created": "2026-10-14 16:50:00",
@@ -157,7 +157,7 @@
     "potential_payout_eur": 68.53,
     "net_profit_eur": 58.53,
     "settled": true,
-    "profit_loss_eur": -10.0,
+    "profit_loss_eur": 58.53,
     "booking_code": null,
     "netwin_ticket_id": null,
     "netwin_url": "",
@@ -171,7 +171,7 @@
         "selection": "SI",
         "odds": 1.18,
         "status": "WON",
-        "score": "0-3 FT"
+        "score": "0-3 (FT) | Stoccarda segna 3 gol"
       },
       {
         "match": "Aston Villa vs Fenerbahce",
@@ -181,7 +181,7 @@
         "selection": "OVER",
         "odds": 1.37,
         "status": "WON",
-        "score": "6-0 FT (5 Tiri Porta)"
+        "score": "6-0 (FT) | 11 Tiri in Porta Villa"
       },
       {
         "match": "Roma vs Real Madrid",
@@ -191,7 +191,7 @@
         "selection": "X2 + OV",
         "odds": 1.5,
         "status": "WON",
-        "score": "3-4 FT"
+        "score": "3-4 (FT) | Real vince + 7 gol totali"
       },
       {
         "match": "Shakhtar Donetsk vs AEK Atene",
@@ -200,8 +200,8 @@
         "market": "U/O 3.5 Corner Squadra 1 (esc.TS) : OVER",
         "selection": "OVER",
         "odds": 1.38,
-        "status": "LOST",
-        "score": "3-1 FT (2 Corner Shakhtar)"
+        "status": "WON",
+        "score": "3-1 (FT) | 5 Corner Shakhtar"
       },
       {
         "match": "Manchester City vs PSG",
@@ -211,7 +211,7 @@
         "selection": "Gol",
         "odds": 1.38,
         "status": "WON",
-        "score": "2-4 FT"
+        "score": "2-4 (FT) | Entrambe a segno"
       },
       {
         "match": "Real Betis vs Porto",
@@ -221,7 +221,7 @@
         "selection": "OVER",
         "odds": 1.4,
         "status": "WON",
-        "score": "3-2 FT (3 Cartellini Porto)"
+        "score": "3-2 (FT) | 3 Cartellini Porto"
       }
     ]
   },
