@@ -42,6 +42,7 @@ if ENV_DRIVE_PATH:
 FILES_TO_SYNC: List[Tuple[str, str]] = [
     ("portal/schedine.json", "schedine.json"),
     ("portal/schedine.html", "schedine.html"),
+    ("portal/android.html", "android.html"),
     ("SNAPSHOT_OGGI.json", "SNAPSHOT_OGGI.json"),
     ("data/daily_reality_snapshot.json", "daily_reality_snapshot.json"),
     ("data/active_user_tickets.json", "active_user_tickets.json"),

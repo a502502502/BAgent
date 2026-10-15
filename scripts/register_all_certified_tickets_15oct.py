@@ -817,6 +817,12 @@ def main():
     if MIRROR.exists():
         update_portal(MIRROR, is_mirror=True)
 
+    try:
+        from scripts.build_android_portal import build as build_android
+        build_android()
+    except Exception as e:
+        print(f"Nota: build_android_portal non eseguito: {e}")
+
     print("\nRegistrazione e pubblicazione completata con successo su tutti i canali.")
 
 
