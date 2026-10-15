@@ -1,196 +1,187 @@
 {
-  "generated_at": "2026-10-15T20:38:32.550038",
+  "generated_at": "2026-10-15T20:47:48.671176",
   "check_seconds": 30,
   "profit_label": "+45.14 € (Saldo Netto Aggiornato)",
   "present": [
     {
-      "id": "SCHEDINA_2_CORE_NOTTURNA_2100_15OTT",
-      "title": "Schedina 2: Core Blindato Notturna (21:00 CEST @ 4.24x)",
-      "label": "In Programma (Ore 21:00)",
+      "id": "TICKET_USER_TRIPLA_NETWIN_10EUR_15OTT",
+      "title": "Ticket 2: Tripla di Ferro (@ 2.96)",
+      "label": "In Corso (1/3 Vinte)",
       "stake": "10.00 €",
-      "odds": "4.24×",
-      "potential_win": "42.40 €",
-      "booking_code": null,
+      "odds": "2.96×",
+      "potential_win": "29.61 €",
+      "booking_code": "NETWIN_PLACED",
       "legs": [
         {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "SL Benfica vs Celtic FC",
-          "pick": "1X + Over 1.5",
-          "odd": "1.45",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Fattore Da Luz fortino europeo; Celtic vulnerabile in trasferta europea"
+          "when": "2026-10-15 18:45 CEST",
+          "match": "Salisburgo vs Milan",
+          "pick": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
+          "odd": "1.47",
+          "result": "WON",
+          "score": "0-4 (FT) ✅ (HT 0-2, 2°T 0-2)"
         },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Celta Vigo vs Juventus",
-          "pick": "Chance Mix: X2 o Under 2.5",
-          "odd": "1.42",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Gestione del possesso e ritmo controllato; copre 0-0, 1-1, 0-1, 0-2, 1-0"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "NEC Nijmegen vs Levski Sofia",
-          "pick": "1X + Over 1.5",
-          "odd": "1.42",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Pressione dinamica olandese contro blocco basso bulgaro"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Jagiellonia vs Ararat-Armenia",
-          "pick": "Jagiellonia Over 1.5 Gol",
-          "odd": "1.45",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Rettifica anti-soffitto (eliminato MultiGol 1-4); polacchi travolgenti in casa"
-        }
-      ]
-    },
-    {
-      "id": "SCHEDINA_3_TRIPLA_CHIRURGICA_TIRI_15OTT",
-      "title": "Schedina 3: La Tripla Chirurgica (Tiri in Porta @ 3.25x — TOP GEM)",
-      "label": "In Programma (Ore 21:00)",
-      "stake": "10.00 €",
-      "odds": "3.25×",
-      "potential_win": "32.50 €",
-      "booking_code": null,
-      "legs": [
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Atalanta vs Pafos FC",
-          "pick": "Atalanta Over 4.5 Tiri in Porta",
-          "odd": "1.40",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Gewiss Stadium ad alto volume balistico (media 6.8 tiri nello specchio)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Ajax vs Maccabi Tel Aviv",
-          "pick": "Ajax Over 5.5 Tiri in Porta",
-          "odd": "1.60",
-          "result": "PENDING",
-          "score": "OFP AAA | Top Gem Argon | Pressione costante sulle fasce e accentramento (media interna 7.8 tiri specchio)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "AFC Bournemouth vs Sturm Graz",
-          "pick": "Bournemouth Over 5.5 Tiri in Porta",
-          "odd": "1.45",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Pressing asfissiante e transizioni rapide della Premier contro blocco statico"
-        }
-      ]
-    },
-    {
-      "id": "SCHEDINA_4_SPECIALS_CORNER_CARTELLINI_15OTT",
-      "title": "Schedina 4: Specials Asimmetrici (Corner & Cartellini @ 4.59x)",
-      "label": "In Programma (Ore 21:00)",
-      "stake": "6.00 €",
-      "odds": "4.59×",
-      "potential_win": "27.54 €",
-      "booking_code": null,
-      "legs": [
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Brighton vs Kauno Zalgiris",
-          "pick": "Brighton Over 6.5 Corner",
-          "odd": "1.50",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Ampiezza estrema sulle fasce contro blocco basso lituano (>7 corner interni)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "SL Benfica vs Celtic FC",
-          "pick": "Benfica Over 4.5 Corner",
+          "pick": "X2 + U/O 4.5 : X2 + UN",
           "odd": "1.38",
           "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Asimmetria corsie esterne Da Luz (>5 corner nel 78% dei match europei)"
+          "score": "Kickoff ore 21:00"
         },
         {
           "when": "2026-10-15 21:00 CEST",
-          "match": "Olympique Marsiglia vs Olympiacos",
-          "pick": "Over 3.5 Cartellini Totali",
-          "odd": "1.53",
+          "match": "Dinamo Zagabria vs Anderlecht",
+          "pick": "MultiGol 0-2 1°Tempo + 1-3 2°Tempo : SI",
+          "odd": "1.46",
           "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Velodrome incandescente, alto attrito e duelli fisici a centrocampo (linea ottimizzata a 3.5)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Union SG vs Real Sociedad",
-          "pick": "Over 3.5 Cartellini Totali",
-          "odd": "1.45",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Scontro fisico a Bruxelles ad alta intensita di falli tattici"
+          "score": "Kickoff ore 21:00"
         }
       ]
     },
     {
-      "id": "SCHEDINA_5_SATELLITE_GOL_OVER_15OTT",
-      "title": "Schedina 5: Satellite Alto Flusso (Gol & Over @ 6.55x)",
-      "label": "In Programma (Ore 21:00)",
-      "stake": "4.00 €",
-      "odds": "4.04×",
-      "potential_win": "16.16 €",
-      "booking_code": null,
+      "id": "TICKET_USER_MULTIPLA7_ALTAQUOTA_NETWIN_6_90EUR_15OTT",
+      "title": "Ticket 4: Multipla (7) Alta Quota (@ 15.76)",
+      "label": "In Corso (1/7 Vinte)",
+      "stake": "6.90 €",
+      "bonus": "14.14 €",
+      "odds": "15.76×",
+      "potential_win": "122.95 €",
+      "booking_code": "NETWIN_PLACED",
       "legs": [
+        {
+          "when": "2026-10-15 18:45 CEST",
+          "match": "Lione vs Crystal Palace",
+          "pick": "MultiGol 1-3 Casa + 1-3 Ospite : SI",
+          "odd": "1.69",
+          "result": "WON",
+          "score": "3-2 (FT) ✅ (Lione 3, Palace 2)"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Bournemouth vs Sturm Graz",
+          "pick": "MultiGol 1-3 1°Tempo : SI",
+          "odd": "1.28",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Celta Vigo vs Juventus",
+          "pick": "X2 + MultiGol 1-5 : SI",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Benfica vs Celtic",
+          "pick": "U/O 9.5 Corner (esc.TS) : OVER",
+          "odd": "1.46",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Dinamo Zagabria vs Anderlecht",
+          "pick": "X o GG : SI",
+          "odd": "1.47",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Marsiglia vs Olympiacos",
+          "pick": "U/O 3.5 Cartellini : OVER",
+          "odd": "1.53",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Rennes vs OFI Creta",
+          "pick": "MultiGol 2-4 Casa : SI",
+          "odd": "1.48",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        }
+      ]
+    },
+    {
+      "id": "TICKET_USER_MULTIPLA4_NETWIN_10EUR_15OTT",
+      "title": "Ticket 1: Multipla (4) Top Flussi (@ 6.88)",
+      "label": "In Programma (Ore 21:00)",
+      "stake": "10.00 €",
+      "bonus": "2.06 €",
+      "odds": "6.88×",
+      "potential_win": "70.92 €",
+      "booking_code": "NETWIN_PLACED",
+      "legs": [
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Brighton vs FK Kauno Zalgiris",
+          "pick": "U/O 9.5 Corner (esc.TS) : OVER",
+          "odd": "1.65",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Atalanta vs Pafos",
+          "pick": "U/O 5.5 Tiri in Porta Squadra 1 : OVER",
+          "odd": "1.47",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
+        {
+          "when": "2026-10-15 21:00 CEST",
+          "match": "Marsiglia vs Olympiacos",
+          "pick": "G/NG: Gol",
+          "odd": "1.67",
+          "result": "PENDING",
+          "score": "Kickoff ore 21:00"
+        },
         {
           "when": "2026-10-15 21:00 CEST",
           "match": "Hoffenheim vs Besiktas",
-          "pick": "Gol + Over 2.5",
-          "odd": "1.75",
+          "pick": "U/O 2.5 + GG/NG: GG+OV",
+          "odd": "1.70",
           "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | PreZero Arena, ritmi altissimi e difese scoperte (massimo xG combinato)"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Olympique Marsiglia vs Olympiacos",
-          "pick": "G/NG: Gol",
-          "odd": "1.65",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Marsiglia aggressivo ma vulnerabile alle ripartenze elleniche"
-        },
-        {
-          "when": "2026-10-15 21:00 CEST",
-          "match": "Olympique Lione vs Crystal Palace",
-          "pick": "Chance Mix: X o GG",
-          "odd": "1.40",
-          "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Duello equilibrato e serrato: copre 1-1, 2-1, 1-2, 0-0"
+          "score": "Kickoff ore 21:00"
         }
       ]
     },
     {
-      "id": "SCHEDINA_6_TRIPLA_BALISTICA_UECL_15OTT",
-      "title": "Schedina 6: La Tripla Balistica UECL (Tiri in Porta & Corner @ 3.05x)",
+      "id": "TICKET_USER_TRIPLA_ASYM_NETWIN_7EUR_15OTT",
+      "title": "Ticket 3: Tripla Asimmetrica (@ 3.87)",
       "label": "In Programma (Ore 21:00)",
-      "stake": "5.00 €",
-      "odds": "3.04×",
-      "potential_win": "15.20 €",
-      "booking_code": null,
+      "stake": "7.00 €",
+      "odds": "3.87×",
+      "potential_win": "27.14 €",
+      "booking_code": "NETWIN_PLACED",
       "legs": [
         {
           "when": "2026-10-15 21:00 CEST",
-          "match": "Atalanta vs Pafos FC",
-          "pick": "Atalanta Over 4.5 Tiri in Porta",
-          "odd": "1.40",
+          "match": "Dinamo Zagabria vs Anderlecht",
+          "pick": "X o GG : SI",
+          "odd": "1.46",
           "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Gewiss Stadium ad alto volume balistico (media 6.8 tiri nello specchio)"
+          "score": "Kickoff ore 21:00"
         },
         {
           "when": "2026-10-15 21:00 CEST",
-          "match": "AFC Bournemouth vs Sturm Graz",
-          "pick": "Bournemouth Over 5.5 Tiri in Porta",
-          "odd": "1.45",
+          "match": "Atalanta vs Pafos",
+          "pick": "U/O 0.5 Squadra 2 : OVER",
+          "odd": "1.66",
           "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Pressing asfissiante e transizioni rapide della Premier contro blocco statico"
+          "score": "Kickoff ore 21:00"
         },
         {
           "when": "2026-10-15 21:00 CEST",
-          "match": "Brighton vs Kauno Zalgiris",
-          "pick": "Brighton Over 6.5 Corner",
-          "odd": "1.50",
+          "match": "Jagiellonia Bialystok vs FC Ararat-Armenia",
+          "pick": "U/O 0.5 Squadra 2 : OVER",
+          "odd": "1.60",
           "result": "PENDING",
-          "score": "OFP AAA | Argon Certified | Ampiezza estrema sulle fasce contro blocco basso lituano (>7 corner interni)"
+          "score": "Kickoff ore 21:00"
         }
       ]
     }
