@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T17:24:02.129667",
+  "generated_at": "2026-10-16T17:26:24.453567",
   "check_seconds": 30,
   "profit_label": "+2.32 € (Saldo Netto Aggiornato)",
   "present": [
@@ -163,6 +163,44 @@
           "match": "Frosinone vs Sassuolo",
           "pick": "U/O Palmisani, Lorenzo (Frosinone) Parate 3.5 : OVER",
           "odd": "1.85",
+          "result": "PENDING"
+        }
+      ],
+      "status": "PENDING"
+    },
+    {
+      "id": "TICKET_USER_TRIPLA3_NORDICA_NETWIN_15EUR_16OTT",
+      "title": "Schedina 4: Tripla (3) Nordica & Over 3.5 (@ 4.16)",
+      "label": "In Corso",
+      "stake": "15.00 €",
+      "odds": "4.16×",
+      "potential_win": "62.40 €",
+      "booking_code": "DF07EA0A10326AA58A01",
+      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10326AA58A01",
+      "placed_at": "2026-10-16 15:17 CEST",
+      "legs": [
+        {
+          "when": "2026-10-16 18:00 CEST",
+          "tournament": "Croazia | HNL",
+          "match": "NK Rudes Zagreb vs Rijeka",
+          "pick": "X2 + Over 1.5 : X2 + OV",
+          "odd": "1.27",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 19:00 CEST",
+          "tournament": "Danimarca | Superligaen",
+          "match": "Horsens vs Randers",
+          "pick": "U/O 3.5 : Over",
+          "odd": "2.52",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 19:00 CEST",
+          "tournament": "Svezia | Allsvenskan",
+          "match": "Brommapojkarna vs Djurgarden",
+          "pick": "X2 + Over 1.5 : X2 + OV",
+          "odd": "1.30",
           "result": "PENDING"
         }
       ],
