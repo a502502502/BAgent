@@ -138,8 +138,11 @@ def validate_gates_0_to_8(snapshot: Dict[str, Any], today_str: str) -> Tuple[boo
                 errors.append(f"[GATE 3] Quota non numerica in {t_id}: {leg.get('odd')}")
 
             pick_clean = str(leg.get("pick", "")).strip().upper()
-            if pick_clean in ("1", "X", "2", "1X2: 1", "1X2: X", "1X2: 2"):
-                errors.append(f"[GATE 3 / REGOLA #82] Segno 1X2 fisso non protetto rilevato in {t_id}: {leg.get('match')} -> {pick_clean}")
+            if pick_clean in ("1", "X", "2", "1X2: 1", "1X2: X", "1X2: 2", "1X2: 1", "1X2: 2"):
+                if t_id.startswith("TICKET_USER_"):
+                    warnings.append(f"[GATE 3 / REGOLA #82 (AVVISO UTENTE)] Segno 1X2 fisso manuale utente in {t_id}: {leg.get('match')} -> {pick_clean}")
+                else:
+                    errors.append(f"[GATE 3 / REGOLA #82] Segno 1X2 fisso non protetto rilevato in {t_id}: {leg.get('match')} -> {pick_clean}")
 
     for t in active_tickets:
         t_id = t.get("id", "UNKNOWN")

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T17:20:19.070152",
+  "generated_at": "2026-10-16T17:22:08.393092",
   "check_seconds": 30,
   "profit_label": "+2.32 € (Saldo Netto Aggiornato)",
   "present": [
@@ -45,6 +45,77 @@
           "match": "Deportivo La Coruna vs Levante",
           "pick": "1X + MultiGol 1-5 : SI",
           "odd": "1.46",
+          "result": "PENDING"
+        }
+      ],
+      "status": "PENDING"
+    },
+    {
+      "id": "TICKET_USER_MULTIPLA7_SATELLITE_NETWIN_15EUR_16OTT",
+      "title": "Schedina 2: Multipla (7) Flussi & Trasferte (@ 18.40)",
+      "label": "In Corso",
+      "stake": "15.00 €",
+      "bonus": "35.89 €",
+      "odds": "18.40×",
+      "potential_win": "312.03 €",
+      "booking_code": "DF07EA0A10326AA70C04",
+      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10326AA70C04",
+      "placed_at": "2026-10-16 15:26 CEST",
+      "legs": [
+        {
+          "when": "2026-10-16 18:00 CEST",
+          "tournament": "Croazia | HNL",
+          "match": "NK Rudes Zagreb vs Rijeka",
+          "pick": "1X2: 2",
+          "odd": "1.36",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 19:00 CEST",
+          "tournament": "Svezia | Allsvenskan",
+          "match": "Brommapojkarna vs Djurgarden",
+          "pick": "1X2: 2",
+          "odd": "1.50",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:00 CEST",
+          "tournament": "Romania | Superliga",
+          "match": "Dinamo Bucurest vs Botosani",
+          "pick": "1X2: 1",
+          "odd": "1.44",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:00 CEST",
+          "tournament": "Perù | Liga 1",
+          "match": "Sport Huancayo vs Cusco FC",
+          "pick": "1X2: 1",
+          "odd": "1.77",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:00 CEST",
+          "tournament": "Olanda | Eredivisie",
+          "match": "Heerenveen vs Excelsior Rotterdam",
+          "pick": "1X2: 1",
+          "odd": "1.55",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:45 CEST",
+          "tournament": "Irlanda | Premier Division",
+          "match": "Bohemians vs Waterford",
+          "pick": "1X2: 1",
+          "odd": "1.62",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:45 CEST",
+          "tournament": "Irlanda | First Division",
+          "match": "Finn Harps vs Bray Wanderers",
+          "pick": "1X2: 2",
+          "odd": "1.41",
           "result": "PENDING"
         }
       ],
