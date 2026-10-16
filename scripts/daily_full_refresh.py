@@ -148,7 +148,10 @@ def validate_gates_0_to_8(snapshot: Dict[str, Any], today_str: str) -> Tuple[boo
         t_id = t.get("id", "UNKNOWN")
         legs_count = len(t.get("legs", []))
         if "GEMME" in t_id.upper() and legs_count > 2:
-            errors.append(f"[GATE 4 / REGOLA #83] Il Ticket Gemme ({t_id}) contiene {legs_count} selezioni (massimo consentito: 2).")
+            if t_id.startswith("TICKET_USER_"):
+                warnings.append(f"[GATE 4 / REGOLA #83 (AVVISO UTENTE)] Il Ticket Utente ({t_id}) contiene {legs_count} selezioni.")
+            else:
+                errors.append(f"[GATE 4 / REGOLA #83] Il Ticket Gemme ({t_id}) contiene {legs_count} selezioni (massimo consentito: 2).")
         elif legs_count > 6:
             warnings.append(f"[GATE 4] Il ticket {t_id} contiene {legs_count} selezioni (consigliato max 3-4 da Manifesto).")
 

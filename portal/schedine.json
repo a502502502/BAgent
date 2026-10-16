@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T17:22:08.393092",
+  "generated_at": "2026-10-16T17:24:02.129667",
   "check_seconds": 30,
   "profit_label": "+2.32 € (Saldo Netto Aggiornato)",
   "present": [
@@ -116,6 +116,53 @@
           "match": "Finn Harps vs Bray Wanderers",
           "pick": "1X2: 2",
           "odd": "1.41",
+          "result": "PENDING"
+        }
+      ],
+      "status": "PENDING"
+    },
+    {
+      "id": "TICKET_USER_MULTIPLA4_GEMME_PROPS_NETWIN_10EUR_16OTT",
+      "title": "Schedina 3: Multipla (4) Gemme Flussi & Parate (@ 5.11)",
+      "label": "In Corso",
+      "stake": "10.00 €",
+      "bonus": "1.53 €",
+      "odds": "5.11×",
+      "potential_win": "52.72 €",
+      "booking_code": "DF07EA0A10320A735A09",
+      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10320A735A09",
+      "placed_at": "2026-10-16 15:23 CEST",
+      "legs": [
+        {
+          "when": "2026-10-16 19:30 CEST",
+          "tournament": "Austria | Bundesliga",
+          "match": "Rapid Vienna vs Hartberg",
+          "pick": "1X2 + MultiGol 2-5 : 1",
+          "odd": "1.53",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:00 CEST",
+          "tournament": "Olanda | Eredivisie",
+          "match": "Heerenveen vs Excelsior Rotterdam",
+          "pick": "Over 0.5 1°T + Over 0.5 2°T : SI",
+          "odd": "1.37",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:30 CEST",
+          "tournament": "Germania | Bundesliga",
+          "match": "Eintracht Francoforte vs Colonia",
+          "pick": "Over 0.5 1°T + Over 0.5 2°T : SI",
+          "odd": "1.32",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:45 CEST",
+          "tournament": "Italia | Serie A",
+          "match": "Frosinone vs Sassuolo",
+          "pick": "U/O Palmisani, Lorenzo (Frosinone) Parate 3.5 : OVER",
+          "odd": "1.85",
           "result": "PENDING"
         }
       ],
