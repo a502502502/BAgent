@@ -1,8 +1,56 @@
 {
-  "generated_at": "2026-10-15T23:14:57.614489",
+  "generated_at": "2026-10-16T17:20:19.070152",
   "check_seconds": 30,
   "profit_label": "+2.32 € (Saldo Netto Aggiornato)",
-  "present": [],
+  "present": [
+    {
+      "id": "TICKET_USER_MULTIPLA4_BIGLEAGUES_NETWIN_25EUR_16OTT",
+      "title": "Schedina 1: Multipla (4) Big Leagues Europa (@ 4.10)",
+      "label": "In Corso",
+      "stake": "25.00 €",
+      "bonus": "3.08 €",
+      "odds": "4.10×",
+      "potential_win": "105.78 €",
+      "booking_code": "DF07EA0A10326B358903",
+      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10326B358903",
+      "placed_at": "2026-10-16 17:18 CEST",
+      "legs": [
+        {
+          "when": "2026-10-16 20:30 CEST",
+          "tournament": "Germania | Bundesliga",
+          "match": "Eintracht Francoforte vs Colonia",
+          "pick": "Doppia Chance: 1X",
+          "odd": "1.26",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:45 CEST",
+          "tournament": "Italia | Serie A",
+          "match": "Frosinone vs Sassuolo",
+          "pick": "1X + MultiGol 1-5 : SI",
+          "odd": "1.63",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 20:45 CEST",
+          "tournament": "Francia | Ligue 1",
+          "match": "Le Mans FC vs Tolosa",
+          "pick": "Chance Mix: X o Gol : SI",
+          "odd": "1.37",
+          "result": "PENDING"
+        },
+        {
+          "when": "2026-10-16 21:00 CEST",
+          "tournament": "Spagna | LaLiga",
+          "match": "Deportivo La Coruna vs Levante",
+          "pick": "1X + MultiGol 1-5 : SI",
+          "odd": "1.46",
+          "result": "PENDING"
+        }
+      ],
+      "status": "PENDING"
+    }
+  ],
   "future": [],
   "past": [
     {
