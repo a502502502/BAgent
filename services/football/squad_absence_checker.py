@@ -264,12 +264,69 @@ class SquadAbsenceChecker:
 
         return "NOT_IN_SQUAD", f"Non a referto per questo match", {}
 
-    def full_player_audit(self, player_name: str, team_name: str, fixture_id: Optional[int] = None) -> PlayerAuditReport:
+    def check_flashscore_lineup(self, flashscore_match_id: str, player_name: str) -> Tuple[str, str, Dict[str, Any]]:
         """
-        Esegue l'audit sequenziale completo:
-        1. Roster Check (Regola #38)
+        Regola #88: Verifica le formazioni ufficiali su Flashscore (df_li_1_<match_id>).
+        Ritorna: (status, details_str, raw_data)
+        Status: "STARTER_CONFIRMED", "BENCH", "NOT_IN_SQUAD", "LINEUP_NOT_OUT"
+        """
+        if not flashscore_match_id:
+            return "LINEUP_NOT_OUT", "ID match Flashscore non specificato", {}
+        url = f"https://2.flashscore.ninja/2/x/feed/df_li_1_{flashscore_match_id}"
+        try:
+            r = requests.get(url, headers={"X-Fsign": "SW9D1eZo", "User-Agent": "Mozilla/5.0"}, timeout=10)
+            if r.status_code != 200 or not r.text or "Starting Lineups" not in r.text:
+                return "LINEUP_NOT_OUT", "Formazioni ufficiali (Starting Lineups) non ancora pubblicate su Flashscore", {}
+            text = r.text
+            # Estrai i blocchi per sezione (Starting Lineups vs Substitutes)
+            import re
+            sections = text.split("~LB÷")
+            norm_target = normalize(player_name)
+            # Gestisci formato "Cognome, Nome" -> tokens
+            target_tokens = [t for t in re.split(r"[\s,\.\-]+", norm_target) if len(t) >= 3]
+            surname_tok = target_tokens[0] if target_tokens else norm_target
+
+            starters_list: List[str] = []
+            subs_list: List[str] = []
+
+            for sec in sections:
+                sec_header = sec.split("¬")[0].strip() if "¬" in sec else ""
+                players_in_sec = re.findall(r"LI÷([^¬]+)", sec)
+                if "Starting Lineups" in sec_header or "Formazioni" in sec_header:
+                    starters_list.extend(players_in_sec)
+                elif "Substitutes" in sec_header or "Panchina" in sec_header or "Sostituti" in sec_header:
+                    subs_list.extend(players_in_sec)
+
+            if not starters_list:
+                return "LINEUP_NOT_OUT", "Lista titolari (Starting Lineups) vuota su Flashscore", {}
+
+            for p in starters_list:
+                np = normalize(p)
+                if surname_tok in np or np in norm_target:
+                    return "STARTER_CONFIRMED", f"Titolare Ufficiale dal 1' certificato su Flashscore ({p})", {"player": p, "source": "flashscore_df_li_1"}
+
+            for p in subs_list:
+                np = normalize(p)
+                if surname_tok in np or np in norm_target:
+                    return "BENCH", f"PANCHINARO nella distinta ufficiale Flashscore ({p})", {"player": p, "source": "flashscore_df_li_1"}
+
+            return "NOT_IN_SQUAD", f"Assente dalla distinta ufficiale Flashscore (né nei 22 titolari né in panchina)", {"starters_count": len(starters_list)}
+        except Exception as e:
+            return "LINEUP_NOT_OUT", f"Errore verifica Flashscore df_li_1: {e}", {}
+
+    def full_player_audit(
+        self,
+        player_name: str,
+        team_name: str,
+        fixture_id: Optional[int] = None,
+        flashscore_match_id: Optional[str] = None,
+        official_starter_verified: bool = False,
+    ) -> PlayerAuditReport:
+        """
+        Esegue l'audit sequenziale completo (Regole #37, #38, #84, #88):
+        1. Roster Check (Regola #38 / #84)
         2. Injury & Absence Check
-        3. Lineup & Starting XI Check (Regola #37)
+        3. Lineup & Starting XI Check (Regola #37 & Regola #88 — Obbligo Formazione Ufficiale Titolare dal 1')
         """
         # 1. Roster Check
         in_squad, actual_team, p_data = self.verify_player_roster(player_name, team_name)
@@ -283,7 +340,7 @@ class SquadAbsenceChecker:
                 injury_reason="",
                 lineup_status="N/A",
                 can_bet_player_prop=False,
-                rejection_reason=f"[BLOCCO REGOLA #38: TRASFERITO / SQUADRA ERRATA] {player_name} NON gioca per {team_name}! Squadra reale: '{actual_team}'.",
+                rejection_reason=f"[BLOCCO REGOLA #38/#84: TRASFERITO / SQUADRA ERRATA] {player_name} NON gioca per {team_name}! Squadra reale: '{actual_team}'.",
                 details=p_data
             )
 
@@ -306,52 +363,69 @@ class SquadAbsenceChecker:
                     details={"injury": inj_reason}
                 )
 
-        # 3. Controllo Formazione Ufficiale (Regola #37)
+        # 3. Controllo Formazione Ufficiale (Regola #37 & Regola #88)
         lineup_status = "LINEUP_NOT_OUT"
-        lineup_detail = ""
-        if fixture_id:
-            lineup_status, lineup_detail, lineup_p = self.check_fixture_lineup(fixture_id, player_name)
-            if lineup_status == "LINEUP_NOT_OUT":
-                return PlayerAuditReport(
-                    player_name=player_name,
-                    team_name=team_name,
-                    in_squad=True,
-                    current_actual_team=actual_team,
-                    is_injured_or_suspended=False,
-                    injury_reason="",
-                    lineup_status="LINEUP_NOT_OUT",
-                    can_bet_player_prop=False,
-                    rejection_reason="[BLOCCO REGOLA #37] Distinte ufficiali non ancora disponibili. Vietato scommettere su mercati giocatore prima delle formazioni ufficiali!",
-                    details={"note": lineup_detail}
-                )
-            elif lineup_status == "BENCH":
-                return PlayerAuditReport(
-                    player_name=player_name,
-                    team_name=team_name,
-                    in_squad=True,
-                    current_actual_team=actual_team,
-                    is_injured_or_suspended=False,
-                    injury_reason="",
-                    lineup_status="BENCH",
-                    can_bet_player_prop=False,
-                    rejection_reason=f"[BLOCCO REGOLA #37: PANCHINA] {player_name} parte dalla PANCHINA! ({lineup_detail}). Zero player props sui panchinari!",
-                    details=lineup_p
-                )
-            elif lineup_status == "NOT_IN_SQUAD":
-                return PlayerAuditReport(
-                    player_name=player_name,
-                    team_name=team_name,
-                    in_squad=True,
-                    current_actual_team=actual_team,
-                    is_injured_or_suspended=False,
-                    injury_reason="",
-                    lineup_status="NOT_IN_SQUAD",
-                    can_bet_player_prop=False,
-                    rejection_reason=f"[BLOCCO REGOLA #37] {player_name} non figura nella distinta gara (né titolare né panchina).",
-                    details={}
-                )
+        lineup_detail = "Distinta ufficiale non verificata"
+        lineup_p: Dict[str, Any] = {}
 
-        # Tutto verificato con successo!
+        if flashscore_match_id:
+            lineup_status, lineup_detail, lineup_p = self.check_flashscore_lineup(flashscore_match_id, player_name)
+        elif fixture_id:
+            lineup_status, lineup_detail, lineup_p = self.check_fixture_lineup(fixture_id, player_name)
+        elif official_starter_verified:
+            lineup_status = "STARTER_CONFIRMED"
+            lineup_detail = "Titolare ufficiale dal 1' verificato su distinta ufficiale"
+
+        if lineup_status == "LINEUP_NOT_OUT":
+            return PlayerAuditReport(
+                player_name=player_name,
+                team_name=team_name,
+                in_squad=True,
+                current_actual_team=actual_team,
+                is_injured_or_suspended=False,
+                injury_reason="",
+                lineup_status="LINEUP_NOT_OUT",
+                can_bet_player_prop=False,
+                rejection_reason=(
+                    f"[BLOCCO REGOLA #88: FORMAZIONE UFFICIALE NON ANCORA PUBBLICATA] Impossibile scommettere su '{player_name}' ({team_name}). "
+                    f"È tassativamente vietato fare scommesse su singoli giocatori se non sono ufficialmente nella formazione titolare ufficiale "
+                    f"già pubblicata (Starting Lineups df_li_1_). Dettaglio: {lineup_detail}."
+                ),
+                details={"note": lineup_detail}
+            )
+        elif lineup_status == "BENCH":
+            return PlayerAuditReport(
+                player_name=player_name,
+                team_name=team_name,
+                in_squad=True,
+                current_actual_team=actual_team,
+                is_injured_or_suspended=False,
+                injury_reason="",
+                lineup_status="BENCH",
+                can_bet_player_prop=False,
+                rejection_reason=(
+                    f"[BLOCCO REGOLA #88: GIOCATORE IN PANCHINA] '{player_name}' ({team_name}) parte dalla PANCHINA nella formazione ufficiale! "
+                    f"({lineup_detail}). Divieto assoluto di scommettere su giocatori non titolari dal 1'!"
+                ),
+                details=lineup_p
+            )
+        elif lineup_status != "STARTER_CONFIRMED":
+            return PlayerAuditReport(
+                player_name=player_name,
+                team_name=team_name,
+                in_squad=True,
+                current_actual_team=actual_team,
+                is_injured_or_suspended=False,
+                injury_reason="",
+                lineup_status=lineup_status,
+                can_bet_player_prop=False,
+                rejection_reason=(
+                    f"[BLOCCO REGOLA #88: NON TITOLARE NELLA FORMAZIONE UFFICIALE] '{player_name}' non figura nell'11 titolare ufficiale ({lineup_detail})."
+                ),
+                details=lineup_p
+            )
+
+        # Tutto verificato con successo: in rosa, sano e TITOLARE UFFICIALE DAL 1'!
         return PlayerAuditReport(
             player_name=player_name,
             team_name=team_name,
@@ -359,10 +433,10 @@ class SquadAbsenceChecker:
             current_actual_team=actual_team,
             is_injured_or_suspended=False,
             injury_reason="",
-            lineup_status=lineup_status,
+            lineup_status="STARTER_CONFIRMED",
             can_bet_player_prop=True,
             rejection_reason=None,
-            details=p_data
+            details={**p_data, **lineup_p, "lineup_detail": lineup_detail}
         )
 
     def get_all_surnames_index(self) -> Dict[str, Tuple[str, str]]:

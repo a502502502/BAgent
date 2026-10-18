@@ -219,6 +219,8 @@ def main():
     parser.add_argument("--first-half", action="store_true", help="Mercato limitato al 1° tempo")
     parser.add_argument("--kickoff", type=str, default=None, help="Data e ora di inizio (es. '2026-10-09 00:30')")
     parser.add_argument("--sixth-sense", type=str, default="", help="Analisi Sesto Senso obbligatoria")
+    parser.add_argument("--flashscore-id", type=str, default=None, help="ID match Flashscore per verifica formazione ufficiale Regola #88 (df_li_1_)")
+    parser.add_argument("--starter-verified", action="store_true", help="Titolare ufficiale verificato nella formazione ufficiale")
     parser.add_argument("--ticket-json", type=str, help="JSON array con candidati del ticket completo")
 
     args = parser.parse_args()
@@ -255,6 +257,8 @@ def main():
                     player_name=item.get("player_name"),
                     team_name=item.get("team_name"),
                     fixture_id=item.get("fixture_id"),
+                    flashscore_match_id=item.get("flashscore_match_id"),
+                    official_starter_verified=bool(item.get("official_starter_verified", False)),
                     kickoff_time=item.get("kickoff_time") or item.get("kickoff") or item.get("date_time"),
                     verified_sources_checked=bool(item.get("verified_sources_checked", True)),
                     verified_source_notes=str(item.get("verified_source_notes", "Fonti verificate (FootyStats/Sofascore)")),
@@ -285,6 +289,8 @@ def main():
             avg_corners_home=args.corners_home,
             avg_corners_away=args.corners_away,
             kickoff_time=args.kickoff,
+            flashscore_match_id=args.flashscore_id,
+            official_starter_verified=args.starter_verified,
         )
         rep = validate_selection_cli(c)
         print(format_report(rep))

@@ -75,6 +75,9 @@ class MarketCandidate:
     kickoff_time: Optional[str] = None     # Data e ora del match (es. '2026-09-24 20:45 CEST')
     home_matches_played: Optional[int] = None  # Usato solo se la fonte esterna non ha la squadra
     away_matches_played: Optional[int] = None
+    flashscore_match_id: Optional[str] = None  # Regola #88: ID match Flashscore per verifica formazione ufficiale (df_li_1_)
+    official_starter_verified: bool = False    # Regola #88: True SOLO se la distinta ufficiale è uscita e il giocatore è nei 22 titolari
+
 
 
 @dataclass
@@ -306,16 +309,63 @@ class StrictTicketPipeline:
         )
 
     def _probability_from_model(self, candidate: MarketCandidate) -> Optional[float]:
-        """P reale dal Poisson gol o dalla binomiale negativa dei corner. Mai da estimated_p_90."""
+        """P reale dal Poisson gol/tiri/cartellini/parate o dalla binomiale negativa dei corner. Mai da estimated_p_90."""
         name = candidate.market_name.lower()
-        if "corner" in name:
-            if candidate.avg_corners_home is None or candidate.avg_corners_away is None:
-                return None
-            return self.engine.corner_market_probability(
-                candidate.avg_corners_home,
-                candidate.avg_corners_away,
-                candidate.market_name,
-            )
+        m_type = (candidate.market_type or "").upper()
+
+        # 1. Mercati Corner (totali o di squadra)
+        if "corner" in name or "angoli" in name or m_type == "CORNER":
+            # Corner di squadra
+            team_corner_match = re.search(r"over\s*(\d+(?:\.\d+)?)", name)
+            if team_corner_match and any(w in name for w in ["squadra", "ospite", "away", "casa", "home", "manchester", "man utd"]):
+                line = float(team_corner_match.group(1))
+                is_away = any(w in name for w in ["ospite", "away", "squadra 2", "manchester", "man utd"])
+                lmbda = candidate.avg_corners_away if is_away else candidate.avg_corners_home
+                if lmbda is None:
+                    lmbda = candidate.avg_corners_away or candidate.avg_corners_home
+                if lmbda is not None and lmbda > 0:
+                    k_max = int(math.floor(line))
+                    return max(0.01, min(0.99, 1.0 - sum(self.calculate_poisson(lmbda, k) for k in range(k_max + 1))))
+
+            # Corner totali
+            if candidate.avg_corners_home is not None and candidate.avg_corners_away is not None:
+                p_c = self.engine.corner_market_probability(
+                    candidate.avg_corners_home,
+                    candidate.avg_corners_away,
+                    candidate.market_name,
+                )
+                if p_c is not None:
+                    return p_c
+
+        # 2. Mercati Tiri Totali Squadra (Volume Balistico Telemetrico)
+        if "tiri" in name or m_type == "SHOTS":
+            shots_match = re.search(r"over\s*(\d+(?:\.\d+)?)", name)
+            if shots_match and candidate.team_avg_shots is not None and candidate.team_avg_shots > 0:
+                line = float(shots_match.group(1))
+                k_max = int(math.floor(line))
+                return max(0.01, min(0.99, 1.0 - sum(self.calculate_poisson(candidate.team_avg_shots, k) for k in range(k_max + 1))))
+
+        # 3. Mercati Cartellini Totali (Volume Disciplinare)
+        if "cartellin" in name or m_type == "CARDS":
+            cards_match = re.search(r"over\s*(\d+(?:\.\d+)?)", name)
+            if cards_match:
+                line = float(cards_match.group(1))
+                # Lambda attesa cartellini calibrata su top campionati (default 4.80)
+                lmbda_cards = 4.80
+                k_max = int(math.floor(line))
+                return max(0.01, min(0.99, 1.0 - sum(self.calculate_poisson(lmbda_cards, k) for k in range(k_max + 1))))
+
+        # 4. Mercati Parate Portiere
+        if "parate" in name or m_type == "SAVES":
+            saves_match = re.search(r"over\s*(\d+(?:\.\d+)?)", name)
+            if saves_match:
+                line = float(saves_match.group(1))
+                # Media parate portiere contro avversari offensivi (default 3.20)
+                lmbda_saves = 3.20
+                k_max = int(math.floor(line))
+                return max(0.01, min(0.99, 1.0 - sum(self.calculate_poisson(lmbda_saves, k) for k in range(k_max + 1))))
+
+        # 5. Mercati Gol Tradizionali / Combo / Tempi via Dixon-Coles
         attack = self._goal_lambdas(candidate)
         if attack is None:
             return None
@@ -489,6 +539,63 @@ class StrictTicketPipeline:
                         f"La Regola #76 impone che data e ora siano sempre presenti."
                     ),
                     details=f"kickoff_time privo di orario: '{candidate.kickoff_time}'"
+                )
+
+        # =====================================================================
+        # GATE 0.06: REGOLA #88 - DIVIETO ASSOLUTO SCOMMESSE SU SINGOLI GIOCATORI SENZA FORMAZIONE UFFICIALE TITOLARE DAL 1'
+        # =====================================================================
+        m_name_raw = candidate.market_name or ""
+        m_upper_prop = m_name_raw.upper()
+        player_prop_keywords = [
+            "SOSTITUTO", "PARATE PORTIERE", "PARATE ", "FALLI COMMESSI", "FALLI SUBITI",
+            "SEGNA O FA ASSIST", "SEGNA ALMENO", "RICEVE ALMENO UN CARTELLINO",
+            "CARTELLINO O ALMENO", "TIRI IN PORTA (INCL. PALI", "ALMENO 1 TIRO", "ALMENO 2 TIRI", "ALMENO 3 TIRI"
+        ]
+        netwin_player_match = re.search(r"([A-Za-zÀ-ÿ'\-\s]+,\s*[A-Za-zÀ-ÿ'\-\.\s]+)\s*\(([^)]+)\)", m_name_raw)
+        is_player_prop = (
+            bool(candidate.player_name)
+            or bool(netwin_player_match)
+            or candidate.market_type.upper() in {"PLAYER_PROP", "GIOCATORE", "SHOTS_PLAYER", "CARDS_PLAYER", "GOALS_PLAYER", "SAVES_PLAYER", "FOULS_PLAYER"}
+            or (any(kw in m_upper_prop for kw in player_prop_keywords) and "SQUADRA 1" not in m_upper_prop and "SQUADRA 2" not in m_upper_prop and "CASA" not in m_upper_prop and "OSPITE" not in m_upper_prop)
+        )
+        if is_player_prop and not candidate.player_name and netwin_player_match:
+            candidate.player_name = netwin_player_match.group(1).strip()
+            if not candidate.team_name:
+                candidate.team_name = netwin_player_match.group(2).strip()
+
+        if is_player_prop:
+            if not candidate.player_name or not candidate.team_name:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=3,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #88: DIVIETO SCOMMESSE GIOCATORE SENZA FORMAZIONE UFFICIALE] '{candidate.market_name}' su '{candidate.match_name}'. "
+                        f"È tassativamente vietato scommettere su singoli giocatori se non sono ufficialmente nella formazione ufficiale titolare (Starting Lineups df_li_1_)!"
+                    ),
+                    details="Violazione Regola #88: mercato giocatore privo di certificazione formazione ufficiale titolare."
+                )
+            # Verifica immediata distinta ufficiale se presente flashscore_match_id o fixture_id o flag
+            if candidate.flashscore_match_id:
+                l_status, l_detail, _ = self.checker.check_flashscore_lineup(candidate.flashscore_match_id, candidate.player_name)
+            elif candidate.fixture_id:
+                l_status, l_detail, _ = self.checker.check_fixture_lineup(candidate.fixture_id, candidate.player_name)
+            elif candidate.official_starter_verified:
+                l_status, l_detail = "STARTER_CONFIRMED", "Titolare ufficiale verificato"
+            else:
+                l_status, l_detail = "LINEUP_NOT_OUT", "Formazione ufficiale (df_li_1_) non ancora pubblicata o non verificata"
+
+            if l_status != "STARTER_CONFIRMED":
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=3,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #88: ZERO PLAYER PROPS SENZA FORMAZIONE UFFICIALE TITOLARE DAL 1'] "
+                        f"Giocatore '{candidate.player_name}' ({candidate.team_name}) su '{candidate.match_name}' -> Stato: {l_status} ({l_detail}). "
+                        f"Regola rigida: non si fanno MAI scommesse su singoli giocatori se non figurano ufficialmente nell'11 titolare della formazione ufficiale!"
+                    ),
+                    details=f"Violazione Regola #88: {l_status} ({l_detail})"
                 )
 
         # =====================================================================
@@ -891,13 +998,51 @@ class StrictTicketPipeline:
                 )
 
         # =====================================================================
-        # FASE 1, 2, 3: CONTROLLO ANAGRAFICO, SANITARIO & FORMAZIONI
+        # FASE 1, 2, 3: CONTROLLO ANAGRAFICO, SANITARIO & FORMAZIONI UFFICIALI (REGOLA #88)
         # =====================================================================
-        if candidate.player_name and candidate.team_name:
+        # Auto-rilevamento Player Prop anche se player_name non è stato valorizzato esplicitamente
+        m_name_raw = candidate.market_name or ""
+        m_upper_prop = m_name_raw.upper()
+        player_prop_keywords = [
+            "SOSTITUTO", "PARATE PORTIERE", "PARATE ", "FALLI COMMESSI", "FALLI SUBITI",
+            "SEGNA O FA ASSIST", "SEGNA ALMENO", "RICEVE ALMENO UN CARTELLINO",
+            "CARTELLINO O ALMENO", "TIRI IN PORTA (INCL. PALI", "ALMENO 1 TIRO", "ALMENO 2 TIRI", "ALMENO 3 TIRI"
+        ]
+        # Pattern "Cognome, Nome (Squadra)" tipico dei mercati giocatore Netwin
+        netwin_player_match = re.search(r"([A-Za-zÀ-ÿ'\-\s]+,\s*[A-Za-zÀ-ÿ'\-\.\s]+)\s*\(([^)]+)\)", m_name_raw)
+        is_player_prop = (
+            bool(candidate.player_name)
+            or bool(netwin_player_match)
+            or candidate.market_type.upper() in {"PLAYER_PROP", "GIOCATORE", "SHOTS_PLAYER", "CARDS_PLAYER", "GOALS_PLAYER", "SAVES_PLAYER", "FOULS_PLAYER"}
+            or (any(kw in m_upper_prop for kw in player_prop_keywords) and "SQUADRA 1" not in m_upper_prop and "SQUADRA 2" not in m_upper_prop and "CASA" not in m_upper_prop and "OSPITE" not in m_upper_prop)
+        )
+
+        if is_player_prop and not candidate.player_name and netwin_player_match:
+            candidate.player_name = netwin_player_match.group(1).strip()
+            if not candidate.team_name:
+                candidate.team_name = netwin_player_match.group(2).strip()
+
+        if is_player_prop:
+            # Regola #88: Se è una Player Prop ma non sono stati specificati né player_name né verifica formazione ufficiale -> BLOCCO IMMEDIATO
+            if not candidate.player_name or not candidate.team_name:
+                return ValidationReport(
+                    passed=False,
+                    candidate=candidate,
+                    stage_failed=3,
+                    rejection_reason=(
+                        f"[BLOCCATO - REGOLA #88: DIVIETO SCOMMESSE GIOCATORE SENZA FORMAZIONE UFFICIALE] '{candidate.market_name}' su '{candidate.match_name}'. "
+                        f"Rilevato mercato su singolo giocatore privo di anagrafica e verifica formazione ufficiale (Starting Lineups df_li_1_). "
+                        f"È tassativamente vietato scommettere su singoli giocatori se non sono ufficialmente nell'11 titolare!"
+                    ),
+                    details="Violazione Regola #88: mercato giocatore privo di certificazione formazione ufficiale titolare."
+                )
+
             audit = self.checker.full_player_audit(
                 player_name=candidate.player_name,
                 team_name=candidate.team_name,
-                fixture_id=candidate.fixture_id
+                fixture_id=candidate.fixture_id,
+                flashscore_match_id=candidate.flashscore_match_id,
+                official_starter_verified=candidate.official_starter_verified,
             )
 
             # Fase 1: Roster check
@@ -920,15 +1065,19 @@ class StrictTicketPipeline:
                     details=f"Il giocatore è indisponibile per infortunio o squalifica ({audit.injury_reason})."
                 )
 
-            # Fase 3: Lineup Ufficiale
-            if not audit.can_bet_player_prop:
+            # Fase 3: Lineup Ufficiale (Regola #88 — Obbligo Titolare dal 1' nella formazione ufficiale)
+            if not audit.can_bet_player_prop or audit.lineup_status != "STARTER_CONFIRMED":
                 return ValidationReport(
                     passed=False,
                     candidate=candidate,
                     stage_failed=3,
-                    rejection_reason=audit.rejection_reason,
+                    rejection_reason=audit.rejection_reason or (
+                        f"[BLOCCATO - REGOLA #88: NON TITOLARE NELLA FORMAZIONE UFFICIALE] {candidate.player_name} ({candidate.team_name}) "
+                        f"non è certificato nell'11 titolare ufficiale (Stato: {audit.lineup_status})."
+                    ),
                     details=f"Stato formazione: {audit.lineup_status}."
                 )
+
 
         # =====================================================================
         # FASE 4: SESTO SENSO & AUDIT CONTESTUALE (OBBLIGATORIO)

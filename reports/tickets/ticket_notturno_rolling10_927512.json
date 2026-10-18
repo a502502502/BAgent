@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "booking_code": "927512",
+  "name": "Tripla Notturna Data-First Rolling-10 (Zero Vincolo 1X2)",
+  "created_at": "2026-10-18 23:50 CEST",
+  "stake": 2.00,
+  "events_added": 3,
+  "total_events": 3,
+  "total_odds": 2.33,
+  "potential_payout": 4.66,
+  "screenshot": "/Users/flashmac/Projects/BAgent/reports/receipts/prenotazione_tripla_notturna_mg13_927512.png",
+  "legs": [
+    {
+      "match": "Clube Do Remo vs Bragantino Sp",
+      "kickoff_time": "19/10/2026 00:30 CEST",
+      "league": "Brasileirao",
+      "market": "MULTIGOL_SQUADRA",
+      "pick": "MultiGol 1-3 Ospite (Bragantino)",
+      "netwin_odds": 1.30,
+      "rolling_10_stat": "Bragantino ha segnato tra 1 e 3 gol nel 70-80% delle ultime 10 gare; Remo subisce gol in 9 delle ultime 10 (90%).",
+      "prob": 0.706
+    },
+    {
+      "match": "Belgrano vs River Plate",
+      "kickoff_time": "19/10/2026 01:15 CEST",
+      "league": "Liga Profesional Argentina",
+      "market": "MULTIGOL_SQUADRA",
+      "pick": "MultiGol 1-3 Ospite (River Plate)",
+      "netwin_odds": 1.40,
+      "rolling_10_stat": "River Plate ha segnato tra 1 e 3 gol in 8 delle ultime 10 gare (80%); Belgrano ha fatto registrare Under 3.5 in 10 gare su 10 (100%), impedendo goleade.",
+      "prob": 0.716
+    },
+    {
+      "match": "Monterrey vs Pachuca",
+      "kickoff_time": "19/10/2026 03:00 CEST",
+      "league": "Liga MX",
+      "market": "MULTIGOL_SQUADRA",
+      "pick": "MultiGol 1-3 Casa (Monterrey)",
+      "netwin_odds": 1.28,
+      "rolling_10_stat": "Monterrey viaggia a 1.7 gol medi fatti e ha centrato il MultiGol 1-3 in casa in 9 delle ultime 10 gare (90%) contro Pachuca.",
+      "prob": 0.725
+    }
+  ]
+}

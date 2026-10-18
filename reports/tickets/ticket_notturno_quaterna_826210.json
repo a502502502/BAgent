@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "booking_code": "826210",
+  "name": "Quaterna Notturna Americhe Data-First (MultiGol 1-3 Puro)",
+  "created_at": "2026-10-19 00:08 CEST",
+  "stake": 2.00,
+  "events_added": 4,
+  "total_events": 4,
+  "total_odds": 3.19,
+  "potential_payout": 6.38,
+  "screenshot": "/Users/flashmac/Projects/BAgent/reports/receipts/prenotazione_quaterna_notturna_mg13_826210.png",
+  "legs": [
+    {
+      "match": "Clube Do Remo vs Bragantino Sp",
+      "kickoff_time": "19/10/2026 00:30 CEST",
+      "league": "Brasileirao",
+      "market": "MULTIGOL_SQUADRA",
+      "pick": "MultiGol 1-3 Ospite (Bragantino)",
+      "netwin_odds": 1.30,
+      "rolling_10_stat": "Bragantino a segno tra 1 e 3 gol nel 75-80% delle gare; Remo subisce gol in 9 delle ultime 10 (90%).",
+      "prob": 0.706
+    },
+    {
+      "match": "Llaneros vs Independiente Santa Fe",
+      "kickoff_time": "19/10/2026 01:05 CEST",
+      "league": "Liga BetPlay Colombia",
+      "market": "MULTIGOL_SQUADRA",
+      "pick": "MultiGol 1-3 Ospite (Independiente Santa Fe)",
+      "netwin_odds": 1.37,
+      "rolling_10_stat": "Santa Fe trova la via della rete con regolarita storica in Colombia; range 1-3 gol segnato nella stragrande maggioranza delle trasferte.",
+      "prob": 0.693
+    },
+    {
+      "match": "Belgrano vs River Plate",
+      "kickoff_time": "19/10/2026 01:15 CEST",
+      "league": "Liga Profesional Argentina",
+      "market": "MULTIGOL_SQUADRA",
+      "pick": "MultiGol 1-3 Ospite (River Plate)",
+      "netwin_odds": 1.40,
+      "rolling_10_stat": "River Plate ha segnato tra 1 e 3 gol in 8 delle ultime 10 gare (80%); Belgrano ha registrato Under 3.5 in 10 gare su 10 (100%), impedendo goleade.",
+      "prob": 0.716
+    },
+    {
+      "match": "Monterrey vs Pachuca",
+      "kickoff_time": "19/10/2026 03:00 CEST",
+      "league": "Liga MX",
+      "market": "MULTIGOL_SQUADRA",
+      "pick": "MultiGol 1-3 Casa (Monterrey)",
+      "netwin_odds": 1.28,
+      "rolling_10_stat": "Monterrey viaggia a 1.7 gol medi fatti al BBVA e ha centrato il MultiGol 1-3 in casa in 9 delle ultime 10 gare (90%).",
+      "prob": 0.725
+    }
+  ]
+}

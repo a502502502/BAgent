@@ -61,6 +61,10 @@ CREATE TABLE IF NOT EXISTS market_family_stats (
 # Famiglie di mercato canoniche e loro prior di base
 CANONICAL_FAMILIES = {
     "TIME_SPLIT_MULTIGOL": {"name": "MultiGol Asimmetrico Tempi (1°T/2°T)", "base_prior": 1.25},
+    "TEAM_SHOTS_VOLUME": {"name": "Tiri Totali Squadra (Volume Offensivo)", "base_prior": 1.25},
+    "GOALKEEPER_SAVES": {"name": "Parate Portiere (Volume Difensivo)", "base_prior": 1.25},
+    "TEAM_MULTIGOL_1_3": {"name": "MultiGol Squadra 1-3 (Resilienza Singola)", "base_prior": 1.25},
+    "DC_PLUS_CARDS": {"name": "Doppia Chance + Cartellini (Tensione)", "base_prior": 1.20},
     "TEAM_CORNERS_VOLUME": {"name": "Corner Squadra Favorita (Assedio)", "base_prior": 1.20},
     "TEAM_CARDS_VOLUME": {"name": "Cartellini Squadra Sfavorita/Fisica", "base_prior": 1.20},
     "TOTAL_SHOTS_ON_TARGET": {"name": "Tiri in Porta Totali (Volume Balistico)", "base_prior": 1.20},
@@ -82,7 +86,23 @@ def classify_market_family(market_name: str) -> str:
     """Classifica automaticamente qualsiasi stringa di mercato nella famiglia canonica."""
     m = market_name.lower().strip()
     
-    # 0. Player props / Marcatore / Palo o Traversa / Tiri Giocatore
+    # 0. Parate Portiere
+    if any(w in m for w in ["parate", "parata", "saves"]):
+        return "GOALKEEPER_SAVES"
+        
+    # 0.1 MultiGol Squadra 1-3
+    if any(w in m for w in ["m 1-3", "mg 1-3", "multigol 1-3"]) and any(s in m for s in ["casa", "ospite", "sq", "squadra"]):
+        return "TEAM_MULTIGOL_1_3"
+
+    # 0.2 Tiri totali squadra / 1X2 Tiri
+    if ("tiri totali" in m or "tiri osp" in m or "tiri casa" in m or "1x2 tiri" in m) and not ("in porta" in m or "specchio" in m):
+        return "TEAM_SHOTS_VOLUME"
+
+    # 0.3 Doppia Chance + Cartellini
+    if ("1x +" in m or "x2 +" in m or "1x+" in m or "x2+" in m) and any(w in m for w in ["cartellin", "card", "ammoniz"]):
+        return "DC_PLUS_CARDS"
+
+    # 0.4 Player props / Marcatore / Palo o Traversa / Tiri Giocatore
     if any(w in m for w in ["segna o colpisce", "marcatore", "palo/trav", "palo", "traversa", "tiri giocatore"]):
         return "PLAYER_PROPS_COMBO"
 

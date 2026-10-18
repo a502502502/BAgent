@@ -90,8 +90,19 @@ class FlashscoreLiveEngine:
             score_str = "0-0"
         else:
             score_str = "-"
-        s1_home = fields.get("BC", "")
-        s1_away = fields.get("BD", "")
+        s2_home = fields.get("BC", "")
+        s2_away = fields.get("BD", "")
+        ba_val = fields.get("BA", "")
+        bb_val = fields.get("BB", "")
+        if ba_val != "" and bb_val != "":
+            s1_home, s1_away = ba_val, bb_val
+        elif s_home.isdigit() and s_away.isdigit() and s2_home.isdigit() and s2_away.isdigit():
+            s1_home = str(max(0, int(s_home) - int(s2_home)))
+            s1_away = str(max(0, int(s_away) - int(s2_away)))
+        elif status_raw in {"11", "12"} and s_home.isdigit() and s_away.isdigit():
+            s1_home, s1_away = s_home, s_away
+        else:
+            s1_home, s1_away = "", ""
         return {
             "match_id": match_id or fields.get("AA", ""),
             "home": home,
@@ -102,11 +113,14 @@ class FlashscoreLiveEngine:
             "status_code": status_raw,
             "status": status_desc,
             "period": fields.get("AC", ""),
-            "ht_score": f"{s1_home}-{s1_away}" if s1_home else "",
+            "ht_score": f"{s1_home}-{s1_away}" if s1_home != "" else "",
             "ht_home": s1_home,
             "ht_away": s1_away,
-            "home_yellow": fields.get("BA", ""),
-            "away_yellow": fields.get("BB", ""),
+            "s2_score": f"{s2_home}-{s2_away}" if s2_home != "" else "",
+            "s2_home": s2_home,
+            "s2_away": s2_away,
+            "home_yellow": "",
+            "away_yellow": "",
             "home_red": fields.get("GRA", ""),
             "away_red": fields.get("GRB", ""),
         }

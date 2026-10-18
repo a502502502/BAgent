@@ -38,6 +38,10 @@ output/
 
 # Binaries & Screenshots
 *.exe
+scripts/ocr_runner
+scripts/ocr_batch_runner
+*.db-wal
+*.db-shm
 reports/*.png
 reports/receipts/
 

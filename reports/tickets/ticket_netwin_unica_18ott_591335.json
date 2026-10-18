@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "booking_code": "591335",
+  "name": "Schedina Unica Netwin 18 Ottobre 2026 - Protezione Capitale",
+  "created_at": "2026-10-18 12:10 CEST",
+  "stake": 2.00,
+  "events_added": 3,
+  "total_events": 3,
+  "total_odds": 2.16,
+  "potential_payout": 4.32,
+  "screenshot": "/Users/flashmac/Projects/BAgent/reports/receipts/prenotazione_schedina_unica_18ott_591335.png",
+  "legs": [
+    {
+      "match": "Nottingham Forest vs Arsenal",
+      "kickoff_time": "18/10/2026 17:30 CEST",
+      "league": "Premier League",
+      "market": "COMBO",
+      "pick": "X2 + MultiGol 1-5",
+      "netwin_odds": 1.26,
+      "prob": 0.84,
+      "edge": "+5.8%"
+    },
+    {
+      "match": "Milan vs Atalanta",
+      "kickoff_time": "18/10/2026 18:00 CEST",
+      "league": "Serie A",
+      "market": "COMBO",
+      "pick": "1X + MultiGol 1-5",
+      "netwin_odds": 1.33,
+      "prob": 0.88,
+      "edge": "+17.0%"
+    },
+    {
+      "match": "Juventus vs Lazio",
+      "kickoff_time": "18/10/2026 20:45 CEST",
+      "league": "Serie A",
+      "market": "COMBO",
+      "pick": "1X + MultiGol 1-5",
+      "netwin_odds": 1.29,
+      "prob": 0.85,
+      "edge": "+9.7%"
+    }
+  ]
+}

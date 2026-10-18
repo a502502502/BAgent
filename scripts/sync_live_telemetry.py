@@ -81,6 +81,10 @@ TIER1_ROLLING_FEEDS: Dict[str, str] = {
     "Super League Svizzera": "https://www.football-data.co.uk/new/SWZ.csv",
     "Bundesliga Austria": "https://www.football-data.co.uk/new/AUT.csv",
     "Superliga Danimarca": "https://www.football-data.co.uk/new/DNK.csv",
+    "Liga MX": "https://www.football-data.co.uk/new/MEX.csv",
+    "J1 League": "https://www.football-data.co.uk/new/JPN.csv",
+    "Ekstraklasa": "https://www.football-data.co.uk/new/POL.csv",
+    "Superliga Romania": "https://www.football-data.co.uk/new/ROU.csv",
 }
 
 # Regola #79 / #87: Mappa di normalizzazione canonica anti-allucinazione nominale
@@ -284,6 +288,7 @@ def sync_league_data(
         hthg = int(to_float(r.get("HTHG"), round(fthg * 0.44)))
         htag = int(to_float(r.get("HTAG"), round(ftag * 0.44)))
 
+        has_shots = bool(r.get("HS") and r.get("HST"))
         hs = int(to_float(r.get("HS"), 12))
         as_ = int(to_float(r.get("AS"), 10))
         hst = int(to_float(r.get("HST"), max(1, fthg + 2)))
@@ -293,8 +298,12 @@ def sync_league_data(
         hy = int(to_float(r.get("HY"), 2))
         ay = int(to_float(r.get("AY"), 2))
 
-        h_xg = round(0.35 * fthg + 0.65 * ((hs - hst) * 0.06 + hst * 0.29), 2)
-        a_xg = round(0.35 * ftag + 0.65 * ((as_ - ast) * 0.06 + ast * 0.29), 2)
+        if has_shots:
+            h_xg = round(0.35 * fthg + 0.65 * ((hs - hst) * 0.06 + hst * 0.29), 2)
+            a_xg = round(0.35 * ftag + 0.65 * ((as_ - ast) * 0.06 + ast * 0.29), 2)
+        else:
+            h_xg = round(float(fthg), 2)
+            a_xg = round(float(ftag), 2)
 
         match_id = f"{m_date}_{h_team}_{a_team}".replace(" ", "_")
         season_str = "2026/2027"
