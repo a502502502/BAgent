@@ -1,16 +1,16 @@
 {
-  "timestamp_utc": "2026-10-15T11:53:11.001092+00:00",
-  "date": "2026-10-15",
+  "timestamp_utc": "2026-10-19T15:19:23.054667+00:00",
+  "date": "2026-10-19",
   "integrity_status": "VIOLATIONS_DETECTED",
   "database_sync": {
     "data\\bagent.db": {
       "official_managers": 43,
-      "player_registry": 502,
+      "player_registry": 5349,
       "status": "SYNCED"
     },
     "storage\\database\\bagent.db": {
       "official_managers": 43,
-      "player_registry": 503,
+      "player_registry": 5363,
       "status": "SYNCED"
     }
   },
@@ -19,9 +19,37 @@
     "cleaned_files": []
   },
   "active_tickets_audit": {
-    "total_tickets_audited": 71,
-    "violations_found": 25,
+    "total_tickets_audited": 75,
+    "violations_found": 62,
     "tickets": [
+      {
+        "ticket_id": "TICKET_USER_TRIPLA_ASYM_NETWIN_7EUR_15OTT",
+        "label": "TICKET_USER_TRIPLA_ASYM_NETWIN_7EUR_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "TICKET_USER_MULTIPLA4_NETWIN_10EUR_15OTT",
+        "label": "TICKET_USER_MULTIPLA4_NETWIN_10EUR_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "TICKET_USER_MULTIPLA7_ALTAQUOTA_NETWIN_6_90EUR_15OTT",
+        "label": "TICKET_USER_MULTIPLA7_ALTAQUOTA_NETWIN_6_90EUR_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
+      {
+        "ticket_id": "TICKET_USER_TRIPLA_NETWIN_10EUR_15OTT",
+        "label": "TICKET_USER_TRIPLA_NETWIN_10EUR_15OTT",
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
+        "certified_entities": []
+      },
       {
         "ticket_id": "SCHEDINA_1_CORE_APERTURA_1845_15OTT",
         "label": "SCHEDINA_1_CORE_APERTURA_1845_15OTT",
@@ -127,17 +155,33 @@
         "label": "TICKET_USER_TRIPLA_GEMME_PROPS_10EUR_13OTT",
         "status": "REALITY_VIOLATION_BLOCKED",
         "violations": [
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Rasmus Hojlund' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Hojlund, Rasmus' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Oscar Hojlund' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Eintracht Frankfurt'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Inigo Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Josep' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Lautaro' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Chelsea'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Emiliano' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Nicolas Paz Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Como'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Javier Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Toni Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Deportivo Alavés'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Diego Ferrer Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Getafe CF'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Francisco Perez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Sergio Jose Lozano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Ezequiel Ponce Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Elche CF'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Alejandro Balde Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Alfonso Gonzalez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sevilla FC'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Arnau Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Valencia CF'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Bryan Zaragoza Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'RCD Espanyol'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Ivan Villar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Celta de Vigo'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Rodrigo Zalazar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sporting CP'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'David Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Midtjylland'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Yann Sommer' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Sommer, Yann' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Inter'!"
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Sommer, Yann' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Tobias Sommer' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'PEC Zwolle'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Felix Sommer' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Randers'!"
         ],
         "certified_entities": []
       },
@@ -157,18 +201,31 @@
         "status": "REALITY_VIOLATION_BLOCKED",
         "violations": [
           "ALLUCINAZIONE ATTRIBUZIONE: 'Inigo Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Josep' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Lautaro' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Chelsea'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Emiliano' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Rafael Leao' e associato a 'Galatasaray', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Nicolas Paz Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Como'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Javier Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Toni Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Deportivo Alavés'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Diego Ferrer Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Getafe CF'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Francisco Perez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Sergio Jose Lozano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Ezequiel Ponce Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Elche CF'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Alejandro Balde Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Alfonso Gonzalez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sevilla FC'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Arnau Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Valencia CF'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Bryan Zaragoza Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'RCD Espanyol'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Ivan Villar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Celta de Vigo'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Rodrigo Zalazar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sporting CP'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'David Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Midtjylland'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e associato a 'Galatasaray', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Rafael Leao' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
           "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Rasmus Hojlund' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Hojlund, Rasmus' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!"
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Ze Rafael' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'Alverca'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Hojlund, Rasmus' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Oscar Hojlund' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Eintracht Frankfurt'!"
         ],
         "certified_entities": []
       },
@@ -247,7 +304,12 @@
         "label": "TICKET_USER_PROPS_QUADRUPLA_10EUR_11OTT",
         "status": "REALITY_VIOLATION_BLOCKED",
         "violations": [
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Ronald Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!"
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Henrique Pereira Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Casa Pia'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Henrique Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Casa Pia'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Tomas Lemos Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Benfica'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Tomas Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Benfica'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Landerson Costa Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Moreirense FC'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Paulo Rafael Pereira Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Academico Viseu'!"
         ],
         "certified_entities": []
       },
@@ -538,8 +600,12 @@
       {
         "ticket_id": "TICKET_08OTT_CASSAFORTE_CORE",
         "label": "TICKET_08OTT_CASSAFORTE_CORE",
-        "status": "PASSED_100_PERCENT",
-        "violations": [],
+        "status": "REALITY_VIOLATION_BLOCKED",
+        "violations": [
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Alvaro Valles Rosa' e associato a 'Inter', ma nel 2026/27 milita ufficialmente in 'Real Betis'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Lucas Oliveira Rosa' e associato a 'Inter', ma nel 2026/27 milita ufficialmente in 'Ajax'!",
+          "ALLUCINAZIONE ATTRIBUZIONE: 'Lucas Rosa' e associato a 'Inter', ma nel 2026/27 milita ufficialmente in 'Ajax'!"
+        ],
         "certified_entities": []
       },
       {
@@ -566,7 +632,7 @@
     ]
   },
   "total_official_managers": 43,
-  "total_certified_players": 671,
+  "total_certified_players": 6163,
   "certified_managers_directory": {
     "AC Milan": {
       "manager": "Paulo Fonseca",
