@@ -46,6 +46,8 @@ FILES_TO_SYNC: List[Tuple[str, str]] = [
     ("SNAPSHOT_OGGI.json", "SNAPSHOT_OGGI.json"),
     ("data/daily_reality_snapshot.json", "daily_reality_snapshot.json"),
     ("data/active_user_tickets.json", "active_user_tickets.json"),
+    ("data/netwin_live_odds.json", "netwin_live_odds.json"),
+    ("reports/oddspedia/latest_signals.json", "latest_signals.json"),
     ("CLAUDE.md", "CLAUDE.md"),
 ]
 
