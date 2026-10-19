@@ -99,3 +99,36 @@ def test_is_leg_eligible_kickoff_gates():
     # Already settled leg
     settled_leg = {"kickoff": "2026-10-07 17:00 CEST", "status": "LOST"}
     assert is_leg_eligible(settled_leg, now) is False
+
+
+def test_telegram_sentinel_unauthorized_sender_blocked():
+    sentinel = TelegramSentinel()
+    sentinel.token = "DUMMY_TOKEN"
+    sentinel.chat_id = "12345678"
+
+    sent_calls = []
+
+    def mock_send(text, reply_markup=None, chat_id=None):
+        sent_calls.append({"text": text, "chat_id": chat_id})
+        return True
+
+    sentinel.send_message = mock_send
+
+    # 1. Spam da utente non autorizzato
+    unauthorized_msg = {
+        "chat": {"id": "99999999"},
+        "from": {"id": "99999999", "username": "spam_bot"},
+        "text": "Новый поисковый бот в Telegram"
+    }
+    sentinel._process_message(unauthorized_msg)
+    assert len(sent_calls) == 0, "Il messaggio non autorizzato non deve produrre alcuna risposta o inoltro"
+
+    # 2. Messaggio dall'utente legittimo autorizzato
+    authorized_msg = {
+        "chat": {"id": "12345678"},
+        "from": {"id": "12345678", "username": "legit_user"},
+        "text": "/start"
+    }
+    sentinel._process_message(authorized_msg)
+    assert len(sent_calls) == 1, "Il messaggio dell'utente autorizzato deve essere elaborato"
+

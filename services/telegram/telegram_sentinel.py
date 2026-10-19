@@ -367,8 +367,21 @@ class TelegramSentinel:
 
     def _process_message(self, message: Dict[str, Any]):
         """Elabora i messaggi di testo inviati dall'utente al bot."""
-        chat_id = str(message.get("chat", {}).get("id", self.chat_id))
+        chat = message.get("chat", {})
+        chat_id = str(chat.get("id", ""))
+        from_user = message.get("from", {})
+        from_id = str(from_user.get("id", ""))
         text = message.get("text", "").strip()
+
+        # Verifica di sicurezza: autorizza esclusivamente il proprietario/amministratore registrato
+        if self.chat_id:
+            authorized_id = str(self.chat_id).strip()
+            if chat_id != authorized_id and from_id != authorized_id:
+                logger.warning(
+                    f"Messaggio Telegram scartato da mittente non autorizzato: "
+                    f"chat_id={chat_id}, from_id={from_id}, username={from_user.get('username')}"
+                )
+                return
 
         if not text:
             return
@@ -406,7 +419,8 @@ class TelegramSentinel:
                 "inline_keyboard": [
                     [{"text": "Menu Completo", "callback_data": "menu_main"}]
                 ]
-            }
+            },
+            chat_id=chat_id
         )
 
     def _send_tickets_overview(self, chat_id: Optional[str] = None):
@@ -458,7 +472,28 @@ class TelegramSentinel:
         data = query.get("data", "")
         message = query.get("message", {})
         message_id = message.get("message_id")
-        chat_id = str(message.get("chat", {}).get("id", self.chat_id))
+        chat = message.get("chat", {})
+        chat_id = str(chat.get("id", ""))
+        from_user = query.get("from", {})
+        from_id = str(from_user.get("id", ""))
+
+        # Verifica di sicurezza: autorizza esclusivamente il proprietario/amministratore registrato
+        if self.chat_id:
+            authorized_id = str(self.chat_id).strip()
+            if chat_id != authorized_id and from_id != authorized_id:
+                logger.warning(
+                    f"Callback Telegram scartata da mittente non autorizzato: "
+                    f"chat_id={chat_id}, from_id={from_id}, username={from_user.get('username')}, data={data}"
+                )
+                try:
+                    requests.post(
+                        f"{self.api_url}/answerCallbackQuery",
+                        json={"callback_query_id": query_id, "text": "Non autorizzato."},
+                        timeout=5
+                    )
+                except Exception:
+                    pass
+                return
 
         requests.post(f"{self.api_url}/answerCallbackQuery", json={"callback_query_id": query_id}, timeout=5)
 
