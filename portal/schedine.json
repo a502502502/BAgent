@@ -1,8 +1,85 @@
 {
-  "generated_at": "2026-10-19T13:49:31.019689",
+  "generated_at": "2026-10-19T13:57:11.512954",
   "check_seconds": 30,
   "profit_label": "+2.32 € (Saldo Netto Aggiornato)",
   "present": [
+    {
+      "id": "AUTO_SYNTH_19OCT_9.6X",
+      "title": "Schedina Autonoma Multi-Mercato AUTO_SYNTH_19OCT_9.6X (Netwin Code: 230140)",
+      "type": "MULTIPLA IBRIDA ASIMMETRICA (Regole #89, #90, #91, #92)",
+      "status": "pending",
+      "booking_code": "230140",
+      "stake": 10.0,
+      "total_odds": 9.64,
+      "potential_win": 96.4,
+      "date": "2026-10-19 18:30 - 21:00 CEST",
+      "booked_at": "2026-10-19T13:57:11.512939",
+      "selections": [
+        {
+          "match": "Monza - Cagliari",
+          "league": "Italia | Serie A",
+          "kickoff": "2026-10-19 18:30 CEST",
+          "market": "Doppia Chance",
+          "pick": "1X",
+          "odds": 1.32,
+          "status": "pending"
+        },
+        {
+          "match": "Degerfors - Kalmar",
+          "league": "Svezia | Allsvenskan",
+          "kickoff": "2026-10-19 19:00 CEST",
+          "market": "Doppia Chance",
+          "pick": "1X",
+          "odds": 1.51,
+          "status": "pending"
+        },
+        {
+          "match": "Viborg - Midtjylland",
+          "league": "Danimarca | Superliga",
+          "kickoff": "2026-10-19 19:00 CEST",
+          "market": "GG-NG",
+          "pick": "Gol (GG)",
+          "odds": 1.46,
+          "status": "pending"
+        },
+        {
+          "match": "Trabzonspor - Besiktas",
+          "league": "Turchia | Super Lig",
+          "kickoff": "2026-10-19 19:00 CEST",
+          "market": "Cartellini Squadra",
+          "pick": "Over 1.5 Cartellini Trabzonspor",
+          "odds": 1.76,
+          "status": "pending"
+        },
+        {
+          "match": "Jong PSV - Dordrecht",
+          "league": "Olanda | Eerste Divisie",
+          "kickoff": "2026-10-19 20:00 CEST",
+          "market": "MultiGol Squadra Casa",
+          "pick": "MultiGol 1-3 Squadra Casa (Jong PSV)",
+          "odds": 1.27,
+          "status": "pending"
+        },
+        {
+          "match": "Parma - Torino",
+          "league": "Italia | Serie A",
+          "kickoff": "2026-10-19 20:45 CEST",
+          "market": "Tempi / MultiGol 2°T",
+          "pick": "MultiGol 1-3 2° Tempo",
+          "odds": 1.31,
+          "status": "pending"
+        },
+        {
+          "match": "Tottenham - Coventry City",
+          "league": "Inghilterra | Premier League",
+          "kickoff": "2026-10-19 21:00 CEST",
+          "market": "Combo Doppia Chance + Over",
+          "pick": "1X + Over 1.5",
+          "odds": 1.34,
+          "status": "pending"
+        }
+      ]
+    },
     {
       "id": "TICKET_NETWIN_OFFICIAL_19OTT_216282",
       "title": "Schedina Ufficiale Tipster — 7 Eventi Asimmetrici (Netwin Code: 216282)",
