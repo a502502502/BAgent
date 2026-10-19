@@ -102,3 +102,19 @@ Minuto e punteggio solo dal feed Flashscore. Trigger: assedio se la sfavorita (f
   2) Per tutte le partite il cui calcio d'inizio è oltre i 60 minuti (dove le distinte ufficiali non sono ancora depositate), è **severamente vietato** proporre mercati sui singoli giocatori: si utilizzano esclusivamente mercati collettivi di squadra.
   3) Prima di selezionare qualsiasi Player Prop (anche a formazioni ufficiali uscite), è obbligatorio verificare la classifica reale (`df_tl_1_<match_id>`) e il Δ punti tra le due squadre, evitando di puntare su attaccanti di squadre tecnicamente inferiori o staccate in classifica contro avversari dominanti.
 
+- **Regola #89 (Principio del Mercato Ottimale per Partita & Mix Flessibile nel Ticket)**:
+  Abolita tassativamente ogni omogeneità forzata di mercato all'interno del singolo ticket. In una stessa schedina possono convivere liberamente mercati asimmetrici e non asimmetrici (Doppie Chance + Over/Under, Over/Under puri, MultiGol, mercati sui Tempi, Tiri, Corner). Per ogni specifica partita in palinsesto si seleziona il mercato migliore in assoluto in termini di rapporto probabilità reale ($P_{\text{real}}$), quota offerta e tenuta statistica per quel match, senza forzare gabbie omogenee artificiali.
+
+- **Regola #90 (Protocollo Auto-Download On-Demand & Divieto di Scarto Preventivo per Dati Mancanti)**:
+  Se per una partita del palinsesto ufficiale mancano i dati storici, le ultime partite giocate o la telemetria in `data/bagent.db`, è TASSATIVAMENTE VIETATO scartare la partita. Il sistema deve attivare immediatamente l'ingestione on-demand automatica dalle sorgenti (Football-Data.co.uk, FootyStats, Flashscore, API-Football), normalizzare gli alias di squadra (`_KNOWN_TEAM_ALIASES`), inserire i record nella tabella `matches`, aggiornare `team_rolling_ten_telemetry` e procedere con l'analisi quantitativa.
+
+- **Regola #91 (Spazio di Ricerca Esteso sui Mercati Asimmetrici, Specialistici & Giocatore XXL)**:
+  Per ogni incontro, la scansione confronta attivamente tutte le 7 famiglie di mercati:
+  1) Telemetria Balistica: Tiri Totali, Tiri in Porta, Fuorigioco;
+  2) Disciplinare: Falli Commessi, Falli Subiti, Sanzioni/Cartellini;
+  3) Difensiva: Parate Portiere;
+  4) Angoli: Corner Squadra e Handicap;
+  5) Tempi: 1° Tempo (Under 1.5, Over 0.5, MultiGol 1-2), 2° Tempo (Over 0.5, MultiGol 1-3) e Confronto Tempi;
+  6) Combo Protette: Chance Mix (`1X o Over 1.5`, `X o Gol`), DC + MultiGol (`1X + 1-4/1-5`);
+  7) Giocatore XXL / Duo / Plus: Tiri in Porta Plus, Falli Subiti, Marcatore XXL/Duo con clausole di salvaguardia obbligatorie (`"Vale Sostituto"`, `"Pali e Traverse"`). Tassativamente vietato il marcatore classico secco privo di clausola sostituto.
+

@@ -65,7 +65,20 @@ CREATE TABLE IF NOT EXISTS team_rolling_ten_telemetry (
     hr_over_35_cards_match REAL NOT NULL,
     top_stat_market TEXT NOT NULL,
     top_stat_hit_rate REAL NOT NULL,
-    updated_at TEXT NOT NULL
+    updated_at TEXT NOT NULL,
+    -- Nuove metriche Primo e Secondo Tempo
+    avg_goals_ht REAL DEFAULT 0.0,
+    avg_goals_sh REAL DEFAULT 0.0,
+    hr_over_05_ht_match REAL DEFAULT 0.0,
+    hr_under_15_ht_match REAL DEFAULT 0.0,
+    hr_mg_1_2_ht_match REAL DEFAULT 0.0,
+    hr_over_05_sh_match REAL DEFAULT 0.0,
+    hr_mg_1_3_sh_match REAL DEFAULT 0.0,
+    hr_team_scores_ht REAL DEFAULT 0.0,
+    hr_team_scores_sh REAL DEFAULT 0.0,
+    hr_team_concedes_ht REAL DEFAULT 0.0,
+    hr_team_concedes_sh REAL DEFAULT 0.0,
+    hr_sh_more_goals REAL DEFAULT 0.0
 );
 
 CREATE TABLE IF NOT EXISTS player_rolling_ten_telemetry (
@@ -453,6 +466,25 @@ class RollingTenEngine:
     def _init_schema(self) -> None:
         with self._get_conn() as conn:
             conn.executescript(_DDL_ROLLING_TEN)
+            # Migrazione automatica per nuove colonne 1° e 2° Tempo se tabella già creata
+            existing_cols = {row[1] for row in conn.execute("PRAGMA table_info(team_rolling_ten_telemetry)").fetchall()}
+            half_cols = [
+                ("avg_goals_ht", "REAL DEFAULT 0.0"),
+                ("avg_goals_sh", "REAL DEFAULT 0.0"),
+                ("hr_over_05_ht_match", "REAL DEFAULT 0.0"),
+                ("hr_under_15_ht_match", "REAL DEFAULT 0.0"),
+                ("hr_mg_1_2_ht_match", "REAL DEFAULT 0.0"),
+                ("hr_over_05_sh_match", "REAL DEFAULT 0.0"),
+                ("hr_mg_1_3_sh_match", "REAL DEFAULT 0.0"),
+                ("hr_team_scores_ht", "REAL DEFAULT 0.0"),
+                ("hr_team_scores_sh", "REAL DEFAULT 0.0"),
+                ("hr_team_concedes_ht", "REAL DEFAULT 0.0"),
+                ("hr_team_concedes_sh", "REAL DEFAULT 0.0"),
+                ("hr_sh_more_goals", "REAL DEFAULT 0.0"),
+            ]
+            for col_name, col_def in half_cols:
+                if col_name not in existing_cols:
+                    conn.execute(f"ALTER TABLE team_rolling_ten_telemetry ADD COLUMN {col_name} {col_def}")
             conn.commit()
 
     def sync_today_completed_matches(self) -> int:
@@ -568,6 +600,7 @@ class RollingTenEngine:
                 gf_list, ga_list, tot_g_list = [], [], []
                 sf_list, sa_list, sot_f_list, sot_a_list = [], [], [], []
                 cf_list, ca_list, saves_list, cards_list = [], [], [], []
+                ht_g_list, sh_g_list = [], []
 
                 # Contatori Hit-Rate
                 c_mg_1_3_team = 0
@@ -579,6 +612,16 @@ class RollingTenEngine:
                 c_un35 = 0
                 c_both_halves = 0
                 c_mg_ht02_sh13 = 0
+                c_ht_ov05 = 0
+                c_ht_un15 = 0
+                c_ht_mg12 = 0
+                c_sh_ov05 = 0
+                c_sh_mg13 = 0
+                c_team_scores_ht = 0
+                c_team_scores_sh = 0
+                c_team_concedes_ht = 0
+                c_team_concedes_sh = 0
+                c_sh_more_goals = 0
                 c_ov95_shots = 0
                 c_ov115_shots = 0
                 c_ov125_shots = 0
@@ -594,12 +637,18 @@ class RollingTenEngine:
                     ga = int(m["away_goals"] if is_home else m["home_goals"])
                     tot_g = gf + ga
 
-                    ht_g = int(m["h_ht"] or 0) + int(m["a_ht"] or 0)
-                    sh_g = max(0, tot_g - ht_g)
+                    gf_ht = int(m["h_ht"] if is_home else m["a_ht"])
+                    ga_ht = int(m["a_ht"] if is_home else m["h_ht"])
+                    tot_ht = gf_ht + ga_ht
+                    gf_sh = max(0, gf - gf_ht)
+                    ga_sh = max(0, ga - ga_ht)
+                    tot_sh = max(0, tot_g - tot_ht)
 
                     gf_list.append(gf)
                     ga_list.append(ga)
                     tot_g_list.append(tot_g)
+                    ht_g_list.append(tot_ht)
+                    sh_g_list.append(tot_sh)
 
                     if 1 <= gf <= 3:
                         c_mg_1_3_team += 1
@@ -615,10 +664,30 @@ class RollingTenEngine:
                         c_ov15 += 1
                     if tot_g <= 3:
                         c_un35 += 1
-                    if ht_g >= 1 and sh_g >= 1:
+                    if tot_ht >= 1 and tot_sh >= 1:
                         c_both_halves += 1
-                    if (0 <= ht_g <= 2) and (1 <= sh_g <= 3):
+                    if (0 <= tot_ht <= 2) and (1 <= tot_sh <= 3):
                         c_mg_ht02_sh13 += 1
+                    if tot_ht >= 1:
+                        c_ht_ov05 += 1
+                    if tot_ht <= 1:
+                        c_ht_un15 += 1
+                    if 1 <= tot_ht <= 2:
+                        c_ht_mg12 += 1
+                    if tot_sh >= 1:
+                        c_sh_ov05 += 1
+                    if 1 <= tot_sh <= 3:
+                        c_sh_mg13 += 1
+                    if gf_ht >= 1:
+                        c_team_scores_ht += 1
+                    if gf_sh >= 1:
+                        c_team_scores_sh += 1
+                    if ga_ht >= 1:
+                        c_team_concedes_ht += 1
+                    if ga_sh >= 1:
+                        c_team_concedes_sh += 1
+                    if tot_sh > tot_ht:
+                        c_sh_more_goals += 1
 
                     if has_real_telemetry and m["hs"] is not None and m["as_"] is not None:
                         sf = int(m["hs"] if is_home else m["as_"])
@@ -705,10 +774,42 @@ class RollingTenEngine:
 
                 conn.execute(
                     """
-                    INSERT OR REPLACE INTO team_rolling_ten_telemetry VALUES (
-                        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                        ?, ?, ?
+                    INSERT OR REPLACE INTO team_rolling_ten_telemetry (
+                        team_name, league, matches_count,
+                        avg_goals_scored, avg_goals_conceded, avg_total_goals,
+                        avg_shots_for, avg_shots_against, avg_sot_for, avg_sot_against,
+                        avg_corners_for, avg_corners_against, avg_saves_gk, avg_cards_match,
+                        hr_multigol_1_3_team, hr_multigol_1_5_match, hr_multigol_2_5_match,
+                        hr_chance_mix_dc_ov15, hr_chance_mix_x_gg, hr_over_15_match, hr_under_35_match,
+                        hr_both_halves_over_05, hr_mg_ht_02_sh_13,
+                        hr_over_95_shots_team, hr_over_115_shots_team, hr_over_125_shots_team,
+                        hr_over_35_sot_team, hr_over_35_corners_team, hr_over_45_corners_team,
+                        hr_over_15_saves_gk, hr_over_35_cards_match,
+                        top_stat_market, top_stat_hit_rate, updated_at,
+                        avg_goals_ht, avg_goals_sh,
+                        hr_over_05_ht_match, hr_under_15_ht_match, hr_mg_1_2_ht_match,
+                        hr_over_05_sh_match, hr_mg_1_3_sh_match,
+                        hr_team_scores_ht, hr_team_scores_sh,
+                        hr_team_concedes_ht, hr_team_concedes_sh,
+                        hr_sh_more_goals
+                    ) VALUES (
+                        ?, ?, ?,
+                        ?, ?, ?,
+                        ?, ?, ?, ?,
+                        ?, ?, ?, ?,
+                        ?, ?, ?,
+                        ?, ?, ?, ?,
+                        ?, ?,
+                        ?, ?, ?,
+                        ?, ?, ?,
+                        ?, ?,
+                        ?, ?, ?,
+                        ?, ?,
+                        ?, ?, ?,
+                        ?, ?,
+                        ?, ?,
+                        ?, ?,
+                        ?
                     )
                     """,
                     (
@@ -744,6 +845,18 @@ class RollingTenEngine:
                         top_market,
                         top_hr,
                         now_str,
+                        round(sum(ht_g_list) / n, 2),
+                        round(sum(sh_g_list) / n, 2),
+                        pct(c_ht_ov05),
+                        pct(c_ht_un15),
+                        pct(c_ht_mg12),
+                        pct(c_sh_ov05),
+                        pct(c_sh_mg13),
+                        pct(c_team_scores_ht),
+                        pct(c_team_scores_sh),
+                        pct(c_team_concedes_ht),
+                        pct(c_team_concedes_sh),
+                        pct(c_sh_more_goals),
                     ),
                 )
                 updated += 1
@@ -933,11 +1046,68 @@ class RollingTenEngine:
         ]
         specialist_gems = sorted([c for c in specialist_candidates if c["hit_rate"] >= 80.0], key=lambda x: x["hit_rate"], reverse=True)
 
+        # 3. Gemme Flussi Tempi (1° e 2° Tempo - Incrocio Specifico)
+        halftime_candidates = [
+            {
+                "market": "Over 0.5 1° Tempo",
+                "hit_rate": round((h_prof.get("hr_over_05_ht_match", 0) + a_prof.get("hr_over_05_ht_match", 0)) / 2.0, 1),
+                "detail": f"Frequenza gol 1°T: Casa {h_prof.get('hr_over_05_ht_match', 0):.0f}% | Ospite {a_prof.get('hr_over_05_ht_match', 0):.0f}% (Media 1°T: {(h_prof.get('avg_goals_ht', 0) + a_prof.get('avg_goals_ht', 0))/2:.2f})",
+            },
+            {
+                "market": "Under 1.5 1° Tempo",
+                "hit_rate": round((h_prof.get("hr_under_15_ht_match", 0) + a_prof.get("hr_under_15_ht_match", 0)) / 2.0, 1),
+                "detail": f"Primi tempi chiusi (max 1 gol): Casa {h_prof.get('hr_under_15_ht_match', 0):.0f}% | Ospite {a_prof.get('hr_under_15_ht_match', 0):.0f}%",
+            },
+            {
+                "market": "MultiGol 1-2 1° Tempo",
+                "hit_rate": round((h_prof.get("hr_mg_1_2_ht_match", 0) + a_prof.get("hr_mg_1_2_ht_match", 0)) / 2.0, 1),
+                "detail": f"Fascia 1-2 gol 1°T: Casa {h_prof.get('hr_mg_1_2_ht_match', 0):.0f}% | Ospite {a_prof.get('hr_mg_1_2_ht_match', 0):.0f}%",
+            },
+            {
+                "market": "Over 0.5 2° Tempo",
+                "hit_rate": round((h_prof.get("hr_over_05_sh_match", 0) + a_prof.get("hr_over_05_sh_match", 0)) / 2.0, 1),
+                "detail": f"Presenza gol ripresa: Casa {h_prof.get('hr_over_05_sh_match', 0):.0f}% | Ospite {a_prof.get('hr_over_05_sh_match', 0):.0f}% (Media 2°T: {(h_prof.get('avg_goals_sh', 0) + a_prof.get('avg_goals_sh', 0))/2:.2f})",
+            },
+            {
+                "market": "MultiGol 1-3 2° Tempo",
+                "hit_rate": round((h_prof.get("hr_mg_1_3_sh_match", 0) + a_prof.get("hr_mg_1_3_sh_match", 0)) / 2.0, 1),
+                "detail": f"Fascia 1-3 gol 2°T: Casa {h_prof.get('hr_mg_1_3_sh_match', 0):.0f}% | Ospite {a_prof.get('hr_mg_1_3_sh_match', 0):.0f}%",
+            },
+            {
+                "market": "Tempo con più gol: 2° Tempo",
+                "hit_rate": round((h_prof.get("hr_sh_more_goals", 0) + a_prof.get("hr_sh_more_goals", 0)) / 2.0, 1),
+                "detail": f"Trend ripresa > 1°T: Casa {h_prof.get('hr_sh_more_goals', 0):.0f}% | Ospite {a_prof.get('hr_sh_more_goals', 0):.0f}%",
+            },
+            {
+                "market": f"Squadra Casa Segna 1°T ({home_team})",
+                "hit_rate": round((h_prof.get("hr_team_scores_ht", 0) + a_prof.get("hr_team_concedes_ht", 0)) / 2.0, 1),
+                "detail": f"{home_team} segna 1°T: {h_prof.get('hr_team_scores_ht', 0):.0f}% vs {away_team} subisce 1°T: {a_prof.get('hr_team_concedes_ht', 0):.0f}%",
+            },
+            {
+                "market": f"Squadra Casa Segna 2°T ({home_team})",
+                "hit_rate": round((h_prof.get("hr_team_scores_sh", 0) + a_prof.get("hr_team_concedes_sh", 0)) / 2.0, 1),
+                "detail": f"{home_team} segna 2°T: {h_prof.get('hr_team_scores_sh', 0):.0f}% vs {away_team} subisce 2°T: {a_prof.get('hr_team_concedes_sh', 0):.0f}%",
+            },
+            {
+                "market": f"Squadra Ospite Segna 2°T ({away_team})",
+                "hit_rate": round((a_prof.get("hr_team_scores_sh", 0) + h_prof.get("hr_team_concedes_sh", 0)) / 2.0, 1),
+                "detail": f"{away_team} segna 2°T: {a_prof.get('hr_team_scores_sh', 0):.0f}% vs {home_team} subisce 2°T: {h_prof.get('hr_team_concedes_sh', 0):.0f}%",
+            },
+        ]
+        halftime_gems = sorted([c for c in halftime_candidates if c["hit_rate"] >= 75.0], key=lambda x: x["hit_rate"], reverse=True)
+
+        for hg in halftime_candidates:
+            if hg["market"] in ["Over 0.5 1° Tempo", "Under 1.5 1° Tempo", "MultiGol 1-3 2° Tempo"] and hg["hit_rate"] >= 80.0:
+                netwin_candidates.append(hg)
+
+        netwin_gems = sorted([c for c in netwin_candidates if c["hit_rate"] >= 75.0], key=lambda x: x["hit_rate"], reverse=True)
+
         return {
             "match": f"{h_prof['team_name']} vs {a_prof['team_name']}",
             "league": h_prof["league"],
             "status": "OK",
             "netwin_gems": netwin_gems,
+            "halftime_gems": halftime_gems,
             "specialist_gems": specialist_gems,
             "player_gems": player_gems,
         }
