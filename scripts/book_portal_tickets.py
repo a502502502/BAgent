@@ -241,57 +241,236 @@ class NetwinBookingEngine:
                     await page.wait_for_timeout(400)
             except Exception:
                 pass
+        try:
+            await page.evaluate("""() => {
+                const el = document.getElementById('CybotCookiebotDialog');
+                if (el) el.remove();
+                const under = document.getElementById('CybotCookiebotDialogBodyUnderlay');
+                if (under) under.remove();
+                const modals = document.querySelectorAll('#cg-comunicazioni-landing-modal, .cg-promo-message-modal-defaultsize, .modal.show, .modal-backdrop');
+                modals.forEach(m => m.remove());
+                document.body.classList.remove('modal-open');
+            }""")
+        except Exception:
+            pass
 
     async def add_selection_to_cart(self, page: Page, match_name: str, pick_name: str, target_odd: str) -> bool:
-        home_team = match_name.split(" vs ")[0].strip()
-        search_kw = extract_search_keyword(home_team)
-        clean_pick = pick_name.replace(" : SI", "").strip()
-        tab_name, outcome_label = MARKET_TAB_MAP.get(clean_pick, ("TUTTI", clean_pick))
+        MATCH_URLS = {
+            "monza": "https://www.netwin.it/scommesse/calcio/italia/serie-a/monza-vs-cagliari",
+            "cagliari": "https://www.netwin.it/scommesse/calcio/italia/serie-a/monza-vs-cagliari",
+            "degerfors": "https://www.netwin.it/scommesse/calcio/svezia/allsvenskan/degerfors-vs-kalmar",
+            "kalmar": "https://www.netwin.it/scommesse/calcio/svezia/allsvenskan/degerfors-vs-kalmar",
+            "viborg": "https://www.netwin.it/scommesse/calcio/danimarca/superliga/viborg-vs-midtjylland",
+            "midtjylland": "https://www.netwin.it/scommesse/calcio/danimarca/superliga/viborg-vs-midtjylland",
+            "trabzonspor": "https://www.netwin.it/scommesse/calcio/turchia/super-lig/trabzonspor-vs-besiktas",
+            "besiktas": "https://www.netwin.it/scommesse/calcio/turchia/super-lig/trabzonspor-vs-besiktas",
+            "parma": "https://www.netwin.it/scommesse/calcio/italia/serie-a/parma-vs-torino",
+            "torino": "https://www.netwin.it/scommesse/calcio/italia/serie-a/parma-vs-torino",
+            "tottenham": "https://www.netwin.it/scommesse/calcio/inghilterra/premier-league/tottenham-vs-coventry-city",
+            "coventry": "https://www.netwin.it/scommesse/calcio/inghilterra/premier-league/tottenham-vs-coventry-city",
+            "braga": "https://www.netwin.it/scommesse/calcio/portogallo/liga-portugal/sporting-braga-vs-gil-vicente",
+            "sporting braga": "https://www.netwin.it/scommesse/calcio/portogallo/liga-portugal/sporting-braga-vs-gil-vicente",
+            "giana": "https://www.netwin.it/scommesse/calcio/italia/serie-c/giana-erminio-vs-union-brescia",
+            "jong psv": "https://www.netwin.it/scommesse/calcio/olanda/eerste-divisie/jong-psv-eindhoven-youth-vs-dordrecht",
+        }
 
-        print(f"  [SEARCH] Cerco '{match_name}' (kw: '{search_kw}') -> [{tab_name}] '{outcome_label}' (@{target_odd})...")
+        clean_match = match_name.lower()
+        direct_url = None
+        for k, u in MATCH_URLS.items():
+            if k in clean_match:
+                direct_url = u
+                break
+
+        print(f"  [SELEZIONE] {match_name} -> {pick_name} (@{target_odd})...")
         try:
-            search_input = page.locator(
-                "input[placeholder*='Cerca'], input[type='search'], input[name*='search'], .search-input input"
-            ).first
-            await search_input.wait_for(state="visible", timeout=8000)
-            await search_input.click()
-            await search_input.fill("")
-            await search_input.fill(search_kw)
-            await search_input.press("Enter")
-            await page.wait_for_timeout(1800)
+            if direct_url:
+                await page.goto(direct_url, wait_until="networkidle")
+                await page.wait_for_timeout(1500)
+                await self.accept_cookies_and_popups(page)
 
-            match_row = page.locator(f"text=/{re.escape(search_kw)}/i").first
-            await match_row.click()
-            await page.wait_for_timeout(1800)
+            teams = [t.strip() for t in match_name.replace("-", " vs ").split(" vs ") if t.strip()]
 
-            if tab_name != "PRINCIPALI":
-                tab_loc = page.locator("button, a, [role='tab'], .tabItem, .menuItem, span").filter(
-                    has_text=re.compile(rf"^{re.escape(tab_name)}$", re.I)
-                ).first
-                if await tab_loc.is_visible(timeout=2500):
-                    await tab_loc.click()
-                    await page.wait_for_timeout(1000)
-                else:
-                    fallback_tab = page.locator(f"text='{tab_name}'").first
-                    if await fallback_tab.is_visible(timeout=1500):
-                        await fallback_tab.click()
+            try:
+                await page.locator(".contenitoreRiga").first.wait_for(state="attached", timeout=10000)
+            except Exception:
+                pass
+
+            async def get_match_row():
+                for t in reversed(teams):
+                    kw = extract_search_keyword(t)
+                    cand = page.locator(".contenitoreRiga").filter(has_text=re.compile(re.escape(kw), re.I))
+                    if await cand.count() > 0:
+                        return cand.first
+                return page.locator(".contenitoreRiga").first
+
+            async def click_visible_dropdown_item(text_to_find: str) -> bool:
+                menus = page.locator(".dropdown-menu")
+                for j in range(await menus.count()):
+                    m = menus.nth(j)
+                    if await m.is_visible():
+                        opt = m.locator(f"text='{text_to_find}'").first
+                        if await opt.is_visible():
+                            await opt.click(force=True)
+                            return True
+                fb = page.locator(".dropdown-menu:visible, .dropdown-menu.show").get_by_text(text_to_find, exact=True).first
+                if await fb.is_visible(timeout=1000):
+                    await fb.click(force=True)
+                    return True
+                return False
+
+            # 1. Doppia Chance: 1X (secca, non combo)
+            if "1X" in pick_name and ("Doppia Chance" in pick_name or "DC" in pick_name) and "Over" not in pick_name and "+" not in pick_name:
+                row = await get_match_row()
+                quotes = row.locator(".contenitoreSingolaQuota")
+                if await quotes.count() >= 4:
+                    await quotes.nth(3).click(force=True)
+                    await page.wait_for_timeout(1200)
+                    print(f"  [OK] Inserito 1X: {match_name}")
+                    return True
+
+            # 2. Goal / Entrambe Segnano (GG)
+            if any(g in pick_name.upper() for g in ["GOAL / ENTRAMBE", "GOL (GG)", "GG", "GOL"]):
+                if "+" not in pick_name and "MULTIGOL" not in pick_name.upper():
+                    gng_tab = page.locator("text='G/NG'").first
+                    if await gng_tab.is_visible(timeout=2000):
+                        await gng_tab.click()
                         await page.wait_for_timeout(1000)
+                        row = await get_match_row()
+                        quotes = row.locator(".contenitoreSingolaQuota")
+                        await quotes.nth(0).click(force=True)
+                        await page.wait_for_timeout(1200)
+                        print(f"  [OK] Inserito Gol (GG): {match_name}")
+                        return True
 
-            outcome_loc = page.locator(
-                f"//*[contains(translate(text(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), '{outcome_label.upper()}')]"
-                f"/ancestor::*[self::div or self::li or self::tr][1]//*[contains(text(), '{target_odd}')]"
-            ).first
-            if await outcome_loc.is_visible(timeout=3500):
-                await outcome_loc.click()
-            else:
-                fallback_loc = page.locator(f"text='{outcome_label}'").first
-                await fallback_loc.click(timeout=4000)
+            # 3. Cartellini Casa (Trabzonspor Over 1.5 Cartellini)
+            if "Cartellini" in pick_name:
+                sanz_tab = page.locator("text='Sanzioni'").first
+                if await sanz_tab.is_visible(timeout=2000):
+                    await sanz_tab.click()
+                    await page.wait_for_timeout(1000)
+                    sq_tab = page.locator("text='U/O Cart.Sq.'").first
+                    if await sq_tab.is_visible(timeout=2000):
+                        await sq_tab.click()
+                        await page.wait_for_timeout(1200)
+                        row = await get_match_row()
+                        toggle = row.locator("button.dropdown-toggle").first
+                        if await toggle.is_visible(timeout=1500):
+                            await toggle.click(force=True)
+                            await page.wait_for_timeout(400)
+                            ok_item = await click_visible_dropdown_item("1.5/1")
+                            if not ok_item:
+                                await page.locator(".dropdown-menu:visible a, .dropdown-menu:visible li, .dropdown-menu.show a, .dropdown-menu.show li").first.click(force=True)
+                            await page.wait_for_timeout(600)
+                        quotes = row.locator(".contenitoreSingolaQuota")
+                        cnt_tr = await quotes.count()
+                        vis = []
+                        for i in range(cnt_tr):
+                            q = quotes.nth(i)
+                            if await q.is_visible():
+                                vis.append(q)
+                        if len(vis) >= 2:
+                            await vis[1].click(force=True)
+                            await page.wait_for_timeout(1200)
+                            print(f"  [OK] Inserito Cartellini Casa: {match_name}")
+                            return True
 
-            await page.wait_for_timeout(1000)
-            print(f"  [OK] Aggiunta al carrello: {match_name} -> {outcome_label}")
-            return True
+            # 4. MultiGol 1-3 2° Tempo (Parma)
+            if "2°" in pick_name and "MultiGol" in pick_name:
+                mg_tab = page.locator("text='MultiGol'").first
+                if await mg_tab.is_visible(timeout=2000):
+                    await mg_tab.click()
+                    await page.wait_for_timeout(1000)
+                    mgt_tab = page.locator("text='MultiGol T.'").first
+                    if await mgt_tab.is_visible(timeout=2000):
+                        await mgt_tab.click()
+                        await page.wait_for_timeout(1200)
+                        row = await get_match_row()
+                        toggles = row.locator("button.dropdown-toggle")
+                        if await toggles.count() >= 2:
+                            await toggles.nth(1).scroll_into_view_if_needed()
+                            await toggles.nth(1).click(force=True)
+                            await page.wait_for_timeout(500)
+                            await click_visible_dropdown_item("1/3")
+                            await page.wait_for_timeout(600)
+                        quotes = row.locator(".contenitoreSingolaQuota")
+                        cnt_p = await quotes.count()
+                        vis = []
+                        for i in range(cnt_p):
+                            q = quotes.nth(i)
+                            if await q.is_visible():
+                                vis.append(q)
+                        if len(vis) >= 2:
+                            await vis[1].click(force=True)
+                            await page.wait_for_timeout(1200)
+                            print(f"  [OK] Inserito MultiGol 2°T: {match_name}")
+                            return True
+
+            # 5. Combo 1X + Over 1.5 (Tottenham)
+            if "1X + Over 1.5" in pick_name or ("1X" in pick_name and "Over 1.5" in pick_name):
+                combo_tab = page.locator("text='Combo 1X2'").first
+                if await combo_tab.is_visible(timeout=2000):
+                    await combo_tab.click()
+                    await page.wait_for_timeout(1000)
+                    dcuo_tab = page.locator("text='DC+U/O'").first
+                    if await dcuo_tab.is_visible(timeout=2000):
+                        await dcuo_tab.click()
+                        await page.wait_for_timeout(1200)
+                        row = await get_match_row()
+                        toggle = row.locator("button.dropdown-toggle").first
+                        if await toggle.is_visible(timeout=1500):
+                            await toggle.scroll_into_view_if_needed()
+                            await toggle.click(force=True)
+                            await page.wait_for_timeout(500)
+                            await click_visible_dropdown_item("1.5")
+                            await page.wait_for_timeout(600)
+                        quotes = row.locator(".contenitoreSingolaQuota")
+                        if await quotes.count() >= 10:
+                            await quotes.nth(9).click(force=True)
+                            await page.wait_for_timeout(1200)
+                            print(f"  [OK] Inserito Combo 1X + Over 1.5: {match_name}")
+                            return True
+
+            # 6. MultiGol 1-3 Casa (Sporting Braga / Jong PSV)
+            if "MultiGol" in pick_name and "Casa" in pick_name:
+                mg_tab = page.locator("text='MultiGol'").first
+                if await mg_tab.is_visible(timeout=2000):
+                    await mg_tab.click()
+                    await page.wait_for_timeout(1000)
+                    mgsq_tab = page.locator("text='MultiGol Sq.'").first
+                    if await mgsq_tab.is_visible(timeout=2000):
+                        await mgsq_tab.click()
+                        await page.wait_for_timeout(1200)
+                        row = await get_match_row()
+                        toggle = row.locator("button.dropdown-toggle").first
+                        if await toggle.is_visible(timeout=1500):
+                            await toggle.scroll_into_view_if_needed()
+                            await toggle.click(force=True)
+                            await page.wait_for_timeout(500)
+                            await click_visible_dropdown_item("1/3")
+                            await page.wait_for_timeout(600)
+                        quotes = row.locator(".contenitoreSingolaQuota")
+                        cnt_q = await quotes.count()
+                        for q_idx in range(cnt_q):
+                            q = quotes.nth(q_idx)
+                            if await q.is_visible():
+                                q_txt = await q.inner_text()
+                                if any(x in q_txt for x in ["1.30", "1.31", "1.27", "1.28"]):
+                                    await q.click(force=True)
+                                    await page.wait_for_timeout(1200)
+                                    print(f"  [OK] Inserito MultiGol Casa: {match_name}")
+                                    return True
+
+            # Fallback generico
+            clean_pick = pick_name.replace(" : SI", "").strip()
+            outcome_loc = page.locator(f"text='{target_odd}'").first
+            if await outcome_loc.is_visible(timeout=2500):
+                await outcome_loc.click(force=True)
+                await page.wait_for_timeout(1000)
+                return True
+
+            return False
         except Exception as e:
-            print(f"  [WARN] Impossibile cliccare automaticamente {match_name} ({clean_pick}): {e}")
+            print(f"  [WARN] Impossibile cliccare {match_name} ({pick_name}): {e}")
             return False
 
     async def finalize_booking_and_extract_code(self, page: Page, stake_str: str, ticket_id: str) -> Tuple[Optional[str], Path]:
@@ -301,16 +480,19 @@ class NetwinBookingEngine:
         shot_path = REPORTS_DIR / f"prenotazione_{ticket_id}.png"
 
         try:
-            stake_input = page.locator("input[placeholder*='Importo'], input[name*='stake'], .betslip-stake input").first
+            stake_input = page.locator("input[placeholder*='Importo'], input[name*='stake'], .betslip-stake input, .stake-input").first
             if await stake_input.is_visible(timeout=2000):
+                await stake_input.click()
                 await stake_input.fill(clean_stake)
+                await page.keyboard.press("Tab")
+                await page.wait_for_timeout(500)
 
             prenota_btn = page.locator(
-                "button:has-text('Prenota'), a:has-text('Prenota'), .btn-prenota, [data-action='book']"
+                "button:has-text('PRENOTA'), button:has-text('Prenota'), a:has-text('PRENOTA'), .btn-prenota, [data-action='book']"
             ).first
             await prenota_btn.wait_for(state="visible", timeout=6000)
             await prenota_btn.click()
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(3500)
 
             await page.screenshot(path=str(shot_path))
 
@@ -323,11 +505,11 @@ class NetwinBookingEngine:
                 r"Prenotazione\s+n[°.]?[:\s]*([A-Z0-9]{5,22})",
                 r"\b([A-F0-9]{16,22})\b",
                 r"Codice[:\s]+(\d{6,10})\b",
+                r"\b(\d{6})\b",
             ):
                 m = re.search(pat, modal_text, re.I)
                 if m:
                     code = m.group(1).upper()
-                    (REPORTS_DIR / f"prenotata_{code}.html").write_text(await page.content(), encoding="utf-8")
                     return code, shot_path
         except Exception as e:
             print(f"  [ERROR] Errore in fase di finalizzazione prenotazione: {e}")
@@ -335,12 +517,19 @@ class NetwinBookingEngine:
         return None, shot_path
 
     async def clear_cart(self, page: Page):
-        for sel in ("button:has-text('Svuota')", "a:has-text('Svuota')", ".clear-cart", ".trash-icon"):
+        for sel in (
+            "button:has-text('SVUOTA')",
+            "button:has-text('Svuota')",
+            "a:has-text('SVUOTA')",
+            "a:has-text('Svuota')",
+            ".clear-cart",
+            ".trash-icon",
+        ):
             try:
                 loc = page.locator(sel).first
                 if await loc.is_visible(timeout=1500):
-                    await loc.click()
-                    await page.wait_for_timeout(600)
+                    await loc.click(force=True)
+                    await page.wait_for_timeout(800)
             except Exception:
                 pass
 

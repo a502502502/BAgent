@@ -1,209 +1,151 @@
 {
-  "timestamp": "2026-10-16T17:26:28.779341",
-  "slate_date": "2026-10-16",
+  "timestamp": "2026-10-19T14:23:17.205593",
+  "slate_date": "2026-10-19",
   "active_portfolio_tonight": [
     {
-      "id": "TICKET_USER_MULTIPLA4_BIGLEAGUES_NETWIN_25EUR_16OTT",
-      "title": "Schedina 1: Multipla (4) Big Leagues Europa (@ 4.10)",
-      "label": "In Corso",
-      "stake": "25.00 €",
-      "bonus": "3.08 €",
-      "odds": "4.10×",
-      "potential_win": "105.78 €",
-      "booking_code": "DF07EA0A10326B358903",
-      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10326B358903",
-      "placed_at": "2026-10-16 17:18 CEST",
-      "legs": [
-        {
-          "when": "2026-10-16 20:30 CEST",
-          "tournament": "Germania | Bundesliga",
-          "match": "Eintracht Francoforte vs Colonia",
-          "pick": "Doppia Chance: 1X",
-          "odd": "1.26",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:45 CEST",
-          "tournament": "Italia | Serie A",
-          "match": "Frosinone vs Sassuolo",
-          "pick": "1X + MultiGol 1-5 : SI",
-          "odd": "1.63",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:45 CEST",
-          "tournament": "Francia | Ligue 1",
-          "match": "Le Mans FC vs Tolosa",
-          "pick": "Chance Mix: X o Gol : SI",
-          "odd": "1.37",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 21:00 CEST",
-          "tournament": "Spagna | LaLiga",
-          "match": "Deportivo La Coruna vs Levante",
-          "pick": "1X + MultiGol 1-5 : SI",
-          "odd": "1.46",
-          "result": "PENDING"
-        }
-      ],
-      "status": "PENDING"
-    },
-    {
-      "id": "TICKET_USER_MULTIPLA7_SATELLITE_NETWIN_15EUR_16OTT",
-      "title": "Schedina 2: Multipla (7) Flussi & Trasferte (@ 18.40)",
-      "label": "In Corso",
-      "stake": "15.00 €",
-      "bonus": "35.89 €",
-      "odds": "18.40×",
-      "potential_win": "312.03 €",
-      "booking_code": "DF07EA0A10326AA70C04",
-      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10326AA70C04",
-      "placed_at": "2026-10-16 15:26 CEST",
-      "legs": [
-        {
-          "when": "2026-10-16 18:00 CEST",
-          "tournament": "Croazia | HNL",
-          "match": "NK Rudes Zagreb vs Rijeka",
-          "pick": "1X2: 2",
-          "odd": "1.36",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 19:00 CEST",
-          "tournament": "Svezia | Allsvenskan",
-          "match": "Brommapojkarna vs Djurgarden",
-          "pick": "1X2: 2",
-          "odd": "1.50",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:00 CEST",
-          "tournament": "Romania | Superliga",
-          "match": "Dinamo Bucurest vs Botosani",
-          "pick": "1X2: 1",
-          "odd": "1.44",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:00 CEST",
-          "tournament": "Perù | Liga 1",
-          "match": "Sport Huancayo vs Cusco FC",
-          "pick": "1X2: 1",
-          "odd": "1.77",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:00 CEST",
-          "tournament": "Olanda | Eredivisie",
-          "match": "Heerenveen vs Excelsior Rotterdam",
-          "pick": "1X2: 1",
-          "odd": "1.55",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:45 CEST",
-          "tournament": "Irlanda | Premier Division",
-          "match": "Bohemians vs Waterford",
-          "pick": "1X2: 1",
-          "odd": "1.62",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:45 CEST",
-          "tournament": "Irlanda | First Division",
-          "match": "Finn Harps vs Bray Wanderers",
-          "pick": "1X2: 2",
-          "odd": "1.41",
-          "result": "PENDING"
-        }
-      ],
-      "status": "PENDING"
-    },
-    {
-      "id": "TICKET_USER_MULTIPLA4_GEMME_PROPS_NETWIN_10EUR_16OTT",
-      "title": "Schedina 3: Multipla (4) Gemme Flussi & Parate (@ 5.11)",
-      "label": "In Corso",
+      "id": "TICKET_BLOCCO1_TIER1_PRESERALE_19OTT",
+      "title": "Blocco 1: Quadrupla Pre-Serale Tier 1 (18:30 - 19:00) (@ 5.12)",
+      "label": "In Corso (Stasera 18:30)",
       "stake": "10.00 €",
-      "bonus": "1.53 €",
-      "odds": "5.11×",
-      "potential_win": "52.72 €",
-      "booking_code": "DF07EA0A10320A735A09",
-      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10320A735A09",
-      "placed_at": "2026-10-16 15:23 CEST",
+      "odds": "5.12x",
+      "potential_win": "51.22 €",
+      "booking_code": "974405",
       "legs": [
         {
-          "when": "2026-10-16 19:30 CEST",
-          "tournament": "Austria | Bundesliga",
-          "match": "Rapid Vienna vs Hartberg",
-          "pick": "1X2 + MultiGol 2-5 : 1",
-          "odd": "1.53",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:00 CEST",
-          "tournament": "Olanda | Eredivisie",
-          "match": "Heerenveen vs Excelsior Rotterdam",
-          "pick": "Over 0.5 1°T + Over 0.5 2°T : SI",
-          "odd": "1.37",
-          "result": "PENDING"
-        },
-        {
-          "when": "2026-10-16 20:30 CEST",
-          "tournament": "Germania | Bundesliga",
-          "match": "Eintracht Francoforte vs Colonia",
-          "pick": "Over 0.5 1°T + Over 0.5 2°T : SI",
+          "when": "2026-10-19 18:30 CEST",
+          "match": "Monza vs Cagliari",
+          "pick": "Doppia Chance: 1X",
           "odd": "1.32",
-          "result": "PENDING"
+          "result": "PENDING",
+          "score": "Serie A | OFP: AAA | Copertura Fattore Campo"
         },
         {
-          "when": "2026-10-16 20:45 CEST",
-          "tournament": "Italia | Serie A",
-          "match": "Frosinone vs Sassuolo",
-          "pick": "U/O Palmisani, Lorenzo (Frosinone) Parate 3.5 : OVER",
-          "odd": "1.85",
-          "result": "PENDING"
+          "when": "2026-10-19 19:00 CEST",
+          "match": "Degerfors vs Kalmar",
+          "pick": "Doppia Chance: 1X",
+          "odd": "1.51",
+          "result": "PENDING",
+          "score": "Allsvenskan | OFP: AA | Trend Interno Solido"
+        },
+        {
+          "when": "2026-10-19 19:00 CEST",
+          "match": "Viborg vs Midtjylland",
+          "pick": "Goal / Entrambe Segnano",
+          "odd": "1.46",
+          "result": "PENDING",
+          "score": "Superligaen | OFP: AAA | DNA Danimarca BTTS"
+        },
+        {
+          "when": "2026-10-19 19:00 CEST",
+          "match": "Trabzonspor vs Besiktas",
+          "pick": "Over 1.5 Cartellini Casa",
+          "odd": "1.76",
+          "result": "PENDING",
+          "score": "Super Lig | GEMMA | Big Match Alta Tensione"
         }
-      ],
-      "status": "PENDING"
+      ]
     },
     {
-      "id": "TICKET_USER_TRIPLA3_NORDICA_NETWIN_15EUR_16OTT",
-      "title": "Schedina 4: Tripla (3) Nordica & Over 3.5 (@ 4.16)",
-      "label": "In Corso",
-      "stake": "15.00 €",
-      "odds": "4.16×",
-      "potential_win": "62.40 €",
-      "booking_code": "DF07EA0A10326AA58A01",
-      "booking_url": "https://www.netwin.it/scommesse/loadbet?ticketId=DF07EA0A10326AA58A01",
-      "placed_at": "2026-10-16 15:17 CEST",
+      "id": "TICKET_BLOCCO2_TIER1_SERALE_19OTT",
+      "title": "Blocco 2: Tripla Cassaforte Serale Tier 1 (20:45 - 21:15) (@ 2.28)",
+      "label": "In Corso (Stasera 20:45)",
+      "stake": "10.00 €",
+      "odds": "2.28x",
+      "potential_win": "22.82 €",
+      "booking_code": "440917",
       "legs": [
         {
-          "when": "2026-10-16 18:00 CEST",
-          "tournament": "Croazia | HNL",
-          "match": "NK Rudes Zagreb vs Rijeka",
-          "pick": "X2 + Over 1.5 : X2 + OV",
-          "odd": "1.27",
-          "result": "PENDING"
+          "when": "2026-10-19 20:45 CEST",
+          "match": "Parma vs Torino",
+          "pick": "MultiGol 1-3 2°Tempo",
+          "odd": "1.31",
+          "result": "PENDING",
+          "score": "Serie A | OFP: AAA | Flusso Reti Ripresa"
         },
         {
-          "when": "2026-10-16 19:00 CEST",
-          "tournament": "Danimarca | Superligaen",
-          "match": "Horsens vs Randers",
-          "pick": "U/O 3.5 : Over",
-          "odd": "2.52",
-          "result": "PENDING"
+          "when": "2026-10-19 21:00 CEST",
+          "match": "Tottenham vs Coventry City",
+          "pick": "1X + Over 1.5",
+          "odd": "1.34",
+          "result": "PENDING",
+          "score": "Inghilterra | OFP: AAA | Dominio Casalingo Spurs"
         },
         {
-          "when": "2026-10-16 19:00 CEST",
-          "tournament": "Svezia | Allsvenskan",
-          "match": "Brommapojkarna vs Djurgarden",
-          "pick": "X2 + Over 1.5 : X2 + OV",
+          "when": "2026-10-19 21:15 CEST",
+          "match": "Sporting Braga vs Gil Vicente",
+          "pick": "MultiGol 1-3 Casa",
           "odd": "1.30",
-          "result": "PENDING"
+          "result": "PENDING",
+          "score": "Liga Portugal | OFP: AAA | Sostituisce Jong PSV (100% Tier 1)"
         }
-      ],
-      "status": "PENDING"
+      ]
+    },
+    {
+      "id": "TICKET_MASTER_7_TIER1_PURE_19OTT",
+      "title": "Multipla Master 7 Eventi 100% Tier 1 (Senza Serie C / Jong PSV) (@ 9.87)",
+      "label": "In Corso (Stasera)",
+      "stake": "5.00 €",
+      "odds": "9.87x",
+      "potential_win": "52.80 €",
+      "booking_code": "159621",
+      "legs": [
+        {
+          "when": "2026-10-19 18:30 CEST",
+          "match": "Monza vs Cagliari",
+          "pick": "Doppia Chance: 1X",
+          "odd": "1.32",
+          "result": "PENDING",
+          "score": "Serie A Tier 1"
+        },
+        {
+          "when": "2026-10-19 19:00 CEST",
+          "match": "Degerfors vs Kalmar",
+          "pick": "Doppia Chance: 1X",
+          "odd": "1.51",
+          "result": "PENDING",
+          "score": "Allsvenskan Tier 1"
+        },
+        {
+          "when": "2026-10-19 19:00 CEST",
+          "match": "Viborg vs Midtjylland",
+          "pick": "Goal / Entrambe Segnano",
+          "odd": "1.46",
+          "result": "PENDING",
+          "score": "Superligaen Tier 1"
+        },
+        {
+          "when": "2026-10-19 19:00 CEST",
+          "match": "Trabzonspor vs Besiktas",
+          "pick": "Over 1.5 Cartellini Casa",
+          "odd": "1.76",
+          "result": "PENDING",
+          "score": "Super Lig Tier 1"
+        },
+        {
+          "when": "2026-10-19 20:45 CEST",
+          "match": "Parma vs Torino",
+          "pick": "MultiGol 1-3 2°Tempo",
+          "odd": "1.31",
+          "result": "PENDING",
+          "score": "Serie A Tier 1"
+        },
+        {
+          "when": "2026-10-19 21:00 CEST",
+          "match": "Tottenham vs Coventry City",
+          "pick": "1X + Over 1.5",
+          "odd": "1.34",
+          "result": "PENDING",
+          "score": "Inghilterra Tier 1"
+        },
+        {
+          "when": "2026-10-19 21:15 CEST",
+          "match": "Sporting Braga vs Gil Vicente",
+          "pick": "MultiGol 1-3 Casa",
+          "odd": "1.30",
+          "result": "PENDING",
+          "score": "Liga Portugal Tier 1"
+        }
+      ]
     }
   ],
   "historical_portfolio_performance": {
@@ -32346,5 +32288,6 @@
         }
       }
     ]
-  }
+  },
+  "last_sync": "2026-10-19T14:41:49.973207"
 }
