@@ -118,3 +118,11 @@ Minuto e punteggio solo dal feed Flashscore. Trigger: assedio se la sfavorita (f
   6) Combo Protette: Chance Mix (`1X o Over 1.5`, `X o Gol`), DC + MultiGol (`1X + 1-4/1-5`);
   7) Giocatore XXL / Duo / Plus: Tiri in Porta Plus, Falli Subiti, Marcatore XXL/Duo con clausole di salvaguardia obbligatorie (`"Vale Sostituto"`, `"Pali e Traverse"`). Tassativamente vietato il marcatore classico secco privo di clausola sostituto.
 
+
+- **Regola #92 (Generazione Autonoma Schedine Multi-Mercato Tipster-Style & Zero Dipendenza Esterna)**:
+  BAgent deve generare in completa autonomia, per ogni sessione di palinsesto, le schedine multi-mercato senza dipendere da tipster o fonti esterne manuali.
+  Il motore `SlateTicketSynthesizer` (`services/analysis/slate_ticket_synthesizer.py`) opera direttamente sui dati del palinsesto:
+  1) Applica l'auto-ingestione on-demand (Regola #90) per scaricare la telemetria delle squadre mancanti.
+  2) Esegue la cross-analisi bilaterale (Regola #89 e #91) incrociando i dati di entrambe le squadre su tutte le 7 famiglie di mercato.
+  3) Individua la singola 'Gemma' a valore atteso (+EV) per ciascun match, filtrando le quote nel corridoio ideale 1.25 - 1.48 con Hit Rate reale >= 75-80%.
+  4) Assembla ticket eterogenei e bilanciati da 5 a 7 eventi (1 Doppia Chance, 1 Gol GG, 1 Chance Mix, 1-2 MultiGol Squadra, 1 Specialistico Cartellini/Corner, 1 Combo Protetta) raggiungendo un moltiplicatore obiettivo tra 8.00x e 15.00x, pronto per la prenotazione 1-click su Netwin.
