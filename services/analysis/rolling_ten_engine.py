@@ -953,13 +953,27 @@ class RollingTenEngine:
             ).fetchone()
             return dict(row) if row else None
 
-    def cross_analyze_match(self, home_team: str, away_team: str) -> Dict[str, Any]:
+    def cross_analyze_match(self, home_team: str, away_team: str, auto_download: bool = True) -> Dict[str, Any]:
         """
         Incrocia le statistiche delle ultime 10 partite di Casa e Ospite + i rispettivi giocatori,
         restituendo le Gemme ordinate per Hit-Rate combinato (divise tra Netwin Native e Specialist).
+        Se mancano dati storici per una o entrambe le squadre (Regola #90), scarica automaticamente on-demand.
         """
         h_prof = self.get_team_profile(home_team)
         a_prof = self.get_team_profile(away_team)
+
+        # Regola #90: Auto-Download On-Demand se mancano i dati nel database
+        if (not h_prof or not a_prof) and auto_download:
+            try:
+                from services.football.external.on_demand_ingestor import OnDemandMatchIngestor
+                ingestor = OnDemandMatchIngestor(db_path=self.db_path)
+                inserted = ingestor.fetch_and_ingest_for_match(home_team, away_team)
+                if inserted > 0:
+                    self.compute_all_teams_rolling_ten(min_matches=5)
+                    h_prof = self.get_team_profile(home_team)
+                    a_prof = self.get_team_profile(away_team)
+            except Exception as e:
+                logger.warning(f"Auto-download on-demand fallito per {home_team} vs {away_team}: {e}")
 
         with self._get_conn() as conn:
             players = conn.execute(
