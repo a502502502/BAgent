@@ -139,13 +139,26 @@ class NetwinAutomator:
             return False
 
     def _accept_cookies_if_present(self):
-        """Chiude il banner Cookiebot con i selettori verificati."""
+        """Chiude il banner Cookiebot e rimuove eventuali popup promozionali bloccanti."""
         try:
             accept_btn = self.page.locator("button:has-text('Accetta tutti'), #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll").first
-            accept_btn.wait_for(state="visible", timeout=5000)
-            accept_btn.click()
-            logger.info("[OK] Banner Cookiebot chiuso.")
-            self.page.wait_for_timeout(1000)
+            if accept_btn.is_visible(timeout=2500):
+                accept_btn.click()
+                logger.info("[OK] Banner Cookiebot chiuso.")
+                self.page.wait_for_timeout(500)
+        except Exception:
+            pass
+
+        # Rimuove modal promozionali sovrapposti (es. #cg-comunicazioni-landing-modal)
+        try:
+            self.page.evaluate("""() => {
+                const modals = document.querySelectorAll('#cg-comunicazioni-landing-modal, .cg-promo-message-modal-defaultsize, .modal.show, .modal-backdrop');
+                modals.forEach(m => {
+                    m.remove();
+                });
+                document.body.classList.remove('modal-open');
+            }""")
+            logger.info("[OK] Popup promozionali e modal ripuliti con successo.")
         except Exception:
             pass
 
@@ -169,13 +182,9 @@ class NetwinAutomator:
     def search_match(self, team_name: str) -> bool:
         """Cerca un match nella barra di ricerca #match-search-input."""
         try:
+            self._accept_cookies_if_present()
             search_input = self.page.locator("#match-search-input").first
-            try:
-                search_input.wait_for(state="visible", timeout=10000)
-            except Exception:
-                self._accept_cookies_if_present()
-                search_input.wait_for(state="visible", timeout=5000)
-
+            search_input.wait_for(state="visible", timeout=10000)
             search_input.click()
             search_input.fill("")
             search_input.fill(team_name)
@@ -479,7 +488,7 @@ class NetwinAutomator:
         home_team = match_info.get("home", "") or match_info.get("match", "").split(" vs ")[0]
         market = match_info.get("market", "1X2")
         pick = match_info.get("pick", "1")
-        odd = match_info.get("netwin_odds") or match_info.get("real_odd")
+        odd = match_info.get("netwin_odds") or match_info.get("real_odd") or match_info.get("odds") or match_info.get("odd")
         search_term = str(match_info.get("search") or home_team).strip() or home_team
 
         logger.info(f"Inserimento: {home_team} | Mercato: {market} | Esito: {pick} (@{odd})")
@@ -634,6 +643,7 @@ class NetwinAutomator:
             return False
         opened = False
         for label in (
+            "DC+U/O",
             "Doppia Chance + U/O",
             "Doppia Chance + Under/Over",
             "DC + U/O",
@@ -645,7 +655,7 @@ class NetwinAutomator:
         if not opened:
             return False
         # Se siamo sul menu Combo 1X2, apri il sotto-tab DC+U/O
-        for label in ("Doppia Chance + U/O", "Doppia Chance + Under/Over", "DC + U/O"):
+        for label in ("DC+U/O", "Doppia Chance + U/O", "Doppia Chance + Under/Over", "DC + U/O"):
             if self._click_visible_text(label):
                 break
         return self._click_ou_combo_slot(

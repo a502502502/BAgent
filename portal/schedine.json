@@ -1,8 +1,85 @@
 {
-  "generated_at": "2026-10-17T20:45:28.044508",
+  "generated_at": "2026-10-19T13:49:31.019689",
   "check_seconds": 30,
   "profit_label": "+2.32 € (Saldo Netto Aggiornato)",
   "present": [
+    {
+      "id": "TICKET_NETWIN_OFFICIAL_19OTT_216282",
+      "title": "Schedina Ufficiale Tipster — 7 Eventi Asimmetrici (Netwin Code: 216282)",
+      "type": "MULTIPLA ASIMMETRICA (7 Eventi — Netwin.it)",
+      "status": "pending",
+      "booking_code": "216282",
+      "stake": 10.0,
+      "total_odds": 9.87,
+      "potential_win": 98.7,
+      "date": "2026-10-19 18:30 - 21:15 CEST",
+      "booked_at": "2026-10-19T13:49:31.019675",
+      "selections": [
+        {
+          "match": "Monza - Cagliari",
+          "league": "Italia | Serie A",
+          "kickoff": "2026-10-19 18:30 CEST",
+          "market": "Doppia Chance",
+          "pick": "1X",
+          "odds": 1.32,
+          "status": "pending"
+        },
+        {
+          "match": "Viborg - Midtjylland",
+          "league": "Danimarca | Superliga",
+          "kickoff": "2026-10-19 19:00 CEST",
+          "market": "GG-NG",
+          "pick": "Gol (GG)",
+          "odds": 1.46,
+          "status": "pending"
+        },
+        {
+          "match": "Trabzonspor - Besiktas",
+          "league": "Turchia | Super Lig",
+          "kickoff": "2026-10-19 19:00 CEST",
+          "market": "GG-NG (Surrogato X o Gol su Netwin)",
+          "pick": "Gol (GG)",
+          "odds": 1.45,
+          "status": "pending"
+        },
+        {
+          "match": "Giana Erminio - Union Brescia",
+          "league": "Italia | Serie C - Gruppo A",
+          "kickoff": "2026-10-19 20:30 CEST",
+          "market": "MultiGol Ospite",
+          "pick": "MultiGol 1-3 Ospite",
+          "odds": 1.28,
+          "status": "pending"
+        },
+        {
+          "match": "Parma - Torino",
+          "league": "Italia | Serie A",
+          "kickoff": "2026-10-19 20:45 CEST",
+          "market": "Cartellini Squadra",
+          "pick": "Over 1.5 Cartellini Parma",
+          "odds": 1.56,
+          "status": "pending"
+        },
+        {
+          "match": "Tottenham - Coventry City",
+          "league": "Inghilterra | Premier League",
+          "kickoff": "2026-10-19 21:00 CEST",
+          "market": "Combo Doppia Chance + Over",
+          "pick": "1X + Over 1.5",
+          "odds": 1.34,
+          "status": "pending"
+        },
+        {
+          "match": "Sporting Braga - Gil Vicente",
+          "league": "Portogallo | Liga Portugal",
+          "kickoff": "2026-10-19 21:15 CEST",
+          "market": "MultiGol Casa",
+          "pick": "MultiGol 1-3 Casa",
+          "odds": 1.3,
+          "status": "pending"
+        }
+      ]
+    },
     {
       "id": "TICKET_EXTREME_3_NOTTURNA_MLS_BRASILE_17OTT",
       "title": "🌙 Tripla Estrema 3 — Notturna MLS & Brasileirão (GIOCATA)",
