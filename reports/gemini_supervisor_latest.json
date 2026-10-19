@@ -1,7 +1,7 @@
 {
   "verdict": "APPROVED",
   "orthogonality_passed": true,
-  "bankroll_exposure_eur": 65.0,
+  "bankroll_exposure_eur": 30.0,
   "total_active_tickets": 4,
   "anomalies_found": [],
   "optimization_advice": "Mantenere l'esposizione entro l'8% di bankroll e rispettare le quote minime >= 1.20.",

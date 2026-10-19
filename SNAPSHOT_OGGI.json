@@ -146,6 +146,57 @@
           "score": "Liga Portugal Tier 1"
         }
       ]
+    },
+    {
+      "id": "TICKET_SATELLITE_GEMME_PROPS_19OTT",
+      "title": "Quintina Satellite Gemme & Props Tier 1 (19:00 - 21:15) (@ 7.34)",
+      "label": "In Corso (Stasera)",
+      "stake": "5.00 €",
+      "odds": "7.34x",
+      "potential_win": "36.70 €",
+      "booking_code": "377223",
+      "legs": [
+        {
+          "when": "2026-10-19 19:00 CEST",
+          "match": "Trabzonspor vs Besiktas",
+          "pick": "Goal / Entrambe Segnano",
+          "odd": "1.46",
+          "result": "PENDING",
+          "score": "Super Lig | GEMMA Flussi Reti | Quota Netwin 1.46"
+        },
+        {
+          "when": "2026-10-19 20:45 CEST",
+          "match": "Parma vs Torino",
+          "pick": "Over 1.5 Cartellini Casa",
+          "odd": "1.56",
+          "result": "PENDING",
+          "score": "Serie A | GEMMA Sanzioni | Quota Netwin 1.56"
+        },
+        {
+          "when": "2026-10-19 21:00 CEST",
+          "match": "Getafe vs Rayo Vallecano",
+          "pick": "1X + Under 3.5",
+          "odd": "1.64",
+          "result": "PENDING",
+          "score": "LaLiga | GEMMA Combo Difensiva | Quota Netwin 1.64"
+        },
+        {
+          "when": "2026-10-19 21:00 CEST",
+          "match": "Tottenham vs Coventry City",
+          "pick": "MultiGol 1-3 Casa",
+          "odd": "1.31",
+          "result": "PENDING",
+          "score": "Inghilterra | GEMMA Flussi Reti Casa | Quota Netwin 1.31"
+        },
+        {
+          "when": "2026-10-19 21:15 CEST",
+          "match": "Sporting Braga vs Gil Vicente",
+          "pick": "1X + Over 1.5",
+          "odd": "1.50",
+          "result": "PENDING",
+          "score": "Liga Portugal | GEMMA Combo Offensiva | Quota Netwin 1.50"
+        }
+      ]
     }
   ],
   "historical_portfolio_performance": {
