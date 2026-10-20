@@ -14,11 +14,34 @@ import sqlite3
 import urllib.request
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger("OnDemandIngestor")
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
 DB_PATH = ROOT_DIR / "data" / "bagent.db"
+
+
+def names_match(query: str, candidate: str) -> bool:
+    """True se i due nomi indicano la stessa squadra, non un token isolato."""
+    q = (query or "").lower().strip()
+    c = (candidate or "").lower().strip()
+    if not q or not c:
+        return False
+    if q == c or q in c or c in q:
+        return True
+    q_tokens = {t for t in q.replace("-", " ").split() if len(t) >= 4}
+    c_tokens = {t for t in c.replace("-", " ").split() if len(t) >= 4}
+    return bool(q_tokens & c_tokens)
+
+
+def season_label(match_date: str) -> str:
+    """Stagione europea: da agosto l'annata nuova, prima resta quella precedente."""
+    try:
+        dt = datetime.strptime((match_date or "")[:10], "%Y-%m-%d")
+    except ValueError:
+        return "2026/2027"
+    start = dt.year if dt.month >= 8 else dt.year - 1
+    return f"{start}/{start + 1}"
 
 HEADERS = {
     "User-Agent": (
@@ -45,16 +68,7 @@ class OnDemandMatchIngestor:
         a_clean = away_team.lower().strip()
 
         for m in feed:
-            m_h = m.get("home", "").lower()
-            m_a = m.get("away", "").lower()
-            if (h_clean in m_h or m_h in h_clean) and (a_clean in m_a or m_a in a_clean):
-                return m.get("match_id")
-
-        # Fallback ricerca parziale
-        for m in feed:
-            m_h = m.get("home", "").lower()
-            m_a = m.get("away", "").lower()
-            if h_clean in m_h or a_clean in m_a:
+            if names_match(h_clean, m.get("home", "")) and names_match(a_clean, m.get("away", "")):
                 return m.get("match_id")
 
         return None
@@ -120,7 +134,7 @@ class OnDemandMatchIngestor:
                 continue
 
             league = fields.get("KF", "League").strip()
-            season = "2026/2027" if "2026" in m_date else "2025/2026"
+            season = season_label(m_date)
             matches.append({
                 "league": league,
                 "season": season,
@@ -156,7 +170,7 @@ class OnDemandMatchIngestor:
                 """, (
                     m["league"], m["season"], m["home_team"], m["away_team"],
                     m["home_goals"], m["away_goals"], m["total_goals"],
-                    max(0, m["home_goals"] // 2), max(0, m["away_goals"] // 2),
+                    None, None,
                     m["match_date"], now_str
                 ))
                 inserted += 1

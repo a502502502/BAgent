@@ -7,7 +7,11 @@ import sqlite3
 from pathlib import Path
 import pytest
 
-from services.football.external.on_demand_ingestor import OnDemandMatchIngestor
+from services.football.external.on_demand_ingestor import (
+    OnDemandMatchIngestor,
+    names_match,
+    season_label,
+)
 from services.analysis.rolling_ten_engine import RollingTenEngine
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -28,6 +32,73 @@ def test_on_demand_ingestor_parse_section():
     assert matches[0]["home_goals"] == 2
     assert matches[0]["away_goals"] == 1
     assert matches[0]["total_goals"] == 3
+    assert matches[0]["season"] == season_label(matches[0]["match_date"])
+
+
+def test_season_label_follows_european_calendar():
+    assert season_label("2026-03-15") == "2025/2026"
+    assert season_label("2026-10-19") == "2026/2027"
+    assert season_label("2027-02-01") == "2026/2027"
+
+
+def test_find_match_id_requires_both_teams(monkeypatch):
+    feed = [
+        {"home": "AC Milan", "away": "Lecce", "match_id": "milan-lecce"},
+        {"home": "Inter", "away": "Juventus", "match_id": "inter-juve"},
+    ]
+
+    class FakeEngine:
+        def fetch_feed(self):
+            return feed
+
+    monkeypatch.setattr(
+        "services.football.external.sources.flashscore_live.FlashscoreLiveEngine",
+        FakeEngine,
+    )
+    ingestor = OnDemandMatchIngestor(db_path=DB_PATH)
+    assert ingestor.find_match_id("Inter", "Juventus") == "inter-juve"
+    assert ingestor.find_match_id("Juventus", "Lecce") is None
+    assert names_match("Real Madrid", "Real Madrid")
+
+
+def test_insert_matches_leaves_halftime_unknown(tmp_path):
+    db_path = tmp_path / "ingest.db"
+    conn = sqlite3.connect(db_path)
+    conn.execute(
+        """
+        CREATE TABLE matches (
+            id INTEGER PRIMARY KEY,
+            league TEXT, season TEXT, status TEXT,
+            home_team TEXT, away_team TEXT,
+            home_goals INTEGER, away_goals INTEGER, total_goals INTEGER,
+            ht_home_goals INTEGER, ht_away_goals INTEGER,
+            match_date TEXT, updated_at TEXT
+        )
+        """
+    )
+    conn.commit()
+    conn.close()
+
+    ingestor = OnDemandMatchIngestor(db_path=db_path)
+    inserted = ingestor._insert_matches([
+        {
+            "league": "Serie A",
+            "season": "2025/2026",
+            "match_date": "2026-03-15",
+            "home_team": "Sample Home",
+            "away_team": "Sample Away",
+            "home_goals": 3,
+            "away_goals": 1,
+            "total_goals": 4,
+        }
+    ])
+    assert inserted == 1
+    conn = sqlite3.connect(db_path)
+    row = conn.execute(
+        "SELECT ht_home_goals, ht_away_goals, season FROM matches"
+    ).fetchone()
+    conn.close()
+    assert row == (None, None, "2025/2026")
 
 
 def test_cross_analyze_match_bilateral_execution():

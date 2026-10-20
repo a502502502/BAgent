@@ -19,12 +19,11 @@ Implementa la sintesi autonoma di ticket ad alto rendimento e protezione statist
 
 from __future__ import annotations
 
-import json
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from services.analysis.rolling_ten_engine import RollingTenEngine
 
@@ -32,6 +31,51 @@ logger = logging.getLogger("SlateTicketSynthesizer")
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = ROOT_DIR / "data"
 DB_PATH = DATA_DIR / "bagent.db"
+ODD_FLOOR = 1.25
+ODD_CEILING = 1.48
+
+
+def kickoff_complete(kickoff: str) -> bool:
+    """Data e ora esplicite, come richiede la Regola #76."""
+    text = (kickoff or "").strip()
+    has_date = ("-" in text or "/" in text) and any(ch.isdigit() for ch in text)
+    return has_date and ":" in text
+
+
+def open_or_tense_fixture(h_gf: float, a_gf: float, tournament: str) -> bool:
+    """Chance Mix solo su gare aperte, oppure equilibrate e tese.
+
+    `and` lega più stretto di `or`: il campionato va parentesizzato insieme
+    al filtro sul divario gol, altrimenti ogni Serie A passa il gate.
+    """
+    both_open = h_gf >= 1.8 and a_gf >= 1.8
+    balanced = abs(h_gf - a_gf) < 0.4
+    tense = any(tag in (tournament or "") for tag in ("Super Lig", "Derby", "Serie A"))
+    return both_open or (balanced and tense)
+
+
+def cards_market_allowed(tournament: str) -> bool:
+    """Over cartellini solo fuori da Nord Europa e Austria, dove il ritmo è pulito."""
+    text = (tournament or "").lower()
+    blocked = ("norveg", "eliteserien", "allsvenskan", "superliga", "austria", "admiral")
+    return not any(tag in text for tag in blocked)
+
+
+def venue_rate(flow: Dict[str, Any], home_key: str, blended_key: str) -> Optional[float]:
+    """In casa se il campione basta, altrimenti sulle ultime gare di qualsiasi campo."""
+    if flow.get("matches", 0) < 3:
+        return None
+    if flow.get("home_n", 0) >= 3:
+        return float(flow.get(home_key) or 0.0)
+    return float(flow.get(blended_key) or 0.0)
+
+
+def quoted_odd(odds_dict: Dict[str, Any], group: str, name: str, default: float) -> float:
+    raw = (odds_dict.get(group) or {}).get(name, default)
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return default
 
 
 @dataclass
@@ -71,7 +115,7 @@ class SlateTicketSynthesizer:
         hp = self.engine.get_team_profile(home_team)
         ap = self.engine.get_team_profile(away_team)
 
-        if not hp or not ap:
+        if not hp or not ap or not kickoff_complete(kickoff):
             return []
 
         odds_dict = odds_dict or {}
@@ -85,12 +129,19 @@ class SlateTicketSynthesizer:
 
         h_ov15 = hp.get("hr_over_15_match", 0.0)
         a_ov15 = ap.get("hr_over_15_match", 0.0)
-        h_cards = hp.get("avg_cards_match", 0.0)
+        h_flow = self.engine.team_flow(home_team)
+        a_flow = self.engine.team_flow(away_team)
+        hr_1x = venue_rate(h_flow, "home_unbeaten_hr", "unbeaten_hr")
+        hr_combo = venue_rate(h_flow, "home_dc_and_ov15_hr", "dc_and_ov15_hr")
+        btts_hr = None
+        if h_flow.get("matches", 0) >= 3 and a_flow.get("matches", 0) >= 3:
+            btts_hr = round((h_flow["btts_hr"] + a_flow["btts_hr"]) / 2.0, 1)
 
         # 1. DOPPIA CHANCE (1X se la casa è nettamente più solida dell'ospite)
-        if h_gf >= 1.3 and a_gf <= 1.1 and h_ga <= 1.4:
+        if hr_1x is not None and h_gf >= 1.3 and a_gf <= 1.1 and h_ga <= 1.4:
             odd_1x = odds_dict.get("DOPPIA_CHANCE", {}).get("1X", 1.34)
             if 1.25 <= odd_1x <= 1.45:
+                sample = h_flow["home_n"] if h_flow["home_n"] >= 3 else h_flow["matches"]
                 candidates.append(
                     MatchGemPick(
                         match_name=f"{home_team} vs {away_team}",
@@ -101,13 +152,16 @@ class SlateTicketSynthesizer:
                         market_name="Doppia Chance 1X",
                         market_category="DOPPIA_CHANCE",
                         odd=odd_1x,
-                        hit_rate=round(min(95.0, (1.0 - (ap.get("avg_goals_scored", 1.0) / 3.0)) * 100), 1),
-                        rationale=f"{home_team} solida in casa (GF {h_gf:.1f}), {away_team} sterile in trasferta (GF {a_gf:.1f}).",
+                        hit_rate=round(hr_1x, 1),
+                        rationale=(
+                            f"{home_team} non perde nel {hr_1x:.1f}% di {sample} gare recenti "
+                            f"(GF {h_gf:.1f}, {away_team} GF {a_gf:.1f})."
+                        ),
                     )
                 )
 
         # 2. GOL (GG) (se entrambi gli attacchi producono e le difese concedono)
-        if h_gf >= 1.6 and a_gf >= 1.6 and h_ov15 >= 80.0 and a_ov15 >= 80.0:
+        if btts_hr is not None and h_gf >= 1.6 and a_gf >= 1.6 and h_ov15 >= 80.0 and a_ov15 >= 80.0:
             odd_gg = odds_dict.get("GOL_NOGOL", {}).get("Gol", 1.47)
             if 1.35 <= odd_gg <= 1.55:
                 candidates.append(
@@ -120,15 +174,21 @@ class SlateTicketSynthesizer:
                         market_name="Gol (GG)",
                         market_category="GOL",
                         odd=odd_gg,
-                        hit_rate=round((h_ov15 + a_ov15) / 2.0, 1),
-                        rationale=f"Attacchi prolifici (Casa {h_gf:.1f}, Ospite {a_gf:.1f}) e frequenza Over 1.5 congiunta al {((h_ov15+a_ov15)/2):.1f}%.",
+                        hit_rate=btts_hr,
+                        rationale=(
+                            f"Gol entrambe nelle ultime gare: {home_team} {h_flow['btts_hr']:.1f}%, "
+                            f"{away_team} {a_flow['btts_hr']:.1f}%."
+                        ),
                     )
                 )
 
-        # 3. CHANCE MIX: X O GOL (ideale per derby e big match tesi ad alto equilibrio)
-        if (h_gf >= 1.8 and a_gf >= 1.8) or (abs(h_gf - a_gf) < 0.4 and "Super Lig" in tournament or "Derby" in tournament or "Serie A" in tournament):
-            odd_x_gg = odds_dict.get("CHANCE_MIX", {}).get("Chance Mix: X o Gol", 1.35)
-            if 1.25 <= odd_x_gg <= 1.45:
+        # 3. CHANCE MIX: X O GOL (gare aperte, oppure equilibrate in tornei tesi)
+        x_gg_hr = (
+            float(hp.get("hr_chance_mix_x_gg") or 0.0) + float(ap.get("hr_chance_mix_x_gg") or 0.0)
+        ) / 2.0
+        if open_or_tense_fixture(h_gf, a_gf, tournament) and x_gg_hr >= 75.0:
+            odd_x_gg = quoted_odd(odds_dict, "CHANCE_MIX", "Chance Mix: X o Gol", 1.35)
+            if ODD_FLOOR <= odd_x_gg <= 1.45:
                 candidates.append(
                     MatchGemPick(
                         match_name=f"{home_team} vs {away_team}",
@@ -139,8 +199,11 @@ class SlateTicketSynthesizer:
                         market_name="Chance Mix: X o Gol",
                         market_category="CHANCE_MIX",
                         odd=odd_x_gg,
-                        hit_rate=88.5,
-                        rationale="Doppia via di fuga: copre sia il pareggio tattico (0-0, 1-1) sia qualsiasi vittoria con gol ambo i lati.",
+                        hit_rate=round(x_gg_hr, 1),
+                        rationale=(
+                            f"X o Gol storico al {x_gg_hr:.1f}% "
+                            f"(Casa GF {h_gf:.1f}, Ospite GF {a_gf:.1f})."
+                        ),
                     )
                 )
 
@@ -149,58 +212,70 @@ class SlateTicketSynthesizer:
         a_mg13 = ap.get("hr_multigol_1_3_team", 0.0)
 
         if h_mg13 >= 80.0 and h_gf >= 1.2:
-            odd_mg_h = 1.30
-            candidates.append(
-                MatchGemPick(
-                    match_name=f"{home_team} vs {away_team}",
-                    home_team=home_team,
-                    away_team=away_team,
-                    tournament=tournament,
-                    kickoff=kickoff,
-                    market_name=f"MultiGol 1-3 Squadra Casa ({home_team})",
-                    market_category="MULTIGOL_SQUADRA",
-                    odd=odd_mg_h,
-                    hit_rate=h_mg13,
-                    rationale=f"{home_team} segna tra 1 e 3 reti nell'{h_mg13:.1f}% delle gare recenti.",
+            odd_mg_h = quoted_odd(odds_dict, "MULTIGOL_SQUADRA", "1-3 Casa", 1.30)
+            if not (ODD_FLOOR <= odd_mg_h <= ODD_CEILING):
+                odd_mg_h = None
+            if odd_mg_h is not None:
+                candidates.append(
+                    MatchGemPick(
+                        match_name=f"{home_team} vs {away_team}",
+                        home_team=home_team,
+                        away_team=away_team,
+                        tournament=tournament,
+                        kickoff=kickoff,
+                        market_name=f"MultiGol 1-3 Squadra Casa ({home_team})",
+                        market_category="MULTIGOL_SQUADRA",
+                        odd=odd_mg_h,
+                        hit_rate=h_mg13,
+                        rationale=f"{home_team} segna tra 1 e 3 reti nell'{h_mg13:.1f}% delle gare recenti.",
+                    )
                 )
-            )
         elif a_mg13 >= 75.0 and a_gf >= 1.4:
-            odd_mg_a = 1.27
-            candidates.append(
-                MatchGemPick(
-                    match_name=f"{home_team} vs {away_team}",
-                    home_team=home_team,
-                    away_team=away_team,
-                    tournament=tournament,
-                    kickoff=kickoff,
-                    market_name=f"MultiGol 1-3 Squadra Ospite ({away_team})",
-                    market_category="MULTIGOL_SQUADRA",
-                    odd=odd_mg_a,
-                    hit_rate=a_mg13,
-                    rationale=f"{away_team} segna con costanza tra 1 e 3 gol in trasferta ({a_mg13:.1f}% hit-rate).",
+            odd_mg_a = quoted_odd(odds_dict, "MULTIGOL_SQUADRA", "1-3 Ospite", 1.27)
+            if ODD_FLOOR <= odd_mg_a <= ODD_CEILING:
+                candidates.append(
+                    MatchGemPick(
+                        match_name=f"{home_team} vs {away_team}",
+                        home_team=home_team,
+                        away_team=away_team,
+                        tournament=tournament,
+                        kickoff=kickoff,
+                        market_name=f"MultiGol 1-3 Squadra Ospite ({away_team})",
+                        market_category="MULTIGOL_SQUADRA",
+                        odd=odd_mg_a,
+                        hit_rate=a_mg13,
+                        rationale=f"{away_team} segna con costanza tra 1 e 3 gol in trasferta ({a_mg13:.1f}% hit-rate).",
+                    )
                 )
-            )
 
-        # 5. SPECIALIST CARTELLINI (Over 1.5 Cartellini Squadra)
-        if h_cards >= 2.5:
-            odd_cards = 1.47
-            candidates.append(
-                MatchGemPick(
-                    match_name=f"{home_team} vs {away_team}",
-                    home_team=home_team,
-                    away_team=away_team,
-                    tournament=tournament,
-                    kickoff=kickoff,
-                    market_name=f"Over 1.5 Cartellini {home_team}",
-                    market_category="CARTELLINI",
-                    odd=odd_cards,
-                    hit_rate=85.0,
-                    rationale=f"{home_team} gioca con alto pressing e falli tattici (media {h_cards:.1f} cartellini a gara).",
+        # 5. SPECIALIST CARTELLINI (Over 1.5 Cartellini della squadra, non del match)
+        if (
+            cards_market_allowed(tournament)
+            and h_flow.get("cards_n", 0) >= 3
+            and h_flow.get("avg_team_cards", 0.0) >= 2.0
+        ):
+            odd_cards = quoted_odd(odds_dict, "CARTELLINI", "Over 1.5 Squadra", 1.47)
+            if ODD_FLOOR <= odd_cards <= ODD_CEILING:
+                candidates.append(
+                    MatchGemPick(
+                        match_name=f"{home_team} vs {away_team}",
+                        home_team=home_team,
+                        away_team=away_team,
+                        tournament=tournament,
+                        kickoff=kickoff,
+                        market_name=f"Over 1.5 Cartellini {home_team}",
+                        market_category="CARTELLINI",
+                        odd=odd_cards,
+                        hit_rate=h_flow["team_cards_ov15_hr"],
+                        rationale=(
+                            f"{home_team} prende almeno 2 cartellini nel {h_flow['team_cards_ov15_hr']:.1f}% "
+                            f"di {h_flow['cards_n']} gare con tabellino (media {h_flow['avg_team_cards']:.1f})."
+                        ),
+                    )
                 )
-            )
 
-        # 6. COMBO CLASSICA PROTETTA (1X + Over 1.5)
-        if h_gf >= 1.5 and h_ov15 >= 75.0 and (a_ga >= 1.3 or a_gf <= 1.0):
+        # 6. COMBO CLASSICA PROTETTA (1X + Over 1.5, entrambe vere nella stessa gara)
+        if hr_combo is not None and h_gf >= 1.5 and h_ov15 >= 75.0 and (a_ga >= 1.3 or a_gf <= 1.0):
             odd_combo = odds_dict.get("COMBO", {}).get("1X + Over 1.5", 1.36)
             if 1.28 <= odd_combo <= 1.48:
                 candidates.append(
@@ -213,8 +288,11 @@ class SlateTicketSynthesizer:
                         market_name="Combo 1X + Over 1.5",
                         market_category="COMBO",
                         odd=odd_combo,
-                        hit_rate=round((h_ov15 + 85.0) / 2.0, 1),
-                        rationale=f"{home_team} nettamente favorita con produzione Over 1.5 al {h_ov15:.1f}%.",
+                        hit_rate=round(hr_combo, 1),
+                        rationale=(
+                            f"1X e Over 1.5 insieme nel {hr_combo:.1f}% delle gare recenti di {home_team} "
+                            f"(Over 1.5 di squadra {h_ov15:.1f}%)."
+                        ),
                     )
                 )
 
@@ -222,35 +300,39 @@ class SlateTicketSynthesizer:
         sh_ov05 = hp.get("hr_over_05_sh_match", 0.0)
         sh_mg13 = hp.get("hr_mg_1_3_sh_match", 0.0)
         if sh_ov05 >= 85.0:
-            candidates.append(
-                MatchGemPick(
-                    match_name=f"{home_team} vs {away_team}",
-                    home_team=home_team,
-                    away_team=away_team,
-                    tournament=tournament,
-                    kickoff=kickoff,
-                    market_name="Over 0.5 2° Tempo",
-                    market_category="TEMPI",
-                    odd=1.23,
-                    hit_rate=sh_ov05,
-                    rationale=f"Gara che si sblocca nella ripresa con frequenza gol 2° tempo del {sh_ov05:.1f}%.",
+            odd_sh = quoted_odd(odds_dict, "TEMPI", "Over 0.5 2° Tempo", 1.23)
+            if ODD_FLOOR <= odd_sh <= ODD_CEILING:
+                candidates.append(
+                    MatchGemPick(
+                        match_name=f"{home_team} vs {away_team}",
+                        home_team=home_team,
+                        away_team=away_team,
+                        tournament=tournament,
+                        kickoff=kickoff,
+                        market_name="Over 0.5 2° Tempo",
+                        market_category="TEMPI",
+                        odd=odd_sh,
+                        hit_rate=sh_ov05,
+                        rationale=f"Gara che si sblocca nella ripresa con frequenza gol 2° tempo del {sh_ov05:.1f}%.",
+                    )
                 )
-            )
         elif sh_mg13 >= 80.0:
-            candidates.append(
-                MatchGemPick(
-                    match_name=f"{home_team} vs {away_team}",
-                    home_team=home_team,
-                    away_team=away_team,
-                    tournament=tournament,
-                    kickoff=kickoff,
-                    market_name="MultiGol 1-3 2° Tempo",
-                    market_category="TEMPI",
-                    odd=1.29,
-                    hit_rate=sh_mg13,
-                    rationale=f"Secondo tempo a ritmo regolare (hit rate MultiGol 1-3 al {sh_mg13:.1f}%).",
+            odd_sh_mg = quoted_odd(odds_dict, "TEMPI", "MultiGol 1-3 2° Tempo", 1.29)
+            if ODD_FLOOR <= odd_sh_mg <= ODD_CEILING:
+                candidates.append(
+                    MatchGemPick(
+                        match_name=f"{home_team} vs {away_team}",
+                        home_team=home_team,
+                        away_team=away_team,
+                        tournament=tournament,
+                        kickoff=kickoff,
+                        market_name="MultiGol 1-3 2° Tempo",
+                        market_category="TEMPI",
+                        odd=odd_sh_mg,
+                        hit_rate=sh_mg13,
+                        rationale=f"Secondo tempo a ritmo regolare (hit rate MultiGol 1-3 al {sh_mg13:.1f}%).",
+                    )
                 )
-            )
 
         # Ordina per Hit Rate decrescente
         candidates.sort(key=lambda c: (c.hit_rate, c.odd), reverse=True)
@@ -360,6 +442,14 @@ class SlateTicketSynthesizer:
         joint_p = round(joint_p * 100.0, 1)
 
         ticket_id = f"AUTO_SYNTH_{datetime.now().strftime('%d%b').upper()}_{total_odd:.1f}X"
+        in_band = min_total_odd <= total_odd <= max_total_odd
+        if not in_band:
+            logger.warning(
+                "Moltiplicatore %.2f fuori dalla banda %.2f-%.2f",
+                total_odd,
+                min_total_odd,
+                max_total_odd,
+            )
 
         ticket_data = {
             "ticket_id": ticket_id,
@@ -367,9 +457,10 @@ class SlateTicketSynthesizer:
             "architecture": "Hybrid Heterogeneous Asymmetric Mix (Regola #89 & #91)",
             "num_legs": len(selected_picks),
             "total_odds": total_odd,
+            "odds_band": {"min": min_total_odd, "max": max_total_odd, "inside": in_band},
             "bonus_multiplier_est": round(total_odd * 1.15, 2),
             "joint_hit_rate_pct": joint_p,
-            "status": "READY",
+            "status": "READY" if in_band else "OUT_OF_ODDS_BAND",
             "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "legs": [
                 {

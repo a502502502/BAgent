@@ -78,7 +78,16 @@ CREATE TABLE IF NOT EXISTS team_rolling_ten_telemetry (
     hr_team_scores_sh REAL DEFAULT 0.0,
     hr_team_concedes_ht REAL DEFAULT 0.0,
     hr_team_concedes_sh REAL DEFAULT 0.0,
-    hr_sh_more_goals REAL DEFAULT 0.0
+    hr_sh_more_goals REAL DEFAULT 0.0,
+    hr_unbeaten REAL DEFAULT 0.0,
+    hr_btts REAL DEFAULT 0.0,
+    hr_dc_and_over15 REAL DEFAULT 0.0,
+    hr_home_unbeaten REAL DEFAULT 0.0,
+    hr_home_dc_and_over15 REAL DEFAULT 0.0,
+    home_sample INTEGER DEFAULT 0,
+    hr_over_15_cards_team REAL DEFAULT 0.0,
+    avg_team_cards REAL DEFAULT 0.0,
+    cards_sample INTEGER DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS player_rolling_ten_telemetry (
@@ -447,6 +456,86 @@ CERTIFIED_PLAYER_ROLLING_10_SEED: List[Dict[str, Any]] = [
 ]
 
 
+def _cell(row: Any, key: str):
+    try:
+        return row[key]
+    except (KeyError, IndexError):
+        return None
+
+
+def summarize_team_flow(rows: List[Any], team: str) -> Dict[str, Any]:
+    """Frequenze reali sulle righe già giocate: nessun tasso di riempimento.
+
+    I cartellini entrano solo se entrambi i gialli sono valorizzati. Un NULL
+    non è uno 0-0 disciplinare. La doppia chance in casa usa solo le gare
+    giocate in casa dentro la finestra.
+    """
+    matches_n = unbeaten = btts = dc_and = 0
+    home_n = home_unbeaten = home_dc = 0
+    cards_n = team_cards_ov15 = match_cards_ov35 = 0
+    team_cards_sum = 0
+    match_cards_sum = 0
+
+    for row in rows:
+        home_goals = _cell(row, "home_goals")
+        away_goals = _cell(row, "away_goals")
+        if home_goals is None or away_goals is None:
+            continue
+        is_home = _cell(row, "home_team") == team
+        gf = int(home_goals if is_home else away_goals)
+        ga = int(away_goals if is_home else home_goals)
+        total = gf + ga
+        matches_n += 1
+        if gf >= ga:
+            unbeaten += 1
+        if gf >= 1 and ga >= 1:
+            btts += 1
+        if gf >= ga and total >= 2:
+            dc_and += 1
+        if is_home:
+            home_n += 1
+            if gf >= ga:
+                home_unbeaten += 1
+            if gf >= ga and total >= 2:
+                home_dc += 1
+
+        hy = _cell(row, "hy")
+        ay = _cell(row, "ay")
+        if hy is None or ay is None:
+            continue
+        cards_n += 1
+        red_h = int(_cell(row, "hr") or 0)
+        red_a = int(_cell(row, "ar") or 0)
+        team_cards = int(hy if is_home else ay) + (red_h if is_home else red_a)
+        match_cards = int(hy) + int(ay) + red_h + red_a
+        team_cards_sum += team_cards
+        match_cards_sum += match_cards
+        if team_cards >= 2:
+            team_cards_ov15 += 1
+        if match_cards >= 4:
+            match_cards_ov35 += 1
+
+    def pct(count: int, sample: int) -> float:
+        if sample <= 0:
+            return 0.0
+        return round(100.0 * count / sample, 1)
+
+    return {
+        "matches": matches_n,
+        "unbeaten_hr": pct(unbeaten, matches_n),
+        "btts_hr": pct(btts, matches_n),
+        "dc_and_ov15_hr": pct(dc_and, matches_n),
+        "home_n": home_n,
+        "home_unbeaten_hr": pct(home_unbeaten, home_n),
+        "home_dc_and_ov15_hr": pct(home_dc, home_n),
+        "cards_n": cards_n,
+        "avg_team_cards": round(team_cards_sum / cards_n, 2) if cards_n else 0.0,
+        "avg_match_cards": round(match_cards_sum / cards_n, 2) if cards_n else 0.0,
+        "team_cards_ov15_hr": pct(team_cards_ov15, cards_n),
+        "match_cards_ov35_hr": pct(match_cards_ov35, cards_n),
+    }
+
+
 class RollingTenEngine:
     """
     Motore di scansione Rolling-10 per Squadre e Giocatori.
@@ -481,6 +570,15 @@ class RollingTenEngine:
                 ("hr_team_concedes_ht", "REAL DEFAULT 0.0"),
                 ("hr_team_concedes_sh", "REAL DEFAULT 0.0"),
                 ("hr_sh_more_goals", "REAL DEFAULT 0.0"),
+                ("hr_unbeaten", "REAL DEFAULT 0.0"),
+                ("hr_btts", "REAL DEFAULT 0.0"),
+                ("hr_dc_and_over15", "REAL DEFAULT 0.0"),
+                ("hr_home_unbeaten", "REAL DEFAULT 0.0"),
+                ("hr_home_dc_and_over15", "REAL DEFAULT 0.0"),
+                ("home_sample", "INTEGER DEFAULT 0"),
+                ("hr_over_15_cards_team", "REAL DEFAULT 0.0"),
+                ("avg_team_cards", "REAL DEFAULT 0.0"),
+                ("cards_sample", "INTEGER DEFAULT 0"),
             ]
             for col_name, col_def in half_cols:
                 if col_name not in existing_cols:
@@ -566,8 +664,8 @@ class RollingTenEngine:
                     SELECT
                         home_team, away_team,
                         home_goals, away_goals,
-                        COALESCE(ht_home_goals, home_goals_ht, 0) AS h_ht,
-                        COALESCE(ht_away_goals, away_goals_ht, 0) AS a_ht,
+                        COALESCE(ht_home_goals, home_goals_ht) AS h_ht,
+                        COALESCE(ht_away_goals, away_goals_ht) AS a_ht,
                         home_corners AS hc,
                         away_corners AS ac,
                         home_shots AS hs,
@@ -575,7 +673,9 @@ class RollingTenEngine:
                         COALESCE(home_sot, home_shots_on_target) AS hsot,
                         COALESCE(away_sot, away_shots_on_target) AS asot,
                         COALESCE(home_yellow, home_yellow_cards) AS hy,
-                        COALESCE(away_yellow, away_yellow_cards) AS ay
+                        COALESCE(away_yellow, away_yellow_cards) AS ay,
+                        home_red_cards AS hr,
+                        away_red_cards AS ar
                     FROM matches
                     WHERE (home_team = ? OR away_team = ?)
                       AND home_goals IS NOT NULL AND away_goals IS NOT NULL
@@ -599,8 +699,9 @@ class RollingTenEngine:
 
                 gf_list, ga_list, tot_g_list = [], [], []
                 sf_list, sa_list, sot_f_list, sot_a_list = [], [], [], []
-                cf_list, ca_list, saves_list, cards_list = [], [], [], []
+                cf_list, ca_list, saves_list = [], [], []
                 ht_g_list, sh_g_list = [], []
+                ht_known_n = 0
 
                 # Contatori Hit-Rate
                 c_mg_1_3_team = 0
@@ -629,7 +730,6 @@ class RollingTenEngine:
                 c_ov35_corners = 0
                 c_ov45_corners = 0
                 c_ov15_saves = 0
-                c_ov35_cards = 0
 
                 for m in matches:
                     is_home = (m["home_team"] == team)
@@ -637,18 +737,23 @@ class RollingTenEngine:
                     ga = int(m["away_goals"] if is_home else m["home_goals"])
                     tot_g = gf + ga
 
-                    gf_ht = int(m["h_ht"] if is_home else m["a_ht"])
-                    ga_ht = int(m["a_ht"] if is_home else m["h_ht"])
-                    tot_ht = gf_ht + ga_ht
-                    gf_sh = max(0, gf - gf_ht)
-                    ga_sh = max(0, ga - ga_ht)
-                    tot_sh = max(0, tot_g - tot_ht)
-
                     gf_list.append(gf)
                     ga_list.append(ga)
                     tot_g_list.append(tot_g)
-                    ht_g_list.append(tot_ht)
-                    sh_g_list.append(tot_sh)
+
+                    h_ht_raw = m["h_ht"]
+                    a_ht_raw = m["a_ht"]
+                    ht_known = h_ht_raw is not None and a_ht_raw is not None
+                    if ht_known:
+                        ht_known_n += 1
+                        gf_ht = int(h_ht_raw if is_home else a_ht_raw)
+                        ga_ht = int(a_ht_raw if is_home else h_ht_raw)
+                        tot_ht = gf_ht + ga_ht
+                        gf_sh = max(0, gf - gf_ht)
+                        ga_sh = max(0, ga - ga_ht)
+                        tot_sh = max(0, tot_g - tot_ht)
+                        ht_g_list.append(tot_ht)
+                        sh_g_list.append(tot_sh)
 
                     if 1 <= gf <= 3:
                         c_mg_1_3_team += 1
@@ -664,30 +769,31 @@ class RollingTenEngine:
                         c_ov15 += 1
                     if tot_g <= 3:
                         c_un35 += 1
-                    if tot_ht >= 1 and tot_sh >= 1:
-                        c_both_halves += 1
-                    if (0 <= tot_ht <= 2) and (1 <= tot_sh <= 3):
-                        c_mg_ht02_sh13 += 1
-                    if tot_ht >= 1:
-                        c_ht_ov05 += 1
-                    if tot_ht <= 1:
-                        c_ht_un15 += 1
-                    if 1 <= tot_ht <= 2:
-                        c_ht_mg12 += 1
-                    if tot_sh >= 1:
-                        c_sh_ov05 += 1
-                    if 1 <= tot_sh <= 3:
-                        c_sh_mg13 += 1
-                    if gf_ht >= 1:
-                        c_team_scores_ht += 1
-                    if gf_sh >= 1:
-                        c_team_scores_sh += 1
-                    if ga_ht >= 1:
-                        c_team_concedes_ht += 1
-                    if ga_sh >= 1:
-                        c_team_concedes_sh += 1
-                    if tot_sh > tot_ht:
-                        c_sh_more_goals += 1
+                    if ht_known:
+                        if tot_ht >= 1 and tot_sh >= 1:
+                            c_both_halves += 1
+                        if (0 <= tot_ht <= 2) and (1 <= tot_sh <= 3):
+                            c_mg_ht02_sh13 += 1
+                        if tot_ht >= 1:
+                            c_ht_ov05 += 1
+                        if tot_ht <= 1:
+                            c_ht_un15 += 1
+                        if 1 <= tot_ht <= 2:
+                            c_ht_mg12 += 1
+                        if tot_sh >= 1:
+                            c_sh_ov05 += 1
+                        if 1 <= tot_sh <= 3:
+                            c_sh_mg13 += 1
+                        if gf_ht >= 1:
+                            c_team_scores_ht += 1
+                        if gf_sh >= 1:
+                            c_team_scores_sh += 1
+                        if ga_ht >= 1:
+                            c_team_concedes_ht += 1
+                        if ga_sh >= 1:
+                            c_team_concedes_sh += 1
+                        if tot_sh > tot_ht:
+                            c_sh_more_goals += 1
 
                     if has_real_telemetry and m["hs"] is not None and m["as_"] is not None:
                         sf = int(m["hs"] if is_home else m["as_"])
@@ -697,7 +803,6 @@ class RollingTenEngine:
                         cf = int((m["hc"] or 0) if is_home else (m["ac"] or 0))
                         ca = int((m["ac"] or 0) if is_home else (m["hc"] or 0))
                         saves_gk = max(0, sot_a - ga)
-                        tot_cards = int(m["hy"] or 0) + int(m["ay"] or 0)
 
                         sf_list.append(sf)
                         sa_list.append(sa)
@@ -706,7 +811,6 @@ class RollingTenEngine:
                         cf_list.append(cf)
                         ca_list.append(ca)
                         saves_list.append(saves_gk)
-                        cards_list.append(tot_cards)
 
                         if sf >= 10:
                             c_ov95_shots += 1
@@ -722,8 +826,6 @@ class RollingTenEngine:
                             c_ov45_corners += 1
                         if saves_gk >= 2:
                             c_ov15_saves += 1
-                        if tot_cards >= 4:
-                            c_ov35_cards += 1
                     else:
                         sf_list.append(0)
                         sa_list.append(0)
@@ -732,10 +834,16 @@ class RollingTenEngine:
                         cf_list.append(0)
                         ca_list.append(0)
                         saves_list.append(0)
-                        cards_list.append(0)
+
+                flow = summarize_team_flow(matches, team)
 
                 def pct(c: int) -> float:
                     return round((c / n) * 100.0, 1)
+
+                def pct_ht(c: int) -> float:
+                    if ht_known_n == 0:
+                        return 0.0
+                    return round((c / ht_known_n) * 100.0, 1)
 
                 market_rates = {
                     "Chance Mix (DC o Over 1.5)": pct(c_dc_ov15),
@@ -745,7 +853,7 @@ class RollingTenEngine:
                     "Under 3.5 Gol Partita": pct(c_un35),
                     "MultiGol 2-5 Partita": pct(c_mg_2_5_match),
                     "Chance Mix (X o Gol)": pct(c_x_gg),
-                    "MultiGol 0-2 1°T + 1-3 2°T": pct(c_mg_ht02_sh13),
+                    "MultiGol 0-2 1°T + 1-3 2°T": pct_ht(c_mg_ht02_sh13),
                     "Over 9.5 Tiri Squadra": pct(c_ov95_shots),
                     "Over 11.5 Tiri Squadra": pct(c_ov115_shots),
                     "Over 12.5 Tiri Squadra": pct(c_ov125_shots),
@@ -753,7 +861,7 @@ class RollingTenEngine:
                     "Over 3.5 Corner Squadra": pct(c_ov35_corners),
                     "Over 4.5 Corner Squadra": pct(c_ov45_corners),
                     "Over 1.5 Parate Portiere": pct(c_ov15_saves),
-                    "Over 3.5 Cartellini Partita": pct(c_ov35_cards),
+                    "Over 3.5 Cartellini Partita": flow["match_cards_ov35_hr"],
                 }
 
                 # Trova il mercato specialistico con hit-rate massimo (privilegiando i mercati a quota >= 1.25)
@@ -791,7 +899,10 @@ class RollingTenEngine:
                         hr_over_05_sh_match, hr_mg_1_3_sh_match,
                         hr_team_scores_ht, hr_team_scores_sh,
                         hr_team_concedes_ht, hr_team_concedes_sh,
-                        hr_sh_more_goals
+                        hr_sh_more_goals,
+                        hr_unbeaten, hr_btts, hr_dc_and_over15,
+                        hr_home_unbeaten, hr_home_dc_and_over15, home_sample,
+                        hr_over_15_cards_team, avg_team_cards, cards_sample
                     ) VALUES (
                         ?, ?, ?,
                         ?, ?, ?,
@@ -809,7 +920,10 @@ class RollingTenEngine:
                         ?, ?,
                         ?, ?,
                         ?, ?,
-                        ?
+                        ?,
+                        ?, ?, ?,
+                        ?, ?, ?,
+                        ?, ?, ?
                     )
                     """,
                     (
@@ -824,7 +938,7 @@ class RollingTenEngine:
                         round(sum(cf_list) / n, 2),
                         round(sum(ca_list) / n, 2),
                         round(sum(saves_list) / n, 2),
-                        round(sum(cards_list) / n, 2),
+                        flow["avg_match_cards"],
                         market_rates["MultiGol 1-3 Squadra"],
                         market_rates["MultiGol 1-5 Partita"],
                         market_rates["MultiGol 2-5 Partita"],
@@ -832,8 +946,8 @@ class RollingTenEngine:
                         market_rates["Chance Mix (X o Gol)"],
                         market_rates["Over 1.5 Gol Partita"],
                         market_rates["Under 3.5 Gol Partita"],
-                        pct(c_both_halves),
-                        market_rates["MultiGol 0-2 1°T + 1-3 2°T"],
+                        pct_ht(c_both_halves),
+                        pct_ht(c_mg_ht02_sh13),
                         market_rates["Over 9.5 Tiri Squadra"],
                         market_rates["Over 11.5 Tiri Squadra"],
                         market_rates["Over 12.5 Tiri Squadra"],
@@ -845,18 +959,27 @@ class RollingTenEngine:
                         top_market,
                         top_hr,
                         now_str,
-                        round(sum(ht_g_list) / n, 2),
-                        round(sum(sh_g_list) / n, 2),
-                        pct(c_ht_ov05),
-                        pct(c_ht_un15),
-                        pct(c_ht_mg12),
-                        pct(c_sh_ov05),
-                        pct(c_sh_mg13),
-                        pct(c_team_scores_ht),
-                        pct(c_team_scores_sh),
-                        pct(c_team_concedes_ht),
-                        pct(c_team_concedes_sh),
-                        pct(c_sh_more_goals),
+                        round(sum(ht_g_list) / ht_known_n, 2) if ht_known_n else 0.0,
+                        round(sum(sh_g_list) / ht_known_n, 2) if ht_known_n else 0.0,
+                        pct_ht(c_ht_ov05),
+                        pct_ht(c_ht_un15),
+                        pct_ht(c_ht_mg12),
+                        pct_ht(c_sh_ov05),
+                        pct_ht(c_sh_mg13),
+                        pct_ht(c_team_scores_ht),
+                        pct_ht(c_team_scores_sh),
+                        pct_ht(c_team_concedes_ht),
+                        pct_ht(c_team_concedes_sh),
+                        pct_ht(c_sh_more_goals),
+                        flow["unbeaten_hr"],
+                        flow["btts_hr"],
+                        flow["dc_and_ov15_hr"],
+                        flow["home_unbeaten_hr"],
+                        flow["home_dc_and_ov15_hr"],
+                        flow["home_n"],
+                        flow["team_cards_ov15_hr"],
+                        flow["avg_team_cards"],
+                        flow["cards_n"],
                     ),
                 )
                 updated += 1
@@ -947,11 +1070,43 @@ class RollingTenEngine:
     def get_team_profile(self, team_name: str) -> Optional[Dict[str, Any]]:
         """Estrae il profilo completo Rolling-10 di una singola squadra."""
         with self._get_conn() as conn:
+            needle = team_name.strip()
             row = conn.execute(
-                "SELECT * FROM team_rolling_ten_telemetry WHERE LOWER(team_name) LIKE LOWER(?)",
-                (f"%{team_name}%",),
+                """
+                SELECT * FROM team_rolling_ten_telemetry
+                WHERE LOWER(team_name) = LOWER(?)
+                   OR LOWER(team_name) LIKE LOWER(?)
+                ORDER BY CASE WHEN LOWER(team_name) = LOWER(?) THEN 0 ELSE 1 END,
+                         LENGTH(team_name) ASC
+                LIMIT 1
+                """,
+                (needle, f"%{needle}%", needle),
             ).fetchone()
             return dict(row) if row else None
+
+    def team_flow(self, team_name: str, limit: int = 10) -> Dict[str, Any]:
+        """Hit rate di 1X, Gol e cartellini sulle ultime partite, non sulla scheda in cache."""
+        profile = self.get_team_profile(team_name)
+        canonical = profile["team_name"] if profile else team_name.strip()
+        with self._get_conn() as conn:
+            rows = conn.execute(
+                """
+                SELECT
+                    home_team, away_team, home_goals, away_goals,
+                    COALESCE(home_yellow, home_yellow_cards) AS hy,
+                    COALESCE(away_yellow, away_yellow_cards) AS ay,
+                    home_red_cards AS hr,
+                    away_red_cards AS ar
+                FROM matches
+                WHERE (home_team = ? OR away_team = ?)
+                  AND home_goals IS NOT NULL AND away_goals IS NOT NULL
+                GROUP BY COALESCE(match_date, date_gmt, CAST(id AS TEXT)), home_team, away_team
+                ORDER BY COALESCE(match_date, date_gmt, '2026-01-01') DESC, MAX(id) DESC
+                LIMIT ?
+                """,
+                (canonical, canonical, limit),
+            ).fetchall()
+        return summarize_team_flow(rows, canonical)
 
     def cross_analyze_match(self, home_team: str, away_team: str, auto_download: bool = True) -> Dict[str, Any]:
         """
@@ -1024,6 +1179,8 @@ class RollingTenEngine:
             },
         ]
         netwin_gems = sorted([c for c in netwin_candidates if c["hit_rate"] >= 75.0], key=lambda x: x["hit_rate"], reverse=True)
+        h_flow = self.team_flow(home_team)
+        a_flow = self.team_flow(away_team)
 
         # 2. Gemme Specialist Telemetry (GoldBet / SNAI / Lottomatica)
         specialist_candidates = [
@@ -1054,8 +1211,11 @@ class RollingTenEngine:
             },
             {
                 "market": "Over 3.5 Cartellini Totali",
-                "hit_rate": round((h_prof["hr_over_35_cards_match"] + a_prof["hr_over_35_cards_match"]) / 2.0, 1),
-                "detail": f"Media cartellini match: {(h_prof['avg_cards_match'] + a_prof['avg_cards_match'])/2:.1f}",
+                "hit_rate": round((h_flow["match_cards_ov35_hr"] + a_flow["match_cards_ov35_hr"]) / 2.0, 1),
+                "detail": (
+                    f"Media cartellini match: {(h_flow['avg_match_cards'] + a_flow['avg_match_cards']) / 2:.1f}"
+                    f" su {h_flow['cards_n']}+{a_flow['cards_n']} gare con ammonizioni note"
+                ),
             },
         ]
         specialist_gems = sorted([c for c in specialist_candidates if c["hit_rate"] >= 80.0], key=lambda x: x["hit_rate"], reverse=True)
