@@ -103,7 +103,7 @@ class TicketValidationReport:
     stake_percentage: float
     legs_reports: List[ValidationReport]
     rejection_reasons: List[str]
-    cloud_audit: Optional[Dict[str, Any]] = None  # Regola #75: Audit Obbligatorio Cloud AI Pre-Emissione (Groq LPU 120B)
+    cloud_audit: Optional[Dict[str, Any]] = None
 
 
 def _match_sides(match_name: str) -> Optional[Tuple[str, str]]:
@@ -1264,6 +1264,7 @@ class StrictTicketPipeline:
         Audit di Livello Ticket: valida tutte le selezioni ed applica i vincoli di schedina.
         - Protocollo Continuità: Max 3-4 selezioni per ticket (5+ gambe tassativamente vietate).
         - Staking Management: Max 8% del bankroll per singolo ticket.
+        enable_cloud_audit e strict_ai_block restano nel contratto dei chiamanti e non fanno rete.
         """
         rejection_reasons: List[str] = []
         legs_reports: List[ValidationReport] = []
@@ -1346,45 +1347,7 @@ class StrictTicketPipeline:
             )
 
         ticket_passed = (len(rejection_reasons) == 0)
-
-        # =====================================================================
-        # GATE 9: REGOLA #75 - AUDIT INDIPENDENTE ONLINE VIA GROQ CLOUD (0€, LPU)
-        # =====================================================================
-        cloud_audit_result = None
-        if ticket_passed and enable_cloud_audit:
-            try:
-                from services.debate.groq_auditor import GroqAuditor
-                auditor = GroqAuditor()
-                if auditor.is_configured():
-                    legs_payload = [
-                        {
-                            "match_name": c.match_name,
-                            "tournament": c.tournament,
-                            "market": c.market_name,
-                            "book_odd": float(c.netwin_actual_odd or c.bookmaker_odd),
-                            "fair_odd": float(rep.fair_odds if rep.fair_odds > 0 else 1.0),
-                            "probability": float(rep.real_probability),
-                            "edge": float(rep.mathematical_edge),
-                            "sixth_sense": c.sixth_sense_analysis,
-                        }
-                        for c, rep in zip(candidates, legs_reports)
-                        if rep.passed
-                    ]
-                    cloud_audit_result = auditor.audit_ticket(
-                        title=ticket_title or "Ticket Certificato BAgent",
-                        legs=legs_payload,
-                        bankroll=current_bankroll,
-                    )
-                    if cloud_audit_result.get("success") and not cloud_audit_result.get("approved"):
-                        if strict_ai_block:
-                            rejection_reasons.append(
-                                f"[BLOCCATO - REGOLA #75: AUDIT CLOUD AI BOCCIATO] Il modello Groq Cloud "
-                                f"({cloud_audit_result.get('model_used')}) ha rigettato il ticket evidenziando "
-                                f"trappole o asimmetria di rischio."
-                            )
-                            ticket_passed = False
-            except Exception as e:
-                cloud_audit_result = {"success": False, "error": str(e), "approved": True}
+        del enable_cloud_audit, strict_ai_block
 
         return TicketValidationReport(
             passed=ticket_passed,
@@ -1394,5 +1357,5 @@ class StrictTicketPipeline:
             stake_percentage=round(stake_pct, 1),
             legs_reports=legs_reports,
             rejection_reasons=rejection_reasons,
-            cloud_audit=cloud_audit_result,
+            cloud_audit=None,
         )

@@ -2,7 +2,7 @@
 
 I cataloghi più vecchi di 12 ore non si usano. Corner, cartellini e props
 non entrano da questo script.
-Validazione hard-gate tramite StrictTicketPipeline e audit Groq Cloud (openai/gpt-oss-120b).
+Validazione hard-gate tramite StrictTicketPipeline.
 """
 from __future__ import annotations
 
@@ -109,7 +109,7 @@ def main() -> None:
 
     legs = sorted(picks, key=lambda row: row["score"], reverse=True)[:4]
 
-    # Validazione con StrictTicketPipeline e GroqAuditor
+    # Validazione con StrictTicketPipeline
     candidates = []
     for leg in legs:
         home, away = leg["match"].split(" - ", 1)
@@ -130,7 +130,6 @@ def main() -> None:
         candidates,
         current_bankroll=100.0,
         ticket_title="Nations League 06/10/2026 - 4 Selezioni Certificate",
-        enable_cloud_audit=True,
     )
 
     tot_odd = 1.0
@@ -143,9 +142,7 @@ def main() -> None:
     joint_p = round(joint_p, 3)
     joint_edge = round(joint_p * tot_odd - 1.0, 3)
 
-    cloud_audit = report.cloud_audit or {}
-    groq_approved = bool(cloud_audit.get("approved"))
-    is_playable = bool(report.passed and groq_approved)
+    is_playable = bool(report.passed)
 
     # Stake 2.50 su bankroll 100 se EV congiunto e' negativo, altrimenti stake del validatore (max 2.50)
     stake = 2.50 if joint_edge <= 0 else min(report.recommended_stake, 2.50)
@@ -162,8 +159,6 @@ def main() -> None:
         "joint_edge": joint_edge,
         "potential_return_eur": round(stake * tot_odd, 2),
         "validator_passed": report.passed,
-        "groq_verdict": "APPROVATA" if groq_approved else "BOCCIATA",
-        "groq_audit_report": cloud_audit.get("critique", ""),
         "legs": legs,
         "skipped": skipped,
     }

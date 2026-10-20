@@ -1,7 +1,7 @@
 """Brier, affidabilità e curva di cassa sulle selezioni già chiuse.
 
 Lo stake di ogni passo è quello di KellyStakingEngine, con il tetto dell'8%.
-Il report non chiama Groq e non entra nel ciclo di emissione.
+Il report non entra nel ciclo di emissione.
 """
 
 from __future__ import annotations

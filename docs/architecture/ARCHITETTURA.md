@@ -18,7 +18,6 @@ flowchart TD
   pipe[StrictTicketPipeline]
   kelly[KellyStakingEngine]
   val[scripts/strict_validator.py]
-  groq[GroqAuditor]
   out[Telegram, Netwin, portale]
 
   news --> sense
@@ -32,11 +31,10 @@ flowchart TD
   price --> pipe
   pipe --> kelly
   kelly --> val
-  val --> groq
-  groq --> out
+  val --> out
 ```
 
-Una selezione entra in `MarketCandidate`: partita, mercato, quota, xG, calcio d'inizio con data e ora, testo del Sesto Senso. `StrictTicketPipeline.validate_candidate` applica i gate in ordine. `validate_ticket` aggiunge il tetto di 3-4 selezioni, lo stake e l'audit Groq. Senza `strict_validator.py` e senza l'audit la schedina non si propone come giocabile. L'audit non ribalta il verdetto del validatore.
+Una selezione entra in `MarketCandidate`: partita, mercato, quota, xG, calcio d'inizio con data e ora, testo del Sesto Senso. `StrictTicketPipeline.validate_candidate` applica i gate in ordine. `validate_ticket` aggiunge il tetto di 3-4 selezioni e lo stake. Senza `strict_validator.py` la schedina non si propone come giocabile.
 
 ## Due sorgenti, e il resto
 
@@ -82,8 +80,6 @@ Lo stake esce da `services/betting/kelly_staking_engine.py`: Kelly frazionario, 
 
 `scripts/strict_validator.py` è il certificato da riga di comando sugli stessi gate. Il verdetto in chat è lo stato di quello script: stella se l'edge è almeno +5%, occhio se è positivo sotto il 5%, croce se è negativo.
 
-`services/debate/groq_auditor.py` manda la schedina a Groq Cloud, modello `openai/gpt-oss-120b`, a costo zero. Cerca la trappola del bookmaker, lo scenario di perdita e lo stake. È il ciclo della Regola #77. Non sostituisce il validatore.
-
 ## Uscite
 
 ```mermaid
@@ -118,7 +114,7 @@ Il minuto e il punteggio arrivano da Flashscore (`FlashscoreLiveEngine`), non da
 | `harness/cassettes/` | Nastro HTTP di FootyStats, per i test del client |
 | `tests/harness/` | Pytest. Hypothesis copre quote, orario e tetto di stake |
 
-`python -m harness` stampa il report di calibrazione su `harness/slates/settled_smoke.json`. Non entra nel ciclo di emissione e non chiama Groq.
+`python -m harness` stampa il report di calibrazione su `harness/slates/settled_smoke.json`. Non entra nel ciclo di emissione.
 
 ## Mappa del repository
 
@@ -127,7 +123,7 @@ Il minuto e il punteggio arrivano da Flashscore (`FlashscoreLiveEngine`), non da
 | `services/analysis` | Poisson, Dixon-Coles, DNA di lega, combo |
 | `services/betting` | Pipeline, Kelly, cache e automazione Netwin |
 | `services/football` | Sesto Senso, rosa, client esterni |
-| `services/debate` | Audit Groq |
+| `services/debate` | Confronto locale tra agenti sulla schedina |
 | `services/portal` | Consigli e archivio per la pagina |
 | `services/live` | Trigger in-play |
 | `services/telegram` | Invio dei ticket |

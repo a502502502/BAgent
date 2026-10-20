@@ -8,7 +8,7 @@ portfolio = {
     "bankroll_reference": 100.0,
     "session_stake": 12.50,
     "playable": True,
-    "groq_audit": "VALIDATO CON REGOLE RESILIENZA E NO-TRAP",
+    "validator_note": "VALIDATO CON REGOLE RESILIENZA E NO-TRAP",
     "created_at": "2026-10-05 17:05 CEST",
     "tickets": [
         {

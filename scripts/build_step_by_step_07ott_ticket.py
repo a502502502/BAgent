@@ -4,7 +4,7 @@ scripts/build_step_by_step_07ott_ticket.py — Schedina di Prova di Oggi (07/10/
 Legge i cataloghi scaricati da Cursor in reports/snai/2026-10-07,
 applica MatchMarketOptimizer.lambdas_for, estrae le selezioni legali tramite best_goal_pick
 (Regola #80, niente 1X2 secchi, niente Under 2.5/3.5 secchi),
-valida con StrictTicketPipeline e sottopone ad audit Groq Cloud (openai/gpt-oss-120b).
+valida con StrictTicketPipeline.
 """
 
 from __future__ import annotations
@@ -117,7 +117,7 @@ def main() -> int:
         print("Nessuna gamba selezionata per il ticket.")
         return 1
 
-    # Validazione tramite StrictTicketPipeline e GroqAuditor
+    # Validazione tramite StrictTicketPipeline
     candidates = []
     for leg in legs:
         home, away = leg["match"].split(" - ", 1)
@@ -138,7 +138,6 @@ def main() -> int:
         candidates,
         current_bankroll=100.0,
         ticket_title="Schedina di Prova Nuovo Motore (07/10/2026)",
-        enable_cloud_audit=True,
     )
 
     tot_odd = 1.0
@@ -151,9 +150,7 @@ def main() -> int:
     joint_p = round(joint_p, 3)
     joint_edge = round(joint_p * tot_odd - 1.0, 3)
 
-    cloud_audit = report.cloud_audit or {}
-    groq_approved = bool(cloud_audit.get("approved"))
-    is_playable = bool(report.passed and groq_approved)
+    is_playable = bool(report.passed)
 
     # Stake fisso 2.50 EUR su bankroll 100 se EV congiunto è negativo, altrimenti stake del validatore (max 2.50)
     stake = 2.50 if joint_edge <= 0 else min(report.recommended_stake, 2.50)
@@ -170,8 +167,6 @@ def main() -> int:
         "joint_edge": joint_edge,
         "potential_return_eur": round(stake * tot_odd, 2),
         "validator_passed": report.passed,
-        "groq_verdict": "APPROVATA" if groq_approved else "BOCCIATA",
-        "groq_audit_report": cloud_audit.get("critique", ""),
         "legs": legs,
         "skipped": skipped,
     }
@@ -184,7 +179,6 @@ def main() -> int:
     print("=" * 80)
     print(f"Stato: {'GIOCABILE (PLAYABLE)' if is_playable else 'NON OPERATIVA (PLAYABLE FALSE)'}")
     print(f"Quota Totale: {tot_odd} | P Congiunta: {joint_p*100:.1f}% | Edge: {joint_edge*100:+.1f}% | Stake: {stake:.2f} EUR")
-    print(f"Verdetto Groq: {payload['groq_verdict']}")
     print("-" * 80)
     for idx, leg in enumerate(legs, 1):
         print(f"Leg {idx}: {leg['match']}")

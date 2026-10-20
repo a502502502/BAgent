@@ -11,8 +11,7 @@ Utilizza il nuovo OmniStatisticalOptimizer per:
    - Player Props Ultra (xG/90 + legni + subentrante)
 3. Calcolare per ciascun mercato lo Sweet-Spot Score S(p, q) a campana gaussiana centrata su p=80%, q=1.45.
 4. Eseguire l'ottimizzazione combinatoria per costruire 5 ticket diversificati (max 4 leg ciascuno).
-5. Eseguire l'audit indipendente di Seconda AI con Groq Cloud (modello openai/gpt-oss-120b).
-6. Salvare il portafoglio. Non è giocabile finché non passa strict_validator.
+5. Salvare il portafoglio. Non è giocabile finché non passa strict_validator.
 """
 
 from __future__ import annotations
@@ -20,7 +19,6 @@ from __future__ import annotations
 import json
 import os
 import sys
-import time
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -36,7 +34,6 @@ from services.analysis.omni_statistical_optimizer import (
 )
 from services.analysis.snai_goal_book import goal_odds_from_catalog
 from services.betting.netwin_cache_reader import CachedMatch
-from services.debate.groq_auditor import GroqAuditor
 
 
 # Database statistico delle 17 partite di Nations League
@@ -324,7 +321,7 @@ def main():
     candidate_picks_by_match = {}
     dossiers_list = []
 
-    print("[1/4] Caricamento cataloghi SNAI e pricing statistico multi-dominio...")
+    print("[1/3] Caricamento cataloghi SNAI e pricing statistico multi-dominio...")
     for filename, dossier in STATISTICAL_DOSSIERS.items():
         if args.date and args.date not in dossier.kickoff:
             continue
@@ -361,7 +358,7 @@ def main():
         dossiers_list.append(dossier)
         print(f"  - {dossier.match_name}: {len(picks)} mercati legali prezzati con lo Sweet-Spot")
 
-    print(f"\n[2/4] Costruzione del portafoglio di 5 ticket diversificati (max 4 leg)...")
+    print(f"\n[2/3] Costruzione del portafoglio di 5 ticket diversificati (max 4 leg)...")
     portfolio = optimizer.build_diversified_portfolio(
         dossiers_list,
         candidate_picks_by_match,
@@ -371,56 +368,11 @@ def main():
         bankroll_reference=100.0
     )
 
-    print("\n[3/4] Esecuzione Audit di Seconda AI (Groq Cloud con policy EV warning)...")
-    auditor = GroqAuditor()
-    if auditor.is_configured():
-        for i, ticket in enumerate(portfolio["tickets"], 1):
-            t_name = ticket["name"]
-            print(f"  - Audit Ticket {i}: {t_name} (Quota {ticket['total_odds']})...")
-            audit_legs = []
-            for leg in ticket["legs"]:
-                audit_legs.append({
-                    "match_name": leg["match"],
-                    "tournament": "UEFA Nations League",
-                    "market": leg["market"],
-                    "book_odd": float(leg["odds"]),
-                    "fair_odd": float(leg["fair_odd"]),
-                    "probability": float(leg["probability"]),
-                    "edge": float(leg["edge"]),
-                    "notes": f"Famiglia: {leg['market_family']} | Score Gaussiano: {leg['score']}"
-                })
-            
-            audit_res = auditor.audit_ticket(
-                title=t_name,
-                legs=audit_legs,
-                bankroll=portfolio["bankroll_reference"]
-            )
-            
-            # Fallback handling in caso di rate limit 429
-            if not audit_res.get("success") and "429" in audit_res.get("error", ""):
-                print("    Rate limit 429 incontrato, attesa 15s...")
-                time.sleep(15)
-                audit_res = auditor.audit_ticket(
-                    title=t_name,
-                    legs=audit_legs,
-                    bankroll=portfolio["bankroll_reference"],
-                    model="llama-3.3-70b-versatile"
-                )
-
-            ticket["groq"] = audit_res
-            appr = audit_res.get("approved")
-            warn = audit_res.get("ev_warning")
-            print(f"    Esito: {'APPROVATA' if appr else 'NON APPROVATA'} | Avviso: {warn or 'Nessun vincolo'}")
-            time.sleep(3)
-        portfolio["groq_audit"] = "ESEGUITO_CON_SUCCESSO_CON_NUOVA_POLICY"
-    else:
-        print("  - Groq Cloud non configurato, audit saltato.")
-
     # Salva il portafoglio
     out_path = ROOT / "reports/tickets/ticket_snai_nl_5tickets_portfolio.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(portfolio, f, indent=2, ensure_ascii=False)
-    print(f"\n[4/4] Portafoglio salvato con successo in {out_path}!")
+    print(f"\n[3/3] Portafoglio salvato con successo in {out_path}!")
 
     # Stampa riassunto a terminale
     print("\n================== RIEPILOGO PORTAFOGLIO OTTIMIZZATO ==================")
