@@ -20,7 +20,8 @@ It prioritises data (Poisson / Dixon-Coles, xG, certified rosters) over gut feel
 - **Reality Gate** — every player, coach and squad must be verified against the current 2026/27 season. Stale memory is forbidden.
 - **Edge is informative** — probabilities come from data, never from odds alone. Negative / low edge is a warning, not an automatic skip.
 
-Full operational rules live in `CLAUDE.md` and `.cursorrules`.
+**Rules index:** [`docs/RULES.md`](docs/RULES.md)  
+**Full operational constraints:** `CLAUDE.md` and `.cursorrules`
 
 ---
 
@@ -38,10 +39,9 @@ pip install -r requirements.txt
 cp .env.example .env        # if present, or create your own
 # Fill API keys, Telegram token, etc.
 
-# 3. Run the main entry point
-python main.py
-# or the full controller (when fully wired):
-# python run_bagent_full.py
+# 3. Entry points
+python main.py              # lightweight entry / pipeline hint
+python run_bagent_full.py   # controller (DB + scanner + live + Telegram wiring)
 ```
 
 Certificate a ticket before playing:
@@ -64,7 +64,7 @@ python scripts/strict_validator.py --demo
 | `data/` | Runtime data (mostly gitignored; some mirrors kept) |
 | `storage/` | SQLite ledger and persistence |
 | `portal/` / `web_mobile/` | Live ticket portal |
-| `docs/` | Architecture notes, handovers, archive |
+| `docs/` | Rules index, architecture, handovers, archive |
 | `tests/` | Unit / property / harness tests |
 | `harness/` | Contracts, HTTP replay, calibration |
 
@@ -74,10 +74,10 @@ python scripts/strict_validator.py --demo
 
 - `scripts/strict_validator.py` — mandatory certificate before any ticket is considered playable
 - `scripts/build_verified_ticket.py` — full pipeline (roster → injuries → lineups → probability → edge → Kelly)
-- Reality Gate & roster hygiene scripts under `scripts/` and `services/football/`
+- Reality Gate & roster hygiene under `scripts/` and `services/football/`
 - Telegram daemon / alerts
 
-See `CLAUDE.md` for the complete rule set (Regole #75–#92 and earlier).
+See [`docs/RULES.md`](docs/RULES.md) for the numbered rules index and `CLAUDE.md` for the full text.
 
 ---
 
@@ -87,6 +87,7 @@ See `CLAUDE.md` for the complete rule set (Regole #75–#92 and earlier).
 - Odds snapshot sources: `data/netwin_live_odds.json` and related caches.
 - Never commit `.env` or real secrets.
 - Prefer path-relative imports from project root.
+- Do not hard-code match slates or squads: always use certified feeds (Reality Gate).
 
 ---
 
