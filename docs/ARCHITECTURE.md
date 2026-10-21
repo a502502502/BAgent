@@ -23,13 +23,12 @@ Active scope: **football only**.
 - Every playable ticket must pass `scripts/strict_validator.py`.
 - No hard-coded match slates or squads. Reality Gate only.
 
-## Residual
-
-- `services/basketball/` — historical / experimental. Not wired into the football path.
-- Empty or stub packages under `app/` — not the main entry.
-
 ## Entry points
 
 - `python main.py` — lightweight hint
 - `python run_bagent_full.py` — controller (DB + scanner + live + Telegram wiring)
 - `python scripts/strict_validator.py --demo` — certificate demo
+
+## Checks
+
+See `docs/SMOKE.md` for local smoke commands.
