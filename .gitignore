@@ -9,7 +9,7 @@ __pycache__/
 # Logs
 logs/
 
-# Generated data
+# Generated / runtime data (keep only explicit mirrors)
 data/*
 !data/active_user_tickets.json
 !data/netwin_live_odds.json
@@ -19,7 +19,16 @@ data/*
 !data/daily_reality_snapshot.json
 output/
 
-# Python cache
+# Large / ephemeral snapshots (do not commit)
+SNAPSHOT_*.json
+**/SNAPSHOT_*.json
+
+# Conversation dumps & session logs (keep under docs/archive if needed)
+CONVERSAZIONE_*.md
+CONVERSAZIONE_*.txt
+**/CONVERSAZIONE_COMPLETA_*.md
+
+# Python cache / tooling
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -30,21 +39,28 @@ output/
 # Temporary files
 *.tmp
 *.temp
+*.save
+*_backup.py
+*.bak
 
 # Database files
 *.db
 *.sqlite
 *.sqlite3
+*.db-wal
+*.db-shm
 
 # Binaries & Screenshots
 *.exe
 scripts/ocr_runner
 scripts/ocr_batch_runner
-*.db-wal
-*.db-shm
 reports/*.png
 reports/receipts/
 
 # Auto-improve local backups (may contain secrets; not source of truth)
 backup_*/
 reports/snai/_probe/
+
+# One-off HTML tickets / scratch
+ticket_*.html
+scratch/
