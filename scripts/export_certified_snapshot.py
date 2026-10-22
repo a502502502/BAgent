@@ -2,12 +2,12 @@
 """
 scripts/export_certified_snapshot.py
 
-Esporta uno snapshot certificato leggero da data/bagent.db (o storage/database/bagent.db)
-in un JSON che può essere condiviso o committato.
+Esporta uno snapshot certificato da data/bagent.db.
+Di default esporta TUTTE le squadre da team_telemetry_2026 e team_rolling_ten_telemetry.
 
 Uso:
     python scripts/export_certified_snapshot.py
-    python scripts/export_certified_snapshot.py --teams "Bayern,Arsenal,Real Madrid"
+    python scripts/export_certified_snapshot.py --teams "Bayern,Arsenal"
     python scripts/export_certified_snapshot.py --output data/certified_snapshot.json
 """
 
@@ -46,13 +46,12 @@ def table_info(conn: sqlite3.Connection) -> dict[str, Any]:
             count = cur.fetchone()[0]
         except Exception:
             count = None
-        # Sample columns
         try:
             cur.execute(f'PRAGMA table_info("{t}")')
             cols = [row[1] for row in cur.fetchall()]
         except Exception:
             cols = []
-        summary[t] = {"count": count, "columns": cols[:30]}
+        summary[t] = {"count": count, "columns": cols[:40]}
     return {"tables": summary, "table_names": tables}
 
 
@@ -67,50 +66,51 @@ def safe_query(conn: sqlite3.Connection, sql: str, params: tuple = ()) -> list[d
         return [{"_error": str(e), "_sql": sql}]
 
 
-def export_team_stats(conn: sqlite3.Connection, team_filter: list[str] | None = None) -> list[dict]:
-    # Try common patterns
-    candidates = [
-        "SELECT * FROM team_stats LIMIT 500",
-        "SELECT * FROM teams LIMIT 300",
-        "SELECT * FROM team LIMIT 300",
-    ]
-    for sql in candidates:
-        rows = safe_query(conn, sql)
-        if rows and "_error" not in rows[0]:
-            if team_filter:
-                filtered = []
-                for r in rows:
-                    text = json.dumps(r, default=str).lower()
-                    if any(t.lower() in text for t in team_filter):
-                        filtered.append(r)
-                return filtered[:200]
-            return rows[:200]
-    return []
+def export_all_teams(conn: sqlite3.Connection, team_filter: list[str] | None = None) -> dict[str, list[dict]]:
+    """Export full certified team tables."""
+    result = {}
+
+    # Primary certified table
+    sql_telemetry = "SELECT * FROM team_telemetry_2026"
+    rows = safe_query(conn, sql_telemetry)
+    if rows and "_error" not in rows[0]:
+        if team_filter:
+            rows = [
+                r for r in rows
+                if any(t.lower() in json.dumps(r, default=str).lower() for t in team_filter)
+            ]
+        result["team_telemetry_2026"] = rows
+
+    # Rolling 10
+    sql_rolling = "SELECT * FROM team_rolling_ten_telemetry"
+    rows = safe_query(conn, sql_rolling)
+    if rows and "_error" not in rows[0]:
+        if team_filter:
+            rows = [
+                r for r in rows
+                if any(t.lower() in json.dumps(r, default=str).lower() for t in team_filter)
+            ]
+        result["team_rolling_ten_telemetry"] = rows
+
+    return result
 
 
-def export_recent_matches(conn: sqlite3.Connection, limit: int = 50) -> list[dict]:
-    candidates = [
-        "SELECT * FROM matches ORDER BY rowid DESC LIMIT ?",
-        "SELECT * FROM fixtures ORDER BY rowid DESC LIMIT ?",
-        "SELECT * FROM tracked_fixtures ORDER BY rowid DESC LIMIT ?",
-    ]
-    for sql in candidates:
-        rows = safe_query(conn, sql, (limit,))
-        if rows and "_error" not in rows[0]:
-            return rows
-    return []
+def export_recent_matches(conn: sqlite3.Connection, limit: int = 100) -> list[dict]:
+    sql = "SELECT * FROM matches ORDER BY rowid DESC LIMIT ?"
+    return safe_query(conn, sql, (limit,))
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Export certified snapshot from bagent.db")
     parser.add_argument("--output", "-o", default="data/certified_snapshot.json", help="Output JSON path")
-    parser.add_argument("--teams", help="Comma-separated team names to filter")
+    parser.add_argument("--teams", help="Comma-separated team names to filter (optional)")
     parser.add_argument("--db", help="Explicit path to bagent.db")
+    parser.add_argument("--matches-limit", type=int, default=100, help="How many recent matches to include")
     args = parser.parse_args()
 
     db_path = Path(args.db) if args.db else find_db()
     if not db_path or not db_path.exists():
-        print("ERRORE: bagent.db non trovato. Cerca in data/bagent.db o storage/database/bagent.db", file=sys.stderr)
+        print("ERRORE: bagent.db non trovato.", file=sys.stderr)
         return 1
 
     team_filter = [t.strip() for t in args.teams.split(",")] if args.teams else None
@@ -118,13 +118,15 @@ def main() -> int:
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
 
+    teams_data = export_all_teams(conn, team_filter)
+
     snapshot = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "source_db": str(db_path.relative_to(ROOT)) if db_path.is_relative_to(ROOT) else str(db_path),
         "schema": table_info(conn),
-        "team_stats_sample": export_team_stats(conn, team_filter),
-        "recent_matches": export_recent_matches(conn),
-        "notes": "Snapshot leggero per condivisione. Non sostituisce il DB completo né il Reality Gate live.",
+        "teams": teams_data,
+        "recent_matches": export_recent_matches(conn, args.matches_limit),
+        "notes": "Snapshot certificato completo di team_telemetry_2026 e team_rolling_ten_telemetry.",
     }
 
     out = ROOT / args.output
@@ -133,7 +135,8 @@ def main() -> int:
 
     print(f"Snapshot esportato: {out}")
     print(f"Tabelle trovate: {len(snapshot['schema']['table_names'])}")
-    print(f"Team stats sample: {len(snapshot['team_stats_sample'])} righe")
+    for name, rows in teams_data.items():
+        print(f"{name}: {len(rows)} squadre")
     print(f"Match recenti: {len(snapshot['recent_matches'])} righe")
 
     conn.close()
