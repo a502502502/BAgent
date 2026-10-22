@@ -17,6 +17,7 @@ data/*
 !data/rosters_2026/
 !data/rosters_2026/*
 !data/daily_reality_snapshot.json
+!data/certified_snapshot.json
 output/
 
 # Large / ephemeral snapshots (do not commit)
