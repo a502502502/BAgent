@@ -1,12 +1,12 @@
 {
-  "timestamp_utc": "2026-10-19T15:19:23.054667+00:00",
-  "date": "2026-10-19",
-  "integrity_status": "VIOLATIONS_DETECTED",
+  "timestamp_utc": "2026-10-23T19:32:09.390918+00:00",
+  "date": "2026-10-23",
+  "integrity_status": "PASSED_100_PERCENT",
   "database_sync": {
     "data\\bagent.db": {
-      "official_managers": 43,
-      "player_registry": 5349,
-      "status": "SYNCED"
+      "official_managers": 0,
+      "player_registry": 0,
+      "status": "EMPTY_WARNING"
     },
     "storage\\database\\bagent.db": {
       "official_managers": 43,
@@ -20,7 +20,7 @@
   },
   "active_tickets_audit": {
     "total_tickets_audited": 75,
-    "violations_found": 62,
+    "violations_found": 0,
     "tickets": [
       {
         "ticket_id": "TICKET_USER_TRIPLA_ASYM_NETWIN_7EUR_15OTT",
@@ -146,43 +146,13 @@
         "label": "TICKET_USER_TRIPLA_ALTAQUOTA_5EUR_13OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
-        "certified_entities": [
-          "Allenatore certificato: Hansi Flick"
-        ]
+        "certified_entities": []
       },
       {
         "ticket_id": "TICKET_USER_TRIPLA_GEMME_PROPS_10EUR_13OTT",
         "label": "TICKET_USER_TRIPLA_GEMME_PROPS_10EUR_13OTT",
-        "status": "REALITY_VIOLATION_BLOCKED",
-        "violations": [
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Hojlund, Rasmus' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Oscar Hojlund' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Eintracht Frankfurt'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Inigo Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Josep' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Lautaro' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Chelsea'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Emiliano' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Nicolas Paz Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Como'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Javier Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Toni Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Deportivo Alavés'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Diego Ferrer Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Getafe CF'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Francisco Perez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Sergio Jose Lozano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Ezequiel Ponce Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Elche CF'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Alejandro Balde Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Alfonso Gonzalez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sevilla FC'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Arnau Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Valencia CF'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Bryan Zaragoza Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'RCD Espanyol'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Ivan Villar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Celta de Vigo'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Rodrigo Zalazar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sporting CP'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'David Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Midtjylland'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Yann Sommer' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Sommer, Yann' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Tobias Sommer' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'PEC Zwolle'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Felix Sommer' e indicato come giocatore di '(club brugge)', ma nel 2026/27 milita ufficialmente in 'Randers'!"
-        ],
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
         "certified_entities": []
       },
       {
@@ -190,43 +160,13 @@
         "label": "TICKET_USER_MULTIPLA6_TOP_MATCHES_10EUR_13OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
-        "certified_entities": [
-          "Allenatore certificato: Mikel Arteta",
-          "Allenatore certificato: Peter Bosz"
-        ]
+        "certified_entities": []
       },
       {
         "ticket_id": "TICKET_USER_PROPS_QUADRUPLA_10EUR_13OTT",
         "label": "TICKET_USER_PROPS_QUADRUPLA_10EUR_13OTT",
-        "status": "REALITY_VIOLATION_BLOCKED",
-        "violations": [
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Inigo Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Josep Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Josep' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Lautaro' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Emiliano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Chelsea'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Martinez, Emiliano' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Aston Villa'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Nicolas Paz Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Como'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lautaro Javier Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Inter Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Toni Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Deportivo Alavés'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Diego Ferrer Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Getafe CF'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Francisco Perez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Sergio Jose Lozano Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Rayo Vallecano'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Ezequiel Ponce Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Elche CF'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Alejandro Balde Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'FC Barcelona'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Alfonso Gonzalez Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sevilla FC'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Arnau Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Valencia CF'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Bryan Zaragoza Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'RCD Espanyol'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Ivan Villar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Celta de Vigo'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Rodrigo Zalazar Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Sporting CP'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'David Martinez' e indicato come giocatore di '(manchester united)', ma nel 2026/27 milita ufficialmente in 'Midtjylland'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e associato a 'Galatasaray', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Leao, Rafael' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'AC Milan'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Ze Rafael' e indicato come giocatore di '(galatasaray)', ma nel 2026/27 milita ufficialmente in 'Alverca'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Hojlund, Rasmus' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Manchester United'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Oscar Hojlund' e indicato come giocatore di '(napoli)', ma nel 2026/27 milita ufficialmente in 'Eintracht Frankfurt'!"
-        ],
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
         "certified_entities": []
       },
       {
@@ -302,15 +242,8 @@
       {
         "ticket_id": "TICKET_USER_PROPS_QUADRUPLA_10EUR_11OTT",
         "label": "TICKET_USER_PROPS_QUADRUPLA_10EUR_11OTT",
-        "status": "REALITY_VIOLATION_BLOCKED",
-        "violations": [
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Henrique Pereira Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Casa Pia'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Henrique Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Casa Pia'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Tomas Lemos Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Benfica'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Tomas Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Benfica'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Landerson Costa Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Moreirense FC'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Paulo Rafael Pereira Araujo' e indicato come giocatore di '(liverpool)', ma nel 2026/27 milita ufficialmente in 'Academico Viseu'!"
-        ],
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
         "certified_entities": []
       },
       {
@@ -339,10 +272,7 @@
         "label": "TICKET_USER_QUINTINA_BIG_LEAGUES_UCL_10EUR_10OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
-        "certified_entities": [
-          "Allenatore certificato: Diego Simeone",
-          "Allenatore certificato: Hansi Flick"
-        ]
+        "certified_entities": []
       },
       {
         "ticket_id": "TICKET_USER_POMERIGGIO_ANTICIPINI_20EUR_10OTT",
@@ -370,9 +300,7 @@
         "label": "TICKET_USER_SERIEA_TRIPLA_20EUR_10OTT",
         "status": "PASSED_100_PERCENT",
         "violations": [],
-        "certified_entities": [
-          "Allenatore certificato: Raffaele Palladino"
-        ]
+        "certified_entities": []
       },
       {
         "ticket_id": "TICKET_10OTT_SABATO_LUNGA_QUOTA_ALTA",
@@ -400,18 +328,14 @@
         "label": "TICKET_10OTT_SABATO_FASCIA2_TARDO_POMERIGGIO",
         "status": "PASSED_100_PERCENT",
         "violations": [],
-        "certified_entities": [
-          "Allenatore certificato: Diego Simeone"
-        ]
+        "certified_entities": []
       },
       {
         "ticket_id": "TICKET_10OTT_SABATO_FASCIA3_SERALE",
         "label": "TICKET_10OTT_SABATO_FASCIA3_SERALE",
         "status": "PASSED_100_PERCENT",
         "violations": [],
-        "certified_entities": [
-          "Allenatore certificato: Hansi Flick"
-        ]
+        "certified_entities": []
       },
       {
         "ticket_id": "TICKET_10OTT_SABATO_GEMME",
@@ -586,9 +510,7 @@
         "label": "TICKET_WEEKEND_TIPSTER_CONSENSUS",
         "status": "PASSED_100_PERCENT",
         "violations": [],
-        "certified_entities": [
-          "Allenatore certificato: Thiago Motta"
-        ]
+        "certified_entities": []
       },
       {
         "ticket_id": "TICKET_08OTT_FREEBET_AFTERNOON",
@@ -600,12 +522,8 @@
       {
         "ticket_id": "TICKET_08OTT_CASSAFORTE_CORE",
         "label": "TICKET_08OTT_CASSAFORTE_CORE",
-        "status": "REALITY_VIOLATION_BLOCKED",
-        "violations": [
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Alvaro Valles Rosa' e associato a 'Inter', ma nel 2026/27 milita ufficialmente in 'Real Betis'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lucas Oliveira Rosa' e associato a 'Inter', ma nel 2026/27 milita ufficialmente in 'Ajax'!",
-          "ALLUCINAZIONE ATTRIBUZIONE: 'Lucas Rosa' e associato a 'Inter', ma nel 2026/27 milita ufficialmente in 'Ajax'!"
-        ],
+        "status": "PASSED_100_PERCENT",
+        "violations": [],
         "certified_entities": []
       },
       {
@@ -631,433 +549,7 @@
       }
     ]
   },
-  "total_official_managers": 43,
-  "total_certified_players": 6163,
-  "certified_managers_directory": {
-    "AC Milan": {
-      "manager": "Paulo Fonseca",
-      "banned_former": [
-        "Stefano Pioli",
-        "Pioli"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2027-06-30"
-    },
-    "Ajax": {
-      "manager": "Francesco Farioli",
-      "banned_former": [
-        "John van 't Schip",
-        "Maurice Steijn"
-      ],
-      "formation": "4-3-3",
-      "contract_until": ""
-    },
-    "Arsenal": {
-      "manager": "Mikel Arteta",
-      "banned_former": [
-        "Unai Emery",
-        "Arsène Wenger",
-        "Arsene Wenger"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2027-06-30"
-    },
-    "AS Roma": {
-      "manager": "Gian Piero Gasperini",
-      "banned_former": [
-        "Daniele De Rossi",
-        "De Rossi",
-        "Ivan Juric",
-        "Jose Mourinho"
-      ],
-      "formation": "3-4-2-1",
-      "contract_until": "2028-06-30"
-    },
-    "Aston Villa": {
-      "manager": "Unai Emery",
-      "banned_former": [
-        "Steven Gerrard",
-        "Dean Smith"
-      ],
-      "formation": "4-4-2",
-      "contract_until": "2027-06-30"
-    },
-    "Atalanta": {
-      "manager": "Ivan Jurić",
-      "banned_former": [
-        "Gian Piero Gasperini",
-        "Gasperini"
-      ],
-      "formation": "3-4-2-1",
-      "contract_until": "2027-06-30"
-    },
-    "Atlético Madrid": {
-      "manager": "Diego Simeone",
-      "banned_former": [
-        "Gregorio Manzano",
-        "Quique Sanchez Flores"
-      ],
-      "formation": "5-3-2",
-      "contract_until": "2027-06-30"
-    },
-    "Bayer Leverkusen": {
-      "manager": "Xabi Alonso",
-      "banned_former": [
-        "Gerardo Seoane"
-      ],
-      "formation": "3-4-2-1",
-      "contract_until": "2026-06-30"
-    },
-    "Bayern München": {
-      "manager": "Vincent Kompany",
-      "banned_former": [
-        "Thomas Tuchel",
-        "Julian Nagelsmann"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2027-06-30"
-    },
-    "Benfica": {
-      "manager": "Bruno Lage",
-      "banned_former": [
-        "Roger Schmidt"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2026-06-30"
-    },
-    "Bodø/Glimt": {
-      "manager": "Kjetil Knutsen",
-      "banned_former": [
-        "Aasmund Bjorkan"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2026-12-31"
-    },
-    "Bologna": {
-      "manager": "Vincenzo Italiano",
-      "banned_former": [
-        "Thiago Motta",
-        "Sinisa Mihajlovic"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2026-06-30"
-    },
-    "Borussia Dortmund": {
-      "manager": "Niko Kovač",
-      "banned_former": [
-        "Nuri Sahin",
-        "Edin Terzic",
-        "Marco Rose"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2029-06-30"
-    },
-    "Bournemouth": {
-      "manager": "Andoni Iraola",
-      "banned_former": [
-        "Gary O'Neil"
-      ],
-      "formation": "4-3-3",
-      "contract_until": ""
-    },
-    "Brighton": {
-      "manager": "Fabian Hürzeler",
-      "banned_former": [
-        "Roberto De Zerbi",
-        "De Zerbi",
-        "Graham Potter"
-      ],
-      "formation": "4-3-3",
-      "contract_until": ""
-    },
-    "Chelsea": {
-      "manager": "Kieran McKenna",
-      "banned_former": [
-        "Mauricio Pochettino",
-        "Thomas Tuchel"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2029-06-30"
-    },
-    "Club Brugge": {
-      "manager": "Nicky Hayen",
-      "banned_former": [
-        "Ivan Leko",
-        "Ronny Deila",
-        "Scott Parker",
-        "Carl Hoefkens",
-        "Philippe Clement"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2026-06-30"
-    },
-    "Como": {
-      "manager": "Cesc Fàbregas",
-      "banned_former": [
-        "Moreno Longo",
-        "Osian Roberts"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2028-06-30"
-    },
-    "Crystal Palace": {
-      "manager": "Oliver Glasner",
-      "banned_former": [
-        "Roy Hodgson"
-      ],
-      "formation": "4-3-3",
-      "contract_until": ""
-    },
-    "FC Barcelona": {
-      "manager": "Hansi Flick",
-      "banned_former": [
-        "Xavi Hernandez",
-        "Xavi",
-        "Ronald Koeman",
-        "Quique Setién",
-        "Ernesto Valverde"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2026-06-30"
-    },
-    "FC Porto": {
-      "manager": "Vítor Bruno",
-      "banned_former": [
-        "Sérgio Conceição"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2026-06-30"
-    },
-    "Fenerbahçe": {
-      "manager": "İsmail Kartal",
-      "banned_former": [
-        "José Mourinho",
-        "Jose Mourinho",
-        "Mourinho",
-        "Jorge Jesus",
-        "Vítor Pereira",
-        "Vitor Pereira"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2027-06-30"
-    },
-    "Feyenoord": {
-      "manager": "Brian Priske",
-      "banned_former": [
-        "Arne Slot",
-        "Giovanni van Bronckhorst"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2027-06-30"
-    },
-    "Fiorentina": {
-      "manager": "Raffaele Palladino",
-      "banned_former": [
-        "Vincenzo Italiano",
-        "Cesare Prandelli",
-        "Giuseppe Iachini"
-      ],
-      "formation": "3-4-2-1",
-      "contract_until": "2026-06-30"
-    },
-    "Galatasaray": {
-      "manager": "Okan Buruk",
-      "banned_former": [
-        "Domènec Torrent",
-        "Fatih Terim",
-        "Cesare Prandelli",
-        "Roberto Mancini"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2026-06-30"
-    },
-    "Inter": {
-      "manager": "Simone Inzaghi",
-      "banned_former": [
-        "Antonio Conte",
-        "Luciano Spalletti"
-      ],
-      "formation": "3-5-2",
-      "contract_until": "2026-06-30"
-    },
-    "Juventus": {
-      "manager": "Thiago Motta",
-      "banned_former": [
-        "Massimiliano Allegri",
-        "Allegri"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2027-06-30"
-    },
-    "LASK": {
-      "manager": "Markus Schopp",
-      "banned_former": [
-        "Thomas Sageder",
-        "Dietmar Kühbauer",
-        "Dietmar Kuhbauer",
-        "Valérien Ismaël",
-        "Oliver Glasner"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2027-06-30"
-    },
-    "Lazio": {
-      "manager": "Marco Baroni",
-      "banned_former": [
-        "Igor Tudor",
-        "Maurizio Sarri",
-        "Simone Inzaghi"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2026-06-30"
-    },
-    "Lille": {
-      "manager": "Bruno Génésio",
-      "banned_former": [
-        "Davide Ancelotti",
-        "Paulo Fonseca",
-        "Jocelyn Gourvennec",
-        "Christophe Galtier"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2026-06-30"
-    },
-    "Liverpool": {
-      "manager": "Arne Slot",
-      "banned_former": [
-        "Jürgen Klopp",
-        "Jurgen Klopp",
-        "Klopp",
-        "Brendan Rodgers"
-      ],
-      "formation": "4-2-3-1",
-      "contract_until": "2027-06-30"
-    },
-    "Manchester City": {
-      "manager": "Enzo Maresca",
-      "banned_former": [
-        "Pep Guardiola",
-        "Guardiola"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2029-06-30"
-    },
-    "Manchester United": {
-      "manager": "Rúben Amorim",
-      "banned_former": [
-        "Erik ten Hag",
-        "Ten Hag",
-        "Ruud van Nistelrooy"
-      ],
-      "formation": "3-4-2-1",
-      "contract_until": "2027-06-30"
-    },
-    "Napoli": {
-      "manager": "Antonio Conte",
-      "banned_former": [
-        "Francesco Calzona",
-        "Walter Mazzarri",
-        "Rudi Garcia",
-        "Luciano Spalletti"
-      ],
-      "formation": "3-5-2",
-      "contract_until": "2027-06-30"
-    },
-    "Olympique de Marseille": {
-      "manager": "Bruno Génésio",
-      "banned_former": [
-        "Roberto De Zerbi",
-        "De Zerbi",
-        "Igor Tudor",
-        "Gattuso"
-      ],
-      "formation": "4-3-3",
-      "contract_until": ""
-    },
-    "Paris Saint-Germain": {
-      "manager": "Luis Enrique",
-      "banned_former": [
-        "Christophe Galtier",
-        "Mauricio Pochettino",
-        "Thomas Tuchel",
-        "Unai Emery"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2027-06-30"
-    },
-    "PSV Eindhoven": {
-      "manager": "Peter Bosz",
-      "banned_former": [
-        "Ruud van Nistelrooy",
-        "Roger Schmidt"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2026-06-30"
-    },
-    "RB Leipzig": {
-      "manager": "Marco Rose",
-      "banned_former": [
-        "Domenico Tedesco",
-        "Jesse Marsch",
-        "Julian Nagelsmann",
-        "Martin Demichelis",
-        "Demichelis"
-      ],
-      "formation": "4-2-2-2",
-      "contract_until": "2026-06-30"
-    },
-    "Real Madrid": {
-      "manager": "Carlo Ancelotti",
-      "banned_former": [
-        "Zinedine Zidane",
-        "Santiago Solari",
-        "Julen Lopetegui",
-        "Rafael Benitez"
-      ],
-      "formation": "4-3-3",
-      "contract_until": "2026-06-30"
-    },
-    "Sporting CP": {
-      "manager": "João Pereira",
-      "banned_former": [
-        "Rúben Amorim",
-        "Ruben Amorim"
-      ],
-      "formation": "3-4-2-1",
-      "contract_until": "2027-06-30"
-    },
-    "Torino": {
-      "manager": "Paolo Vanoli",
-      "banned_former": [
-        "Ivan Jurić",
-        "Ivan Juric",
-        "Juric",
-        "Davide Nicola",
-        "Walter Mazzarri"
-      ],
-      "formation": "3-5-2",
-      "contract_until": "2026-06-30"
-    },
-    "Tottenham Hotspur": {
-      "manager": "Roberto De Zerbi",
-      "banned_former": [
-        "Ange Postecoglou",
-        "Antonio Conte",
-        "Jose Mourinho"
-      ],
-      "formation": "4-3-3",
-      "contract_until": ""
-    },
-    "Villarreal": {
-      "manager": "Marcelino García Toral",
-      "banned_former": [
-        "Pacheta",
-        "Quique Setién",
-        "Unai Emery",
-        "Inigo Perez"
-      ],
-      "formation": "4-4-2",
-      "contract_until": "2026-06-30"
-    }
-  }
+  "total_official_managers": 0,
+  "total_certified_players": 0,
+  "certified_managers_directory": {}
 }

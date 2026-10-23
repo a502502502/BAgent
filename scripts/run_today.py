@@ -333,18 +333,22 @@ def step5_build_candidates(
             score = (edge * 2.0) + (prob * 1.5)
             candidates_pool.append((score, cand))
 
-    # Regola 5.6: Max 4 selezioni, stessa partita una sola volta, deduplicazione
+    # Regola 5.6: Max 4 selezioni, stessa partita una sola volta, deduplicazione e diversificazione (max 2 per tipo di mercato)
     candidates_pool.sort(key=lambda x: x[0], reverse=True)
 
     selected: List[MarketCandidate] = []
     used_matches = set()
-    used_market_types = set()
+    market_type_counts: Dict[str, int] = {}
 
     for _, cand in candidates_pool:
         if cand.match_name in used_matches:
             continue
+        c_type = cand.market_type
+        if market_type_counts.get(c_type, 0) >= 2:
+            continue
         selected.append(cand)
         used_matches.add(cand.match_name)
+        market_type_counts[c_type] = market_type_counts.get(c_type, 0) + 1
         if len(selected) >= 4:
             break
 
