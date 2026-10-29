@@ -441,6 +441,8 @@ def sync_league_data(
 
 
 def main() -> int:
+    from concurrent.futures import ThreadPoolExecutor
+
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(DB_PATH))
     ensure_schema(conn)
@@ -448,18 +450,18 @@ def main() -> int:
     tot_matches = 0
     tot_teams = 0
 
-    print("[STEP 1/2] Sincronizzazione Leghe Europee Tier 1 (Stagione 2026/27)...")
+    tasks = []
     for league, urls in TIER1_CSV_FEEDS_2627.items():
-        rows = fetch_csv_with_fallback(urls)
-        m_cnt, t_cnt = sync_league_data(conn, league, rows, is_rolling=False)
-        tot_matches += m_cnt
-        tot_teams += t_cnt
-        print(f"  [OK] {league:<22} | Match: {m_cnt:<4} | Squadre: {t_cnt}")
-
-    print("[STEP 2/2] Sincronizzazione Leghe Extra-Europee & Rolling Tier 1...")
+        tasks.append((league, urls, False))
     for league, url in TIER1_ROLLING_FEEDS.items():
-        rows = fetch_csv_with_fallback((url,))
-        m_cnt, t_cnt = sync_league_data(conn, league, rows, is_rolling=True)
+        tasks.append((league, (url,), True))
+
+    print(f"[TURBO SYNC] Download parallelo di {len(tasks)} campionati Tier 1 (max_workers=12)...")
+    with ThreadPoolExecutor(max_workers=12) as pool:
+        fetched = list(pool.map(lambda item: (item[0], fetch_csv_with_fallback(item[1]), item[2]), tasks))
+
+    for league, rows, is_rolling in fetched:
+        m_cnt, t_cnt = sync_league_data(conn, league, rows, is_rolling=is_rolling)
         tot_matches += m_cnt
         tot_teams += t_cnt
         print(f"  [OK] {league:<22} | Match: {m_cnt:<4} | Squadre: {t_cnt}")

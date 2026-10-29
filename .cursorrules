@@ -105,3 +105,25 @@
 - **Protezione da Single-Point-of-Failure**:
   1. Nessun singolo evento, errore arbitrale o episodio isolato (es. espulsione precoce, autogol, crollo della favorita) deve poter compromettere simultaneamente entrambi i ticket.
   2. Se un evento fa parte del Ticket A ("La Cassaforte"), è categoricamente escluso da qualsiasi iterazione o mercato speciale del Ticket B ("Le Gemme" / Satellite) e viceversa.
+
+## Regola #87: Divieto Assoluto di Citazione Nominale Non Certificata nei Commenti di Squadra & Departed Players Blacklist
+- È severamente proibito citare a memoria o da snippet web non certificati nomi di singoli calciatori all'interno delle giustificazioni tattiche di mercati collettivi (1X2, Doppie Chance, Over/Under, MultiGol, Corner, Cartellini). L'analisi di squadra deve basarsi unicamente su metriche aggregate (xG, xGA, volumi di tiro complessivi, baricentro, transizioni e allenatore ufficiale).
+- I giocatori ceduti nelle stagioni passate sono tracciati permanentemente nella tabella `departed_players_blacklist` in `data/bagent.db`. Il `RealityGateGuardian` intercetta e blocca all'istante qualsiasi testo che associ un calciatore ceduto alla sua ex squadra.
+- I singoli calciatori possono essere citati esclusivamente se oggetto di una specifica Player Prop certificata a referto ufficiale (-60 min) tramite `verify_squad_control.py`.
+
+## Regola #88: Divieto Assoluto di Scommesse su Singoli Giocatori Senza Formazione Ufficiale Titolare Certificata
+- È tassativamente vietato proporre, generare o validare qualsiasi scommessa su singoli giocatori (Player Props) se non è già stata pubblicata la formazione ufficiale del match (`Starting Lineups` su Flashscore `df_li_1_<match_id>` o API-Football `/fixtures/lineups`) e se il calciatore non figura ufficialmente nell'11 TITOLARE dal 1' (`STARTER_CONFIRMED`).
+- Per tutte le partite il cui calcio d'inizio è oltre i 60 minuti, è severamente vietato proporre mercati sui singoli giocatori: si utilizzano esclusivamente mercati collettivi di squadra.
+
+## Regola #89: Principio del Mercato Ottimale per Partita & Mix Flessibile nel Ticket
+- Abolita ogni omogeneità forzata di mercato all'interno del singolo ticket. In una stessa schedina possono convivere liberamente mercati asimmetrici e non asimmetrici (Doppie Chance + Over/Under, Over/Under puri, MultiGol, mercati sui Tempi, Tiri, Corner), selezionando il mercato migliore in termini di rapporto probabilità reale ($P_{\text{real}}$), quota offerta e tenuta statistica per quel match.
+
+## Regola #90: Protocollo Auto-Download On-Demand & Divieto di Scarto Preventivo per Dati Mancanti
+- Se per una partita del palinsesto ufficiale mancano i dati storici, le ultime partite giocate o la telemetria in `data/bagent.db`, è TASSATIVAMENTE VIETATO scartare la partita. Il sistema deve attivare immediatamente l'ingestione on-demand automatica (`OnDemandMatchIngestor`), normalizzare gli alias di squadra (`_KNOWN_TEAM_ALIASES`), aggiornare `team_rolling_ten_telemetry` e procedere con l'analisi quantitativa.
+
+## Regola #91: Spazio di Ricerca Esteso sui Mercati Asimmetrici, Specialistici & Giocatore XXL
+- Per ogni incontro, la scansione confronta attivamente tutte le 7 famiglie di mercati: Telemetria Balistica, Disciplinare, Difensiva, Angoli, Tempi, Combo Protette e Giocatore XXL / Duo / Plus (solo a distinta ufficiale confermata e con clausola sostituto).
+
+## Regola #92: Generazione Autonoma Schedine Multi-Mercato Tipster-Style & Zero Dipendenza Esterna
+- Il motore `SlateTicketSynthesizer` (`services/analysis/slate_ticket_synthesizer.py`) e la pipeline unificata `scripts/run_today.py` operano direttamente sui dati del palinsesto applicando l'auto-ingestione on-demand (Regola #90), la cross-analisi bilaterale (Regola #89 e #91) e la validazione locale (`StrictTicketPipeline`).
+

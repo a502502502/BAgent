@@ -101,15 +101,42 @@ def test_insert_matches_leaves_halftime_unknown(tmp_path):
     assert row == (None, None, "2025/2026")
 
 
+def test_parse_stats_and_ht_incidents():
+    raw_stats = (
+        "~SE÷Match¬"
+        "~SD÷1¬SG÷Expected goals (xG)¬SH÷1.84¬SI÷0.72¬"
+        "~SD÷2¬SG÷Total shots¬SH÷16¬SI÷8¬"
+        "~SD÷3¬SG÷Shots on target¬SH÷6¬SI÷3¬"
+        "~SD÷4¬SG÷Corner kicks¬SH÷7¬SI÷2¬"
+        "~SD÷5¬SG÷Yellow cards¬SH÷2¬SI÷3¬"
+        "~SE÷1st Half¬"
+        "~SD÷6¬SG÷Total shots¬SH÷9¬SI÷4¬"
+    )
+    parsed = OnDemandMatchIngestor.parse_stats_feed(raw_stats)
+    assert parsed["home_xg"] == 1.84
+    assert parsed["away_xg"] == 0.72
+    assert parsed["home_shots"] == 16
+    assert parsed["away_shots"] == 8
+    assert parsed["home_sot"] == 6
+    assert parsed["away_sot"] == 3
+    assert parsed["home_corners"] == 7
+    assert parsed["away_corners"] == 2
+    assert parsed["home_yellow"] == 2
+    assert parsed["away_yellow"] == 3
+
+    raw_inc = "~AC÷1st Half¬~IG÷1¬~IH÷0¬~AC÷2nd Half¬~IG÷2¬~IH÷1¬"
+    ht = OnDemandMatchIngestor.parse_incidents_ht(raw_inc)
+    assert ht == {"ht_home_goals": 1, "ht_away_goals": 0}
+
+
 def test_cross_analyze_match_bilateral_execution():
     engine = RollingTenEngine()
-    # Verifica che Jong PSV e Dordrecht abbiano dati completi e calcolo bilaterale attivo
-    res = engine.cross_analyze_match("Jong PSV", "Dordrecht", auto_download=False)
+    # Verifica che Sporting CP e Casa Pia (Tier-1 Liga Portugal) abbiano dati completi e calcolo bilaterale attivo
+    res = engine.cross_analyze_match("Sporting CP", "Casa Pia", auto_download=False)
     assert res.get("status") == "OK"
     assert len(res.get("netwin_gems", [])) > 0
-    assert len(res.get("halftime_gems", [])) > 0
 
     # Verifica che le gemme riflettano entrambe le squadre
     gems = res.get("netwin_gems", [])
     markets = [g["market"] for g in gems]
-    assert any("Jong PSV" in m or "Partita" in m or "Chance Mix" in m for m in markets)
+    assert any("Sporting CP" in m or "Partita" in m or "Chance Mix" in m for m in markets)

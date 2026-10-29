@@ -5,6 +5,8 @@ Interroga direttamente il feed delta ad alta frequenza di Flashscore/Diretta.it
 (local-it.flashscore.ninja), azzerando la latenza dei motori di ricerca.
 """
 from __future__ import annotations
+from concurrent.futures import ThreadPoolExecutor
+import time
 import urllib.request
 import sys
 from typing import Dict, List, Any
@@ -62,25 +64,51 @@ class FlashscoreLiveEngine:
         if not text:
             return []
         matches = []
-        for block in text.split("~AA÷")[1:]:
-            match_id, _, rest = block.partition("¬")
-            fields: Dict[str, str] = {}
-            for piece in rest.split("¬"):
-                if "÷" in piece:
-                    key, value = piece.split("÷", 1)
-                    fields[key] = value
-            parsed = self._match_from_fields(match_id.strip(), fields)
-            if parsed is not None:
-                matches.append(parsed)
+        current_league = ""
+        for chunk in text.split("~"):
+            if chunk.startswith("ZA÷"):
+                for piece in chunk.split("¬"):
+                    if piece.startswith("ZA÷"):
+                        current_league = piece[3:].strip()
+                        break
+            elif chunk.startswith("AA÷"):
+                block = chunk[3:]
+                match_id, _, rest = block.partition("¬")
+                fields: Dict[str, str] = {}
+                for piece in rest.split("¬"):
+                    if "÷" in piece:
+                        key, value = piece.split("÷", 1)
+                        fields[key] = value
+                parsed = self._match_from_fields(match_id.strip(), fields, league=current_league)
+                if parsed is not None:
+                    matches.append(parsed)
         return matches
 
-    def _match_from_fields(self, match_id: str, fields: Dict[str, str]) -> Dict[str, Any] | None:
+    def _match_from_fields(self, match_id: str, fields: Dict[str, str], league: str = "") -> Dict[str, Any] | None:
         home = fields.get("AE", "").strip()
         away = fields.get("AF", "").strip()
         if not home or not away:
             return None
         status_raw = fields.get("AB", "1")
+        ac_raw = fields.get("AC", "")
+        ao_raw = fields.get("AO", "")
         status_desc = self.STATUS_MAP.get(status_raw, f"Codice {status_raw}")
+        period_val = ac_raw
+        if status_raw == "2" and ao_raw.isdigit():
+            now_ts = int(time.time())
+            elapsed_min = max(1, (now_ts - int(ao_raw)) // 60 + 1)
+            if ac_raw == "12":
+                status_desc = "1° Tempo"
+                period_val = str(min(45, elapsed_min))
+            elif ac_raw in {"38", "11"}:
+                status_desc = "Intervallo"
+                period_val = "45"
+            elif ac_raw == "13":
+                status_desc = "2° Tempo"
+                period_val = str(45 + min(49, elapsed_min))
+            elif ac_raw in {"6", "4"}:
+                status_desc = "Tempi Suppl."
+                period_val = str(90 + min(30, elapsed_min))
         s_home = fields.get("AG", "")
         s_away = fields.get("AH", "")
         live = status_raw in self.LIVE_STATUS
@@ -105,6 +133,7 @@ class FlashscoreLiveEngine:
             s1_home, s1_away = "", ""
         return {
             "match_id": match_id or fields.get("AA", ""),
+            "league": league,
             "home": home,
             "away": away,
             "score": score_str,
@@ -112,7 +141,7 @@ class FlashscoreLiveEngine:
             "away_score": s_away,
             "status_code": status_raw,
             "status": status_desc,
-            "period": fields.get("AC", ""),
+            "period": period_val,
             "ht_score": f"{s1_home}-{s1_away}" if s1_home != "" else "",
             "ht_home": s1_home,
             "ht_away": s1_away,
@@ -124,6 +153,48 @@ class FlashscoreLiveEngine:
             "home_red": fields.get("GRA", ""),
             "away_red": fields.get("GRB", ""),
         }
+
+    def fetch_match_stats(self, match_id: str) -> Dict[str, Any]:
+        """Scarica e decodifica la telemetria live df_st_1_<match_id> (xG, tiri, SOT, corner, gialli)."""
+        if not match_id:
+            return {}
+        from services.football.external.on_demand_ingestor import OnDemandMatchIngestor
+
+        url = f"https://local-global.flashscore.ninja/2/x/feed/df_st_1_{match_id}"
+        try:
+            req = urllib.request.Request(url, headers=self.HEADERS)
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                raw_stats = resp.read().decode("utf-8", errors="ignore")
+            return OnDemandMatchIngestor.parse_stats_feed(raw_stats)
+        except Exception:
+            return {}
+
+    def get_enriched_live_snapshots(self, feed_text: str | None = None, max_workers: int = 10):
+        """Recupera gli snapshot live arricchiti in parallelo con xG, tiri, SOT e corner da df_st_1_."""
+        snapshots = self.get_live_snapshots(feed_text=feed_text)
+        if not snapshots:
+            return snapshots
+
+        def _enrich(snap):
+            st = self.fetch_match_stats(snap.fixture_id)
+            if st:
+                snap.xg_home = st.get("home_xg")
+                snap.xg_away = st.get("away_xg")
+                snap.home_shots = int(st.get("home_shots") or 0)
+                snap.away_shots = int(st.get("away_shots") or 0)
+                snap.home_shots_on_target = int(st.get("home_sot") or 0)
+                snap.away_shots_on_target = int(st.get("away_sot") or 0)
+                snap.home_corners = int(st.get("home_corners") or 0)
+                snap.away_corners = int(st.get("away_corners") or 0)
+                if st.get("home_yellow") is not None:
+                    snap.home_yellow_cards = int(st.get("home_yellow") or 0)
+                if st.get("away_yellow") is not None:
+                    snap.away_yellow_cards = int(st.get("away_yellow") or 0)
+            return snap
+
+        with ThreadPoolExecutor(max_workers=max_workers) as pool:
+            list(pool.map(_enrich, snapshots))
+        return snapshots
 
     def get_live_snapshots(self, feed_text: str | None = None):
         """Converte le gare in corso in snapshot pronti per il motore in-play.

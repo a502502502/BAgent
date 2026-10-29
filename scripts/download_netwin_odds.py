@@ -41,7 +41,22 @@ def main():
     args = parser.parse_args()
 
     if args.all:
-        tournaments = ["Europa League", "LaLiga", "Serie A", "Premier League", "Bundesliga", "Argentina", "Brasile"]
+        tournaments = [
+            "Serie A",
+            "Premier League",
+            "EFL Cup",
+            "LaLiga",
+            "Bundesliga",
+            "Ligue 1",
+            "Eredivisie",
+            "Liga Portugal",
+            "Super Lig",
+            "Champions League",
+            "Europa League",
+            "Conference League",
+            "Brasile",
+            "Argentina",
+        ]
     elif args.tournament:
         tournaments = [args.tournament]
     else:

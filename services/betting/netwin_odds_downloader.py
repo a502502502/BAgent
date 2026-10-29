@@ -426,17 +426,37 @@ class NetwinOddsDownloader:
 
     def download_tournaments(self, target_tournaments: List[str]) -> List[Dict[str, Any]]:
         """
-        Avvia Playwright in background, naviga sui tornei target ed estrae tutti i dati.
+        Avvia Playwright in background, naviga sui tornei target in modalità batch parallela
+        ed estrae tutti i mercati principali e i 17 aggregati secondari via HTTP/2 Promise.all.
         """
-        all_results = []
-        captured_payloads = {}
+        all_results: List[Dict[str, Any]] = []
+        captured_payloads: Dict[str, Dict[str, Any]] = {}
+        last_rx_ts = [0.0]
 
-        logger.info(f"Avvio scarico quote Netwin per tornei: {target_tournaments}")
+        logger.info(f"[TURBO] Avvio scarico quote Netwin per tornei: {target_tournaments}")
+
+        cat_label_map = {
+            "1": "Serie A",
+            "2": "Premier League",
+            "3": "LaLiga",
+            "4": "Bundesliga",
+            "5": "Ligue 1",
+            "13": "Brasileirão",
+            "20": "Liga 1 Perù",
+            "37": "Eredivisie",
+            "44": "Liga Portugal",
+            "45": "Liga Profesional",
+            "48": "Liga Profesional",
+            "52": "Super Lig",
+            "165": "LigaPro Ecuador",
+            "274": "Primera A Colombia",
+            "280": "Division de Honor Paraguay",
+        }
 
         with sync_playwright() as p:
             browser = p.chromium.launch(
                 headless=self.headless,
-                args=["--disable-blink-features=AutomationControlled", "--no-sandbox"]
+                args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
             )
             page = browser.new_page(viewport={"width": 1440, "height": 900})
 
@@ -444,51 +464,147 @@ class NetwinOddsDownloader:
                 if "getTorneoCentrale" in resp.url and resp.status == 200:
                     try:
                         text = resp.text()
-                        if len(text) > 500:
-                            data = json.loads(text)
-                            captured_payloads[resp.url] = data
+                        if len(text) > 500 and '"avs"' in text:
+                            captured_payloads[resp.url] = json.loads(text)
+                            last_rx_ts[0] = time.time()
                     except Exception:
                         pass
 
             page.on("response", on_response)
 
             try:
-                page.goto(XSPORT_APP_URL, timeout=35000, wait_until="domcontentloaded")
-                page.wait_for_timeout(3000)
+                page.goto(XSPORT_APP_URL, timeout=25000, wait_until="domcontentloaded")
+                # Attesa reattiva comparsa menu tornei nella sidebar
+                for _ in range(25):
+                    ready = page.evaluate(
+                        "() => (document.body && document.body.innerText && document.body.innerText.includes('Serie A'))"
+                    )
+                    if ready:
+                        break
+                    page.wait_for_timeout(150)
+                page.wait_for_timeout(250)
 
-                for tourney in target_tournaments:
-                    search_name = TOURNAMENT_ALIASES.get(tourney.lower().strip(), tourney)
-                    logger.info(f"Selezione torneo su Netwin: '{tourney}' (cercato come '{search_name}')...")
-                    btn = page.locator(f":text-matches('^{search_name}$', 'i')")
-                    if btn.count() == 0:
-                        btn = page.locator(f":text-matches('{search_name}', 'i')")
-                    btn = btn.first
-                    if btn.is_visible(timeout=3000):
-                        captured_payloads.clear()
-                        btn.click()
-                        page.wait_for_timeout(4000)
+                search_names = [
+                    TOURNAMENT_ALIASES.get(t.lower().strip(), t) for t in target_tournaments
+                ]
 
-                        for url, payload in captured_payloads.items():
-                            matches = self.parse_torneo_centrale_payload(payload, tournament_label=tourney)
-                            logger.info(f"Estratte {len(matches)} partite per {tourney}")
+                # Espandi in un unico passaggio i paesi necessari se non già visibili
+                countries_to_expand = [
+                    "Portogallo", "Olanda", "Brasile", "Argentina", "Colombia",
+                    "Turchia", "Scozia", "Belgio", "Perù", "Ecuador", "Paraguay", "Cile", "Uruguay",
+                ]
+                page.evaluate(
+                    """(countries) => {
+                        for (const el of document.querySelectorAll("li, div, span, a")) {
+                            const t = (el.innerText || "").trim();
+                            if (/^[A-Za-zÀ-ÿ .()-]+[0-9]+$/.test(t) && countries.some(c => t.toLowerCase().startsWith(c.toLowerCase()))) {
+                                el.click();
+                            }
+                        }
+                    }""",
+                    countries_to_expand,
+                )
+                page.wait_for_timeout(450)
 
-                            try:
-                                parsed_url = urllib.parse.urlparse(url)
-                                qparams = urllib.parse.parse_qs(parsed_url.query)
-                                cat_id = qparams.get("categoryId", [None])[0]
-                                tourn_id = qparams.get("tournamentId", [None])[0]
-                                if cat_id and tourn_id:
-                                    logger.info(f"Scaricamento aggregati secondari per {tourney} (cat={cat_id}, tourn={tourn_id})...")
-                                    for agg_id in SECONDARY_AGGREGATES:
-                                        agg_payload = self._fetch_aggregate_payload(cat_id, tourn_id, agg_id, request_context=page.request)
-                                        if agg_payload:
-                                            self._merge_aggregate_markets(matches, agg_payload, agg_id)
-                            except Exception as e:
-                                logger.warning(f"Errore download aggregati secondari per {tourney}: {e}")
+                # Clicca tutti i tornei richiesti in un'unica passata JS
+                clicked_count = page.evaluate(
+                    """(targets) => {
+                        let clicked = 0;
+                        const lowerTargets = targets.map(t => t.toLowerCase().trim());
+                        const seen = new Set();
+                        for (const el of document.querySelectorAll("li, div, span, a")) {
+                            if (el.children.length === 0) {
+                                const t = (el.innerText || "").trim();
+                                const tl = t.toLowerCase();
+                                if (lowerTargets.some(lt => tl === lt || tl.includes(lt))) {
+                                    if (!seen.has(tl)) {
+                                        seen.add(tl);
+                                        el.click();
+                                        clicked++;
+                                    }
+                                }
+                            }
+                        }
+                        return clicked;
+                    }""",
+                    search_names,
+                )
+                logger.info(f"[TURBO] Selezionati {clicked_count} tornei in batch su Netwin.")
 
-                            all_results.extend(matches)
-                    else:
-                        logger.warning(f"Torneo '{tourney}' ('{search_name}') non trovato nel menu Netwin.")
+                # Attesa adattiva: esce appena le risposte getTorneoCentrale si stabilizzano
+                t_start = time.time()
+                while time.time() - t_start < 2.8:
+                    page.wait_for_timeout(180)
+                    if captured_payloads and (time.time() - last_rx_ts[0]) > 0.55:
+                        break
+
+                # Prepara tutte le coppie (cat_id, tourn_id) e scarica tutti gli aggregati in un unico Promise.all!
+                tourn_entries = []
+                agg_requests = []
+                for idx, (url, payload) in enumerate(list(captured_payloads.items())):
+                    parsed_url = urllib.parse.urlparse(url)
+                    qparams = urllib.parse.parse_qs(parsed_url.query)
+                    cat_id = qparams.get("categoryId", [None])[0]
+                    tourn_id = qparams.get("tournamentId", [None])[0]
+                    t_label = (
+                        payload.get("d", {}).get("IT")
+                        or payload.get("dsl", {}).get("IT")
+                        or cat_label_map.get(str(cat_id))
+                        or (target_tournaments[idx] if idx < len(target_tournaments) else "Calcio Tier 1")
+                    )
+                    matches = self.parse_torneo_centrale_payload(payload, tournament_label=t_label)
+                    tourn_entries.append((idx, cat_id, tourn_id, matches))
+                    if cat_id and tourn_id:
+                        for agg_id in SECONDARY_AGGREGATES:
+                            agg_url = (
+                                f"https://www.netwin.it/XSportDatastore/getTorneoCentrale"
+                                f"?systemCode=EPLAY24&lingua=IT&hash=&sportId=1"
+                                f"&categoryId={cat_id}&tournamentId={tourn_id}&idAggregata={agg_id}"
+                            )
+                            agg_requests.append({"idx": idx, "agg_id": agg_id, "url": agg_url})
+
+                if agg_requests:
+                    from concurrent.futures import ThreadPoolExecutor
+
+                    logger.info(f"[TURBO] Download parallelo di {len(agg_requests)} mercati aggregati...")
+                    cookies = page.context.cookies()
+                    cookie_hdr = "; ".join(f"{c['name']}={c['value']}" for c in cookies)
+
+                    def _fetch_one(req_item: Dict[str, Any]):
+                        import urllib.request
+                        import ssl
+
+                        ctx = ssl.create_default_context()
+                        ctx.check_hostname = False
+                        ctx.verify_mode = ssl.CERT_NONE
+                        headers = {
+                            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+                            "Referer": XSPORT_APP_URL,
+                            "Cookie": cookie_hdr,
+                        }
+                        try:
+                            r = urllib.request.Request(req_item["url"], headers=headers)
+                            with urllib.request.urlopen(r, context=ctx, timeout=6) as resp:
+                                raw = resp.read().decode("utf-8", errors="ignore")
+                                if len(raw) > 25:
+                                    return (req_item["idx"], req_item["agg_id"], json.loads(raw))
+                        except Exception:
+                            pass
+                        return None
+
+                    with ThreadPoolExecutor(max_workers=16) as pool:
+                        agg_results = list(pool.map(_fetch_one, agg_requests))
+
+                    matches_by_idx = {idx: ms for idx, _, _, ms in tourn_entries}
+                    for item in agg_results:
+                        if item:
+                            idx, agg_id, data = item
+                            ms = matches_by_idx.get(idx)
+                            if ms and data:
+                                self._merge_aggregate_markets(ms, data, agg_id)
+
+                for _, _, _, ms in tourn_entries:
+                    all_results.extend(ms)
 
             except Exception as e:
                 logger.error(f"Errore durante navigazione Netwin: {e}")
@@ -517,7 +633,13 @@ class NetwinOddsDownloader:
             for m in matches:
                 existing[m["match_name"].lower()] = m
 
-            merged_matches = list(existing.values())
+            from services.betting.strict_ticket_pipeline import normalize_kickoff
+            now_local_str = time.strftime("%Y-%m-%d %H:%M")
+            merged_matches = []
+            for m in existing.values():
+                ko = normalize_kickoff(m.get("kickoff") or m.get("kickoff_time") or "")
+                if ko and ko > now_local_str:
+                    merged_matches.append(m)
             with open(LIVE_ODDS_FILE, "w", encoding="utf-8") as f:
                 json.dump({
                     "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),

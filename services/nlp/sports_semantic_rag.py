@@ -80,8 +80,12 @@ class SportsSemanticRAG:
         if self._initialized or not HF_AVAILABLE:
             return
         try:
-            self.tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME)
-            self.model = AutoModel.from_pretrained(self.MODEL_NAME).to(self.device)
+            try:
+                self.tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME, local_files_only=True)
+                self.model = AutoModel.from_pretrained(self.MODEL_NAME, local_files_only=True).to(self.device)
+            except Exception:
+                self.tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME)
+                self.model = AutoModel.from_pretrained(self.MODEL_NAME).to(self.device)
             self._initialized = True
             self._precompute_anchors()
         except Exception as e:

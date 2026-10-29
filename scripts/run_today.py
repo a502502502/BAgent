@@ -59,6 +59,7 @@ CERTIFIED_SNAPSHOT = DATA_DIR / "certified_snapshot.json"
 NETWIN_ODDS_FILE = DATA_DIR / "netwin_live_odds.json"
 REALITY_SNAPSHOT = DATA_DIR / "daily_reality_snapshot.json"
 TICKET_OUTPUT = DATA_DIR / "ticket_oggi.json"
+SATELLITE_OUTPUT = DATA_DIR / "ticket_satellite_oggi.json"
 
 
 def print_banner(text: str, char: str = "="):
@@ -156,15 +157,12 @@ def _resolve_team_telemetry(name: str, telemetry_dict: Dict[str, Dict[str, Any]]
     alias = _KNOWN_TEAM_ALIASES.get(folded, folded)
     if alias in telemetry_dict:
         return telemetry_dict[alias]
-    # Fuzzy lookup
-    for k, v in telemetry_dict.items():
-        if len(k) >= 4 and (k in folded or folded in k):
-            return v
     return None
 
 
 def step5_build_candidates(
     tournament_filter: Optional[str] = None,
+    date_filter: Optional[str] = None,
     guardian: Optional[RealityGateGuardian] = None,
     pipeline: Optional[StrictTicketPipeline] = None,
 ) -> List[MarketCandidate]:
@@ -220,11 +218,16 @@ def step5_build_candidates(
             if tournament_filter.lower() not in t_name:
                 continue
 
-        # Regola 5.2: Kickoff valido
+        # Regola 5.2: Kickoff valido e rigorosamente nel futuro
         raw_kickoff = m.get("kickoff") or m.get("kickoff_time") or ""
         norm_kickoff = normalize_kickoff(raw_kickoff)
-        if not norm_kickoff:
+        now_local_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+        if not norm_kickoff or norm_kickoff <= now_local_str:
             continue
+        if date_filter:
+            allowed_dates = [d.strip() for d in date_filter.split(",") if d.strip()]
+            if not any(norm_kickoff.startswith(d) for d in allowed_dates):
+                continue
 
         # Regola 5.2b: Divieto Regola #56 (Seconde divisioni, squadre B, U21, U23, giovanili, donne, primavera)
         text_to_check = f"{m.get('tournament') or ''} {match_name}".upper()
@@ -278,14 +281,36 @@ def step5_build_candidates(
         # 3. Chance Mix
         for label, odd in markets_dict.get("CHANCE_MIX", {}).items():
             if odd and odd >= 1.25:
-                # Escludi trappole 1/2
-                if " 1 o " not in label and " 2 o " not in label:
-                    eligible_markets.append((label, float(odd), "CHANCE_MIX"))
+                # Escludi trappole 1/2 e DC/Gol contraria alla netta favorita
+                if " 1 o " in label or " 2 o " in label:
+                    continue
+                if ("X2 o " in label or "X o Gol" in label) and (xg_home - xg_away) >= 0.45:
+                    continue
+                if ("1X o " in label or "X o Gol" in label) and (xg_away - xg_home) >= 0.45:
+                    continue
+                eligible_markets.append((label, float(odd), "CHANCE_MIX"))
 
-        # 4. Primo Tempo (MultiGol o Under)
+        # 4. MultiGol Squadra
+        for label, odd in markets_dict.get("MULTIGOL_SQUADRA", {}).items():
+            if odd and odd >= 1.25:
+                if ("1-2" in label or "1-3" in label) and "Casa" in label and xg_home >= 2.10:
+                    continue
+                if ("1-2" in label or "1-3" in label) and "Ospite" in label and xg_away >= 2.10:
+                    continue
+                if "Ospite" in label and (xg_home - xg_away) >= 0.45:
+                    continue
+                if "Casa" in label and (xg_away - xg_home) >= 0.45:
+                    continue
+                if "0-1" in label or "0-2" in label or "1-6" in label:
+                    continue
+                eligible_markets.append((label, float(odd), "MULTIGOL"))
+
+        # 5. Primo Tempo (MultiGol o Under o 1X)
         for label, odd in markets_dict.get("PRIMO_TEMPO", {}).items():
             if odd and odd >= 1.25:
                 if any(w in label.lower() for w in ["multigol", "under", "1x"]):
+                    if "0-1" in label and (xg_home + xg_away) >= 3.10:
+                        continue
                     eligible_markets.append((label, float(odd), "FIRST_HALF"))
 
         for m_label, odd_val, m_type in eligible_markets:
@@ -442,14 +467,86 @@ def step6_and_7_validate_and_save(
         return False
 
 
+def build_orthogonal_satellite_ticket(
+    core_candidates: List[MarketCandidate],
+    tournament_filter: Optional[str] = None,
+    date_filter: Optional[str] = None,
+    output_path: Path = SATELLITE_OUTPUT,
+) -> Optional[Dict[str, Any]]:
+    """
+    Genera il ticket Satellite multi-mercato (Regola #92) tramite SlateTicketSynthesizer
+    escludendo rigorosamente le partite già presenti nel ticket Core (Regola #86 Ortogonalità).
+    """
+    print_banner("STEP 8: Sintesi Ticket Satellite Ortogonale (SlateTicketSynthesizer - Regola #86 & #92)")
+    if not NETWIN_ODDS_FILE.exists():
+        print(f"❌ File quote {NETWIN_ODDS_FILE} non trovato!")
+        return None
+
+    try:
+        from services.analysis.slate_ticket_synthesizer import SlateTicketSynthesizer
+        raw_odds = json.loads(NETWIN_ODDS_FILE.read_text(encoding="utf-8"))
+        matches = raw_odds if isinstance(raw_odds, list) else raw_odds.get("matches", [])
+    except Exception as e:
+        print(f"❌ Errore inizializzazione SlateTicketSynthesizer: {e}")
+        return None
+
+    core_matches = {c.match_name for c in core_candidates}
+    catalog: List[Dict[str, Any]] = []
+    now_local_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    for m in matches:
+        match_name = m.get("match_name", "")
+        if match_name in core_matches:
+            continue
+        if tournament_filter:
+            t_name = (m.get("tournament") or "").lower()
+            if tournament_filter.lower() not in t_name:
+                continue
+        parts = [p.strip() for p in match_name.split(" vs ")]
+        if len(parts) != 2:
+            continue
+        norm_ko = normalize_kickoff(m.get("kickoff") or m.get("kickoff_time") or "")
+        if not norm_ko or norm_ko <= now_local_str:
+            continue
+        if date_filter:
+            allowed_dates = [d.strip() for d in date_filter.split(",") if d.strip()]
+            if not any(norm_ko.startswith(d) for d in allowed_dates):
+                continue
+        catalog.append(
+            {
+                "home_team": parts[0],
+                "away_team": parts[1],
+                "tournament": m.get("tournament") or "Lega Tier 1",
+                "kickoff": norm_ko,
+                "markets": m.get("markets", {}),
+            }
+        )
+
+    synth = SlateTicketSynthesizer()
+    sat_ticket = synth.build_tipster_style_ticket(catalog)
+    if sat_ticket:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(sat_ticket, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"✅ Ticket Satellite Ortogonale salvato in: {output_path} (Quota @{sat_ticket.get('total_odds')})")
+    else:
+        print("ℹ️ Nessun Ticket Satellite generato (partite ortogonali insufficienti nel palinsesto corrente).")
+    return sat_ticket
+
+
 def main():
     parser = argparse.ArgumentParser(description="BAgent — Pipeline Giornaliera Unificata (Fase 2 & 3)")
     parser.add_argument("--tournament", type=str, help="Filtra per torneo o campionato")
+    parser.add_argument("--date", type=str, help="Filtra per data YYYY-MM-DD (anche separata da virgola)")
     parser.add_argument("--bankroll", type=float, default=37.32, help="Bankroll liquido (default: 37.32 EUR)")
     parser.add_argument("--stake", type=float, default=None, help="Stake proposto in euro (opzionale)")
     parser.add_argument("--skip-refresh", action="store_true", help="Salta refresh SQLite bagent.db")
     parser.add_argument("--skip-download", action="store_true", help="Salta download quote Netwin (usa cache)")
     parser.add_argument("--output", type=str, default=str(TICKET_OUTPUT), help="Path output JSON ticket")
+    parser.add_argument(
+        "--mode",
+        choices=["core", "satellite", "both"],
+        default="core",
+        help="Modalità generazione: 'core' (3-4 selezioni Dixon-Coles), 'satellite' (5-7 selezioni Rolling10), 'both' (entrambi ortogonali)",
+    )
 
     args = parser.parse_args()
 
@@ -467,16 +564,31 @@ def main():
     # Step 4: Download quote Netwin
     step4_download_odds(tournament=args.tournament, skip=args.skip_download)
 
-    # Step 5: Builder candidati interno
-    candidates = step5_build_candidates(tournament_filter=args.tournament)
+    passed = True
+    candidates: List[MarketCandidate] = []
+    if args.mode in ("core", "both"):
+        # Step 5: Builder candidati interno
+        candidates = step5_build_candidates(
+            tournament_filter=args.tournament,
+            date_filter=args.date,
+        )
 
-    # Step 6 & 7: Validazione e scrittura
-    passed = step6_and_7_validate_and_save(
-        candidates,
-        bankroll=args.bankroll,
-        proposed_stake=args.stake,
-        output_path=Path(args.output),
-    )
+        # Step 6 & 7: Validazione e scrittura
+        passed = step6_and_7_validate_and_save(
+            candidates,
+            bankroll=args.bankroll,
+            proposed_stake=args.stake,
+            output_path=Path(args.output),
+        )
+
+    if args.mode in ("satellite", "both"):
+        sat_ticket = build_orthogonal_satellite_ticket(
+            core_candidates=candidates,
+            tournament_filter=args.tournament,
+            date_filter=args.date,
+        )
+        if args.mode == "satellite":
+            passed = sat_ticket is not None
 
     sys.exit(0 if passed else 1)
 

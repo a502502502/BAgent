@@ -1,7 +1,7 @@
 # BAgent — Indice delle regole operative
 
-> **Source of truth**: il testo completo e aggiornato delle regole vive in `CLAUDE.md` e `.cursorrules`.  
-> Questo file è un **indice navigabile** per umani e agent: non sostituisce CLAUDE.md.
+> **Source of truth**: il testo completo e aggiornato delle regole vive in `GEMINI.md` e `.cursorrules`.  
+> Questo file è un **indice navigabile** per umani e agent: non sostituisce `GEMINI.md`.
 
 Tennis abolito dal 22 settembre 2026. Solo calcio.
 
@@ -22,11 +22,11 @@ Tennis abolito dal 22 settembre 2026. Solo calcio.
 
 ## 2. Regole numerate (riferimento rapido)
 
-Dettaglio completo in `CLAUDE.md`.
+Dettaglio completo in `GEMINI.md`.
 
 | # | Titolo breve |
 |---|--------------|
-| 55 | Storico gol / xG da DB (o FootyStats) obbligatorio |
+| 55 | Storico gol / xG da DB (Football-Data.co.uk / Flashscore Ninja) obbligatorio |
 | 75 | Certificato locale pre-emissione (`strict_validator`) |
 | 76 | Data e ora kickoff obbligatorie su ogni selezione |
 | 77 | Rettifica locale prima di pubblicare |
@@ -42,7 +42,7 @@ Dettaglio completo in `CLAUDE.md`.
 | 89 | Mercato ottimale per partita (mix flessibile nel ticket) |
 | 90 | Auto-download on-demand; no scarto preventivo per dati mancanti |
 | 91 | Spazio di ricerca 7 famiglie di mercati |
-| 92+ | Generazione autonoma multi-mercato (vedi CLAUDE.md) |
+| 92+ | Generazione autonoma multi-mercato (vedi `GEMINI.md`) |
 
 ---
 
@@ -54,7 +54,7 @@ Dettaglio completo in `CLAUDE.md`.
 4. Scansione mercati (`scan_omni_markets` / engine correlati)
 5. Triangolazione OFP se disponibile (Regola 83)
 6. Reality Gate su rose / coach / props (85, 87, 88)
-7. `scripts/build_verified_ticket.py` → probabilità, edge, Kelly
+7. `scripts/build_verified_ticket.py` / `scripts/run_today.py` → probabilità, edge, Kelly
 8. **`scripts/strict_validator.py`** → certificato (75, 76, 78)
 9. Pubblicazione solo se certificato; portfolio ortogonale (86)
 
@@ -77,7 +77,7 @@ Dettaglio completo in `CLAUDE.md`.
 
 | File | Ruolo |
 |------|--------|
-| `CLAUDE.md` | Vincoli operativi completi (source of truth) |
+| `GEMINI.md` | Vincoli operativi completi (source of truth) |
 | `.cursorrules` | Regole per agent in Cursor |
 | `BAGent_Master_Project_Context_for_Argon.md` | Contesto architetturale / audit pack (può essere datato) |
 | `docs/archive/` | Storico sessioni e versioni estese |

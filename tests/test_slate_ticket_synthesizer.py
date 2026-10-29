@@ -24,10 +24,10 @@ def test_slate_ticket_synthesizer_build_ticket():
         {"home_team": "Monza", "away_team": "Cagliari", "tournament": "Serie A", "kickoff": "2026-10-19 18:30 CEST", "markets": {"DOPPIA_CHANCE": {"1X": 1.36}}},
         {"home_team": "Viborg", "away_team": "Midtjylland", "tournament": "Superligaen DEN", "kickoff": "2026-10-19 19:00 CEST", "markets": {"GOL_NOGOL": {"Gol": 1.47}}},
         {"home_team": "Trabzonspor", "away_team": "Besiktas", "tournament": "Super Lig TUR", "kickoff": "2026-10-19 19:00 CEST", "markets": {"CHANCE_MIX": {"Chance Mix: X o Gol": 1.35}}},
-        {"home_team": "Parma", "away_team": "Torino", "tournament": "Serie A", "kickoff": "2026-10-19 20:45 CEST", "markets": {}},
-        {"home_team": "Tottenham", "away_team": "Coventry", "tournament": "Premier League", "kickoff": "2026-10-19 21:00 CEST", "markets": {"COMBO": {"1X + Over 1.5": 1.36}}},
-        {"home_team": "Braga", "away_team": "Gil Vicente", "tournament": "Liga Portugal", "kickoff": "2026-10-19 21:15 CEST", "markets": {}},
-        {"home_team": "Jong PSV", "away_team": "Dordrecht", "tournament": "Eerste Divisie", "kickoff": "2026-10-19 20:00 CEST", "markets": {}},
+        {"home_team": "Sporting CP", "away_team": "Casa Pia", "tournament": "Liga Portugal", "kickoff": "2026-10-19 20:45 CEST", "markets": {"DOPPIA_CHANCE": {"1X": 1.34}}},
+        {"home_team": "Barcelona", "away_team": "Sevilla", "tournament": "La Liga", "kickoff": "2026-10-19 21:00 CEST", "markets": {"COMBO": {"1X + Over 1.5": 1.36}}},
+        {"home_team": "PSV", "away_team": "AZ Alkmaar", "tournament": "Eredivisie", "kickoff": "2026-10-19 21:15 CEST", "markets": {"GOL_NOGOL": {"Gol": 1.47}}},
+        {"home_team": "Arsenal", "away_team": "Chelsea", "tournament": "Premier League", "kickoff": "2026-10-19 20:00 CEST", "markets": {"COMBO": {"1X + Over 1.5": 1.36}}},
     ]
 
     ticket = synth.build_tipster_style_ticket(matches_sample, target_legs=5)

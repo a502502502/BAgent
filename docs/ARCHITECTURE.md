@@ -17,7 +17,7 @@ Active scope: **football only**.
 
 ## Rules of the road
 
-- Source of truth for rules: `CLAUDE.md`
+- Source of truth for rules: `GEMINI.md`
 - Navigable index: `docs/RULES.md`
 - No rigid 1X2. Prefer flow markets.
 - Every playable ticket must pass `scripts/strict_validator.py`.

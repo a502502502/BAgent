@@ -117,6 +117,10 @@ def main() -> int:
 
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
+    try:
+        conn.execute("PRAGMA wal_checkpoint(PASSIVE)")
+    except Exception:
+        pass
 
     teams_data = export_all_teams(conn, team_filter)
 
