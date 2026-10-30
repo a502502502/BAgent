@@ -14,6 +14,8 @@ data/*
 !data/active_user_tickets.json
 !data/netwin_live_odds.json
 !data/netwin_odds_cache.json
+!data/ticket_oggi.json
+!data/ticket_satellite_oggi.json
 !data/rosters_2026/
 !data/rosters_2026/*
 !data/daily_reality_snapshot.json
