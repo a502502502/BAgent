@@ -67,43 +67,86 @@ def evaluate_market_outcome(market: str, h_goals: int, a_goals: int, ht_h: int =
                 return min_g <= ht_goals <= max_g
             return min_g <= total_goals <= max_g
 
-    # 3. Chance Mix: pareggio o Under 2.5
-    if "chance mix: pareggio o under 2.5" in m:
+    # 3. Chance Mix mercati
+    if "chance mix" in m:
         is_draw = (h_goals == a_goals)
-        is_under25 = (total_goals < 3)
-        return is_draw or is_under25
-
-    # 4. Chance Mix: 1X o Over 1.5
-    if "chance mix: 1x o over 1.5" in m:
         is_1x = (h_goals >= a_goals)
-        is_ov15 = (total_goals >= 2)
-        return is_1x or is_ov15
-
-    # 5. Chance Mix: X2 o Over 1.5
-    if "chance mix: x2 o over 1.5" in m:
         is_x2 = (a_goals >= h_goals)
+        is_gol = (h_goals > 0 and a_goals > 0)
         is_ov15 = (total_goals >= 2)
-        return is_x2 or is_ov15
+        is_ov25 = (total_goals >= 3)
+        is_un25 = (total_goals < 3)
 
-    # 6. Combo 1X + Over 1.5
+        if "pareggio o under 2.5" in m:
+            return is_draw or is_un25
+        if "1x o gol" in m:
+            return is_1x or is_gol
+        if "x2 o gol" in m:
+            return is_x2 or is_gol
+        if "x o gol" in m:
+            return is_draw or is_gol
+        if "1x o over 1.5" in m:
+            return is_1x or is_ov15
+        if "x2 o over 1.5" in m:
+            return is_x2 or is_ov15
+        if "1 o over 2.5" in m:
+            return (h_goals > a_goals) or is_ov25
+        if "2 o over 2.5" in m:
+            return (a_goals > h_goals) or is_ov25
+        if "x o over 2.5" in m:
+            return is_draw or is_ov25
+
+    # 4. Gol / NoGol
+    if m == "gol" or m == "gg":
+        return h_goals > 0 and a_goals > 0
+    if m == "nogol" or m == "ng":
+        return h_goals == 0 or a_goals == 0
+
+    # 5. Doppia Chance
+    if m == "1x":
+        return h_goals >= a_goals
+    if m == "x2":
+        return a_goals >= h_goals
+    if m == "12":
+        return h_goals != a_goals
+
+    # 6. Under / Over totali
+    if "under 2.5" in m or m == "u2.5":
+        return total_goals < 3
+    if "over 2.5" in m or m == "o2.5":
+        return total_goals >= 3
+    if "under 3.5" in m or m == "u3.5":
+        return total_goals < 4
+    if "over 1.5" in m or m == "o1.5":
+        return total_goals >= 2
+    if "under 4.5" in m:
+        return total_goals < 5
+
+    # 7. Combo
+    if "over 2.5 + gol" in m or "gol + over 2.5" in m:
+        return (total_goals >= 3) and (h_goals > 0 and a_goals > 0)
     if "1x + over 1.5" in m:
         return (h_goals >= a_goals) and (total_goals >= 2)
-
-    # 7. Combo 1X + Under 3.5
+    if "x2 + over 1.5" in m:
+        return (a_goals >= h_goals) and (total_goals >= 2)
     if "1x + under 3.5" in m:
         return (h_goals >= a_goals) and (total_goals <= 3)
-
-    # 8. Combo 1X + MultiGol 1-4
+    if "x2 + under 3.5" in m:
+        return (a_goals >= h_goals) and (total_goals <= 3)
     if "1x + multigol 1-4" in m:
         return (h_goals >= a_goals) and (1 <= total_goals <= 4)
-
-    # 9. Combo 1X + MultiGol 1-5
     if "1x + multigol 1-5" in m:
         return (h_goals >= a_goals) and (1 <= total_goals <= 5)
+    if "x2 + multigol 1-4" in m:
+        return (a_goals >= h_goals) and (1 <= total_goals <= 4)
+    if "x2 + multigol 1-5" in m:
+        return (a_goals >= h_goals) and (1 <= total_goals <= 5)
 
-    # 10. Under 1.5 1° Tempo
+    # 8. Tempi
     if "under 1.5 1° tempo" in m or "under 1.5 1°t" in m:
         return ht_goals <= 1
+    if "over 0.5 1° tempo" in m or "over 0.5 1°t" in m:
+        return ht_goals >= 1
 
     # Default conservative
     return False
